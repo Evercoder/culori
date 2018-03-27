@@ -1,5 +1,5 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
-export default hsv2rgb = (h, s, v) => {
+export default function(h, s, v) {
 	let f = Math.abs(h/60 % 2 - 1);
 	switch (Math.floor(h/60)) {
 		case 0: return [v, v * (1 - s * f), v * (1 - s)];
