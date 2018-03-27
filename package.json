@@ -1,0 +1,14 @@
+{
+  "name": "culori",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "git@github.com:danburzo/culori.git",
+  "author": "Dan Burzo <danburzo@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+  }
+}
