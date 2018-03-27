@@ -1,4 +1,3 @@
-import hex from './hex';
 import hsl from './hsl';
 import hsv from './hsv';
 import named from './named';
