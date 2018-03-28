@@ -52,6 +52,10 @@ Returns the color in the format specified, with values expanded to a format amen
 
 Returns a CSS representation of the color, in the (optionally-specified) format, or otherwise in a format most suitable. Accepted formats: `hex`, `hex8`, `rgb`, `hsl`.  It follows [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value).
 
+### `color.toString()` 
+
+Alias of `color.css()`.
+
 ## Prior art
 
 * [chroma.js](https://github.com/gka/chroma.js)
