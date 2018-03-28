@@ -36,7 +36,11 @@ __The problem of alpha__. Internally we should keep alpha as undefined whenever 
 
 #### `culori(color)`
 
-Accepts a color in any supported format.
+Accepts a color in any supported format and returns a `Color` instance.
+
+#### `culori.scale([ colors ])`
+
+Accepts an array of colors and returns a `Scale` instance.
 
 ### `Color` API
 
@@ -52,7 +56,11 @@ Returns the color in the format specified, with values expanded to a format amen
 
 Returns a CSS representation of the color, in the (optionally-specified) format, or otherwise in a format most suitable. Accepted formats: `hex`, `hex8`, `rgb`, `hsl`.  It follows [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value).
 
-### `color.toString()` 
+#### `color.toString()` 
+
+### `Scale` API
+
+TODO
 
 Alias of `color.css()`.
 
