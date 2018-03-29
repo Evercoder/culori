@@ -3,6 +3,8 @@ import {
 	hsl_current
 } from '../util/regex';
 
+import from_hsl from '../converters/from_hsl';
+
 const angle_to_hue = (val, unit) => {
 	switch (unit) {
 		case 'deg': return val;

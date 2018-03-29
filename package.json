@@ -8,9 +8,13 @@
   "author": "Dan Burzo <danburzo@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "rollup": "^0.57.1"
+    "rollup": "^0.57.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.9.0"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "pretest": "yarn build",
+    "test": "tape test/tests/*.js | tap-spec"
   }
 }

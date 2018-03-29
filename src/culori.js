@@ -15,6 +15,8 @@ import to_hsl from './converters/to_hsl';
 import to_hsv from './converters/to_hsv';
 import to_hsi from './converters/to_hsi';
 
+import round from './util/round';
+
 import named from './colors/named';
 
 import Color from './color/color';
@@ -26,9 +28,12 @@ mixin(culori, {
 		from_hsl,
 		from_hsv,
 		from_hsi,
+
 		to_hsl,
 		to_hsv,
-		to_hsi
+		to_hsi,
+		
+		round
 	},
 	parse,
 	parser: {

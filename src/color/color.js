@@ -29,7 +29,7 @@ class Color {
 	}
 
 	serialize() {
-		return { ...this._color };
+		return this._color;
 	}
 
 	toString() {
