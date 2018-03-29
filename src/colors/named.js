@@ -1,13 +1,4 @@
-/*
-	CSS Named Colors
-	----------------
-
-	Reference: https://www.w3.org/TR/SVG/types.html#ColorKeywords
-
-	Colors are stored in a 0xRRGGBB format.
-*/
-
-const colors = {
+export default {
 	aliceblue: 0xf0f8ff,
 	antiquewhite: 0xfaebd7,
 	aqua: 0x00ffff,
@@ -157,5 +148,3 @@ const colors = {
 	yellow: 0xffff00,
 	yellowgreen: 0x9acd32
 };
-
-export default named = {};
