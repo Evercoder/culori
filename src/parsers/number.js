@@ -1,8 +1,6 @@
 export default color => {
 	
-	if (typeof color !== 'number') {
-		return;
-	}
+	if (typeof color !== 'number') return;
 
 	let num = Math.min(Math.max(0, color), 0xFFFFFFFF);
 

@@ -11,6 +11,8 @@ import parseHsl from './parsers/hsl';
 import hsl_to_rgb from './converters/hsl2rgb';
 import hsv_to_rgb from './converters/hsv2rgb';
 
+import named from './colors/named';
+
 import Color from './color/color';
 
 const culori = c => new Color(c instanceof Color ? c.serialize() : parse(c));
@@ -27,6 +29,9 @@ mixin(culori, {
 		hex: parseHex,
 		rgb: parseRgb,
 		hsl: parseHsl
+	},
+	colors: {
+		named
 	}
 });
 

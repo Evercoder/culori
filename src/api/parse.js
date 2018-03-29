@@ -10,7 +10,8 @@ const parse = color => {
 		parseHex(color) || 
 		parseRgb(color) || 
 		parseHsl(color) ||
-		parseNamed(color)
+		parseNamed(color) || 
+		(color === 'transparent' ? parseNumber(0x00000000) : undefined)
 	);
 };
 
