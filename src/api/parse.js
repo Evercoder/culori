@@ -2,12 +2,14 @@ import parseNumber from '../parsers/number';
 import parseNamed from '../parsers/named';
 import parseHex from '../parsers/hex';
 import parseRgb from '../parsers/rgb';
+import parseHsl from '../parsers/hsl';
 
 const parsers = [
 	parseNumber,
 	parseNamed,
 	parseHex,
-	parseRgb
+	parseRgb,
+	parseHsl
 ];
 
 const parse = c => {

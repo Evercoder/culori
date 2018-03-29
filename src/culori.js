@@ -6,6 +6,7 @@ import parseNumber from './parsers/number';
 import parseNamed from './parsers/named';
 import parseHex from './parsers/hex';
 import parseRgb from './parsers/rgb';
+import parseHsl from './parsers/hsl';
 
 import hsl_to_rgb from './converters/hsl2rgb';
 import hsv_to_rgb from './converters/hsv2rgb';
@@ -24,7 +25,8 @@ mixin(culori, {
 		number: parseNumber,
 		named: parseNamed,
 		hex: parseHex,
-		rgb: parseRgb
+		rgb: parseRgb,
+		hsl: parseHsl
 	}
 });
 
