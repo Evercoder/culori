@@ -73,4 +73,4 @@ Alias of `color.css()`.
 
 ## Benchmarks
 
-To stacks well against its peers: [benchmarks](./test/benchmarks/README.md).
+`colori` stacks well against its peers: [benchmarks](./test/benchmarks/README.md).

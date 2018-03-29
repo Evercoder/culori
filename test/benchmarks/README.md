@@ -2,7 +2,7 @@
 
 ## Benchmarks
 
-## RGB parse speed
+### RGB parse speed
 
 This benchmark measures the performance of parsing strings such as `rgb(255, 255, 255)`. 
 
