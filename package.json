@@ -1,6 +1,6 @@
 {
   "name": "culori",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "build/culori.js",
   "module": "index.js",
   "jsnext:main": "index.js",
@@ -15,6 +15,7 @@
   "scripts": {
     "build": "rollup -c",
     "pretest": "yarn build",
-    "test": "tape test/tests/*.js | tap-spec"
+    "test": "tape test/tests/*.js | tap-spec",
+    "benchmark": "node test/benchmarks/index.js"
   }
 }

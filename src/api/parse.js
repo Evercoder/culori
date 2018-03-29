@@ -1,3 +1,5 @@
+import mixin from '../util/mixin';
+
 import parseNumber from '../parsers/number';
 import parseNamed from '../parsers/named';
 import parseHex from '../parsers/hex';
@@ -14,5 +16,13 @@ const parse = color => {
 		(color === 'transparent' ? parseNumber(0x00000000) : undefined)
 	);
 };
+
+mixin(parse, {
+	number: parseNumber,
+	named: parseNamed,
+	hex: parseHex,
+	rgb: parseRgb,
+	hsl: parseHsl
+});
 
 export default parse;

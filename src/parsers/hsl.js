@@ -5,7 +5,7 @@ import {
 
 import from_hsl from '../converters/from_hsl';
 
-const angle_to_hue = (val, unit) => {
+const hue = (val, unit) => {
 	switch (unit) {
 		case 'deg': return val;
 		case 'rad': return val / 180 * Math.PI;
@@ -19,13 +19,12 @@ export default color => {
 	if (typeof color !== 'string') return;
 	let match = color.match(hsl_legacy) || color.match(hsl_current);
 	if (!match) return;
-	return from_hsl(
-		match[3] === undefined ? angle_to_hue(match[1], match[2]) : match[3],
-		match[4] / 100,
-		match[5] / 100
-	).concat(
-		match[6] === undefined ? 
-			match[7] === undefined ? [] : [match[7] / 255] 
-			: [match[6] / 100]
-	);
+	return from_hsl({
+		h: match[3] === undefined ? hue(match[1], match[2]) : match[3],
+		s: match[4] / 100,
+		l: match[5] / 100,
+		a: match[6] === undefined ? 
+			match[7] === undefined ? undefined : match[7] / 255 
+			: match[6] / 100
+	});
 }

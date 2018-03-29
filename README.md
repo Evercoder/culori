@@ -35,38 +35,57 @@ The implementations I've already finished ar denoted by checkmarks (✓).
 
 ## API
 
-### Top-level
+§ __culori__( _RGBA_ or _Color_ )
 
-#### `culori(color)`
+Shortcut to _culori_.__rgb__().
 
-Accepts a color in any supported format and returns a `Color` instance.
+§ culori.__parse__( _Color_ )
 
-#### `culori.scale([ colors ])`
+§ culori.__rgb__( _RGBA_ or _Color_ )
 
-Accepts an array of colors and returns a `Scale` instance.
+### HSL
 
-### `Color` API
+§ culori.__hsl__( _RGBA_ or _Color_ ) → _HSLA_
 
-#### `color.to(format)`
+Takes a color in any format
 
-Returns the color in the format specified, with all values normalized to `[0, 1]`.
+§ culori.__to_hsl__( _RGBA_ ) → _HSLA_
 
-#### `color.nice(format)`
+§ culori.__from_hsl__( _HSLA_ ) → _RGBA_
 
-Returns the color in the format specified, with values expanded to a format amenable for use. For example, `color.nice('rgb')` will return integers `[0, 255]` for the R, G, and B values.
+### HSV 
 
-#### `color.css(format?)`
+§ culori.__hsv__( _RGBA_ or _Color_ ) → _HSVA_
 
-Returns a CSS representation of the color, in the (optionally-specified) format, or otherwise in a format most suitable. Accepted formats: `hex`, `hex8`, `rgb`, `hsl`.  It follows [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value).
+§ culori.__to_hsv__( _RGBA_ ) → _HSVA_
 
-#### `color.toString()` 
+§ culori.__from_hsv__( _HSVA_ ) → _RGBA_
 
-Alias of `color.css()`.
+### HSI
 
+§ culori.__hsi__( _RGBA_ or _Color_ ) → _HSIA_
 
-### `Scale` API
+§ culori.__to_hsi__( _RGBA_ or _Color_ ) → _HSIA_
 
-To be discussed.
+§ culori.__from_hsi__( _HSIA_ ) → _RGBA_
+
+### Miscellaneous
+
+§ culori.__isRGBObject__( _object_ ) → _true_ / _false_
+
+§ culori.__round__( _value_ | _object_ )
+
+### Definitions
+
+__Color__ is a color in any parsable format. It is normally a string, but numbers (e.g. `0xFFF`) are also accepted.
+
+__RGBA__ is any plain object containing the `r`, `g`, `b`, and optionally `a`, properties with all values normalized to the interval `[0..1]`.
+
+__HSLA__ is any plain object containing the `h`, `s`, `l`, and optionally `a`, properties with the values for `s`, `l`, and `a`, normalized to the interval `[0..1]`.
+
+__HSVA__ is any plain object containing the `h`, `s`, `v`, and optionally `a`, properties with the values for `s`, `v`, and `a`, normalized to the interval `[0..1]`.
+
+__HSIA__ is any plain object containing the `h`, `s`, `i`, and optionally `a`, properties with the values for `s`, `i`, and `a`, normalized to the interval `[0..1]`.
 
 ## Prior art
 
@@ -83,3 +102,5 @@ This library is indebted to these projects:
 ## Further reading
 
 * [HSL and HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) on Wikipedia
+* [CSS Color Module Level 4](https://drafts.csswg.org/css-color/)
+* [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value)

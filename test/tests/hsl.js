@@ -8,12 +8,12 @@ let round = culori.convert.round;
 
 tape("from_hsl works correctly", function(test) {
 
-	test.deepEqual(from_hsl(0, 0, 0), [0, 0, 0], 'lightness 0 should yield black');
-	test.deepEqual(from_hsl(60, 0.25, 0), [0, 0, 0], '...regardless of hue and saturation');
+	test.deepEqual(from_hsl({ h: 0, s: 0, l: 0 }), { r: 0, g: 0, b: 0, a: undefined }, 'lightness 0 should yield black');
+	test.deepEqual(from_hsl({ h: 60, s: 0.25, l: 0 }), { r: 0, g: 0, b: 0, a: undefined }, '...regardless of hue and saturation');
 
-	test.deepEqual(from_hsl(0, 0, 0.5), [0.5, 0.5, 0.5], 'saturation 0 should yield gray');
-	test.deepEqual(from_hsl(60, 0, 0.25), [0.25, 0.25, 0.25], '...regardless of the hue');
-	test.deepEqual(from_hsl(100, 0, 0.5), [0.5, 0.5, 0.5], '...or the lightness');
+	test.deepEqual(from_hsl({ h: 0, s: 0, l: 0.5 }), { r: 0.5, g: 0.5, b: 0.5, a: undefined }, 'saturation 0 should yield gray');
+	test.deepEqual(from_hsl({ h: 60, s: 0, l: 0.25 }), { r: 0.25, g: 0.25, b: 0.25, a: undefined }, '...regardless of the hue');
+	test.deepEqual(from_hsl({ h: 100, s: 0, l: 0.5 }), { r: 0.5, g: 0.5, b: 0.5, a: undefined }, '...or the lightness');
 
 	test.end();
 
@@ -21,46 +21,84 @@ tape("from_hsl works correctly", function(test) {
 
 tape('to_hsl works correctly', function(test) {
 
-	test.deepEqual(to_hsl(0, 0, 0), [undefined, 0, 0], 'black');
+	test.deepEqual(to_hsl({ r: 0, g: 0, b: 0 }), { h: undefined, s: 0, l: 0, a: undefined }, 'black');
 
-	test.deepEqual(to_hsl(0.25, 0.25, 0.25), [undefined, 0, 0.25], 'R = G = B yields undefined hue');
-	test.deepEqual(to_hsl(0.6, 0.6, 0.6), [undefined, 0, 0.6], 'R = G = B yields zero saturation');
+	test.deepEqual(to_hsl({ r: 0.25, g: 0.25, b: 0.25 }), { h: undefined, s: 0, l: 0.25, a: undefined }, 'R = G = B yields undefined hue');
+	test.deepEqual(to_hsl({ r: 0.6, g: 0.6, b: 0.6 }), { h: undefined, s: 0, l: 0.6, a: undefined }, 'R = G = B yields zero saturation');
 	
-	test.deepEqual(to_hsl(1, 0, 0), [0, 1, 0.5], 'red');
-	test.deepEqual(to_hsl(1, 1, 0), [60, 1, 0.5], 'yellow');
-	test.deepEqual(to_hsl(0, 1, 0), [120, 1, 0.5], 'green');
-	test.deepEqual(to_hsl(0, 1, 1), [180, 1, 0.5], 'cyan');
-	test.deepEqual(to_hsl(0, 0, 1), [240, 1, 0.5], 'blue');
-	test.deepEqual(to_hsl(1, 0, 1), [300, 1, 0.5], 'magenta');
+	test.deepEqual(to_hsl({ r: 1, g: 0, b: 0 }), { h: 0, s: 1, l: 0.5, a: undefined }, 'red');
+	test.deepEqual(to_hsl({ r: 1, g: 1, b: 0 }), { h: 60, s: 1, l: 0.5, a: undefined }, 'yellow');
+	test.deepEqual(to_hsl({ r: 0, g: 1, b: 0 }), { h: 120, s: 1, l: 0.5, a: undefined }, 'green');
+	test.deepEqual(to_hsl({ r: 0, g: 1, b: 1 }), { h: 180, s: 1, l: 0.5, a: undefined }, 'cyan');
+	test.deepEqual(to_hsl({ r: 0, g: 0, b: 1 }), { h: 240, s: 1, l: 0.5, a: undefined }, 'blue');
+	test.deepEqual(to_hsl({ r: 1, g: 0, b: 1 }), { h: 300, s: 1, l: 0.5, a: undefined }, 'magenta');
 
 	test.end();
 });
 
 tape('to_hsl -> from_hsl preserves color (via round)', function(test) {
 
-	test.deepEqual(from_hsl.apply(null, to_hsl(1, 0, 0)).map(v => round(v)), [1, 0, 0], 'red');
-	test.deepEqual(from_hsl.apply(null, to_hsl(1, 1, 0)).map(v => round(v)), [1, 1, 0], 'yellow');
-	test.deepEqual(from_hsl.apply(null, to_hsl(0.3, 0.2, 0.1)).map(v => round(v)), [0.3, 0.2, 0.1], 'floating point');
-	test.deepEqual(from_hsl.apply(null, to_hsl(0.7, 0.1, 0.3)).map(v => round(v)), [0.7, 0.1, 0.3], 'floating point');
+	test.deepEqual(
+		from_hsl(to_hsl({ r: 1, g: 0, b: 0 })), 
+		{ r: 1, g: 0, b: 0, a: undefined  }, 
+		'red'
+	);
+
+	test.deepEqual(
+		round(from_hsl(to_hsl({ r: 1, g: 1, b: 0 }))), 
+		{ r: 1, g: 1, b: 0, a: undefined  }, 
+		'yellow'
+	);
+
+	test.deepEqual(
+		round(from_hsl(to_hsl({ r: 0.3, g: 0.2, b: 0.1 }))), 
+		{ r: 0.3, g: 0.2, b: 0.1, a: undefined  }, 
+		'floating point'
+	);
+
+	test.deepEqual(
+		round(from_hsl(to_hsl({ r: 0.7, g: 0.1, b: 0.3 }))), 
+		{ r: 0.7, g: 0.1, b: 0.3, a: undefined  }, 
+		'floating point'
+	);
 
 	test.end();
 });
 
 tape('from_hsl -> to_hsl preserves color (via round)', function(test) {
 
-	test.deepEqual(to_hsl.apply(null, from_hsl(0, 1, 0.5)).map(v => round(v)), [0, 1, 0.5], 'red');
-	test.deepEqual(to_hsl.apply(null, from_hsl(60, 1, 0.5)).map(v => round(v)), [60, 1, 0.5], 'yellow');
-	test.deepEqual(to_hsl.apply(null, from_hsl(0.3, 0.2, 0.1)).map(v => round(v)), [0.3, 0.2, 0.1], 'floating point');
-	test.deepEqual(to_hsl.apply(null, from_hsl(0.7, 0.1, 0.3)).map(v => round(v)), [0.7, 0.1, 0.3], 'floating point');
+	test.deepEqual(
+		round(to_hsl(from_hsl({ h: 0, s: 1, l: 0.5 }))), 
+		{ h: 0, s: 1, l: 0.5, a: undefined  }, 
+		'red'
+	);
+
+	test.deepEqual(
+		round(to_hsl(from_hsl({ h: 60, s: 1, l: 0.5 }))), 
+		{ h: 60, s: 1, l: 0.5, a: undefined  }, 
+		'yellow'
+	);
+
+	test.deepEqual(
+		round(to_hsl(from_hsl({ h: 0.3, s: 0.2, l: 0.1 }))), 
+		{ h: 0.3, s: 0.2, l: 0.1, a: undefined  }, 
+		'floating point'
+	);
+	
+	test.deepEqual(
+		round(to_hsl(from_hsl({ h: 0.7, s: 0.1, l: 0.3 }))), 
+		{ h: 0.7, s: 0.1, l: 0.3, a: undefined  }, 
+		'floating point'
+	);
 
 	test.end();
 });
 
-tape('parses hsl / hsla CSS strings', function(test) {
+tape('culori.hsl() parses hsl / hsla CSS strings', function(test) {
 
-	test.deepEqual(to_hsl.apply(null, culori.parse('hsl(0, 100%, 0%)')), [undefined, 0, 0], 'black');
-	test.deepEqual(to_hsl.apply(null, culori.parse('hsl(100, 0%, 50%)')), [undefined, 0, 0.5], 'grey');
-	test.deepEqual(to_hsl.apply(null, culori.parse('hsl(0, 100%, 50%)')), [0, 1, 0.5], 'red');
+	test.deepEqual(culori.hsl('hsl(0, 100%, 0%)'), { h: undefined, s: 0, l: 0, a: undefined  }, 'black');
+	test.deepEqual(culori.hsl('hsl(100, 0%, 50%)'), { h: undefined, s: 0, l: 0.5, a: undefined  }, 'grey');
+	test.deepEqual(culori.hsl('hsl(0, 100%, 50%)'), { h: 0, s: 1, l: 0.5, a: undefined  }, 'red');
 
 	test.end();
 })

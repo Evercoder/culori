@@ -10,10 +10,10 @@ Library | 16.7 million colors
 ------- | -------------------
 d3-color | 8s
 __culori__ | __11s__
-chroma | 63s
-tinycolor | 34s
+tinycolor | 36s
+chroma | 66s
 
-`culori` is much faster than `chroma` and `tinycolor` and comparable in speed with `d3-color`; however, it handles more `rgb` formats than `d3-color`.
+`culori` is much faster than `chroma` and `tinycolor`. It's a bit slower than `d3-color`, but handles more RGB(A) CSS formats.
 
 ## Running the benchmarks
 

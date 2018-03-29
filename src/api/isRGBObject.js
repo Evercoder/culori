@@ -1,0 +1,1 @@
+export default o => o.hasOwnProperty('r') && o.hasOwnProperty('g') && o.hasOwnProperty('b');

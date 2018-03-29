@@ -1,8 +1,8 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Formal_derivation
-export default function(r, g, b) {
+export default function({ r, g, b, a }) {
 	let M = Math.max(r, g, b), m = Math.min(r, g, b);
-	return [
-		M - m === 0 ? 
+	return {
+		h: M - m === 0 ? 
 			undefined : 
 			(
 				M === r ? 
@@ -11,7 +11,8 @@ export default function(r, g, b) {
 						(b - r) / (M - m) + 2 
 						: (r - g) / (M - m) + 4
 			) * 60,
-		M === 0 ? 0 : 1 - m / M,
-		M
-	];
+		s: M === 0 ? 0 : 1 - m / M,
+		v: M,
+		a: a
+	};
 }
