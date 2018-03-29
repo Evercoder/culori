@@ -4,15 +4,23 @@ Culori is a general-purpose color library for JavaScript.
 
 ## Use cases
 
-* Converting from, and to, a variety of formats
-* Recreating classic color schemes
-* Working with color schemes (interpolation between colors)
+This library aims to provide a simple API to:
 
-## Goals
+__Convert between a variety of color formats__.
 
-* Make it useful as a basis for color pickers.
+__Build a color picker for a particular format__. Let's take the ubiquitous HSV color picker; the library should allow me to:
 
-__The problem of alpha__. Internally we should keep alpha as undefined whenever possible (avoid making alpha 1 by default). 
+* map the user interface for the `h`, `s`, `v` values to a color that I can then convert to any other format
+* for a color in any format the user can input (these will usually be the [CSS Colors Level 4][css4-colors]), obtain the representation in __HSV__ space, so the interface can be updated accordingly
+
+Of particular interest is deciding when to apply the _alpha_ channel to the interface (i.e. to an opacity slider). If the interface contains color swatches, I should decide whether to use the _alpha_ channel or not:
+
+* if the user inputs `#ffffff` I might only use the `h`, `s` and `v` value;
+* if the user inputs `#ffffff00` I might also want to apply the `a: 0` value.
+
+__Create color schemes based on a base color__.
+
+__Obtain color scales to use in data visualization__.
 
 ## Supported formats
 
@@ -27,7 +35,7 @@ The library supports all the color formats defined in the [CSS Colors Level 4][c
 
 Additionally, it supports:
 
-* ✓ HSV
+* ✓ HSV (also called HSB)
 * ✓ HSI
 * (Hopefully) CubeHelix
 
@@ -43,7 +51,9 @@ Just a convenience for _culori_.__parse__().
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __RGB__ object. 
 
-The individual parsers are also exposed:
+__Note:__ If the color does not specify an explicit _alpha_ value, the `a` property of the __RGB__ object is marked as _undefined_. Other color libraries will put a default `a: 1` for these colors, but I found this assumption to be limiting. As such, we leave it to the user to place `a: 1` instead of `undefined` when appropriate for their needs.
+
+The individual parsers are exposed in the _culori_.__parse__ namespace:
 
 * culori.parse.__number__( _Color_ )
 * culori.parse.__named__( _Color_ )
@@ -67,7 +77,7 @@ Converts a __HSL__ object to a __RGB__ object.
 
 ### HSV 
 
-§ culori.__hsv__( _Color_ or _RGB_) → _HSV_
+§ culori.__hsv__( _Color_ or _RGB_ ) → _HSV_
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSV__ object. 
 

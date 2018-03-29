@@ -9,8 +9,7 @@ export default color => {
 		return {
 			r: ((num >> 8 & 0xF) | (num >> 4 & 0xF0)) / 255, 
 			g: ((num >> 4 & 0xF) | (num & 0xF0)) / 255, 
-			b: ((num & 0xF) | (num << 4 & 0xF0)) / 255,
-			a: undefined
+			b: ((num & 0xF) | (num << 4 & 0xF0)) / 255
 		};
 	}
 
@@ -29,8 +28,7 @@ export default color => {
 		return {
 			r: (num >> 16 & 0xFF) / 255, 
 			g: (num >> 8 & 0xFF) / 255, 
-			b: (num & 0xFF) / 255,
-			a: undefined
+			b: (num & 0xFF) / 255
 		};
 	}
 

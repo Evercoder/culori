@@ -24,7 +24,7 @@ mixin(culori, {
 
 	to_hsl,
 	to_hsv,
-	to_hsi
+	to_hsi,
 
 	// API
 	parse,

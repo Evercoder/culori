@@ -1,48 +1,54 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 export default function ({h, s, i, a}) {
 	let f = Math.abs(h/60 % 2 - 1);
+	let res;
 	switch (Math.floor(h/60)) {
 		case 0: 
-			return {
+			res = {
 				r: i * (1 + s * (3 / (2 - f) - 1)), 
 				g: i * (1 + s * (3 * (1 - f) / (2 - f) - 1)), 
-				b: i * (1 - s), 
-				a: a
+				b: i * (1 - s)
 			};
+			break;
 		case 1: 
-			return {
+			res = {
 				r: i * (1 + s * (3 * (1 - f) / (2 - f) - 1)), 
 				g: i * (1 + s * (3 / (2 - f) - 1)), 
-				b: i * (1 - s), 
-				a: a
+				b: i * (1 - s)
 			};
+			break;
 		case 2: 
-			return {
+			res = {
 				r: i * (1 - s), 
 				g: i * (1 + s * (3 / (2 - f) - 1)), 
-				b: i * (1 + s * (3 * (1 - f) / (2 - f) - 1)), 
-				a: a
+				b: i * (1 + s * (3 * (1 - f) / (2 - f) - 1))
 			};
+			break;
 		case 3: 
-			return {
+			res = {
 				r: i * (1 - s), 
 				g: i * (1 + s * (3 * (1 - f) / (2 - f) - 1)), 
 				b: i * (1 + s * (3 / (2 - f) - 1)), 
 				a: a
 			};
+			break;
 		case 4: 
-			return {
+			res = {
 				r: i * (1 + s * (3 * (1 - f) / (2 - f) - 1)), 
 				g: i * (1 - s), 
 				b: i * (1 + s * (3 / (2 - f) - 1)), 
 				a: a
 			};
+			break;
 		case 5: 
-			return {
+			res = {
 				r: i * (1 + s * (3 / (2 - f) - 1)), 
 				g: i * (1 - s), 
 				b: i * (1 + s * (3 * (1 - f) / (2 - f) - 1)), 
 				a: a
 			};
+			break;
 	}
+	if (a !== undefined) res['a'] = a;
+	return res;
 }
