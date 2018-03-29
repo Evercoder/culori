@@ -8,6 +8,7 @@ export default function({ r, g, b, a }) {
 	if (M - m !== 0) {
 		res['h'] = (M === r ? (g - b) / (M - m) + (g < b) * 6 : M === g ? (b - r) / (M - m) + 2 : (r - g) / (M - m) + 4) * 60;
 	}
+	res['mode'] = 'hsv';
 	if (a !== undefined) res['a'] = a;
 	return res;
 }

@@ -28,27 +28,25 @@ export default function ({h, s, i, a}) {
 			res = {
 				r: i * (1 - s), 
 				g: i * (1 + s * (3 * (1 - f) / (2 - f) - 1)), 
-				b: i * (1 + s * (3 / (2 - f) - 1)), 
-				a: a
+				b: i * (1 + s * (3 / (2 - f) - 1))
 			};
 			break;
 		case 4: 
 			res = {
 				r: i * (1 + s * (3 * (1 - f) / (2 - f) - 1)), 
 				g: i * (1 - s), 
-				b: i * (1 + s * (3 / (2 - f) - 1)), 
-				a: a
+				b: i * (1 + s * (3 / (2 - f) - 1))
 			};
 			break;
 		case 5: 
 			res = {
 				r: i * (1 + s * (3 / (2 - f) - 1)), 
 				g: i * (1 - s), 
-				b: i * (1 + s * (3 * (1 - f) / (2 - f) - 1)), 
-				a: a
+				b: i * (1 + s * (3 * (1 - f) / (2 - f) - 1))
 			};
 			break;
 	}
+	res['mode'] = 'rgb';
 	if (a !== undefined) res['a'] = a;
 	return res;
 }

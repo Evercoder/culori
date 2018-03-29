@@ -11,6 +11,7 @@ export default function({ h, s, l, a }) {
 		case 4: res = { r: m2, g: 2 * l - m1, b: m1 }; break;
 		case 5: res = { r: m1, g: 2 * l - m1, b: m2 }; break;
 	}
+	res['mode'] = 'rgb';
 	if (a !== undefined) res['a'] = a;
 	return res;
 };

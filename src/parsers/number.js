@@ -7,6 +7,7 @@ export default color => {
 	// hex3: #c93 -> #cc9933
 	if (num <= 0xFFF) {
 		return {
+			mode: 'rgb',
 			r: ((num >> 8 & 0xF) | (num >> 4 & 0xF0)) / 255, 
 			g: ((num >> 4 & 0xF) | (num & 0xF0)) / 255, 
 			b: ((num & 0xF) | (num << 4 & 0xF0)) / 255
@@ -16,6 +17,7 @@ export default color => {
 	// hex4: #c931 -> #cc993311
 	if (num <= 0xFFFF) {
 		return {
+			mode: 'rgb',
 			r: ((num >> 12 & 0xF) | (num >> 8 & 0xF0)) / 255, 
 			g: ((num >> 8 & 0xF) | (num >> 4 & 0xF0)) / 255, 
 			b: ((num >> 4 & 0xF) | (num & 0xF0)) / 255, 
@@ -26,6 +28,7 @@ export default color => {
 	// hex6: #f0f1f2
 	if (num <= 0xFFFFFF) {
 		return {
+			mode: 'rgb',
 			r: (num >> 16 & 0xFF) / 255, 
 			g: (num >> 8 & 0xFF) / 255, 
 			b: (num & 0xFF) / 255
@@ -35,6 +38,7 @@ export default color => {
 	// hex8: #f0f1f2ff
 	if (num <= 0xFFFFFFFF) {
 		return {
+			mode: 'rgb',
 			r: (num >> 24 & 0xFF) / 255, 
 			g: (num >> 16 & 0xFF) / 255, 
 			b: (num >> 8 & 0xFF) / 255, 

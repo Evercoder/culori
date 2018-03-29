@@ -14,5 +14,9 @@ export default function round(value, precision = 4) {
 	if (typeof value === 'object') {
 		return Object.keys(value).reduce((o, k) => (o[k] = round(value[k]), o), {});
 	}
+
+	if (typeof value === 'string') {
+		return value;
+	}
 }
 	

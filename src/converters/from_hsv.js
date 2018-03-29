@@ -10,6 +10,7 @@ export default function({ h, s, v, a }) {
 		case 4: res = { r: v * (1 - s * f), g: v * (1 - s), b: v }; break;
 		case 5: res = { r: v, g: v * (1 - s), b: v * (1 - s * f) }; break;
 	}
+	res['mode'] = 'rgb';
 	if (a !== undefined) res['a'] = a;
 	return res;
 };

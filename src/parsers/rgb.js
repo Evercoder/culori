@@ -12,6 +12,7 @@ export default color => {
 		b: match[5] === undefined ? match[6] / 255 : match[5] / 100
 	};
 
+	res['mode'] = 'rgb';
 	if (match[7] !== undefined) {
 		res['a'] = match[7] / 100;
 	} else if (match[8] !== undefined) {
