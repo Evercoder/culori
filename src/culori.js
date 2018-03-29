@@ -14,7 +14,7 @@ import to_hsi from './converters/to_hsi';
 
 import named from './colors/named';
 
-const culori = color => culori.rgb(color);
+const culori = color => isRGBObject(color) ? color : parse(color);
 
 mixin(culori, {
 	
@@ -45,10 +45,6 @@ mixin(culori, {
 
 	hsi: function(color) {
 		return to_hsi(isRGBObject(color) ? color: parse(color));
-	}
-
-	rgb: function(color) {
-		return isRGBObject(color) ? color : parse(color);
 	}
 });
 
