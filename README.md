@@ -18,19 +18,20 @@ __The problem of alpha__. Internally we should keep alpha as undefined whenever 
 
 The library supports all the color formats defined in the [CSS Colors Level 4](https://drafts.csswg.org/css-color/):
 
-* [Named colors](https://drafts.csswg.org/css-color/#named-colors)
-* [Hex colors](https://drafts.csswg.org/css-color/#hex-notation) (with 3, 4, 6, or 8 digits)
-* [RGB and RGBA](https://drafts.csswg.org/css-color/#rgb-functions)
-* [HSL and HSLA](https://drafts.csswg.org/css-color/#the-hsl-notation)
+* ✓ [Named colors](https://drafts.csswg.org/css-color/#named-colors)
+* ✓ [Hex colors](https://drafts.csswg.org/css-color/#hex-notation) (with 3, 4, 6, or 8 digits)
+* ✓ [RGB and RGBA](https://drafts.csswg.org/css-color/#rgb-functions)
+* ✓ [HSL and HSLA](https://drafts.csswg.org/css-color/#the-hsl-notation)
 * [HWB](https://drafts.csswg.org/css-color/#the-hwb-notation)
 * [LAB and LCH](https://drafts.csswg.org/css-color/#lab-colors)
 
 Additionally, it supports:
 
-* HSV
+* ✓ HSV
 * HSI
 * (Hopefully) CubeHelix
 
+The implementations I've already finished ar denoted by checkmarks (✓).
 
 ## API
 
