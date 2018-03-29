@@ -3,7 +3,6 @@ let { color } = require('d3-color');
 let tinycolor = require("tinycolor2");
 let culori = require('../../../build/culori');
 
-
 var start, end;
 function startBench() {
 	start = process.hrtime();

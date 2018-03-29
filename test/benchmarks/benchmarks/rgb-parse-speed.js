@@ -3,8 +3,6 @@ let { color } = require('d3-color');
 let tinycolor = require("tinycolor2");
 let culori = require('../../../build/culori');
 
-import named_colors from '../../../'
-
 let increment = 1;
 
 var start, end;

@@ -13,7 +13,7 @@ __culori__ | __11s__
 chroma | 63s
 tinycolor | 34s
 
-Currently, [d3-color](https://github.com/d3/d3-color) has the fastest RGB parser.
+`culori` is much faster than `chroma` and `tinycolor` and comparable in speed with `d3-color`; however, it handles more `rgb` formats than `d3-color`.
 
 ## Running the benchmarks
 
