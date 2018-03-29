@@ -28,6 +28,7 @@ The library supports all the color formats defined in the [CSS Colors Level 4](h
 Additionally, it supports:
 
 * HSV
+* HSI
 * (Hopefully) CubeHelix
 
 
@@ -59,13 +60,16 @@ Returns a CSS representation of the color, in the (optionally-specified) format,
 
 #### `color.toString()` 
 
-### `Scale` API
-
-TODO
-
 Alias of `color.css()`.
 
+
+### `Scale` API
+
+To be discussed.
+
 ## Prior art
+
+This library is indebted to these projects:
 
 * [chroma.js](https://github.com/gka/chroma.js)
 * [d3-color](https://github.com/d3/d3-color)
