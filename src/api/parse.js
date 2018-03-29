@@ -4,18 +4,14 @@ import parseHex from '../parsers/hex';
 import parseRgb from '../parsers/rgb';
 import parseHsl from '../parsers/hsl';
 
-const parsers = [
-	parseNumber,
-	parseNamed,
-	parseHex,
-	parseRgb,
-	parseHsl
-];
-
-const parse = c => {
-	let res;
-	parsers.find(f => res = f(c));
-	return res;
+const parse = color => {
+	return (
+		parseNumber(color) || 
+		parseNamed(color) || 
+		parseHex(color) || 
+		parseRgb(color) || 
+		parseHsl(color)
+	);
 };
 
 export default parse;
