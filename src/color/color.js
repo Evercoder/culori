@@ -33,7 +33,7 @@ class Color {
 	}
 
 	toString() {
-		return this.css();
+		return this.serialize();
 	}
 }
 

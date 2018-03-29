@@ -15,7 +15,12 @@ export default color => {
 
 	// hex4: #c931 -> #cc993311
 	if (num <= 0xFFFF) {
-
+		return [
+			((num >> 12 & 0xF) | (num >> 8 & 0xF0)) / 255, 
+			((num >> 8 & 0xF) | (num >> 4 & 0xF0)) / 255, 
+			((num >> 4 & 0xF) | (num & 0xF0)) / 255, 
+			((num & 0xF) | (num << 4 & 0xF0)) / 255
+		];
 	}
 	
 	// hex6: #f0f1f2
