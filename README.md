@@ -70,3 +70,7 @@ Alias of `color.css()`.
 * [chroma.js](https://github.com/gka/chroma.js)
 * [d3-color](https://github.com/d3/d3-color)
 * [TinyColor](https://github.com/bgrins/TinyColor)
+
+## Benchmarks
+
+To stacks well against its peers: [benchmarks](./test/benchmarks/README.md).

@@ -25,3 +25,5 @@ export const rgb_current = new RegExp(`^rgba?\\(\\s*${pn}\\s+${pn}\\s+${pn}\\s*(
 // https://drafts.csswg.org/css-color/#the-hsl-notation
 export const hsl_legacy = new RegExp(`^hsla?\\(\\s*${hue}\\s*,\\s*${sp}\\s*,\\s*${sp}\\s*(?:,\\s*${pn}\\s*)?\\)$`);
 export const hsl_current = new RegExp(`^hsla?\\(\\s*${hue}\\s+${sp}\\s+${sp}\\s*(?:\\/\\s*${pn}\\s*)?\\)$`);
+
+export const hex = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i;

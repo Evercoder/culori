@@ -13,7 +13,7 @@ import hsv_to_rgb from './converters/hsv2rgb';
 
 import Color from './color/color';
 
-const culori = c => new Color(c instanceof Color ? c.serialize() : culori.parse(c));
+const culori = c => new Color(c instanceof Color ? c.serialize() : parse(c));
 
 mixin(culori, {
 	convert: {

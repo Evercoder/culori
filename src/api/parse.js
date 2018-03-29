@@ -6,11 +6,11 @@ import parseHsl from '../parsers/hsl';
 
 const parse = color => {
 	return (
-		parseNumber(color) || 
-		parseNamed(color) || 
+		parseNumber(color) ||
 		parseHex(color) || 
 		parseRgb(color) || 
-		parseHsl(color)
+		parseHsl(color) ||
+		parseNamed(color)
 	);
 };
 
