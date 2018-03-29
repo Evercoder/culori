@@ -3,8 +3,6 @@ import {
 	hsl_current
 } from '../util/regex';
 
-import hsl_to_rgb from '../converters/hsl2rgb';
-
 const angle_to_hue = (val, unit) => {
 	switch (unit) {
 		case 'deg': return val;
@@ -19,7 +17,7 @@ export default color => {
 	if (typeof color !== 'string') return;
 	let match = color.match(hsl_legacy) || color.match(hsl_current);
 	if (!match) return;
-	return hsl_to_rgb(
+	return from_hsl(
 		match[3] === undefined ? angle_to_hue(match[1], match[2]) : match[3],
 		match[4] / 100,
 		match[5] / 100

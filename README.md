@@ -28,7 +28,7 @@ The library supports all the color formats defined in the [CSS Colors Level 4](h
 Additionally, it supports:
 
 * ✓ HSV
-* HSI
+* ✓ HSI
 * (Hopefully) CubeHelix
 
 The implementations I've already finished ar denoted by checkmarks (✓).
@@ -79,3 +79,7 @@ This library is indebted to these projects:
 ## Benchmarks
 
 `colori` stacks well against its peers: [benchmarks](./test/benchmarks/README.md).
+
+## Further reading
+
+* [HSL and HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) on Wikipedia

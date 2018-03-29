@@ -8,10 +8,12 @@ import parseHex from './parsers/hex';
 import parseRgb from './parsers/rgb';
 import parseHsl from './parsers/hsl';
 
-import hsl_to_rgb from './converters/hsl2rgb';
-import hsv_to_rgb from './converters/hsv2rgb';
-import rgb_to_hsl from './converters/rgb2hsl';
-import rgb_to_hsv from './converters/rgb2hsv';
+import from_hsl from './converters/from_hsl';
+import from_hsv from './converters/from_hsv';
+import from_hsi from './converters/from_hsi';
+import to_hsl from './converters/to_hsl';
+import to_hsv from './converters/to_hsv';
+import to_hsi from './converters/to_hsi';
 
 import named from './colors/named';
 
@@ -21,10 +23,12 @@ const culori = c => new Color(c instanceof Color ? c.serialize() : parse(c));
 
 mixin(culori, {
 	convert: {
-		hsl_to_rgb,
-		hsv_to_rgb,
-		rgb_to_hsl,
-		rgb_to_hsv
+		from_hsl,
+		from_hsv,
+		from_hsi,
+		to_hsl,
+		to_hsv,
+		to_hsi
 	},
 	parse,
 	parser: {

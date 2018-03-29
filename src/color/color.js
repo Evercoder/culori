@@ -1,5 +1,5 @@
-import rgb_to_hsl from '../converters/rgb2hsl';
-import rgb_to_hsv from '../converters/rgb2hsv';
+import to_hsl from '../converters/to_hsl';
+import to_hsv from '../converters/to_hsv';
 
 class Color {
 
@@ -10,9 +10,9 @@ class Color {
 	to(format) {
 		switch(format) {
 			case 'hsl':
-				return rgb_to_hsl(...this._color);
+				return to_hsl(...this._color);
 			case 'hsv':
-				return rgb_to_hsv(...this._color);
+				return to_hsv(...this._color);
 		}
 	}
 
