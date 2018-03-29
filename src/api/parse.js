@@ -1,11 +1,13 @@
 import parseNumber from '../parsers/number';
 import parseNamed from '../parsers/named';
 import parseHex from '../parsers/hex';
+import parseRgb from '../parsers/rgb';
 
 const parsers = [
 	parseNumber,
 	parseNamed,
-	parseHex
+	parseHex,
+	parseRgb
 ];
 
 const parse = c => {
