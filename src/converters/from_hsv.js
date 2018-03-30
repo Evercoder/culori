@@ -1,8 +1,6 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
-import { IS_CULORI, IS_RGB, IS_ALPHA_IMPLIED, IS_NORMALIZED } from '../api/flags';
-import with_flags from '../util/with_flags';
 
-export default function({ h, s, v, a }, additional_flags = 0) {
+export default function({ h, s, v, a }) {
 	let f = Math.abs(h/60 % 2 - 1);
 	let res;
 	switch (Math.floor(h/60)) {
@@ -13,14 +11,9 @@ export default function({ h, s, v, a }, additional_flags = 0) {
 		case 4: res = { r: v * (1 - s * f), g: v * (1 - s), b: v }; break;
 		case 5: res = { r: v, g: v * (1 - s), b: v * (1 - s * f) }; break;
 	}
+	res['mode'] = 'rgb';
 	if (a !== undefined) {
 		res['a'] = a;
 	}
-	return with_flags(res, 
-		IS_CULORI | 
-		IS_RGB | 
-		IS_NORMALIZED | 
-		(res['a'] === undefined && IS_ALPHA_IMPLIED) | 
-		additional_flags
-	);
+	return res;
 };

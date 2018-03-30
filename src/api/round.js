@@ -11,8 +11,11 @@ export default function round(value, precision = 4) {
 		return r(value, precision);
 	}
 
+	if (typeof value === 'string') {
+		return value;
+	}
+
 	if (typeof value === 'object') {
-		return Object.keys(value).reduce((o, k) => (o[k] = k !== 'flags' ? round(value[k]) : value[k], o), {});
+		return Object.keys(value).reduce((o, k) => (o[k] = round(value[k]), o), {});
 	}
 }
-	

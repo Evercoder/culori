@@ -1,11 +1,10 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Formal_derivation
-import { IS_CULORI, IS_HSV, IS_ALPHA_IMPLIED, IS_NORMALIZED, IS_HUE_UNDEFINED } from '../api/flags';
-import with_flags from '../util/with_flags';
 
-export default function({ r, g, b, a, flags }, additional_flags = 0) {
-	if (flags & IS_CULORI && flags & IS_HSV) return arguments[0];
+export default function({ r, g, b, a }) {
+	// if (flags & IS_CULORI && flags & IS_HSV) return arguments[0];
 	let M = Math.max(r, g, b), m = Math.min(r, g, b);
 	let res = {
+		mode: 'hsv',
 		s: M === 0 ? 0 : 1 - m / M,
 		v: M
 	};
@@ -15,12 +14,5 @@ export default function({ r, g, b, a, flags }, additional_flags = 0) {
 	if (a !== undefined) {
 		res['a'] = a;
 	}
-	return with_flags(res, 
-		IS_CULORI | 
-		IS_HSV | 
-		IS_NORMALIZED | 
-		(res['h'] === undefined && IS_HUE_UNDEFINED) | 
-		(res['a'] === undefined && IS_ALPHA_IMPLIED) | 
-		additional_flags
-	);
+	return res;
 }
