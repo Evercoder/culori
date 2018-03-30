@@ -63,9 +63,16 @@ The individual parsers are exposed in the _culori_.__parse__ namespace:
 
 ### HSL
 
-§ culori.__hsl__( _Color_ or _RGB_ ) → _HSL_
+§ culori.__hsl__( _Color_ or _HSL_ or _RGB_ or _Object_) → _HSL_
 
-Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSL__ object. 
+Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSL__ object.
+
+When passed a culori object:
+
+* if it's a __HSL__ object, it just returns it back
+* it it's a __RGB__ object, it converts it to a __HSL__ object.
+
+When passed a plain object, it assumes it's a normalized __HSL__ object.
 
 § culori.__to_hsl__( _RGB_ ) → _HSL_
 
@@ -77,9 +84,16 @@ Converts a __HSL__ object to a __RGB__ object.
 
 ### HSV 
 
-§ culori.__hsv__( _Color_ or _RGB_ ) → _HSV_
+§ culori.__hsv__( _Color_ or _HSL_ or _RGB_ or _Object_) → _HSV_
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSV__ object. 
+
+When passed a culori object:
+
+* if it's a __HSV__ object, it just returns it back
+* it it's a __RGB__ object, it converts it to a __HSV__ object.
+
+When passed a plain object, it assumes it's a normalized __HSV__ object.
 
 § culori.__to_hsv__( _RGB_ ) → _HSV_
 
@@ -91,9 +105,16 @@ Converts a __HSV__ object to a __RGB__ object.
 
 ### HSI
 
-§ culori.__hsi__( _Color_ or _RGB_) → _HSI_
+§ culori.__hsi__( _Color_ or _HSI_ or _RGB_ or _Object_) → _HSI_
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSI__ object. 
+
+When passed a culori object:
+
+* if it's a __HSI__ object, it just returns it back
+* it it's a __RGB__ object, it converts it to a __HSI__ object.
+
+When passed a plain object, it assumes it's a normalized __HSI__ object.
 
 § culori.__to_hsi__( _RGB_ ) → _HSI_
 
@@ -105,14 +126,15 @@ Converts a __HSI__ object to a __RGB__ object.
 
 ### Color sets
 
-§ culori.__colors__ 
+§ culori.__named__
 
-Is the namespace for the various color sets included in the library:
+Contains the set of [CSS Named Colors][css4-named-colors].
 
-* culori.colors.__named__ contains the set of [CSS Named Colors][css4-named-colors]
-* culori.colors.__brewer__ (soon)
+§ culori.__brewer__
 
-### Miscellaneous
+ColorBrewer (coming soon).
+
+### Utilities
 
 § culori.__round__( _value_ | _object_ [, _precision_ = 4 ] )
 
@@ -125,22 +147,22 @@ Rounds the value, or each property in an object, to a certain number of decimal 
 
 Flag | Notes
 ---- | -----
-IS_CULORI | The object was processed with culori.
-IS_RGB | The color is in the RGB color space.
-IS_HSL | The color is in the HSL color space.
-IS_HSV | The color is in the HSV color space.
-IS_HSI | The color is in the HSI color space.
-IS_LAB | The color is in the LAB color space.
-IS_HCL | The color is in the HCL color space.
-IS_GRAY | The color is grayscale.
-IS_HWB | The color is in the HWB color space.
-IS_CUBEHELIX | The color is in the Cubehelix color space.
-IS_FORMAT_HEX | The color originates from a hex format.
-IS_FORMAT_NAMED | The color originates from a named color.
-IS_HUE_UNDEFINED | Whether the hue is undefined in the HSL/HSV/HSI color spaces.
-IS_ALPHA_IMPLIED | Whether the (missing) alpha should be assumed to be 1.
-IS_NORMALIZED | Whether the values are normalized to their appropriate ranges, depending on the color space.
-IS_DISPLAYABLE | Whether the color can be displayed on RGB devices.
+culori.__IS_CULORI__ | The object was processed with culori.
+culori.__IS_RGB__ | The color is in the RGB color space.
+culori.__IS_HSL__ | The color is in the HSL color space.
+culori.__IS_HSV__ | The color is in the HSV color space.
+culori.__IS_HSI__ | The color is in the HSI color space.
+culori.__IS_LAB__ | The color is in the LAB color space.
+culori.__IS_HCL__ | The color is in the HCL color space.
+culori.__IS_GRAY__ | The color is grayscale.
+culori.__IS_HWB__ | The color is in the HWB color space.
+culori.__IS_CUBEHELIX__ | The color is in the Cubehelix color space.
+culori.__IS_FORMAT_HEX__ | The color originates from a hex format.
+culori.__IS_FORMAT_NAMED__ | The color originates from a named color.
+culori.__IS_HUE_UNDEFINED__ | Whether the hue is undefined in the HSL/HSV/HSI color spaces.
+culori.__IS_ALPHA_IMPLIED__ | Whether the (missing) alpha should be assumed to be 1.
+culori.__IS_NORMALIZED__ | Whether the values are normalized to their appropriate ranges, depending on the color space.
+culori.__IS_DISPLAYABLE__ | Whether the color can be displayed on RGB devices.
 
 
 ### Definitions
