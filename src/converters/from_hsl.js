@@ -14,11 +14,14 @@ export default function({ h, s, l, a }, additional_flags = 0) {
 		case 4: res = { r: m2, g: 2 * l - m1, b: m1 }; break;
 		case 5: res = { r: m1, g: 2 * l - m1, b: m2 }; break;
 	}
-	let proposed_flags = IS_CULORI | IS_RGB | IS_NORMALIZED | additional_flags;
 	if (a !== undefined) {
 		res['a'] = a;
-	} else {
-		proposed_flags |= IS_ALPHA_IMPLIED;
 	}
-	return with_flags(res, proposed_flags);
+	return with_flags(res, 
+		IS_CULORI | 
+		IS_RGB | 
+		IS_NORMALIZED | 
+		(res['a'] === undefined && IS_ALPHA_IMPLIED) | 
+		additional_flags
+	);
 };

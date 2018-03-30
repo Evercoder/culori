@@ -28,13 +28,19 @@ export default (color, additional_flags = 0) => {
 		s: match[4] / 100,
 		l: match[5] / 100
 	};
-	let flags = IS_CULORI | IS_HSL | additional_flags;
 	if (match[6] !== undefined) {
 		res['a'] = match[6] / 100;
 	} else if (match[7] !== undefined) {
 		res['a'] = match[7] / 255;
-	} else {
-		flags |= IS_ALPHA_IMPLIED;
 	}
-	return to_hsl(from_hsl(with_flags(res, flags)));
+	return to_hsl(
+		from_hsl(
+			with_flags(res, 
+				IS_CULORI | 
+				IS_HSL | 
+				(res['a'] === undefined && IS_ALPHA_IMPLIED) | 
+				additional_flags
+			)
+		)
+	);
 }

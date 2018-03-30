@@ -3,7 +3,7 @@ import {
 	rgb_current
 } from '../util/regex';
 
-import { IS_CULORI, IS_RGB, IS_ALPHA_IMPLIED } from '../api/flags';
+import { IS_CULORI, IS_RGB, IS_NORMALIZED, IS_ALPHA_IMPLIED } from '../api/flags';
 import with_flags from '../util/with_flags';
 
 export default (color, additional_flags = 0) => {
@@ -15,14 +15,17 @@ export default (color, additional_flags = 0) => {
 		b: match[5] === undefined ? match[6] / 255 : match[5] / 100
 	};
 
-	let flags = IS_CULORI | IS_RGB | additional_flags;
 	if (match[7] !== undefined) {
 		res['a'] = match[7] / 100;
 	} else if (match[8] !== undefined) {
 		res['a'] = +match[8];
-	} else {
-		flags |= IS_ALPHA_IMPLIED;
 	}
 	
-	return with_flags(res, flags);
+	return with_flags(res, 
+		IS_CULORI | 
+		IS_RGB | 
+		IS_NORMALIZED |
+		(res['a'] === undefined && IS_ALPHA_IMPLIED) |
+		additional_flags
+	);
 };
