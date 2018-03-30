@@ -1,5 +1,5 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Formal_derivation
-import { IS_CULORI, IS_HSL, ALPHA_IMPLIED } from '../api/flags';
+import { IS_CULORI, IS_HSL, IS_ALPHA_IMPLIED } from '../api/flags';
 
 export default function({ r, g, b, a, flags }, additional_flags = 0) {
 	if (flags & IS_CULORI && flags & IS_HSL) return arguments[0];
@@ -15,7 +15,7 @@ export default function({ r, g, b, a, flags }, additional_flags = 0) {
 	if (a !== undefined) {
 		res['a'] = a;
 	} else {
-		res['flags'] |= ALPHA_IMPLIED;
+		res['flags'] |= IS_ALPHA_IMPLIED;
 	}
 	return res;
 }

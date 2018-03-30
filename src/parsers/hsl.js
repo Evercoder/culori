@@ -3,7 +3,7 @@ import {
 	hsl_current
 } from '../util/regex';
 
-import { IS_CULORI, IS_HSL, ALPHA_IMPLIED } from '../api/flags';
+import { IS_CULORI, IS_HSL, IS_ALPHA_IMPLIED } from '../api/flags';
 
 import from_hsl from '../converters/from_hsl';
 
@@ -33,7 +33,7 @@ export default (color, flags = 0) => {
 	} else if (match[7] !== undefined) {
 		res['a'] = match[7] / 255;
 	} else {
-		res['flags'] |= ALPHA_IMPLIED;
+		res['flags'] |= IS_ALPHA_IMPLIED;
 	}
 	return res;
 }

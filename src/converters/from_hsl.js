@@ -1,5 +1,5 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
-import { IS_CULORI, IS_RGB, IS_HSL, ALPHA_IMPLIED } from '../api/flags';
+import { IS_CULORI, IS_RGB, IS_HSL, IS_ALPHA_IMPLIED } from '../api/flags';
 
 export default function({ h, s, l, a, flags }, additional_flags = 0) {
 	// if (flags & (IS_CULORI | IS_HSL)) return { h, s, l, a, flags: flags | additional_flags };
@@ -18,7 +18,7 @@ export default function({ h, s, l, a, flags }, additional_flags = 0) {
 	if (a !== undefined) {
 		res['a'] = a;
 	} else {
-		res['flags'] |= ALPHA_IMPLIED;
+		res['flags'] |= IS_ALPHA_IMPLIED;
 	}
 	return res;
 };
