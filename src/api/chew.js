@@ -1,4 +1,5 @@
 import { 
+	IS_CULORI,
 	IS_RGB,
 	IS_HSL,
 	IS_HSI,
@@ -7,28 +8,29 @@ import {
 	IS_LCH,
 	IS_CUBEHELIX,
 	IS_GRAY,
-	IS_HWB
+	IS_HWB,
+	IS_NORMALIZED
 } from './flags';
+import with_flags from '../util/with_flags';
 
-import from_hsl from '../converters/from_hsl';
-import from_hsv from '../converters/from_hsv';
-import from_hsi from '../converters/from_hsi';
+import isCulori from './isCulori';
+import spew from './spew';
 
-export default function(color, mode) {
+export default function(color, mode = 'rgb') {
 	if (typeof color !== 'object') {
 		return undefined;
 	}
 
-	if (color.flags & IS_RGB || mode === 'rgb') {
-		return color;
-	} else if (color.flags & IS_HSL || mode === 'hsl') {
-		return from_hsl(color);
-	} else if (color.flags & IS_HSV || mode === 'hsv') {
-		return from_hsv(color);
-	} else if (color.flags & IS_HSI || mode === 'hsi') {
-		return from_hsi(color);
-	} else {
-		// unknown format
-		return undefined;
+	if (isCulori(color)) {
+		return spew(color, mode);
 	}
+
+	switch(mode) {
+		case 'rgb': return with_flags(color, IS_CULORI | IS_RGB | IS_NORMALIZED);
+		case 'hsl': return with_flags(color, IS_CULORI | IS_HSL | IS_NORMALIZED);
+		case 'hsv': return with_flags(color, IS_CULORI | IS_HSV | IS_NORMALIZED);
+		case 'hsi': return with_flags(color, IS_CULORI | IS_HSI | IS_NORMALIZED);
+	}
+
+	return undefined;
 }
