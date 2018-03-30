@@ -7,6 +7,10 @@ import to_hsi from '../converters/to_hsi';
 
 const convert = (color, mode) => {
 
+	if (color === undefined) {
+		return undefined;
+	}
+
 	// If the color's in the same mode as needed, just return the color.
 	if (color.mode === mode) {
 		return color;

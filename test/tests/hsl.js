@@ -2,11 +2,6 @@ let tape = require('tape');
 let culori = require('../../');
 let { round, hsl, rgb } = culori;
 
-tape('hsl(Object)', function(test) {
-
-	test.end();
-}); 
-
 tape("rgb() converts from HSL to RGB", function(test) {
 
 	test.deepEqual(
