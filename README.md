@@ -43,11 +43,11 @@ The implementations I've already finished ar denoted by checkmarks (✓).
 
 ## API
 
-§ __culori__( _Color_ or _RGB_ )
+§ __culori__( _Specifier_ or _Color_ )
 
 Just a convenience for _culori_.__rgb__().
 
-§ culori.__parse__( _Color_ ) → _RGB_ or _HSL_ object.
+§ culori.__parse__( _Specifier_ ) → _Color_ object.
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __RGB__ or __HSL__ object. 
 
@@ -55,15 +55,17 @@ __Note:__ If the color does not specify an explicit _alpha_ value, the `a` prope
 
 The individual parsers are exposed in the _culori_.__parse__ namespace:
 
-* culori.parse.__number__( _Color_ )
-* culori.parse.__named__( _Color_ )
-* culori.parse.__hex__( _Color_ )
-* culori.parse.__rgb__( _Color_ )
-* culori.parse.__hsl__( _Color_ )
+* culori.parse.__number__( _Specifier_ )
+* culori.parse.__named__( _Specifier_ )
+* culori.parse.__hex__( _Specifier_ )
+* culori.parse.__rgb__( _Specifier_ )
+* culori.parse.__hsl__( _Specifier_ )
+
+§ culori.__convert__( _Specifier_ or _Color_ )
 
 ### HSL
 
-§ culori.__hsl__( _Color_ or _HSL_ or _RGB_ or _Object_) → _HSL_
+§ culori.__hsl__( _Specifier_ or _HSL_ or _RGB_ or _Object_) → _HSL_
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSL__ object.
 
@@ -74,17 +76,9 @@ When passed a culori object:
 
 When passed a plain object, it assumes it's a normalized __HSL__ object.
 
-§ culori.__to_hsl__( _RGB_ ) → _HSL_
+### HSV
 
-Converts a __RGB__ object to a __HSL__ object.
-
-§ culori.__from_hsl__( _HSL_ ) → _RGB_
-
-Converts a __HSL__ object to a __RGB__ object.
-
-### HSV 
-
-§ culori.__hsv__( _Color_ or _HSL_ or _RGB_ or _Object_) → _HSV_
+§ culori.__hsv__( _Specifier_ or _HSL_ or _RGB_ or _Object_) → _HSV_
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSV__ object. 
 
@@ -95,17 +89,9 @@ When passed a culori object:
 
 When passed a plain object, it assumes it's a normalized __HSV__ object.
 
-§ culori.__to_hsv__( _RGB_ ) → _HSV_
-
-Converts a __RGB__ object to a __HSV__ object.
-
-§ culori.__from_hsv__( _HSV_ ) → _RGB_
-
-Converts a __HSV__ object to a __RGB__ object.
-
 ### HSI
 
-§ culori.__hsi__( _Color_ or _HSI_ or _RGB_ or _Object_) → _HSI_
+§ culori.__hsi__( _Specifier_ or _HSI_ or _RGB_ or _Object_) → _HSI_
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSI__ object. 
 
@@ -115,14 +101,6 @@ When passed a culori object:
 * it it's a __RGB__ object, it converts it to a __HSI__ object.
 
 When passed a plain object, it assumes it's a normalized __HSI__ object.
-
-§ culori.__to_hsi__( _RGB_ ) → _HSI_
-
-Converts a __RGB__ object to a __HSI__ object.
-
-§ culori.__from_hsi__( _HSI_ ) → _RGB_
-
-Converts a __HSI__ object to a __RGB__ object.
 
 ### Color sets
 
@@ -145,7 +123,7 @@ Rounds the value, or each property in an object, to a certain number of decimal 
 
 ### Definitions
 
-__Color__ is a color in any parsable format. It is normally a string, but numbers (e.g. `0xFFF`) are also accepted.
+_Specifier_. is a color in any parsable format. It is normally a string, but numbers (e.g. `0xFFF`) are also accepted.
 
 __RGB__ is any plain object containing the `r`, `g`, `b`, and optionally `a`, properties with all values normalized to the interval `[0..1]`.
 
