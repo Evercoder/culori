@@ -8,6 +8,7 @@
   "author": "Dan Burzo <danburzo@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "nyc": "^11.6.0",
     "rollup": "^0.57.1",
     "tap-spec": "^4.1.1",
     "tape": "^4.9.0"
@@ -15,7 +16,11 @@
   "scripts": {
     "build": "rollup -c",
     "pretest": "yarn build",
-    "test": "tape test/tests/*.js | tap-spec",
-    "benchmark": "node test/benchmarks/index.js"
+    "test": "nyc --produce-source-map tape test/tests/*.js | tap-spec",
+    "benchmark": "node test/benchmarks/index.js",
+    "coverage" : "nyc report --reporter=lcov"
+  },
+  "nyc": {
+    "sourceMap": true
   }
 }

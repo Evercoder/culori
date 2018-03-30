@@ -2,3 +2,5 @@
 build/*.zip
 test/
 *.log
+.nyc_output/
+coverage/

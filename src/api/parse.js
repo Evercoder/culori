@@ -13,7 +13,7 @@ const parse = color => {
 		parseRgb(color) || 
 		parseHsl(color) ||
 		parseNamed(color) || 
-		(color === 'transparent' ? parseNumber(0x00000000) : undefined)
+		(color === 'transparent' ? parseHex('#00000000') : undefined)
 	);
 };
 
