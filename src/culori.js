@@ -1,7 +1,6 @@
 import mixin from './util/mixin';
 
 import parse from './api/parse';
-import isRGBObject from './api/isRGBObject';
 import round from './api/round';
 import flags from './api/flags';
 
@@ -15,7 +14,7 @@ import to_hsi from './converters/to_hsi';
 
 import named from './colors/named';
 
-const culori = color => isRGBObject(color) ? color : parse(color);
+const culori = color => parse(color);
 
 mixin(culori, flags);
 
@@ -32,7 +31,6 @@ mixin(culori, {
 	// API
 	parse,
 	round,
-	isRGBObject,
 
 	colors: {
 		named

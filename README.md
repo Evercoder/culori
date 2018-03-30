@@ -114,10 +114,6 @@ Is the namespace for the various color sets included in the library:
 
 ### Miscellaneous
 
-§ culori.__isRGBObject__( _object_ ) → _true_ / _false_
-
-Checks whether an object is a __RGB__ object.
-
 § culori.__round__( _value_ | _object_ [, _precision_ = 4 ] )
 
 Rounds the value, or each property in an object, to a certain number of decimal places. This is useful in a couple of situations:

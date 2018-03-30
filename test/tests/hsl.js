@@ -22,7 +22,6 @@ tape("from_hsl works correctly", function(test) {
 
 	test.deepEqual(from_hsl({ h: 0, s: 0, l: 0 }), { r: 0, g: 0, b: 0, flags: rgb_alpha_implied }, 'lightness 0 should yield black');
 	test.deepEqual(from_hsl({ h: 60, s: 0.25, l: 0 }), { r: 0, g: 0, b: 0, flags: rgb_alpha_implied }, '...regardless of hue and saturation');
-
 	test.deepEqual(from_hsl({ h: 0, s: 0, l: 0.5 }), { r: 0.5, g: 0.5, b: 0.5, flags: rgb_alpha_implied }, 'saturation 0 should yield gray');
 	test.deepEqual(from_hsl({ h: 60, s: 0, l: 0.25 }), { r: 0.25, g: 0.25, b: 0.25, flags: rgb_alpha_implied }, '...regardless of the hue');
 	test.deepEqual(from_hsl({ h: 100, s: 0, l: 0.5 }), { r: 0.5, g: 0.5, b: 0.5, flags: rgb_alpha_implied }, '...or the lightness');
