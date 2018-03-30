@@ -1,1 +1,3 @@
-export default o => o.hasOwnProperty('r') && o.hasOwnProperty('g') && o.hasOwnProperty('b');
+import { IS_CULORI } from './flags';
+
+export default o => !o.flags || o.flags & IS_CULORI;

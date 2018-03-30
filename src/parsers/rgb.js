@@ -3,7 +3,9 @@ import {
 	rgb_current
 } from '../util/regex';
 
-export default color => {
+import { IS_CULORI, IS_RGB, ALPHA_IMPLIED } from '../api/flags';
+
+export default (color, flags = 0) => {
 	var match = match = color.match(rgb_legacy) || color.match(rgb_current);
 	if (!match) return;
 	let res = {
@@ -12,11 +14,13 @@ export default color => {
 		b: match[5] === undefined ? match[6] / 255 : match[5] / 100
 	};
 
-	res['mode'] = 'rgb';
+	res['flags'] = IS_CULORI | IS_RGB | flags;
 	if (match[7] !== undefined) {
 		res['a'] = match[7] / 100;
 	} else if (match[8] !== undefined) {
 		res['a'] = +match[8];
+	} else {
+		res['flags'] |= ALPHA_IMPLIED;
 	}
 	
 	return res;

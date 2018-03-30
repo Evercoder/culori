@@ -3,6 +3,8 @@ import {
 	hsl_current
 } from '../util/regex';
 
+import { IS_CULORI, IS_HSL, ALPHA_IMPLIED } from '../api/flags';
+
 import from_hsl from '../converters/from_hsl';
 
 const hue = (val, unit) => {
@@ -15,16 +17,23 @@ const hue = (val, unit) => {
 	}
 }
 
-export default color => {
+export default (color, flags = 0) => {
 	if (typeof color !== 'string') return;
 	let match = color.match(hsl_legacy) || color.match(hsl_current);
 	if (!match) return;
-	return from_hsl({
-		h: match[3] === undefined ? hue(match[1], match[2]) : match[3],
+	let res = {
+		h: match[3] === undefined ? +hue(match[1], match[2]) : +match[3],
 		s: match[4] / 100,
-		l: match[5] / 100,
-		a: match[6] === undefined ? 
-			match[7] === undefined ? undefined : match[7] / 255 
-			: match[6] / 100
-	});
+		l: match[5] / 100
+	};
+	console.log('hue', res.h);
+	res['flags'] = IS_CULORI | IS_HSL | flags;
+	if (match[6] !== undefined) {
+		res['a'] = match[6] / 100;
+	} else if (match[7] !== undefined) {
+		res['a'] = match[7] / 255;
+	} else {
+		res['flags'] |= ALPHA_IMPLIED;
+	}
+	return res;
 }
