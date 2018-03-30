@@ -47,9 +47,17 @@ The implementations I've already finished ar denoted by checkmarks (✓).
 
 Just a convenience for _culori_.__rgb__().
 
+```js
+culori('tomato');
+culori('rgb(255, 0, 0)');
+culori({ r: 0.5, g: 0.1, b: 0.2 });
+```
+
 § culori.__parse__( _Specifier_ ) → _Color_ object.
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __RGB__ or __HSL__ object. 
+
+If you'd like to always get a RGB representation regardless of the CSS format, use __culori()__ instead.
 
 __Note:__ If the color does not specify an explicit _alpha_ value, the `a` property of the __RGB__ object is marked as _undefined_. Other color libraries will put a default `a: 1` for these colors, but I found this assumption to be limiting. As such, we leave it to the user to place `a: 1` instead of `undefined` when appropriate for their needs.
 
@@ -120,6 +128,8 @@ Rounds the value, or each property in an object, to a certain number of decimal 
 
 * When creating the CSS representation of the value;
 * To deal with floating-point errors that occur when converting between color formats.
+
+§ culori.__prepare__( _Specifier_ or _Color_ )
 
 ### Definitions
 
