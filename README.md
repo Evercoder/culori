@@ -73,6 +73,16 @@ The individual parsers are exposed in the _culori_.__parse__ namespace:
 
 <a name='culori-convert' href='#culori-convert'>§</a> culori.__convert__( _Specifier_ or _Color_ ) [<>](./src/api/convert.js "Source")
 
+<a name='culori-css' href='#culori-css'>§</a> culori.__css__( _Color_, _format_ ) [<>](./src/api/css.js "Source")
+
+Converts a Color to a CSS representation. Accepted values for the format:
+
+Format | Example
+------ | -------
+`rgb` (default) | 
+`hex` |
+`hsl` (coming soon) | 
+
 ### HSL
 
 <a name='culori-hsl' href='#culori-hsl'>§</a> culori.__hsl__( _Specifier_ or _HSL_ or _RGB_ or _Object_) → _HSL_ [<>](./src/api/hsl.js "Source")
