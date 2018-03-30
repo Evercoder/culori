@@ -43,7 +43,11 @@ The implementations I've already finished ar denoted by checkmarks (✓).
 
 ## API
 
-§ __culori__( _Specifier_ or _Color_ )
+### Preamble
+
+### API Reference
+
+<a name='culori' href='#culori'>§</a> __culori__( _Specifier_ or _Color_ ) [<>](./src/culori.js "Source")
 
 Just a convenience for _culori_.__rgb__().
 
@@ -53,7 +57,7 @@ culori('rgb(255, 0, 0)');
 culori({ r: 0.5, g: 0.1, b: 0.2 });
 ```
 
-§ culori.__parse__( _Specifier_ ) → _Color_ object.
+<a name='culori-parse' href='#culori-parse'>§</a> culori.__parse__( _Specifier_ ) → _Color_ object.
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __RGB__ or __HSL__ object. 
 
@@ -69,11 +73,11 @@ The individual parsers are exposed in the _culori_.__parse__ namespace:
 * culori.parse.__rgb__( _Specifier_ )
 * culori.parse.__hsl__( _Specifier_ )
 
-§ culori.__convert__( _Specifier_ or _Color_ )
+<a name='culori-convert' href='#culori-convert'>§</a> culori.__convert__( _Specifier_ or _Color_ )
 
 ### HSL
 
-§ culori.__hsl__( _Specifier_ or _HSL_ or _RGB_ or _Object_) → _HSL_
+<a name='culori-hsl' href='#culori-hsl'>§</a> culori.__hsl__( _Specifier_ or _HSL_ or _RGB_ or _Object_) → _HSL_
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSL__ object.
 
@@ -86,7 +90,7 @@ When passed a plain object, it assumes it's a normalized __HSL__ object.
 
 ### HSV
 
-§ culori.__hsv__( _Specifier_ or _HSL_ or _RGB_ or _Object_) → _HSV_
+<a name='culori-hsv' href='#culori-hsv'>§</a> culori.__hsv__( _Specifier_ or _HSL_ or _RGB_ or _Object_) → _HSV_
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSV__ object. 
 
@@ -99,7 +103,7 @@ When passed a plain object, it assumes it's a normalized __HSV__ object.
 
 ### HSI
 
-§ culori.__hsi__( _Specifier_ or _HSI_ or _RGB_ or _Object_) → _HSI_
+<a name='culori-hsi' href='#culori-hsi'>§</a> culori.__hsi__( _Specifier_ or _HSI_ or _RGB_ or _Object_) → _HSI_
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSI__ object. 
 
@@ -112,24 +116,24 @@ When passed a plain object, it assumes it's a normalized __HSI__ object.
 
 ### Color sets
 
-§ culori.__named__
+<a name='culori-named' href='#culori-named'>§</a> culori.__named__
 
 Contains the set of [CSS Named Colors][css4-named-colors].
 
-§ culori.__brewer__
+<a name='culori-brewer' href='#culori-brewer'>§</a> culori.__brewer__
 
 ColorBrewer (coming soon).
 
 ### Utilities
 
-§ culori.__round__( _value_ | _object_ [, _precision_ = 4 ] )
+<a name='culori-round' href='#culori-round'>§</a> culori.__round__( _value_ | _object_ [, _precision_ = 4 ] )
 
 Rounds the value, or each property in an object, to a certain number of decimal places. This is useful in a couple of situations:
 
 * When creating the CSS representation of the value;
 * To deal with floating-point errors that occur when converting between color formats.
 
-§ culori.__prepare__( _Specifier_ or _Color_ )
+<a name='culori-prepare' href='#culori-prepare'>§</a> culori.__prepare__( _Specifier_ or _Color_ )
 
 ### Definitions
 
