@@ -1,7 +1,4 @@
 import convert from './convert';
-import parse from './parse';
+import prepare from './prepare';
 
-export default color => convert(
-	typeof color !== 'object' ? parse(color) 
-		: color.mode === undefined ? {...color, mode: 'hsv' } : color
-	, 'hsv');
+export default color => convert(prepare(color, 'hsv'), 'hsv');

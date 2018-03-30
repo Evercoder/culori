@@ -5,6 +5,7 @@ import rgb from './api/rgb';
 import parse from './api/parse';
 import round from './api/round';
 import convert from './api/convert';
+import prepare from './api/prepare';
 import colors from './api/colors/index';
 
 import mixin from './util/mixin';
@@ -20,6 +21,7 @@ mixin(
 		hsi,
 		rgb,
 		convert,
+		prepare,
 		parse,
 		round
 	}
