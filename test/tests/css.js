@@ -9,6 +9,12 @@ tape('css()', function(test) {
 		'rgb'
 	);
 
+	test.deepEqual(
+		css(rgb('rgba(200, 300, 100, 0.1)')),
+		'rgba(200, 300, 100, 0.1)',
+		'rgb'
+	);
+
 	test.end();
 });
 
