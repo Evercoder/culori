@@ -144,20 +144,20 @@ tape('hsl', function(test) {
 	);
 
 	test.deepEqual(
-		parse('hsl(1turn, 100%, 50%)'),
-		{ h: 120, s: 1, l: 0.5, mode: 'hsl' },
+		parse('hsl(0.5turn, 100%, 50%)'),
+		{ h: 180, s: 1, l: 0.5, mode: 'hsl' },
 		'hsl legacy (turn)'
 	);
 
 	test.deepEqual(
-		parse('hsl(1.57079rad, 100%, 50%)'),
-		{ h: 120, s: 1, l: 0.5, mode: 'hsl' },
+		parse(`hsl(${Math.PI}rad, 100%, 50%)`),
+		{ h: 180, s: 1, l: 0.5, mode: 'hsl' },
 		'hsl legacy (rad)'
 	);
 
 	test.deepEqual(
 		parse('hsl(40grad, 100%, 50%)'),
-		{ h: 120, s: 1, l: 0.5, mode: 'hsl' },
+		{ h: 36, s: 1, l: 0.5, mode: 'hsl' },
 		'hsl legacy (grad)'
 	);
 

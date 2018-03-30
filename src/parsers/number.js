@@ -1,48 +1,46 @@
-export default (color, additional_flags = 0) => {
+export default (color, len) => {
 	
 	if (typeof color !== 'number') return;
 
-	let num = Math.min(Math.max(0, color), 0xFFFFFFFF);
-
 	// hex3: #c93 -> #cc9933
-	if (num <= 0xFFF) {
+	if (len === 3) {
 		return {
 			mode: 'rgb',
-			r: ((num >> 8 & 0xF) | (num >> 4 & 0xF0)) / 255, 
-			g: ((num >> 4 & 0xF) | (num & 0xF0)) / 255, 
-			b: ((num & 0xF) | (num << 4 & 0xF0)) / 255
+			r: ((color >> 8 & 0xF) | (color >> 4 & 0xF0)) / 255, 
+			g: ((color >> 4 & 0xF) | (color & 0xF0)) / 255, 
+			b: ((color & 0xF) | (color << 4 & 0xF0)) / 255
 		};
 	}
 
 	// hex4: #c931 -> #cc993311
-	if (num <= 0xFFFF) {
+	if (len === 4) {
 		return {
 			mode: 'rgb',
-			r: ((num >> 12 & 0xF) | (num >> 8 & 0xF0)) / 255, 
-			g: ((num >> 8 & 0xF) | (num >> 4 & 0xF0)) / 255, 
-			b: ((num >> 4 & 0xF) | (num & 0xF0)) / 255, 
-			a: ((num & 0xF) | (num << 4 & 0xF0)) / 255
+			r: ((color >> 12 & 0xF) | (color >> 8 & 0xF0)) / 255, 
+			g: ((color >> 8 & 0xF) | (color >> 4 & 0xF0)) / 255, 
+			b: ((color >> 4 & 0xF) | (color & 0xF0)) / 255, 
+			a: ((color & 0xF) | (color << 4 & 0xF0)) / 255
 		};
 	}
 	
 	// hex6: #f0f1f2
-	if (num <= 0xFFFFFF) {
+	if (len === 6) {
 		return {
 			mode: 'rgb',
-			r: (num >> 16 & 0xFF) / 255, 
-			g: (num >> 8 & 0xFF) / 255, 
-			b: (num & 0xFF) / 255
+			r: (color >> 16 & 0xFF) / 255, 
+			g: (color >> 8 & 0xFF) / 255, 
+			b: (color & 0xFF) / 255
 		};
 	}
 
 	// hex8: #f0f1f2ff
-	if (num <= 0xFFFFFFFF) {
+	if (len === 8) {
 		return {
 			mode: 'rgb',
-			r: (num >> 24 & 0xFF) / 255, 
-			g: (num >> 16 & 0xFF) / 255, 
-			b: (num >> 8 & 0xFF) / 255, 
-			a: (num & 0xFF) / 255
+			r: (color >> 24 & 0xFF) / 255, 
+			g: (color >> 16 & 0xFF) / 255, 
+			b: (color >> 8 & 0xFF) / 255, 
+			a: (color & 0xFF) / 255
 		};
 	}
 }

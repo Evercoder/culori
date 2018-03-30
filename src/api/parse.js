@@ -8,12 +8,11 @@ import parseHsl from '../parsers/hsl';
 
 const parse = color => {
 	return (
-		parseNumber(color) ||
 		parseHex(color) || 
 		parseRgb(color) || 
 		parseHsl(color) ||
 		parseNamed(color) || 
-		(color === 'transparent' ? parseHex('#00000000') : undefined)
+		(color === 'transparent' ? parseNumber(0, 8) : undefined)
 	);
 };
 

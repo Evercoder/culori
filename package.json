@@ -16,9 +16,10 @@
   "scripts": {
     "build": "rollup -c",
     "pretest": "yarn build",
-    "test": "nyc --produce-source-map tape test/tests/*.js | tap-spec",
+    "test": "tape test/tests/*.js | tap-spec",
     "benchmark": "node test/benchmarks/index.js",
-    "coverage" : "nyc report --reporter=lcov"
+    "coverage:report" : "nyc report --reporter=lcov",
+    "coverage:test": "nyc --produce-source-map tape test/tests/*.js | tap-spec"
   },
   "nyc": {
     "sourceMap": true

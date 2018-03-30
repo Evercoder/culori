@@ -9,9 +9,9 @@ import to_hsl from '../converters/to_hsl';
 const hue = (val, unit) => {
 	switch (unit) {
 		case 'deg': return val;
-		case 'rad': return val / 180 * Math.PI;
-		case 'grad': return val / 200 * Math.PI;
-		case 'turn': return val * 2 * Math.PI;
+		case 'rad': return val / Math.PI * 180;
+		case 'grad': return val / 10 * 9;
+		case 'turn': return val * 360;
 	}
 }
 
