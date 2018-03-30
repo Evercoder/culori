@@ -3,13 +3,11 @@ import {
 	rgb_current
 } from '../util/regex';
 
-import { IS_CULORI, IS_RGB, IS_NORMALIZED, IS_ALPHA_IMPLIED } from '../api/flags';
-import with_flags from '../util/with_flags';
-
-export default (color, additional_flags = 0) => {
+export default color => {
 	var match = match = color.match(rgb_legacy) || color.match(rgb_current);
 	if (!match) return;
 	let res = {
+		mode: 'rgb',
 		r: match[1] === undefined ? match[2] / 255 : match[1] / 100, 
 		g: match[3] === undefined ? match[4] / 255 : match[3] / 100, 
 		b: match[5] === undefined ? match[6] / 255 : match[5] / 100
@@ -21,11 +19,5 @@ export default (color, additional_flags = 0) => {
 		res['a'] = +match[8];
 	}
 	
-	return with_flags(res, 
-		IS_CULORI | 
-		IS_RGB | 
-		IS_NORMALIZED |
-		(res['a'] === undefined && IS_ALPHA_IMPLIED) |
-		additional_flags
-	);
+	return res;
 };

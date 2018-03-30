@@ -143,28 +143,6 @@ Rounds the value, or each property in an object, to a certain number of decimal 
 * When creating the CSS representation of the value;
 * To deal with floating-point errors that occur when converting between color formats.
 
-### Flags
-
-Flag | Notes
----- | -----
-culori.__IS_CULORI__ | The object was processed with culori.
-culori.__IS_RGB__ | The color is in the RGB color space.
-culori.__IS_HSL__ | The color is in the HSL color space.
-culori.__IS_HSV__ | The color is in the HSV color space.
-culori.__IS_HSI__ | The color is in the HSI color space.
-culori.__IS_LAB__ | The color is in the LAB color space.
-culori.__IS_HCL__ | The color is in the HCL color space.
-culori.__IS_GRAY__ | The color is grayscale.
-culori.__IS_HWB__ | The color is in the HWB color space.
-culori.__IS_CUBEHELIX__ | The color is in the Cubehelix color space.
-culori.__IS_FORMAT_HEX__ | The color originates from a hex format.
-culori.__IS_FORMAT_NAMED__ | The color originates from a named color.
-culori.__IS_HUE_UNDEFINED__ | Whether the hue is undefined in the HSL/HSV/HSI color spaces.
-culori.__IS_ALPHA_IMPLIED__ | Whether the (missing) alpha should be assumed to be 1.
-culori.__IS_NORMALIZED__ | Whether the values are normalized to their appropriate ranges, depending on the color space.
-culori.__IS_DISPLAYABLE__ | Whether the color can be displayed on RGB devices.
-
-
 ### Definitions
 
 __Color__ is a color in any parsable format. It is normally a string, but numbers (e.g. `0xFFF`) are also accepted.
