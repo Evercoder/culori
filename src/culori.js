@@ -20,6 +20,8 @@ import colors from './colors/index';
 import parse from './api/parse';
 import round from './api/round';
 import flags from './api/flags';
+import chew from './api/chew';
+import spew from './api/spew';
 
 const culori = color => parse(color);
 
@@ -43,6 +45,9 @@ mixin(culori, {
 	to_hsl,
 	to_hsv,
 	to_hsi,
+
+	chew,
+	spew,
 
 	// Utilities
 	parse,
