@@ -1,41 +1,30 @@
-import mixin from './util/mixin';
-
-// Constructors
 import hsl from './api/hsl';
 import hsv from './api/hsv';
 import hsi from './api/hsi';
-
-// Colors
-import colors from './colors/index';
-
-// Utilities
+import rgb from './api/rgb';
 import parse from './api/parse';
 import round from './api/round';
 import flags from './api/flags';
-import chew from './api/chew';
-import spew from './api/spew';
+import convert from './api/convert';
+import colors from './api/colors/index';
 
-const culori = color => parse(color);
+import mixin from './util/mixin';
 
-// Flags
-mixin(culori, flags);
+const culori = color => rgb(color);
 
-// Colors
-mixin(culori, colors);
-
-mixin(culori, {
-
-	// Constructors
-	hsl,
-	hsv,
-	hsi,
-
-	chew,
-	spew,
-
-	// Utilities
-	parse,
-	round
-});
+mixin(
+	culori, 
+	flags, 
+	colors, 
+	{
+		hsl,
+		hsv,
+		hsi,
+		rgb,
+		convert,
+		parse,
+		round
+	}
+);
 
 export default culori;

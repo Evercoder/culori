@@ -1,5 +1,5 @@
 import parseNumber from './number';
-import named_colors from '../colors/named';
+import named_colors from '../api/colors/named';
 import { IS_FORMAT_NAMED } from '../api/flags';
 
 // Also supports the `transparent` color as defined in:

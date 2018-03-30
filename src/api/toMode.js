@@ -10,4 +10,5 @@ export default color => {
 	if (color.flags & IS_HSL) return 'hsl';
 	if (color.flags & IS_HSV) return 'hsv';
 	if (color.flags & IS_HSI) return 'hsi';
+	return undefined;
 }

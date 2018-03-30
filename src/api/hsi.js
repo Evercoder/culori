@@ -1,4 +1,3 @@
-import parse from './parse';
-import chew from './chew';
+import convert from './convert';
 
-export default color => chew(typeof color === 'object' ? color : parse(color), 'hsi');
+export default color => convert(color, 'hsi');

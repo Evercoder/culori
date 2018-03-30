@@ -36,7 +36,7 @@
 		let hsl_canvas = draw(function(drawPixel) {
 			for (var sat = 100; sat >= 0; sat--) {
 				for (var light = 100; light >=0; light--) {
-					let rgb = culori.chew({ h: 0, s: sat/100, l: light/100 }, 'hsl');
+					let rgb = culori.rgb(culori.hsl({ h: 0, s: sat/100, l: light/100 }));
 					drawPixel(100 - sat, 100 - light, rgb.r * 255, rgb.g * 255, rgb.b * 255);
 				}
 			}
@@ -45,7 +45,7 @@
 		let hsv_canvas = draw(function(drawPixel) {
 			for (var sat = 100; sat >= 0; sat--) {
 				for (var val = 100; val >=0; val--) {
-					let rgb = culori.chew({ h: 120, s: sat/100, v: val/100 }, 'hsv');
+					let rgb = culori.rgb(culori.hsv({ h: 120, s: sat/100, v: val/100 }));
 					drawPixel(100 - sat, 100 - val, rgb.r * 255, rgb.g * 255, rgb.b * 255);
 				}
 			}

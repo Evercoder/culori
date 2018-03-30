@@ -13,7 +13,7 @@ function endBench() {
 	return end[0] + 's ' + end[1] / 1000000 + 'ms';
 }
 
-let colors = Object.keys(culori.colors.named);
+let colors = Object.keys(culori.named);
 let iterations = 10000;
 
 startBench();

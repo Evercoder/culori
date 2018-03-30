@@ -9,7 +9,7 @@ This benchmark measures the performance of parsing strings such as `rgb(255, 255
 Library | 16.7 million colors
 ------- | -------------------
 d3-color | 8s
-__culori__ | __11s__
+__culori__ | __12s__
 tinycolor | 36s
 chroma | 66s
 

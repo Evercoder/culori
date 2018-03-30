@@ -45,11 +45,11 @@ The implementations I've already finished ar denoted by checkmarks (✓).
 
 § __culori__( _Color_ or _RGB_ )
 
-Just a convenience for _culori_.__parse__().
+Just a convenience for _culori_.__rgb__().
 
-§ culori.__parse__( _Color_ ) → _RGB_
+§ culori.__parse__( _Color_ ) → _RGB_ or _HSL_ object.
 
-Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __RGB__ object. 
+Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __RGB__ or __HSL__ object. 
 
 __Note:__ If the color does not specify an explicit _alpha_ value, the `a` property of the __RGB__ object is marked as _undefined_. Other color libraries will put a default `a: 1` for these colors, but I found this assumption to be limiting. As such, we leave it to the user to place `a: 1` instead of `undefined` when appropriate for their needs.
 
