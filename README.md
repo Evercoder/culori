@@ -33,8 +33,8 @@ The library supports all the color formats defined in the [CSS Colors Level 4][c
 * ✓ [RGB and RGBA](https://drafts.csswg.org/css-color/#rgb-functions)
 * ✓ [HSL and HSLA](https://drafts.csswg.org/css-color/#the-hsl-notation)
 * ✓ [HWB](https://drafts.csswg.org/css-color/#the-hwb-notation)
-* [LAB and LCH](https://drafts.csswg.org/css-color/#lab-colors)
-* [Grays](https://drafts.csswg.org/css-color/#grays)
+* ✓ [LAB and LCH](https://drafts.csswg.org/css-color/#lab-colors)
+* ✓ [Grays](https://drafts.csswg.org/css-color/#grays)
 
 Additionally, it supports:
 
