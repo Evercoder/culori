@@ -9,11 +9,9 @@ import convert from './api/convert';
 import prepare from './api/prepare';
 import colors from './api/colors/index';
 
-import mixin from './util/mixin';
-
 const culori = color => rgb(color);
 
-mixin(
+Object.assign(
 	culori, 
 	colors, 
 	{

@@ -1,4 +1,6 @@
-// See: https://github.com/d3/d3-format/issues/32
+
+// From: https://github.com/d3/d3-format/issues/32
+
 const r = (value, precision) => Math.round(value * (precision = Math.pow(10, precision))) / precision;
 
 export default function round(value, precision = 4) {

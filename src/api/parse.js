@@ -1,5 +1,3 @@
-import mixin from '../util/mixin';
-
 import parseNumber from '../parsers/number';
 import parseNamed from '../parsers/named';
 import parseHex from '../parsers/hex';
@@ -16,7 +14,7 @@ const parse = color => {
 	);
 };
 
-mixin(parse, {
+Object.assign(parse, {
 	number: parseNumber,
 	named: parseNamed,
 	hex: parseHex,
