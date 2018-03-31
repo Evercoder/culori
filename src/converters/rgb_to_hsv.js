@@ -1,7 +1,6 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Formal_derivation
 
 export default function({ r, g, b, alpha }) {
-	// if (flags & IS_CULORI && flags & IS_HSV) return arguments[0];
 	let M = Math.max(r, g, b), m = Math.min(r, g, b);
 	let res = {
 		mode: 'hsv',
