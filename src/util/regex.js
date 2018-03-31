@@ -46,13 +46,13 @@ const hwb = new RegExp(`^hwb\\(\\s*${hue}${s}${per}${s}${per}\\s*(?:\\/\\s*${alp
 	Reference: https://drafts.csswg.org/css-color/#lab-colors
  */
 const lab = new RegExp(`^lab\\(\\s*${num}${s}${num}${s}${num}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
-const lch = new RegExp(`^lab\\(\\s*${num}${s}${num}${s}${hue}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
+const lch = new RegExp(`^lch\\(\\s*${num}${s}${num}${s}${hue}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
 
 /*
 	gray() regular expressions.
 	Reference: https://drafts.csswg.org/css-color/#grays
  */
-const gray = new RegExp(`^gray\\(\\s*${num}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
+const gray = new RegExp(`^gray\\(\\s*${num}()()\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
 
 export {
 	rgb_num_old,

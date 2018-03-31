@@ -19,7 +19,7 @@ export default (color, len) => {
 			r: ((color >> 12 & 0xF) | (color >> 8 & 0xF0)) / 255, 
 			g: ((color >> 8 & 0xF) | (color >> 4 & 0xF0)) / 255, 
 			b: ((color >> 4 & 0xF) | (color & 0xF0)) / 255, 
-			a: ((color & 0xF) | (color << 4 & 0xF0)) / 255
+			alpha: ((color & 0xF) | (color << 4 & 0xF0)) / 255
 		};
 	}
 	
@@ -40,7 +40,7 @@ export default (color, len) => {
 			r: (color >> 24 & 0xFF) / 255, 
 			g: (color >> 16 & 0xFF) / 255, 
 			b: (color >> 8 & 0xFF) / 255, 
-			a: (color & 0xFF) / 255
+			alpha: (color & 0xFF) / 255
 		};
 	}
 }

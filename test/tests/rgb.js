@@ -46,8 +46,8 @@ tape("rgb(Object)", function(test) {
 	);
 
 	test.deepEqual(
-		rgb({ r: 0.1, g: 0.2, b: 0.3, a: 0.4 }),
-		{ r: 0.1, g: 0.2, b: 0.3, a: 0.4, mode: 'rgb' },
+		rgb({ r: 0.1, g: 0.2, b: 0.3, alpha: 0.4 }),
+		{ r: 0.1, g: 0.2, b: 0.3, alpha: 0.4, mode: 'rgb' },
 		'floating point'
 	);
 

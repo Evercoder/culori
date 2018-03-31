@@ -28,9 +28,9 @@ export default color => {
 	}
 
 	if (match[4] !== undefined) {
-		res.a = match[4] / 100;
+		res.alpha = match[4] / 100;
 	} else if (match[5] !== undefined) {
-		res.a = +match[5];
+		res.alpha = +match[5];
 	}
 	
 	return res;

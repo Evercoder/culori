@@ -14,12 +14,12 @@ export default (c, format = 'rgb') => {
 	}
 
 	if (format === 'rgb') {
-		if (color['a'] === undefined || color['a'] === 1) {
+		if (color.alpha === undefined || color.alpha === 1) {
 			// opaque color
 			return `rgb(${r}, ${g}, ${b})`;
 		} else {
 			// transparent color
-			return `rgba(${r}, ${g}, ${b}, ${ color['a'] })`;
+			return `rgba(${r}, ${g}, ${b}, ${ color.alpha })`;
 		}
 	}
 }

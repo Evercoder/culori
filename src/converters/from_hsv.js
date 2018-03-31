@@ -1,6 +1,6 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 
-export default function({ h, s, v, a }) {
+export default function({ h, s, v, alpha }) {
 	let f = Math.abs(h/60 % 2 - 1);
 	let res;
 	switch (Math.floor(h/60)) {
@@ -12,6 +12,6 @@ export default function({ h, s, v, a }) {
 		case 5: res = { r: v, g: v * (1 - s), b: v * (1 - s * f) }; break;
 	}
 	res.mode = 'rgb';
-	if (a !== undefined) res.a = a;
+	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };

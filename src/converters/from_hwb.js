@@ -10,7 +10,7 @@
 
 import from_hsv from './from_hsv';
 
-export default function ({ h, w, b, a }) {
+export default function ({ h, w, b, alpha }) {
 	// normalize w + b to 1
 	if (w + b > 1) {
 		let s = w + b;
@@ -21,6 +21,6 @@ export default function ({ h, w, b, a }) {
 		h: h, 
 		s: b === 1 ? 1 : 1 - w / (1 - b), 
 		v: 1 - b,
-		a: a
+		alpha: alpha
 	}); 
 };

@@ -33,13 +33,13 @@ tape('hex colors', function(test) {
 
 	test.deepEqual(
 		parse('#3690'),
-		 { mode: 'rgb', r: 0.2, g: 0.4, b: 0.6, a: 0 },
+		 { mode: 'rgb', r: 0.2, g: 0.4, b: 0.6, alpha: 0 },
 		'#3690'
 	);
 
 	test.deepEqual(
 		parse('3690'),
-		 { mode: 'rgb', r: 0.2, g: 0.4, b: 0.6, a: 0 },
+		 { mode: 'rgb', r: 0.2, g: 0.4, b: 0.6, alpha: 0 },
 		'3690'
 	);
 
@@ -57,13 +57,13 @@ tape('hex colors', function(test) {
 
 	test.deepEqual(
 		parse('#163264ff'),
-		 { mode: 'rgb', r: 0.08627450980392157, g: 0.19607843137254902, b: 0.39215686274509803, a: 1 },
+		 { mode: 'rgb', r: 0.08627450980392157, g: 0.19607843137254902, b: 0.39215686274509803, alpha: 1 },
 		'#163264ff'
 	);
 
 	test.deepEqual(
 		parse('163264FF'),
-		 { mode: 'rgb', r: 0.08627450980392157, g: 0.19607843137254902, b: 0.39215686274509803, a: 1 },
+		 { mode: 'rgb', r: 0.08627450980392157, g: 0.19607843137254902, b: 0.39215686274509803, alpha: 1 },
 		'163264FF'
 	);
 
@@ -86,13 +86,13 @@ tape('rgb', function(test) {
 
 	test.deepEqual(
 		parse('rgba(255, 0, 0, 0.5)'),
-		{ r: 1, g: 0, b: 0, mode: 'rgb', a: 0.5 },
+		{ r: 1, g: 0, b: 0, mode: 'rgb', alpha: 0.5 },
 		'rgba legacy'
 	);
 
 	test.deepEqual(
 		parse('rgba(100%, 0%, 0%, 50%)'),
-		{ r: 1, g: 0, b: 0, mode: 'rgb', a: 0.5 },
+		{ r: 1, g: 0, b: 0, mode: 'rgb', alpha: 0.5 },
 		'rgba legacy (percentage)'
 	);
 
@@ -110,13 +110,13 @@ tape('rgb', function(test) {
 
 	test.deepEqual(
 		parse('rgb(255 0  0 / 0.5)'),
-		{ r: 1, g: 0, b: 0, mode: 'rgb', a: 0.5 },
+		{ r: 1, g: 0, b: 0, mode: 'rgb', alpha: 0.5 },
 		'rgba current'
 	);
 
 	test.deepEqual(
 		parse('rgb(100% 0% 0% / 50%)'),
-		{ r: 1, g: 0, b: 0, mode: 'rgb', a: 0.5 },
+		{ r: 1, g: 0, b: 0, mode: 'rgb', alpha: 0.5 },
 		'rgba current (percentage)'
 	);
 
@@ -169,7 +169,7 @@ tape('hsl', function(test) {
 
 	test.deepEqual(
 		parse('hsla(240, 100%, 50%, 50%)'),
-		{ h: 240, s: 1, l: 0.5, mode: 'hsl', a: 0.5 },
+		{ h: 240, s: 1, l: 0.5, mode: 'hsl', alpha: 0.5 },
 		'hsla legacy (percentage)'
 	);
 
@@ -193,7 +193,7 @@ tape('hsl', function(test) {
 
 	test.deepEqual(
 		parse('hsl(0 100% 50% / 50%)'),
-		{  h: 0, s: 1, l: 0.5,  mode: 'hsl', a: 0.5 },
+		{  h: 0, s: 1, l: 0.5,  mode: 'hsl', alpha: 0.5 },
 		'hsla current (percentage)'
 	);
 
@@ -215,7 +215,7 @@ tape('hwb', function(test) {
 
 	test.deepEqual(
 		parse('hwb(200 10% 30% / 50%)'), 
-		{ h: 200, w: 0.1, b: 0.3, a: 0.5, mode: 'hwb' }, 
+		{ h: 200, w: 0.1, b: 0.3, alpha: 0.5, mode: 'hwb' }, 
 		'hwba'
 	);
 
@@ -226,8 +226,41 @@ tape('transparent', function(test) {
 
 	test.deepEqual(
 		parse('transparent'),
-		{ r: 0, g: 0, b: 0, a: 0, mode: 'rgb' }
+		{ r: 0, g: 0, b: 0, alpha: 0, mode: 'rgb' }
 	)
+
+	test.end();
+});
+
+tape('lab()', function(test) {
+	test.deepEqual(
+		parse('lab(50 -5 10 / 50%)'),
+		{ l: 50, a: -5, b: 10, alpha: 0.5, mode: 'lab' },
+		'lab + alpha'
+	);
+
+	test.deepEqual(
+		parse('gray(50 / 50%)'),
+		{ l: 50, a: 0, b: 0, alpha: 0.5, mode: 'lab' },
+		'gray + alpha'
+	)
+
+	test.end();
+});
+
+tape('lch()', function(test) {
+
+	test.deepEqual(
+		parse('lch(50 3 240 / 50%)'),
+		{ l: 50, c: 3, h: 240, alpha: 0.5, mode: 'lch' },
+		'lch + alpha'
+	);
+
+	test.deepEqual(
+		parse('lch(50 -3 240deg / 50%)'),
+		{ l: 50, c: 0, h: 240, alpha: 0.5, mode: 'lch' },
+		'lch negative c'
+	);
 
 	test.end();
 });

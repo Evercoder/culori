@@ -20,9 +20,9 @@ export default color => {
 	}
 
 	if (match[6] !== undefined) {
-		res.a = match[6] / 100;
+		res.alpha = match[6] / 100;
 	} else if (match[7] !== undefined) {
-		res.a = match[7] / 255;
+		res.alpha = match[7] / 255;
 	}
 	return res;
 }

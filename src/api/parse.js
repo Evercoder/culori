@@ -4,6 +4,8 @@ import parseHex from '../parsers/hex';
 import parseRgb from '../parsers/rgb';
 import parseHsl from '../parsers/hsl';
 import parseHwb from '../parsers/hwb';
+import parseLab from '../parsers/lab';
+import parseLch from '../parsers/lch';
 
 const parse = color => {
 	return (
@@ -12,7 +14,9 @@ const parse = color => {
 		parseHsl(color) ||
 		parseNamed(color) || 
 		(color === 'transparent' ? parseNumber(0x00000000, 8) : undefined) ||
-		parseHwb(color)
+		parseHwb(color) ||
+		parseLab(color) ||
+		parseLch(color)
 	);
 };
 
@@ -22,7 +26,9 @@ export {
 	parseHex,
 	parseRgb,
 	parseHsl,
-	parseHwb
+	parseHwb,
+	parseLab,
+	parseLch
 };
 
 export default parse;

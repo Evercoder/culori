@@ -19,6 +19,6 @@ export default function (rgba) {
 		b: 1 - hsv.v
 	};
 	if (hsv.h !== undefined) res.h = hsv.h;
-	if (hsv.a !== undefined) res.a = hsv.a;
+	if (hsv.alpha !== undefined) res.alpha = hsv.alpha;
 	return res;
 };
