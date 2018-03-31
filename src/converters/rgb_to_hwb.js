@@ -8,10 +8,10 @@
 		* http://alvyray.com/Papers/CG/HWB_JGTv208.pdf
  */
 
-import to_hsv from './to_hsv';
+import rgb_to_hsv from './rgb_to_hsv';
 
 export default function (rgba) {
-	var hsv = to_hsv(rgba);
+	var hsv = rgb_to_hsv(rgba);
 	if (hsv === undefined) return undefined;
 	let res = {
 		mode: 'hwb',

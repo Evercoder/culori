@@ -8,7 +8,7 @@
 		* http://alvyray.com/Papers/CG/HWB_JGTv208.pdf
  */
 
-import from_hsv from './from_hsv';
+import hsv_to_rgb from './hsv_to_rgb';
 
 export default function ({ h, w, b, alpha }) {
 	// normalize w + b to 1
@@ -17,7 +17,7 @@ export default function ({ h, w, b, alpha }) {
 		w /= s; 
 		b /= s;
 	}
-	return from_hsv({ 
+	return hsv_to_rgb({ 
 		h: h, 
 		s: b === 1 ? 1 : 1 - w / (1 - b), 
 		v: 1 - b,

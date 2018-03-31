@@ -1,9 +1,9 @@
-import from_hsl from '../converters/from_hsl';
-import from_hsv from '../converters/from_hsv';
-import from_hsi from '../converters/from_hsi';
-import to_hsl from '../converters/to_hsl';
-import to_hsv from '../converters/to_hsv';
-import to_hsi from '../converters/to_hsi';
+import hsl_to_rgb from '../converters/hsl_to_rgb';
+import hsv_to_rgb from '../converters/hsv_to_rgb';
+import hsi_to_rgb from '../converters/hsi_to_rgb';
+import rgb_to_hsl from '../converters/rgb_to_hsl';
+import rgb_to_hsv from '../converters/rgb_to_hsv';
+import rgb_to_hsi from '../converters/rgb_to_hsi';
 
 const convert = (color, mode) => {
 
@@ -21,17 +21,17 @@ const convert = (color, mode) => {
 	let rgb;
 	switch(color.mode) {
 		case 'rgb': rgb = color; break;
-		case 'hsl': rgb = from_hsl(color); break;
-		case 'hsv': rgb = from_hsv(color); break;
-		case 'hsi': rgb = from_hsi(color); break;
+		case 'hsl': rgb = hsl_to_rgb(color); break;
+		case 'hsv': rgb = hsv_to_rgb(color); break;
+		case 'hsi': rgb = hsi_to_rgb(color); break;
 		default: return undefined;
 	}
 
 	switch(mode) {
 		case 'rgb': return rgb;
-		case 'hsl': return to_hsl(rgb);
-		case 'hsv': return to_hsv(rgb);
-		case 'hsi': return to_hsi(rgb);
+		case 'hsl': return rgb_to_hsl(rgb);
+		case 'hsv': return rgb_to_hsv(rgb);
+		case 'hsi': return rgb_to_hsi(rgb);
 		default: return undefined;
 	};
 

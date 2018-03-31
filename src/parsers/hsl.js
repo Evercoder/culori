@@ -1,8 +1,8 @@
 import { hsl_old, hsl_new } from '../util/regex';
 import { hue } from '../util/hue';
 
-import from_hsl from '../converters/from_hsl';
-import to_hsl from '../converters/to_hsl';
+import hsl_to_rgb from '../converters/hsl_to_rgb';
+import rgb_to_hsl from '../converters/rgb_to_hsl';
 
 export default color => {
 	if (typeof color !== 'string') return;
@@ -20,5 +20,5 @@ export default color => {
 		res.alpha = match[7] / 255;
 	}
 	// TODO better way to normalize than via rgb?
-	return to_hsl(from_hsl(res));
+	return rgb_to_hsl(hsl_to_rgb(res));
 }
