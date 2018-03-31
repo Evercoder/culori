@@ -1,31 +1,69 @@
-// converts a regexp to string
-// (does not cover all cases, but for our purposes it works)
-const s = r => r.toString().replace(/^\/|\/$/g, '');
+/*
+	Basic building blocks for color regexes
+	---------------------------------------
 
-// matches a number
-const n = /([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)/;
+	These regexes are expressed as strings
+	to be interpolated in the color regexes.
+ */
 
-// matches a percentage
-const p = /([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)%/;
-const sp = s(p);
+const num = (/([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)/ + '').replace(/^\/|\/$/g, ''); // number
+const per = `${num}%`; // percentage
+const alpha = `(?:${num}%|${num})`; // alpha-value
+const hue = `(?:${num}(deg|grad|rad|turn)|${num})`; // hue
+const c = `\\s*,\\s*`; // comma
+const s = `\\s+`; // space
 
 
-// matches a percentage or number
-const pn = `(?:${s(p)}|${s(n)})`;
+/*
+	rgb() regular expressions.
+	Reference: https://drafts.csswg.org/css-color/#rgb-functions
+ */
+const rgb_num_old = new RegExp(`^rgba?\\(\\s*${num}${c}${num}${c}${num}\\s*(?:,\\s*${alpha}\\s*)?\\)$`);
+const rgb_per_old = new RegExp(`^rgba?\\(\\s*${per}${c}${per}${c}${per}\\s*(?:,\\s*${alpha}\\s*)?\\)$`);
+const rgb_num_new = new RegExp(`^rgba?\\(\\s*${num}${s}${num}${s}${num}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
+const rgb_per_new = new RegExp(`^rgba?\\(\\s*${per}${s}${per}${s}${per}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
 
-// hue can be a number or an angle (number + angle unit)
-const hue = `(?:${s(n)}(deg|grad|rad|turn)|${s(n)})`;
+/*
+	hsl() regular expressions.
+	Reference: https://drafts.csswg.org/css-color/#the-hsl-notation
+ */
+const hsl_old = new RegExp(`^hsla?\\(\\s*${hue}${c}${per}${c}${per}\\s*(?:,\\s*${alpha}\\s*)?\\)$`);
+const hsl_new = new RegExp(`^hsla?\\(\\s*${hue}${s}${per}${s}${per}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
 
-// Reference:
-// https://drafts.csswg.org/css-color/#rgb-functions
-export const rgb_legacy = new RegExp(`^rgba?\\(\\s*${pn}\\s*,\\s*${pn}\\s*,\\s*${pn}\\s*(?:,\\s*${pn}\\s*)?\\)$`);
-export const rgb_current = new RegExp(`^rgba?\\(\\s*${pn}\\s+${pn}\\s+${pn}\\s*(?:\\/\\s*${pn}\\s*)?\\)$`);
+/*
+	hexadecimal regular expressions.
+ */
+const hex = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i;
 
-// Reference:
-// https://drafts.csswg.org/css-color/#the-hsl-notation
-export const hsl_legacy = new RegExp(`^hsla?\\(\\s*${hue}\\s*,\\s*${sp}\\s*,\\s*${sp}\\s*(?:,\\s*${pn}\\s*)?\\)$`);
-export const hsl_current = new RegExp(`^hsla?\\(\\s*${hue}\\s+${sp}\\s+${sp}\\s*(?:\\/\\s*${pn}\\s*)?\\)$`);
+/*
+	hwb() regular expressions.
+	Reference: https://drafts.csswg.org/css-color/#the-hwb-notation
+ */
+const hwb = new RegExp(`^hwb\\(\\s*${hue}${s}${per}${s}${per}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
 
-export const hex = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i;
+/*
+	lab() and lch() regular expressions.
+	Reference: https://drafts.csswg.org/css-color/#lab-colors
+ */
+const lab = new RegExp(`^lab\\(\\s*${num}${s}${num}${s}${num}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
+const lch = new RegExp(`^lab\\(\\s*${num}${s}${num}${s}${hue}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
 
-export const hwb = new RegExp(`^hwb\\(\\s*${hue}\\s+${sp}\\s+${sp}\\s*(?:\\/\\s*${pn}\\s*)?\\)$`);
+/*
+	gray() regular expressions.
+	Reference: https://drafts.csswg.org/css-color/#grays
+ */
+const gray = new RegExp(`^gray\\(\\s*${num}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`);
+
+export {
+	rgb_num_old,
+	rgb_num_new,
+	rgb_per_old,
+	rgb_per_new,
+	hsl_old,
+	hsl_new,
+	hex,
+	hwb,
+	lab,
+	lch,
+	gray
+};

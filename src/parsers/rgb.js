@@ -1,22 +1,36 @@
 import {
-	rgb_legacy, 
-	rgb_current
+	rgb_num_old,
+	rgb_num_new,
+	rgb_per_old, 
+	rgb_per_new
 } from '../util/regex';
 
 export default color => {
-	var match = color.match(rgb_legacy) || color.match(rgb_current);
-	if (!match) return;
-	let res = {
-		mode: 'rgb',
-		r: match[1] === undefined ? match[2] / 255 : match[1] / 100, 
-		g: match[3] === undefined ? match[4] / 255 : match[3] / 100, 
-		b: match[5] === undefined ? match[6] / 255 : match[5] / 100
-	};
+	
+	let match, res;
 
-	if (match[7] !== undefined) {
-		res.a = match[7] / 100;
-	} else if (match[8] !== undefined) {
-		res.a = +match[8];
+	if (match = color.match(rgb_num_old) || color.match(rgb_num_new)) {
+		res = { 
+			mode: 'rgb',
+			r: match[1] / 255, 
+			g: match[2] / 255, 
+			b: match[3] / 255 
+		};
+	} else if (match = color.match(rgb_per_old) || color.match(rgb_per_new)) {
+		res = { 
+			mode: 'rgb',
+			r: match[1] / 100, 
+			g: match[2] / 100, 
+			b: match[3] / 100 
+		};
+	} else {
+		return undefined;
+	}
+
+	if (match[4] !== undefined) {
+		res.a = match[4] / 100;
+	} else if (match[5] !== undefined) {
+		res.a = +match[5];
 	}
 	
 	return res;

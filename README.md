@@ -2,7 +2,9 @@
 
 Culori is a general-purpose color library for JavaScript.
 
-## Use cases
+## Why I built this
+
+There are already [several excellent libraries](#about-the-project) out there for manipulating colors in JavaScript.
 
 This library aims to provide a simple API to:
 
@@ -90,7 +92,7 @@ Format | Example
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSL__ object.
 
-When passed a culori object:
+When passed a Culori object:
 
 * if it's a __HSL__ object, it just returns it back
 * it it's a __RGB__ object, it converts it to a __HSL__ object.
@@ -103,7 +105,7 @@ When passed a plain object, it assumes it's a normalized __HSL__ object.
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSV__ object. 
 
-When passed a culori object:
+When passed a Culori object:
 
 * if it's a __HSV__ object, it just returns it back
 * it it's a __RGB__ object, it converts it to a __HSV__ object.
@@ -116,7 +118,7 @@ When passed a plain object, it assumes it's a normalized __HSV__ object.
 
 Accepts a color in any [CSS Colors Level 4][css4-colors] format and returns the corresponding __HSI__ object. 
 
-When passed a culori object:
+When passed a Culori object:
 
 * if it's a __HSI__ object, it just returns it back
 * it it's a __RGB__ object, it converts it to a __HSI__ object.
@@ -156,13 +158,13 @@ __HSV__ is any plain object containing the `h`, `s`, `v`, and optionally `a`, pr
 
 __HSI__ is any plain object containing the `h`, `s`, `i`, and optionally `a`, properties with the values for `s`, `i`, and `a`, normalized to the interval `[0..1]`.
 
-## Prior art
+## About the project
 
-This library is indebted to these projects:
+Culori is written by [Dan Burzo](http://danburzo.ro) and is released under the [MIT License](./LICENSE).
 
-* [chroma.js](https://github.com/gka/chroma.js)
-* [d3-color](https://github.com/d3/d3-color)
-* [TinyColor](https://github.com/bgrins/TinyColor)
+It builds upon the ideas of two thoroughly documented and time-tested projects: [chroma.js](https://github.com/gka/chroma.js) by [Gregor Aisch](https://driven-by-data.net/) and [d3-color](https://github.com/d3/d3-color) by [Mike Bostock](https://bost.ocks.org/mike/). 
+
+You may also want to look at [TinyColor](https://github.com/bgrins/TinyColor) by [Brian Grinstead](http://briangrinstead.com), [color](https://github.com/Qix-/color) by [Heather Arthur](https://github.com/Qix-/), and [color.js](https://github.com/brehaut/color-js) by Andrew Brehaut et al.
 
 ## Benchmarks
 
@@ -171,7 +173,7 @@ This library is indebted to these projects:
 ## Further reading
 
 * [HSL and HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) on Wikipedia
-* [CSS Color Module Level 4](https://drafts.csswg.org/css-color/)
+* [CSS Color Module Level 4][css4-colors]
 * [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value)
 
 

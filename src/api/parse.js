@@ -16,13 +16,13 @@ const parse = color => {
 	);
 };
 
-Object.assign(parse, {
-	number: parseNumber,
-	named: parseNamed,
-	hex: parseHex,
-	rgb: parseRgb,
-	hsl: parseHsl,
-	hwb: parseHwb
-});
+export {
+	parseNumber,
+	parseNamed,
+	parseHex,
+	parseRgb,
+	parseHsl,
+	parseHwb
+};
 
 export default parse;

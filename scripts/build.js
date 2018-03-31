@@ -11,7 +11,7 @@ const bundles = [
 
 	// UMD
 	{
-		input: "index.js",
+		input: "src/culori.js",
 		output: {
 			file: 'build/culori.js',
 			format: 'umd',
@@ -22,7 +22,7 @@ const bundles = [
 
 	// UMD, minified
 	{
-		input: "index.js",
+		input: "src/culori.js",
 		output: {
 			file: 'build/culori.min.js',
 			format: 'umd',
@@ -33,7 +33,7 @@ const bundles = [
 
 	// ES6 modules
 	{
-		input: 'index.js',
+		input: 'src/index.js',
 		output: {
 			file: 'build/index.js',
 			format: 'es'

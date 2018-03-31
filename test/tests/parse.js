@@ -79,7 +79,7 @@ tape('rgb', function(test) {
 	);
 
 	test.deepEqual(
-		parse('rgb(100%, 0, 0)'),
+		parse('rgb(100%, 0%, 0%)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
 		'rgb legacy (percentage)'
 	);
@@ -91,7 +91,7 @@ tape('rgb', function(test) {
 	);
 
 	test.deepEqual(
-		parse('rgba(100%, 0, 0, 50%)'),
+		parse('rgba(100%, 0%, 0%, 50%)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb', a: 0.5 },
 		'rgba legacy (percentage)'
 	);
@@ -103,7 +103,7 @@ tape('rgb', function(test) {
 	);
 
 	test.deepEqual(
-		parse('rgb(100%  0  0)'),
+		parse('rgb(100% 0%   0%)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
 		'rgb current (percentage)'
 	);
@@ -115,7 +115,7 @@ tape('rgb', function(test) {
 	);
 
 	test.deepEqual(
-		parse('rgb(100% 0 0 / 50%)'),
+		parse('rgb(100% 0% 0% / 50%)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb', a: 0.5 },
 		'rgba current (percentage)'
 	);
