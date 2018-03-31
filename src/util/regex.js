@@ -27,3 +27,5 @@ export const hsl_legacy = new RegExp(`^hsla?\\(\\s*${hue}\\s*,\\s*${sp}\\s*,\\s*
 export const hsl_current = new RegExp(`^hsla?\\(\\s*${hue}\\s+${sp}\\s+${sp}\\s*(?:\\/\\s*${pn}\\s*)?\\)$`);
 
 export const hex = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i;
+
+export const hwb = new RegExp(`^hwb\\(\\s*${hue}\\s+${sp}\\s+${sp}\\s*(?:\\/\\s*${pn}\\s*)?\\)$`);

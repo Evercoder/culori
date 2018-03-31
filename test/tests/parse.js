@@ -200,6 +200,28 @@ tape('hsl', function(test) {
 	test.end();
 });
 
+tape('hwb', function(test) {
+	test.deepEqual(
+		parse('hwb(100 0% 0%)'), 
+		{ h: 100, w: 0, b: 0, mode: 'hwb' }, 
+		'black'
+	);
+
+	test.deepEqual(
+		parse('hwb(200 150% 150%)'), 
+		{ h: 200, w: 0.5, b: 0.5, mode: 'hwb' }, 
+		'grey'
+	);
+
+	test.deepEqual(
+		parse('hwb(200 10% 30% / 50%)'), 
+		{ h: 200, w: 0.1, b: 0.3, a: 0.5, mode: 'hwb' }, 
+		'hwba'
+	);
+
+	test.end();
+});
+
 tape('transparent', function(test) {
 
 	test.deepEqual(

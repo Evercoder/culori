@@ -1,6 +1,7 @@
 import hsl from './api/hsl';
 import hsv from './api/hsv';
 import hsi from './api/hsi';
+import hwb from './api/hwb';
 import rgb from './api/rgb';
 import css from './api/css';
 import parse from './api/parse';
@@ -18,6 +19,7 @@ Object.assign(
 		hsl,
 		hsv,
 		hsi,
+		hwb,
 		rgb,
 		css,
 		convert,

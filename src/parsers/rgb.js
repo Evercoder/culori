@@ -4,7 +4,7 @@ import {
 } from '../util/regex';
 
 export default color => {
-	var match = match = color.match(rgb_legacy) || color.match(rgb_current);
+	var match = color.match(rgb_legacy) || color.match(rgb_current);
 	if (!match) return;
 	let res = {
 		mode: 'rgb',
@@ -14,9 +14,9 @@ export default color => {
 	};
 
 	if (match[7] !== undefined) {
-		res['a'] = match[7] / 100;
+		res.a = match[7] / 100;
 	} else if (match[8] !== undefined) {
-		res['a'] = +match[8];
+		res.a = +match[8];
 	}
 	
 	return res;
