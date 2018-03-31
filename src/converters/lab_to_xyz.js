@@ -1,11 +1,19 @@
+// D50 white 
+const Xn = 0.9642; 
+const Yn = 1.0000; 
+const Zn = 0.8249;
+
+const k = Math.pow(29, 3) / Math.pow(3, 3);
+const e = Math.pow(6, 3) / Math.pow(29, 3);
+
 export default ({ l, a, b }) => {
 
-  let x = Math.pow(a / 500 + l / 116 + 0.137931034482759, 3) * 0.9642;
-  let z = Math.pow(l / 116 + 0.137931034482759 - b / 200, 3) * 0.8249;
+ 	let fx = a / 500 + (l + 16) / 116;
+ 	let fy = (l + 16) / 116 - b / 200;
 
-  return {
-    x: x > 0.008539390708927 ? x : (0.232 * a + l) * 0.001067423838616,
-    y: l > 8 ? Math.pow(l / 116 + 0.137931034482759, 3) : l / 903.296296296296296,
-    z: z > 0.007305686990037 ? z : (l / 116 - b / 200) * 0.10593246135558
-  };
+	return {
+		x: (Math.pow(fx, 3) > e ? Math.pow(fx, 3) : (116 * fx - 16) / k) * Xn,
+		y: (l > 8 ? Math.pow((l + 16) / 116, 3) : l / k) * Yn,
+		z: (Math.pow(fy, 3) > e ? Math.pow(fy, 3) : (116 * fy - 16) / k) * Zn
+	};
 };
