@@ -10,6 +10,7 @@ import round from './api/round';
 import convert from './api/convert';
 import prepare from './api/prepare';
 import named from './api/colors/named';
+import map from './api/map';
 
 import {
 	default as parse,
@@ -42,7 +43,8 @@ export {
 	parseRgb,
 	parseHsl,
 	parseHwb,
-	named
+	named,
+	map
 };
 
 export default culori;
