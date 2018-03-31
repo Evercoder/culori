@@ -1,6 +1,6 @@
 {
   "name": "culori",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "main": "build/culori.js",
   "module": "index.js",
   "jsnext:main": "index.js",
@@ -8,20 +8,23 @@
   "author": "Dan Burzo <danburzo@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
     "nyc": "^11.6.0",
     "rollup": "^0.57.1",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-uglify": "^3.0.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.9.0"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "node scripts/build.js",
     "pretest": "yarn build",
     "test": "tape test/tests/*.js | tap-spec",
     "benchmark": "node test/benchmarks/index.js",
-    "coverage:report" : "nyc report --reporter=lcov",
+    "prepublishOnly": "yarn test",
+    "coverage:report": "nyc report --reporter=lcov",
     "coverage:test": "nyc --produce-source-map tape test/tests/*.js | tap-spec"
-  },
-  "nyc": {
-    "sourceMap": true
   }
 }
