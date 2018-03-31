@@ -47,9 +47,8 @@ export default function ({ h, s, i, a }) {
 			};
 			break;
 	}
-	res['mode'] = 'rgb';
-	if (a !== undefined) {
-		res['a'] = a;
-	}
+
+	res.mode = 'rgb';
+	if (a !== undefined) res.a = a;
 	return res;
 }
