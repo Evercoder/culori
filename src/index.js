@@ -3,6 +3,8 @@ import hsv from './api/hsv';
 import hsi from './api/hsi';
 import hwb from './api/hwb';
 import rgb from './api/rgb';
+import lab from './api/lab';
+import lch from './api/lch';
 import css from './api/css';
 import round from './api/round';
 import convert from './api/convert';
@@ -27,6 +29,8 @@ export {
 	hsi,
 	hwb,
 	rgb,
+	lab,
+	lch,
 	css,
 	convert,
 	prepare,
