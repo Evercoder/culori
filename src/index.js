@@ -11,6 +11,8 @@ import convert from './api/convert';
 import prepare from './api/prepare';
 import named from './api/colors/named';
 import map from './api/map';
+import interpolate from './api/interpolate';
+import swatches from './api/swatches';
 
 import {
 	default as parse,
@@ -44,7 +46,9 @@ export {
 	parseHsl,
 	parseHwb,
 	named,
-	map
+	map,
+	interpolate,
+	swatches
 };
 
 export default culori;

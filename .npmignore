@@ -4,5 +4,5 @@ test/
 *.log
 .nyc_output/
 coverage/
-recipes/
+docs/
 .babelrc

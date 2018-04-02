@@ -19,3 +19,6 @@ for (var i = 0; i < 100; i++) {
 	console.log('culori', map(rgb(lab2(color)), (k,v) => 'rgb'.indexOf(k) > -1 ? v * 255 : v ));
 
 }
+// 
+// console.log('d3-color\n', lab("#abcdef"), lab("#abcdef").rgb());
+// console.log('culori\n', lab2("#abcdef"), map(rgb(lab2("#abcdef")), (k,v) => 'rgb'.indexOf(k) > -1 ? v * 255 : v ));
