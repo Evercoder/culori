@@ -1,4 +1,4 @@
-// D50 white 
+// ICC D50 white 
 const Xn = 0.9642; 
 const Yn = 1.0000; 
 const Zn = 0.8249;
