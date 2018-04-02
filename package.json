@@ -11,6 +11,7 @@
     "babel-core": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015-rollup": "^3.0.0",
+    "mathjs": "^4.0.1",
     "nyc": "^11.6.0",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^3.0.3",
