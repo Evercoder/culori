@@ -5,7 +5,7 @@ let m = str => str[0]
 	.map(row => 
 		row
 			.split(/\s+/)
-			.map(v => +v)
+			.map(v => parseFloat(v))
 	);
 
 let m1 = m`
@@ -30,7 +30,7 @@ let multiply = (m1, m2) => {
 		for (var j = 0; j < p; j++) {
 			let val = 0;
 			for (var k = 0; k < m; k++) {
-				val += m1[i][k] + m2[k][j];
+				val += m1[i][k] * m2[k][j];
 			}
 			res[i][j] = val;
 		}
