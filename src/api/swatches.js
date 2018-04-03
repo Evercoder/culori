@@ -1,6 +1,6 @@
 export default (fn, count = 2) => {
 	if (count < 2) {
-		return count < 1 ? [fn(0), fn(1)] ? [fn(0.5)];
+		return count < 1 ? [fn(0), fn(1)] : [fn(0.5)];
 	}
 	let res = [];
 	for (let i = 0; i < count; i++) {
