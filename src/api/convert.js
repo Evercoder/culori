@@ -22,7 +22,7 @@ const converters = {
 	},
 	lch: {
 		lab: lch_to_lab,
-		rgb: c => lch_to_lab(lab_to_rgb(c))
+		rgb: c => lab_to_rgb(lch_to_lab(c))
 	},
 	rgb: {
 		hsi: rgb_to_hsi,
@@ -30,7 +30,7 @@ const converters = {
 		hsv: rgb_to_hsv,
 		hwb: rgb_to_hwb,
 		lab: rgb_to_lab,
-		lch: c => rgb_to_lab(lab_to_lch(c))
+		lch: c => lab_to_lch(rgb_to_lab(c))
 	}
 };
 
