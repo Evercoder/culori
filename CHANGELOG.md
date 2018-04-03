@@ -1,5 +1,9 @@
 ## Culori 0.2.x
 
+### 0.2.7
+
+Added CIE Lab and LCH (D50) color spaces.
+
 ### 0.2.5
 
 Added support for the [HWB](https://drafts.csswg.org/css-color/#the-hwb-notation) color space.
