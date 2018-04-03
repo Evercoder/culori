@@ -11,14 +11,13 @@ export default color => {
 	let res = {
 		mode: 'hsl',
 		h: match[3] === undefined ? hue(match[1], match[2]) : +match[3],
-		s: match[4] / 100,
-		l: match[5] / 100
+		s: Math.min(Math.max(0, match[4] / 100), 1),
+		l: Math.min(Math.max(0, match[5] / 100), 1)
 	};
 	if (match[6] !== undefined) {
 		res.alpha = match[6] / 100;
 	} else if (match[7] !== undefined) {
 		res.alpha = match[7] / 255;
 	}
-	// TODO better way to normalize than via rgb?
-	return rgb_to_hsl(hsl_to_rgb(res));
+	return res;
 }

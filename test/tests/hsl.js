@@ -159,19 +159,19 @@ tape('hsl() parses hsl / hsla CSS strings', function(test) {
 
 	test.deepEqual(
 		hsl('hsl(0, 100%, 0%)'), 
-		{ s: 0, l: 0, mode: 'hsl' }, 
+		{ s: 1, l: 0, h: 0, mode: 'hsl' }, 
 		'black'
 	);
 
 	test.deepEqual(
 		hsl('hsl(100, 0%, 50%)'), 
-		{ s: 0, l: 0.5, mode: 'hsl' }, 
+		{ s: 0, l: 0.5, h: 100, mode: 'hsl' }, 
 		'grey'
 	);
 
 	test.deepEqual(
 		hsl('hsl(0, 100%, 50%)'), 
-		{ h: 0, s: 1, l: 0.5, mode: 'hsl' }, 
+		{ h: 0, s: 1, l: 0.5, h: 0, mode: 'hsl' }, 
 		'red'
 	);
 
