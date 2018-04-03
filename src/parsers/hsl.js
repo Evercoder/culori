@@ -1,9 +1,6 @@
 import { hsl_old, hsl_new } from '../util/regex';
 import { hue } from '../util/hue';
 
-import hsl_to_rgb from '../converters/hsl_to_rgb';
-import rgb_to_hsl from '../converters/rgb_to_hsl';
-
 export default color => {
 	if (typeof color !== 'string') return;
 	let match = color.match(hsl_old) || color.match(hsl_new);
