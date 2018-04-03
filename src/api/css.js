@@ -19,7 +19,7 @@ export default (c, format = 'rgb') => {
 			return `rgb(${r}, ${g}, ${b})`;
 		} else {
 			// transparent color
-			return `rgba(${r}, ${g}, ${b}, ${ color.alpha })`;
+			return `rgba(${r}, ${g}, ${b}, ${ round(color.alpha, 2) })`;
 		}
 	}
 }
