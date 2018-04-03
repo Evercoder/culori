@@ -1,6 +1,6 @@
 let tape = require('tape');
 let culori = require('../../');
-let { round, rgb, convert } = culori;
+let { round, rgb, convert, lch } = culori;
 
 // tape('convert(lch)', function(test) {
 
@@ -21,3 +21,12 @@ let { round, rgb, convert } = culori;
 
 // 	test.end();
 // })
+// 
+tape('lch()', function(test) {
+	test.deepEqual(
+		lch('blue'),
+		{}
+	)
+
+	test.end();
+})

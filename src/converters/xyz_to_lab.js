@@ -1,7 +1,7 @@
 // ICC D50 white 
 const Xn = 0.9642; 
 const Yn = 1.0000; 
-const Zn = 0.8249;
+const Zn = 0.82521;
 
 const k = Math.pow(29, 3) / Math.pow(3, 3);
 const e = Math.pow(6, 3) / Math.pow(29, 3);

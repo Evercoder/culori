@@ -1,8 +1,13 @@
 let tape = require('tape');
 let culori = require('../../');
-let { round, rgb } = culori;
+let { round, rgb, css } = culori;
 
 tape("rgb(Specifier)", function(test) {
+
+	test.deepEqual(
+		css(rgb('#ffffff'), 'hex'),
+		'#ffffff'
+	);
 
 	test.deepEqual(
 		rgb('tomato'), 

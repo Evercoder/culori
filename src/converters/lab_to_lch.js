@@ -10,6 +10,7 @@ export default ({ l, a, b, alpha }) => {
 		c: Math.sqrt(a * a + b * b),
 		h: Math.atan2(b, a) * 180 / Math.PI
 	}
+	if (res.h < 0) res.h += 360;
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
