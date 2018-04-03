@@ -1,16 +1,21 @@
 import convert from './convert';
 import prepare from './prepare';
+import map from './map';
 
-const interpolate = (a, b, t) => (t - a) / (b - a);
+const interpolate = (a, b, t) => a === undefined || b === undefined ? undefined : a + t * (b - a);
 
 export default (colors, mode = 'rgb') => {
 	if (colors.length < 2) {
 		return undefined;
 	}
-	let arr = colors;
-	// let arr = colors.map(c => convert(prepare(color, mode), mode));
+	let classes = colors.length - 1;
+	let arr = colors.map(color => convert(prepare(color, mode), mode));
 	return t => {
-		let cls = t * (colors.length - 1), i = Math.floor(cls);
-		return interpolate(arr[i], arr[i+1], cls - i);
+		let cls = Math.min(Math.max(0, t), 1) * classes, 
+			i = Math.floor(cls),
+			colorA = arr[i],
+			colorB = arr[i + 1],
+			tt = (cls - i) / classes;
+		return map({ mode: mode }, k => i === classes ? colorA[k] : interpolate(colorA[k], colorB[k], tt));
 	};
 };

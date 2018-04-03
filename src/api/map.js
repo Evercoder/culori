@@ -8,12 +8,17 @@ components.lab = ['l', 'a', 'b', 'alpha'];
 components.lch = ['l', 'c', 'h', 'alpha'];
 components.hwb = ['h', 'w', 'b', 'alpha'];
 
-export default (color, fn) => 
-	components[color.mode].reduce(
+export default (color, fn) => {
+	let c = components[color.mode].reduce(
 		(result, k) => {
-			if (color[k] !== undefined) {
-				result[k] = fn(k, color[k]);
+			let res = fn(k, color[k]);
+			if (res !== undefined) {
+				result[k] = res;
 			}
 			return result;
-		}, {}
+		}, 
+		{}
 	);
+	c.mode = color.mode;
+	return c;
+}
