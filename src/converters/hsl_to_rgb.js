@@ -1,6 +1,8 @@
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 
 export default function({ h, s, l, alpha }) {
+	h = h % 360;
+	if (h < 0) h += 360;
 	let m1 = l + s * (l < 0.5 ? l : 1 - l);
 	let m2 = m1 - (m1 - l) * 2 * Math.abs(h/60 % 2 - 1);
 	let res;
