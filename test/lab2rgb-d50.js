@@ -3,7 +3,7 @@ let { lab: lab2 } = require('d3-color');
 
 let fs = require('fs');
 
-fs.readFileSync('./datasets/matlab-lab2rgb-icc.txt', 'utf8').split(/\n/).forEach(line => {
+fs.readFileSync('./datasets/matlab-lab2rgb-d50.txt', 'utf8').split(/\n/).forEach(line => {
 	let values = line.split(/\s+/);
 	let l = parseFloat(values[0]), 
 		a = parseFloat(values[1]), 
