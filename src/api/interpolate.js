@@ -2,7 +2,10 @@ import convert from './convert';
 import prepare from './prepare';
 import map from './map';
 
-const interpolate = (a, b, t) => a === undefined || b === undefined ? undefined : a + t * (b - a);
+const interpolate = (a, b, t) => 
+	a === undefined || b === undefined ? 
+		undefined 
+		: Math.min(a, b) + t * Math.abs(b - a);
 
 export default (colors, mode = 'rgb') => {
 	if (colors.length < 2) {
