@@ -1,5 +1,4 @@
 import convert from './convert';
-import prepare from './prepare';
 import map from './map';
 import normalizeHue from '../util/normalizeHue';
 
@@ -34,7 +33,8 @@ export default (seeds, mode = 'rgb') => {
 		return undefined;
 	}
 
-	let colors = seeds.map(color => convert(prepare(color, mode), mode));
+	let converter = convert(mode);
+	let colors = seeds.map(color => converter(color));
 
 	return t => {
 

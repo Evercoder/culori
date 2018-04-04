@@ -1,4 +1,3 @@
 import convert from './convert';
-import prepare from './prepare';
-
-export default color => convert(prepare(color, 'hwb'), 'hwb');
+const converter = convert('hwb');
+export default color => converter(color);

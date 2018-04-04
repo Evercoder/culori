@@ -13,6 +13,8 @@ import rgb_to_lab from '../converters/rgb_to_lab';
 import rgb_to_lrgb from '../converters/rgb_to_lrgb';
 import lrgb_to_rgb from '../converters/lrgb_to_rgb';
 
+import parse from './parse';
+
 const converters = {
 	hsi: { rgb: hsi_to_rgb },
 	hsl: { rgb: hsl_to_rgb },
@@ -40,8 +42,12 @@ const converters = {
 	}
 };
 
-export default (color, target_mode) => 
-	color !== undefined ? 
+const prepare = (color, mode) =>
+	typeof color !== 'object' ? parse(color) 
+		: color.mode === undefined ? {...color,  mode: mode } : color;
+
+export default (target_mode = 'rgb') => 
+	color => (color = prepare(color, target_mode)) !== undefined ? 
 		// if the color's mode corresponds to our target mode
 		color.mode === target_mode ? 
 			// then just return the color

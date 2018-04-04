@@ -1,4 +1,3 @@
 import convert from './convert';
-import prepare from './prepare';
-
-export default color => convert(prepare(color, 'lch'), 'lch');
+const converter = convert('lch');
+export default color => coverter(color);

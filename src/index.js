@@ -9,7 +9,6 @@ import lrgb from './api/lrgb';
 import css from './api/css';
 import round from './api/round';
 import convert from './api/convert';
-import prepare from './api/prepare';
 import named from './api/colors/named';
 import map from './api/map';
 import interpolate from './api/interpolate';
@@ -38,7 +37,6 @@ export {
 	lrgb,
 	css,
 	convert,
-	prepare,
 	round,
 	parse,
 	parseNumber,
