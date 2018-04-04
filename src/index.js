@@ -13,7 +13,7 @@ import prepare from './api/prepare';
 import named from './api/colors/named';
 import map from './api/map';
 import interpolate from './api/interpolate';
-import swatches from './api/swatches';
+import samples from './api/samples';
 
 import {
 	default as parse,
@@ -50,7 +50,7 @@ export {
 	named,
 	map,
 	interpolate,
-	swatches
+	samples
 };
 
 export default culori;
