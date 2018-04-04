@@ -22,11 +22,11 @@ let { round, rgb, convert, lch } = culori;
 // 	test.end();
 // })
 // 
-tape('lch()', function(test) {
-	test.deepEqual(
-		lch('blue'),
-		{}
-	)
+// tape('lch()', function(test) {
+// 	test.deepEqual(
+// 		lch('blue'),
+// 		{}
+// 	)
 
-	test.end();
-})
+// 	test.end();
+// })

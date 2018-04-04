@@ -154,3 +154,8 @@ tape('hsv -> rgb -> hsv preserves color (via round)', function(test) {
 
 	test.end();
 });
+
+tape('hsv(str)', function(test) {
+	test.deepEqual(hsv('white'),  { mode: 'hsv', s: 0, v: 1 });
+	test.end();
+})

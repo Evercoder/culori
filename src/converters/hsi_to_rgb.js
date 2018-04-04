@@ -1,7 +1,9 @@
+import normalizeHue from '../util/normalizeHue';
+
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 
 export default function ({ h, s, i, alpha }) {
-	h = (h < 0 ? h + 360 : h) % 360;
+	h = normalizeHue(h);
 	let f = Math.abs(h/60 % 2 - 1);
 	let res;
 	switch (Math.floor(h/60)) {
@@ -47,6 +49,8 @@ export default function ({ h, s, i, alpha }) {
 				b: i * (1 + s * (3 * (1 - f) / (2 - f) - 1))
 			};
 			break;
+		default:
+			res = { r: i * (1 - s), g: i * (1 - s), b: i * (1 - s) };
 	}
 
 	res.mode = 'rgb';

@@ -1,35 +1,63 @@
 import convert from './convert';
 import prepare from './prepare';
 import map from './map';
+import normalizeHue from '../util/normalizeHue';
 
-function hue(a, b) {
-  var d = b - a;
-  return d ? linear(a, d > 180 || d < -180 ? d - 360 * Math.round(d / 360) : d) : a;
+const linear = (a, b, t) => a + t * (b - a);
+
+const generic = (a, b, t) => {
+	if (a !== undefined && b !== undefined) return linear(a, b, t);
+	return a === undefined ? b : a;
 }
 
-function linear(a, d) {
-  return function(t) {
-    return a + t * d;
-  };
+const hue = (a, b, t) => {
+	if (a !== undefined && b !== undefined) {
+		a = normalizeHue(a); b = normalizeHue(b);
+		return Math.abs(b - a) > 180 ? 
+			normalizeHue(linear(a, b - 360 * Math.sign(b - a), t))
+			: linear(a, b, t);
+	}
+	return a === undefined ? b : a;
 }
 
-const interpolate = (a, b, t, k) => 
-	a === undefined || b === undefined ? undefined : (
-		k === 'h' ? hue(a,b)(t) : (1 - t) * a + t * b
-	);
+const alpha = (a, b, t) => {
+	if (
+		(a === undefined && b === undefined) ||
+		(a === undefined && t === 0) ||
+		(b === undefined && t === 1)
+	) return undefined;
+	return linear(a === undefined ? 1 : a, b === undefined ? 1: b, t);
+}
 
-export default (colors, mode = 'rgb') => {
-	if (colors.length < 2) {
+export default (seeds, mode = 'rgb') => {
+	if (seeds.length < 2) {
 		return undefined;
 	}
-	let classes = colors.length - 1;
-	let arr = colors.map(color => convert(prepare(color, mode), mode));
+
+	let colors = seeds.map(color => convert(prepare(color, mode), mode));
+
 	return t => {
-		let cls = Math.min(Math.max(0, t), 1) * classes, 
-			i = Math.floor(cls),
-			colorA = arr[i],
-			colorB = arr[i + 1],
-			tt = (cls - i);
-		return map({ mode: mode }, k => i === classes ? colorA[k] : interpolate(colorA[k], colorB[k], tt, k));
+
+		// clamp t to [0, 1]
+		t = Math.min(Math.max(0, t), 1);
+
+		// at the end of the range, we don't have 
+		// an endColor to interpolate with,
+		// so just return a copy of the last color.
+		if (t === 1) {
+			return Object.assign({}, colors[colors.length - 1]);
+		}
+
+		// find out between which two colors we need to interpolate
+		let cls = t * (colors.length - 1);
+		let idx = Math.floor(cls);
+		let startColor = colors[idx], endColor = colors[idx + 1];
+		let t0 = (cls - idx);
+
+		// create a new color in the mode given, and map its values
+		return map(
+			{ mode: mode }, 
+			key => (key === 'h' ? hue : (key === 'alpha' ? alpha : generic))(startColor[key], endColor[key], t0)
+		);
 	};
 };
