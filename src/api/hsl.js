@@ -1,6 +1,17 @@
 import hsl_to_rgb from '../converters/hsl_to_rgb';
 import rgb_to_hsl from '../converters/rgb_to_hsl';
-import convert, { defineConverter } from './convert';
-defineConverter('hsl', { rgb: hsl_to_rgb }, { rgb: rgb_to_hsl }, ['h', 's', 'l', 'alpha']);
-const converter = convert('hsl');
-export default color => converter(color);
+
+import { defineConverter } from './convert';
+
+const converter = defineConverter({
+	mode: 'hsl',
+	output: { 
+		rgb: hsl_to_rgb 
+	},
+	input: {
+		rgb: rgb_to_hsl
+	},
+	keys: ['h', 's', 'l', 'alpha']
+});
+
+export default converter;

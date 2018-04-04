@@ -45,3 +45,25 @@ tape('11 swatches between black and white in Lab', function(test) {
 
 	test.end();
 });
+
+tape('11 swatches between black and white in Lch', function(test) {
+
+	test.deepEqual(
+		samples(11).map(interpolate(['#fff', '#000'], 'lch')).map(css('hex')),
+		[ 
+			'#ffffff', 
+			'#e2e2e2', 
+			'#c6c6c6', 
+			'#ababab', 
+			'#919191', 
+			'#777777', 
+			'#5e5e5e', 
+			'#474747', 
+			'#303030', 
+			'#1b1b1b', 
+			'#000000'
+		]
+	);
+
+	test.end();
+});

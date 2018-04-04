@@ -1,6 +1,8 @@
-import convert, { defineConverter } from './convert';
+import { defineConverter } from './convert';
 
-defineConverter('rgb', {}, {}, ['r', 'g', 'b', 'alpha']);
+const converter = defineConverter({
+	mode: 'rgb',
+	keys: ['r', 'g', 'b', 'alpha']
+})
 
-const converter = convert('rgb');
-export default color => converter(color);
+export default converter;
