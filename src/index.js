@@ -20,8 +20,7 @@ import {
 	parseNamed,
 	parseHex,
 	parseRgb,
-	parseHsl,
-	parseHwb
+	parseHsl
 } from './api/parse';
 
 const culori = color => rgb(color);
@@ -44,7 +43,6 @@ export {
 	parseHex,
 	parseRgb,
 	parseHsl,
-	parseHwb,
 	named,
 	map,
 	interpolate,

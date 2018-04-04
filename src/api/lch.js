@@ -1,10 +1,12 @@
 import lab_to_lch from '../converters/lab_to_lch';
 import lch_to_lab from '../converters/lch_to_lab';
+import parseLch from '../parsers/lch';
 
 import lab from './lab';
 import rgb from './rgb';
 
 import { defineConverter } from './convert';
+import { registerParser } from './parse';
 
 const converter = defineConverter({
 	mode: 'lch',
@@ -18,5 +20,7 @@ const converter = defineConverter({
 	},
 	keys: ['l', 'c', 'h', 'alpha']
 });
+
+registerParser(parseLch);
 
 export default converter;

@@ -3,32 +3,35 @@ import parseNamed from '../parsers/named';
 import parseHex from '../parsers/hex';
 import parseRgb from '../parsers/rgb';
 import parseHsl from '../parsers/hsl';
-import parseHwb from '../parsers/hwb';
-import parseLab from '../parsers/lab';
-import parseLch from '../parsers/lch';
+
+const parsers = [
+	parseHex,
+	parseRgb,
+	parseNamed,
+	parseHsl,
+	c => (c === 'transparent' ? parseNumber(0x00000000, 8) : undefined)
+];
+
 
 const parse = color => {
-	return (
-		parseHex(color) || 
-		parseRgb(color) || 
-		parseHsl(color) ||
-		parseNamed(color) || 
-		(color === 'transparent' ? parseNumber(0x00000000, 8) : undefined) ||
-		parseHwb(color) ||
-		parseLab(color) ||
-		parseLch(color)
-	);
+	let result, i = 0, len = parsers.length;
+	while (i++ < len) {
+		if ((result = parsers[i](color)) !== undefined) break;
+	}
+	return result;
 };
 
+const registerParser = parser => {
+	parsers.push(parser);
+}
+
 export {
+	registerParser,
 	parseNumber,
 	parseNamed,
 	parseHex,
 	parseRgb,
-	parseHsl,
-	parseHwb,
-	parseLab,
-	parseLch
+	parseHsl
 };
 
 export default parse;
