@@ -1,5 +1,5 @@
 /*
-	Convert sRGB values to CIE XYZ D50
+	Convert sRGB values to CIE XYZ D65
 
 	References:
 		* https://drafts.csswg.org/css-color/#color-conversion-code
@@ -11,8 +11,8 @@ import rgb_to_lrgb from './rgb_to_lrgb';
 export default (rgb) => {
 	let { r, g, b } = rgb_to_lrgb(rgb);
 	return {
-		x: 0.4360747 * r + 0.3850649 * g + 0.1430804 * b,
-		y: 0.2225045 * r + 0.7168786 * g + 0.0606169 * b,
-		z: 0.0139322 * r + 0.0971045 * g + 0.7141733 * b
+		x: 0.4124564 * r + 0.3575761 * g + 0.1804375 * b,
+		y: 0.2126729 * r + 0.7151522 * g + 0.0721750 * b,
+		z: 0.0193339 * r + 0.1191920 * g + 0.9503041 * b
 	};
 }

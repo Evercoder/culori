@@ -1,19 +1,22 @@
-// ICC D50 white 
-const Xn = 0.9642; 
-const Yn = 1.0000; 
-const Zn = 0.82521;
+// D65 white 
+const Xn = 0.95047; 
+const Yn = 1.00000; 
+const Zn = 1.08883;
 
 const k = Math.pow(29, 3) / Math.pow(3, 3);
 const e = Math.pow(6, 3) / Math.pow(29, 3);
 
+let fn = v => Math.pow(v, 3) > e ? Math.pow(v, 3) : (116 * v - 16) / k;
+
 export default ({ l, a, b }) => {
 
- 	let fx = a / 500 + (l + 16) / 116;
- 	let fy = (l + 16) / 116 - b / 200;
+	let fy = (l + 16) / 116;
+ 	let fx = a / 500 + fy;
+ 	let fz = fy - b / 200;
 
 	return {
-		x: (Math.pow(fx, 3) > e ? Math.pow(fx, 3) : (116 * fx - 16) / k) * Xn,
-		y: (l > 8 ? Math.pow((l + 16) / 116, 3) : l / k) * Yn,
-		z: (Math.pow(fy, 3) > e ? Math.pow(fy, 3) : (116 * fy - 16) / k) * Zn
+		x: fn(fx) * Xn,
+		y: fn(fy) * Yn,
+		z: fn(fz) * Zn
 	};
 };
