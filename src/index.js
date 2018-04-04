@@ -5,6 +5,7 @@ import hwb from './api/hwb';
 import rgb from './api/rgb';
 import lab from './api/lab';
 import lch from './api/lch';
+import lrgb from './api/lrgb';
 import css from './api/css';
 import round from './api/round';
 import convert from './api/convert';
@@ -34,6 +35,7 @@ export {
 	rgb,
 	lab,
 	lch,
+	lrgb,
 	css,
 	convert,
 	prepare,

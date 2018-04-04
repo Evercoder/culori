@@ -7,6 +7,7 @@ components.hsi = ['h', 's', 'i', 'alpha'];
 components.lab = ['l', 'a', 'b', 'alpha'];
 components.lch = ['l', 'c', 'h', 'alpha'];
 components.hwb = ['h', 'w', 'b', 'alpha'];
+components.lrgb = ['r', 'g', 'b', 'alpha'];
 
 export default (color, fn) => {
 	let c = components[color.mode].reduce(

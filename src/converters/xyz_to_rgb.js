@@ -6,10 +6,10 @@
 		* http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
 */
 
-const lrgb_to_rgb = c => c > 0.0031308 ? 1.055 * Math.pow(c, 1/2.4) - 0.055 : 12.92 * c;
+import lrgb_to_rgb from './lrgb_to_rgb';
 
-export default ({ x, y, z }) => ({
-	r: lrgb_to_rgb(x * 3.1338561 - y * 1.6168667 - 0.4906146 * z),
-	g: lrgb_to_rgb(x * -0.9787684 + y * 1.9161415 + 0.0334540 * z),
-	b: lrgb_to_rgb(x * 0.0719453 - y * 0.2289914 + 1.4052427 * z)
+export default ({ x, y, z }) => lrgb_to_rgb({
+	r: x * 3.1338561 - y * 1.6168667 - 0.4906146 * z,
+	g: x * -0.9787684 + y * 1.9161415 + 0.0334540 * z,
+	b: x * 0.0719453 - y * 0.2289914 + 1.4052427 * z
 });

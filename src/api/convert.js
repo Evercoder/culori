@@ -10,6 +10,8 @@ import lab_to_lch from '../converters/lab_to_lch';
 import lch_to_lab from '../converters/lch_to_lab';
 import lab_to_rgb from '../converters/lab_to_rgb';
 import rgb_to_lab from '../converters/rgb_to_lab';
+import rgb_to_lrgb from '../converters/rgb_to_lrgb';
+import lrgb_to_rgb from '../converters/lrgb_to_rgb';
 
 const converters = {
 	hsi: { rgb: hsi_to_rgb },
@@ -30,7 +32,11 @@ const converters = {
 		hsv: rgb_to_hsv,
 		hwb: rgb_to_hwb,
 		lab: rgb_to_lab,
-		lch: c => lab_to_lch(rgb_to_lab(c))
+		lch: c => lab_to_lch(rgb_to_lab(c)),
+		lrgb: rgb_to_lrgb
+	},
+	lrgb: {
+		rgb: lrgb_to_rgb
 	}
 };
 
