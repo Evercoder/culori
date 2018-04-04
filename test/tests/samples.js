@@ -1,14 +1,11 @@
 let tape = require('tape');
 let culori = require('../../');
-let { interpolate, swatches, css } = culori;
+let { interpolate, samples, css } = culori;
 
 tape('11 swatches between black and white in RGB', function(test) {
 
 	test.deepEqual(
-		swatches(
-			interpolate(['#fff', '#000']), 
-			11
-		).map(s => css(s, 'hex')),
+		samples(11).map(interpolate(['#fff', '#000'])).map(css('hex')),
 		[ 
 			'#ffffff', 
 			'#e6e6e6', 
@@ -30,10 +27,7 @@ tape('11 swatches between black and white in RGB', function(test) {
 tape('11 swatches between black and white in Lab', function(test) {
 
 	test.deepEqual(
-		swatches(
-			interpolate(['#fff', '#000'], 'lab'), 
-			11
-		).map(s => css(s, 'hex')),
+		samples(11).map(interpolate(['#fff', '#000'], 'lab')).map(css('hex')),
 		[ 
 			'#ffffff', 
 			'#e2e2e2', 

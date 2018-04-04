@@ -1,6 +1,8 @@
 let tape = require('tape');
 let culori = require('../../');
-let { round, hsl, rgb } = culori;
+let { round, hsl, rgb, map } = culori;
+
+let approx = map((k,v) => round()(v));
 
 tape("rgb() converts from HSL to RGB", function(test) {
 
@@ -100,25 +102,25 @@ tape('hsl() converts RGB to HSL', function(test) {
 tape('rgb -> hsl -> rgb preserves color (via round)', function(test) {
 
 	test.deepEqual(
-		round(rgb(hsl(rgb({ r: 1, g: 0, b: 0 })))), 
+		approx(rgb(hsl(rgb({ r: 1, g: 0, b: 0 })))), 
 		{ r: 1, g: 0, b: 0, mode: 'rgb' }, 
 		'red'
 	);
 
 	test.deepEqual(
-		round(rgb(hsl(rgb({ r: 1, g: 1, b: 0 })))), 
+		approx(rgb(hsl(rgb({ r: 1, g: 1, b: 0 })))), 
 		{ r: 1, g: 1, b: 0, mode: 'rgb' }, 
 		'yellow'
 	);
 
 	test.deepEqual(
-		round(rgb(hsl(rgb({ r: 0.3, g: 0.2, b: 0.1 })))),
+		approx(rgb(hsl(rgb({ r: 0.3, g: 0.2, b: 0.1 })))),
 		{ r: 0.3, g: 0.2, b: 0.1, mode: 'rgb' }, 
 		'floating point'
 	);
 
 	test.deepEqual(
-		round(rgb(hsl(rgb({ r: 0.7, g: 0.1, b: 0.3 })))),
+		approx(rgb(hsl(rgb({ r: 0.7, g: 0.1, b: 0.3 })))),
 		{ r: 0.7, g: 0.1, b: 0.3, mode: 'rgb' }, 
 		'floating point'
 	);
@@ -129,25 +131,25 @@ tape('rgb -> hsl -> rgb preserves color (via round)', function(test) {
 tape('hsl -> rgb -> hsl preserves color (via round)', function(test) {
 
 	test.deepEqual(
-		round(hsl(rgb(hsl({ h: 0, s: 1, l: 0.5 })))), 
+		approx(hsl(rgb(hsl({ h: 0, s: 1, l: 0.5 })))), 
 		{ h: 0, s: 1, l: 0.5, mode: 'hsl' }, 
 		'red'
 	);
 
 	test.deepEqual(
-		round(hsl(rgb(hsl({ h: 60, s: 1, l: 0.5 })))), 
+		approx(hsl(rgb(hsl({ h: 60, s: 1, l: 0.5 })))), 
 		{ h: 60, s: 1, l: 0.5, mode: 'hsl' }, 
 		'yellow'
 	);
 
 	test.deepEqual(
-		round(hsl(rgb(hsl({ h: 0.3, s: 0.2, l: 0.1 })))), 
+		approx(hsl(rgb(hsl({ h: 0.3, s: 0.2, l: 0.1 })))), 
 		{ h: 0.3, s: 0.2, l: 0.1, mode: 'hsl' }, 
 		'floating point'
 	);
 	
 	test.deepEqual(
-		round(hsl(rgb(hsl({ h: 0.7, s: 0.1, l: 0.3 })))), 
+		approx(hsl(rgb(hsl({ h: 0.7, s: 0.1, l: 0.3 })))), 
 		{ h: 0.7, s: 0.1, l: 0.3, mode: 'hsl' }, 
 		'floating point'
 	);

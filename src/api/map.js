@@ -9,17 +9,20 @@ components.lch = ['l', 'c', 'h', 'alpha'];
 components.hwb = ['h', 'w', 'b', 'alpha'];
 components.lrgb = ['r', 'g', 'b', 'alpha'];
 
-export default (color, fn) => {
-	let c = components[color.mode].reduce(
-		(result, k) => {
-			let res = fn(k, color[k]);
-			if (res !== undefined) {
-				result[k] = res;
-			}
-			return result;
-		}, 
-		{}
-	);
-	c.mode = color.mode;
-	return c;
-}
+const invariant = (k,v) => v;
+
+export default (fn = invariant) => 
+	color => {
+		let c = components[color.mode].reduce(
+			(result, k) => {
+				let res = fn(k, color[k]);
+				if (res !== undefined) {
+					result[k] = res;
+				}
+				return result;
+			}, 
+			{}
+		);
+		c.mode = color.mode;
+		return c;
+	}
