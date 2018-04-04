@@ -8,7 +8,7 @@ tape('11 swatches between black and white in RGB', function(test) {
 		swatches(
 			interpolate(['#fff', '#000']), 
 			11
-		).map(s => css(s, 'hex')),
+		).map(css('hex')),
 		[ 
 			'#ffffff', 
 			'#e6e6e6', 
@@ -33,7 +33,7 @@ tape('11 swatches between black and white in Lab', function(test) {
 		swatches(
 			interpolate(['#fff', '#000'], 'lab'), 
 			11
-		).map(s => css(s, 'hex')),
+		).map(css('hex')),
 		[ 
 			'#ffffff', 
 			'#e2e2e2', 

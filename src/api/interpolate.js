@@ -55,9 +55,6 @@ export default (seeds, mode = 'rgb') => {
 		let t0 = (cls - idx);
 
 		// create a new color in the mode given, and map its values
-		return map(
-			{ mode: mode }, 
-			key => (key === 'h' ? hue : (key === 'alpha' ? alpha : generic))(startColor[key], endColor[key], t0)
-		);
+		return map(key => (key === 'h' ? hue : (key === 'alpha' ? alpha : generic))(startColor[key], endColor[key], t0))({ mode: mode }) ;
 	};
 };

@@ -5,7 +5,7 @@ let { round, rgb, css } = culori;
 tape("rgb(Specifier)", function(test) {
 
 	test.deepEqual(
-		css(rgb('#ffffff'), 'hex'),
+		css('hex')(rgb('#ffffff')),
 		'#ffffff'
 	);
 
