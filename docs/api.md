@@ -28,13 +28,63 @@ Mode | For
 `lch` | LCh color space
 `lrgb`| Linearized RGB color space
 
+§ __transform__( _function_ )
+
+Returns a transformer function, that when run on a color, calls the original _function_ on each of the color's channels.
+
+```js
+let round_to_two_decimals = culori.round(2);
+let approximate = culori.transform(round_to_two_decimals);
+approximate({
+	mode: 'rgb',
+	r: 0.232323354324,
+	g: 0.780909090909,
+	b: 0.484389483439
+}); // => { mode: 'rgb', r: 0.23, g: 0.78, b: 0.48 }
+```
+
 § __interpolate__( _colors_, _mode = "rgb"_)
 
 Returns an interpolator between an array of colors in the _mode_ color space.
 
-§ __transform__( _function_ )
+§ __css__( _format_ )
 
-§ __reduce__( _function_ )
+Returns a function that will format any color to _format_.
+
+### Utilities
+
+§ __samples__( _n = 2_ )
+
+Returns an array of _n_ equally-spaced samples from the `[0, 1]` range, with `0` and `1` at the ends.
+
+```js
+culori.samples(3); // => [0, 0.5, 1]
+culori.samples(5); // => [0, 0.25, 0.5, 0.75, 1]
+```
+
+The samples are useful for `interpolate` to generate color scales:
+
+```js
+let grays = culori.interpolate(['#fff', '#000']);
+samples(5).map(grays);
+```
+
+§ __round__( _n = 8_ )
+
+Returns a function that rounds numbers to at most _n_ digits of precision.
+
+```js
+let approximate = culori.round(2);
+approximate(0.2494924242); // => 0.25
+
+culori.transform(approximate)({
+	mode: 'rgb',
+	mode: 'rgb',
+	r: 0.232323354324,
+	g: 0.780909090909,
+	b: 0.484389483439
+}); // => { mode: 'rgb', r: 0.23, g: 0.78, b: 0.48 }
+```
 
 ## Shortcuts
 
@@ -75,10 +125,4 @@ Shortcut to `converter('lch')(color)`.
 Shortcut to `converter('lrgb')(color)`.
 
 § __css__( _format_ )
-
-## Utilities
-
-§ __samples__( _n = 2_ )
-
-§ __round__( _precision = 8_ )
 
