@@ -28,6 +28,8 @@ const alpha = (a, b, t) => {
 	return linear(a === undefined ? 1 : a, b === undefined ? 1: b, t);
 }
 
+let method = k => k === 'h' ? hue : k === 'alpha' ? alpha : generic;
+
 export default (seeds, mode = 'rgb') => {
 	if (seeds.length < 2) {
 		return undefined;
@@ -48,11 +50,6 @@ export default (seeds, mode = 'rgb') => {
 		let t0 = (cls - idx);
 
 		// create a new color in the mode given, and map its values
-		return transform(
-			(v, k) => {
-				let method = k === 'h' ? hue : k === 'alpha' ? alpha : generic;
-				return method(startColor[k], endColor[k], t0);
-			}
-		)({ mode: mode });
+		return transform((k, v) => method(k)(startColor[k], endColor[k], t0))({ mode: mode });
 	};
 };
