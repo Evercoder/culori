@@ -1,4 +1,4 @@
-import { lab, gray } from '../../util/regex';
+import { lab, gray } from '../util/regex';
 
 export default color => {
 	let match, res;

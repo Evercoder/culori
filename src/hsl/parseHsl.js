@@ -1,5 +1,5 @@
-import { hsl_old, hsl_new } from '../../util/regex';
-import { hue } from '../../util/hue';
+import { hsl_old, hsl_new } from '../util/regex';
+import { hue } from '../util/hue';
 
 export default color => {
 	if (typeof color !== 'string') return;

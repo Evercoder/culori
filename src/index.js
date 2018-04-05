@@ -8,16 +8,16 @@ import samples from './samples';
 
 import parse from './parse';
 
-import { defineMode } from './mode/index';
+import { defineMode } from './modes';
 
-import rgbDef from './mode/rgb/definition';
-import lrgbDef from './mode/lrgb/definition';
-import hslDef from './mode/hsl/definition';
-import hsvDef from './mode/hsv/definition';
-import hsiDef from './mode/hsi/definition';
-import hwbDef from './mode/hwb/definition';
-import labDef from './mode/lab/definition';
-import lchDef from './mode/lch/definition';
+import rgbDef from './rgb/definition';
+import lrgbDef from './lrgb/definition';
+import hslDef from './hsl/definition';
+import hsvDef from './hsv/definition';
+import hsiDef from './hsi/definition';
+import hwbDef from './hwb/definition';
+import labDef from './lab/definition';
+import lchDef from './lch/definition';
 
 defineMode(rgbDef);
 defineMode(lrgbDef);

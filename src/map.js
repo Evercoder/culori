@@ -1,4 +1,4 @@
-import { components } from './mode/index';
+import { components } from './modes';
 
 const invariant = (k,v) => v;
 

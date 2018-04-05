@@ -1,5 +1,5 @@
 import parse from './parse';
-import { converters } from './mode/index';
+import { converters } from './modes';
 
 const prepare = (color, mode) => 
 	typeof color !== 'object' ? 

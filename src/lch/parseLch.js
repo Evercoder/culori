@@ -1,5 +1,5 @@
-import { lch } from '../../util/regex';
-import { hue } from '../../util/hue';
+import { lch } from '../util/regex';
+import { hue } from '../util/hue';
 
 export default color => {
 	

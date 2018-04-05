@@ -1,5 +1,5 @@
-import normalizeHue from '../../util/normalizeHue';
-import round from '../../round';
+import normalizeHue from '../util/normalizeHue';
+import round from '../round';
 
 let round_chroma = round(4);
 

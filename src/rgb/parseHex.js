@@ -1,5 +1,5 @@
 import parseNumber from './parseNumber';
-import { hex } from '../../util/regex';
+import { hex } from '../util/regex';
 
 export default color => {
 	var match;
