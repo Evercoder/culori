@@ -1,5 +1,5 @@
 let tape = require('tape');
-let culori = require('../../');
+let culori = require('../');
 let { interpolate, css, rgb, samples, hsv } = culori;
 
 let hex = css('hex');

@@ -1,5 +1,5 @@
 let tape = require('tape');
-let culori = require('../../');
+let culori = require('../');
 let { hwb } = culori;
 
 tape('hwb() parses hwb CSS strings', function(test) {

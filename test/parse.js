@@ -1,5 +1,5 @@
 let tape = require('tape');
-let culori = require('../../');
+let culori = require('../');
 let { parse } = culori;
 
 tape('named colors', function(test) {

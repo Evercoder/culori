@@ -1,5 +1,5 @@
 let tape = require('tape');
-let culori = require('../../');
+let culori = require('../');
 let { css, hsl, rgb } = culori;
 
 tape('css()', function(test) {

@@ -1,5 +1,5 @@
 let tape = require('tape');
-let culori = require('../../');
+let culori = require('../');
 let { round, rgb, css } = culori;
 
 tape("rgb(Specifier)", function(test) {

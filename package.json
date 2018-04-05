@@ -22,10 +22,10 @@
   "scripts": {
     "build": "node scripts/build.js",
     "pretest": "yarn build",
-    "test": "tape test/tests/*.js | tap-spec",
-    "benchmark": "node test/benchmarks/index.js",
+    "test": "tape test/*.js | tap-spec",
+    "benchmark": "node benchmark/index.js",
     "prepublishOnly": "yarn test",
     "coverage:report": "nyc report --reporter=lcov",
-    "coverage:test": "nyc --produce-source-map tape test/tests/*.js | tap-spec"
+    "coverage:test": "nyc --produce-source-map tape test/*.js | tap-spec"
   }
 }

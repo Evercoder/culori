@@ -1,5 +1,5 @@
 let tape = require('tape');
-let culori = require('../../');
+let culori = require('../');
 let { round, hsl, rgb, map } = culori;
 
 let approx = map((k,v) => round()(v));

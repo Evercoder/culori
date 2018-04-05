@@ -1,5 +1,5 @@
 let tape = require('tape');
-let culori = require('../../');
+let culori = require('../');
 let { interpolate, samples, css } = culori;
 
 tape('11 swatches between black and white in RGB', function(test) {
