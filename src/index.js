@@ -6,6 +6,7 @@ import transform from './transform';
 import interpolate from './interpolate';
 import samples from './samples';
 import brighten from './brighten';
+import toArray from './toArray';
 
 import parse from './parse';
 
@@ -57,7 +58,8 @@ export {
 	named,
 	transform,
 	interpolate,
-	samples
+	samples,
+	toArray
 };
 
 export default culori;

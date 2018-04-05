@@ -53,6 +53,6 @@ export default (seeds, mode = 'rgb') => {
 				let method = k === 'h' ? hue : k === 'alpha' ? alpha : generic;
 				return method(startColor[k], endColor[k], t0);
 			}
-		)({ mode: mode }) ;
+		)({ mode: mode });
 	};
 };

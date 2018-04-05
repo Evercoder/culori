@@ -1,12 +1,20 @@
 import parse from './parse';
-import { converters } from './modes';
+import { converters, components } from './modes';
+
+const fromArray = (color, mode) => {
+	let res = { mode: mode };
+	components[mode].forEach((k, idx) => res[k] = color[idx]);
+	return res;
+}
 
 const prepare = (color, mode) => 
 	typeof color !== 'object' ? 
 		parse(color) 
-		: color.mode === undefined ? 
-			{...color,  mode: mode } 
-			: color;
+		: Array.isArray(color) ? 
+			fromArray(color, mode)
+			: color.mode === undefined ? 
+				{...color,  mode: mode } 
+				: color;
 
 const converter = (target_mode = 'rgb') => 
 	color => (color = prepare(color, target_mode)) !== undefined ? 
