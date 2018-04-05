@@ -10,6 +10,6 @@ export default {
 	input: {
 		rgb: convertRgbToLab
 	},
-	keys: ['l', 'a', 'b', 'alpha'],
+	channels: ['l', 'a', 'b'],
 	parsers: [ parseLab ]
 };

@@ -10,6 +10,6 @@ export default {
 	input: {
 		rgb: convertRgbToHsl
 	},
-	keys: ['h', 's', 'l', 'alpha'],
+	channels: ['h', 's', 'l'],
 	parsers: [ parseHsl ]
 };

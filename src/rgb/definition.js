@@ -5,6 +5,6 @@ import parseTransparent from './parseTransparent';
 
 export default {
 	mode: 'rgb',
-	keys: ['r', 'g', 'b', 'alpha'],
+	channels: ['r', 'g', 'b'],
 	parsers: [ parseHex, parseRgb, parseNamed, parseTransparent ]
 };

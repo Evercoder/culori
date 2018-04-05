@@ -1,3 +1,3 @@
-import { components } from './modes';
+import { getChannels } from './modes';
 
-export default (include) => color => (include || components[color.mode]).map(k => color[k]);
+export default () => color => getChannels(color.mode).map(k => color[k]);

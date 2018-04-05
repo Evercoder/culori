@@ -9,5 +9,5 @@ export default {
 	input: {
 		rgb: convertRgbToHsi
 	},
-	keys: ['h', 's', 'i', 'alpha']
+	channels: ['h', 's', 'i']
 }

@@ -9,5 +9,5 @@ export default {
 	input: { 
 		rgb: convertRgbToLrgb
 	},
-	keys: ['r', 'g', 'b', 'alpha']
+	channels: ['r', 'g', 'b']
 };

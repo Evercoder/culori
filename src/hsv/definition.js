@@ -9,5 +9,5 @@ export default {
 	input: {
 		rgb: convertRgbToHsv
 	},
-	keys: ['h', 's', 'v', 'alpha']
+	channels: ['h', 's', 'v']
 };

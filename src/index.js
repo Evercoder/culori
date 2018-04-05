@@ -6,6 +6,7 @@ import transform from './transform';
 import interpolate from './interpolate';
 import samples from './samples';
 import brighten from './brighten';
+import fromArray from './fromArray';
 import toArray from './toArray';
 
 import parse from './parse';
@@ -59,6 +60,7 @@ export {
 	transform,
 	interpolate,
 	samples,
+	fromArray,
 	toArray
 };
 

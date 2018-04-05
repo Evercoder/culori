@@ -8,7 +8,8 @@ let clamp = v => Math.round(Math.max(0, Math.min(v, 1)) * 255);
 
 export default (format = 'rgb') => 
 	c => {
-		let color = toArray(['r', 'g', 'b'])(rgb(c))
+		let color = toArray()(rgb(c))
+			.slice(0, 3)
 			.map(clamp)
 			.concat([c.alpha === 1 ? undefined : c.alpha ]);
 

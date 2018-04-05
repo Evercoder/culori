@@ -14,6 +14,6 @@ export default {
 		rgb: convertRgbToLch,
 		lch: convertLabToLch
 	},
-	keys: ['l', 'c', 'h', 'alpha'],
+	channels: ['l', 'c', 'h'],
 	parsers: [ parseLch ]
 };

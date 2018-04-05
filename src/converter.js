@@ -1,11 +1,6 @@
 import parse from './parse';
-import { converters, components } from './modes';
-
-const fromArray = (color, mode) => {
-	let res = { mode: mode };
-	components[mode].forEach((k, idx) => res[k] = color[idx]);
-	return res;
-}
+import { converters } from './modes';
+import fromArray from './fromArray';
 
 const prepare = (color, mode) => 
 	typeof color !== 'object' ? 

@@ -10,6 +10,6 @@ export default {
 	input: {
 		rgb: convertRgbToHwb
 	},
-	keys: ['h', 'w', 'b', 'alpha'],
+	channels: ['h', 'w', 'b'],
 	parsers: [ parseHwb ]
 };
