@@ -32,7 +32,9 @@ Mode | For
 
 Returns an interpolator between an array of colors in the _mode_ color space.
 
-§ __transform__()
+§ __transform__( _function_ )
+
+§ __reduce__( _function_ )
 
 ## Shortcuts
 

@@ -2,7 +2,7 @@ let tape = require('tape');
 let culori = require('../');
 let { transform, round, hsv, rgb } = culori;
 
-let approx = transform((k,v) => round()(v));
+let approx = transform(round());
 
 tape("rgb() converts from HSV to RGB", function(test) {
 

@@ -40,20 +40,19 @@ export default (seeds, mode = 'rgb') => {
 		// clamp t to [0, 1]
 		t = Math.min(Math.max(0, t), 1);
 
-		// at the end of the range, we don't have 
-		// an endColor to interpolate with,
-		// so just return a copy of the last color.
-		if (t === 1) {
-			return Object.assign({}, colors[colors.length - 1]);
-		}
-
 		// find out between which two colors we need to interpolate
 		let cls = t * (colors.length - 1);
 		let idx = Math.floor(cls);
-		let startColor = colors[idx], endColor = colors[idx + 1];
+		let startColor = colors[idx];
+		let endColor = t === 1 ? colors[idx] : colors[idx + 1];
 		let t0 = (cls - idx);
 
 		// create a new color in the mode given, and map its values
-		return transform(key => (key === 'h' ? hue : (key === 'alpha' ? alpha : generic))(startColor[key], endColor[key], t0))({ mode: mode }) ;
+		return transform(
+			(v, k) => {
+				let method = k === 'h' ? hue : k === 'alpha' ? alpha : generic;
+				return method(startColor[k], endColor[k], t0);
+			}
+		)({ mode: mode }) ;
 	};
 };

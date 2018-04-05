@@ -1,28 +1,29 @@
 import converter from './converter';
 import round from './round';
+import transform from './transform';
 
-let clamp = v => Math.round(Math.max(0, Math.min(v, 1)) * 255);
+let clampRGB = transform(
+	(v, k) => k === 'alpha' ? v : Math.round(Math.max(0, Math.min(v, 1)) * 255)
+);
+
 let rgb = converter('rgb');
-let round_alpha = round(2);
+let roundAlpha = round(2);
 
 export default (format = 'rgb') => 
 	c => {
-		let color = rgb(c);
-		let r = clamp(color.r);
-		let g = clamp(color.g);
-		let b = clamp(color.b);
+		let color = clampRGB(rgb(c));
 
 		if (format === 'hex') {
-			return '#' + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
+			return '#' + (1 << 24 | color.r << 16 | color.g << 8 | color.b).toString(16).slice(1);
 		}
 
 		if (format === 'rgb') {
-			if (color.alpha === undefined || color.alpha === 1) {
+			if (color.alpha === undefined || color.alpha === 255) {
 				// opaque color
-				return `rgb(${r}, ${g}, ${b})`;
+				return `rgb(${color.r}, ${color.g}, ${color.b})`;
 			} else {
 				// transparent color
-				return `rgba(${r}, ${g}, ${b}, ${ round_alpha(color.alpha) })`;
+				return `rgba(${color.r}, ${color.g}, ${color.b}, ${ roundAlpha(color.alpha) })`;
 			}
 		}
 	}
