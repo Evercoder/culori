@@ -28,4 +28,4 @@ const converter = (target_mode = 'rgb') =>
 					: converters.rgb[target_mode](converters[color.mode].rgb(color))
 		: undefined;
 
-export { defineConverter, components, converter as default };
+export default converter;

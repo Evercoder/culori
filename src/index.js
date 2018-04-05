@@ -1,8 +1,8 @@
 import css from './css';
 import round from './round';
-import convert from './convert';
+import converter from './converter';
 import named from './colors/named';
-import map from './map';
+import transform from './transform';
 import interpolate from './interpolate';
 import samples from './samples';
 
@@ -28,14 +28,14 @@ defineMode(hwbDef);
 defineMode(labDef);
 defineMode(lchDef);
 
-let rgb = convert('rgb');
-let lrgb = convert('lrgb');
-let hsl = convert('hsl');
-let hsv = convert('hsv');
-let hsi = convert('hsi');
-let hwb = convert('hwb');
-let lab = convert('lab');
-let lch = convert('lch');
+let rgb = converter('rgb');
+let lrgb = converter('lrgb');
+let hsl = converter('hsl');
+let hsv = converter('hsv');
+let hsi = converter('hsi');
+let hwb = converter('hwb');
+let lab = converter('lab');
+let lch = converter('lch');
 
 const culori = rgb;
 
@@ -49,11 +49,11 @@ export {
 	lch,
 	lrgb,
 	css,
-	convert,
+	converter,
 	round,
 	parse,
 	named,
-	map,
+	transform,
 	interpolate,
 	samples
 };

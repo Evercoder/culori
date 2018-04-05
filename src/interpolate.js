@@ -1,5 +1,5 @@
-import convert from './convert';
-import map from './map';
+import converter from './converter';
+import transform from './transform';
 import normalizeHue from './util/normalizeHue';
 
 const linear = (a, b, t) => a + t * (b - a);
@@ -33,8 +33,7 @@ export default (seeds, mode = 'rgb') => {
 		return undefined;
 	}
 
-	let converter = convert(mode);
-	let colors = seeds.map(color => converter(color));
+	let colors = seeds.map(converter(mode));
 
 	return t => {
 
@@ -55,6 +54,6 @@ export default (seeds, mode = 'rgb') => {
 		let t0 = (cls - idx);
 
 		// create a new color in the mode given, and map its values
-		return map(key => (key === 'h' ? hue : (key === 'alpha' ? alpha : generic))(startColor[key], endColor[key], t0))({ mode: mode }) ;
+		return transform(key => (key === 'h' ? hue : (key === 'alpha' ? alpha : generic))(startColor[key], endColor[key], t0))({ mode: mode }) ;
 	};
 };

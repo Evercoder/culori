@@ -1,8 +1,8 @@
-import convert from './convert';
+import converter from './converter';
 import round from './round';
 
 let clamp = v => Math.round(Math.max(0, Math.min(v, 1)) * 255);
-let rgb = convert('rgb');
+let rgb = converter('rgb');
 let round_alpha = round(2);
 
 export default (format = 'rgb') => 
