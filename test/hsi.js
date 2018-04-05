@@ -1,8 +1,8 @@
 let tape = require('tape');
 let culori = require('../');
-let { transform, round, hsi, rgb } = culori;
+let { fromArray, toArray, round, hsi, rgb } = culori;
 
-let approx = transform(round());
+let approx = c => fromArray(toArray()(c).slice(0, 3).map(round()).concat(c.alpha), c.mode);
 
 tape("rgb() converts from HSI to RGB", function(test) {
 
