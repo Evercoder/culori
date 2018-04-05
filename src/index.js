@@ -5,6 +5,7 @@ import named from './colors/named';
 import transform from './transform';
 import interpolate from './interpolate';
 import samples from './samples';
+import brighten from './brighten';
 
 import parse from './parse';
 
@@ -50,6 +51,7 @@ export {
 	lrgb,
 	css,
 	converter,
+	brighten,
 	round,
 	parse,
 	named,
