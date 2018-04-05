@@ -1,6 +1,6 @@
 {
   "name": "culori",
-  "version": "0.2.46",
+  "version": "0.2.47",
   "main": "build/culori.js",
   "module": "build/index.js",
   "jsnext:main": "build/index.js",
