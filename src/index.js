@@ -2,7 +2,6 @@ import css from './css';
 import round from './round';
 import converter from './converter';
 import named from './colors/named';
-import transform from './transform';
 import interpolate from './interpolate';
 import samples from './samples';
 import brighten from './brighten';
@@ -57,7 +56,6 @@ export {
 	round,
 	parse,
 	named,
-	transform,
 	interpolate,
 	samples,
 	fromArray,

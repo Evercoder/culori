@@ -1,6 +1,7 @@
 import converter from './converter';
-import transform from './transform';
 import normalizeHue from './util/normalizeHue';
+import { getChannels } from './modes';
+import fromArray from './fromArray';
 
 const linear = (a, b, t) => a + t * (b - a);
 
@@ -49,7 +50,9 @@ export default (seeds, mode = 'rgb') => {
 		let endColor = t === 1 ? colors[idx] : colors[idx + 1];
 		let t0 = (cls - idx);
 
-		// create a new color in the mode given, and map its values
-		return transform((k, v) => method(k)(startColor[k], endColor[k], t0))({ mode: mode });
+		return fromArray(
+			getChannels(mode).map(k => method(k)(startColor[k], endColor[k], t0)),
+			mode
+		);
 	};
 };

@@ -28,21 +28,6 @@ Mode | For
 `lch` | LCh color space
 `lrgb`| Linearized RGB color space
 
-§ __transform__( _function_ )
-
-Returns a transformer function, that when run on a color, calls the original _function_ on each of the color's channels.
-
-```js
-let round_to_two_decimals = culori.round(2);
-let approximate = culori.transform(round_to_two_decimals);
-approximate({
-	mode: 'rgb',
-	r: 0.232323354324,
-	g: 0.780909090909,
-	b: 0.484389483439
-}); // => { mode: 'rgb', r: 0.23, g: 0.78, b: 0.48 }
-```
-
 § __interpolate__( _colors_, _mode = "rgb"_)
 
 Returns an interpolator between an array of colors in the _mode_ color space.
@@ -72,19 +57,6 @@ samples(5).map(grays);
 § __round__( _n = 8_ )
 
 Returns a function that rounds numbers to at most _n_ digits of precision.
-
-```js
-let approximate = culori.round(2);
-approximate(0.2494924242); // => 0.25
-
-culori.transform(approximate)({
-	mode: 'rgb',
-	mode: 'rgb',
-	r: 0.232323354324,
-	g: 0.780909090909,
-	b: 0.484389483439
-}); // => { mode: 'rgb', r: 0.23, g: 0.78, b: 0.48 }
-```
 
 ## Shortcuts
 
