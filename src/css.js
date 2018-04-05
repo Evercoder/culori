@@ -1,29 +1,27 @@
 import converter from './converter';
 import round from './round';
-import toArray from './toArray';
-
 let rgb = converter('rgb');
 let roundAlpha = round(2);
 let clamp = v => Math.round(Math.max(0, Math.min(v, 1)) * 255);
 
 export default (format = 'rgb') => 
 	c => {
-		let color = toArray()(rgb(c))
-			.slice(0, 3)
-			.map(clamp)
-			.concat([c.alpha === 1 ? undefined : c.alpha ]);
+		let color = rgb(c);
+		color.r = clamp(color.r);
+		color.b = clamp(color.b);
+		color.g = clamp(color.g);
 
 		if (format === 'hex') {
-			return '#' + (1 << 24 | color[0] << 16 | color[1] << 8 | color[2]).toString(16).slice(1);
+			return '#' + (1 << 24 | color.r << 16 | color.g << 8 | color.b).toString(16).slice(1);
 		}
 
 		if (format === 'rgb') {
-			if (color[3] === undefined) {
+			if (c.alpha === undefined || c.alpha === 1) {
 				// opaque color
-				return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+				return `rgb(${color.r}, ${color.g}, ${color.b})`;
 			} else {
 				// transparent color
-				return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${ roundAlpha(color[3]) })`;
+				return `rgba(${color.r}, ${color.g}, ${color.b}, ${ roundAlpha(color.alpha) })`;
 			}
 		}
 	}

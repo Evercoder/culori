@@ -1,9 +1,6 @@
 let tape = require('tape');
 let culori = require('../');
-let { round, hsl, rgb, fromArray, toArray } = culori;
-
-let approx = c => fromArray(toArray()(c).slice(0, 3).map(round()).concat(c.alpha), c.mode);
-
+let { hsl, rgb } = culori;
 
 tape("rgb() converts from HSL to RGB", function(test) {
 
@@ -95,64 +92,6 @@ tape('hsl() converts RGB to HSL', function(test) {
 		hsl( rgb({ r: 1, g: 0, b: 1 }) ), 
 		{ h: 300, s: 1, l: 0.5, mode: 'hsl' }, 
 		'magenta'
-	);
-
-	test.end();
-});
-
-tape('rgb -> hsl -> rgb preserves color (via round)', function(test) {
-
-	test.deepEqual(
-		approx(rgb(hsl(rgb({ r: 1, g: 0, b: 0 })))), 
-		{ r: 1, g: 0, b: 0, mode: 'rgb' }, 
-		'red'
-	);
-
-	test.deepEqual(
-		approx(rgb(hsl(rgb({ r: 1, g: 1, b: 0 })))), 
-		{ r: 1, g: 1, b: 0, mode: 'rgb' }, 
-		'yellow'
-	);
-
-	test.deepEqual(
-		approx(rgb(hsl(rgb({ r: 0.3, g: 0.2, b: 0.1 })))),
-		{ r: 0.3, g: 0.2, b: 0.1, mode: 'rgb' }, 
-		'floating point'
-	);
-
-	test.deepEqual(
-		approx(rgb(hsl(rgb({ r: 0.7, g: 0.1, b: 0.3 })))),
-		{ r: 0.7, g: 0.1, b: 0.3, mode: 'rgb' }, 
-		'floating point'
-	);
-
-	test.end();
-});
-
-tape('hsl -> rgb -> hsl preserves color (via round)', function(test) {
-
-	test.deepEqual(
-		approx(hsl(rgb(hsl({ h: 0, s: 1, l: 0.5 })))), 
-		{ h: 0, s: 1, l: 0.5, mode: 'hsl' }, 
-		'red'
-	);
-
-	test.deepEqual(
-		approx(hsl(rgb(hsl({ h: 60, s: 1, l: 0.5 })))), 
-		{ h: 60, s: 1, l: 0.5, mode: 'hsl' }, 
-		'yellow'
-	);
-
-	test.deepEqual(
-		approx(hsl(rgb(hsl({ h: 0.3, s: 0.2, l: 0.1 })))), 
-		{ h: 0.3, s: 0.2, l: 0.1, mode: 'hsl' }, 
-		'floating point'
-	);
-	
-	test.deepEqual(
-		approx(hsl(rgb(hsl({ h: 0.7, s: 0.1, l: 0.3 })))), 
-		{ h: 0.7, s: 0.1, l: 0.3, mode: 'hsl' }, 
-		'floating point'
 	);
 
 	test.end();

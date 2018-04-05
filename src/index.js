@@ -5,12 +5,10 @@ import named from './colors/named';
 import interpolate from './interpolate';
 import samples from './samples';
 import brighten from './brighten';
-import fromArray from './fromArray';
-import toArray from './toArray';
 
 import parse from './parse';
 
-import { defineMode } from './modes';
+import { defineMode, getChannels } from './modes';
 
 import rgbDef from './rgb/definition';
 import lrgbDef from './lrgb/definition';
@@ -58,8 +56,9 @@ export {
 	named,
 	interpolate,
 	samples,
-	fromArray,
-	toArray
+
+	defineMode,
+	getChannels
 };
 
 export default culori;

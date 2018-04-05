@@ -1,7 +1,6 @@
 import converter from './converter';
 import normalizeHue from './util/normalizeHue';
 import { getChannels } from './modes';
-import fromArray from './fromArray';
 
 const linear = (a, b, t) => a + t * (b - a);
 
@@ -50,9 +49,15 @@ export default (seeds, mode = 'rgb') => {
 		let endColor = t === 1 ? colors[idx] : colors[idx + 1];
 		let t0 = (cls - idx);
 
-		return fromArray(
-			getChannels(mode).map(k => method(k)(startColor[k], endColor[k], t0)),
-			mode
-		);
+		return getChannels(mode)
+				.map(k => [k, method(k)(startColor[k], endColor[k], t0)])
+				.reduce((res, curr) => {
+						if (curr[1] !== undefined) {
+							res[curr[0]] = curr[1];
+						}
+						return res;
+					}, 
+					{ mode: mode }
+				);
 	};
 };
