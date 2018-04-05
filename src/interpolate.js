@@ -28,14 +28,19 @@ const alpha = (a, b, t) => {
 	return linear(a === undefined ? 1 : a, b === undefined ? 1: b, t);
 }
 
-let method = k => k === 'h' ? hue : k === 'alpha' ? alpha : generic;
+const method = {
+	'h': hue,
+	'alpha': alpha
+}
 
-export default (seeds, mode = 'rgb') => {
+const interpolate = (seeds, mode = 'rgb') => {
 	if (seeds.length < 2) {
 		return undefined;
 	}
 
 	let colors = seeds.map(converter(mode));
+	let channels = getChannels(mode);
+	let startColor, endColor, cls, idx, t0, res, val;
 
 	return t => {
 
@@ -43,21 +48,21 @@ export default (seeds, mode = 'rgb') => {
 		t = Math.min(Math.max(0, t), 1);
 
 		// find out between which two colors we need to interpolate
-		let cls = t * (colors.length - 1);
-		let idx = Math.floor(cls);
-		let startColor = colors[idx];
-		let endColor = t === 1 ? colors[idx] : colors[idx + 1];
-		let t0 = (cls - idx);
+		cls = t * (colors.length - 1);
+		idx = Math.floor(cls);
+		startColor = colors[idx];
+		endColor = t === 1 ? colors[idx] : colors[idx + 1];
+		t0 = cls - idx;
 
-		return getChannels(mode)
-				.map(k => [k, method(k)(startColor[k], endColor[k], t0)])
-				.reduce((res, curr) => {
-						if (curr[1] !== undefined) {
-							res[curr[0]] = curr[1];
-						}
-						return res;
-					}, 
-					{ mode: mode }
-				);
+		res = { mode: mode };
+		channels.forEach(k => {
+			if ((val = (method[k] || generic)(startColor[k], endColor[k], t0)) !== undefined) {
+				res[k] = val;
+			}
+		});
+
+		return res;
 	};
 };
+
+export default interpolate;
