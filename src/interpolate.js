@@ -1,6 +1,7 @@
 import converter from './converter';
 import normalizeHue from './util/normalizeHue';
-import { getChannels } from './modes';
+import zip from './zip';
+import { getModeDefinition } from './modes';
 
 const linear = (a, b, t) => a + t * (b - a);
 
@@ -28,41 +29,50 @@ const alpha = (a, b, t) => {
 	return linear(a === undefined ? 1 : a, b === undefined ? 1: b, t);
 }
 
-const method = {
-	'h': hue,
-	'alpha': alpha
-}
+const interpolateLinear = arr => 
+	t => {
+		let cls = t * (arr.length - 1);
+		let idx = Math.floor(cls);
+		return generic(arr[idx], arr[idx + 1], cls - idx);
+	};
 
-const interpolate = (seeds, mode = 'rgb') => {
-	if (seeds.length < 2) {
-		return undefined;
+const interpolateHue = arr => 
+	t => {
+		let cls = t * (arr.length - 1);
+		let idx = Math.floor(cls);
+		return hue(arr[idx], arr[idx + 1], cls - idx);
 	}
 
-	let colors = seeds.map(converter(mode));
-	let channels = getChannels(mode);
-	let startColor, endColor, cls, idx, t0, res, val;
+const interpolateAlpha = arr => 
+	t => {
+		let cls = t * (arr.length - 1);
+		let idx = Math.floor(cls);
+		return alpha(arr[idx], arr[idx + 1], cls - idx);
+	}
+
+const interpolate = (colors, mode = 'rgb', interpolations) => {
+	let zipped = zip(mode)(colors.map(converter(mode)));
+	interpolations = interpolations || getModeDefinition(mode).interpolate;
+	let mappings = {};
+	Object.keys(interpolations).forEach(k => {
+		mappings[k] = interpolations[k](zipped[k]);
+	});
 
 	return t => {
-
-		// clamp t to [0, 1]
 		t = Math.min(Math.max(0, t), 1);
-
-		// find out between which two colors we need to interpolate
-		cls = t * (colors.length - 1);
-		idx = Math.floor(cls);
-		startColor = colors[idx];
-		endColor = t === 1 ? colors[idx] : colors[idx + 1];
-		t0 = cls - idx;
-
-		res = { mode: mode };
-		channels.forEach(k => {
-			if ((val = (method[k] || generic)(startColor[k], endColor[k], t0)) !== undefined) {
+		let res = { mode: mode }, val;
+		Object.keys(mappings).forEach(k => {
+			if ((val = mappings[k](t)) !== undefined) {
 				res[k] = val;
 			}
 		});
-
 		return res;
-	};
-};
+	}
+}
 
-export default interpolate;
+export {
+	interpolate as default,
+	interpolateAlpha,
+	interpolateLinear,
+	interpolateHue
+}

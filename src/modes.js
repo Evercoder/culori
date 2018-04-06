@@ -1,24 +1,24 @@
 const converters = {};
-const _channels = {};
+const modes = {};
 const parsers = [];
 
-const defineMode = ({ mode, input, output, channels, parsers: p  }) => {
-	converters[mode] = Object.assign(converters[mode] || {}, output);
-	Object.keys(input || {}).forEach(k => {
+const defineMode = definition => {
+	converters[definition.mode] = Object.assign(converters[definition.mode] || {}, definition.output);
+	Object.keys(definition.input || {}).forEach(k => {
 		if (!converters[k]) {
 			converters[k] = {};
 		}
-		converters[k][mode] = input[k];
+		converters[k][definition.mode] = definition.input[k];
 	});
-	_channels[mode] = channels.concat('alpha');
-	(p || []).forEach(parser => parsers.push(parser));
-}
+	modes[definition.mode] = definition;
+	(definition.parsers || []).forEach(parser => parsers.push(parser));
+};
 
-const getChannels = (mode) => _channels[mode];
+const getModeDefinition = (mode) => modes[mode];
 
 export { 
 	defineMode, 
-	getChannels, 
+	getModeDefinition, 
 	converters, 
 	parsers 
 };

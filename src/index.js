@@ -2,12 +2,12 @@ import css from './css';
 import round from './round';
 import converter from './converter';
 import named from './colors/named';
-import interpolate from './interpolate';
+import interpolate, { interpolateLinear, interpolateAlpha, interpolateHue } from './interpolate';
 import samples from './samples';
 
 import parse from './parse';
 
-import { defineMode, getChannels } from './modes';
+import { defineMode, getModeDefinition } from './modes';
 
 import rgbDef from './rgb/definition';
 import lrgbDef from './lrgb/definition';
@@ -53,10 +53,13 @@ export {
 	parse,
 	named,
 	interpolate,
+	interpolateLinear,
+	interpolateAlpha,
+	interpolateHue,
 	samples,
 
 	defineMode,
-	getChannels
+	getModeDefinition
 };
 
 export default culori;

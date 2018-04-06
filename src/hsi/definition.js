@@ -1,5 +1,6 @@
 import convertHsiToRgb from './convertHsiToRgb';
 import convertRgbToHsi from './convertRgbToHsi';
+import { interpolateLinear, interpolateAlpha, interpolateHue } from '../interpolate';
 
 export default {
 	mode: 'hsi',
@@ -9,5 +10,11 @@ export default {
 	input: {
 		rgb: convertRgbToHsi
 	},
-	channels: ['h', 's', 'i']
+	channels: ['h', 's', 'i', 'alpha'],
+	interpolate: {
+		h: interpolateHue,
+		s: interpolateLinear,
+		i: interpolateLinear,
+		alpha: interpolateAlpha
+	}
 }
