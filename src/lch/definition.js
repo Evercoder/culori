@@ -3,7 +3,7 @@ import convertLchToLab from './convertLchToLab';
 import convertLchToRgb from './convertLchToRgb';
 import convertRgbToLch from './convertRgbToLch';
 import parseLch from './parseLch';
-import { interpolateLinear, interpolateAlpha, interpolateHue } from '../interpolate';
+import { interpolateNumber, interpolateAlpha, interpolateHue } from '../interpolate';
 
 export default {
 	mode: 'lch',
@@ -18,10 +18,10 @@ export default {
 	channels: ['l', 'c', 'h', 'alpha'],
 	parsers: [ parseLch ],
 	interpolate: {
-		h: interpolateHue,
-		c: interpolateLinear,
-		l: interpolateLinear,
-		alpha: interpolateAlpha
+		h: interpolateHue(),
+		c: interpolateNumber(),
+		l: interpolateNumber(),
+		alpha: interpolateAlpha()
 	}
 };
 

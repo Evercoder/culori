@@ -2,7 +2,12 @@ import css from './css';
 import round from './round';
 import converter from './converter';
 import named from './colors/named';
-import interpolate, { interpolateLinear, interpolateAlpha, interpolateHue } from './interpolate';
+import interpolate, { 
+	interpolateNumber, 
+	interpolateAlpha, 
+	interpolateHue,
+	interpolateMethodLinear
+} from './interpolate';
 import samples from './samples';
 import zip from './zip';
 
@@ -54,9 +59,10 @@ export {
 	parse,
 	named,
 	interpolate,
-	interpolateLinear,
+	interpolateNumber,
 	interpolateAlpha,
 	interpolateHue,
+	interpolateMethodLinear,
 	samples,
 
 	defineMode,

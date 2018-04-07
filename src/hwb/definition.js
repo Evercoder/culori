@@ -1,7 +1,7 @@
 import convertHwbToRgb from './convertHwbToRgb';
 import convertRgbToHwb from './convertRgbToHwb';
 import parseHwb from './parseHwb';
-import { interpolateLinear, interpolateAlpha, interpolateHue } from '../interpolate';
+import { interpolateNumber, interpolateAlpha, interpolateHue } from '../interpolate';
 
 export default {
 	mode: 'hwb',
@@ -14,9 +14,9 @@ export default {
 	channels: ['h', 'w', 'b', 'alpha'],
 	parsers: [ parseHwb ],
 	interpolate: {
-		h: interpolateHue,
-		w: interpolateLinear,
-		b: interpolateLinear,
-		alpha: interpolateAlpha
+		h: interpolateHue(),
+		w: interpolateNumber(),
+		b: interpolateNumber(),
+		alpha: interpolateAlpha()
 	}
 };

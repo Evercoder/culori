@@ -1,15 +1,15 @@
 let tape = require('tape');
 let culori = require('../');
-let { interpolate, interpolateLinear, interpolateHue, interpolateAlpha, css, rgb, samples, hsv } = culori;
+let { interpolate, interpolateAlpha, css, rgb, samples, hsv } = culori;
 
 let hex = css('hex');
 
 tape('interpolateAlpha', function(test) {
-	test.equal(interpolateAlpha([undefined, undefined])(0), undefined);
-	test.equal(interpolateAlpha([undefined, undefined])(1), undefined);
-	test.equal(interpolateAlpha([undefined, 0.5])(0), undefined);
-	test.equal(interpolateAlpha([undefined, 0.5])(0.5), 0.75);
-	test.equal(interpolateAlpha([undefined, 0.5])(1), 0.5);
+	test.equal(interpolateAlpha()([undefined, undefined])(0), undefined);
+	test.equal(interpolateAlpha()([undefined, undefined])(1), undefined);
+	test.equal(interpolateAlpha()([undefined, 0.5])(0), undefined);
+	test.equal(interpolateAlpha()([undefined, 0.5])(0.5), 0.75);
+	test.equal(interpolateAlpha()([undefined, 0.5])(1), 0.5);
 	test.end();
 });
 
