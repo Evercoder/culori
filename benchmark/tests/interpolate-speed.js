@@ -59,7 +59,7 @@ let colors = ['red', 'white', 'green', 'blue', 'black', 'fuchsia', 'cyan'];
 
 benchmark('culori: multiple colors in RGB', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori.samples(count).map(culori.interpolate(colors)).map(culori.formatter('hex'));
+		culori.samples(count).map(culori.interpolate(colors)).map(hex);
 	}
 });
 

@@ -5,11 +5,11 @@ let { interpolate, interpolateAlpha, formatter, rgb, samples, hsv } = culori;
 let hex = formatter('hex');
 
 tape('interpolateAlpha', function(test) {
-	test.equal(interpolateAlpha()([undefined, undefined])(0), undefined);
-	test.equal(interpolateAlpha()([undefined, undefined])(1), undefined);
-	test.equal(interpolateAlpha()([undefined, 0.5])(0), undefined);
-	test.equal(interpolateAlpha()([undefined, 0.5])(0.5), 0.75);
-	test.equal(interpolateAlpha()([undefined, 0.5])(1), 0.5);
+	test.equal(interpolateAlpha()([undefined, undefined], 0), undefined);
+	test.equal(interpolateAlpha()([undefined, undefined], 1), undefined);
+	test.equal(interpolateAlpha()([undefined, 0.5], 0), undefined);
+	test.equal(interpolateAlpha()([undefined, 0.5], 0.5), 0.75);
+	test.equal(interpolateAlpha()([undefined, 0.5], 1), 0.5);
 	test.end();
 });
 
