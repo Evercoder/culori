@@ -6,7 +6,7 @@ import { getModeDefinition } from './modes';
 const interpolateMethodLinear = (a, b, t) => a + t * (b - a);
 
 const interpolateNumber = (method = interpolateMethodLinear) =>
-	arr => 
+	arr =>
 		t => {
 			let cls = t * (arr.length - 1), 
 				idx = Math.floor(cls),
@@ -56,19 +56,17 @@ const interpolateAlpha = (method = interpolateMethodLinear) =>
 const interpolate = (colors, mode = 'rgb', interpolations) => {
 	let zipped = zip(mode)(colors.map(converter(mode)));
 	interpolations = interpolations || getModeDefinition(mode).interpolate;
-	let mappings = {};
-	Object.keys(interpolations).forEach(k => {
-		mappings[k] = interpolations[k](zipped[k]);
-	});
+	let keys = Object.keys(interpolations);
+	let fns = keys.map(k => interpolations[k](zipped[k]));
 
 	return t => {
 		t = Math.min(Math.max(0, t), 1);
 		let res = { mode: mode }, val;
-		Object.keys(mappings).forEach(k => {
-			if ((val = mappings[k](t)) !== undefined) {
-				res[k] = val;
+		for (var i = 0; i < fns.length; i++) {
+			if ((val = fns[i](t)) !== undefined) {
+				res[keys[i]] = val;
 			}
-		});
+		}
 		return res;
 	}
 }
