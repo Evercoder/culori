@@ -31,7 +31,7 @@ export default ({ r, g, b, alpha }) => {
 		s: (l === 0 || l === 1) ? undefined : Math.sqrt(k * k + bl * bl) / (E * l * (1 - l))
 	};
 
-	if (res.s) res.h = normalizeHue(Math.atan2(k, bl) * radToDeg - 120);
+	if (res.s) res.h = Math.atan2(k, bl) * radToDeg - 120;
 	if (alpha !== undefined) res.alpha = alpha;
 
 	return res;
