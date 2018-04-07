@@ -1,8 +1,8 @@
 let tape = require('tape');
 let culori = require('../');
-let { interpolate, interpolateAlpha, css, rgb, samples, hsv } = culori;
+let { interpolate, interpolateAlpha, formatter, rgb, samples, hsv } = culori;
 
-let hex = css('hex');
+let hex = formatter('hex');
 
 tape('interpolateAlpha', function(test) {
 	test.equal(interpolateAlpha()([undefined, undefined])(0), undefined);
@@ -65,7 +65,7 @@ tape('bug checking', function(test) {
 	test.deepEqual(
 		samples(4).map(
 			interpolate(['blue', 'white'], 'hsv')
-		).map(css('hex')),
+		).map(hex),
 		[ '#0000ff', '#5555ff', '#aaaaff', '#ffffff' ]);
 	test.end();
 })

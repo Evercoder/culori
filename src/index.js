@@ -1,4 +1,4 @@
-import css from './css';
+import formatter from './formatter';
 import round from './round';
 import converter from './converter';
 import named from './colors/named';
@@ -53,7 +53,7 @@ export {
 	lab,
 	lch,
 	lrgb,
-	css,
+	formatter,
 	converter,
 	round,
 	parse,
