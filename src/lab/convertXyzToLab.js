@@ -9,8 +9,9 @@ export default ({ x, y, z }) => {
 	let f2 = f(z/Zn);
 
 	return {
+		mode: 'lab',
 		l: (116 * f1) - 16,
 		a: 500 * (f0 - f1),
 		b: 200 * (f1 - f2)
-	}
+	};
 };
