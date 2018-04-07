@@ -23,7 +23,7 @@ export default {
 		rgb: convertCubehelixToRgb
 	},
 	interpolate: {
-		'h': interpolateHue(interpolateMethodLinear, false),
+		'h': interpolateHue(),
 		's': interpolateNumber(),
 		'l': interpolateNumber(),
 		'alpha': interpolateAlpha()

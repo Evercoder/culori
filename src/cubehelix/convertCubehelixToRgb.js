@@ -5,7 +5,7 @@ export default ({ h, s, l, alpha }) => {
 
 	h = (h === undefined ? 0 : h + 120) * degToRad;
 	
-	let amp = s * l * (1 - l);
+	let amp = s === undefined ? 0 : s * l * (1 - l);
 
 	let cosh = Math.cos(h);
 	let sinh = Math.sin(h);
