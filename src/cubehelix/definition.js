@@ -9,18 +9,23 @@
 	https://arxiv.org/pdf/1108.5083.pdf
 */
 
+import { interpolateNumber, interpolateAlpha, interpolateHue } from '../interpolate';
+import convertRgbToCubehelix from './convertRgbToCubehelix';
+import convertCubehelixToRgb from './convertCubehelixToRgb';
+
 export default {
 	mode: 'cubehelix',
-	channels: [
-		'l', // lightness
-		's', // start color
-		'r', // rotations
-		'c' // chroma (defined as 'hue' in Green's paper)
-	],
+	channels: ['h', 's', 'l', 'alpha'],
 	input: {
-		rgb: () => {}
+		rgb: convertRgbToCubehelix
 	},
 	output: {
-		rgb: () => {}
+		rgb: convertCubehelixToRgb
+	},
+	interpolate: {
+		'h': interpolateHue(),
+		's': interpolateNumber(),
+		'l': interpolateNumber(),
+		'alpha': interpolateAlpha()
 	}
 };
