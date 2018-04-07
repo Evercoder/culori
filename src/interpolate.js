@@ -3,9 +3,9 @@ import normalizeHue from './util/normalizeHue';
 import zip from './zip';
 import { getModeDefinition } from './modes';
 
-const interpolateMethodLinear = (a, b, t) => a + t * (b - a);
+const interpolateMethodLinear = (a, b, t, gamma = 1) => a + Math.pow(t, gamma) * (b - a);
 
-const interpolateNumber = (method = interpolateMethodLinear) =>
+const interpolateNumber = (method = interpolateMethodLinear, gamma = 1) =>
 	(arr, t) => {
 			let cls = t * (arr.length - 1), 
 				idx = Math.floor(cls),
@@ -13,11 +13,11 @@ const interpolateNumber = (method = interpolateMethodLinear) =>
 				b = arr[idx + 1], 
 				t0 = cls - idx;
 
-			if (a !== undefined && b !== undefined) return method(a, b, t0);
+			if (a !== undefined && b !== undefined) return method(a, b, t0, gamma);
 			return a === undefined ? b : a;
 		};
 
-const interpolateHue = (method = interpolateMethodLinear, useShortest = true) =>
+const interpolateHue = (method = interpolateMethodLinear, useShortest = true, gamma = 1) =>
 	(arr, t) => {
 			let cls = t * (arr.length - 1), 
 				idx = Math.floor(cls),
@@ -28,13 +28,13 @@ const interpolateHue = (method = interpolateMethodLinear, useShortest = true) =>
 			if (a !== undefined && b !== undefined) {
 				a = normalizeHue(a); b = normalizeHue(b);
 				return useShortest && Math.abs(b - a) > 180 ? 
-					normalizeHue(method(a, b - 360 * Math.sign(b - a), t0))
-					: method(a, b, t0);
+					normalizeHue(method(a, b - 360 * Math.sign(b - a), t0, gamma))
+					: method(a, b, t0, gamma);
 			}
 			return a === undefined ? b : a;
 		};
 
-const interpolateAlpha = (method = interpolateMethodLinear) =>
+const interpolateAlpha = (method = interpolateMethodLinear, gamma = 1) =>
 	(arr, t) => {
 			let cls = t * (arr.length - 1), 
 				idx = Math.floor(cls),
@@ -47,7 +47,7 @@ const interpolateAlpha = (method = interpolateMethodLinear) =>
 				(a === undefined && t0 === 0) ||
 				(b === undefined && t0 === 1)
 			) return undefined;
-			return method(a === undefined ? 1 : a, b === undefined ? 1: b, t0);
+			return method(a === undefined ? 1 : a, b === undefined ? 1: b, t0, gamma);
 		};
 
 const interpolate = (colors, mode = 'rgb', interpolations) => {
