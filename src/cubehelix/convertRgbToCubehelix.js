@@ -7,7 +7,7 @@
 	...but can be derived from the inverse, HSL to RGB conversion.
 
 	It matches the math in Mike Bostock's D3 implementation:
-	
+
 	https://github.com/d3/d3-color/blob/master/src/cubehelix.js
  */
 
@@ -21,14 +21,14 @@ let AD = M[0] * M[3];
 
 export default ({ r, g, b, alpha }) => {
 
-	let l = (r * DE - g * BE + (BC - AD) * b) / (BC - AD + DE - BE));
-	let y = b - l;
-	let x = ((g - l) * M[4] - M[2] * (b - l)) / M[3];
+	let l = (r * DE - g * BE + (BC - AD) * b) / (BC - AD + DE - BE);
+	let x = b - l;
+	let y = ((g - l) * M[4] - M[2] * x) / M[3];
 
 	let res = { 
 		mode: 'cubehelix',
 		l: l,
-		s: (l === 0 || l === 1) ? undefined : Math.sqrt(x * x + y * y) / (E * l * (1 - l))
+		s: (l === 0 || l === 1) ? undefined : Math.sqrt(x * x + y * y) / (M[4] * l * (1 - l))
 	};
 
 	if (res.s) res.h = Math.atan2(y, x) * radToDeg - 120;
