@@ -5,49 +5,49 @@ import { getModeDefinition } from './modes';
 
 const linear = (a, b, t) => a + t * (b - a);
 
-const generic = (a, b, t) => {
-	if (a !== undefined && b !== undefined) return linear(a, b, t);
-	return a === undefined ? b : a;
-}
-
-const hue = (a, b, t) => {
-	if (a !== undefined && b !== undefined) {
-		a = normalizeHue(a); b = normalizeHue(b);
-		return Math.abs(b - a) > 180 ? 
-			normalizeHue(linear(a, b - 360 * Math.sign(b - a), t))
-			: linear(a, b, t);
-	}
-	return a === undefined ? b : a;
-}
-
-const alpha = (a, b, t) => {
-	if (
-		(a === undefined && b === undefined) ||
-		(a === undefined && t === 0) ||
-		(b === undefined && t === 1)
-	) return undefined;
-	return linear(a === undefined ? 1 : a, b === undefined ? 1: b, t);
-}
-
 const interpolateLinear = arr => 
 	t => {
-		let cls = t * (arr.length - 1);
-		let idx = Math.floor(cls);
-		return generic(arr[idx], arr[idx + 1], cls - idx);
+		let cls = t * (arr.length - 1), 
+			idx = Math.floor(cls),
+			a = arr[idx], 
+			b = arr[idx + 1], 
+			t0 = cls - idx;
+			
+		if (a !== undefined && b !== undefined) return linear(a, b, t0);
+		return a === undefined ? b : a;
 	};
 
 const interpolateHue = arr => 
 	t => {
-		let cls = t * (arr.length - 1);
-		let idx = Math.floor(cls);
-		return hue(arr[idx], arr[idx + 1], cls - idx);
+		let cls = t * (arr.length - 1), 
+			idx = Math.floor(cls),
+			a = arr[idx], 
+			b = arr[idx + 1], 
+			t0 = cls - idx;
+
+		if (a !== undefined && b !== undefined) {
+			a = normalizeHue(a); b = normalizeHue(b);
+			return Math.abs(b - a) > 180 ? 
+				normalizeHue(linear(a, b - 360 * Math.sign(b - a), t0))
+				: linear(a, b, t0);
+		}
+		return a === undefined ? b : a;
 	}
 
 const interpolateAlpha = arr => 
 	t => {
-		let cls = t * (arr.length - 1);
-		let idx = Math.floor(cls);
-		return alpha(arr[idx], arr[idx + 1], cls - idx);
+		let cls = t * (arr.length - 1), 
+			idx = Math.floor(cls),
+			a = arr[idx], 
+			b = arr[idx + 1], 
+			t0 = cls - idx;
+
+		if (
+			(a === undefined && b === undefined) ||
+			(a === undefined && t === 0) ||
+			(b === undefined && t === 1)
+		) return undefined;
+		return linear(a === undefined ? 1 : a, b === undefined ? 1: b, t0);
 	}
 
 const interpolate = (colors, mode = 'rgb', interpolations) => {
