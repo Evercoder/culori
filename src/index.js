@@ -8,6 +8,7 @@ import interpolate, {
 	interpolateHue,
 	interpolateMethodLinear
 } from './interpolate';
+import interpolateCubehelix from './interpolateCubehelix';
 import samples from './samples';
 import zip from './zip';
 
@@ -23,6 +24,7 @@ import hsiDef from './hsi/definition';
 import hwbDef from './hwb/definition';
 import labDef from './lab/definition';
 import lchDef from './lch/definition';
+import cubehelixDef from './cubehelix/definition';
 
 defineMode(rgbDef);
 defineMode(lrgbDef);
@@ -32,6 +34,7 @@ defineMode(hsiDef);
 defineMode(hwbDef);
 defineMode(labDef);
 defineMode(lchDef);
+defineMode(cubehelixDef);
 
 let rgb = converter('rgb');
 let lrgb = converter('lrgb');
@@ -41,6 +44,7 @@ let hsi = converter('hsi');
 let hwb = converter('hwb');
 let lab = converter('lab');
 let lch = converter('lch');
+let cubehelix = converter('cubehelix');
 
 const culori = rgb;
 
@@ -53,6 +57,7 @@ export {
 	lab,
 	lch,
 	lrgb,
+	cubehelix,
 	formatter,
 	converter,
 	round,
@@ -63,8 +68,8 @@ export {
 	interpolateAlpha,
 	interpolateHue,
 	interpolateMethodLinear,
+	interpolateCubehelix,
 	samples,
-
 	defineMode,
 	getModeDefinition
 };
