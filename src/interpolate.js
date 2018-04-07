@@ -12,7 +12,7 @@ const interpolateLinear = arr =>
 			a = arr[idx], 
 			b = arr[idx + 1], 
 			t0 = cls - idx;
-			
+
 		if (a !== undefined && b !== undefined) return linear(a, b, t0);
 		return a === undefined ? b : a;
 	};
@@ -44,8 +44,8 @@ const interpolateAlpha = arr =>
 
 		if (
 			(a === undefined && b === undefined) ||
-			(a === undefined && t === 0) ||
-			(b === undefined && t === 1)
+			(a === undefined && t0 === 0) ||
+			(b === undefined && t0 === 1)
 		) return undefined;
 		return linear(a === undefined ? 1 : a, b === undefined ? 1: b, t0);
 	}

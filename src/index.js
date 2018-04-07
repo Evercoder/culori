@@ -4,6 +4,7 @@ import converter from './converter';
 import named from './colors/named';
 import interpolate, { interpolateLinear, interpolateAlpha, interpolateHue } from './interpolate';
 import samples from './samples';
+import zip from './zip';
 
 import parse from './parse';
 
