@@ -52,7 +52,7 @@ const interpolateAlpha = (method = interpolateMethodLinear, gamma = 1) =>
 
 const interpolate = (colors, mode = 'rgb', interpolations) => {
 	let zipped = zip(colors.map(converter(mode)), mode);
-	interpolations = interpolations || getModeDefinition(mode).interpolate;
+	interpolations = Object.assign({}, getModeDefinition(mode).interpolate, interpolations);
 	let keys = Object.keys(interpolations);
 
 	return t => {
