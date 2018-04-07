@@ -55,7 +55,7 @@ Additionally, it supports:
 
 Culori is written by [Dan Burzo](http://danburzo.ro) and is released under the [MIT License](./LICENSE).
 
-It builds upon the ideas of two thoroughly documented and time-tested projects: [chroma.js](https://github.com/gka/chroma.js) by [Gregor Aisch](https://driven-by-data.net/) and [d3-color](https://github.com/d3/d3-color) by [Mike Bostock](https://bost.ocks.org/mike/). 
+It builds upon the ideas of two thoroughly documented and time-tested projects: [d3-color](https://github.com/d3/d3-color) and [d3-interpolate](https://github.com/d3/d3-interpolate) by [Mike Bostock](https://bost.ocks.org/mike/), and [chroma.js](https://github.com/gka/chroma.js) by [Gregor Aisch](https://driven-by-data.net/). 
 
 You may also want to look at [TinyColor](https://github.com/bgrins/TinyColor) by [Brian Grinstead](http://briangrinstead.com), [color](https://github.com/Qix-/color) by [Heather Arthur](https://github.com/Qix-/), and [color.js](https://github.com/brehaut/color-js) by Andrew Brehaut et al.
 
