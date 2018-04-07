@@ -1,6 +1,6 @@
 let tape = require('tape');
 let culori = require('../');
-let { interpolate, samples, formatter } = culori;
+let { interpolate, samples, formatter, cubehelix } = culori;
 
 let hex = formatter('hex');
 
@@ -69,3 +69,25 @@ tape('11 swatches between black and white in Lch', function(test) {
 
 	test.end();
 });
+
+// tape('default cubehelix scale', function(test) {
+
+// 	let start = cubehelix({
+// 		h: 300,
+// 		s: 0.5,
+// 		l: 0
+// 	});
+
+// 	let end = cubehelix({
+// 		h: -240,
+// 		s: 0.5,
+// 		l: 1
+// 	})
+
+// 	test.deepEqual(
+// 		samples(10).map(interpolate([start, end], 'cubehelix')).map(hex),
+// 		['#000000', '#1a1935', '#15474e', '#2b6f39', '#767b33', '#c17a6f', '#d490c6', '#c3c0f2', '#ceebef', '#ffffff']
+// 	)
+
+// 	test.end();
+// });

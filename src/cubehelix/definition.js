@@ -9,7 +9,7 @@
 	https://arxiv.org/pdf/1108.5083.pdf
 */
 
-import { interpolateNumber, interpolateAlpha, interpolateHue } from '../interpolate';
+import { interpolateNumber, interpolateAlpha, interpolateHue, interpolateMethodLinear } from '../interpolate';
 import convertRgbToCubehelix from './convertRgbToCubehelix';
 import convertCubehelixToRgb from './convertCubehelixToRgb';
 
@@ -23,7 +23,7 @@ export default {
 		rgb: convertCubehelixToRgb
 	},
 	interpolate: {
-		'h': interpolateHue(),
+		'h': interpolateHue(interpolateMethodLinear, false),
 		's': interpolateNumber(),
 		'l': interpolateNumber(),
 		'alpha': interpolateAlpha()

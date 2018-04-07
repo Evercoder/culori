@@ -68,4 +68,4 @@ tape('bug checking', function(test) {
 		).map(hex),
 		[ '#0000ff', '#5555ff', '#aaaaff', '#ffffff' ]);
 	test.end();
-})
+});

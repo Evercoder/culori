@@ -8,7 +8,6 @@ import interpolate, {
 	interpolateHue,
 	interpolateMethodLinear
 } from './interpolate';
-import interpolateCubehelix from './interpolateCubehelix';
 import samples from './samples';
 import zip from './zip';
 
@@ -68,7 +67,6 @@ export {
 	interpolateAlpha,
 	interpolateHue,
 	interpolateMethodLinear,
-	interpolateCubehelix,
 	samples,
 	defineMode,
 	getModeDefinition
