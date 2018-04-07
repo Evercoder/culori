@@ -4,7 +4,7 @@ let tinycolor = require("tinycolor2");
 let culori = require('../../build/culori');
 let benchmark = require('../util/benchmark');
 
-let increment = 1;
+let increment = 2;
 
 benchmark('chroma: chroma("rgb(r,g,b)")', () => {
 	for (var r = 0; r <= 255; r+=increment) {

@@ -54,3 +54,18 @@ benchmark('d3-color: #fff -> #000 in RGB (cached)', () => {
 		d3i.quantize(interp, count);
 	}
 });
+
+let colors = ['red', 'white', 'green', 'blue', 'black', 'fuchsia', 'cyan'];
+
+benchmark('culori: multiple colors in RGB', () => {
+	for (var i = 0; i < iterations; i++) {
+		culori.samples(count).map(culori.interpolate(colors)).map(culori.formatter('hex'));
+	}
+});
+
+let scale2 = chroma.scale(colors);
+benchmark('chroma: multiple colors in RGB (cached)', () => {
+	for (var i = 0; i < iterations; i++) {
+		scale2.colors(count);
+	}
+});
