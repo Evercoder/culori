@@ -6,7 +6,7 @@
 	Basis spline
 	------------
 
-		Given control points V0...Vn (our values)
+	Given control points V0...Vn (our values)
 
 		S0 = V0
 		...
@@ -14,19 +14,19 @@
 		...
 		Sn = Vn
 
-		The Bézier curve has control points:
+	The Bézier curve has control points:
 
 		Bi = Si-1, 2/3 * Vi-1 + 1/3 * Vi, 1/3 * Vi-1 + 2/3 * Vi, Si
 
-		Which we can then factor into the Bezier's explicit form:
-		
+	Which we can then factor into the Bezier's explicit form:
+	
 		B(t) = (1-t)^3 * P0 + 3 * (1-t)^2 * t * P1 + (1-t) * t^2 * P2 + t^3 * P3 
 
  */
 
 const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
-	let t2 = t * t;  // t^2
-	let t3 = t2 * t; // t^3
+	let t2 = t * t;
+	let t3 = t2 * t;
 	return (
 		(1 - 3 * t + 3 * t2 - t3) * Vim2 +
 		(4 - 6 * t2 + 3 * t3) * Vim1 +
@@ -37,7 +37,7 @@ const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 
 const invariant = values => values;
 
-export default (method = bspline, normalize = invariant) =>
+export default (normalize = invariant, method = bspline, gamma = 1) =>
 
 	(arr, t) => {
 

@@ -13,6 +13,6 @@ export default () =>
 			return [ a === undefined ? 1 : a, b === undefined ? 1 : b];
 		} else {
 			// spline interpolation
-			return undefined;
+			return values;
 		}
 	};

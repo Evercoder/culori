@@ -8,6 +8,6 @@ export default () =>
 			return values[0] === undefined ? [values[1], values[1]] : [values[0], values[0]];
 		} else {
 			// spline
-			return undefined;
+			return values;
 		}
 	};
