@@ -16,14 +16,13 @@ import normalizeHue from '../util/normalizeHue';
 
 let DE = M[3] * M[4];
 let BE = M[1] * M[4];
-let BC = M[1] * M[2];
-let AD = M[0] * M[3];
+let BCAD = M[1] * M[2] - M[0] * M[3];
 
 export default ({ r, g, b, alpha }) => {
 
-	let l = (r * DE - g * BE + (BC - AD) * b) / (BC - AD + DE - BE);
+	let l = (BCAD * b + r * DE - g * BE) / (BCAD + DE - BE);
 	let x = b - l;
-	let y = ((g - l) * M[4] - M[2] * x) / M[3];
+	let y = (M[4] * (g - l) - M[2] * x) / M[3];
 
 	let res = { 
 		mode: 'cubehelix',
