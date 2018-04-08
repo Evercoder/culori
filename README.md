@@ -2,24 +2,7 @@
 
 Culori is a general-purpose color library for JavaScript. It incorporates, and extends, ideas from Mike Bostock's [D3.js](https://github.com/d3) and Gregor Aisch's [chroma.js](https://github.com/gka/chroma.js).
 
-## Color spaces and formats
-
-The library supports all the formats defined in the [CSS Colors Level 4][css4-colors]:
-
-* [Named colors][css4-named-colors]
-* [Hex colors](https://drafts.csswg.org/css-color/#hex-notation) (3 to 8 digits)
-* [RGB and RGBA](https://drafts.csswg.org/css-color/#rgb-functions)
-* [HSL and HSLA](https://drafts.csswg.org/css-color/#the-hsl-notation)
-* [HWB](https://drafts.csswg.org/css-color/#the-hwb-notation)
-* [Lab and LCh](https://drafts.csswg.org/css-color/#lab-colors)
-* [Grays](https://drafts.csswg.org/css-color/#grays)
-
-And a few more color spaces:
-
-* [Linear RGB](https://en.wikipedia.org/wiki/SRGB#The_sRGB_transfer_function_(%22gamma%22))
-* [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) (also known as HSB)
-* [HSI](https://en.wikipedia.org/wiki/HSL_and_HSV)
-* Dave Green's [Cubehelix](https://www.mrao.cam.ac.uk/%7Edag/CUBEHELIX/)
+The library supports all the formats defined in the [CSS Colors Level 4][css4-colors]: [Named colors][css4-named-colors], [Hex colors](https://drafts.csswg.org/css-color/#hex-notation) (3 to 8 digits), [RGB](https://drafts.csswg.org/css-color/#rgb-functions), [HSL](https://drafts.csswg.org/css-color/#the-hsl-notation), [HWB](https://drafts.csswg.org/css-color/#the-hwb-notation), [Lab and LCh](https://drafts.csswg.org/css-color/#lab-colors), and [Grays](https://drafts.csswg.org/css-color/#grays). Additionally, the [Linear RGB](https://en.wikipedia.org/wiki/SRGB#The_sRGB_transfer_function_(%22gamma%22)), [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) (also known as HSB), [HSI](https://en.wikipedia.org/wiki/HSL_and_HSV), and [Cubehelix](https://www.mrao.cam.ac.uk/%7Edag/CUBEHELIX/) color spaces are supported.
 
 ## Documentation
 
