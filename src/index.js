@@ -27,10 +27,16 @@ import cubehelixDef from './cubehelix/definition';
 
 import colorsNamed from './colors/named';
 import schemesColorbrewer from './schemes/colorbrewer';
+
 import scalesColorbrewer from './scales/colorbrewer';
 import scalesMpl from './scales/mpl';
+import scalesPerceptualRainbow from './scales/perceptualRainbow';
 
-let scales = Object.assign({}, scalesColorbrewer, scalesMpl);
+let scales = Object.assign({}, 
+	scalesColorbrewer, 
+	scalesMpl,
+	scalesPerceptualRainbow
+);
 let schemes = Object.assign({}, schemesColorbrewer);
 
 defineMode(rgbDef);
