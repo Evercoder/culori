@@ -23,20 +23,13 @@ __Note:__ The WCAG defines the luminance using a [deprecated value](https://gith
 
 ## Contrast ratio
 
-Using the `luminance()` function above, the `contrast()` ratio is simply the ratio between the luminances of two colors:
+Using the `luminance()` function above, the `contrast()` ratio is simply the ratio between the luminances of two colors, with the values shifted by 0.05 to avoid division by zero when comparing against black.
 
 ```js
 function contrast(colorA, colorB) {
 	let L1 = luminance(colorA);
 	let L2 = luminance(colorB);
-	let ratio = L1 / L2;
-	return ratio < 1 ? 1 / ratio : ratio;
+	return (L1 + 0.05) / (L2 + 0.05);
 }
-```
-
-__Note:__ The WCAG defines contrast a bit differently, with:
-
-```
-let ratio = (L1 + 0.05) / (L2 + 0.05);
 ```
 
