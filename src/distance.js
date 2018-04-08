@@ -22,35 +22,58 @@ const cie94 = (KL = 1, K1 = 0.045, K2 = 0.015) => {
 	let lab = converter('lab'),
 		lch = converter('lch');
 	
-	return (a, b) => {
+	return (std, smp) => {
 
-		let labA = lab(a), labB = lab(b);
-		let lchA = lch(labA), lchB = lch(labB);
+		let LabStd = lab(std);
+		let LabSmp = lab(smp);
 
-		let deltaL_squared = (labA.l - labB.l) ** 2;
-		let deltaC_squared = (lchA.c - lchB.c) ** 2;
-		let deltaH_squared = ((labA.a - labB.a) ** 2) + ((labA.b - labB.b) ** 2) - deltaC_squared;
+		// Extract Lab values, and compute Chroma
+		let lStd = LabStd.l;
+		let aStd = LabStd.a;
+		let bStd = LabStd.b;
+		let cStd = Math.sqrt(aStd * aStd + bStd * bStd);
+
+		let lSmp = LabSmp.l;
+		let aSmp = LabSmp.a;
+		let bSmp = LabSmp.b;
+		let cSmp = Math.sqrt(aSmp * aSmp + bSmp * bSmp);
+
+		let dL2 = Math.pow(lStd - lSmp, 2);
+		let dC2 = Math.pow(cStd - cSmp, 2);
+		let dH2 = Math.pow(aStd - aSmp, 2) + Math.pow(bStd - bSmp, 2) - dC2;
 
 		return Math.sqrt(
-			deltaL_squared / (KL ** 2) + 
-			deltaC_squared / ((1 + K1 * lchA.c) ** 2) +
-			deltaH_squared / ((1 + K2 * lchA.c) ** 2)
+			dL2 / Math.pow(KL, 2) + 
+			dC2 / Math.pow(1 + K1 * cStd, 2) +
+			dH2 / Math.pow(1 + K2 * cStd, 2)
 		);
 	}
 }
 
 /*
-	The CIEDE2000 color difference.
+	The CIEDE2000 color difference
+	--------------------------------------------------
 
 	Original implementation in Matlab by Gaurav Sharma:
+
 		http://www2.ece.rochester.edu/~gsharma/ciede2000/
 
 	Based on the paper: 
+
 		"The CIEDE2000 Color-Difference Formula: 
 		Implementation Notes, Supplementary Test Data, 
-		and Mathematical Observations" by Gaurav Sharma, 
-		Wencheng Wu, Edul N. Dalal.
-		http://www2.ece.rochester.edu/~gsharma/ciede2000/ciede2000noteCRNA.pdf
+		and Mathematical Observations" 
+
+		by Gaurav Sharma, Wencheng Wu, Edul N. Dalal
+
+		in Color Research and Application, 
+		vol. 30. No. 1, pp. 21-30, February 2005.
+
+	Available at:
+
+		http://www2.ece.rochester.edu/~gsharma/ciede2000/
+
+	Ported to JavaScript by Dan Burzo for the Culori library.
  */
 
 const ciede2000 = (Kl = 1, Kc = 1, Kh = 1) => {
@@ -133,10 +156,46 @@ const ciede2000 = (Kl = 1, Kc = 1, Kh = 1) => {
 	}
 }
 
-// todo
-const cmc = () => {
+const cmc = (l = 1, c = 1) => {
 	let lab = converter('lab');
-	return (colorA, colorB) => NaN
+	return (std, smp) => {
+
+		let LabStd = lab(std);
+		let LabSmp = lab(smp);
+
+		let lStd = LabStd.l;
+		let aStd = LabStd.a;
+		let bStd = LabStd.b;
+		let cStd = Math.sqrt(aStd * aStd + bStd * bStd);
+		let hStd = Math.atan2(bStd, aStd);
+			hStd = hStd + 2 * Math.PI * (hStd < 0);
+
+		let lSmp = LabSmp.l;
+		let aSmp = LabSmp.a;
+		let bSmp = LabSmp.b;
+		let cSmp = Math.sqrt(aSmp * aSmp + bSmp * bSmp);
+
+		let dL2 = Math.pow(lStd - lSmp, 2);
+		let dC2 = Math.pow(cStd - cSmp, 2);
+		let dH2 = Math.pow(aStd - aSmp, 2) + Math.pow(bStd - bSmp, 2) - dC2;
+
+		let F = Math.sqrt(Math.pow(cStd, 4) / (Math.pow(cStd, 4) + 1900));
+		let T = hStd >= (164 / 180 * Math.PI) && 
+				hStd <= (345 / 180 * Math.PI) ?
+					0.56 + Math.abs(0.2 * Math.cos(hStd + 168 / 180 * Math.PI)) 
+					: 0.36 + Math.abs(0.4 * Math.cos(hStd + 35 / 180 * Math.PI));
+
+		let Sl = lStd < 16 ? 0.511 : ((0.040975 * lStd) / (1 + 0.01765 * lStd));
+		let Sc = 0.0638 * cStd / (1 + 0.0131 * cStd) + 0.638;
+		let Sh = Sc * (F * T + 1 - F);
+
+		return Math.sqrt(
+			dL2 / Math.pow(l * Sl, 2),
+			dC2 / Math.pow(c * Sc, 2),
+			dH2 / Math.pow(Sh, 2)
+		);
+
+	};
 }
 
 const formulas = {

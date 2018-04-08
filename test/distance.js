@@ -41,7 +41,7 @@ tape('cie94 distance', function(test) {
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
-		1.4142135603514716
+		1.4142135623730951
 	)
 
 	test.end();
@@ -97,8 +97,32 @@ tape('ciede2000 distance', function(test) {
 				lab({ l: +line[3], a: +line[4], b: +line[5] })
 			)),
 			+line[6]
-		)
+		);
+
+		// also test for symmetry
+		test.equal(
+			approx(delta(
+				lab({ l: +line[3], a: +line[4], b: +line[5] }),
+				lab({ l: +line[0], a: +line[1], b: +line[2] })
+			)),
+			+line[6]
+		);
 	}
 
 	test.end();
-})
+});
+
+tape('cmc distance', function(test) {
+
+	let delta = distance('cmc');
+
+	test.equal(
+		delta(
+			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
+			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
+		),
+		1.9569471624266144
+	);
+
+	test.end();
+});
