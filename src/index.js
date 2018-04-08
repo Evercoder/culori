@@ -10,6 +10,7 @@ import interpolate, {
 } from './interpolate';
 import samples from './samples';
 import zip from './zip';
+import distance from './distance';
 
 import parse from './parse';
 
@@ -69,7 +70,8 @@ export {
 	interpolateMethodLinear,
 	samples,
 	defineMode,
-	getModeDefinition
+	getModeDefinition,
+	distance
 };
 
 export default culori;
