@@ -4,6 +4,7 @@ import parseHsl from './parseHsl';
 import interpolateNumber from '../interpolate/interpolateNumber';
 import interpolateAlpha from '../interpolate/interpolateAlpha';
 import interpolateHue from '../interpolate/interpolateHue';
+import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
 
 export default {
 	mode: 'hsl',
@@ -16,9 +17,9 @@ export default {
 	channels: ['h', 's', 'l', 'alpha'],
 	parsers: [ parseHsl ],
 	interpolate: {
-		h: interpolateHue(),
-		s: interpolateNumber(),
-		l: interpolateNumber(),
-		alpha: interpolateAlpha()
+		h: interpolateFunctionLinear(interpolateHue()),
+		s: interpolateFunctionLinear(interpolateNumber()),
+		l: interpolateFunctionLinear(interpolateNumber()),
+		alpha: interpolateFunctionLinear(interpolateAlpha())
 	}
 };

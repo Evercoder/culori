@@ -4,6 +4,7 @@ import parseHwb from './parseHwb';
 import interpolateNumber from '../interpolate/interpolateNumber';
 import interpolateAlpha from '../interpolate/interpolateAlpha';
 import interpolateHue from '../interpolate/interpolateHue';
+import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
 
 export default {
 	mode: 'hwb',
@@ -16,9 +17,9 @@ export default {
 	channels: ['h', 'w', 'b', 'alpha'],
 	parsers: [ parseHwb ],
 	interpolate: {
-		h: interpolateHue(),
-		w: interpolateNumber(),
-		b: interpolateNumber(),
-		alpha: interpolateAlpha()
+		h: interpolateFunctionLinear(interpolateHue()),
+		w: interpolateFunctionLinear(interpolateNumber()),
+		b: interpolateFunctionLinear(interpolateNumber()),
+		alpha: interpolateFunctionLinear(interpolateAlpha())
 	}
 };

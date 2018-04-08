@@ -6,6 +6,7 @@ import parseLch from './parseLch';
 import interpolateNumber from '../interpolate/interpolateNumber';
 import interpolateAlpha from '../interpolate/interpolateAlpha';
 import interpolateHue from '../interpolate/interpolateHue';
+import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
 
 export default {
 	mode: 'lch',
@@ -20,9 +21,9 @@ export default {
 	channels: ['l', 'c', 'h', 'alpha'],
 	parsers: [ parseLch ],
 	interpolate: {
-		h: interpolateHue(),
-		c: interpolateNumber(),
-		l: interpolateNumber(),
-		alpha: interpolateAlpha()
+		h: interpolateFunctionLinear(interpolateHue()),
+		c: interpolateFunctionLinear(interpolateNumber()),
+		l: interpolateFunctionLinear(interpolateNumber()),
+		alpha: interpolateFunctionLinear(interpolateAlpha())
 	}
 };

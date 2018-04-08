@@ -34,6 +34,7 @@
 import interpolateNumber from '../interpolate/interpolateNumber';
 import interpolateAlpha from '../interpolate/interpolateAlpha';
 import interpolateHue from '../interpolate/interpolateHue';
+import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
 import convertRgbToCubehelix from './convertRgbToCubehelix';
 import convertCubehelixToRgb from './convertCubehelixToRgb';
 
@@ -47,9 +48,9 @@ export default {
 		rgb: convertCubehelixToRgb
 	},
 	interpolate: {
-		'h': interpolateHue(),
-		's': interpolateNumber(),
-		'l': interpolateNumber(),
-		'alpha': interpolateAlpha()
+		'h': interpolateFunctionLinear(interpolateHue()),
+		's': interpolateFunctionLinear(interpolateNumber()),
+		'l': interpolateFunctionLinear(interpolateNumber()),
+		'alpha': interpolateFunctionLinear(interpolateAlpha())
 	}
 };

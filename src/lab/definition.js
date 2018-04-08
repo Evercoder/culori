@@ -3,6 +3,8 @@ import convertRgbToLab from './convertRgbToLab';
 import parseLab from './parseLab';
 import interpolateNumber from '../interpolate/interpolateNumber';
 import interpolateAlpha from '../interpolate/interpolateAlpha';
+import interpolateHue from '../interpolate/interpolateHue';
+import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
 
 export default {
 	mode: 'lab',
@@ -15,9 +17,9 @@ export default {
 	channels: ['l', 'a', 'b', 'alpha'],
 	parsers: [ parseLab ],
 	interpolate: {
-		l: interpolateNumber(),
-		a: interpolateNumber(),
-		b: interpolateNumber(),
-		alpha: interpolateAlpha()
+		l: interpolateFunctionLinear(interpolateNumber()),
+		a: interpolateFunctionLinear(interpolateNumber()),
+		b: interpolateFunctionLinear(interpolateNumber()),
+		alpha: interpolateFunctionLinear(interpolateAlpha())
 	}
 };

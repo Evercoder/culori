@@ -3,6 +3,7 @@ import convertRgbToHsi from './convertRgbToHsi';
 import interpolateNumber from '../interpolate/interpolateNumber';
 import interpolateAlpha from '../interpolate/interpolateAlpha';
 import interpolateHue from '../interpolate/interpolateHue';
+import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
 
 export default {
 	mode: 'hsi',
@@ -14,9 +15,9 @@ export default {
 	},
 	channels: ['h', 's', 'i', 'alpha'],
 	interpolate: {
-		h: interpolateHue(),
-		s: interpolateNumber(),
-		i: interpolateNumber(),
-		alpha: interpolateAlpha()
+		h: interpolateFunctionLinear(interpolateHue()),
+		s: interpolateFunctionLinear(interpolateNumber()),
+		i: interpolateFunctionLinear(interpolateNumber()),
+		alpha: interpolateFunctionLinear(interpolateAlpha())
 	}
 }
