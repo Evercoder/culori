@@ -1,12 +1,19 @@
 import converter from './converter';
 import round from './round';
-let rgb = converter('rgb');
-let roundAlpha = round(2);
-let clamp = v => Math.round(Math.max(0, Math.min(v, 1)) * 255);
+import clamp from './util/clamp';
+
+let rgb = converter('rgb'),
+	roundAlpha = round(2);
 
 export default (format = 'rgb') => 
 	c => {
+		
 		let color = rgb(c);
+
+		if (color === undefined) {
+			return undefined;
+		}
+
 		color.r = clamp(color.r);
 		color.b = clamp(color.b);
 		color.g = clamp(color.g);
