@@ -2,6 +2,7 @@ import formatter from './formatter';
 import round from './round';
 import converter from './converter';
 import named from './colors/named';
+import colorbrewer from './colors/colorbrewer';
 import interpolate, { 
 	interpolateNumber, 
 	interpolateAlpha, 
@@ -71,7 +72,8 @@ export {
 	samples,
 	defineMode,
 	getModeDefinition,
-	difference
+	difference,
+	colorbrewer
 };
 
 export default culori;
