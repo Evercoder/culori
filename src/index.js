@@ -3,6 +3,7 @@ import round from './round';
 import converter from './converter';
 import named from './colors/named';
 import colorbrewer from './colors/colorbrewer';
+import mpl from './colors/mpl';
 import interpolate, { 
 	interpolateNumber, 
 	interpolateAlpha, 
@@ -63,7 +64,6 @@ export {
 	converter,
 	round,
 	parse,
-	named,
 	interpolate,
 	interpolateNumber,
 	interpolateAlpha,
@@ -73,7 +73,11 @@ export {
 	defineMode,
 	getModeDefinition,
 	difference,
-	colorbrewer
+
+	// colors
+	named,
+	colorbrewer,
+	mpl
 };
 
 export default culori;
