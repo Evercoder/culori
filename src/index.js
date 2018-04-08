@@ -1,9 +1,6 @@
 import formatter from './formatter';
 import round from './round';
 import converter from './converter';
-import named from './colors/named';
-import colorbrewer from './colors/colorbrewer';
-import mpl from './colors/mpl';
 import interpolate, { 
 	interpolateNumber, 
 	interpolateAlpha, 
@@ -27,6 +24,14 @@ import hwbDef from './hwb/definition';
 import labDef from './lab/definition';
 import lchDef from './lch/definition';
 import cubehelixDef from './cubehelix/definition';
+
+import colorsNamed from './colors/named';
+import schemesColorbrewer from './schemes/colorbrewer';
+import scalesColorbrewer from './scales/colorbrewer';
+import scalesMpl from './scales/mpl';
+
+let scales = Object.assign({}, scalesColorbrewer, scalesMpl);
+let schemes = Object.assign({}, schemesColorbrewer);
 
 defineMode(rgbDef);
 defineMode(lrgbDef);
@@ -75,9 +80,13 @@ export {
 	difference,
 
 	// colors
-	named,
-	colorbrewer,
-	mpl
+	colorsNamed,
+
+	// schemes
+	schemes,
+
+	// scales
+	scales
 };
 
 export default culori;
