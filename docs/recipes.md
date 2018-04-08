@@ -5,7 +5,7 @@
 The [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) of a color is defined as:
 
 ```
-L = 
+L = 0.2126 * R + 0.7152 * G + 0.0722 * B
 ```
 
 Where R, G, and B are the components from the LRGB color space.
@@ -15,9 +15,11 @@ To compute it in Culori:
 ```js
 function luminance(color) {
 	let c = culori.lrgb(color);
-	return 0.2126 * c.r + 0.7152 * c.g. + 0.0722 * c.b
+	return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
 }
 ```
+
+__Note:__ The WCAG defines the luminance using a [deprecated value](https://github.com/w3c/wcag/issues/236#issuecomment-379526596) for converting sRGB to LRGB. If you'd like a strict implementation, you'll need to write your own sRGB → LRGB conversion.
 
 ## Contrast ratio
 
