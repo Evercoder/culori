@@ -26,18 +26,6 @@ import lchDef from './lch/definition';
 import cubehelixDef from './cubehelix/definition';
 
 import colorsNamed from './colors/named';
-import schemesColorbrewer from './schemes/colorbrewer';
-
-import scalesColorbrewer from './scales/colorbrewer';
-import scalesMpl from './scales/mpl';
-import scalesPerceptualRainbow from './scales/perceptualRainbow';
-
-let scales = Object.assign({}, 
-	scalesColorbrewer, 
-	scalesMpl,
-	scalesPerceptualRainbow
-);
-let schemes = Object.assign({}, schemesColorbrewer);
 
 defineMode(rgbDef);
 defineMode(lrgbDef);
@@ -86,13 +74,7 @@ export {
 	difference,
 
 	// colors
-	colorsNamed,
-
-	// schemes
-	schemes,
-
-	// scales
-	scales
+	colorsNamed
 };
 
 export default culori;

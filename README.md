@@ -12,10 +12,6 @@ Culori supports all the formats defined in the [CSS Colors Level 4][css4-colors]
 
 Culori can compute [color differences](https://en.wikipedia.org/wiki/Color_difference) with either a simple Euclidean distance or the CIELAB Delta E* metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984).
 
-### Color Scales
-
-Culori packages Cynthia A. Brewer's [ColorBrewer](http://colorbrewer2.org/) schemes, and the [new default matplotlib colormaps](https://bids.github.io/colormap/) designed by Nathaniel J. Smith, Stéfan van der Walt, and Eric Firing.
-
 ## Documentation
 
 * [Getting Started with Culori](./docs/tutorial.md)
