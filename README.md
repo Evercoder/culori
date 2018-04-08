@@ -8,7 +8,7 @@ Culori supports all the formats defined in the [CSS Colors Level 4][css4-colors]
 
 ### Color Differences
 
-Culori implements simple Euclidean distance, as well as CIE76, CIE94, CIEDE2000 and CMC(l:c) [color differences](https://en.wikipedia.org/wiki/Color_difference).
+To compute [color differences](https://en.wikipedia.org/wiki/Color_difference), Culori implements simple Euclidean distance, as well as the CIELAB Delta E* distance metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984).
 
 ## Documentation
 
