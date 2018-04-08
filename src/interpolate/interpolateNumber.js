@@ -1,6 +1,19 @@
 import interpolateFunctionLinear from './interpolateFunctionLinear';
 
-export default (fn = interpolateFunctionLinear()) =>
+const number = values => {
+	if (values.length === 2) {
+		// linear
+		if (values[0] !== undefined && values[1] !== undefined) {
+			return values;
+		}
+		return values[0] === undefined ? [values[1], values[1]] : [values[0], values[0]];
+	} else {
+		// spline
+		return undefined;
+	}
+}
+
+export default (fn = interpolateFunctionLinear(1, number)) =>
 	(arr, t) => {
 		let cls = t * (arr.length - 1), 
 			idx = Math.floor(cls),
@@ -8,6 +21,5 @@ export default (fn = interpolateFunctionLinear()) =>
 			b = arr[idx + 1], 
 			t0 = cls - idx;
 
-		if (a !== undefined && b !== undefined) return fn(a, b, t0);
-		return a === undefined ? b : a;
+		return fn(a, b, t0);
 	};
