@@ -1,0 +1,1 @@
+export default (gamma = 1) => (a, b, t) => a + Math.pow(t, gamma) * (b - a);

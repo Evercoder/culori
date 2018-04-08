@@ -1,12 +1,12 @@
 import formatter from './formatter';
 import round from './round';
 import converter from './converter';
-import interpolate, { 
-	interpolateNumber, 
-	interpolateAlpha, 
-	interpolateHue,
-	interpolateMethodLinear
-} from './interpolate';
+import interpolate from './interpolate/interpolate'; 
+import interpolateNumber from './interpolate/interpolateNumber';
+import interpolateAlpha from './interpolate/interpolateAlpha';
+import interpolateHue from './interpolate/interpolateHue';
+import interpolateFunctionLinear from './interpolate/interpolateFunctionLinear';
+import interpolateFunctionSpline from './interpolate/interpolateFunctionSpline';
 import samples from './samples';
 import zip from './zip';
 import difference from './difference';
@@ -50,6 +50,8 @@ let cubehelix = converter('cubehelix');
 const culori = rgb;
 
 export {
+	
+	// Color spaces
 	hsl,
 	hsv,
 	hsi,
@@ -59,21 +61,28 @@ export {
 	lch,
 	lrgb,
 	cubehelix,
+
+	// Basics
 	formatter,
 	converter,
 	round,
 	parse,
+	difference,
+
+	// Interpolation
 	interpolate,
 	interpolateNumber,
 	interpolateAlpha,
 	interpolateHue,
-	interpolateMethodLinear,
+	interpolateFunctionLinear,
+	interpolateFunctionSpline,
 	samples,
+	
+	// Extending Culori
 	defineMode,
 	getModeDefinition,
-	difference,
 
-	// colors
+	// Colors
 	colorsNamed
 };
 

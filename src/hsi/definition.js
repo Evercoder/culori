@@ -1,6 +1,8 @@
 import convertHsiToRgb from './convertHsiToRgb';
 import convertRgbToHsi from './convertRgbToHsi';
-import { interpolateNumber, interpolateAlpha, interpolateHue } from '../interpolate';
+import interpolateNumber from '../interpolate/interpolateNumber';
+import interpolateAlpha from '../interpolate/interpolateAlpha';
+import interpolateHue from '../interpolate/interpolateHue';
 
 export default {
 	mode: 'hsi',

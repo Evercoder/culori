@@ -31,7 +31,9 @@
 	with a variable Saturation and a Lightness interval other than the fixed 0 -> 1.
 */
 
-import { interpolateNumber, interpolateAlpha, interpolateHue } from '../interpolate';
+import interpolateNumber from '../interpolate/interpolateNumber';
+import interpolateAlpha from '../interpolate/interpolateAlpha';
+import interpolateHue from '../interpolate/interpolateHue';
 import convertRgbToCubehelix from './convertRgbToCubehelix';
 import convertCubehelixToRgb from './convertCubehelixToRgb';
 

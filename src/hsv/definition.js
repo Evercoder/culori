@@ -1,6 +1,8 @@
 import convertHsvToRgb from './convertHsvToRgb';
 import convertRgbToHsv from './convertRgbToHsv';
-import { interpolateNumber, interpolateAlpha, interpolateHue } from '../interpolate';
+import interpolateNumber from '../interpolate/interpolateNumber';
+import interpolateAlpha from '../interpolate/interpolateAlpha';
+import interpolateHue from '../interpolate/interpolateHue';
 
 export default {
 	mode: 'hsv',
