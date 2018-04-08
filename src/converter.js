@@ -2,11 +2,13 @@ import parse from './parse';
 import { converters } from './modes';
 
 const prepare = (color, mode) => 
-	typeof color !== 'object' ? 
-		parse(color) 
-		: color.mode === undefined ? 
-			{...color,  mode: mode } 
-			: color;
+	color === undefined ? 
+		undefined 
+		: typeof color !== 'object' ? 
+			parse(color) 
+			: color.mode === undefined ? 
+				{...color,  mode: mode } 
+				: color;
 
 const converter = (target_mode = 'rgb') => 
 	color => (color = prepare(color, target_mode)) !== undefined ? 

@@ -1,6 +1,8 @@
 import { lab, gray } from '../util/regex';
 
 export default color => {
+	if (typeof color !== 'string') return undefined;
+
 	let match, res;
 
 	if (match = color.match(lab)) {

@@ -2,7 +2,7 @@ import { hwb } from '../util/regex';
 import { hue } from '../util/hue';
 
 export default color => {
-	if (typeof color !== 'string') return;
+	if (typeof color !== 'string') return undefined;
 	let match = color.match(hwb);
 	if (!match) return undefined;
 	let res = {

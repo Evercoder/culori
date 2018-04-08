@@ -4,7 +4,7 @@ let tinycolor = require("tinycolor2");
 let culori = require('../../build/culori');
 let benchmark = require('../util/benchmark');
 
-let colors = Object.keys(culori.named);
+let colors = Object.keys(culori.colorsNamed);
 let iterations = 10000;
 
 benchmark('chroma: chroma("colorname")', () => {
