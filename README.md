@@ -2,7 +2,7 @@
 
 Culori is a general-purpose color library for JavaScript. It incorporates, and extends, ideas from Mike Bostock's [D3.js](https://github.com/d3) and Gregor Aisch's [chroma.js](https://github.com/gka/chroma.js).
 
-_(⚠ Until version _1.0.0_ the API will be changing quite a bit, until I find an adequate expression)_
+_(⚠ Until I realease __v1.0.0__ you can assume the API will be changing quite a bit, until I find an adequate expression.)_
 
 ### Color Spaces
 
@@ -10,7 +10,7 @@ Culori supports all the formats defined in the [CSS Colors Level 4][css4-colors]
 
 ### Color Differences
 
-To compute [color differences](https://en.wikipedia.org/wiki/Color_difference), Culori implements both the simple Euclidean distance and the CIELAB Delta E* metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984).
+Culori can compute [color differences](https://en.wikipedia.org/wiki/Color_difference) with either a simple Euclidean distance or the CIELAB Delta E* metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984).
 
 ## Documentation
 

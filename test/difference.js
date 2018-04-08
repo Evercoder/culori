@@ -1,10 +1,10 @@
 let tape = require('tape');
 let culori = require('../');
-let { distance, rgb, lab, round } = culori;
+let { difference, rgb, lab, round } = culori;
 
 tape('euclidean distance in RGB', function(test) {
 
-	let delta = distance('euclidean');
+	let delta = difference('euclidean');
 
 	test.equal(
 		delta(
@@ -17,24 +17,9 @@ tape('euclidean distance in RGB', function(test) {
 	test.end();
 });
 
-tape('cie76 distance', function(test) {
+tape('cie76 difference', function(test) {
 
-	let delta = distance('cie76');
-
-	test.equal(
-		delta(
-			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
-			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
-		),
-		1.4142135623730951
-	)
-
-	test.end();
-});
-
-tape('cie94 distance', function(test) {
-
-	let delta = distance('cie94');
+	let delta = difference('cie76');
 
 	test.equal(
 		delta(
@@ -47,9 +32,24 @@ tape('cie94 distance', function(test) {
 	test.end();
 });
 
-tape('ciede2000 distance', function(test) {
+tape('cie94 difference', function(test) {
 
-	let delta = distance('ciede2000');
+	let delta = difference('cie94');
+
+	test.equal(
+		delta(
+			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
+			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
+		),
+		1.4142135623730951
+	)
+
+	test.end();
+});
+
+tape('ciede2000 difference', function(test) {
+
+	let delta = difference('ciede2000');
 	let approx = round(4);
 
 	// Test data from: http://www2.ece.rochester.edu/~gsharma/ciede2000/
@@ -112,9 +112,9 @@ tape('ciede2000 distance', function(test) {
 	test.end();
 });
 
-tape('cmc distance', function(test) {
+tape('cmc difference', function(test) {
 
-	let delta = distance('cmc');
+	let delta = difference('cmc');
 
 	test.equal(
 		delta(
