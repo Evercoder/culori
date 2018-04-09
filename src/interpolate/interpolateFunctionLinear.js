@@ -3,6 +3,8 @@ const invariant = values => values;
 export default (normalize = invariant, gamma = 1) => 
 	(arr, t) => {
 
+		t = Math.pow(t0, gamma);
+
 		let cls = t * (arr.length - 1), 
 			idx = Math.floor(cls),
 			a = arr[idx], 
@@ -11,6 +13,6 @@ export default (normalize = invariant, gamma = 1) =>
 
 		let values = normalize([a, b], t0);
 		return typeof values === 'object' ? 
-			(a = values[0], b = values[1], a + Math.pow(t0, gamma) * (b - a)) : 
+			(a = values[0], b = values[1], a + t0 * (b - a)) : 
 			values;
 	};

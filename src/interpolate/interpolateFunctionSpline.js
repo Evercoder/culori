@@ -68,6 +68,8 @@ export default (normalize = invariant, method = 'bspline', gamma = 1) =>
 
 	(arr, t) => {
 
+		t = Math.pow(t0, gamma);
+
 		let classes = arr.length - 1;
 		let i = t === 1 ? classes - 1 : Math.floor(t * classes);
 
