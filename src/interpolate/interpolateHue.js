@@ -8,12 +8,14 @@
 
 	*	For spline interpolation, undefined behavior when some values are undefined
 		and others are not.
+	*	Spline interpolation does not support the shortPath hue interpolation, but it
+		will normalize all hues to the [0, 360) range.
  */
 
 import normalizeHue from '../util/normalizeHue';
 
-export default (shortPath = true) => {
-	return values => {
+export default (shortPath = true) => 
+	values => {
 
 		if (values.length === 2) {
 
@@ -58,12 +60,15 @@ export default (shortPath = true) => {
 				return undefined;
 			}
 			
+			if (shortPath) {
+				return values.map(v => normalizeHue(v));
+			}
+
 			// If some values are defined, return them back for now
 			return values;
 
 		}
 	};
-}
 
 // todo hue short vs. hue long
 // todo normalize hue before and after interpolateHue
