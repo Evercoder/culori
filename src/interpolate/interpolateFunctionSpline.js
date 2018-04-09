@@ -49,7 +49,11 @@ const solve = (v) => {
 		_v[i] = (6 * v[i] - (i == n-1 ? v[n] : 0) - _v[i-1]) * c[i];
 	}
 	
-	sol[0] = v[0], sol[n] = v[n], sol[n-1] = _v[n-1];
+	sol[0] = v[0];
+	sol[n] = v[n];
+	if (n - 1 > 0) {
+		sol[n-1] = _v[n-1];
+	}
 	
 	for (i = n-2; i > 0; --i) {
 		sol[i] = _v[i] - c[i] * sol[i+1];
