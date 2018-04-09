@@ -1,9 +1,9 @@
 const invariant = values => values;
 
-export default (normalize = invariant, gamma = 1) => 
+export default (normalize = invariant, γ = 1) => 
 	(arr, t) => {
 
-		t = Math.pow(t0, gamma);
+		t = Math.pow(t, γ);
 
 		let cls = t * (arr.length - 1), 
 			idx = Math.floor(cls),

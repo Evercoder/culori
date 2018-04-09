@@ -64,11 +64,11 @@ const solve = (v) => {
 
 const invariant = values => values;
 
-export default (normalize = invariant, method = 'bspline', gamma = 1) =>
+export default (normalize = invariant, method = 'bspline', γ = 1) =>
 
 	(arr, t) => {
 
-		t = Math.pow(t0, gamma);
+		t = Math.pow(t, γ);
 
 		let classes = arr.length - 1;
 		let i = t === 1 ? classes - 1 : Math.floor(t * classes);
