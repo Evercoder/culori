@@ -1,5 +1,19 @@
-export default () =>
-	(values) => {
+/*
+	Interpolation of hue values.
+	
+	Hues can be interpolated either on the shortest path around the cyllinder
+	or the normal (long) way.
+
+	Known issues:
+
+	*	For spline interpolation, undefined behavior when some values are undefined
+		and others are not.
+ */
+
+import normalizeHue from '../util/normalizeHue';
+
+export default (shortPath = true) => {
+	return values => {
 
 		if (values.length === 2) {
 
@@ -15,8 +29,14 @@ export default () =>
 			// the start hue and the end hue brought closest
 			// to the start hue.
 			if (values[0] !== undefined && values[1] !== undefined) {
-				if (Math.abs(values[1] - values[0]) > 180) {
-					return [values[0], values[1] - 360 * Math.sign(values[1] - values[0])];
+				if (shortPath) {
+					let na = normalizeHue(values[0]);
+					let nb = normalizeHue(values[1]);
+					if (Math.abs(nb - na) > 180) {
+						// todo this result should be somehow normalized
+						return [na, nb - 360 * Math.sign(nb - na)];
+					}
+					return [na, nb];
 				}
 				return values;
 			}
@@ -43,6 +63,7 @@ export default () =>
 
 		}
 	};
+}
 
 // todo hue short vs. hue long
 // todo normalize hue before and after interpolateHue

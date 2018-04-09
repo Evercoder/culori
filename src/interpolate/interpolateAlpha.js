@@ -1,3 +1,16 @@
+/*
+	Interpolation of alpha values.
+	
+	Colors with an implicit alpha of 1 will have an undefined alpha channel.
+	We try to keep it undefined through the interpolation process.
+
+	Known issues:
+
+	*	For spline interpolation, alphas will be filled with 1 when undefined
+	 	(unless all four values in the interpolation are undefined).
+ */
+
+
 export default () =>
 	(values, t) => {
 		if (values.length === 2) {

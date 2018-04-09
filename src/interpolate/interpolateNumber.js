@@ -1,3 +1,15 @@
+/*
+	Interpolation of simple numeric values.
+	
+	In linear interpolation, when one value is undefined, 
+	the other value is returned.
+
+	Known issues:
+
+	*	Spline interpolation can't interpolate when some values 
+		are undefined and others aren't.
+ */
+
 export default () => 
 	values => {
 		if (values.length === 2) {
