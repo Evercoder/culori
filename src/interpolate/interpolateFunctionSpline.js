@@ -35,14 +35,41 @@ const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 	) / 6;
 }
 
+const solve = (v) => {
+	var i; 
+	var n = v.length - 1;
+	var c = new Array(n);
+	var _v = new Array(n);
+	var sol = new Array(n);
+	
+	c[1] = 1/4, _v[1] = (6 * v[1] - v[0])/4;
+	
+	for (i = 2; i < n; ++i) {
+		c[i] = 1 / (4 - c[i-1]); 
+		_v[i] = (6 * v[i] - (i == n-1 ? v[n] : 0) - _v[i-1]) * c[i];
+	}
+	
+	sol[0] = v[0], sol[n] = v[n], sol[n-1] = _v[n-1];
+	
+	for (i = n-2; i > 0; --i) {
+		sol[i] = _v[i] - c[i] * sol[i+1];
+	}
+	
+	return sol;
+};
+
 const invariant = values => values;
 
-export default (normalize = invariant, method = bspline, gamma = 1) =>
+export default (normalize = invariant, method = 'bspline', gamma = 1) =>
 
 	(arr, t) => {
 
 		let classes = arr.length - 1;
 		let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+
+		if (method === 'natural') {
+			arr = solve(arr);
+		}
 
 		let Vim1 = arr[i];
 		let Vi = arr[i+1];
