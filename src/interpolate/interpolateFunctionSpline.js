@@ -50,7 +50,9 @@ export default (normalize = invariant, method = bspline, gamma = 1) =>
 		let Vim2 = i > 0 ? arr[i-1] : 2 * Vim1 - Vi;
 		let Vip1 = i < classes - 1 ? arr[i+2] : 2 * Vi - Vim1;
 
-		[Vim2, Vim1, Vi, Vip1] = normalize([Vim2, Vim1, Vi, Vip1]);
+		let v = normalize([Vim2, Vim1, Vi, Vip1]);
 
-		return bspline(Vim2, Vim1, Vi, Vip1, (t - i / classes) * classes);
+		return typeof v === 'object' ? 
+			bspline(v[0], v[1], v[2], v[3], (t - i / classes) * classes)
+			: v;
 	};
