@@ -7,6 +7,7 @@ import interpolateAlpha from './interpolate/interpolateAlpha';
 import interpolateHue from './interpolate/interpolateHue';
 import interpolateFunctionLinear from './interpolate/interpolateFunctionLinear';
 import interpolateFunctionSpline from './interpolate/interpolateFunctionSpline';
+import interpolateFunctionCosine from './interpolate/interpolateFunctionCosine';
 import samples from './samples';
 import zip from './zip';
 import difference from './difference';
@@ -76,6 +77,7 @@ export {
 	interpolateHue,
 	interpolateFunctionLinear,
 	interpolateFunctionSpline,
+	interpolateFunctionCosine,
 	samples,
 	
 	// Extending Culori
