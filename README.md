@@ -10,7 +10,7 @@ Culori supports all the formats defined in the [CSS Colors Level 4][css4-colors]
 
 ### Color Differences
 
-Culori can compute [color differences](https://en.wikipedia.org/wiki/Color_difference) with either a simple Euclidean distance or the CIELAB Delta E* metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984).
+Culori can compute [color differences](https://en.wikipedia.org/wiki/Color_difference) with either a simple Euclidean distance or the CIELAB Delta E* metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984). It can also find the nearest N colors from a set of colors based on any of these differences.
 
 ## Documentation
 
