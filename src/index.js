@@ -11,7 +11,14 @@ import interpolateFunctionCosine from './interpolate/interpolateFunctionCosine';
 import interpolateFunctionMonotone from './interpolate/interpolateFunctionMonotone';
 import samples from './samples';
 import zip from './zip';
-import difference from './difference';
+
+import {
+	differenceEuclidean, 
+	differenceCie76, 
+	differenceCie94,
+	differenceCiede2000,
+	differenceCmc
+} from './difference';
 
 import parse from './parse';
 
@@ -69,7 +76,6 @@ export {
 	converter,
 	round,
 	parse,
-	difference,
 
 	// Interpolation
 	interpolate,
@@ -83,6 +89,13 @@ export {
 	interpolateFunctionMonotone,
 
 	samples,
+
+	// Difference
+	differenceEuclidean, 
+	differenceCie76, 
+	differenceCie94,
+	differenceCiede2000,
+	differenceCmc,
 	
 	// Extending Culori
 	defineMode,

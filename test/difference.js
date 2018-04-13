@@ -1,13 +1,20 @@
 let tape = require('tape');
 let culori = require('../');
-let { difference, rgb, lab, round } = culori;
+let { 
+	differenceEuclidean, 
+	differenceCie76, 
+	differenceCie94,
+	differenceCiede2000,
+	differenceCmc,
+	rgb, 
+	lab, 
+	round 
+} = culori;
 
 tape('euclidean distance in RGB', function(test) {
 
-	let delta = difference('euclidean');
-
 	test.equal(
-		delta(
+		differenceEuclidean()(
 			rgb({ r: 1, g: 0, b: 0, alpha: 0.5 }),
 			rgb({ r: 0, g: 1, b: 0, alpha: 0.75 })
 		),
@@ -19,10 +26,8 @@ tape('euclidean distance in RGB', function(test) {
 
 tape('cie76 difference', function(test) {
 
-	let delta = difference('cie76');
-
 	test.equal(
-		delta(
+		differenceCie76()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
@@ -34,10 +39,8 @@ tape('cie76 difference', function(test) {
 
 tape('cie94 difference', function(test) {
 
-	let delta = difference('cie94');
-
 	test.equal(
-		delta(
+		differenceCie94()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
@@ -49,7 +52,6 @@ tape('cie94 difference', function(test) {
 
 tape('ciede2000 difference', function(test) {
 
-	let delta = difference('ciede2000');
 	let approx = round(4);
 
 	// Test data from: http://www2.ece.rochester.edu/~gsharma/ciede2000/
@@ -92,7 +94,7 @@ tape('ciede2000 difference', function(test) {
 	for (var i = 0; i < testdata.length; i++) {
 		let line = testdata[i];
 		test.equal(
-			approx(delta(
+			approx(differenceCiede2000()(
 				lab({ l: +line[0], a: +line[1], b: +line[2] }),
 				lab({ l: +line[3], a: +line[4], b: +line[5] })
 			)),
@@ -101,7 +103,7 @@ tape('ciede2000 difference', function(test) {
 
 		// also test for symmetry
 		test.equal(
-			approx(delta(
+			approx(differenceCiede2000()(
 				lab({ l: +line[3], a: +line[4], b: +line[5] }),
 				lab({ l: +line[0], a: +line[1], b: +line[2] })
 			)),
@@ -114,10 +116,8 @@ tape('ciede2000 difference', function(test) {
 
 tape('cmc difference', function(test) {
 
-	let delta = difference('cmc');
-
 	test.equal(
-		delta(
+		differenceCmc()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),

@@ -1,37 +1,46 @@
 const invariant = values => values;
 
-const monotone = (Vim1, Vi, Vip1, Vip2, classes, t) => {
-	let classes2 = classes * classes;
+const monotone = (v0, v1, v2, v3, h, t) => {
+
+	let h2 = h * h;
 	let t2 = t * t;
 	let t3 = t2 * t;
 
-	let s1 = (Vip1 - Vim1) * classes;
-	let s2 = (Vip2 - Vi) * classes;
-	let s3 = (Vip1 - Vi) * classes;
+	let s20 = (v2 - v0) / (2 * h);
+	let s31 = (v3 - v1) / (2 * h);
+	let s21 = (v2 - v1) / h;
 
 	return (
-		(0.5 * s1 + 0.5 * s2 - 2 * s3) * classes2 * t3 +
-		(3 * s3 - s1 - 0.5 * s2) * classes * t2 + 
-		0.5 * s1 * t +
-		Vi
+		(s20 + s31 - 2 * s21) / h2 * t3 +
+		(3 * s21 - 2 * s20 - s31) / h * t2 + 
+		s20 * t +
+		v1
 	);
 }
 
 export default (normalize = invariant, γ = 1) => 
+
 	(arr, t) => {
 
 		t = Math.pow(t, γ);
 
-		let classes = arr.length - 1;
-		let i = t === 1 ? classes - 1 : Math.floor(t * classes);
-		let Vi = arr[i];
-		let Vip1 = arr[i + 1];
+		let n = arr.length - 1;
 
-		let Vim1 = i > 0 ? arr[i-1] : 2 * Vi - Vip1;
-		let Vip2 = i < classes - 1 ? arr[i+2] : 2 * Vip1 - Vi;
+		let i;
+		if (t === 1) {
+			i = n - 1;
+			t = 1;
+		} else {
+			i = Math.floor(t * n);
+		}
 
-		let v = normalize([Vim1, Vi, Vip1, Vip2]);
+		let v1 = arr[i];
+		let v2 = arr[i + 1];
+		let v0 = i > 0 ? arr[i - 1] : 2 * v1 - v2;
+		let v3 = i < n - 1 ? arr[i + 2] : 2 * v2 - v1;
+
+		let v = normalize([v0, v1, v2, v3]);
 
 		return typeof v === 'object' ? 
-			monotone(v[0], v[1], v[2], v[3], classes, t * classes - Math.floor(t * classes)) : v;
+			monotone(v[0], v[1], v[2], v[3], 1 / n, t - i / n) : v;
 	};

@@ -1,12 +1,12 @@
 import { getModeDefinition } from './modes';
 import converter from './converter';
 
-const euclidean = mode => {
+const differenceEuclidean = (mode = 'rgb') => {
 	let channels = getModeDefinition(mode).channels;
 	let conv = converter(mode);
-	return (a, b) => {
-		let colorA = conv(a);
-		let colorB = conv(b);
+	return (std, smp) => {
+		let colorA = conv(std);
+		let colorB = conv(smp);
 		return Math.sqrt(
 			channels.reduce(
 				(delta, k) => 
@@ -18,9 +18,10 @@ const euclidean = mode => {
 	}
 };
 
-const cie94 = (KL = 1, K1 = 0.045, K2 = 0.015) => {
-	let lab = converter('lab'),
-		lch = converter('lch');
+const differenceCie76 = () => differenceEuclidean('lab');
+
+const differenceCie94 = (KL = 1, K1 = 0.045, K2 = 0.015) => {
+	let lab = converter('lab');
 	
 	return (std, smp) => {
 
@@ -76,7 +77,7 @@ const cie94 = (KL = 1, K1 = 0.045, K2 = 0.015) => {
 	Ported to JavaScript by Dan Burzo for the Culori library.
  */
 
-const ciede2000 = (Kl = 1, Kc = 1, Kh = 1) => {
+const differenceCiede2000 = (Kl = 1, Kc = 1, Kh = 1) => {
 	let lab = converter('lab');
 	return (std, smp) => {
 		let LabStd = lab(std);
@@ -154,9 +155,9 @@ const ciede2000 = (Kl = 1, Kc = 1, Kh = 1) => {
 			Rt * dC / (Kc * Sc) * dH / (Kh * Sh)
 		);
 	}
-}
+};
 
-const cmc = (l = 1, c = 1) => {
+const differenceCmc = (l = 1, c = 1) => {
 	let lab = converter('lab');
 	return (std, smp) => {
 
@@ -194,18 +195,13 @@ const cmc = (l = 1, c = 1) => {
 			dC2 / Math.pow(c * Sc, 2),
 			dH2 / Math.pow(Sh, 2)
 		);
-
 	};
-}
-
-const formulas = {
-	cie76: () => euclidean('lab'),
-	cie94: () => cie94(),
-	ciede2000: () => ciede2000(),
-	cmc: () => cmc(),
-	euclidean: mode => euclidean(mode)
 };
 
-export default (formula = 'euclidean', mode = 'rgb') => {
-	return formulas[formula](mode);
-}
+export {
+	differenceEuclidean,
+	differenceCie76,
+	differenceCie94,
+	differenceCiede2000,
+	differenceCmc
+};
