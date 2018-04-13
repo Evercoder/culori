@@ -98,3 +98,5 @@ Formula | Notes
 
 For a given _metric_ color difference formula, and an array of _colors_, returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_.
 
+Pass _n = Infinity_ to get all colors in the array with a maximum distance of _τ_.
+

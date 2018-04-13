@@ -13,13 +13,20 @@ let {
 
 tape('euclidean distance in RGB', function(test) {
 
+	let delta = differenceEuclidean();
+
 	test.equal(
-		differenceEuclidean()(
+		delta(
 			rgb({ r: 1, g: 0, b: 0, alpha: 0.5 }),
 			rgb({ r: 0, g: 1, b: 0, alpha: 0.75 })
 		),
 		1.4142135623730951
-	)
+	);
+
+	test.equal(
+		delta('red', 'red'),
+		0
+	);
 
 	test.end();
 });

@@ -19,6 +19,7 @@ import {
 	differenceCiede2000,
 	differenceCmc
 } from './difference';
+import nearest from './nearest';
 
 import parse from './parse';
 
@@ -96,6 +97,8 @@ export {
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
+
+	nearest,
 	
 	// Extending Culori
 	defineMode,
