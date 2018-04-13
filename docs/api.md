@@ -34,6 +34,18 @@ Mode | For
 `lch` | LCh color space
 `lrgb`| Linearized RGB color space
 
+Converter | Notes
+--------- | -----
+§ __culori__( _color_ ) | Shortcut to `converter('rgb')(color)`.
+§ __rgb__( _color_ ) | Shortcut to `converter('rgb')(color)`.
+§ __hsl__( _color_ ) | Shortcut to `converter('hsl')(color)`.
+§ __hsv__( _color_ ) | Shortcut to `converter('hsv')(color)`.
+§ __hsi__( _color_ ) | Shortcut to `converter('hsi')(color)`.
+§ __hwb__( _color_ ) | Shortcut to `converter('hwb')(color)`.
+§ __lab__( _color_ ) | Shortcut to `converter('lab')(color)`.
+§ __lch__( _color_ ) | Shortcut to `converter('lch')(color)`.
+§ __lrgb__( _color_ ) | Shortcut to `converter('lrgb')(color)`.
+
 § __interpolate__( _colors_, _mode = "rgb"_)
 
 Returns an interpolator between an array of colors in the _mode_ color space.
@@ -64,46 +76,6 @@ samples(5).map(grays);
 
 Returns a function that rounds numbers to at most _n_ digits of precision.
 
-## Shortcuts
-
-§ __culori__( _color_ )
-
-Shortcut to `converter('rgb')(color)`.
-
-§ __rgb__( _color_ )
-
-Shortcut to `converter('rgb')(color)`.
-
-§ __hsl__( _color_ )
-
-Shortcut to `converter('hsl')(color)`.
-
-§ __hsv__( _color_ )
-
-Shortcut to `converter('hsv')(color)`.
-
-§ __hsi__( _color_ )
-
-Shortcut to `converter('hsi')(color)`.
-
-§ __hwb__( _color_ )
-
-Shortcut to `converter('hwb')(color)`.
-
-§ __lab__( _color_ )
-
-Shortcut to `converter('lab')(color)`.
-
-§ __lch__( _color_ )
-
-Shortcut to `converter('lch')(color)`.
-
-§ __lrgb__( _color_ )
-
-Shortcut to `converter('lrgb')(color)`.
-
-§ __css__( _format_ )
-
 ## Difference
 
 These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas.
@@ -112,25 +84,13 @@ These methods are concerned to finding the [distance between two colors](https:/
 
 Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors. 
 
-§ __differenceEuclidean__( _mode = 'rgb'_ )
-
-Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
-
-§ __differenceCie76__()
-
-Returns a [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76) Delta E* function. It is analogous to computing the Euclidean distance in the Lab color space.
-
-§ __differenceCie94__(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_)
-
-Returns a [CIE94](https://en.wikipedia.org/wiki/Color_difference#CIE94) Delta E* function.
-
-§ __differenceCiede2000__(_Kl = 1_, _Kc = 1_, _Kh = 1_)
-
-Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E* function.
-
-§ __differenceCmc__() →
-
-Returns a [CMC l:c 1984](https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)) Delta E* function. Please note that _differenceCmc_ is not a metric, therefore it cannot be used with _nearest()_.
+Formula | Notes
+------- | -----
+§ __differenceEuclidean__( _mode = 'rgb'_ ) | Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
+§ __differenceCie76__() | Returns a [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76) Delta E* function. It is analogous to computing the Euclidean distance in the Lab color space.
+§ __differenceCie94__(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_) | Returns a [CIE94](https://en.wikipedia.org/wiki/Color_difference#CIE94) Delta E* function.
+§ __differenceCiede2000__(_Kl = 1_, _Kc = 1_, _Kh = 1_) | Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E* function.
+§ __differenceCmc__() |  Returns a [CMC l:c 1984](https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)) Delta E* function. Please note that _differenceCmc_ is not a metric, therefore it cannot be used with _nearest()_.
 
 ### Nearest color(s)
 
