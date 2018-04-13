@@ -36,29 +36,31 @@ Mode | For
 
 Converter | Notes
 --------- | -----
-§ __culori__( _color_ ) | Shortcut to `converter('rgb')(color)`.
-§ __rgb__( _color_ ) | Shortcut to `converter('rgb')(color)`.
-§ __hsl__( _color_ ) | Shortcut to `converter('hsl')(color)`.
-§ __hsv__( _color_ ) | Shortcut to `converter('hsv')(color)`.
-§ __hsi__( _color_ ) | Shortcut to `converter('hsi')(color)`.
-§ __hwb__( _color_ ) | Shortcut to `converter('hwb')(color)`.
-§ __lab__( _color_ ) | Shortcut to `converter('lab')(color)`.
-§ __lch__( _color_ ) | Shortcut to `converter('lch')(color)`.
-§ __lrgb__( _color_ ) | Shortcut to `converter('lrgb')(color)`.
+§ __culori__( _color_ ) | Shortcut to `converter('rgb')(color)`
+§ __rgb__( _color_ ) | Shortcut to `converter('rgb')(color)`
+§ __hsl__( _color_ ) | Shortcut to `converter('hsl')(color)`
+§ __hsv__( _color_ ) | Shortcut to `converter('hsv')(color)`
+§ __hsi__( _color_ ) | Shortcut to `converter('hsi')(color)`
+§ __hwb__( _color_ ) | Shortcut to `converter('hwb')(color)`
+§ __lab__( _color_ ) | Shortcut to `converter('lab')(color)`
+§ __lch__( _color_ ) | Shortcut to `converter('lch')(color)`
+§ __lrgb__( _color_ ) | Shortcut to `converter('lrgb')(color)`
+
+§ __formatter__( _format = 'rgb'_ )
+
+§ __round__( _n = 8_ )
+
+Returns a function that rounds numbers to at most _n_ digits of precision.
+
+### Interpolation
 
 § __interpolate__( _colors_, _mode = "rgb"_)
 
 Returns an interpolator between an array of colors in the _mode_ color space.
 
-§ __css__( _format_ )
+§ __samples__( _n = 2_, _γ = 1_ )
 
-Returns a function that will format any color to _format_.
-
-### Utilities
-
-§ __samples__( _n = 2_ )
-
-Returns an array of _n_ equally-spaced samples from the `[0, 1]` range, with `0` and `1` at the ends.
+Returns an array of _n_ equally-spaced samples from the `[0, 1]` range, with `0` and `1` at the ends. The function also accepts a _γ_ (gamma) parameter which will map each value _t_ to _t_<sup>γ</sup>.
 
 ```js
 culori.samples(3); // => [0, 0.5, 1]
@@ -71,10 +73,6 @@ The samples are useful for `interpolate` to generate color scales:
 let grays = culori.interpolate(['#fff', '#000']);
 samples(5).map(grays);
 ```
-
-§ __round__( _n = 8_ )
-
-Returns a function that rounds numbers to at most _n_ digits of precision.
 
 ## Difference
 
