@@ -1,3 +1,5 @@
+import { differenceEuclidean } from './difference';
+
 // selects the vantage point
 // currently does so randomly, but this could be optimized
 const select = colors => {
@@ -22,11 +24,11 @@ const vptree = (colors, metric) => {
 	};
 }
 
-export default (colors, metric) => {
+export default (colors, metric = differenceEuclidean()) => {
 
 	let tree = vptree(colors, metric);
 
-	return (color, n, τ = Infinity) => {
+	return (color, n = 1, τ = Infinity) => {
 		let dist = metric(color, tree.color);
 		let best_match;
 		if (dist < τ) {

@@ -20,7 +20,7 @@ const differenceEuclidean = (mode = 'rgb') => {
 
 const differenceCie76 = () => differenceEuclidean('lab');
 
-const differenceCie94 = (KL = 1, K1 = 0.045, K2 = 0.015) => {
+const differenceCie94 = (kL = 1, K1 = 0.045, K2 = 0.015) => {
 	let lab = converter('lab');
 	
 	return (std, smp) => {
@@ -44,7 +44,7 @@ const differenceCie94 = (KL = 1, K1 = 0.045, K2 = 0.015) => {
 		let dH2 = Math.pow(aStd - aSmp, 2) + Math.pow(bStd - bSmp, 2) - dC2;
 
 		return Math.sqrt(
-			dL2 / Math.pow(KL, 2) + 
+			dL2 / Math.pow(kL, 2) + 
 			dC2 / Math.pow(1 + K1 * cStd, 2) +
 			dH2 / Math.pow(1 + K2 * cStd, 2)
 		);

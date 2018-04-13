@@ -1,5 +1,11 @@
 # API Reference
 
+## Table of contents
+
+* [Basics](#basics)
+* [Interpolation](#interpolation)
+* [Difference](#difference)
+
 ## Basics
 
 § __parse__( _string_ ) → _color_ or _undefined_
@@ -97,4 +103,32 @@ Shortcut to `converter('lch')(color)`.
 Shortcut to `converter('lrgb')(color)`.
 
 § __css__( _format_ )
+
+## Difference
+
+These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas.
+
+§ __differenceEuclidean__( _mode = 'rgb'_ ) → _function (colorA, colorB)_
+
+Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
+
+§ __differenceCie76__() → _function (colorA, colorB)_
+
+Returns a [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76) Delta E* function. It is analogous to computing the Euclidean distance in the Lab color space.
+
+§ __differenceCie94__(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_) → _function (colorA, colorB)_
+
+Returns a [CIE94](https://en.wikipedia.org/wiki/Color_difference#CIE94) Delta E* function.
+
+§ __differenceCiede2000__(_Kl = 1_, _Kc = 1_, _Kh = 1_) → _function (colorA, colorB)_
+
+Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E* function.
+
+§ __differenceCmc__() → _function (colorA, colorB)_
+
+Returns a [CMC l:c 1984](https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)) Delta E* function. Please note that _differenceCmc_ is not a metric, therefore it cannot be used with _nearest()_.
+
+§ __nearest__(_colors_, _metric = differenceEuclidean()_) → _function(color, n = 1, τ = Infinity)_.
+
+For a given _metric_ color difference formula, and an array of _colors_, returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_.
 
