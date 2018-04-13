@@ -35,19 +35,19 @@ Mode | For | Shortcut
 `lrgb`| Linearized RGB color space | culori.__lrgb__( _color_ )
 `cubehelix` | Cubehelix color space | culori.__cubehelix__( _color_ )
 
-§ __formatter__( _format = 'rgb'_ )
+§ culori.__formatter__( _format = 'rgb'_ )
 
-§ __round__( _n = 8_ )
+§ culori.__round__( _n = 8_ )
 
 Returns a function that rounds numbers to at most _n_ digits of precision.
 
 ## Interpolation
 
-§ __interpolate__( _colors_, _mode = "rgb"_ )
+§ culori.__interpolate__( _colors_, _mode = "rgb"_ )
 
 Returns an interpolator between an array of colors in the _mode_ color space.
 
-§ __samples__( _n = 2_, _γ = 1_ )
+§ culori.__samples__( _n = 2_, _γ = 1_ )
 
 Returns an array of _n_ equally-spaced samples from the `[0, 1]` range, with `0` and `1` at the ends. The function also accepts a _γ_ (gamma) parameter which will map each value _t_ to _t_<sup>γ</sup>.
 
@@ -56,7 +56,7 @@ culori.samples(3); // => [0, 0.5, 1]
 culori.samples(5); // => [0, 0.25, 0.5, 0.75, 1]
 ```
 
-The samples are useful for `interpolate` to generate color scales:
+The samples are useful for `culori.interpolate` to generate color scales:
 
 ```js
 let grays = culori.interpolate(['#fff', '#000']);
@@ -86,15 +86,15 @@ Each of these formulas will return a _function (colorA, colorB)_ that lets you m
 
 Formula | Notes
 ------- | -----
-§ __differenceEuclidean__( _mode = 'rgb'_ ) | Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
-§ __differenceCie76__() | Returns a [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76) Delta E* function. It is analogous to computing the Euclidean distance in the Lab color space.
-§ __differenceCie94__( _kL = 1_, _K1 = 0.045_, _K2 = 0.015_ ) | Returns a [CIE94](https://en.wikipedia.org/wiki/Color_difference#CIE94) Delta E* function.
-§ __differenceCiede2000__( _Kl = 1_, _Kc = 1_, _Kh = 1_ ) | Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E* function.
-§ __differenceCmc__() |  Returns a [CMC l:c 1984](https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)) Delta E* function. Please note that _differenceCmc_ is not a metric, therefore it cannot be used with _nearest()_.
+§ culori.__differenceEuclidean__( _mode = 'rgb'_ ) | Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
+§ culori.__differenceCie76__() | Returns a [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76) Delta E* function. It is analogous to computing the Euclidean distance in the Lab color space.
+§ culori.__differenceCie94__( _kL = 1_, _K1 = 0.045_, _K2 = 0.015_ ) | Returns a [CIE94](https://en.wikipedia.org/wiki/Color_difference#CIE94) Delta E* function.
+§ culori.__differenceCiede2000__( _Kl = 1_, _Kc = 1_, _Kh = 1_ ) | Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E* function.
+§ culori.__differenceCmc__() |  Returns a [CMC l:c 1984](https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)) Delta E* function. Please note that _differenceCmc_ is not a metric, therefore it cannot be used with _nearest()_.
 
 ### Nearest color(s)
 
-§ __nearest__( _colors_, _metric = differenceEuclidean()_ ) → _function(color, n = 1, τ = Infinity)_.
+§ culori.__nearest__( _colors_, _metric = differenceEuclidean()_ ) → _function(color, n = 1, τ = Infinity)_.
 
 For a given _metric_ color difference formula, and an array of _colors_, returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_.
 
