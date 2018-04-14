@@ -94,7 +94,7 @@ Formula | Notes
 
 ### Nearest color(s)
 
-§ culori.__nearest__( _colors_, _metric = differenceEuclidean()_ ) → _function(color, n = 1, τ = Infinity)_.
+§ culori.__nearest__( _colors_, _metric = differenceEuclidean()_, _accessor = identity_ ) → _function(color, n = 1, τ = Infinity)_.
 
 For a given _metric_ color difference formula, and an array of _colors_, returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_.
 

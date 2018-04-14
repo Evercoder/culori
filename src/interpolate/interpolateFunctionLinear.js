@@ -1,6 +1,6 @@
-const invariant = values => values;
+import identity from '../util/identity';
 
-export default (normalize = invariant, γ = 1) => 
+export default (normalize = identity, γ = 1) => 
 	(arr, t) => {
 
 		t = Math.pow(t, γ);

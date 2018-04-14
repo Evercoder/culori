@@ -1,4 +1,4 @@
-const invariant = values => values;
+import identity from '../util/identity';
 
 const monotone = (v0, v1, v2, v3, h, t) => {
 
@@ -18,7 +18,7 @@ const monotone = (v0, v1, v2, v3, h, t) => {
 	);
 }
 
-export default (normalize = invariant, γ = 1) => 
+export default (normalize = identity, γ = 1) => 
 
 	(arr, t) => {
 

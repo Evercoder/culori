@@ -38,9 +38,11 @@ import { differenceEuclidean } from './difference';
 // 	}
 // }
 // 
+// 
+const identity = d => d;
 
-export default (colors, metric = differenceEuclidean()) => {
-	let arr = colors.map(c => ({ color: c }));
+export default (colors, metric = differenceEuclidean(), accesor = identity) => {
+	let arr = colors.map((c, idx) => ({ color: accesor(c), i: idx }));
 	return (color, n = 1, τ = Infinity) => {
 		
 		if (isFinite(n)) {

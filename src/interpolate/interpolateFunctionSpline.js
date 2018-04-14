@@ -24,6 +24,8 @@
 
  */
 
+import identity from '../util/identity';
+
 const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 	let t2 = t * t;
 	let t3 = t2 * t;
@@ -62,9 +64,7 @@ const solve = (v) => {
 	return sol;
 };
 
-const invariant = values => values;
-
-export default (normalize = invariant, method = 'bspline', γ = 1) =>
+export default (normalize = identity, method = 'bspline', γ = 1) =>
 
 	(arr, t) => {
 
