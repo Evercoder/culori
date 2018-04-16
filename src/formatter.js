@@ -14,21 +14,21 @@ export default (format = 'rgb') =>
 			return undefined;
 		}
 
-		color.r = clamp(color.r);
-		color.b = clamp(color.b);
-		color.g = clamp(color.g);
+		let r = clamp(color.r);
+		let b = clamp(color.b);
+		let g = clamp(color.g);
 
 		if (format === 'hex') {
-			return '#' + (1 << 24 | color.r << 16 | color.g << 8 | color.b).toString(16).slice(1);
+			return '#' + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
 		}
 
 		if (format === 'rgb') {
 			if (c.alpha === undefined || c.alpha === 1) {
 				// opaque color
-				return `rgb(${color.r}, ${color.g}, ${color.b})`;
+				return `rgb(${r}, ${g}, ${b})`;
 			} else {
 				// transparent color
-				return `rgba(${color.r}, ${color.g}, ${color.b}, ${ roundAlpha(color.alpha) })`;
+				return `rgba(${r}, ${g}, ${b}, ${ roundAlpha(c.alpha) })`;
 			}
 		}
 	}
