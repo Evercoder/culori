@@ -1,6 +1,6 @@
 let tape = require('tape');
 let culori = require('../');
-let { interpolate, samples, formatter, cubehelix } = culori;
+let { interpolate, samples, formatter, cubehelix, converter } = culori;
 
 let hex = formatter('hex');
 
@@ -73,7 +73,7 @@ tape('11 swatches between black and white in Lch', function(test) {
 tape('11 swatches between black and white in DIN99o', function(test) {
 
 	test.deepEqual(
-		samples(11).map(interpolate(['#fff', '#000'], 'din')).map(hex),
+		samples(11).map(interpolate(['#fff', '#000'], 'dlab')).map(hex),
 		[ '#ffffff', '#dedede', '#bfbfbf', '#a2a2a2', '#868686', '#6d6d6d', '#555555', '#3f3f3f', '#2b2b2b', '#191919', '#000000' ]
 	);
 

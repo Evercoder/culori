@@ -1,21 +1,20 @@
-import convertDinToLab from './convertDinToLab';
-import convertDinToRgb from './convertDinToRgb';
-import convertLabToDin from './convertLabToDin';
-import convertRgbToDin from './convertRgbToDin';
+import convertDlabToLab from './convertDlabToLab';
+import convertDlabToRgb from './convertDlabToRgb';
+import convertLabToDlab from './convertLabToDlab';
+import convertRgbToDlab from './convertRgbToDlab';
 import interpolateNumber from '../interpolate/interpolateNumber';
 import interpolateAlpha from '../interpolate/interpolateAlpha';
-import interpolateHue from '../interpolate/interpolateHue';
 import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
 
 export default {
-	mode: 'din',
+	mode: 'dlab',
 	output: { 
-		lab: convertDinToLab,
-		rgb: convertDinToRgb
+		lab: convertDlabToLab,
+		rgb: convertDlabToRgb
 	},
 	input: {
-		lab: convertLabToDin,
-		rgb: convertRgbToDin
+		lab: convertLabToDlab,
+		rgb: convertRgbToDlab
 	},
 	channels: ['l', 'a', 'b', 'alpha'],
 	interpolate: {
