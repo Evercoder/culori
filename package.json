@@ -7,6 +7,9 @@
   "repository": "git@github.com:danburzo/culori.git",
   "author": "Dan Burzo <danburzo@gmail.com>",
   "license": "MIT",
+  "files": [
+    "build"
+  ],
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

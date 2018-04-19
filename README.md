@@ -1,5 +1,9 @@
 # Culori
 
+![Man before a rainbow, in Christoph Weigel’s Ethica Naturalis seu Documenta Moralia e Variis rerum Naturalium proprietatibus Virtutum Vitiorumq symbolicis imaginibus collecta (ca. 1700)](./.github/man-rainbow.png)
+
+<small>“Man before a rainbow”, in Christoph Weigel’s _Ethica Naturalis seu Documenta Moralia e Variis rerum Naturalium proprietatibus Virtutum Vitiorumq symbolicis imaginibus collecta_ (ca. 1700). [Rijksmuseum](https://www.rijksmuseum.nl/en/collection/RP-P-1896-A-19368-1803), via [The Public Domain Review](publicdomainreview.org).</small>
+
 Culori is a general-purpose color library for JavaScript. It incorporates, and extends, ideas from Mike Bostock's [D3.js](https://github.com/d3) and Gregor Aisch's [chroma.js](https://github.com/gka/chroma.js).
 
 _(⚠ Until I realease __v1.0.0__ you can assume the API will be changing quite a bit, until I find an adequate expression.)_
@@ -10,7 +14,9 @@ Culori supports all the formats defined in the [CSS Colors Level 4][css4-colors]
 
 ### Color Differences
 
-Culori can compute [color differences](https://en.wikipedia.org/wiki/Color_difference) with either a simple Euclidean distance or the CIELAB Delta E* metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984). It can also find the nearest N colors from a set of colors based on any of these differences.
+Culori can compute [color differences](https://en.wikipedia.org/wiki/Color_difference) with either a simple Euclidean distance or the CIELAB Delta E* metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984). They're also available [as a D3 plugin](https://github.com/danburzo/d3-color-difference).
+
+It can also find the closest N colors from a set of colors based on any of these differences.
 
 ## Documentation
 

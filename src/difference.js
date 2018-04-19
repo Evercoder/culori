@@ -52,29 +52,10 @@ const differenceCie94 = (kL = 1, K1 = 0.045, K2 = 0.015) => {
 }
 
 /*
-	The CIEDE2000 color difference
-	--------------------------------------------------
-
-	Original implementation in Matlab by Gaurav Sharma:
-
-		http://www2.ece.rochester.edu/~gsharma/ciede2000/
-
-	Based on the paper: 
-
-		"The CIEDE2000 Color-Difference Formula: 
-		Implementation Notes, Supplementary Test Data, 
-		and Mathematical Observations" 
-
-		by Gaurav Sharma, Wencheng Wu, Edul N. Dalal
-
-		in Color Research and Application, 
-		vol. 30. No. 1, pp. 21-30, February 2005.
-
-	Available at:
-
-		http://www2.ece.rochester.edu/~gsharma/ciede2000/
-
-	Ported to JavaScript by Dan Burzo for the Culori library.
+	CIEDE2000 color difference, original Matlab implementation by Gaurav Sharma
+	Based on "The CIEDE2000 Color-Difference Formula: Implementation Notes, Supplementary Test Data, and Mathematical Observations" 
+	by Gaurav Sharma, Wencheng Wu, Edul N. Dalal in Color Research and Application, vol. 30. No. 1, pp. 21-30, February 2005.
+	http://www2.ece.rochester.edu/~gsharma/ciede2000/
  */
 
 const differenceCiede2000 = (Kl = 1, Kc = 1, Kh = 1) => {
