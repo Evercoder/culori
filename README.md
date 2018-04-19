@@ -1,5 +1,5 @@
 <figure style='text-align: center'>
-	<img src='./.github/man-rainbow.png' width='400'/>
+	<img src='./.github/man-rainbow.jpg' width='400'/>
 	<figcaption style='font-size: 0.8em'>“Man before a rainbow” (ca. 1700) — <a href='https://www.rijksmuseum.nl/en/collection/RP-P-1896-A-19368-1803'>Rijksmuseum</a>, via <a href='https://publicdomainreview.org'>The Public Domain Review</a>.</figcaption>
 </figure>
 
