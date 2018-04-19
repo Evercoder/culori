@@ -1,8 +1,9 @@
+<figure style='text-align: center'>
+	<img src='./.github/man-rainbow.png' width='400'/>
+	<figcaption style='font-size: 0.8em'>“Man before a rainbow” (ca. 1700) — <a href='https://www.rijksmuseum.nl/en/collection/RP-P-1896-A-19368-1803'>Rijksmuseum</a>, via <a href='https://publicdomainreview.org'>The Public Domain Review</a>.</figcaption>
+</figure>
+
 # Culori
-
-![Man before a rainbow, in Christoph Weigel’s Ethica Naturalis seu Documenta Moralia e Variis rerum Naturalium proprietatibus Virtutum Vitiorumq symbolicis imaginibus collecta (ca. 1700)](./.github/man-rainbow.png)
-
-<small>“Man before a rainbow”, in Christoph Weigel’s _Ethica Naturalis seu Documenta Moralia e Variis rerum Naturalium proprietatibus Virtutum Vitiorumq symbolicis imaginibus collecta_ (ca. 1700). [Rijksmuseum](https://www.rijksmuseum.nl/en/collection/RP-P-1896-A-19368-1803), via [The Public Domain Review](publicdomainreview.org).</small>
 
 Culori is a general-purpose color library for JavaScript. It incorporates, and extends, ideas from Mike Bostock's [D3.js](https://github.com/d3) and Gregor Aisch's [chroma.js](https://github.com/gka/chroma.js).
 
