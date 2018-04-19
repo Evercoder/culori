@@ -179,10 +179,13 @@ const differenceCmc = (l = 1, c = 1) => {
 	};
 };
 
+const differenceDin99 = () => differenceEuclidean('din');
+
 export {
 	differenceEuclidean,
 	differenceCie76,
 	differenceCie94,
 	differenceCiede2000,
-	differenceCmc
+	differenceCmc,
+	differenceDin99
 };

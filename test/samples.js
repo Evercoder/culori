@@ -70,6 +70,16 @@ tape('11 swatches between black and white in Lch', function(test) {
 	test.end();
 });
 
+tape('11 swatches between black and white in DIN99', function(test) {
+
+	test.deepEqual(
+		samples(11).map(interpolate(['#fff', '#000'], 'din')).map(hex),
+		[ '#ffffff', '#d5d5d5', '#b0b0b0', '#8f8f8f', '#737373', '#5a5a5a', '#454545', '#323232', '#222222', '#141414', '#000000' ]
+	);
+
+	test.end();
+});
+
 // tape('default cubehelix scale', function(test) {
 
 // 	let start = cubehelix({

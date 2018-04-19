@@ -34,6 +34,7 @@ import hwbDef from './hwb/definition';
 import labDef from './lab/definition';
 import lchDef from './lch/definition';
 import cubehelixDef from './cubehelix/definition';
+import dinDef from './din/definition';
 
 import colorsNamed from './colors/named';
 
@@ -46,6 +47,7 @@ defineMode(hwbDef);
 defineMode(labDef);
 defineMode(lchDef);
 defineMode(cubehelixDef);
+defineMode(dinDef);
 
 let rgb = converter('rgb');
 let lrgb = converter('lrgb');
@@ -56,6 +58,7 @@ let hwb = converter('hwb');
 let lab = converter('lab');
 let lch = converter('lch');
 let cubehelix = converter('cubehelix');
+let din = converter('din');
 
 const culori = rgb;
 
@@ -71,6 +74,7 @@ export {
 	lch,
 	lrgb,
 	cubehelix,
+	din,
 
 	// Basics
 	formatter,
