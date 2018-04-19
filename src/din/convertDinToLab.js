@@ -1,20 +1,20 @@
-import { kE, kCH, cos16, sin16 } from './constants';
+import { kCH, kE, cosθ, sinθ, θ } from './constants';
 
 export default ({ l, a, b, alpha }) => {
 
 	let res = { 
 		mode: 'lab',
-		l: (Math.exp(l * kE / 105.51) - 1) / 0.0158
+		l: (Math.exp(l * kE / 303.67) - 1) / 0.0039
 	};
 
-	let h = Math.atan2(b, a);
-	let c = Math.sqrt(a * a + b * b);
-	let G = (Math.exp(0.045 * c * kCH * kE) - 1) / 0.045;
+	let h = Math.atan2(b, a) - θ;
+	let C = Math.sqrt(a * a + b * b);
+	let G = (Math.exp(0.0435 * C * kCH * kE) - 1) / 0.075;
 	let e = G * Math.cos(h);
 	let f = G * Math.sin(h);
 
-	res.a = e * cos16 - (f / 0.7) * sin16;
-	res.b = e * sin16 + (f / 0.7) * cos16;
+	res.a = e * cosθ - (f / 0.83) * sinθ;
+	res.b = e * sinθ + (f / 0.83) * cosθ;
 
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
