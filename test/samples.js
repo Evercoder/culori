@@ -77,6 +77,11 @@ tape('11 swatches between black and white in DIN99o', function(test) {
 		[ '#ffffff', '#dedede', '#bfbfbf', '#a2a2a2', '#868686', '#6d6d6d', '#555555', '#3f3f3f', '#2b2b2b', '#191919', '#000000' ]
 	);
 
+	// test.deepEqual(
+	// 	samples(11).map(interpolate(['red', 'white'], 'dlch')).map(hex),
+	// 	[]
+	// )
+
 	test.end();
 });
 
