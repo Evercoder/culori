@@ -57,7 +57,7 @@ The object needs to have a `mode` key that identifies the color space, and value
 
 ### Basic methods
 
-§ culori.__parse__( _string_ ) → _color_ or _undefined_
+<a name="culoriParse" href="#culoriParse">#</a> culori.__parse__(_string_) → _color_ or _undefined_ [<>](https://github.com/danburzo/culori/blob/master/src/parse.js "Source")
 
 Parses a string and returns the corresponding _color_. The color will be in the matching color space, e.g. RGB for hex strings, HSL for `hsl(…, …, …)` strings, et cetera. If no built-in parsers can match the string, the function will return _undefined_.
 
@@ -75,7 +75,7 @@ culori.parse('hsl(60 50% 10% / 100%)'); // ⇒ { h: 60, s: 0.5, b: 0.1, alpha: 1
 culori.parse('lab(100 -50 50)'); // ⇒ { l: 100, a: -50, b: 50, mode: 'lab' }
 ```
 
-§ culori.__converter__( _mode = "rgb"_ ) → _function (color or String)_
+<a name="culoriConverter" href="#culoriConverter">#</a> culori.__converter__(_mode = "rgb"_) → _function (color or String)_ [<>](https://github.com/danburzo/culori/blob/master/src/converter.js "Source")
 
 Returns a function that can then convert any color to the _mode_ color space:
 
@@ -101,9 +101,9 @@ Mode | For | Shortcut
 `lrgb`| Linearized RGB color space | culori.__lrgb__( _color_ )
 `cubehelix` | Cubehelix color space | culori.__cubehelix__( _color_ )
 
-§ culori.__formatter__( _format = 'rgb'_ ) → _function (color)_
+<a name="culoriFormatter" href="#culoriFormatter">#</a> culori.__formatter__(_format = 'rgb'_) → _function (color)_ [<>](https://github.com/danburzo/culori/blob/master/src/formatter.js "Source")
 
-Returns a function that can format colors to various formats. 
+Returns a formatter function that can transform colors to useful string representations. 
 
 ```js
 let hex = culori.formatter('hex');
@@ -118,9 +118,9 @@ Format | Description
 `hex` | Returns the hex string for a color
 `rgb` | Returns the `rgb(…)` / `rgba(…)` string for a color
 
-§ culori.__round__( _n = 8_ )
+<a name="culoriRound" href="#culoriRound">#</a> culori.__round__(_n = 8_) [<>](https://github.com/danburzo/culori/blob/master/src/round.js "Source")
 
-A rather miscellaneous utility that returns a function with which to round numbers to at most _n_ digits of precision.
+A (rather miscellaneous) utility that returns a function with which to round numbers to at most _n_ digits of precision.
 
 ```js
 let approximate = culori.round(4);
@@ -130,11 +130,11 @@ approximate(0.38393993); // => 0.3839
 
 ### Interpolation
 
-§ culori.__interpolate__( _colors_, _mode = "rgb"_ )
+<a name="culoriInterpolate" href="#culoriInterpolate">#</a> culori.__interpolate__(_colors_, _mode = "rgb"_) [<>](https://github.com/danburzo/culori/blob/master/src/interpolate/interpolate.js "Source")
 
 Returns an interpolator between an array of colors in the _mode_ color space.
 
-§ culori.__samples__( _n = 2_, _γ = 1_ )
+<a name="culoriSamples" href="#culoriSamples">#</a> culori.__samples__(_n = 2_, _γ = 1_) [<>](https://github.com/danburzo/culori/blob/master/src/samples.js "Source")
 
 Returns an array of _n_ equally-spaced samples from the `[0, 1]` range, with `0` and `1` at the ends. The function also accepts a _γ_ (gamma) parameter which will map each value _t_ to _t_<sup>γ</sup>.
 
@@ -143,7 +143,7 @@ culori.samples(3); // => [0, 0.5, 1]
 culori.samples(5); // => [0, 0.25, 0.5, 0.75, 1]
 ```
 
-The samples are useful for `culori.interpolate` to generate color scales:
+The samples are useful for [culori.interpolate()](#culoriInterpolate) to generate color scales:
 
 ```js
 let grays = culori.interpolate(['#fff', '#000']);
@@ -152,41 +152,49 @@ samples(5).map(grays);
 
 #### Interpolation functions
 
-§ culori.__interpolateFunctionLinear__
+<a name="culoriInterpolateFunctionLinear" href="#culoriInterpolateFunctionLinear">#</a> culori.__interpolateFunctionLinear__ [<>](https://github.com/danburzo/culori/blob/master/src/interpolate/interpolateFunctionLinear.js "Source")
 
-§ culori.__interpolateFunctionSpline__
+<a name="culoriInterpolateFunctionSpline" href="#culoriInterpolateFunctionSpline">#</a> culori.__interpolateFunctionSpline__ [<>](https://github.com/danburzo/culori/blob/master/src/interpolate/interpolateFunctionSpline.js "Source")
 
-§ culori.__interpolateFunctionMonotone__
+<a name="culoriInterpolateFunctionMonotone" href="#culoriInterpolateFunctionMonotone">#</a> culori.__interpolateFunctionMonotone__ [<>](https://github.com/danburzo/culori/blob/master/src/interpolate/interpolateFunctionMonotone.js "Source")
 
-§ culori.__interpolateFunctionCosine__
+<a name="culoriInterpolateFunctionCosine" href="#culoriInterpolateFunctionCosine">#</a> culori.__interpolateFunctionCosine__ [<>](https://github.com/danburzo/culori/blob/master/src/interpolate/interpolateFunctionCosine.js "Source")
 
 #### Interpolation modes
 
-§ culori.__interpolateNumber__
+<a name="culoriInterpolateNumber" href="#culoriInterpolateNumber">#</a> culori.__interpolateNumber__ [<>](https://github.com/danburzo/culori/blob/master/src/interpolate/interpolateNumber.js "Source")
 
-§ culori.__interpolateHue__
+<a name="culoriInterpolateHue" href="#culoriInterpolateHue">#</a> culori.__interpolateHue__ [<>](https://github.com/danburzo/culori/blob/master/src/interpolate/interpolateHue.js "Source")
 
-§ culori.__interpolateAlpha__
+<a name="culoriInterpolateNumber" href="#culoriInterpolateNumber">#</a> culori.__interpolateAlpha__ [<>](https://github.com/danburzo/culori/blob/master/src/interpolate/interpolateNumber.js "Source")
 
 ### Difference
 
-These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas.
+These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas. Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors. 
 
-#### Formulas
+<a name="culoriDifferenceEuclidean" href="#culoriDifferenceEuclidean">#</a> culori.__differenceEuclidean__(_mode = 'rgb'_) [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
 
-Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors. 
+Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
 
-Formula | Notes
-------- | -----
-§ culori.__differenceEuclidean__( _mode = 'rgb'_ ) | Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
-§ culori.__differenceCie76__() | Returns a [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76) Delta E* function. It is analogous to computing the Euclidean distance in the Lab color space.
-§ culori.__differenceCie94__( _kL = 1_, _K1 = 0.045_, _K2 = 0.015_ ) | Returns a [CIE94](https://en.wikipedia.org/wiki/Color_difference#CIE94) Delta E* function.
-§ culori.__differenceCiede2000__( _Kl = 1_, _Kc = 1_, _Kh = 1_ ) | Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E* function.
-§ culori.__differenceCmc__() |  Returns a [CMC l:c 1984](https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)) Delta E* function. Please note that _differenceCmc_ is not a metric, therefore it cannot be used with _nearest()_.
+<a name="culoriDifferenceCie76" href="#culoriDifferenceCie76">#</a> culori.__differenceCie76__() [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
+
+Returns a [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76) Delta E* function. It is analogous to computing the Euclidean distance in the Lab color space.
+
+<a name="culoriDifferenceCie94" href="#culoriDifferenceCie94">#</a> culori.__differenceCie94__(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_) [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
+
+Returns a [CIE94](https://en.wikipedia.org/wiki/Color_difference#CIE94) Delta E* function.
+
+<a name="culoriDifferenceCiede2000" href="#culoriDifferenceCiede2000">#</a> culori.__differenceCiede2000__(_Kl = 1_, _Kc = 1_, _Kh = 1_)  [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
+
+Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E* function.
+
+<a name="culoriDifferenceCmc" href="#culoriDifferenceCmc">#</a> culori.__differenceCmc__() [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
+
+Returns a [CMC l:c 1984](https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)) Delta E* function. Please note that _differenceCmc_ is not a metric, therefore it cannot be used with _nearest()_.
 
 #### Nearest color(s)
 
-§ culori.__nearest__( _colors_, _metric = differenceEuclidean()_, _accessor = identity_ ) → _function(color, n = 1, τ = Infinity)_.
+<a name="culoriNearest" href="#culoriNearest">#</a> culori.__nearest__(_colors_, _metric = differenceEuclidean()_, _accessor = identity_) → _function(color, n = 1, τ = Infinity)_ [<>](https://github.com/danburzo/culori/blob/master/src/nearest.js "Source")
 
 For a given _metric_ color difference formula, and an array of _colors_, returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_.
 
