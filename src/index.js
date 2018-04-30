@@ -12,6 +12,9 @@ import interpolateFunctionMonotone from './interpolate/interpolateFunctionMonoto
 import samples from './samples';
 import zip from './zip';
 
+import displayable from './displayable';
+import clamp from './clamp';
+
 import {
 	differenceEuclidean, 
 	differenceCie76, 
@@ -109,6 +112,9 @@ export {
 	differenceDin99o,
 
 	nearest,
+	
+	displayable,
+	clamp,
 	
 	// Extending Culori
 	defineMode,

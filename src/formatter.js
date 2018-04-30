@@ -1,9 +1,9 @@
 import converter from './converter';
 import round from './round';
-import clamp from './util/clamp';
+import fixup from './util/fixup';
 
-let rgb = converter('rgb'),
-	roundAlpha = round(2);
+let rgb = converter('rgb');
+let roundAlpha = round(2);
 
 export default (format = 'rgb') => 
 	c => {
@@ -14,9 +14,9 @@ export default (format = 'rgb') =>
 			return undefined;
 		}
 
-		let r = clamp(color.r);
-		let b = clamp(color.b);
-		let g = clamp(color.g);
+		let r = fixup(color.r);
+		let g = fixup(color.g);
+		let b = fixup(color.b);
 
 		if (format === 'hex') {
 			return '#' + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);

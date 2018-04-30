@@ -120,6 +120,26 @@ Format | Description
 `hex` | Returns the hex string for a color
 `rgb` | Returns the `rgb(…)` / `rgba(…)` string for a color
 
+<a name="culoriDisplayable" href="#culoriDisplayable">#</a> culori.__displayable__(_color_ or _String_) [<>](https://github.com/danburzo/culori/blob/master/src/displayable.js "Source")
+
+For some color spaces — particularly Lab and LCh — not all colors that can be expressed can be displayed on-screen. This function lets you check whether a particular color fits inside the sRGB gamut, i.e. that its `r`, `g`, and `b` channels are in the interval `[0, 1]`.
+
+```js
+culori.displayable('red'); // ⇒ true
+culori.displayable('rgb(300 255 255)'); // ⇒ false
+```
+
+<a name="culoriClamp" href="#culoriClamp">#</a> culori.__clamp__(_method = 'rgb'_) → _function (color)_ [<>](https://github.com/danburzo/culori/blob/master/src/clamp.js "Source")
+
+Returns a function which you can then use to retreive a representation of any color that's displayable on the screen, i.e. fits within the sRGB gamut. There are two available methods:
+
+* `method = 'rgb'` clamps the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`;
+* `method = 'lch'` converts the color to the LCh space and finds the largest Chroma channel value that's displayable for the given Lightness and Hue; if not even the achromatic version (Chroma = 0) of the LCh color isn't displayable, it falls back to the `rgb` method.
+
+```js
+culori.clamp('lch')('lch(50 120 5)'); // ⇒ { mode: 'lch', l: 50, c: 77.48291015625, h: 5 }
+```
+
 <a name="culoriRound" href="#culoriRound">#</a> culori.__round__(_n = 8_) [<>](https://github.com/danburzo/culori/blob/master/src/round.js "Source")
 
 A (rather miscellaneous) utility that returns a function with which to round numbers to at most _n_ digits of precision.
