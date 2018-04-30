@@ -92,14 +92,16 @@ The available modes (color spaces) are listed below. Each color space has a conv
 Mode | For | Shortcut
 ---- | --- | --------
 `rgb` | RGB color space | __culori__( _color_ )  and culori.__rgb__( _color_ )
-`hsl` | HSL color space | culori.__hsl__( _color_ ) 
-`hsv` | HSV color space | culori.__hsv__( _color_ )
-`hsi` | HSI color space | culori.__hsi__( _color_ )
-`hwb` | HWB color space | culori.__hwb__( _color_ )
-`lab` | Lab color space | culori.__lab__( _color_ ) 
-`lch` | LCh color space | culori.__lch__( _color_ )
-`lrgb`| Linearized RGB color space | culori.__lrgb__( _color_ )
-`cubehelix` | Cubehelix color space | culori.__cubehelix__( _color_ )
+`hsl` | HSL color space | culori.__hsl__(_color_) 
+`hsv` | HSV color space | culori.__hsv__(_color_)
+`hsi` | HSI color space | culori.__hsi__(_color_)
+`hwb` | HWB color space | culori.__hwb__(_color_)
+`lab` | Lab color space | culori.__lab__(_color_) 
+`lch` | LCh color space | culori.__lch__(_color_)
+`lrgb`| Linearized RGB color space | culori.__lrgb__(_color_)
+`cubehelix` | Cubehelix color space | culori.__cubehelix__(_color_)
+`dlab` | DIN99o Lab color space | culori.__dlab__(_color_)
+`dlch` | DIN99o LCh color space | culori.__dlch__(_color_)
 
 <a name="culoriFormatter" href="#culoriFormatter">#</a> culori.__formatter__(_format = 'rgb'_) → _function (color)_ [<>](https://github.com/danburzo/culori/blob/master/src/formatter.js "Source")
 
@@ -178,19 +180,27 @@ Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Eu
 
 <a name="culoriDifferenceCie76" href="#culoriDifferenceCie76">#</a> culori.__differenceCie76__() [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
 
-Returns a [CIE76](https://en.wikipedia.org/wiki/Color_difference#CIE76) Delta E* function. It is analogous to computing the Euclidean distance in the Lab color space.
+Computes the [CIE76][CIE76] ΔE\*<sub>ab</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space and it is analogous to [culori.differenceEuclidean('lab')](#culoriDifferenceEuclidean).
 
 <a name="culoriDifferenceCie94" href="#culoriDifferenceCie94">#</a> culori.__differenceCie94__(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_) [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
 
-Returns a [CIE94](https://en.wikipedia.org/wiki/Color_difference#CIE94) Delta E* function.
+Computes the [CIE94][CIE94] ΔE\*<sub>94</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space.
 
 <a name="culoriDifferenceCiede2000" href="#culoriDifferenceCiede2000">#</a> culori.__differenceCiede2000__(_Kl = 1_, _Kc = 1_, _Kh = 1_)  [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
+
+Computes the [CIEDE2000][CIEDE2000] ΔE\*<sub>00</sub> color difference between the colors _a_ and _b_ as implemented by [G. Sharma](http://www2.ece.rochester.edu/~gsharma/ciede2000/). The computation is done in the Lab color space.
 
 Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E* function.
 
 <a name="culoriDifferenceCmc" href="#culoriDifferenceCmc">#</a> culori.__differenceCmc__() [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
 
-Returns a [CMC l:c 1984](https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)) Delta E* function. Please note that _differenceCmc_ is not a metric, therefore it cannot be used with _nearest()_.
+Computes the [CMC l:c (1984)][CMC] ΔE\*<sub>CMC</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space.
+
+_Note:_ ΔE\*<sub>CMC</sub> is not considered a metric since it's not symmetrical, i.e. the distance from _a_ to _b_ is not always equal to the distance from _b_ to _a_. Therefore it cannot be reliably used with [culori.nearest()](#culoriNearest).
+
+<a name="culoriDifferenceDin99o" href="#culoriDifferenceDin99o">#</a> culori.__differenceDin99o__() [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
+
+Computes the [DIN99o][DIN99oDE] ΔE\*<sub>99o</sub> color difference between the colors _a_ and _b_. The computation is done in the [DIN99o][DIN99o] color space.
 
 #### Nearest color(s)
 
@@ -286,3 +296,10 @@ These libraries extend Culori:
 
 [css4-colors]: https://drafts.csswg.org/css-color/
 [css4-named-colors]: https://drafts.csswg.org/css-color/#named-colors
+
+[CIE76]: https://en.wikipedia.org/wiki/Color_difference#CIE76
+[CIE94]: https://en.wikipedia.org/wiki/Color_difference#CIE94
+[CIEDE2000]: https://en.wikipedia.org/wiki/Color_difference#CIEDE2000
+[CMC]: https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)
+[DIN99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
+[DIN99oDE]: https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel
