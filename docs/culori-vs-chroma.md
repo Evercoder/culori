@@ -18,7 +18,6 @@ Not implemented.
 
 Returns a random color. Not implemented.
 
-
 § chroma.contrast()
 
 Not implemented yet.

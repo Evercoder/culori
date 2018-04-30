@@ -24,6 +24,7 @@ When developing the API, I tried to balance brevity, convenience and flexibility
 ---
 
 <sup>1</sup> Other popular libraries you may want to look at are [TinyColor](https://github.com/bgrins/TinyColor) by [Brian Grinstead](http://briangrinstead.com), [color](https://github.com/Qix-/color) by Heather Arthur, [color.js](https://github.com/brehaut/color-js) by Andrew Brehaut et al, and [chromatist](https://github.com/jrus/chromatist) by [Jacob Rus](http://www.hcs.harvard.edu/~jrus/).
+
 <sup>2</sup> from the Romanian word for ‘colors’.
 
 ## Getting Started
@@ -31,8 +32,6 @@ When developing the API, I tried to balance brevity, convenience and flexibility
 TODO
 
 ## API Reference
-
-### Table of contents
 
 * [Basics](#basics)
 * [Interpolation](#interpolation)
@@ -137,25 +136,27 @@ For a given _metric_ color difference formula, and an array of _colors_, returns
 
 Pass _n = Infinity_ to get all colors in the array with a maximum distance of _τ_.
 
-# Color Spaces
+## Color Spaces
 
-## HSL
+TODO
+
+### HSL
 
 The figure above shows a slice of the HSL color space for a particular hue:
 
-![HSL Spectrum](./assets/hsl-spectrum.png)
+<img src='./.github/hsl-spectrum.png' width='200'/>
 
-## HSV
+### HSV
 
 The figure above shows a slice of the HSV color space for a particular hue:
 
-![HSV Spectrum](./assets/hsv-spectrum.png)
+<img src='./.github/hsv-spectrum.png' width='200'/>
 
-## HSI
+### HSI
 
 The figure above shows a slice of the HSI color space for a particular hue:
 
-![HSI Spectrum](./assets/hsi-spectrum.png)
+<img src='./.github/hsi-spectrum.png' width='200'/>
 
 ## Culori Recipes
 
