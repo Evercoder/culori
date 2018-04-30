@@ -17,7 +17,8 @@ import {
 	differenceCie76, 
 	differenceCie94,
 	differenceCiede2000,
-	differenceCmc
+	differenceCmc,
+	differenceDin99o
 } from './difference';
 import nearest from './nearest';
 
@@ -105,6 +106,7 @@ export {
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
+	differenceDin99o,
 
 	nearest,
 	

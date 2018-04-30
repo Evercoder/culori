@@ -1,12 +1,7 @@
 const rollup = require('rollup');
-const babel = require('rollup-plugin-babel');
+const buble = require('rollup-plugin-buble');
 const uglify = require('rollup-plugin-uglify');
 
-const babel_configuration = () => babel({
-	babelrc: false,
-	presets: ["es2015-rollup"],
-	plugins: ["transform-object-rest-spread"]
-});
 const bundles = [
 
 	// UMD
@@ -17,7 +12,9 @@ const bundles = [
 			format: 'umd',
 			name: 'culori',
 		},
-		plugins: [ babel_configuration() ]
+		plugins: [ buble({
+			objectAssign: 'Object.assign'
+		}) ]
 	},
 
 	// UMD, minified
@@ -28,7 +25,9 @@ const bundles = [
 			format: 'umd',
 			name: 'culori',
 		},
-		plugins: [ babel_configuration(), uglify() ]
+		plugins: [ buble({
+			objectAssign: 'Object.assign'
+		}), uglify() ]
 	},
 
 	// ES6 modules
@@ -38,7 +37,9 @@ const bundles = [
 			file: 'build/index.js',
 			format: 'es'
 		},
-		plugins: [ babel_configuration() ]
+		plugins: [ buble({
+			objectAssign: 'Object.assign'
+		}) ]
 	}
 
 ];

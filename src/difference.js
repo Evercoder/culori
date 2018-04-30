@@ -180,7 +180,6 @@ const differenceCmc = (l = 1, c = 1) => {
 };
 
 const differenceDin99o = () => differenceEuclidean('dlab');
-const differenceDin99
 
 export {
 	differenceEuclidean,
