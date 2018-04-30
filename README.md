@@ -54,6 +54,10 @@ To import culori as a `<script>` tag to use in a web page, load it from unpkg:
 
 If you prefer not to use a Content Delivery Network such as unpkg, just save the one of the JS files linked above to your project.
 
+### Trying it online
+
+You can use [npm.runkit.com/culori](https://npm.runkit.com/culori) as a playground to test various methods in from the API without installing culori in your project.
+
 ## API Reference
 
 * [Color representation](#color-representation)
