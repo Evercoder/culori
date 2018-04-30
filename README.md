@@ -1,8 +1,8 @@
 # Culori
 
 <figure style='text-align: center'>
-	<img src='./.github/man-rainbow.jpg' width='400'/>
-	<figcaption style='font-size: 0.8em'>“Man before a rainbow” (ca. 1700) — <a href='https://www.rijksmuseum.nl/en/collection/RP-P-1896-A-19368-1803'>Rijksmuseum</a>, via <a href='https://publicdomainreview.org'>The Public Domain Review</a>.</figcaption>
+  <img src='./.github/man-rainbow.jpg' width='400'/>
+  <figcaption style='font-size: 0.8em'>“Man before a rainbow” (ca. 1700) — <a href='https://www.rijksmuseum.nl/en/collection/RP-P-1896-A-19368-1803'>Rijksmuseum</a>, via <a href='https://publicdomainreview.org'>The Public Domain Review</a>.</figcaption>
 </figure>
 
 ⚠ _Until __v1.0.0__ the API is a work-in-progress and will be changing quite a bit._
@@ -45,11 +45,11 @@ Culori does not have a _Color_ class. Instead, it uses plain objects to represen
 ```js
 // A color in the RGB space
 {
-	mode: 'rgb',
-	r: 0.1,
-	g: 0.2,
-	b: 1,
-	alpha: 1
+  mode: 'rgb',
+  r: 0.1,
+  g: 0.2,
+  b: 1,
+  alpha: 1
 }
 ```
 
@@ -170,7 +170,7 @@ samples(5).map(grays);
 
 ### Difference
 
-These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas. Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors. 
+These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas. Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors. Also available as a separate [d3 plugin](https://github.com/danburzo/d3-color-difference).
 
 <a name="culoriDifferenceEuclidean" href="#culoriDifferenceEuclidean">#</a> culori.__differenceEuclidean__(_mode = 'rgb'_) [<>](https://github.com/danburzo/culori/blob/master/src/difference.js "Source")
 
@@ -238,8 +238,8 @@ To compute it in Culori:
 
 ```js
 function luminance(color) {
-	let c = culori.lrgb(color);
-	return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+  let c = culori.lrgb(color);
+  return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
 }
 ```
 
@@ -251,15 +251,22 @@ Using the `luminance()` function above, the `contrast()` ratio is simply the rat
 
 ```js
 function contrast(colorA, colorB) {
-	let L1 = luminance(colorA);
-	let L2 = luminance(colorB);
-	return (L1 + 0.05) / (L2 + 0.05);
+  let L1 = luminance(colorA);
+  let L2 = luminance(colorB);
+  return (L1 + 0.05) / (L2 + 0.05);
 }
 ```
 
 ## Extending Culori
 
 TODO
+
+## See also
+
+These libraries extend Culori:
+
+* [culori-scales](https://github.com/danburzo/culori-scales) — color scales (ColorBrewer, matplotlib, etc.)
+* [culori-names](https://github.com/danburzo/culori-names) — more color names
 
 ## Further reading
 
