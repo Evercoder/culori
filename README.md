@@ -33,26 +33,61 @@ TODO
 
 ## API Reference
 
-* [Basics](#basics)
+* [Color representation](#color-representation)
+* [Basics methods](#basic-methods)
 * [Interpolation](#interpolation)
 * [Difference](#difference)
 
-### Basics
+### Color representation
+
+Culori does not have a _Color_ class. Instead, it uses plain objects to represent colors:
+
+```js
+// A color in the RGB space
+{
+	mode: 'rgb',
+	r: 0.1,
+	g: 0.2,
+	b: 1,
+	alpha: 1
+}
+```
+
+The object needs to have a `mode` key that identifies the color space, and values for each channel in that particular color space. Optionally, the `alpha` key hold's the color's alpha channel.
+
+### Basic methods
 
 § culori.__parse__( _string_ ) → _color_ or _undefined_
 
 Parses a string and returns the corresponding _color_. The color will be in the matching color space, e.g. RGB for hex strings, HSL for `hsl(…, …, …)` strings, et cetera. If no built-in parsers can match the string, the function will return _undefined_.
 
-§ culori.__converter__( _mode = "rgb"_ ) → _function_
+```js
+// named colors
+culori.parse('red'); // ⇒ { r: 1, g: 0, b: 0, mode: 'rgb' }
+
+// hex strings
+culori.parse('#ff0000'); // ⇒ { r: 1, g: 0, b: 0, mode: 'rgb' }
+
+// HSL color
+culori.parse('hsl(60 50% 10% / 100%)'); // ⇒ { h: 60, s: 0.5, b: 0.1, alpha: 1, mode: 'hsl' }
+
+// Lab color
+culori.parse('lab(100 -50 50)'); // ⇒ { l: 100, a: -50, b: 50, mode: 'lab' }
+```
+
+§ culori.__converter__( _mode = "rgb"_ ) → _function (color or String)_
 
 Returns a function that can then convert any color to the _mode_ color space:
 
 ```js
 var rgb = culori.converter('rgb');
-rgb('#f0f0f0');
+
+rgb('#f0f0f0'); // ⇒ { "mode": "rgb", "r": 0.4980392156862745, "g": 0.4980392156862745, "b": 0.4980392156862745 }
 ```
 
-Currently, the available modes are: 
+Converters accept either strings (which will be parsed with `culori.parse`) or color objects. If the `mode` key is absent from the color, it's assumed to be in the converter's color space.
+
+The available modes (color spaces) are listed below. Each color space has a convenience method for converting to that color space.
 
 Mode | For | Shortcut
 ---- | --- | --------
@@ -66,11 +101,32 @@ Mode | For | Shortcut
 `lrgb`| Linearized RGB color space | culori.__lrgb__( _color_ )
 `cubehelix` | Cubehelix color space | culori.__cubehelix__( _color_ )
 
-§ culori.__formatter__( _format = 'rgb'_ )
+§ culori.__formatter__( _format = 'rgb'_ ) → _function (color)_
+
+Returns a function that can format colors to various formats. 
+
+```js
+let hex = culori.formatter('hex');
+
+hex('red'); // ⇒ "#ff0000"
+```
+
+Available formats:
+
+Format | Description
+------ | -----------
+`hex` | Returns the hex string for a color
+`rgb` | Returns the `rgb(…)` / `rgba(…)` string for a color
 
 § culori.__round__( _n = 8_ )
 
-Returns a function that rounds numbers to at most _n_ digits of precision.
+A rather miscellaneous utility that returns a function with which to round numbers to at most _n_ digits of precision.
+
+```js
+let approximate = culori.round(4);
+
+approximate(0.38393993); // => 0.3839
+```
 
 ### Interpolation
 
@@ -164,7 +220,7 @@ The figure above shows a slice of the HSI color space for a particular hue:
 
 The [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) of a color is defined as:
 
-```
+```js
 L = 0.2126 * R + 0.7152 * G + 0.0722 * B
 ```
 
