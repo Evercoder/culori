@@ -66,14 +66,19 @@ samples(5).map(grays);
 ### Interpolation functions
 
 § culori.__interpolateFunctionLinear__
+
 § culori.__interpolateFunctionSpline__
+
 § culori.__interpolateFunctionMonotone__
+
 § culori.__interpolateFunctionCosine__
 
 ### Interpolation modes
 
 § culori.__interpolateNumber__
+
 § culori.__interpolateHue__
+
 § culori.__interpolateAlpha__
 
 ## Difference
