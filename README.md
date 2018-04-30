@@ -1,7 +1,7 @@
 # Culori
 
 <figure style='text-align: center'>
-  <img src='./.github/man-rainbow.jpg' width='400'/>
+  <img src='https://github.com/danburzo/culori/.github/man-rainbow.jpg' width='400'/>
   <figcaption style='font-size: 0.8em'>“Man before a rainbow” (ca. 1700) — <a href='https://www.rijksmuseum.nl/en/collection/RP-P-1896-A-19368-1803'>Rijksmuseum</a>, via <a href='https://publicdomainreview.org'>The Public Domain Review</a>.</figcaption>
 </figure>
 
@@ -29,7 +29,30 @@ When developing the API, I tried to balance brevity, convenience and flexibility
 
 ## Getting Started
 
-TODO
+### Installation
+
+If you're using NPM, you can install culori by running:
+
+```bash
+npm install culori
+```
+
+You can either `require` or `import` culori in your project:
+
+```js
+// either
+var culori = require('culori');
+
+// or
+import { rgb } from 'culori';
+```
+
+To import culori as a `<script>` tag to use in a web page, load it from unpkg:
+
+* https://unpkg.com/culori@0.4.0/build/culori.js
+* https://unpkg.com/culori@0.4.0/build/culori.min.js
+
+If you prefer not to use a Content Delivery Network such as unpkg, just save the one of the JS files linked above to your project.
 
 ## API Reference
 
