@@ -34,6 +34,7 @@ TODO
 ## API Reference
 
 * [Color representation](#color-representation)
+* [A note on the API](#a-note-on-the-api)
 * [Basics methods](#basic-methods)
 * [Interpolation](#interpolation)
 * [Difference](#difference)
@@ -53,7 +54,11 @@ Culori does not have a _Color_ class. Instead, it uses plain objects to represen
 }
 ```
 
-The object needs to have a `mode` key that identifies the color space, and values for each channel in that particular color space. Optionally, the `alpha` key hold's the color's alpha channel.
+The object needs to have a `mode` property that identifies the color space, and values for each channel in that particular color space. See the [Color Spaces](#color-spaces) section for the channels expected of each color space. Optionally, the `alpha` property is used for the color's alpha channel.
+
+### A note on the API
+
+TODO explain Functional style and its benefits.
 
 ### Basic methods
 
@@ -134,7 +139,7 @@ culori.displayable('rgb(300 255 255)'); // ⇒ false
 Returns a function which you can then use to retreive a representation of any color that's displayable on the screen, i.e. fits within the sRGB gamut. There are two available methods:
 
 * `method = 'rgb'` clamps the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`;
-* `method = 'lch'` converts the color to the LCh space and finds the largest Chroma channel value that's displayable for the given Lightness and Hue; if not even the achromatic version (Chroma = 0) of the LCh color isn't displayable, it falls back to the `rgb` method.
+* `method = 'lch'` converts the color to the LCh space and finds the largest Chroma channel value that's displayable for the given Lightness and Hue; if not even the achromatic version (Chroma = 0) of the LCh color is displayable, it falls back to the `rgb` method.
 
 ```js
 culori.clamp('lch')('lch(50 120 5)'); // ⇒ { mode: 'lch', l: 50, c: 77.48291015625, h: 5 }
