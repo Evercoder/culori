@@ -10,7 +10,7 @@ __Color Differences__. Culori can compute [color differences](https://en.wikiped
 
 ## Foreword
 
-If you're thinking _Do we really need another JavaScript color library?_, I hear you. Reader, for the most part, we don't. Mike Bostock's [d3-color](https://github.com/d3/d3-color), and Gregor Aisch's [chroma.js](https://github.com/gka/chroma.js) are two robust libraries that provide most of what you need for working with colors on the web<sup>1</sup>. I'll admit Culori<sup>2</sup> is foremost a reflection of my own curiousity in understanding color spaces at a deeper level. But it also ended up a fairly fast, and fairly comprehensive, toolkit for manipulating colors — and with an implementation that has certain advantages.
+If you're thinking _Do we really need another JavaScript color library?_, I hear you. Reader, for the most part, we don't. Mike Bostock's [d3-color](https://github.com/d3/d3-color), and Gregor Aisch's [chroma.js](https://github.com/gka/chroma.js) are two robust libraries that provide most of what you need for working with colors on the web<sup>1</sup>. I'll admit culori<sup>2</sup> is foremost a reflection of my own curiousity in understanding color spaces at a deeper level. But it also ended up a fairly fast, and fairly comprehensive, toolkit for manipulating colors — and with an implementation that has certain advantages.
 
 The _alpha_ channel which governs a color's opacity is treated differently than in other libaries, in that we don't equate an _undefined_ alpha with an alpha of 1. The hex string <kbd>#ff0000</kbd> _should_ eventually be interpreted as a fully-opaque red color, but at the color-manipulation level we want to draw the distinction between <kbd>#ff0000</kbd> and <kbd>#ff0000ff</kbd>, which has an explicit alpha channel. 
 
@@ -24,9 +24,12 @@ When developing the API, I tried to balance brevity, convenience and flexibility
 
 ## Getting Started
 
-### Installation
+### Try it online
 
-If you're using NPM, you can install culori by running:
+You can use [npm.runkit.com/culori](https://npm.runkit.com/culori) as a playground to test various methods in from the API without installing culori in your project.
+
+
+### Install as NPM package
 
 ```bash
 npm install culori
@@ -42,16 +45,14 @@ var culori = require('culori');
 import { rgb } from 'culori';
 ```
 
-To import culori as a `<script>` tag to use in a web page, load it from unpkg:
+### Add culori via the `<script>` tag
 
-* https://unpkg.com/culori@0.4.0/build/culori.js
-* https://unpkg.com/culori@0.4.0/build/culori.min.js
+To import culori as a `<script>` tag to use in a web page, load it from [unpkg](https://unpkg.com):
+
+* https://unpkg.com/culori/build/culori.js
+* https://unpkg.com/culori/build/culori.min.js
 
 If you prefer not to use a Content Delivery Network such as unpkg, just save the one of the JS files linked above to your project.
-
-### Trying it online
-
-You can use [npm.runkit.com/culori](https://npm.runkit.com/culori) as a playground to test various methods in from the API without installing culori in your project.
 
 ## API Reference
 
@@ -291,7 +292,7 @@ L = 0.2126 * R + 0.7152 * G + 0.0722 * B
 
 Where R, G, and B are the components from the LRGB color space.
 
-To compute it in Culori:
+To compute it in culori:
 
 ```js
 function luminance(color) {
@@ -314,13 +315,13 @@ function contrast(colorA, colorB) {
 }
 ```
 
-## Extending Culori
+## Extending culori
 
 TODO
 
 ## See also
 
-These libraries extend Culori:
+These libraries add more functionality to culori:
 
 * [culori-scales](https://github.com/evercoder/culori-scales) — color scales (ColorBrewer, matplotlib, etc.)
 * [culori-names](https://github.com/evercoder/culori-names) — more color names
@@ -333,7 +334,7 @@ These libraries extend Culori:
 
 ## Colophon
 
-* _Author_ [Dan Burzo](http://evercoder.ro)
+* _Author_ [Dan Burzo](http://danburzo.ro)
 * _License_ [MIT](./LICENSE)
 * _Inspired by_ [d3-color](https://github.com/d3/d3-color), [d3-interpolate](https://github.com/d3/d3-interpolate), [chroma.js](https://github.com/gka/chroma.js)
 * _Dependencies_ none
