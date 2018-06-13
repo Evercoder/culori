@@ -1,4 +1,6 @@
-# API Reference
+---
+title: API Reference
+---
 
 * [Color representation](#color-representation)
 * [A note on the API](#a-note-on-the-api)

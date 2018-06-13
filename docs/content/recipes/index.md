@@ -1,5 +1,6 @@
-# Culori Recipes
-
+---
+title: Culori Recipes
+---
 #### Relative luminance of a color
 
 The [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) of a color is defined as:

@@ -1,3 +1,5 @@
-## Extending culori
+---
+title: Extending culori
+---
 
 TODO

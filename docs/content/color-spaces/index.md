@@ -1,4 +1,6 @@
-# Color Spaces
+---
+title: Color Spaces
+---
 
 TODO
 
