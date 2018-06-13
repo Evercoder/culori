@@ -1,9 +1,9 @@
 {
   "name": "culori",
   "version": "0.4.1",
-  "main": "build/culori.js",
-  "module": "build/index.js",
-  "jsnext:main": "build/index.js",
+  "main": "build/culori.umd.js",
+  "module": "build/culori.js",
+  "jsnext:main": "build/culori.js",
   "repository": "git@github.com:Evercoder/culori.git",
   "author": "Dan Burzo <danburzo@gmail.com>",
   "license": "MIT",
@@ -11,6 +11,7 @@
     "build"
   ],
   "devDependencies": {
+    "gh-pages": "^1.2.0",
     "nyc": "^11.6.0",
     "rollup": "^0.57.1",
     "rollup-plugin-buble": "^0.19.2",
@@ -19,12 +20,15 @@
     "tape": "^4.9.0"
   },
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "rollup -c",
     "pretest": "yarn build",
     "test": "tape test/*.js | tap-spec",
     "benchmark": "node benchmark/index.js",
     "prepublishOnly": "yarn test",
     "coverage:report": "nyc report --reporter=lcov",
-    "coverage:test": "nyc --produce-source-map tape test/*.js | tap-spec"
+    "coverage:test": "nyc --produce-source-map tape test/*.js | tap-spec",
+    "docs:start": "hugo serve --source docs",
+    "docs:build": "hugo --source docs",
+    "docs:deploy": "yarn docs:build && gh-pages -d docs/public"
   }
 }
