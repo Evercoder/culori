@@ -1,6 +1,6 @@
 {
   "name": "culori",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "build/culori.umd.js",
   "module": "build/culori.js",
   "jsnext:main": "build/culori.js",
@@ -25,6 +25,7 @@
     "test": "tape test/*.js | tap-spec",
     "benchmark": "node benchmark/index.js",
     "prepublishOnly": "yarn test",
+    "postpublish": "git push && git push --tags",
     "coverage:report": "nyc report --reporter=lcov",
     "coverage:test": "nyc --produce-source-map tape test/*.js | tap-spec",
     "docs:start": "hugo serve --source docs",
