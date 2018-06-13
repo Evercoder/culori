@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {{ block "title" . }}
+        {{ .Site.Title }}
+      {{ end }}
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700|IBM+Plex+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ `style.css` | relURL }}">
+  </head>
+  <body>
+    {{ block "header" . }}
+    <header>
+      <div class='container'>
+        <a href='https://moqups.com' class='logo'>
+          <img src='{{ `moqups.svg` | relURL}}' alt='Moqups Logo'/>
+        </a>
+      </div>
+    </header>
+    {{ end }}
+
+    <article class='main'>
+    {{ block "main" . }}
+    {{ end }}
+    </article>
+    
+    {{ block "footer" . }}
+    <footer>
+      <div class='container'>
+        <p>Evercoder Software are the makers of <a href='https://moqups.com'>Moqups</a> — find us <a href='https://github.com/Evercoder'>on GitHub</a>. This website is built with <a href='https://gohugo.io'>Hugo</a>.</p>
+      </div>
+    </footer>
+    {{ end }}
+  </body>
+</html>
