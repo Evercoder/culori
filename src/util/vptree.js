@@ -6,19 +6,19 @@
 
  */
 
-import identity from './identity';
+// import identity from './identity';
 
-const vptree = (items, metric, accesor = identity) => {
+// const vptree = (items, metric, accesor = identity) => {
 
-	let values = [];
-	let indexes = [];
+// 	let values = [];
+// 	let indexes = [];
 
-	items.forEach((item, idx) => {
-		values.push(accessor(item));
-		indexes.push(idx);
-	});
+// 	items.forEach((item, idx) => {
+// 		values.push(accessor(item));
+// 		indexes.push(idx);
+// 	});
 
-	return (item, n = 1, τ = Infinity) => {
+// 	return (item, n = 1, τ = Infinity) => {
 
-	}
-}
+// 	}
+// }

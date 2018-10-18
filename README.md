@@ -1,18 +1,20 @@
 # Culori
 
-⚠ _Until the first stable release (1.0.0) the API is considered unstable and will be changing quite a bit. Use cautiously!_
+<a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat" alt="npm version"></a>
 
 Culori is a general-purpose color library for JavaScript. It incorporates, and extends, ideas from Mike Bostock's [D3.js](https://github.com/d3) and Gregor Aisch's [chroma.js](https://github.com/gka/chroma.js).
 
-__Color Spaces__. Culori supports all the formats defined in the [CSS Colors Level 4][css4-colors]: [Named colors][css4-named-colors], [Hex colors](https://drafts.csswg.org/css-color/#hex-notation) (3 to 8 digits), [RGB](https://drafts.csswg.org/css-color/#rgb-functions), [HSL](https://drafts.csswg.org/css-color/#the-hsl-notation), [HWB](https://drafts.csswg.org/css-color/#the-hwb-notation), [Lab and LCh](https://drafts.csswg.org/css-color/#lab-colors), and [Grays](https://drafts.csswg.org/css-color/#grays). Additionally, the [Linear RGB](https://en.wikipedia.org/wiki/SRGB#The_sRGB_transfer_function_(%22gamma%22)), [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) (also known as HSB), [HSI](https://en.wikipedia.org/wiki/HSL_and_HSV), and [Cubehelix](https://www.mrao.cam.ac.uk/%7Edag/CUBEHELIX/) color spaces are supported.
+**Color Spaces**. Culori supports all the formats defined in the [CSS Colors Level 4][css4-colors]: [Named colors][css4-named-colors], [Hex colors](https://drafts.csswg.org/css-color/#hex-notation) (3 to 8 digits), [RGB](https://drafts.csswg.org/css-color/#rgb-functions), [HSL](https://drafts.csswg.org/css-color/#the-hsl-notation), [HWB](https://drafts.csswg.org/css-color/#the-hwb-notation), [Lab and LCh](https://drafts.csswg.org/css-color/#lab-colors), and [Grays](https://drafts.csswg.org/css-color/#grays). Additionally, the [Linear RGB](<https://en.wikipedia.org/wiki/SRGB#The_sRGB_transfer_function_(%22gamma%22)>), [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) (also known as HSB), [HSI](https://en.wikipedia.org/wiki/HSL_and_HSV), and [Cubehelix](https://www.mrao.cam.ac.uk/%7Edag/CUBEHELIX/) color spaces are supported.
 
-__Color Differences__. Culori can compute [color differences](https://en.wikipedia.org/wiki/Color_difference) with either a simple Euclidean distance or the CIELAB Delta E* metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984). They're also available [as a D3 plugin](https://github.com/evercoder/d3-color-difference). It can also find the closest N colors from a set of colors based on any of these differences.
+**Color Differences**. Culori can compute [color differences](https://en.wikipedia.org/wiki/Color_difference) with either a simple Euclidean distance or the CIELAB Delta E\* metric as formulated by CIE76, CIE94, CIEDE2000 and CMC l:c (1984). They're also available [as a D3 plugin](https://github.com/evercoder/d3-color-difference). It can also find the closest N colors from a set of colors based on any of these differences.
+
+⚠ **Note: The API may change as we near the first stable release (1.0.0).** Keep an eye on the [CHANGELOG](./CHANGELOG.md).
 
 ## Foreword
 
 If you're thinking _Do we really need another JavaScript color library?_, I hear you. Reader, for the most part, we don't. Mike Bostock's [d3-color](https://github.com/d3/d3-color), and Gregor Aisch's [chroma.js](https://github.com/gka/chroma.js) are two robust libraries that provide most of what you need for working with colors on the web<sup>1</sup>. I'll admit culori<sup>2</sup> is foremost a reflection of my own curiousity in understanding color spaces at a deeper level. But it also ended up a fairly fast, and fairly comprehensive, toolkit for manipulating colors — and with an implementation that has certain advantages.
 
-The _alpha_ channel which governs a color's opacity is treated differently than in other libaries, in that we don't equate an _undefined_ alpha with an alpha of 1. The hex string <kbd>#ff0000</kbd> _should_ eventually be interpreted as a fully-opaque red color, but at the color-manipulation level we want to draw the distinction between <kbd>#ff0000</kbd> and <kbd>#ff0000ff</kbd>, which has an explicit alpha channel. 
+The _alpha_ channel which governs a color's opacity is treated differently than in other libaries, in that we don't equate an _undefined_ alpha with an alpha of 1. The hex string <kbd>#ff0000</kbd> _should_ eventually be interpreted as a fully-opaque red color, but at the color-manipulation level we want to draw the distinction between <kbd>#ff0000</kbd> and <kbd>#ff0000ff</kbd>, which has an explicit alpha channel.
 
 When developing the API, I tried to balance brevity, convenience and flexibility. It ended up a more-or-less functional API, i.e. a collection of functions you can pipe data through. It's not as readable as a fluent API where you chain methods, but it's much more flexible, I think.
 
@@ -26,22 +28,27 @@ When developing the API, I tried to balance brevity, convenience and flexibility
 
 ### Try it online
 
-You can use [npm.runkit.com/culori](https://npm.runkit.com/culori) as a playground to test various methods in from the API without installing culori in your project.
+You can use [npm.runkit.com/culori](https://npm.runkit.com/culori) as a playground to test various methods in from the API without installing culori in your project. [Observable](https://beta.observablehq.com) is another great place to tinker with the library.
 
+### Install as npm package
 
-### Install as NPM package
+culori is bundled as UMD and ES [on npm](https://npmjs.com/package/culori). Install it using `npm` or `yarn`:
 
 ```bash
+# using npm
 npm install culori
+
+# using yarn
+yarn add culori
 ```
 
-You can either `require` or `import` culori in your project:
+You can then import culori in your project:
 
 ```js
-// either
+// CJS-style
 var culori = require('culori');
 
-// or
+// ES-style
 import { rgb } from 'culori';
 ```
 
@@ -49,18 +56,17 @@ import { rgb } from 'culori';
 
 To import culori as a `<script>` tag to use in a web page, load it from [unpkg](https://unpkg.com):
 
-* https://unpkg.com/culori/build/culori.js
-* https://unpkg.com/culori/build/culori.min.js
-
-If you prefer not to use a Content Delivery Network such as unpkg, just save the one of the JS files linked above to your project.
+```html
+<script src='https://unpkg.com/culori'/>
+```
 
 ## API Reference
 
-* [Color representation](#color-representation)
-* [A note on the API](#a-note-on-the-api)
-* [Basics methods](#basic-methods)
-* [Interpolation](#interpolation)
-* [Difference](#difference)
+-   [Color representation](#color-representation)
+-   [A note on the API](#a-note-on-the-api)
+-   [Basics methods](#basic-methods)
+-   [Interpolation](#interpolation)
+-   [Difference](#difference)
 
 ### Color representation
 
@@ -85,7 +91,7 @@ TODO explain Functional style and its benefits.
 
 ### Basic methods
 
-<a name="culoriParse" href="#culoriParse">#</a> culori.__parse__(_string_) → _color_ or _undefined_ [<>](https://github.com/evercoder/culori/blob/master/src/parse.js "Source")
+<a name="culoriParse" href="#culoriParse">#</a> culori.**parse**(_string_) → _color_ or _undefined_ [<>](https://github.com/evercoder/culori/blob/master/src/parse.js 'Source')
 
 Parses a string and returns the corresponding _color_. The color will be in the matching color space, e.g. RGB for hex strings, HSL for `hsl(…, …, …)` strings, et cetera. If no built-in parsers can match the string, the function will return _undefined_.
 
@@ -103,7 +109,7 @@ culori.parse('hsl(60 50% 10% / 100%)'); // ⇒ { h: 60, s: 0.5, b: 0.1, alpha: 1
 culori.parse('lab(100 -50 50)'); // ⇒ { l: 100, a: -50, b: 50, mode: 'lab' }
 ```
 
-<a name="culoriConverter" href="#culoriConverter">#</a> culori.__converter__(_mode = "rgb"_) → _function (color or String)_ [<>](https://github.com/evercoder/culori/blob/master/src/converter.js "Source")
+<a name="culoriConverter" href="#culoriConverter">#</a> culori.**converter**(_mode = "rgb"_) → _function (color or String)_ [<>](https://github.com/evercoder/culori/blob/master/src/converter.js 'Source')
 
 Returns a function that can then convert any color to the _mode_ color space:
 
@@ -117,23 +123,23 @@ Converters accept either strings (which will be parsed with `culori.parse`) or c
 
 The available modes (color spaces) are listed below. Each color space has a convenience method for converting to that color space.
 
-Mode | For | Shortcut
----- | --- | --------
-`rgb` | RGB color space | __culori__( _color_ )  and culori.__rgb__( _color_ )
-`hsl` | HSL color space | culori.__hsl__(_color_) 
-`hsv` | HSV color space | culori.__hsv__(_color_)
-`hsi` | HSI color space | culori.__hsi__(_color_)
-`hwb` | HWB color space | culori.__hwb__(_color_)
-`lab` | Lab color space | culori.__lab__(_color_) 
-`lch` | LCh color space | culori.__lch__(_color_)
-`lrgb`| Linearized RGB color space | culori.__lrgb__(_color_)
-`cubehelix` | Cubehelix color space | culori.__cubehelix__(_color_)
-`dlab` | DIN99o Lab color space | culori.__dlab__(_color_)
-`dlch` | DIN99o LCh color space | culori.__dlch__(_color_)
+| Mode        | For                        | Shortcut                                            |
+| ----------- | -------------------------- | --------------------------------------------------- |
+| `rgb`       | RGB color space            | **culori**( _color_ ) and culori.**rgb**( _color_ ) |
+| `hsl`       | HSL color space            | culori.**hsl**(_color_)                             |
+| `hsv`       | HSV color space            | culori.**hsv**(_color_)                             |
+| `hsi`       | HSI color space            | culori.**hsi**(_color_)                             |
+| `hwb`       | HWB color space            | culori.**hwb**(_color_)                             |
+| `lab`       | Lab color space            | culori.**lab**(_color_)                             |
+| `lch`       | LCh color space            | culori.**lch**(_color_)                             |
+| `lrgb`      | Linearized RGB color space | culori.**lrgb**(_color_)                            |
+| `cubehelix` | Cubehelix color space      | culori.**cubehelix**(_color_)                       |
+| `dlab`      | DIN99o Lab color space     | culori.**dlab**(_color_)                            |
+| `dlch`      | DIN99o LCh color space     | culori.**dlch**(_color_)                            |
 
-<a name="culoriFormatter" href="#culoriFormatter">#</a> culori.__formatter__(_format = 'rgb'_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/formatter.js "Source")
+<a name="culoriFormatter" href="#culoriFormatter">#</a> culori.**formatter**(_format = 'rgb'_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/formatter.js 'Source')
 
-Returns a formatter function that can transform colors to useful string representations. 
+Returns a formatter function that can transform colors to useful string representations.
 
 ```js
 let hex = culori.formatter('hex');
@@ -143,12 +149,12 @@ hex('red'); // ⇒ "#ff0000"
 
 Available formats:
 
-Format | Description
------- | -----------
-`hex` | Returns the hex string for a color
-`rgb` | Returns the `rgb(…)` / `rgba(…)` string for a color
+| Format | Description                                         |
+| ------ | --------------------------------------------------- |
+| `hex`  | Returns the hex string for a color                  |
+| `rgb`  | Returns the `rgb(…)` / `rgba(…)` string for a color |
 
-<a name="culoriDisplayable" href="#culoriDisplayable">#</a> culori.__displayable__(_color_ or _String_) [<>](https://github.com/evercoder/culori/blob/master/src/displayable.js "Source")
+<a name="culoriDisplayable" href="#culoriDisplayable">#</a> culori.**displayable**(_color_ or _String_) [<>](https://github.com/evercoder/culori/blob/master/src/displayable.js 'Source')
 
 For some color spaces — particularly Lab and LCh — not all colors that can be expressed can be displayed on-screen. This function lets you check whether a particular color fits inside the sRGB gamut, i.e. that its `r`, `g`, and `b` channels are in the interval `[0, 1]`.
 
@@ -157,18 +163,18 @@ culori.displayable('red'); // ⇒ true
 culori.displayable('rgb(300 255 255)'); // ⇒ false
 ```
 
-<a name="culoriClamp" href="#culoriClamp">#</a> culori.__clamp__(_method = 'rgb'_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/clamp.js "Source")
+<a name="culoriClamp" href="#culoriClamp">#</a> culori.**clamp**(_method = 'rgb'_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/clamp.js 'Source')
 
 Returns a function which you can then use to retreive a representation of any color that's displayable on the screen, i.e. fits within the sRGB gamut. There are two available methods:
 
-* `method = 'rgb'` clamps the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`;
-* `method = 'lch'` converts the color to the LCh space and finds the largest Chroma channel value that's displayable for the given Lightness and Hue; if not even the achromatic version (Chroma = 0) of the LCh color is displayable, it falls back to the `rgb` method.
+-   `method = 'rgb'` clamps the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`;
+-   `method = 'lch'` converts the color to the LCh space and finds the largest Chroma channel value that's displayable for the given Lightness and Hue; if not even the achromatic version (Chroma = 0) of the LCh color is displayable, it falls back to the `rgb` method.
 
 ```js
 culori.clamp('lch')('lch(50 120 5)'); // ⇒ { mode: 'lch', l: 50, c: 77.48291015625, h: 5 }
 ```
 
-<a name="culoriRound" href="#culoriRound">#</a> culori.__round__(_n = 8_) [<>](https://github.com/evercoder/culori/blob/master/src/round.js "Source")
+<a name="culoriRound" href="#culoriRound">#</a> culori.**round**(_n = 8_) [<>](https://github.com/evercoder/culori/blob/master/src/round.js 'Source')
 
 A (rather miscellaneous) utility that returns a function with which to round numbers to at most _n_ digits of precision.
 
@@ -180,11 +186,11 @@ approximate(0.38393993); // => 0.3839
 
 ### Interpolation
 
-<a name="culoriInterpolate" href="#culoriInterpolate">#</a> culori.__interpolate__(_colors_, _mode = "rgb"_) [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js "Source")
+<a name="culoriInterpolate" href="#culoriInterpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_) [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js 'Source')
 
 Returns an interpolator between an array of colors in the _mode_ color space.
 
-<a name="culoriSamples" href="#culoriSamples">#</a> culori.__samples__(_n = 2_, _γ = 1_) [<>](https://github.com/evercoder/culori/blob/master/src/samples.js "Source")
+<a name="culoriSamples" href="#culoriSamples">#</a> culori.**samples**(_n = 2_, _γ = 1_) [<>](https://github.com/evercoder/culori/blob/master/src/samples.js 'Source')
 
 Returns an array of _n_ equally-spaced samples from the `[0, 1]` range, with `0` and `1` at the ends. The function also accepts a _γ_ (gamma) parameter which will map each value _t_ to _t_<sup>γ</sup>.
 
@@ -202,57 +208,57 @@ samples(5).map(grays);
 
 #### Interpolation functions
 
-<a name="culoriInterpolateFunctionLinear" href="#culoriInterpolateFunctionLinear">#</a> culori.__interpolateFunctionLinear__ [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionLinear.js "Source")
+<a name="culoriInterpolateFunctionLinear" href="#culoriInterpolateFunctionLinear">#</a> culori.**interpolateFunctionLinear** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionLinear.js 'Source')
 
-<a name="culoriInterpolateFunctionSpline" href="#culoriInterpolateFunctionSpline">#</a> culori.__interpolateFunctionSpline__ [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionSpline.js "Source")
+<a name="culoriInterpolateFunctionSpline" href="#culoriInterpolateFunctionSpline">#</a> culori.**interpolateFunctionSpline** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionSpline.js 'Source')
 
-<a name="culoriInterpolateFunctionMonotone" href="#culoriInterpolateFunctionMonotone">#</a> culori.__interpolateFunctionMonotone__ [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionMonotone.js "Source")
+<a name="culoriInterpolateFunctionMonotone" href="#culoriInterpolateFunctionMonotone">#</a> culori.**interpolateFunctionMonotone** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionMonotone.js 'Source')
 
-<a name="culoriInterpolateFunctionCosine" href="#culoriInterpolateFunctionCosine">#</a> culori.__interpolateFunctionCosine__ [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionCosine.js "Source")
+<a name="culoriInterpolateFunctionCosine" href="#culoriInterpolateFunctionCosine">#</a> culori.**interpolateFunctionCosine** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionCosine.js 'Source')
 
 #### Interpolation modes
 
-<a name="culoriInterpolateNumber" href="#culoriInterpolateNumber">#</a> culori.__interpolateNumber__ [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateNumber.js "Source")
+<a name="culoriInterpolateNumber" href="#culoriInterpolateNumber">#</a> culori.**interpolateNumber** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateNumber.js 'Source')
 
-<a name="culoriInterpolateHue" href="#culoriInterpolateHue">#</a> culori.__interpolateHue__ [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateHue.js "Source")
+<a name="culoriInterpolateHue" href="#culoriInterpolateHue">#</a> culori.**interpolateHue** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateHue.js 'Source')
 
-<a name="culoriInterpolateNumber" href="#culoriInterpolateNumber">#</a> culori.__interpolateAlpha__ [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateNumber.js "Source")
+<a name="culoriInterpolateNumber" href="#culoriInterpolateNumber">#</a> culori.**interpolateAlpha** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateNumber.js 'Source')
 
 ### Difference
 
 These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas. Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors. Also available as a separate [d3 plugin](https://github.com/evercoder/d3-color-difference).
 
-<a name="culoriDifferenceEuclidean" href="#culoriDifferenceEuclidean">#</a> culori.__differenceEuclidean__(_mode = 'rgb'_) [<>](https://github.com/evercoder/culori/blob/master/src/difference.js "Source")
+<a name="culoriDifferenceEuclidean" href="#culoriDifferenceEuclidean">#</a> culori.**differenceEuclidean**(_mode = 'rgb'_) [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
 Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
 
-<a name="culoriDifferenceCie76" href="#culoriDifferenceCie76">#</a> culori.__differenceCie76__() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js "Source")
+<a name="culoriDifferenceCie76" href="#culoriDifferenceCie76">#</a> culori.**differenceCie76**() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
-Computes the [CIE76][CIE76] ΔE\*<sub>ab</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space and it is analogous to [culori.differenceEuclidean('lab')](#culoriDifferenceEuclidean).
+Computes the [CIE76][cie76] ΔE\*<sub>ab</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space and it is analogous to [culori.differenceEuclidean('lab')](#culoriDifferenceEuclidean).
 
-<a name="culoriDifferenceCie94" href="#culoriDifferenceCie94">#</a> culori.__differenceCie94__(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_) [<>](https://github.com/evercoder/culori/blob/master/src/difference.js "Source")
+<a name="culoriDifferenceCie94" href="#culoriDifferenceCie94">#</a> culori.**differenceCie94**(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_) [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
-Computes the [CIE94][CIE94] ΔE\*<sub>94</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space.
+Computes the [CIE94][cie94] ΔE\*<sub>94</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space.
 
-<a name="culoriDifferenceCiede2000" href="#culoriDifferenceCiede2000">#</a> culori.__differenceCiede2000__(_Kl = 1_, _Kc = 1_, _Kh = 1_)  [<>](https://github.com/evercoder/culori/blob/master/src/difference.js "Source")
+<a name="culoriDifferenceCiede2000" href="#culoriDifferenceCiede2000">#</a> culori.**differenceCiede2000**(_Kl = 1_, _Kc = 1_, _Kh = 1_) [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
-Computes the [CIEDE2000][CIEDE2000] ΔE\*<sub>00</sub> color difference between the colors _a_ and _b_ as implemented by [G. Sharma](http://www2.ece.rochester.edu/~gsharma/ciede2000/). The computation is done in the Lab color space.
+Computes the [CIEDE2000][ciede2000] ΔE\*<sub>00</sub> color difference between the colors _a_ and _b_ as implemented by [G. Sharma](http://www2.ece.rochester.edu/~gsharma/ciede2000/). The computation is done in the Lab color space.
 
-Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E* function.
+Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E\* function.
 
-<a name="culoriDifferenceCmc" href="#culoriDifferenceCmc">#</a> culori.__differenceCmc__() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js "Source")
+<a name="culoriDifferenceCmc" href="#culoriDifferenceCmc">#</a> culori.**differenceCmc**() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
-Computes the [CMC l:c (1984)][CMC] ΔE\*<sub>CMC</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space.
+Computes the [CMC l:c (1984)][cmc] ΔE\*<sub>CMC</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space.
 
 _Note:_ ΔE\*<sub>CMC</sub> is not considered a metric since it's not symmetrical, i.e. the distance from _a_ to _b_ is not always equal to the distance from _b_ to _a_. Therefore it cannot be reliably used with [culori.nearest()](#culoriNearest).
 
-<a name="culoriDifferenceDin99o" href="#culoriDifferenceDin99o">#</a> culori.__differenceDin99o__() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js "Source")
+<a name="culoriDifferenceDin99o" href="#culoriDifferenceDin99o">#</a> culori.**differenceDin99o**() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
-Computes the [DIN99o][DIN99oDE] ΔE\*<sub>99o</sub> color difference between the colors _a_ and _b_. The computation is done in the [DIN99o][DIN99o] color space.
+Computes the [DIN99o][din99ode] ΔE\*<sub>99o</sub> color difference between the colors _a_ and _b_. The computation is done in the [DIN99o][din99o] color space.
 
 #### Nearest color(s)
 
-<a name="culoriNearest" href="#culoriNearest">#</a> culori.__nearest__(_colors_, _metric = differenceEuclidean()_, _accessor = identity_) → _function(color, n = 1, τ = Infinity)_ [<>](https://github.com/evercoder/culori/blob/master/src/nearest.js "Source")
+<a name="culoriNearest" href="#culoriNearest">#</a> culori.**nearest**(_colors_, _metric = differenceEuclidean()_, _accessor = identity_) → _function(color, n = 1, τ = Infinity)_ [<>](https://github.com/evercoder/culori/blob/master/src/nearest.js 'Source')
 
 For a given _metric_ color difference formula, and an array of _colors_, returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_.
 
@@ -287,7 +293,7 @@ The figure above shows a slice of the HSI color space for a particular hue:
 The [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) of a color is defined as:
 
 ```js
-L = 0.2126 * R + 0.7152 * G + 0.0722 * B
+L = 0.2126 * R + 0.7152 * G + 0.0722 * B;
 ```
 
 Where R, G, and B are the components from the LRGB color space.
@@ -296,12 +302,12 @@ To compute it in culori:
 
 ```js
 function luminance(color) {
-  let c = culori.lrgb(color);
-  return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
+	let c = culori.lrgb(color);
+	return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
 }
 ```
 
-__Note:__ The WCAG defines the luminance using a [deprecated value](https://github.com/w3c/wcag/issues/236#issuecomment-379526596) for converting sRGB to LRGB. If you'd like a strict implementation, you'll need to write your own sRGB → LRGB conversion.
+**Note:** The WCAG defines the luminance using a [deprecated value](https://github.com/w3c/wcag/issues/236#issuecomment-379526596) for converting sRGB to LRGB. If you'd like a strict implementation, you'll need to write your own sRGB → LRGB conversion.
 
 #### Contrast ratio
 
@@ -309,9 +315,9 @@ Using the `luminance()` function above, the `contrast()` ratio is simply the rat
 
 ```js
 function contrast(colorA, colorB) {
-  let L1 = luminance(colorA);
-  let L2 = luminance(colorB);
-  return (L1 + 0.05) / (L2 + 0.05);
+	let L1 = luminance(colorA);
+	let L2 = luminance(colorB);
+	return (L1 + 0.05) / (L2 + 0.05);
 }
 ```
 
@@ -323,31 +329,29 @@ TODO
 
 These libraries add more functionality to culori:
 
-* [culori-scales](https://github.com/evercoder/culori-scales) — color scales (ColorBrewer, matplotlib, etc.)
-* [culori-names](https://github.com/evercoder/culori-names) — more color names
+-   [culori-scales](https://github.com/evercoder/culori-scales) — color scales (ColorBrewer, matplotlib, etc.)
+-   [culori-names](https://github.com/evercoder/culori-names) — more color names
 
 ## Further reading
 
-* [HSL and HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) on Wikipedia
-* [CSS Color Module Level 4][css4-colors]
-* [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value)
+-   [HSL and HSV](https://en.wikipedia.org/wiki/HSL_and_HSV) on Wikipedia
+-   [CSS Color Module Level 4][css4-colors]
+-   [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value)
 
 ## Colophon
 
-* _Author_ [Dan Burzo](http://danburzo.ro)
-* _License_ [MIT](./LICENSE)
-* _Inspired by_ [d3-color](https://github.com/d3/d3-color), [d3-interpolate](https://github.com/d3/d3-interpolate), [chroma.js](https://github.com/gka/chroma.js)
-* _Dependencies_ none
-* _Bundled with_ [rollup](https://github.com/rollup/rollup), [buble](https://github.com/Rich-Harris/buble)
-* _Tested with_ [tape](https://github.com/substack/tape)
-
+-   _Author_ [Dan Burzo](http://danburzo.ro)
+-   _License_ [MIT](./LICENSE)
+-   _Inspired by_ [d3-color](https://github.com/d3/d3-color), [d3-interpolate](https://github.com/d3/d3-interpolate), [chroma.js](https://github.com/gka/chroma.js)
+-   _Dependencies_ none
+-   _Bundled with_ [rollup](https://github.com/rollup/rollup), [buble](https://github.com/Rich-Harris/buble), [terser](https://github.com/terser-js/terser)
+-   _Tested with_ [tape](https://github.com/substack/tape)
 
 [css4-colors]: https://drafts.csswg.org/css-color/
 [css4-named-colors]: https://drafts.csswg.org/css-color/#named-colors
-
-[CIE76]: https://en.wikipedia.org/wiki/Color_difference#CIE76
-[CIE94]: https://en.wikipedia.org/wiki/Color_difference#CIE94
-[CIEDE2000]: https://en.wikipedia.org/wiki/Color_difference#CIEDE2000
-[CMC]: https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)
-[DIN99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
-[DIN99oDE]: https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel
+[cie76]: https://en.wikipedia.org/wiki/Color_difference#CIE76
+[cie94]: https://en.wikipedia.org/wiki/Color_difference#CIE94
+[ciede2000]: https://en.wikipedia.org/wiki/Color_difference#CIEDE2000
+[cmc]: https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)
+[din99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
+[din99ode]: https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel

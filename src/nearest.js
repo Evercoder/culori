@@ -12,7 +12,7 @@ import { differenceEuclidean } from './difference';
 // }
 
 // const vptree = (colors, metric) => {
-	
+
 // 	let color = select(colors);
 // 	let dist = median(color, colors, metric);
 
@@ -37,22 +37,25 @@ import { differenceEuclidean } from './difference';
 // 		}
 // 	}
 // }
-// 
-// 
+//
+//
 const identity = d => d;
 
 export default (colors, metric = differenceEuclidean(), accesor = identity) => {
 	let arr = colors.map((c, idx) => ({ color: accesor(c), i: idx }));
 	return (color, n = 1, τ = Infinity) => {
-		
 		if (isFinite(n)) {
 			n = Math.max(1, Math.min(n, arr.length - 1));
 		}
 
 		arr.forEach(c => {
-			c.d = metric(color, c.color)
+			c.d = metric(color, c.color);
 		});
 
-		return arr.sort((a, b) => a.d - b.d).slice(0, n).filter(c => c.d < τ).map(c => c.color);
-	}
-}
+		return arr
+			.sort((a, b) => a.d - b.d)
+			.slice(0, n)
+			.filter(c => c.d < τ)
+			.map(c => c.color);
+	};
+};

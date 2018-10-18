@@ -1,17 +1,13 @@
 let tape = require('tape');
 let culori = require('../');
-let { round, rgb, formatter } = culori;
+let { rgb, formatter } = culori;
 
-tape("rgb(Specifier)", function(test) {
-
-	test.deepEqual(
-		formatter('hex')(rgb('#ffffff')),
-		'#ffffff'
-	);
+tape('rgb(Specifier)', function(test) {
+	test.deepEqual(formatter('hex')(rgb('#ffffff')), '#ffffff');
 
 	test.deepEqual(
-		rgb('tomato'), 
-		{ r: 1, g: 0.38823529411764707, b: 0.2784313725490196, mode: 'rgb' }, 
+		rgb('tomato'),
+		{ r: 1, g: 0.38823529411764707, b: 0.2784313725490196, mode: 'rgb' },
 		'named color'
 	);
 
@@ -42,8 +38,7 @@ tape("rgb(Specifier)", function(test) {
 	test.end();
 });
 
-tape("rgb(Object)", function(test) {
-
+tape('rgb(Object)', function(test) {
 	test.deepEqual(
 		rgb({ r: 1, g: 0, b: 0 }),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },

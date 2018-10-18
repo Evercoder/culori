@@ -1,9 +1,8 @@
 let tape = require('tape');
-let culori = require('../');
-let { cubehelix, rgb } = culori;
+// let culori = require('../');
+// let { cubehelix, rgb } = culori;
 
 tape('RGB -> Cubehelix', function(test) {
-	
 	// test.deepEqual(
 	// 	cubehelix('red'),
 	// 	{},

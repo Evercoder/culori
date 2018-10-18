@@ -1,24 +1,25 @@
 let tape = require('tape');
 let culori = require('../');
-let { interpolate, samples, formatter, cubehelix, converter } = culori;
+let { interpolate, samples, formatter } = culori;
 
 let hex = formatter('hex');
 
 tape('11 swatches between black and white in RGB', function(test) {
-
 	test.deepEqual(
-		samples(11).map(interpolate(['#fff', '#000'])).map(hex),
-		[ 
-			'#ffffff', 
-			'#e6e6e6', 
-			'#cccccc', 
-			'#b3b3b3', 
-			'#999999', 
-			'#808080', 
-			'#666666', 
-			'#4d4d4d', 
-			'#333333', 
-			'#191919', 
+		samples(11)
+			.map(interpolate(['#fff', '#000']))
+			.map(hex),
+		[
+			'#ffffff',
+			'#e6e6e6',
+			'#cccccc',
+			'#b3b3b3',
+			'#999999',
+			'#808080',
+			'#666666',
+			'#4d4d4d',
+			'#333333',
+			'#191919',
 			'#000000'
 		]
 	);
@@ -27,20 +28,21 @@ tape('11 swatches between black and white in RGB', function(test) {
 });
 
 tape('11 swatches between black and white in Lab', function(test) {
-
 	test.deepEqual(
-		samples(11).map(interpolate(['#fff', '#000'], 'lab')).map(hex),
-		[ 
-			'#ffffff', 
-			'#e2e2e2', 
-			'#c6c6c6', 
-			'#ababab', 
-			'#919191', 
-			'#777777', 
-			'#5e5e5e', 
-			'#474747', 
-			'#303030', 
-			'#1b1b1b', 
+		samples(11)
+			.map(interpolate(['#fff', '#000'], 'lab'))
+			.map(hex),
+		[
+			'#ffffff',
+			'#e2e2e2',
+			'#c6c6c6',
+			'#ababab',
+			'#919191',
+			'#777777',
+			'#5e5e5e',
+			'#474747',
+			'#303030',
+			'#1b1b1b',
 			'#000000'
 		]
 	);
@@ -49,20 +51,21 @@ tape('11 swatches between black and white in Lab', function(test) {
 });
 
 tape('11 swatches between black and white in Lch', function(test) {
-
 	test.deepEqual(
-		samples(11).map(interpolate(['#fff', '#000'], 'lch')).map(hex),
-		[ 
-			'#ffffff', 
-			'#e2e2e2', 
-			'#c6c6c6', 
-			'#ababab', 
-			'#919191', 
-			'#777777', 
-			'#5e5e5e', 
-			'#474747', 
-			'#303030', 
-			'#1b1b1b', 
+		samples(11)
+			.map(interpolate(['#fff', '#000'], 'lch'))
+			.map(hex),
+		[
+			'#ffffff',
+			'#e2e2e2',
+			'#c6c6c6',
+			'#ababab',
+			'#919191',
+			'#777777',
+			'#5e5e5e',
+			'#474747',
+			'#303030',
+			'#1b1b1b',
 			'#000000'
 		]
 	);
@@ -71,10 +74,23 @@ tape('11 swatches between black and white in Lch', function(test) {
 });
 
 tape('11 swatches between black and white in DIN99o', function(test) {
-
 	test.deepEqual(
-		samples(11).map(interpolate(['#fff', '#000'], 'dlab')).map(hex),
-		[ '#ffffff', '#dedede', '#bfbfbf', '#a2a2a2', '#868686', '#6d6d6d', '#555555', '#3f3f3f', '#2b2b2b', '#191919', '#000000' ]
+		samples(11)
+			.map(interpolate(['#fff', '#000'], 'dlab'))
+			.map(hex),
+		[
+			'#ffffff',
+			'#dedede',
+			'#bfbfbf',
+			'#a2a2a2',
+			'#868686',
+			'#6d6d6d',
+			'#555555',
+			'#3f3f3f',
+			'#2b2b2b',
+			'#191919',
+			'#000000'
+		]
 	);
 
 	// test.deepEqual(

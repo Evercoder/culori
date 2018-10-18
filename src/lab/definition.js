@@ -3,19 +3,18 @@ import convertRgbToLab from './convertRgbToLab';
 import parseLab from './parseLab';
 import interpolateNumber from '../interpolate/interpolateNumber';
 import interpolateAlpha from '../interpolate/interpolateAlpha';
-import interpolateHue from '../interpolate/interpolateHue';
 import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
 
 export default {
 	mode: 'lab',
-	output: { 
-		rgb: convertLabToRgb 
+	output: {
+		rgb: convertLabToRgb
 	},
 	input: {
 		rgb: convertRgbToLab
 	},
 	channels: ['l', 'a', 'b', 'alpha'],
-	parsers: [ parseLab ],
+	parsers: [parseLab],
 	interpolate: {
 		l: interpolateFunctionLinear(interpolateNumber()),
 		a: interpolateFunctionLinear(interpolateNumber()),

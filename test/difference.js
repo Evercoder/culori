@@ -1,18 +1,17 @@
 let tape = require('tape');
 let culori = require('../');
-let { 
-	differenceEuclidean, 
-	differenceCie76, 
+let {
+	differenceEuclidean,
+	differenceCie76,
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
-	rgb, 
-	lab, 
-	round 
+	rgb,
+	lab,
+	round
 } = culori;
 
 tape('euclidean distance in RGB', function(test) {
-
 	let delta = differenceEuclidean();
 
 	test.equal(
@@ -23,42 +22,36 @@ tape('euclidean distance in RGB', function(test) {
 		1.4142135623730951
 	);
 
-	test.equal(
-		delta('red', 'red'),
-		0
-	);
+	test.equal(delta('red', 'red'), 0);
 
 	test.end();
 });
 
 tape('cie76 difference', function(test) {
-
 	test.equal(
 		differenceCie76()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
 		1.4142135623730951
-	)
+	);
 
 	test.end();
 });
 
 tape('cie94 difference', function(test) {
-
 	test.equal(
 		differenceCie94()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
 		1.4142135623730951
-	)
+	);
 
 	test.end();
 });
 
 tape('ciede2000 difference', function(test) {
-
 	let approx = round(4);
 
 	// Test data from: http://www2.ece.rochester.edu/~gsharma/ciede2000/
@@ -96,24 +89,29 @@ tape('ciede2000 difference', function(test) {
 		90.9257	-0.5406	-0.9208	88.6381	-0.8985	-0.7239	1.5381
 		6.7747	-0.2908	-2.4247	5.8714	-0.0985	-2.2286	0.6377
 		2.0776	0.0795	-1.1350	0.9033	-0.0636	-0.5514	0.9082`
-		.split('\n').map(line => line.trim().split(/\s+/));
+		.split('\n')
+		.map(line => line.trim().split(/\s+/));
 
 	for (var i = 0; i < testdata.length; i++) {
 		let line = testdata[i];
 		test.equal(
-			approx(differenceCiede2000()(
-				lab({ l: +line[0], a: +line[1], b: +line[2] }),
-				lab({ l: +line[3], a: +line[4], b: +line[5] })
-			)),
+			approx(
+				differenceCiede2000()(
+					lab({ l: +line[0], a: +line[1], b: +line[2] }),
+					lab({ l: +line[3], a: +line[4], b: +line[5] })
+				)
+			),
 			+line[6]
 		);
 
 		// also test for symmetry
 		test.equal(
-			approx(differenceCiede2000()(
-				lab({ l: +line[3], a: +line[4], b: +line[5] }),
-				lab({ l: +line[0], a: +line[1], b: +line[2] })
-			)),
+			approx(
+				differenceCiede2000()(
+					lab({ l: +line[3], a: +line[4], b: +line[5] }),
+					lab({ l: +line[0], a: +line[1], b: +line[2] })
+				)
+			),
 			+line[6]
 		);
 	}
@@ -122,7 +120,6 @@ tape('ciede2000 difference', function(test) {
 });
 
 tape('cmc difference', function(test) {
-
 	test.equal(
 		differenceCmc()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
