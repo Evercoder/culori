@@ -41,8 +41,12 @@ import { differenceEuclidean } from './difference';
 //
 const identity = d => d;
 
-export default (colors, metric = differenceEuclidean(), accesor = identity) => {
-	let arr = colors.map((c, idx) => ({ color: accesor(c), i: idx }));
+export default (
+	colors,
+	metric = differenceEuclidean(),
+	accessor = identity
+) => {
+	let arr = colors.map((c, idx) => ({ color: accessor(c), i: idx }));
 	return (color, n = 1, τ = Infinity) => {
 		if (isFinite(n)) {
 			n = Math.max(1, Math.min(n, arr.length - 1));
@@ -56,6 +60,6 @@ export default (colors, metric = differenceEuclidean(), accesor = identity) => {
 			.sort((a, b) => a.d - b.d)
 			.slice(0, n)
 			.filter(c => c.d < τ)
-			.map(c => c.color);
+			.map(c => colors[c.i]);
 	};
 };

@@ -1,5 +1,9 @@
 ## Culori Changelog
 
+### 0.5.3
+
+**Breaking:** `nearest()` now returns the original color object. ([#67](https://github.com/Evercoder/culori/issues/67))
+
 ### 0.5.2
 
 -   Adds YIQ color space and Kotsarenko/Ramos color difference function (thanks [@mourner](https://github.com/mourner) for the pointer!)
