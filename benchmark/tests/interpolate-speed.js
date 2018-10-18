@@ -1,16 +1,24 @@
 let chroma = require('chroma-js');
 let { color } = require('d3-color');
 let d3i = require('d3-interpolate');
-let tinycolor = require("tinycolor2");
-let culori = require('../../build/culori');
+let tinycolor = require('tinycolor2');
+let culori = require('../../build/culori.umd');
 let benchmark = require('../util/benchmark');
+
+console.log(`
+Benchmark: interpolate speed
+============================
+`);
 
 let count = 1000;
 let iterations = 1000;
 
 benchmark('culori: #fff -> #000 in RGB', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori.samples(count).map(culori.interpolate(['#fff', '#000'])).map(culori.formatter('hex'));
+		culori
+			.samples(count)
+			.map(culori.interpolate(['#fff', '#000']))
+			.map(culori.formatter('hex'));
 	}
 });
 
@@ -19,7 +27,10 @@ let hex = culori.formatter('hex');
 
 benchmark('culori: #fff -> #000 in RGB (cached)', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori.samples(count).map(interpolator).map(hex);
+		culori
+			.samples(count)
+			.map(interpolator)
+			.map(hex);
 	}
 });
 
@@ -59,7 +70,10 @@ let colors = ['red', 'white', 'green', 'blue', 'black', 'fuchsia', 'cyan'];
 
 benchmark('culori: multiple colors in RGB', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori.samples(count).map(culori.interpolate(colors)).map(hex);
+		culori
+			.samples(count)
+			.map(culori.interpolate(colors))
+			.map(hex);
 	}
 });
 
