@@ -1,7 +1,7 @@
 import { getModeDefinition } from './modes';
 import converter from './converter';
 
-const differenceEuclidean = (mode = 'rgb') => {
+const differenceEuclidean = (mode = 'rgb', weights = [1, 1, 1]) => {
 	let channels = getModeDefinition(mode).channels;
 	let conv = converter(mode);
 	return (std, smp) => {
@@ -9,10 +9,12 @@ const differenceEuclidean = (mode = 'rgb') => {
 		let ConvSmp = conv(smp);
 		return Math.sqrt(
 			channels.reduce(
-				(delta, k) =>
+				(delta, k, idx) =>
 					// ignore alpha channel in computing the euclidean distance
 					delta +
-					(k === 'alpha' ? 0 : Math.pow(ConvStd[k] - ConvSmp[k], 2)),
+					(k === 'alpha'
+						? 0
+						: weights[idx] * Math.pow(ConvStd[k] - ConvSmp[k], 2)),
 				0
 			)
 		);
@@ -194,11 +196,26 @@ const differenceCmc = (l = 1, c = 1) => {
 
 const differenceDin99o = () => differenceEuclidean('dlab');
 
+/*
+	"Measuring perceived color difference using YIQ NTSC
+	transmission color space in mobile applications"
+		
+		by Yuriy Kotsarenko, Fernando Ramos in:
+		Programación Matemática y Software (2010) 
+
+	Available at:
+		
+		http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf
+ */
+const differenceKotsarenkoRamos = () =>
+	differenceEuclidean('yiq', [0.5053, 0.299, 0.1957]);
+
 export {
 	differenceEuclidean,
 	differenceCie76,
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
-	differenceDin99o
+	differenceDin99o,
+	differenceKotsarenkoRamos
 };

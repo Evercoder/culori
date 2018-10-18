@@ -1,8 +1,10 @@
 ## Culori Changelog
 
-### 0.5.0
+### 0.5.1
 
-Removed default export from ES build, and cleaned up the build process. Added Prettier, ESLint.
+**Breaking:** Removed the `culori()` function, which was an alias for `culori.rgb()`. This makes the build simpler and clarifies the API a bit.
+
+Cleaned up the build process; added Prettier, ESLint.
 
 ### Previously
 
