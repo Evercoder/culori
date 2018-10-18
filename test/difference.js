@@ -6,6 +6,7 @@ let {
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
+	differenceKotsarenkoRamos,
 	rgb,
 	lab,
 	round
@@ -119,13 +120,22 @@ tape('ciede2000 difference', function(test) {
 	test.end();
 });
 
-tape('cmc difference', function(test) {
+tape('differenceCmc', function(test) {
 	test.equal(
 		differenceCmc()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
 		1.9569471624266144
+	);
+
+	test.end();
+});
+
+tape('differenceKotsarenkoRamos', function(test) {
+	test.equal(
+		differenceKotsarenkoRamos()('white', 'black'),
+		0.7108445752103619
 	);
 
 	test.end();

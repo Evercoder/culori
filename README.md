@@ -136,6 +136,7 @@ The available modes (color spaces) are listed below. Each color space has a conv
 | `cubehelix` | Cubehelix color space      | culori.**cubehelix**(_color_)                       |
 | `dlab`      | DIN99o Lab color space     | culori.**dlab**(_color_)                            |
 | `dlch`      | DIN99o LCh color space     | culori.**dlch**(_color_)                            |
+| `yiq`       | YIQ color space            | culori.**yiq**(_color_)                             |
 
 <a name="culoriFormatter" href="#culoriFormatter">#</a> culori.**formatter**(_format = 'rgb'_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/formatter.js 'Source')
 
@@ -228,9 +229,11 @@ samples(5).map(grays);
 
 These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas. Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors. Also available as a separate [d3 plugin](https://github.com/evercoder/d3-color-difference).
 
-<a name="culoriDifferenceEuclidean" href="#culoriDifferenceEuclidean">#</a> culori.**differenceEuclidean**(_mode = 'rgb'_) [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
+<a name="culoriDifferenceEuclidean" href="#culoriDifferenceEuclidean">#</a> culori.**differenceEuclidean**(_mode = 'rgb'_, _weights = [1, 1, 1]_) [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
 Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
+
+You can optionally assign different weights to the channels in the color space. See, for example, the [Kotsarenko/Ramos distance](#culoriDifferenceKotsarenkoRamos).
 
 <a name="culoriDifferenceCie76" href="#culoriDifferenceCie76">#</a> culori.**differenceCie76**() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
@@ -255,6 +258,10 @@ _Note:_ ΔE\*<sub>CMC</sub> is not considered a metric since it's not symmetrica
 <a name="culoriDifferenceDin99o" href="#culoriDifferenceDin99o">#</a> culori.**differenceDin99o**() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
 Computes the [DIN99o][din99ode] ΔE\*<sub>99o</sub> color difference between the colors _a_ and _b_. The computation is done in the [DIN99o][din99o] color space.
+
+<a name="culoriDifferenceKotsarenkoRamos" href="#culoriDifferenceKotsarenkoRamos">#</a> culori.**differenceKotsarenkoRamos**() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
+
+Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the colors _a_ and _b_. This is a weighted Euclidean distance in the [YIQ][yiq] color space.
 
 #### Nearest color(s)
 
@@ -355,3 +362,5 @@ These libraries add more functionality to culori:
 [cmc]: https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)
 [din99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
 [din99ode]: https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel
+[kotsarekno-ramos]: http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf
+[yiq]: https://en.wikipedia.org/wiki/YIQ
