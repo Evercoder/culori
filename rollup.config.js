@@ -1,12 +1,12 @@
 import buble from 'rollup-plugin-buble';
-import uglify from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
 export default [
 
 	// UMD, minified
 	{
-		input: "./src/umd.js",
+		input: "src/index.js",
 		output: {
 			file: pkg.main,
 			format: 'umd',
@@ -14,7 +14,7 @@ export default [
 		},
 		plugins: [ 
 			buble({ objectAssign: 'Object.assign' }), 
-			uglify() 
+			terser() 
 		]
 	},
 

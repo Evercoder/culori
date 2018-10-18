@@ -1,34 +1,3 @@
-import formatter from './formatter';
-import round from './round';
-import converter from './converter';
-import interpolate from './interpolate/interpolate'; 
-import interpolateNumber from './interpolate/interpolateNumber';
-import interpolateAlpha from './interpolate/interpolateAlpha';
-import interpolateHue from './interpolate/interpolateHue';
-import interpolateFunctionLinear from './interpolate/interpolateFunctionLinear';
-import interpolateFunctionSpline from './interpolate/interpolateFunctionSpline';
-import interpolateFunctionCosine from './interpolate/interpolateFunctionCosine';
-import interpolateFunctionMonotone from './interpolate/interpolateFunctionMonotone';
-import samples from './samples';
-import zip from './zip';
-
-import displayable from './displayable';
-import clamp from './clamp';
-
-import {
-	differenceEuclidean, 
-	differenceCie76, 
-	differenceCie94,
-	differenceCiede2000,
-	differenceCmc,
-	differenceDin99o
-} from './difference';
-import nearest from './nearest';
-
-import parse from './parse';
-
-import { defineMode, getModeDefinition } from './modes';
-
 import rgbDef from './rgb/definition';
 import lrgbDef from './lrgb/definition';
 import hslDef from './hsl/definition';
@@ -41,7 +10,8 @@ import cubehelixDef from './cubehelix/definition';
 import dlabDef from './dlab/definition';
 import dlchDef from './dlch/definition';
 
-import colorsNamed from './colors/named';
+import { defineMode } from './modes';
+import converter from './converter';
 
 defineMode(rgbDef);
 defineMode(lrgbDef);
@@ -67,11 +37,9 @@ let cubehelix = converter('cubehelix');
 let dlab = converter('dlab');
 let dlch = converter('dlch');
 
-const culori = rgb;
-
 export {
-	
-	// Color spaces
+	defineMode,
+	converter,
 	hsl,
 	hsv,
 	hsi,
@@ -82,46 +50,32 @@ export {
 	lrgb,
 	cubehelix,
 	dlab,
-	dlch,
+	dlch
+};
 
-	// Basics
-	formatter,
-	converter,
-	round,
-	parse,
-
-	// Interpolation
-	interpolate,
-	interpolateNumber,
-	interpolateAlpha,
-	interpolateHue,
-	
-	interpolateFunctionLinear,
-	interpolateFunctionSpline,
-	interpolateFunctionCosine,
-	interpolateFunctionMonotone,
-
-	samples,
-
-	// Difference
+export { default as formatter } from './formatter';
+export { default as round } from './round';
+export { default as interpolate } from './interpolate/interpolate'; 
+export { default as interpolateNumber } from './interpolate/interpolateNumber';
+export { default as interpolateAlpha } from './interpolate/interpolateAlpha';
+export { default as interpolateHue } from './interpolate/interpolateHue';
+export { default as interpolateFunctionLinear } from './interpolate/interpolateFunctionLinear';
+export { default as interpolateFunctionSpline } from './interpolate/interpolateFunctionSpline';
+export { default as interpolateFunctionCosine } from './interpolate/interpolateFunctionCosine';
+export { default as interpolateFunctionMonotone } from './interpolate/interpolateFunctionMonotone';
+export { default as samples } from './samples';
+export { default as zip } from './zip';
+export { default as displayable } from './displayable';
+export { default as clamp } from './clamp';
+export { default as nearest } from './nearest';
+export { getModeDefinition } from './modes';
+export { default as parse } from './parse';
+export {
 	differenceEuclidean, 
 	differenceCie76, 
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
-	differenceDin99o,
-
-	nearest,
-	
-	displayable,
-	clamp,
-	
-	// Extending Culori
-	defineMode,
-	getModeDefinition,
-
-	// Colors
-	colorsNamed
-};
-
-export default culori;
+	differenceDin99o
+} from './difference';
+export { default as colorsNamed } from './colors/named';

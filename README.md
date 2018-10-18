@@ -338,7 +338,7 @@ These libraries add more functionality to culori:
 * _License_ [MIT](./LICENSE)
 * _Inspired by_ [d3-color](https://github.com/d3/d3-color), [d3-interpolate](https://github.com/d3/d3-interpolate), [chroma.js](https://github.com/gka/chroma.js)
 * _Dependencies_ none
-* _Bundled with_ [rollup](https://github.com/rollup/rollup), [buble](https://github.com/Rich-Harris/buble)
+* _Bundled with_ [rollup](https://github.com/rollup/rollup), [buble](https://github.com/Rich-Harris/buble), [terser](https://github.com/terser-js/terser)
 * _Tested with_ [tape](https://github.com/substack/tape)
 
 
