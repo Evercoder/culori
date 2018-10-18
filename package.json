@@ -11,12 +11,12 @@
     "build"
   ],
   "devDependencies": {
-    "gh-pages": "^1.2.0",
-    "nyc": "^11.6.0",
-    "rollup": "^0.57.1",
-    "rollup-plugin-buble": "^0.19.2",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.9.0"
+    "gh-pages": "^2.0.1",
+    "nyc": "^13.1.0",
+    "rollup": "^0.66.6",
+    "rollup-plugin-buble": "^0.19.4",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1"
   },
   "scripts": {
     "build": "rollup -c",
