@@ -2,7 +2,6 @@ import { getModeDefinition } from './modes';
 import converter from './converter';
 
 export default (colors, mode = 'rgb') => {
-	
 	let channels = getModeDefinition(mode).channels;
 	let res = {
 		mode: mode
@@ -11,6 +10,4 @@ export default (colors, mode = 'rgb') => {
 		res[channels[i]] = colors.map(c => c[channels[i]]);
 	}
 	return res;
-}
-
-
+};

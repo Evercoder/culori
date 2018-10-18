@@ -3,7 +3,10 @@ const modes = {};
 const parsers = [];
 
 const defineMode = definition => {
-	converters[definition.mode] = Object.assign(converters[definition.mode] || {}, definition.output);
+	converters[definition.mode] = Object.assign(
+		converters[definition.mode] || {},
+		definition.output
+	);
 	Object.keys(definition.input || {}).forEach(k => {
 		if (!converters[k]) {
 			converters[k] = {};
@@ -14,11 +17,6 @@ const defineMode = definition => {
 	(definition.parsers || []).forEach(parser => parsers.push(parser));
 };
 
-const getModeDefinition = (mode) => modes[mode];
+const getModeDefinition = mode => modes[mode];
 
-export { 
-	defineMode, 
-	getModeDefinition, 
-	converters, 
-	parsers 
-};
+export { defineMode, getModeDefinition, converters, parsers };

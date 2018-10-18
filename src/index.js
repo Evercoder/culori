@@ -55,14 +55,22 @@ export {
 
 export { default as formatter } from './formatter';
 export { default as round } from './round';
-export { default as interpolate } from './interpolate/interpolate'; 
+export { default as interpolate } from './interpolate/interpolate';
 export { default as interpolateNumber } from './interpolate/interpolateNumber';
 export { default as interpolateAlpha } from './interpolate/interpolateAlpha';
 export { default as interpolateHue } from './interpolate/interpolateHue';
-export { default as interpolateFunctionLinear } from './interpolate/interpolateFunctionLinear';
-export { default as interpolateFunctionSpline } from './interpolate/interpolateFunctionSpline';
-export { default as interpolateFunctionCosine } from './interpolate/interpolateFunctionCosine';
-export { default as interpolateFunctionMonotone } from './interpolate/interpolateFunctionMonotone';
+export {
+	default as interpolateFunctionLinear
+} from './interpolate/interpolateFunctionLinear';
+export {
+	default as interpolateFunctionSpline
+} from './interpolate/interpolateFunctionSpline';
+export {
+	default as interpolateFunctionCosine
+} from './interpolate/interpolateFunctionCosine';
+export {
+	default as interpolateFunctionMonotone
+} from './interpolate/interpolateFunctionMonotone';
 export { default as samples } from './samples';
 export { default as zip } from './zip';
 export { default as displayable } from './displayable';
@@ -71,8 +79,8 @@ export { default as nearest } from './nearest';
 export { getModeDefinition } from './modes';
 export { default as parse } from './parse';
 export {
-	differenceEuclidean, 
-	differenceCie76, 
+	differenceEuclidean,
+	differenceCie76,
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
