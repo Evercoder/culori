@@ -12,26 +12,27 @@
  */
 
 import { radToDeg, M } from './constants';
-import normalizeHue from '../util/normalizeHue';
 
 let DE = M[3] * M[4];
 let BE = M[1] * M[4];
 let BCAD = M[1] * M[2] - M[0] * M[3];
 
 export default ({ r, g, b, alpha }) => {
-
 	let l = (BCAD * b + r * DE - g * BE) / (BCAD + DE - BE);
 	let x = b - l;
 	let y = (M[4] * (g - l) - M[2] * x) / M[3];
 
-	let res = { 
+	let res = {
 		mode: 'cubehelix',
 		l: l,
-		s: (l === 0 || l === 1) ? undefined : Math.sqrt(x * x + y * y) / (M[4] * l * (1 - l))
+		s:
+			l === 0 || l === 1
+				? undefined
+				: Math.sqrt(x * x + y * y) / (M[4] * l * (1 - l))
 	};
 
 	if (res.s) res.h = Math.atan2(y, x) * radToDeg - 120;
 	if (alpha !== undefined) res.alpha = alpha;
 
 	return res;
-}
+};

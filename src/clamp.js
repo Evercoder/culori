@@ -1,6 +1,5 @@
 import converter from './converter';
 import displayable from './displayable';
-import identity from './util/identity';
 import parse from './parse';
 
 let lch = converter('lch');

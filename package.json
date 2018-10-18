@@ -11,6 +11,7 @@
 		"build"
 	],
 	"devDependencies": {
+		"eslint": "^5.7.0",
 		"gh-pages": "^2.0.1",
 		"husky": "^1.1.2",
 		"nyc": "^13.1.0",
@@ -33,7 +34,8 @@
 		"coverage:test": "nyc --produce-source-map tape test/*.js | tap-spec",
 		"docs:start": "hugo serve --source docs",
 		"docs:build": "hugo --source docs",
-		"docs:deploy": "yarn docs:build && gh-pages -d docs/public"
+		"docs:deploy": "yarn docs:build && gh-pages -d docs/public",
+		"lint": "yarn eslint {src,test}/**/*.js"
 	},
 	"husky": {
 		"hooks": {

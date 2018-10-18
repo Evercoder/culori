@@ -1,5 +1,4 @@
 import { getModeDefinition } from './modes';
-import converter from './converter';
 
 export default (colors, mode = 'rgb') => {
 	let channels = getModeDefinition(mode).channels;

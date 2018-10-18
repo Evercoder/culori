@@ -1,6 +1,6 @@
 let tape = require('tape');
 let culori = require('../');
-let { formatter, hsl, rgb } = culori;
+let { formatter, rgb } = culori;
 
 tape('formatter()', function(test) {
 	test.deepEqual(
@@ -19,17 +19,9 @@ tape('formatter()', function(test) {
 });
 
 tape('formatter("hex")', function(test) {
-	test.deepEqual(
-		formatter('hex')(rgb('#c0c2ff')),
-		'#c0c2ff',
-		'#c0c2ff'
-	);
+	test.deepEqual(formatter('hex')(rgb('#c0c2ff')), '#c0c2ff', '#c0c2ff');
 
-	test.deepEqual(
-		formatter('hex')(rgb('#00c2ff')),
-		'#00c2ff',
-		'#00c2ff'
-	);
+	test.deepEqual(formatter('hex')(rgb('#00c2ff')), '#00c2ff', '#00c2ff');
 
 	test.end();
 });

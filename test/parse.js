@@ -11,7 +11,12 @@ tape('named colors', function(test) {
 
 	test.deepEqual(
 		parse('RoyalBlue'),
-		{ mode: 'rgb', r: 0.2549019607843137, g: 0.4117647058823529, b: 0.8823529411764706 },
+		{
+			mode: 'rgb',
+			r: 0.2549019607843137,
+			g: 0.4117647058823529,
+			b: 0.8823529411764706
+		},
 		'RoyalBlue (CamelCase)'
 	);
 
@@ -33,37 +38,59 @@ tape('hex colors', function(test) {
 
 	test.deepEqual(
 		parse('#3690'),
-		 { mode: 'rgb', r: 0.2, g: 0.4, b: 0.6, alpha: 0 },
+		{ mode: 'rgb', r: 0.2, g: 0.4, b: 0.6, alpha: 0 },
 		'#3690'
 	);
 
 	test.deepEqual(
 		parse('3690'),
-		 { mode: 'rgb', r: 0.2, g: 0.4, b: 0.6, alpha: 0 },
+		{ mode: 'rgb', r: 0.2, g: 0.4, b: 0.6, alpha: 0 },
 		'3690'
 	);
 
 	test.deepEqual(
 		parse('#163264'),
-		 { mode: 'rgb', r: 0.08627450980392157, g: 0.19607843137254902, b: 0.39215686274509803 },
+		{
+			mode: 'rgb',
+			r: 0.08627450980392157,
+			g: 0.19607843137254902,
+			b: 0.39215686274509803
+		},
 		'#163264'
 	);
 
 	test.deepEqual(
 		parse('163264'),
-		 { mode: 'rgb', r: 0.08627450980392157, g: 0.19607843137254902, b: 0.39215686274509803 },
+		{
+			mode: 'rgb',
+			r: 0.08627450980392157,
+			g: 0.19607843137254902,
+			b: 0.39215686274509803
+		},
 		'163264'
 	);
 
 	test.deepEqual(
 		parse('#163264ff'),
-		 { mode: 'rgb', r: 0.08627450980392157, g: 0.19607843137254902, b: 0.39215686274509803, alpha: 1 },
+		{
+			mode: 'rgb',
+			r: 0.08627450980392157,
+			g: 0.19607843137254902,
+			b: 0.39215686274509803,
+			alpha: 1
+		},
 		'#163264ff'
 	);
 
 	test.deepEqual(
 		parse('163264FF'),
-		 { mode: 'rgb', r: 0.08627450980392157, g: 0.19607843137254902, b: 0.39215686274509803, alpha: 1 },
+		{
+			mode: 'rgb',
+			r: 0.08627450980392157,
+			g: 0.19607843137254902,
+			b: 0.39215686274509803,
+			alpha: 1
+		},
 		'163264FF'
 	);
 
@@ -71,7 +98,6 @@ tape('hex colors', function(test) {
 });
 
 tape('rgb', function(test) {
-
 	test.deepEqual(
 		parse('rgb(255, 0, 0)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
@@ -124,7 +150,6 @@ tape('rgb', function(test) {
 });
 
 tape('hsl', function(test) {
-
 	test.deepEqual(
 		parse('hsl(0, 1, 0.5)'),
 		undefined,
@@ -193,7 +218,7 @@ tape('hsl', function(test) {
 
 	test.deepEqual(
 		parse('hsl(0 100% 50% / 50%)'),
-		{  h: 0, s: 1, l: 0.5,  mode: 'hsl', alpha: 0.5 },
+		{ h: 0, s: 1, l: 0.5, mode: 'hsl', alpha: 0.5 },
 		'hsla current (percentage)'
 	);
 
@@ -202,20 +227,20 @@ tape('hsl', function(test) {
 
 tape('hwb', function(test) {
 	test.deepEqual(
-		parse('hwb(100 0% 0%)'), 
-		{ h: 100, w: 0, b: 0, mode: 'hwb' }, 
+		parse('hwb(100 0% 0%)'),
+		{ h: 100, w: 0, b: 0, mode: 'hwb' },
 		'black'
 	);
 
 	test.deepEqual(
-		parse('hwb(200 150% 150%)'), 
-		{ h: 200, w: 0.5, b: 0.5, mode: 'hwb' }, 
+		parse('hwb(200 150% 150%)'),
+		{ h: 200, w: 0.5, b: 0.5, mode: 'hwb' },
 		'grey'
 	);
 
 	test.deepEqual(
-		parse('hwb(200 10% 30% / 50%)'), 
-		{ h: 200, w: 0.1, b: 0.3, alpha: 0.5, mode: 'hwb' }, 
+		parse('hwb(200 10% 30% / 50%)'),
+		{ h: 200, w: 0.1, b: 0.3, alpha: 0.5, mode: 'hwb' },
 		'hwba'
 	);
 
@@ -223,11 +248,13 @@ tape('hwb', function(test) {
 });
 
 tape('transparent', function(test) {
-
-	test.deepEqual(
-		parse('transparent'),
-		{ r: 0, g: 0, b: 0, alpha: 0, mode: 'rgb' }
-	)
+	test.deepEqual(parse('transparent'), {
+		r: 0,
+		g: 0,
+		b: 0,
+		alpha: 0,
+		mode: 'rgb'
+	});
 
 	test.end();
 });
@@ -243,13 +270,12 @@ tape('lab()', function(test) {
 		parse('gray(50 / 50%)'),
 		{ l: 50, a: 0, b: 0, alpha: 0.5, mode: 'lab' },
 		'gray + alpha'
-	)
+	);
 
 	test.end();
 });
 
 tape('lch()', function(test) {
-
 	test.deepEqual(
 		parse('lch(50 3 240 / 50%)'),
 		{ l: 50, c: 3, h: 240, alpha: 0.5, mode: 'lch' },
