@@ -5,6 +5,8 @@ import normalizeHue from './util/normalizeHue';
 const hue_difference = (a, b) => {
 	let na = normalizeHue(a);
 	let nb = normalizeHue(b);
+	// TODO this assumes H is in the range [0, 360)
+	// but in the LCh color space, it's in radians.
 	if (Math.abs(nb - na) > 180) {
 		// todo should this be normalized once again?
 		return na - (nb - 360 * Math.sign(nb - na));
