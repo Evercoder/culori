@@ -1,5 +1,9 @@
 ## Culori Changelog
 
+### 0.5.4
+
+Fixed typo in CMC (l:c) color difference formula. ([#66](https://github.com/Evercoder/culori/issues/66))
+
 ### 0.5.3
 
 **Breaking:** `nearest()` now returns the original color object. ([#67](https://github.com/Evercoder/culori/issues/67))
