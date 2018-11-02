@@ -2,6 +2,8 @@ import parseNumber from './parseNumber';
 import { hex } from '../util/regex';
 
 export default color => {
-	var match;
-	return (match = color.match(hex)) ? parseNumber(parseInt(match[1], 16), match[1].length) : undefined;
-}
+	let match;
+	return (match = color.match(hex))
+		? parseNumber(parseInt(match[1], 16), match[1].length)
+		: undefined;
+};

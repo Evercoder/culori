@@ -76,7 +76,6 @@ export {
 	default as interpolateFunctionMonotone
 } from './interpolate/interpolateFunctionMonotone';
 export { default as samples } from './samples';
-export { default as zip } from './zip';
 export { default as displayable } from './displayable';
 export { default as clamp } from './clamp';
 export { default as nearest } from './nearest';
