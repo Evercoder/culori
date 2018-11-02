@@ -126,7 +126,17 @@ tape('differenceCmc', function(test) {
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
-		1.9569471624266144
+		2.507265255284643
+	);
+
+	test.equal(
+		differenceCmc()('rgb(55, 60, 48)', 'rgb(55, 65, 53)'),
+		3.6725610403812463
+	);
+
+	test.equal(
+		differenceCmc(2, 1)('rgb(55, 60, 48)', 'rgb(55, 65, 53)'),
+		2.944236531878115
 	);
 
 	test.end();

@@ -154,26 +154,49 @@ const differenceCiede2000 = (Kl = 1, Kc = 1, Kh = 1) => {
 	};
 };
 
+/*
+	CMC (l:c) difference formula
+
+	References:
+		https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)
+		http://www.brucelindbloom.com/index.html?Eqn_DeltaE_CMC.html
+ */
 const differenceCmc = (l = 1, c = 1) => {
 	let lab = converter('lab');
-	return (std, smp) => {
-		let LabStd = lab(std);
-		let LabSmp = lab(smp);
 
+	/*
+		Comparte two colors:
+		std - standard (first) color
+		smp - sample (second) color
+	 */
+	return (std, smp) => {
+		// convert standard color to Lab
+		let LabStd = lab(std);
 		let lStd = LabStd.l;
 		let aStd = LabStd.a;
 		let bStd = LabStd.b;
+
+		// Obtain hue/chroma
 		let cStd = Math.sqrt(aStd * aStd + bStd * bStd);
 		let hStd = Math.atan2(bStd, aStd);
 		hStd = hStd + 2 * Math.PI * (hStd < 0);
 
+		// convert sample color to Lab, obtain LCh
+		let LabSmp = lab(smp);
 		let lSmp = LabSmp.l;
 		let aSmp = LabSmp.a;
 		let bSmp = LabSmp.b;
+
+		// Obtain chroma
 		let cSmp = Math.sqrt(aSmp * aSmp + bSmp * bSmp);
 
+		// lightness delta squared
 		let dL2 = Math.pow(lStd - lSmp, 2);
+
+		// chroma delta squared
 		let dC2 = Math.pow(cStd - cSmp, 2);
+
+		// hue delta squared
 		let dH2 = Math.pow(aStd - aSmp, 2) + Math.pow(bStd - bSmp, 2) - dC2;
 
 		let F = Math.sqrt(Math.pow(cStd, 4) / (Math.pow(cStd, 4) + 1900));
@@ -187,9 +210,9 @@ const differenceCmc = (l = 1, c = 1) => {
 		let Sh = Sc * (F * T + 1 - F);
 
 		return Math.sqrt(
-			dL2 / Math.pow(l * Sl, 2),
-			dC2 / Math.pow(c * Sc, 2),
-			dH2 / Math.pow(Sh, 2)
+			dL2 / Math.pow(l * Sl, 2) +
+				dC2 / Math.pow(c * Sc, 2) +
+				dH2 / Math.pow(Sh, 2)
 		);
 	};
 };
