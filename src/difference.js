@@ -1,22 +1,34 @@
 import { getModeDefinition } from './modes';
 import converter from './converter';
+import normalizeHue from './util/normalizeHue';
 
-const differenceEuclidean = (mode = 'rgb', weights = [1, 1, 1]) => {
+const hue_difference = (a, b) => {
+	let na = normalizeHue(a);
+	let nb = normalizeHue(b);
+	if (Math.abs(nb - na) > 180) {
+		// todo should this be normalized once again?
+		return na - (nb - 360 * Math.sign(nb - na));
+	}
+	return na - nb;
+};
+
+const differenceEuclidean = (mode = 'rgb', weights = [1, 1, 1, 0]) => {
 	let channels = getModeDefinition(mode).channels;
 	let conv = converter(mode);
 	return (std, smp) => {
 		let ConvStd = conv(std);
 		let ConvSmp = conv(smp);
 		return Math.sqrt(
-			channels.reduce(
-				(delta, k, idx) =>
-					// ignore alpha channel in computing the euclidean distance
-					delta +
-					(k === 'alpha'
-						? 0
-						: weights[idx] * Math.pow(ConvStd[k] - ConvSmp[k], 2)),
-				0
-			)
+			channels.reduce((sum, k, idx) => {
+				let delta =
+					k === 'h'
+						? hue_difference(ConvStd[k], ConvSmp[k])
+						: ConvStd[k] - ConvSmp[k];
+				return (
+					sum +
+					(weights[idx] || 0) * Math.pow(isNaN(delta) ? 0 : delta, 2)
+				);
+			}, 0)
 		);
 	};
 };

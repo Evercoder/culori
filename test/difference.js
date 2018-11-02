@@ -9,7 +9,8 @@ let {
 	differenceKotsarenkoRamos,
 	rgb,
 	lab,
-	round
+	round,
+	hsl
 } = culori;
 
 tape('euclidean distance in RGB', function(test) {
@@ -24,6 +25,27 @@ tape('euclidean distance in RGB', function(test) {
 	);
 
 	test.equal(delta('red', 'red'), 0);
+
+	test.end();
+});
+
+tape('euclidean distance in HSL', function(test) {
+	let delta = differenceEuclidean('hsl');
+
+	test.equal(
+		delta(hsl({ h: 0, s: 1, l: 1 }), hsl({ h: 180, s: 1, l: 1 })),
+		180
+	);
+
+	test.equal(
+		delta(hsl({ h: 0, s: 1, l: 1 }), hsl({ h: 360, s: 1, l: 1 })),
+		0
+	);
+
+	test.equal(
+		delta(hsl({ h: 60, s: 1, l: 1 }), hsl({ h: -540, s: 1, l: 1 })),
+		120
+	);
 
 	test.end();
 });

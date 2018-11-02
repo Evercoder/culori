@@ -1,5 +1,13 @@
 ## Culori Changelog
 
+### Unreleased
+
+Stop treating the _alpha_ channel specifically in the Euclidean distance formula. Instead, assume it's always the fourth channel and assign it a default weight of 0. This means that it's now possible to factor in the alpha into the distance, if needed.
+
+There's also a change of handing `NaN` differences on a channel. In this case, the distance on that particular channel is considered to be zero. (Which kind of makes sense?)
+
+Distances on the hue (`h` channel) are now computed with the _shortest hue distance_, taking into account the cyclical nature of this channel. ([#68](https://github.com/Evercoder/culori/issues/68)).
+
 ### 0.5.4
 
 Fixed typo in CMC (l:c) color difference formula. ([#66](https://github.com/Evercoder/culori/issues/66))

@@ -87,7 +87,7 @@ The object needs to have a `mode` property that identifies the color space, and 
 
 ### A note on the API
 
-TODO explain Functional style and its benefits.
+> 🕳 explain choice of functional style and its benefits.
 
 ### Basic methods
 
@@ -209,6 +209,8 @@ samples(5).map(grays);
 
 #### Interpolation functions
 
+> 🕳 expand section
+
 <a name="culoriInterpolateFunctionLinear" href="#culoriInterpolateFunctionLinear">#</a> culori.**interpolateFunctionLinear** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionLinear.js 'Source')
 
 <a name="culoriInterpolateFunctionSpline" href="#culoriInterpolateFunctionSpline">#</a> culori.**interpolateFunctionSpline** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionSpline.js 'Source')
@@ -218,6 +220,8 @@ samples(5).map(grays);
 <a name="culoriInterpolateFunctionCosine" href="#culoriInterpolateFunctionCosine">#</a> culori.**interpolateFunctionCosine** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionCosine.js 'Source')
 
 #### Interpolation modes
+
+> 🕳 expand section
 
 <a name="culoriInterpolateNumber" href="#culoriInterpolateNumber">#</a> culori.**interpolateNumber** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateNumber.js 'Source')
 
@@ -229,11 +233,24 @@ samples(5).map(grays);
 
 These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas. Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors. Also available as a separate [d3 plugin](https://github.com/evercoder/d3-color-difference).
 
-<a name="culoriDifferenceEuclidean" href="#culoriDifferenceEuclidean">#</a> culori.**differenceEuclidean**(_mode = 'rgb'_, _weights = [1, 1, 1]_) [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
+<a name="culoriDifferenceEuclidean" href="#culoriDifferenceEuclidean">#</a> culori.**differenceEuclidean**(_mode = 'rgb'_, _weights = [1, 1, 1, 0]_) [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
 Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
 
 You can optionally assign different weights to the channels in the color space. See, for example, the [Kotsarenko/Ramos distance](#culoriDifferenceKotsarenkoRamos).
+
+The default weights `[1, 1, 1, 0]` mean that the _alpha_, which is the fourth channel in all the color spaces Culori defines, is not taken into account. Send `[1, 1, 1, 1]` as the weights to include it in the computation.
+
+For the `h` channel in the color (in any color space that has this channel), we're using a _shortest hue distance_ to compute the hue's contribution to the distance. In spaces such as HSL or HSV, where the range of this difference is `[0, 180]` — as opposed to `[0, 1]` for the other channels — consider adjusting the weights so that the hue contributes "equally" to the distance:
+
+```js
+let hsl_distance = culori.differenceEuclidean('hsl', [
+	1 / (180 * 180),
+	1,
+	1,
+	0
+]);
+```
 
 <a name="culoriDifferenceCie76" href="#culoriDifferenceCie76">#</a> culori.**differenceCie76**() [<>](https://github.com/evercoder/culori/blob/master/src/difference.js 'Source')
 
@@ -274,6 +291,8 @@ Pass _n = Infinity_ to get all colors in the array with a maximum distance of _�
 ## Color Spaces
 
 ### RGB / LRGB (Linear RGB)
+
+> 🕳 expand this section
 
 ### HSL / HSV / HSI
 
@@ -436,7 +455,14 @@ function contrast(colorA, colorB) {
 
 ## Extending culori
 
-TODO
+### Defining a color space
+
+**Note:** The order of the items in the `channels` array matters. To keep things simple, we're making the following conventions:
+
+-   the fourth item in the array should be `alpha`
+-   any cyclical values (e.g. hue) should be identified by `h`, in the range `[0, 360)`
+
+These constrains make sure `differenceEuclidean()` works as expected.
 
 ## See also
 
