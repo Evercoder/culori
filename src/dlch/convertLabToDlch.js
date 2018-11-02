@@ -1,7 +1,7 @@
-import { kCH, kE, sinθ, cosθ, θ, factor  } from './constants';
+import { kCH, kE, sinθ, cosθ, θ, factor } from './constants';
 
 /*
-	Convert CIELab to DIN99oLCh
+	Convert CIELab to DIN99o LCh
  */
 
 export default ({ l, a, b, alpha }) => {
@@ -10,14 +10,14 @@ export default ({ l, a, b, alpha }) => {
 	let G = Math.sqrt(e * e + f * f);
 	let res = {
 		mode: 'dlch',
-		l: factor / kE * Math.log(1 + 0.0039 * l),
+		l: (factor / kE) * Math.log(1 + 0.0039 * l),
 		c: Math.log(1 + 0.075 * G) / (0.0435 * kCH * kE)
 	};
 
 	if (res.c) {
-		res.h = (Math.atan2(f, e) + θ) / Math.PI * 180;
+		res.h = ((Math.atan2(f, e) + θ) / Math.PI) * 180;
 	}
 
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
-}
+};

@@ -273,25 +273,115 @@ Pass _n = Infinity_ to get all colors in the array with a maximum distance of _�
 
 ## Color Spaces
 
-TODO
+### RGB / LRGB (Linear RGB)
 
-### HSL
+### HSL / HSV / HSI
 
-The figure above shows a slice of the HSL color space for a particular hue:
+[HSL, HSV, and HSI](https://en.wikipedia.org/wiki/HSL_and_HSV) are a family of representations of the RGB color space, created in 1970 to provide color spaces more closely aligned to how humans perceive colors.
+
+> 💡 In this family of color spaces, the _hue_ is undefined for achromatic colors (i.e. shades of gray).
+
+#### `hsl`
+
+| Channel | Range      | Description       |
+| ------- | ---------- | ----------------- |
+| `h`     | `[0, 360)` | Hue               |
+| `s`     | `[0, 1]`   | Saturation in HSL |
+| `l`     | `[0, 1]`   | Lightness         |
+
+The figure below shows a slice of the HSL color space for a particular hue:
 
 <img src='./.github/hsl-spectrum.png' width='200'/>
 
-### HSV
+#### `hsv`
 
-The figure above shows a slice of the HSV color space for a particular hue:
+| Channel | Range      | Description       |
+| ------- | ---------- | ----------------- |
+| `h`     | `[0, 360)` | Hue               |
+| `s`     | `[0, 1]`   | Saturation in HSV |
+| `v`     | `[0, 1]`   | Value             |
+
+The figure below shows a slice of the HSV color space for a particular hue:
 
 <img src='./.github/hsv-spectrum.png' width='200'/>
 
-### HSI
+#### `hsi`
 
-The figure above shows a slice of the HSI color space for a particular hue:
+| Channel | Range      | Description       |
+| ------- | ---------- | ----------------- |
+| `h`     | `[0, 360)` | Hue               |
+| `s`     | `[0, 1]`   | Saturation in HSI |
+| `i`     | `[0, 1]`   | Intensity         |
+
+The figure below shows a slice of the HSI color space for a particular hue:
 
 <img src='./.github/hsi-spectrum.png' width='200'/>
+
+> 💡 While the _hue_ in this family of color spaces retains its value in all of them, the _saturation_ in HSL is **not interchangeable** with the _saturation_ from HSV, nor HSI — they're computed differently, depending on the color space.
+
+### HWB
+
+[The HWB color space](https://en.wikipedia.org/wiki/HWB_color_model) was developed by Alvy Ray Smith, who also created the HSV color space. It's meant to be more intuitive for humans to use and faster to compute.
+
+**References:**
+
+-   Smith, Alvy Ray (1996) — ["HWB — A More Intuitive Hue-Based Color Model"](http://alvyray.com/Papers/CG/HWB_JGTv208.pdf), Journal of Graphics, GPU and Game tools.
+
+### Lab / LCh (CIE)
+
+> As defined in the [CSS Color Module Level 4 spec](https://drafts.csswg.org/css-color/#lab-colors), we use the [D50 illuminant](https://en.wikipedia.org/wiki/Standard_illuminant) as a reference white for these color spaces.
+
+#### `lab`
+
+| Channel | Range | Description |
+| ------- | ----- | ----------- |
+| `l`     | ?     | Lightness   |
+| `a`     | ?     |
+| `b`     | ?     |
+
+#### `lch`
+
+| Channel | Range | Description |
+| ------- | ----- | ----------- |
+| `l`     | ?     | Lightness   |
+| `c`     | ?     | Chroma      |
+| `h`     | ?     | Hue         |
+
+### DIN99 Lab / LCh
+
+The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an [effective color difference](#culoriDifferenceDin99o) metric that can be expressed as a simple Euclidean distance. We implement the latest iteration of the the standard, DIN99o.
+
+#### `dlab`
+
+| Channel | Range | Description |
+| ------- | ----- | ----------- |
+| `l`     | ?     | Lightness   |
+| `a`     | ?     |
+| `b`     | ?     |
+
+#### `dlch`
+
+| Channel | Range | Description |
+| ------- | ----- | ----------- |
+| `l`     | ?     | Lightness   |
+| `c`     | ?     | Chroma      |
+| `h`     | ?     | Hue         |
+
+**References:**
+
+-   ["Industrial Color Physics"](https://www.springer.com/us/book/9781441911964), Georg A. Klein, Springer (2010)
+
+### YIQ
+
+[YIQ](yiq) is the color space used by the NTSC color TV system. It contains the following channels:
+
+| Channel | Range               | Description                    |
+| ------- | ------------------- | ------------------------------ |
+| Y       | `[0,1]`             | Luma                           |
+| I       | `[-0.5957, 0.5957]` | In-phase (orange-blue axis)    |
+| Q       | `[-0.5226, 0.5226]` | Quadrature (green-purple axis) |
+
+### Cubehelix
 
 ## Culori Recipes
 

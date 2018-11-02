@@ -139,6 +139,11 @@ tape('differenceCmc', function(test) {
 		2.944236531878115
 	);
 
+	test.equal(
+		differenceCmc()('lab(50 40 20)', 'lab(60 20 100)'),
+		50.913226714067704
+	);
+
 	test.end();
 });
 
