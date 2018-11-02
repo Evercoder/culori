@@ -387,6 +387,18 @@ The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an 
 
 -   Green, D. A., 2011, [_"A colour scheme for the display of astronomical intensity images"_](http://astron-soc.in/bulletin/11June/289392011.pdf), Bulletin of the Astronomical Society of India, 39, 289. ([2011BASI...39..289G](https://ui.adsabs.harvard.edu/#abs/2011BASI...39..289G) at [ADS](https://ui.adsabs.harvard.edu/))
 
+It was expanded into a color space by [Mike Bostock](https://en.wikipedia.org/wiki/Mike_Bostock) and [Jason Davies](https://www.jasondavies.com/) in [D3](https://github.com/d3/d3-color).
+
+#### `cubehelix`
+
+The channels in the `cubehelix` color space maintain the conventions from D3, namely:
+
+| Channel | Range      | Description                                                              |
+| ------- | ---------- | ------------------------------------------------------------------------ |
+| `h`     | `[0, 360)` | Hue (Based on _start color_ and _rotations_ as defined in Green's paper) |
+| `s`     | `[0, 1]`   | Saturation (Called _hue_ in op. cit.)                                    |
+| `l`     | `[0, 1]`   | Lightness                                                                |
+
 ## Culori Recipes
 
 #### Relative luminance of a color
