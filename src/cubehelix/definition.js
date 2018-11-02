@@ -17,7 +17,7 @@
 	* 	a `lightness` dimension in the interval [0, 1] 
 		on which we interpolate to obtain the colour scheme
 	*	a `start` colour that is analogous to a Hue in HSL space
-	*	a number of `rotations` around the Hue cyllinder.
+	*	a number of `rotations` around the Hue cylinder.
 	*	a `hue` parameter which should more appropriately be called `saturation`
 	
 	As such, the original definition of the Cubehelix scheme is actually an
@@ -48,9 +48,9 @@ export default {
 		rgb: convertCubehelixToRgb
 	},
 	interpolate: {
-		'h': interpolateFunctionLinear(interpolateHue()),
-		's': interpolateFunctionLinear(interpolateNumber()),
-		'l': interpolateFunctionLinear(interpolateNumber()),
-		'alpha': interpolateFunctionLinear(interpolateAlpha())
+		h: interpolateFunctionLinear(interpolateHue()),
+		s: interpolateFunctionLinear(interpolateNumber()),
+		l: interpolateFunctionLinear(interpolateNumber()),
+		alpha: interpolateFunctionLinear(interpolateAlpha())
 	}
 };
