@@ -1,6 +1,6 @@
 ## Culori Changelog
 
-### Unreleased
+### 0.6.0
 
 Stop treating the _alpha_ channel specifically in the Euclidean distance formula. Instead, assume it's always the fourth channel and assign it a default weight of 0. This means that it's now possible to factor in the alpha into the distance, if needed.
 
