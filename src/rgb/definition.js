@@ -3,6 +3,7 @@ import parseHex from './parseHex';
 import parseRgb from './parseRgb';
 import parseTransparent from './parseTransparent';
 import interpolateLinear from '../interpolate/linear';
+import interpolateAlpha from '../interpolate/alpha';
 
 export default {
 	mode: 'rgb',
@@ -12,6 +13,6 @@ export default {
 		r: interpolateLinear(),
 		g: interpolateLinear(),
 		b: interpolateLinear(),
-		alpha: interpolateLinear()
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };

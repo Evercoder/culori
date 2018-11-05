@@ -1,6 +1,7 @@
 import convertHsvToRgb from './convertHsvToRgb';
 import convertRgbToHsv from './convertRgbToHsv';
 import interpolateHue from '../interpolate/hue';
+import interpolateAlpha from '../interpolate/alpha';
 import interpolateLinear from '../interpolate/linear';
 
 export default {
@@ -13,9 +14,9 @@ export default {
 	},
 	channels: ['h', 's', 'v', 'alpha'],
 	interpolate: {
-		h: interpolateLinear(interpolateHue()),
+		h: interpolateLinear(interpolateHue),
 		s: interpolateLinear(),
 		v: interpolateLinear(),
-		alpha: interpolateLinear()
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };

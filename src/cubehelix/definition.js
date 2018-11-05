@@ -32,6 +32,7 @@
 */
 
 import interpolateHue from '../interpolate/hue';
+import interpolateAlpha from '../interpolate/alpha';
 import interpolateLinear from '../interpolate/linear';
 import convertRgbToCubehelix from './convertRgbToCubehelix';
 import convertCubehelixToRgb from './convertCubehelixToRgb';
@@ -46,9 +47,9 @@ export default {
 		rgb: convertCubehelixToRgb
 	},
 	interpolate: {
-		h: interpolateLinear(interpolateHue()),
+		h: interpolateLinear(interpolateHue),
 		s: interpolateLinear(),
 		l: interpolateLinear(),
-		alpha: interpolateLinear()
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };

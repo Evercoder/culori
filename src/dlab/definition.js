@@ -3,6 +3,7 @@ import convertDlabToRgb from './convertDlabToRgb';
 import convertLabToDlab from './convertLabToDlab';
 import convertRgbToDlab from './convertRgbToDlab';
 import interpolateLinear from '../interpolate/linear';
+import interpolateAlpha from '../interpolate/alpha';
 
 export default {
 	mode: 'dlab',
@@ -19,6 +20,6 @@ export default {
 		l: interpolateLinear(),
 		a: interpolateLinear(),
 		b: interpolateLinear(),
-		alpha: interpolateLinear()
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };

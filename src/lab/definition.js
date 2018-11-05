@@ -2,6 +2,7 @@ import convertLabToRgb from './convertLabToRgb';
 import convertRgbToLab from './convertRgbToLab';
 import parseLab from './parseLab';
 import interpolateLinear from '../interpolate/linear';
+import interpolateAlpha from '../interpolate/alpha';
 
 export default {
 	mode: 'lab',
@@ -17,6 +18,6 @@ export default {
 		l: interpolateLinear(),
 		a: interpolateLinear(),
 		b: interpolateLinear(),
-		alpha: interpolateLinear()
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };

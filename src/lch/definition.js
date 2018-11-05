@@ -4,6 +4,7 @@ import convertLchToRgb from './convertLchToRgb';
 import convertRgbToLch from './convertRgbToLch';
 import parseLch from './parseLch';
 import interpolateHue from '../interpolate/hue';
+import interpolateAlpha from '../interpolate/alpha';
 import interpolateLinear from '../interpolate/linear';
 
 export default {
@@ -19,9 +20,9 @@ export default {
 	channels: ['l', 'c', 'h', 'alpha'],
 	parsers: [parseLch],
 	interpolate: {
-		h: interpolateLinear(interpolateHue()),
+		h: interpolateLinear(interpolateHue),
 		c: interpolateLinear(),
 		l: interpolateLinear(),
-		alpha: interpolateLinear()
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };

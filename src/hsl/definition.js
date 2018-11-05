@@ -2,6 +2,7 @@ import convertHslToRgb from './convertHslToRgb';
 import convertRgbToHsl from './convertRgbToHsl';
 import parseHsl from './parseHsl';
 import interpolateHue from '../interpolate/hue';
+import interpolateAlpha from '../interpolate/alpha';
 import interpolateLinear from '../interpolate/linear';
 
 export default {
@@ -15,9 +16,9 @@ export default {
 	channels: ['h', 's', 'l', 'alpha'],
 	parsers: [parseHsl],
 	interpolate: {
-		h: interpolateLinear(interpolateHue()),
+		h: interpolateLinear(interpolateHue),
 		s: interpolateLinear(),
 		l: interpolateLinear(),
-		alpha: interpolateLinear()
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };

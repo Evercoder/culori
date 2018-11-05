@@ -1,18 +1,15 @@
-/*
-	Interpolation of hue values.
-	
-	Hues can be interpolated either on the shortest path around the cyllinder
-	or the normal (long) way.
-
-	Known issues:
-
-	*	For spline interpolation, undefined behavior when some values are undefined
-		and others are not.
-	*	Spline interpolation does not support the shortPath hue interpolation, but it
-		will normalize all hues to the [0, 360) range.
- */
-
 import normalizeHue from '../util/normalizeHue';
-import identity from '../util/identity';
 
-export default identity;
+export default arr =>
+	arr.map((val, idx, arr) => {
+		let a = arr[idx - 1];
+		let b = arr[idx];
+		if (a !== undefined && b !== undefined) {
+			let na = normalizeHue(a);
+			let nb = normalizeHue(b);
+			return Math.abs(nb - na) > 180
+				? normalizeHue(nb - 360 * Math.sign(nb - na))
+				: val;
+		}
+		return val;
+	});
