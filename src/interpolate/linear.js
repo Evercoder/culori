@@ -1,17 +1,36 @@
 import identity from '../util/identity';
 
-export default (γ = 1) => (arr, normalize) => {
+const get_classes = arr => {
+	let classes = [];
+	for (let i = 0; i < arr.length - 1; i++) {
+		let a = arr[i];
+		let b = arr[i + 1];
+
+		if (a === undefined && b === undefined) {
+			classes.push(undefined);
+		} else if (a !== undefined && b !== undefined) {
+			classes.push([a, b]);
+		} else {
+			classes.push(a !== undefined ? [a, a] : [b, b]);
+		}
+	}
+
+	return classes;
+};
+
+export default (normalize = identity, γ = 1) => arr => {
+	let normalized_arr = normalize(arr);
+	let classes = get_classes(normalized_arr);
+
 	return t => {
 		t = Math.pow(t, γ);
-		let cls = t * (arr.length - 1);
-		let idx = Math.floor(cls);
-		let a = arr[idx];
-		let b = arr[idx + 1];
-		let t0 = cls - idx;
 
-		let values = normalize([a, b], t0);
-		return typeof values === 'object'
-			? ((a = values[0]), (b = values[1]), a + t0 * (b - a))
-			: values;
+		let cls = t * classes.length;
+		let idx = t === 1 ? classes.length - 1 : Math.floor(cls);
+		let pair = classes[idx];
+
+		return pair === undefined
+			? undefined
+			: pair[0] + (cls - idx) * (pair[1] - pair[0]);
 	};
 };

@@ -2,8 +2,6 @@ import convertDlabToLab from './convertDlabToLab';
 import convertDlabToRgb from './convertDlabToRgb';
 import convertLabToDlab from './convertLabToDlab';
 import convertRgbToDlab from './convertRgbToDlab';
-import interpolateNumber from '../interpolate/number';
-import interpolateAlpha from '../interpolate/alpha';
 import interpolateLinear from '../interpolate/linear';
 
 export default {
@@ -18,9 +16,9 @@ export default {
 	},
 	channels: ['l', 'a', 'b', 'alpha'],
 	interpolate: {
-		l: interpolateLinear(interpolateNumber()),
-		a: interpolateLinear(interpolateNumber()),
-		b: interpolateLinear(interpolateNumber()),
-		alpha: interpolateLinear(interpolateAlpha())
+		l: interpolateLinear(),
+		a: interpolateLinear(),
+		b: interpolateLinear(),
+		alpha: interpolateLinear()
 	}
 };

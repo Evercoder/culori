@@ -1,3 +1,5 @@
+import identity from '../util/identity';
+
 /*
 
 	Basis spline
@@ -33,17 +35,25 @@ const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 	);
 };
 
-export default (type = 'default', γ = 1) => (arr, normalize) => t => {
-	t = Math.pow(t, γ);
+export default (
+	normalize = identity,
+	type = 'default',
+	γ = 1
+) => original_arr => {
+	let arr = normalize(original_arr);
 
-	let classes = arr.length - 1;
-	let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+	return t => {
+		t = Math.pow(t, γ);
 
-	return bspline(
-		i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
-		arr[i],
-		arr[i + 1],
-		i < classes - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
-		(t - i / classes) * classes
-	);
+		let classes = arr.length - 1;
+		let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+
+		return bspline(
+			i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
+			arr[i],
+			arr[i + 1],
+			i < classes - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
+			(t - i / classes) * classes
+		);
+	};
 };

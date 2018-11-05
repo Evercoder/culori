@@ -60,8 +60,6 @@ export {
 export { default as formatter } from './formatter';
 export { default as round } from './round';
 export { default as interpolate } from './interpolate/interpolate';
-export { default as interpolateNumber } from './interpolate/number';
-export { default as interpolateAlpha } from './interpolate/alpha';
 export { default as interpolateHue } from './interpolate/hue';
 
 export { default as interpolateLinear } from './interpolate/linear';

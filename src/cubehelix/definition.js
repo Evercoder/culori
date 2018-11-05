@@ -31,8 +31,6 @@
 	with a variable Saturation and a Lightness interval other than the fixed 0 -> 1.
 */
 
-import interpolateNumber from '../interpolate/number';
-import interpolateAlpha from '../interpolate/alpha';
 import interpolateHue from '../interpolate/hue';
 import interpolateLinear from '../interpolate/linear';
 import convertRgbToCubehelix from './convertRgbToCubehelix';
@@ -49,8 +47,8 @@ export default {
 	},
 	interpolate: {
 		h: interpolateLinear(interpolateHue()),
-		s: interpolateLinear(interpolateNumber()),
-		l: interpolateLinear(interpolateNumber()),
-		alpha: interpolateLinear(interpolateAlpha())
+		s: interpolateLinear(),
+		l: interpolateLinear(),
+		alpha: interpolateLinear()
 	}
 };

@@ -13,10 +13,16 @@ export default (colors, mode = 'rgb', interpolations) => {
 
 	// override the default interpolators
 	// from the color space definition with any custom ones
-	let interpolators = {
-		...def.interpolate,
-		...interpolations
-	};
+	let interpolators = def.channels.reduce(
+		(res, channel) => {
+			res[channel] = res[channel](zipped[channel]);
+			return res;
+		},
+		{
+			...def.interpolate,
+			...interpolations
+		}
+	);
 
 	return t => {
 		// clamp t to the [0, 1] interval
@@ -24,7 +30,7 @@ export default (colors, mode = 'rgb', interpolations) => {
 
 		return def.channels.reduce(
 			(res, channel) => {
-				let val = interpolators[channel](zipped[channel], t);
+				let val = interpolators[channel](t);
 				if (val !== undefined) {
 					res[channel] = val;
 				}

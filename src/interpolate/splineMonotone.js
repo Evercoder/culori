@@ -17,7 +17,9 @@ const monotone = (v0, v1, v2, v3, h, t) => {
 	);
 };
 
-export default (γ = 1) => (arr, normalize) => {
+export default (normalize = identity, γ = 1) => original_arr => {
+	let arr = normalize(original_arr);
+
 	return t => {
 		t = Math.pow(t, γ);
 

@@ -1,7 +1,5 @@
 import convertRgbToYiq from './convertRgbToYiq';
 import convertYiqToRgb from './convertYiqToRgb';
-import interpolateNumber from '../interpolate/number';
-import interpolateAlpha from '../interpolate/alpha';
 import interpolateLinear from '../interpolate/linear';
 
 /*
@@ -34,9 +32,9 @@ export default {
 	},
 	channels: ['y', 'i', 'q', 'alpha'],
 	interpolate: {
-		y: interpolateLinear(interpolateNumber()),
-		i: interpolateLinear(interpolateNumber()),
-		q: interpolateLinear(interpolateNumber()),
-		alpha: interpolateLinear(interpolateAlpha())
+		y: interpolateLinear(),
+		i: interpolateLinear(),
+		q: interpolateLinear(),
+		alpha: interpolateLinear()
 	}
 };
