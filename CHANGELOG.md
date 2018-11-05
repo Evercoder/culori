@@ -1,5 +1,9 @@
 ## Culori Changelog
 
+### 0.7.2
+
+Adds `closed` type for basis, natural and monotone spline interpolation. ([#50](https://github.com/Evercoder/culori/issues/50)).
+
 ### 0.7.1
 
 Fixes a regretion in short path hue interpolation.
