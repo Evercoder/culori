@@ -17,7 +17,11 @@ const monotone = (v0, v1, v2, v3, h, t) => {
 	);
 };
 
-export default (normalize = identity, γ = 1) => original_arr => {
+export default (
+	normalize = identity,
+	type = 'default',
+	γ = 1
+) => original_arr => {
 	let arr = (normalize || identity)(original_arr);
 
 	return t => {
@@ -33,15 +37,27 @@ export default (normalize = identity, γ = 1) => original_arr => {
 			i = Math.floor(t * n);
 		}
 
-		let v1 = arr[i];
-		let v2 = arr[i + 1];
-		let v0 = i > 0 ? arr[i - 1] : 2 * v1 - v2;
-		let v3 = i < n - 1 ? arr[i + 2] : 2 * v2 - v1;
-
-		let v = normalize([v0, v1, v2, v3]);
-
-		return typeof v === 'object'
-			? monotone(v[0], v[1], v[2], v[3], 1 / n, t - i / n)
-			: v;
+		switch (type) {
+			case 'default':
+				return monotone(
+					i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
+					arr[i],
+					arr[i + 1],
+					i < n - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
+					1 / n,
+					t - i / n
+				);
+			case 'closed':
+				return monotone(
+					arr[(i - 1) % arr.length],
+					arr[i],
+					arr[(i + 1) % arr.length],
+					arr[(i + 2) % arr.length],
+					1 / n,
+					t - i / n
+				);
+			case 'open':
+				throw new Error('open monotone spline not implemented yet');
+		}
 	};
 };

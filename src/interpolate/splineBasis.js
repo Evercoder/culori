@@ -48,12 +48,25 @@ export default (
 		let classes = arr.length - 1;
 		let i = t === 1 ? classes - 1 : Math.floor(t * classes);
 
-		return bspline(
-			i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
-			arr[i],
-			arr[i + 1],
-			i < classes - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
-			(t - i / classes) * classes
-		);
+		switch (type) {
+			case 'default':
+				return bspline(
+					i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
+					arr[i],
+					arr[i + 1],
+					i < classes - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
+					(t - i / classes) * classes
+				);
+			case 'closed':
+				return bspline(
+					arr[(i - 1) % arr.length],
+					arr[i],
+					arr[(i + 1) % arr.length],
+					arr[(i + 2) % arr.length],
+					(t - i / classes) * classes
+				);
+			case 'open':
+				throw new Error('open basis spline is not yet implemented');
+		}
 	};
 };
