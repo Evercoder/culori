@@ -6,14 +6,13 @@ import convertLabToDlch from './convertLabToDlch';
 import convertDlabToDlch from './convertDlabToDlch';
 import convertRgbToDlch from './convertRgbToDlch';
 
-import interpolateNumber from '../interpolate/interpolateNumber';
-import interpolateAlpha from '../interpolate/interpolateAlpha';
-import interpolateHue from '../interpolate/interpolateHue';
-import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
+import interpolateHue from '../interpolate/hue';
+import interpolateAlpha from '../interpolate/alpha';
+import interpolateLinear from '../interpolate/linear';
 
 export default {
 	mode: 'dlch',
-	output: { 
+	output: {
 		lab: convertDlchToLab,
 		dlab: convertDlchToDlab,
 		rgb: convertDlchToRgb
@@ -25,9 +24,9 @@ export default {
 	},
 	channels: ['l', 'c', 'h', 'alpha'],
 	interpolate: {
-		l: interpolateFunctionLinear(interpolateNumber()),
-		c: interpolateFunctionLinear(interpolateNumber()),
-		h: interpolateFunctionLinear(interpolateHue()),
-		alpha: interpolateFunctionLinear(interpolateAlpha())
+		l: interpolateLinear(),
+		c: interpolateLinear(),
+		h: interpolateLinear(interpolateHue),
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };

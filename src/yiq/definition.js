@@ -1,8 +1,7 @@
 import convertRgbToYiq from './convertRgbToYiq';
 import convertYiqToRgb from './convertYiqToRgb';
-import interpolateNumber from '../interpolate/interpolateNumber';
-import interpolateAlpha from '../interpolate/interpolateAlpha';
-import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
+import interpolateLinear from '../interpolate/linear';
+import interpolateAlpha from '../interpolate/alpha';
 
 /*
 	YIQ Color Space
@@ -34,9 +33,9 @@ export default {
 	},
 	channels: ['y', 'i', 'q', 'alpha'],
 	interpolate: {
-		y: interpolateFunctionLinear(interpolateNumber()),
-		i: interpolateFunctionLinear(interpolateNumber()),
-		q: interpolateFunctionLinear(interpolateNumber()),
-		alpha: interpolateFunctionLinear(interpolateAlpha())
+		y: interpolateLinear(),
+		i: interpolateLinear(),
+		q: interpolateLinear(),
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };

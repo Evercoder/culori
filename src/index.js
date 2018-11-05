@@ -60,23 +60,20 @@ export {
 export { default as formatter } from './formatter';
 export { default as round } from './round';
 export { default as interpolate } from './interpolate/interpolate';
-export { default as interpolateNumber } from './interpolate/interpolateNumber';
-export { default as interpolateAlpha } from './interpolate/interpolateAlpha';
-export { default as interpolateHue } from './interpolate/interpolateHue';
+export { default as interpolateHue } from './interpolate/hue';
+export { default as interpolateAlpha } from './interpolate/alpha';
+
+export { default as interpolateLinear } from './interpolate/linear';
+export { default as interpolateCosine } from './interpolate/cosine';
+export { default as interpolateSplineBasis } from './interpolate/splineBasis';
 export {
-	default as interpolateFunctionLinear
-} from './interpolate/interpolateFunctionLinear';
+	default as interpolateSplineNatural
+} from './interpolate/splineNatural';
 export {
-	default as interpolateFunctionSpline
-} from './interpolate/interpolateFunctionSpline';
-export {
-	default as interpolateFunctionCosine
-} from './interpolate/interpolateFunctionCosine';
-export {
-	default as interpolateFunctionMonotone
-} from './interpolate/interpolateFunctionMonotone';
+	default as interpolateSplineMonotone
+} from './interpolate/splineMonotone';
+
 export { default as samples } from './samples';
-export { default as zip } from './zip';
 export { default as displayable } from './displayable';
 export { default as clamp } from './clamp';
 export { default as nearest } from './nearest';

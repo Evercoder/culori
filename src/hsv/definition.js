@@ -1,24 +1,22 @@
 import convertHsvToRgb from './convertHsvToRgb';
 import convertRgbToHsv from './convertRgbToHsv';
-import interpolateNumber from '../interpolate/interpolateNumber';
-import interpolateAlpha from '../interpolate/interpolateAlpha';
-import interpolateHue from '../interpolate/interpolateHue';
-import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
-
+import interpolateHue from '../interpolate/hue';
+import interpolateAlpha from '../interpolate/alpha';
+import interpolateLinear from '../interpolate/linear';
 
 export default {
 	mode: 'hsv',
-	output: { 
-		rgb: convertHsvToRgb 
+	output: {
+		rgb: convertHsvToRgb
 	},
 	input: {
 		rgb: convertRgbToHsv
 	},
 	channels: ['h', 's', 'v', 'alpha'],
 	interpolate: {
-		h: interpolateFunctionLinear(interpolateHue()),
-		s: interpolateFunctionLinear(interpolateNumber()),
-		v: interpolateFunctionLinear(interpolateNumber()),
-		alpha: interpolateFunctionLinear(interpolateAlpha())
+		h: interpolateLinear(interpolateHue),
+		s: interpolateLinear(),
+		v: interpolateLinear(),
+		alpha: interpolateLinear(interpolateAlpha)
 	}
 };
