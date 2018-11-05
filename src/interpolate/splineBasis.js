@@ -59,7 +59,7 @@ export default (
 				);
 			case 'closed':
 				return bspline(
-					arr[(i - 1) % arr.length],
+					arr[(i - 1 + arr.length) % arr.length],
 					arr[i],
 					arr[(i + 1) % arr.length],
 					arr[(i + 2) % arr.length],
