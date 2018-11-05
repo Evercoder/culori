@@ -1,5 +1,9 @@
 ## Culori Changelog
 
+### 0.7.1
+
+Fixes a regretion in short path hue interpolation.
+
 ### 0.7.0
 
 #### Breaking changes
