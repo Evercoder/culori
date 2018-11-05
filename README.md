@@ -352,19 +352,21 @@ The figure below shows a slice of the HSI color space for a particular hue:
 
 #### `lab`
 
-| Channel | Range | Description |
-| ------- | ----- | ----------- |
-| `l`     | ?     | Lightness   |
-| `a`     | ?     |
-| `b`     | ?     |
+| Channel | Range                  | Description           |
+| ------- | ---------------------- | --------------------- |
+| `l`     | `[0 — 100]`            | Lightness             |
+| `a`     | `[-79.2872, 93.55]`    | Green–red component   |
+| `b`     | `[-112.0294, 93.3884]` | Blue–yellow component |
 
 #### `lch`
 
-| Channel | Range | Description |
-| ------- | ----- | ----------- |
-| `l`     | ?     | Lightness   |
-| `c`     | ?     | Chroma      |
-| `h`     | ?     | Hue         |
+| Channel | Range           | Description |
+| ------- | --------------- | ----------- |
+| `l`     | `[0 - 100]`     | Lightness   |
+| `c`     | `[0 - 131.207]` | Chroma      |
+| `h`     | `[0 - 360]`     | Hue         |
+
+> 💡 The range for the `a` and `b` channels in Lab, and the `c` channel in LCh, depend on the specific implementation. I've obtained the ranges from the tables above by converting all sRGB colors defined by `r, g, b ∈ ℕ ⋂ [0, 255]` into Lab and LCh respectively.
 
 ### DIN99 Lab / LCh
 
@@ -412,11 +414,11 @@ It was expanded into a color space by [Mike Bostock](https://en.wikipedia.org/wi
 
 The channels in the `cubehelix` color space maintain the conventions from D3, namely:
 
-| Channel | Range      | Description                                                              |
-| ------- | ---------- | ------------------------------------------------------------------------ |
-| `h`     | `[0, 360)` | Hue (Based on _start color_ and _rotations_ as defined in Green's paper) |
-| `s`     | `[0, 1]`   | Saturation (Called _hue_ in op. cit.)                                    |
-| `l`     | `[0, 1]`   | Lightness                                                                |
+| Channel | Range         | Description                                                              |
+| ------- | ------------- | ------------------------------------------------------------------------ |
+| `h`     | `[0, 360)`    | Hue (Based on _start color_ and _rotations_ as defined in Green's paper) |
+| `s`     | `[0, 4.6143]` | Saturation (Called _hue_ in op. cit.)                                    |
+| `l`     | `[0, 1]`      | Lightness                                                                |
 
 ## Culori Recipes
 
