@@ -40,7 +40,7 @@ export default (
 	type = 'default',
 	γ = 1
 ) => original_arr => {
-	let arr = normalize(original_arr);
+	let arr = (normalize || identity)(original_arr);
 
 	return t => {
 		t = Math.pow(t, γ);

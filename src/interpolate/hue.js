@@ -1,15 +1,27 @@
 import normalizeHue from '../util/normalizeHue';
 
-export default arr =>
-	arr.map((val, idx, arr) => {
-		let a = arr[idx - 1];
-		let b = arr[idx];
-		if (a !== undefined && b !== undefined) {
-			let na = normalizeHue(a);
-			let nb = normalizeHue(b);
-			return Math.abs(nb - na) > 180
-				? normalizeHue(nb - 360 * Math.sign(nb - na))
-				: val;
+export default arr => {
+	let res = [];
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i] === undefined) {
+			res.push(undefined);
+			continue;
 		}
-		return val;
-	});
+
+		let normalized = normalizeHue(arr[i]);
+		let prev;
+
+		if (i === 0 || (prev = res[res.length - 1]) === undefined) {
+			res.push(normalized);
+			continue;
+		}
+
+		res.push(
+			Math.abs(normalized - prev) > 180
+				? normalized - 360 * Math.sign(normalized - prev)
+				: normalized
+		);
+	}
+
+	return res;
+};

@@ -19,7 +19,7 @@ const get_classes = arr => {
 };
 
 export default (normalize = identity, γ = 1) => arr => {
-	let normalized_arr = normalize(arr);
+	let normalized_arr = (normalize || identity)(arr);
 	let classes = get_classes(normalized_arr);
 
 	return t => {

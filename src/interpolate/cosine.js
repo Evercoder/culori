@@ -6,7 +6,7 @@
 import identity from '../util/identity';
 
 export default (normalize = identity, γ = 1) => original_arr => {
-	let arr = normalize(arr);
+	let arr = (normalize || identity)(arr);
 
 	return t => {
 		t = Math.pow(t, γ);
