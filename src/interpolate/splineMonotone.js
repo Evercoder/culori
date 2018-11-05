@@ -1,7 +1,6 @@
 import identity from '../util/identity';
 
 const monotone = (v0, v1, v2, v3, h, t) => {
-
 	let h2 = h * h;
 	let t2 = t * t;
 	let t3 = t2 * t;
@@ -11,17 +10,15 @@ const monotone = (v0, v1, v2, v3, h, t) => {
 	let s21 = (v2 - v1) / h;
 
 	return (
-		(s20 + s31 - 2 * s21) / h2 * t3 +
-		(3 * s21 - 2 * s20 - s31) / h * t2 + 
+		((s20 + s31 - 2 * s21) / h2) * t3 +
+		((3 * s21 - 2 * s20 - s31) / h) * t2 +
 		s20 * t +
 		v1
 	);
-}
+};
 
-export default (normalize = identity, γ = 1) => 
-
-	(arr, t) => {
-
+export default (γ = 1) => (arr, normalize) => {
+	return t => {
 		t = Math.pow(t, γ);
 
 		let n = arr.length - 1;
@@ -41,6 +38,8 @@ export default (normalize = identity, γ = 1) =>
 
 		let v = normalize([v0, v1, v2, v3]);
 
-		return typeof v === 'object' ? 
-			monotone(v[0], v[1], v[2], v[3], 1 / n, t - i / n) : v;
+		return typeof v === 'object'
+			? monotone(v[0], v[1], v[2], v[3], 1 / n, t - i / n)
+			: v;
 	};
+};

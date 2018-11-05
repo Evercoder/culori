@@ -1,22 +1,22 @@
 import convertRgbToLrgb from './convertRgbToLrgb';
 import convertLrgbToRgb from './convertLrgbToRgb';
-import interpolateNumber from '../interpolate/interpolateNumber';
-import interpolateAlpha from '../interpolate/interpolateAlpha';
-import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
+import interpolateNumber from '../interpolate/number';
+import interpolateAlpha from '../interpolate/alpha';
+import interpolateLinear from '../interpolate/linear';
 
 export default {
 	mode: 'lrgb',
 	output: {
 		rgb: convertLrgbToRgb
 	},
-	input: { 
+	input: {
 		rgb: convertRgbToLrgb
 	},
 	channels: ['r', 'g', 'b', 'alpha'],
 	interpolate: {
-		r: interpolateFunctionLinear(interpolateNumber()),
-		g: interpolateFunctionLinear(interpolateNumber()),
-		b: interpolateFunctionLinear(interpolateNumber()),
-		alpha: interpolateFunctionLinear(interpolateAlpha())
+		r: interpolateLinear(interpolateNumber()),
+		g: interpolateLinear(interpolateNumber()),
+		b: interpolateLinear(interpolateNumber()),
+		alpha: interpolateLinear(interpolateAlpha())
 	}
 };

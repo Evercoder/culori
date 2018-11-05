@@ -1,9 +1,9 @@
 import convertLabToRgb from './convertLabToRgb';
 import convertRgbToLab from './convertRgbToLab';
 import parseLab from './parseLab';
-import interpolateNumber from '../interpolate/interpolateNumber';
-import interpolateAlpha from '../interpolate/interpolateAlpha';
-import interpolateFunctionLinear from '../interpolate/interpolateFunctionLinear';
+import interpolateNumber from '../interpolate/number';
+import interpolateAlpha from '../interpolate/alpha';
+import interpolateLinear from '../interpolate/linear';
 
 export default {
 	mode: 'lab',
@@ -16,9 +16,9 @@ export default {
 	channels: ['l', 'a', 'b', 'alpha'],
 	parsers: [parseLab],
 	interpolate: {
-		l: interpolateFunctionLinear(interpolateNumber()),
-		a: interpolateFunctionLinear(interpolateNumber()),
-		b: interpolateFunctionLinear(interpolateNumber()),
-		alpha: interpolateFunctionLinear(interpolateAlpha())
+		l: interpolateLinear(interpolateNumber()),
+		a: interpolateLinear(interpolateNumber()),
+		b: interpolateLinear(interpolateNumber()),
+		alpha: interpolateLinear(interpolateAlpha())
 	}
 };
