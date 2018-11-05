@@ -1,5 +1,11 @@
 ## Culori Changelog
 
+### 0.7.0
+
+#### Breaking changes
+
+Revamped the interpolation UI to be terser ([#55](https://github.com/Evercoder/culori/issues/55)). The interpolation functions have been renamed, and their implementation has been refactored.
+
 ### 0.6.0
 
 Stop treating the _alpha_ channel specifically in the Euclidean distance formula. Instead, assume it's always the fourth channel and assign it a default weight of 0. This means that it's now possible to factor in the alpha into the distance, if needed.
