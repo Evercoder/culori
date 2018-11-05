@@ -209,25 +209,21 @@ samples(5).map(grays);
 
 #### Interpolation functions
 
-> 🕳 expand section
+<a name="culoriInterpolateLinear" href="#culoriInterpolateLinear">#</a> culori.**interpolateLinear** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/linear.js 'Source')
 
-<a name="culoriInterpolateFunctionLinear" href="#culoriInterpolateFunctionLinear">#</a> culori.**interpolateFunctionLinear** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionLinear.js 'Source')
+<a name="culoriInterpolateSplineBasis" href="#culoriInterpolateSplineBasis">#</a> culori.**interpolateSplineBasis** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js 'Source')
 
-<a name="culoriInterpolateFunctionSpline" href="#culoriInterpolateFunctionSpline">#</a> culori.**interpolateFunctionSpline** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionSpline.js 'Source')
+<a name="culoriInterpolateSplineNatural" href="#culoriInterpolateSplineNatural">#</a> culori.**interpolateSplineNatural** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js 'Source')
 
-<a name="culoriInterpolateFunctionMonotone" href="#culoriInterpolateFunctionMonotone">#</a> culori.**interpolateFunctionMonotone** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionMonotone.js 'Source')
+<a name="culoriInterpolateSplineMonotone" href="#culoriInterpolateSplineMonotone">#</a> culori.**interpolateSplineMonotone** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js 'Source')
 
-<a name="culoriInterpolateFunctionCosine" href="#culoriInterpolateFunctionCosine">#</a> culori.**interpolateFunctionCosine** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateFunctionCosine.js 'Source')
+<a name="culoriInterpolateCosine" href="#culoriInterpolateCosine">#</a> culori.**interpolateCosine** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/cosine.js 'Source')
 
 #### Interpolation modes
 
-> 🕳 expand section
+<a name="culoriInterpolateHue" href="#culoriInterpolateHue">#</a> culori.**interpolateHue** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/hue.js 'Source')
 
-<a name="culoriInterpolateNumber" href="#culoriInterpolateNumber">#</a> culori.**interpolateNumber** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateNumber.js 'Source')
-
-<a name="culoriInterpolateHue" href="#culoriInterpolateHue">#</a> culori.**interpolateHue** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateHue.js 'Source')
-
-<a name="culoriInterpolateNumber" href="#culoriInterpolateNumber">#</a> culori.**interpolateAlpha** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolateNumber.js 'Source')
+<a name="culoriInterpolateAlpha" href="#culoriInterpolateAlpha">#</a> culori.**interpolateAlpha** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/alpha.js 'Source')
 
 ### Difference
 
