@@ -168,11 +168,13 @@ culori.displayable('rgb(300 255 255)'); // ⇒ false
 
 Returns a function which you can then use to retreive a representation of any color that's displayable on the screen, i.e. fits within the sRGB gamut. There are two available methods:
 
--   `method = 'rgb'` clamps the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`;
--   `method = 'lch'` converts the color to the LCh space and finds the largest Chroma channel value that's displayable for the given Lightness and Hue; if not even the achromatic version (Chroma = 0) of the LCh color is displayable, it falls back to the `rgb` method.
+`method = 'rgb'` clamps the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`.
+
+`method = 'lch'` converts the color to the LCh space and finds the largest Chroma channel value that's displayable for the given Lightness and Hue; if not even the achromatic version (Chroma = 0) of the LCh color is displayable, it falls back to the `rgb` method.
 
 ```js
-culori.clamp('lch')('lch(50 120 5)'); // ⇒ { mode: 'lch', l: 50, c: 77.48291015625, h: 5 }
+culori.clamp('lch')('lch(50 120 5)');
+// ⇒ { mode: 'lch', l: 50, c: 77.48291015625, h: 5 }
 ```
 
 <a name="culoriRound" href="#culoriRound">#</a> culori.**round**(_n = 8_) [<>](https://github.com/evercoder/culori/blob/master/src/round.js 'Source')
@@ -187,9 +189,98 @@ approximate(0.38393993); // => 0.3839
 
 ### Interpolation
 
-<a name="culoriInterpolate" href="#culoriInterpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_) [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js 'Source')
+<a name="culoriInterpolate" href="#culoriInterpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_, _interpolations_) [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js 'Source')
 
-Returns an interpolator between an array of colors in the _mode_ color space.
+Returns an interpolator between an array of colors in the _mode_ color space. The interpolator accepts a value _t_ in the interval `[0, 1]` and returns the interpolated color.
+
+```js
+let grays = culori.interpolate(['#fff', '#000']);
+grays(0.5); // => { mode: 'rgb', r: 0.5, g: 0.5, b: 0.5 }
+```
+
+By default, colors in all spaces are interpolated linearly. You can override the way specific channels are interpolated with the _interpolations_ object, the third argument of `culori.interpolate()`.
+
+```
+let custom_interpolator = culori.interpolate(['blue', 'red'], 'lch', {
+	h: culori.interpolateLinear() // long-path hue interpolation
+});
+```
+
+There are a few interpolation methods available, listed below. Depending on the channel, the numeric values can be interpreted/interpolated in various _modes_. The hue channel, for example, is interpolated by taking into account the _shortest path around the hue circle_ (`interpolateHue`). And the `interpolateAlpha` mode assumes an _undefined_ alpha is `1`.
+
+#### Interpolation methods
+
+You'll use these methods when you want to override how colors get interpolated in a specific color space, or when defining the default interpolation for custom color spaces.
+
+<a name="culoriInterpolateLinear" href="#culoriInterpolateLinear">#</a> culori.**interpolateLinear**(_normalize = identity_, _γ = 1_) [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/linear.js 'Source')
+
+A linear interpolator for values in a channel. By default does not normalize the values.
+
+<a name="culoriInterpolateSplineBasis" href="#culoriInterpolateSplineBasis">#</a> culori.**interpolateSplineBasis**(_normalize = identity_, _type = "default"_, _γ = 1_) [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js 'Source')
+
+A basis spline interpolator for values in a channel. The _type_ can be one of the following:
+
+-   `default` creates a basis spline that passes through the first and last values in the array.
+-   `closed` creates a closed basis spline
+-   `open` creates an open basis spline (_not yet implemented_)
+
+<a name="culoriInterpolateSplineNatural" href="#culoriInterpolateSplineNatural">#</a> culori.**interpolateSplineNatural**(_normalize = identity_, _type = "default"_, _γ = 1_) [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js 'Source')
+
+A natural spline interpolator for values in a channel. The _type_ can be one of the following:
+
+-   `default` creates a natural spline
+-   `closed` creates a closed natural spline
+
+<a name="culoriInterpolateSplineMonotone" href="#culoriInterpolateSplineMonotone">#</a> culori.**interpolateSplineMonotone**(_normalize = identity_, _type = "default"_, _γ = 1_) [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js 'Source')
+
+A monotone spline interpolator for values in a channel. The _type_ can be one of the following:
+
+-   `default` creates a monotone spline
+-   `closed` creates a closed monotone spline
+-   `open` creates an open monotone spline (_not yet implemented_)
+
+<a name="culoriInterpolateCosine" href="#culoriInterpolateCosine">#</a> culori.**interpolateCosine**(_normalize = identity_, _γ = 1_) [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/cosine.js 'Source')
+
+Interpolates the value [using the cosine function](http://paulbourke.net/miscellaneous/interpolation/), which can offer a smoother alternative to linear interpolation.
+
+#### Interpolation modes
+
+By default, channel values that need to be interpolated are not normalized in any way. However, for some channels, we need to do some normalization before we interpolate the values:
+
+<a name="culoriInterpolateHue" href="#culoriInterpolateHue">#</a> culori.**interpolateHue** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/hue.js 'Source')
+
+Used for the hue channel in various color spaces, normalizes the array such that the interpolator takes into account the _shortest path around the hue circle_:
+
+**hsl/definition.js**
+
+```js
+export default {
+	// ...
+	interpolate: {
+		h: interpolateLinear(interpolateHue),
+		s: interpolateLinear(),
+		l: interpolateLinear(),
+		alpha: interpolateLinear(interpolateAlpha)
+	}
+	// ...
+};
+```
+
+By default, hue channels in all color spaces will use this normalization. However, the example below interpolates colors in the HSL color space by treating hues as normal numeric values instead:
+
+```js
+let hsl_long = culori.interpolate(['blue', 'red', 'green'], 'hsl', {
+	h: culori.interpolateLinear()
+});
+```
+
+(Notice we're not sending `culori.interpolateHue` to `culori.interpolateLinear()` as the first argument.)
+
+<a name="culoriInterpolateAlpha" href="#culoriInterpolateAlpha">#</a> culori.**interpolateAlpha** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/alpha.js 'Source')
+
+Used for the alpha channel in various color spaces such that `undefined` values are treated as `1` (full opacity) in some situations. This is the default for the alpha channel in all color spaces.
+
+#### Evenly-spaced samples
 
 <a name="culoriSamples" href="#culoriSamples">#</a> culori.**samples**(_n = 2_, _γ = 1_) [<>](https://github.com/evercoder/culori/blob/master/src/samples.js 'Source')
 
@@ -200,30 +291,14 @@ culori.samples(3); // => [0, 0.5, 1]
 culori.samples(5); // => [0, 0.25, 0.5, 0.75, 1]
 ```
 
+![culori.samples() with various gamma values](./.github/culori-samples.png)
+
 The samples are useful for [culori.interpolate()](#culoriInterpolate) to generate color scales:
 
 ```js
 let grays = culori.interpolate(['#fff', '#000']);
-samples(5).map(grays);
+culori.samples(5).map(grays); // => five evenly-spaced colors
 ```
-
-#### Interpolation functions
-
-<a name="culoriInterpolateLinear" href="#culoriInterpolateLinear">#</a> culori.**interpolateLinear** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/linear.js 'Source')
-
-<a name="culoriInterpolateSplineBasis" href="#culoriInterpolateSplineBasis">#</a> culori.**interpolateSplineBasis** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js 'Source')
-
-<a name="culoriInterpolateSplineNatural" href="#culoriInterpolateSplineNatural">#</a> culori.**interpolateSplineNatural** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js 'Source')
-
-<a name="culoriInterpolateSplineMonotone" href="#culoriInterpolateSplineMonotone">#</a> culori.**interpolateSplineMonotone** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js 'Source')
-
-<a name="culoriInterpolateCosine" href="#culoriInterpolateCosine">#</a> culori.**interpolateCosine** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/cosine.js 'Source')
-
-#### Interpolation modes
-
-<a name="culoriInterpolateHue" href="#culoriInterpolateHue">#</a> culori.**interpolateHue** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/hue.js 'Source')
-
-<a name="culoriInterpolateAlpha" href="#culoriInterpolateAlpha">#</a> culori.**interpolateAlpha** [<>](https://github.com/evercoder/culori/blob/master/src/interpolate/alpha.js 'Source')
 
 ### Difference
 
