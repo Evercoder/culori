@@ -300,6 +300,20 @@ let grays = culori.interpolate(['#fff', '#000']);
 culori.samples(5).map(grays); // => five evenly-spaced colors
 ```
 
+Should you want samples distributed along a different function, you can pair it with an [easing function](https://gist.github.com/gre/1650294), a library such as [bezier-easing](https://github.com/gre/bezier-easing), or [d3-scale](https://github.com/d3/d3-scale):
+
+```js
+var culori = require('culori');
+var easing = require('bezier-easing');
+
+// Bezier easing
+let bezier = easing(0, 0, 1, 0.5);
+culori.samples(10).map(bezier);
+
+// easeInQuad
+culori.samples(10).map(t => t * t);
+```
+
 ### Difference
 
 These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas. Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors. Also available as a separate [d3 plugin](https://github.com/evercoder/d3-color-difference).
