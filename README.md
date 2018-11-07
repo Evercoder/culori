@@ -85,6 +85,7 @@ To import culori as a `<script>` tag to use in a web page, you can load it from 
 -   [Basics methods](#basic-methods)
 -   [Interpolation](#interpolation)
 -   [Difference](#difference)
+-   [Extending culori](#extending-culori)
 
 ### Color representation
 
@@ -409,6 +410,48 @@ For a given _metric_ color difference formula, and an array of _colors_, returns
 
 Pass _n = Infinity_ to get all colors in the array with a maximum distance of _τ_.
 
+### Extending culori
+
+<a name="culoriDefineMode" href="#culoriDefineMode">#</a> culori.**defineMode**(_definition_) [<>](https://github.com/evercoder/culori/blob/master/src/modes.js 'Source')
+
+Defines a new color space through a _definition_ object. By way of example, here's the definition of the HSL color space:
+
+```js
+{
+	mode: 'hsl',
+	output: {
+		rgb: convertHslToRgb
+	},
+	input: {
+		rgb: convertRgbToHsl
+	},
+	channels: ['h', 's', 'l', 'alpha'],
+	parsers: [parseHsl],
+	interpolate: {
+		h: interpolateLinear(interpolateHue),
+		s: interpolateLinear(),
+		l: interpolateLinear(),
+		alpha: interpolateLinear(interpolateAlpha)
+	}
+}
+```
+
+The properties a definition needs are the following:
+
+-   `mode`: the string identifier for the color space
+-   `output`: a set of functions to convert from the color space we're defining to other color spaces. At least `rgb` needs to be included; in case a specific conversion pair between two color spaces is missing, RGB is used as the "buffer" for the conversion.
+-   `input`: opposite of `output`; a set of function to convert from various color spaces to the color space we're defining. At least `rgb` needs to be included.
+-   `channels`: a list of channels for the color space.
+-   `parsers`: any parsers for the color space that can transform strings into colors
+-   `interpolate`: the default interpolations for the color space.
+
+**Note:** The order of the items in the `channels` array matters. To keep things simple, we're making the following conventions:
+
+-   the fourth item in the array should be `alpha`
+-   any cyclical values (e.g. hue) should be identified by `h`, in the range `[0, 360)`
+
+These constrains make sure `differenceEuclidean()` works as expected.
+
 ## Color Spaces
 
 ### RGB
@@ -582,23 +625,17 @@ function contrast(colorA, colorB) {
 }
 ```
 
-## Extending culori
-
-### Defining a color space
-
-**Note:** The order of the items in the `channels` array matters. To keep things simple, we're making the following conventions:
-
--   the fourth item in the array should be `alpha`
--   any cyclical values (e.g. hue) should be identified by `h`, in the range `[0, 360)`
-
-These constrains make sure `differenceEuclidean()` works as expected.
-
 ## Related projects
 
-These libraries add more functionality to culori:
+These projects add more functionality to culori, but they're separate as to keep the core bundle small:
 
--   [culori-scales](https://github.com/evercoder/culori-scales) — color scales (ColorBrewer, matplotlib, etc.)
--   [culori-names](https://github.com/evercoder/culori-names) — more color names
+#### [culori-scales](https://github.com/evercoder/culori-scales)
+
+Color scales (ColorBrewer, matplotlib, etc).
+
+#### [culori-names](https://github.com/evercoder/culori-names)
+
+More named colors, from a variety of sources.
 
 ## Other projects
 
