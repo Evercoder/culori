@@ -335,7 +335,7 @@ let grays = culori.interpolate(['#fff', '#000']);
 culori.samples(5).map(grays); // => five evenly-spaced colors
 ```
 
-Should you want samples distributed along a different function, you can pair it with an [easing function](https://gist.github.com/gre/1650294), a library such as [bezier-easing](https://github.com/gre/bezier-easing), or [d3-scale](https://github.com/d3/d3-scale):
+Should you want samples distributed along a different function, you can pair it with an [easing function](https://gist.github.com/gre/1650294), a library such as [bezier-easing](https://github.com/gre/bezier-easing), [eases](https://github.com/mattdesl/eases), or [d3-scale](https://github.com/d3/d3-scale):
 
 ```js
 let culori = require('culori');
