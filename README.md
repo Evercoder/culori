@@ -645,6 +645,7 @@ Some popular libraries you may want to look at are:
 -   [color](https://github.com/Qix-/color) by Heather Arthur
 -   [color.js](https://github.com/brehaut/color-js) by Andrew Brehaut et al
 -   [chromatist](https://github.com/jrus/chromatist) by [Jacob Rus](http://www.hcs.harvard.edu/~jrus/)
+-   [gradstop.js](https://github.com/Siddharth11/gradstop) by [Siddharth Parmar](https://github.com/Siddharth11)
 
 _Please suggest more interesting projects._
 
