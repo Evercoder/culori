@@ -6,6 +6,24 @@
 	"module": "build/culori.js",
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <danburzo@gmail.com>",
+	"description": "A general-purpose color library for JavaScript",
+	"keywords": [
+		"ciede2000",
+		"cielab",
+		"color",
+		"color-difference",
+		"cubehelix",
+		"din99",
+		"hsi",
+		"hsl",
+		"hsv",
+		"hwb",
+		"lab",
+		"lch",
+		"lrgb",
+		"rgb",
+		"yiq"
+	],
 	"license": "MIT",
 	"files": [
 		"build"

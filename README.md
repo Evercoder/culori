@@ -637,6 +637,14 @@ Color scales (ColorBrewer, matplotlib, etc).
 
 More named colors, from a variety of sources.
 
+## Products using culori
+
+#### [Moqups](https://moqups.com)
+
+All our color-manipulation functions are handled by culori.
+
+_Does your product/project use culori? Create a PR and add yourself to this list!_
+
 ## Other projects
 
 Some popular libraries you may want to look at are:
