@@ -1,5 +1,9 @@
 ## Culori Changelog
 
+### 0.7.4
+
+Fixes a typo that caused `formatter('rgb')('#f0f0f0f0')` and similar examples to ignore the `alpha` channel of the input color, generating `rgb(...)` instead of `rgba(...)`.
+
 ### 0.7.3
 
 Adds `closed` type for basis, natural and monotone spline interpolation. ([#50](https://github.com/Evercoder/culori/issues/50)).
