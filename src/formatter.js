@@ -23,12 +23,12 @@ export default (format = 'rgb') => c => {
 	}
 
 	if (format === 'rgb') {
-		if (c.alpha === undefined || c.alpha === 1) {
+		if (color.alpha === undefined || color.alpha === 1) {
 			// opaque color
 			return `rgb(${r}, ${g}, ${b})`;
 		} else {
 			// transparent color
-			return `rgba(${r}, ${g}, ${b}, ${roundAlpha(c.alpha)})`;
+			return `rgba(${r}, ${g}, ${b}, ${roundAlpha(color.alpha)})`;
 		}
 	}
 };
