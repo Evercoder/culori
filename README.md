@@ -643,6 +643,10 @@ More named colors, from a variety of sources.
 
 All our color-manipulation functions are handled by culori.
 
+#### [Dainty](https://dainty-vs.now.sh)
+
+Dainty is a configurable refined and balanced color theme for Visual Studio using Culori’s CIELAB capabilities for generating and processing colors.
+
 _Does your product/project use culori? Create a PR and add yourself to this list!_
 
 ## Other projects
