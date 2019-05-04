@@ -1,6 +1,6 @@
 # Culori
 
-A color library for JavaScript. Culori works across many color spaces to offer conversion, interpolation and color difference formulas.
+A color library for JavaScript. Culori works across many color spaces to offer conversion, interpolation, color difference formulas, and blending functions.
 
 It supports most color spaces and formats defined in the [CSS Colors Level 4][css4-colors] spec:
 
@@ -85,6 +85,7 @@ To import culori as a `<script>` tag to use in a web page, you can load it from 
 -   [Basics methods](#basic-methods)
 -   [Interpolation](#interpolation)
 -   [Difference](#difference)
+-   [Blending](#blending)
 -   [Extending culori](#extending-culori)
 
 ### Color representation
@@ -409,6 +410,35 @@ Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the c
 For a given _metric_ color difference formula, and an array of _colors_, returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_.
 
 Pass _n = Infinity_ to get all colors in the array with a maximum distance of _τ_.
+
+### Blending
+
+Color blending works as defined in the W3C [Compositing and Blending Level 2](https://drafts.fxtf.org/compositing-2/) specification.
+
+<a name="culoriBlend" href="#culoriBlend">#</a> culori.**blend**(_colors_, _type = 'normal'_, _mode = 'rgb'_) → _color_ [<>](https://github.com/evercoder/culori/blob/master/src/blend.js 'Source')
+
+Available blending modes:
+
+-   `normal`
+-   `multiply`
+-   `screen`
+-   `hard-light`
+-   `overlay`
+-   `darken`
+-   `lighten`
+-   `color-dodge`
+-   `color-burn`
+-   `soft-light`
+-   `difference`
+-   `exclusion`
+
+```js
+culori.blend(
+	['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'],
+	'screen'
+);
+// => { mode: 'rgb', alpha: 0.875, r: 0.57..., g: 0.57..., b:0.57... }
+```
 
 ### Extending culori
 
