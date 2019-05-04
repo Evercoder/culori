@@ -1,6 +1,6 @@
 {
 	"name": "culori",
-	"version": "0.7.4",
+	"version": "0.8.0-alpha2",
 	"main": "build/culori.umd.js",
 	"browser": "build/culori.umd.js",
 	"module": "build/culori.js",
@@ -22,7 +22,9 @@
 		"lch",
 		"lrgb",
 		"rgb",
-		"yiq"
+		"yiq",
+		"mix",
+		"blend"
 	],
 	"license": "MIT",
 	"files": [
