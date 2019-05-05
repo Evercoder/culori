@@ -14,6 +14,9 @@ export default {
 		rgb: convertRgbToHsl
 	},
 	channels: ['h', 's', 'l', 'alpha'],
+	bounds: {
+		h: [0, 360]
+	},
 	parsers: [parseHsl],
 	interpolate: {
 		h: interpolateLinear(interpolateHue),

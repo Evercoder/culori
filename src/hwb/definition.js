@@ -14,6 +14,9 @@ export default {
 		rgb: convertRgbToHwb
 	},
 	channels: ['h', 'w', 'b', 'alpha'],
+	bounds: {
+		h: [0, 360]
+	},
 	parsers: [parseHwb],
 	interpolate: {
 		h: interpolateLinear(interpolateHue),

@@ -90,3 +90,4 @@ export {
 } from './difference';
 export { default as colorsNamed } from './colors/named';
 export { default as blend } from './blend';
+export { default as random } from './random';

@@ -40,6 +40,10 @@ import convertCubehelixToRgb from './convertCubehelixToRgb';
 export default {
 	mode: 'cubehelix',
 	channels: ['h', 's', 'l', 'alpha'],
+	bounds: {
+		h: [0, 360],
+		s: [0, 4.6143]
+	},
 	input: {
 		rgb: convertRgbToCubehelix
 	},

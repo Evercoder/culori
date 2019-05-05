@@ -32,6 +32,10 @@ export default {
 		rgb: convertRgbToYiq
 	},
 	channels: ['y', 'i', 'q', 'alpha'],
+	bounds: {
+		i: [-0.5957, 0.5957],
+		q: [-0.5226, 0.5226]
+	},
 	interpolate: {
 		y: interpolateLinear(),
 		i: interpolateLinear(),

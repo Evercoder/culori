@@ -18,6 +18,11 @@ export default {
 		lch: convertLabToLch
 	},
 	channels: ['l', 'c', 'h', 'alpha'],
+	bounds: {
+		l: [0, 100],
+		c: [0, 131.207],
+		h: [0, 360]
+	},
 	parsers: [parseLch],
 	interpolate: {
 		h: interpolateLinear(interpolateHue),

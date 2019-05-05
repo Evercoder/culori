@@ -16,6 +16,11 @@ export default {
 		rgb: convertRgbToDlab
 	},
 	channels: ['l', 'a', 'b', 'alpha'],
+	bounds: {
+		l: [0, 100],
+		a: [],
+		b: []
+	},
 	interpolate: {
 		l: interpolateLinear(),
 		a: interpolateLinear(),
