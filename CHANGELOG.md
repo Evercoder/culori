@@ -1,5 +1,9 @@
 ## Culori Changelog
 
+### 0.8.0
+
+Adds `culori.blend()` ([#59](https://github.com/Evercoder/culori/issues/59)).
+
 ### 0.7.4
 
 Fixes a typo that caused `formatter('rgb')('#f0f0f0f0')` and similar examples to ignore the `alpha` channel of the input color, generating `rgb(...)` instead of `rgba(...)`.

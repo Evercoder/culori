@@ -432,12 +432,24 @@ Available blending modes:
 -   `difference`
 -   `exclusion`
 
+> **Note:** culori currently implements the _separable_ blend modes, that is the blend modes that work on each channel in the color space independently. _color_, _hue_, _saturation_, and _lightness_ modes are not yet available.
+
+An example of blending three colors:
+
 ```js
 culori.blend(
 	['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'],
 	'screen'
 );
 // => { mode: 'rgb', alpha: 0.875, r: 0.57..., g: 0.57..., b:0.57... }
+```
+
+In addition to strings, the _type_ parameter supports a _function (b, s) → v_ that takes the values of the _backdrop_ and _source_ color to return the blended value. This allows you to write your own (separable) blending functions. For example, an _average_ blending mode:
+
+```js
+culori.blend(['red', 'green'], function average(b, s) {
+	return (b + s) / 2;
+});
 ```
 
 ### Extending culori
