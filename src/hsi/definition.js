@@ -13,6 +13,9 @@ export default {
 		rgb: convertRgbToHsi
 	},
 	channels: ['h', 's', 'i', 'alpha'],
+	ranges: {
+		h: [0, 360]
+	},
 	interpolate: {
 		h: interpolateLinear(interpolateHue),
 		s: interpolateLinear(),
