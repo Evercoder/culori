@@ -514,7 +514,7 @@ The properties a definition needs are the following:
 -   `output`: a set of functions to convert from the color space we're defining to other color spaces. At least `rgb` needs to be included; in case a specific conversion pair between two color spaces is missing, RGB is used as the "buffer" for the conversion.
 -   `input`: opposite of `output`; a set of function to convert from various color spaces to the color space we're defining. At least `rgb` needs to be included.
 -   `channels`: a list of channels for the color space.
--   `ranges`: the value domain for a specific channel; if left unspecified, defaults to `[0, 1]`.
+-   `ranges`: the ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
 -   `parsers`: any parsers for the color space that can transform strings into colors
 -   `interpolate`: the default interpolations for the color space.
 
