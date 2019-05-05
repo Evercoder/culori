@@ -13,7 +13,7 @@ export default {
 		rgb: convertRgbToHsv
 	},
 	channels: ['h', 's', 'v', 'alpha'],
-	bounds: {
+	ranges: {
 		h: [0, 360]
 	},
 	interpolate: {

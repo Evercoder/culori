@@ -13,7 +13,7 @@ export default {
 		rgb: convertRgbToHsi
 	},
 	channels: ['h', 's', 'i', 'alpha'],
-	bounds: {
+	ranges: {
 		h: [0, 360]
 	},
 	interpolate: {

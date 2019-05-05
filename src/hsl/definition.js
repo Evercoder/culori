@@ -14,7 +14,7 @@ export default {
 		rgb: convertRgbToHsl
 	},
 	channels: ['h', 's', 'l', 'alpha'],
-	bounds: {
+	ranges: {
 		h: [0, 360]
 	},
 	parsers: [parseHsl],

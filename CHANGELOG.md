@@ -1,5 +1,9 @@
 ## Culori Changelog
 
+### 0.8.2
+
+Adds `culori.random()` for generating random colors.
+
 ### 0.8.0
 
 Adds `culori.blend()` ([#59](https://github.com/Evercoder/culori/issues/59)).

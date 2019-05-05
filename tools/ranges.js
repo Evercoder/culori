@@ -1,6 +1,11 @@
 let culori = require('..');
 
-let bounds = (mode, step = 0.01) => {
+/*
+	Find the channel value ranges (minimum & maximum)
+	for a particular color space, by converting lots of
+	RGB colors to that space.
+ */
+let ranges = (mode, step = 0.01) => {
 	let conv = culori.converter(mode);
 	let chs = culori.getModeDefinition(mode).channels;
 	let res = chs.reduce(
@@ -26,4 +31,4 @@ let bounds = (mode, step = 0.01) => {
 	return res;
 };
 
-console.log(bounds('dlab', 0.002));
+console.log(ranges('yiq', 0.002));

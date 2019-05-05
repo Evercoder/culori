@@ -457,7 +457,7 @@ culori.blend(['red', 'green'], function average(b, s) {
 
 <a name="culoriRandom" href="#culoriRandom">#</a> culori.**random**(_mode = 'rgb'_, _constraints = {}_) [<>](https://github.com/evercoder/culori/blob/master/src/random.js 'Source')
 
-Obtains a random color from a particular color space (by default, RGB) with optional constraints. The resulting color will be in the color space from where it has been picked.
+Obtain a random color from a particular color space, with optional constraints. The resulting color will be in the color space from where it has been picked.
 
 Basic usage:
 
@@ -466,7 +466,7 @@ culori.random();
 // => { mode: 'rgb', r: 0.75, g: 0.12, b: 0.99 }
 ```
 
-You can specify constraints for each individual channel in the color space. You can either specify a _fixed number_ or an _interval array_:
+You can specify constraints for each individual channel in the color space, as either a _fixed number_ or an _interval_:
 
 ```js
 culori.random('hsv', {
@@ -475,11 +475,9 @@ culori.random('hsv', {
 });
 ```
 
-The resulting color will not include an _alpha_ channel unless you specify a constraint for it.
+The resulting color will not include an _alpha_ value, unless you include it in the list of constraints.
 
-If some channel in the color space has no constraints, we take the entire span of that channel into account. For some color spaces that don't have explicit bounds defined for certain channels, "bounds" [have been (aproximatively) pre-computed](https://github.com/evercoder/culori/blob/master/tools/bounds.js) to the limits of the displayable sRGB gamut.
-
-Note that even with these bounds in place, a combination of channel values may not be displayable. You can use `culori.displayable()` to check whether that's the case, and optionally `culori.clamp()` to obtain a displayable version.
+The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as LAB or LCH, don't have explicit ranges for certain channels; for these, some approximate ranges [have been pre-computed](https://github.com/evercoder/culori/blob/master/tools/ranges.js) as the limits of the displayable sRGB gamut. Even with these ranges in place, a combination of channel values may not be displayable. You can use [`culori.displayable()`](#culoriDisplayable) to check this, and [`culori.clamp()`](#culoriClamp) to obtain a displayable version.
 
 ### Extending culori
 
@@ -497,7 +495,7 @@ Defines a new color space through a _definition_ object. By way of example, here
 		rgb: convertRgbToHsl
 	},
 	channels: ['h', 's', 'l', 'alpha'],
-	bounds: {
+	ranges: {
 		h: [0, 360]
 	},
 	parsers: [parseHsl],
@@ -516,7 +514,7 @@ The properties a definition needs are the following:
 -   `output`: a set of functions to convert from the color space we're defining to other color spaces. At least `rgb` needs to be included; in case a specific conversion pair between two color spaces is missing, RGB is used as the "buffer" for the conversion.
 -   `input`: opposite of `output`; a set of function to convert from various color spaces to the color space we're defining. At least `rgb` needs to be included.
 -   `channels`: a list of channels for the color space.
--   `bounds`: the value domain for a specific channel; if left unspecified, defaults to `[0, 1]`.
+-   `ranges`: the value domain for a specific channel; if left unspecified, defaults to `[0, 1]`.
 -   `parsers`: any parsers for the color space that can transform strings into colors
 -   `interpolate`: the default interpolations for the color space.
 
@@ -597,19 +595,19 @@ The figure below shows a slice of the HSI color space for a particular hue:
 
 #### `lab`
 
-| Channel | Range                  | Description           |
-| ------- | ---------------------- | --------------------- |
-| `l`     | `[0, 100]`             | Lightness             |
-| `a`     | `[-79.2872, 93.55]`    | Green–red component   |
-| `b`     | `[-112.0294, 93.3884]` | Blue–yellow component |
+| Channel | Range                | Description           |
+| ------- | -------------------- | --------------------- |
+| `l`     | `[0, 100]`           | Lightness             |
+| `a`     | `[-79.167, 93.408]`  | Green–red component   |
+| `b`     | `[-111.859, 93.246]` | Blue–yellow component |
 
 #### `lch`
 
 | Channel | Range          | Description |
 | ------- | -------------- | ----------- |
 | `l`     | `[0, 100]`     | Lightness   |
-| `c`     | `[0, 131.207]` | Chroma      |
-| `h`     | `[0, 360]`     | Hue         |
+| `c`     | `[0, 131.008]` | Chroma      |
+| `h`     | `[0, 360)`     | Hue         |
 
 > 💡 The range for the `a` and `b` channels in Lab, and the `c` channel in LCh, depend on the specific implementation. I've obtained the ranges from the tables above by converting all sRGB colors defined by `r, g, b ∈ ℕ ⋂ [0, 255]` into Lab and LCh respectively.
 
@@ -619,19 +617,19 @@ The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an 
 
 #### `dlab`
 
-| Channel | Range | Description |
-| ------- | ----- | ----------- |
-| `l`     | ?     | Lightness   |
-| `a`     | ?     |
-| `b`     | ?     |
+| Channel | Range               | Description |
+| ------- | ------------------- | ----------- |
+| `l`     | `[0, 100]`          | Lightness   |
+| `a`     | `[-39.229, 45.166]` |
+| `b`     | `[-43.002, 44.424]` |
 
 #### `dlch`
 
-| Channel | Range | Description |
-| ------- | ----- | ----------- |
-| `l`     | ?     | Lightness   |
-| `c`     | ?     | Chroma      |
-| `h`     | ?     | Hue         |
+| Channel | Range         | Description |
+| ------- | ------------- | ----------- |
+| `l`     | `[0, 100]`    | Lightness   |
+| `c`     | `[0, 50.944]` | Chroma      |
+| `h`     | `[0, 360)`    | Hue         |
 
 **References:**
 
@@ -641,11 +639,11 @@ The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an 
 
 [YIQ](yiq) is the color space used by the NTSC color TV system. It contains the following channels:
 
-| Channel | Range               | Description                    |
-| ------- | ------------------- | ------------------------------ |
-| Y       | `[0, 1]`            | Luma                           |
-| I       | `[-0.5957, 0.5957]` | In-phase (orange-blue axis)    |
-| Q       | `[-0.5226, 0.5226]` | Quadrature (green-purple axis) |
+| Channel | Range             | Description                    |
+| ------- | ----------------- | ------------------------------ |
+| Y       | `[0, 1]`          | Luma                           |
+| I       | `[-0.593, 0.593]` | In-phase (orange-blue axis)    |
+| Q       | `[-0.520, 0.520]` | Quadrature (green-purple axis) |
 
 ### Cubehelix
 

@@ -14,7 +14,7 @@ export default {
 		rgb: convertRgbToHwb
 	},
 	channels: ['h', 'w', 'b', 'alpha'],
-	bounds: {
+	ranges: {
 		h: [0, 360]
 	},
 	parsers: [parseHwb],

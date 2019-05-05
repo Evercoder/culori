@@ -25,7 +25,7 @@ export default (mode = 'rgb', constraints = {}) => {
 		(res, ch) => {
 			// ignore alpha if not present in constraints
 			if (limits.alpha || ch !== 'alpha') {
-				res[ch] = rand(limits[ch] || def.bounds[ch]);
+				res[ch] = rand(limits[ch] || def.ranges[ch]);
 			}
 			return res;
 		},

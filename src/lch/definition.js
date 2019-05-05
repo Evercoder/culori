@@ -18,9 +18,9 @@ export default {
 		lch: convertLabToLch
 	},
 	channels: ['l', 'c', 'h', 'alpha'],
-	bounds: {
+	ranges: {
 		l: [0, 100],
-		c: [0, 131.207],
+		c: [0, 131.008],
 		h: [0, 360]
 	},
 	parsers: [parseLch],

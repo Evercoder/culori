@@ -14,15 +14,15 @@ const defineMode = definition => {
 		converters[k][definition.mode] = definition.input[k];
 	});
 
-	// Color space channel bounds
-	if (!definition.bounds) {
-		definition.bounds = {};
+	// Color space channel ranges
+	if (!definition.ranges) {
+		definition.ranges = {};
 	}
 
 	definition.channels.forEach(channel => {
-		// undefined channel bounds default to the [0, 1] interval
-		if (definition.bounds[channel] === undefined) {
-			definition.bounds[channel] = [0, 1];
+		// undefined channel ranges default to the [0, 1] interval
+		if (definition.ranges[channel] === undefined) {
+			definition.ranges[channel] = [0, 1];
 		}
 	});
 
