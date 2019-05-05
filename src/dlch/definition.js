@@ -23,6 +23,11 @@ export default {
 		rgb: convertRgbToDlch
 	},
 	channels: ['l', 'c', 'h', 'alpha'],
+	ranges: {
+		l: [0, 100],
+		c: [0, 50.944],
+		h: [0, 360]
+	},
 	interpolate: {
 		l: interpolateLinear(),
 		c: interpolateLinear(),

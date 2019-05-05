@@ -13,6 +13,11 @@ export default {
 		rgb: convertRgbToLab
 	},
 	channels: ['l', 'a', 'b', 'alpha'],
+	ranges: {
+		l: [0, 100],
+		a: [-79.167, 93.408],
+		b: [-111.859, 93.246]
+	},
 	parsers: [parseLab],
 	interpolate: {
 		l: interpolateLinear(),

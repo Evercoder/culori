@@ -16,6 +16,11 @@ export default {
 		rgb: convertRgbToDlab
 	},
 	channels: ['l', 'a', 'b', 'alpha'],
+	ranges: {
+		l: [0, 100],
+		a: [-39.229, 45.166],
+		b: [-43.002, 44.424]
+	},
 	interpolate: {
 		l: interpolateLinear(),
 		a: interpolateLinear(),
