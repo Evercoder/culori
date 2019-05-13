@@ -77,6 +77,16 @@ benchmark('culori: multiple colors in RGB', () => {
 	}
 });
 
+benchmark('culori: multiple colors in RGB (cached)', () => {
+	let lerp = culori.interpolate(colors);
+	for (var i = 0; i < iterations; i++) {
+		culori
+			.samples(count)
+			.map(lerp)
+			.map(hex);
+	}
+});
+
 let scale2 = chroma.scale(colors);
 benchmark('chroma: multiple colors in RGB (cached)', () => {
 	for (var i = 0; i < iterations; i++) {
