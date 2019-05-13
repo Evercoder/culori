@@ -10,14 +10,14 @@ export default (colors, mode = 'rgb', interpolations) => {
 	let converted = [];
 	let offsets = [];
 
-	colors.forEach(c => {
-		if (Array.isArray(c)) {
-			converted.push(conv(c[0]));
-			offsets.push(c[1]);
-		} else if (typeof c === 'number') {
+	colors.forEach(color => {
+		if (Array.isArray(color)) {
+			converted.push(conv(color[0]));
+			offsets.push(color[1]);
+		} else if (typeof color === 'number') {
 			// TODO: support for color hints
 		} else {
-			converted.push(conv(c));
+			converted.push(conv(color));
 			offsets.push(undefined);
 		}
 	});
@@ -42,29 +42,33 @@ export default (colors, mode = 'rgb', interpolations) => {
 		}
 	);
 
+	let n = converted.length - 1;
+
 	return t => {
 		// clamp t to the [0, 1] interval
 		t = Math.min(Math.max(0, t), 1);
 
-		if (t < offsets[0]) {
+		if (t <= offsets[0]) {
 			return converted[0];
 		}
 
-		if (t > offsets[offsets.length - 1]) {
-			return converted[converted.length - 1];
+		if (t > offsets[n]) {
+			return converted[n];
 		}
 
-		// TODO: figure this out
-		// let idx = offsets.findIndex(offset => offset > t);
-		// let start = offsets[idx - 1];
-		// let end = offsets[idx];
-		// let pc = start + (end - start)
-		// let start_range = (idx-1) / (offsets.length - 1);
-		// let end_range = idx / (offsets.length - 1);
+		// Convert `t` from [0, 1] to `t0` between the appropriate two colors.
+		// First, look for the two colors between which `t` is located.
+		// Note: this can be optimized by searching for the index
+		// through bisection instead of start-to-end.
+		let idx = 0;
+		while (offsets[idx] < t) idx++;
+		let start = offsets[idx - 1];
+		let end = offsets[idx];
+		let t0 = (idx - 1 + (t - start) / (end - start)) / n;
 
 		return def.channels.reduce(
 			(res, channel) => {
-				let val = interpolators[channel](t);
+				let val = interpolators[channel](t0);
 				if (val !== undefined) {
 					res[channel] = val;
 				}
