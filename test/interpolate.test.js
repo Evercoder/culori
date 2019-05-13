@@ -108,8 +108,7 @@ tape('interpolate between black and white in RGB/RGBA', function(test) {
 		r: 1,
 		g: 1,
 		b: 1,
-		mode: 'rgb',
-		alpha: 1
+		mode: 'rgb'
 	});
 	test.deepEqual(rgb(grays(0.1)), {
 		r: 0.9,

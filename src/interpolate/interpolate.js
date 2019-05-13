@@ -1,31 +1,31 @@
 import converter from '../converter';
 import { getModeDefinition } from '../modes';
-import normalizeOffsets from '../util/normalizeOffsets';
+import normalizePositions from '../util/normalizePositions';
 import samples from '../samples';
 
 export default (colors, mode = 'rgb', interpolations) => {
 	let def = getModeDefinition(mode);
 	let conv = converter(mode);
 
-	let converted = [];
-	let offsets = [];
+	let conv_colors = [];
+	let positions = [];
 
 	colors.forEach(color => {
 		if (Array.isArray(color)) {
-			converted.push(conv(color[0]));
-			offsets.push(color[1]);
+			conv_colors.push(conv(color[0]));
+			positions.push(color[1]);
 		} else if (typeof color === 'number') {
-			// TODO: support for color hints
+			// TODO: add support for color hints
 		} else {
-			converted.push(conv(color));
-			offsets.push(undefined);
+			conv_colors.push(conv(color));
+			positions.push(undefined);
 		}
 	});
 
-	normalizeOffsets(offsets);
+	normalizePositions(positions);
 
 	let zipped = def.channels.reduce((res, channel) => {
-		res[channel] = converted.map(color => color[channel]);
+		res[channel] = conv_colors.map(color => color[channel]);
 		return res;
 	}, {});
 
@@ -42,18 +42,18 @@ export default (colors, mode = 'rgb', interpolations) => {
 		}
 	);
 
-	let n = converted.length - 1;
+	let n = conv_colors.length - 1;
 
 	return t => {
 		// clamp t to the [0, 1] interval
 		t = Math.min(Math.max(0, t), 1);
 
-		if (t <= offsets[0]) {
-			return converted[0];
+		if (t <= positions[0]) {
+			return conv_colors[0];
 		}
 
-		if (t > offsets[n]) {
-			return converted[n];
+		if (t > positions[n]) {
+			return conv_colors[n];
 		}
 
 		// Convert `t` from [0, 1] to `t0` between the appropriate two colors.
@@ -61,9 +61,9 @@ export default (colors, mode = 'rgb', interpolations) => {
 		// Note: this can be optimized by searching for the index
 		// through bisection instead of start-to-end.
 		let idx = 0;
-		while (offsets[idx] < t) idx++;
-		let start = offsets[idx - 1];
-		let end = offsets[idx];
+		while (positions[idx] < t) idx++;
+		let start = positions[idx - 1];
+		let end = positions[idx];
 		let t0 = (idx - 1 + (t - start) / (end - start)) / n;
 
 		return def.channels.reduce(
