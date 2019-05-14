@@ -245,6 +245,25 @@ let custom_interpolator = culori.interpolate(['blue', 'red'], 'lch', {
 
 There are a few interpolation methods available, listed below. Depending on the channel, the numeric values can be interpreted/interpolated in various _modes_. The hue channel, for example, is interpolated by taking into account the _shortest path around the hue circle_ (`interpolateHue`). And the `interpolateAlpha` mode assumes an _undefined_ alpha is `1`.
 
+#### Color stop positions
+
+You can specify positions of color stops to interpolate in the way they're defined in the [CSS Images Module Level 4][css-images-4] specification:
+
+```js
+culori.interpolate(['red', ['green', 0.25], 'blue']);
+```
+
+In the image below, you can see the effect of interpolating with evenly-spaced colors (1) vs. positioned colors stops (2):
+
+<img src='./.github/evenly-spaced-vs-positions.png' width='263'/>
+
+To specify a positioned color stop, use an array that contains the color followed by its position. For omitted (implicit) positions, we apply the rules from the spec:
+
+1. if the first color doesn't have a position, it's assumed to be `0`; if the last color doesn't have a position, it's assumed to be `1`;
+2. any other color stops that don't have a position will be evenly distributed along the gradient line.
+
+Color stop positions should be in increasing order.
+
 #### Interpolation methods
 
 You'll use these methods when you want to override how colors get interpolated in a specific color space, or when defining the default interpolation for custom color spaces.
@@ -466,7 +485,11 @@ culori.random();
 // => { mode: 'rgb', r: 0.75, g: 0.12, b: 0.99 }
 ```
 
-You can specify constraints for each individual channel in the color space, as either a _fixed number_ or an _interval_:
+#### Specifying constraints
+
+Random colors are, by definition, all over the color space and not all of them will look particularly nice. Some color spaces, such as HSL or HSV, are also biased towards colors close to black and/or white, because of the way these color spaces stretch the RGB cube into cyllinders.
+
+For more control on how the colors are generated, you can specify constraints for each individual channel in the color space. Constraints can be either a _constant number_ or an _interval_ from where to pick the channel value:
 
 ```js
 culori.random('hsv', {
@@ -475,9 +498,17 @@ culori.random('hsv', {
 });
 ```
 
-The resulting color will not include an _alpha_ value, unless you include it in the list of constraints.
+The _alpha_ channel is excluded by default. To obtain colors with random alpha values, include a constraint for `alpha`:
 
-The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as LAB or LCH, don't have explicit ranges for certain channels; for these, some approximate ranges [have been pre-computed](https://github.com/evercoder/culori/blob/master/tools/ranges.js) as the limits of the displayable sRGB gamut. Even with these ranges in place, a combination of channel values may not be displayable. You can use [`culori.displayable()`](#culoriDisplayable) to check this, and [`culori.clamp()`](#culoriClamp) to obtain a displayable version.
+```js
+culori.random('lrgb', { alpha: [0, 1] });
+```
+
+#### Displayable random colors
+
+The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as LAB or LCH, don't have explicit ranges for certain channels; for these, some approximate ranges [have been pre-computed](https://github.com/evercoder/culori/blob/master/tools/ranges.js) as the limits of the displayable sRGB gamut.
+
+Even with these ranges in place, a combination of channel values may not be displayable. Check if that's the case with [`culori.displayable()`](#culoriDisplayable), and pass the color through [`culori.clamp()`](#culoriClamp) to obtain a displayable version.
 
 ### Extending culori
 
@@ -753,3 +784,4 @@ _Please suggest more interesting projects._
 [din99ode]: https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel
 [kotsarekno-ramos]: http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf
 [yiq]: https://en.wikipedia.org/wiki/YIQ
+[css-images-4]: https://drafts.csswg.org/css-images-4/#color-stop-syntax
