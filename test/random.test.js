@@ -1,7 +1,5 @@
-let tape = require('tape');
-let culori = require('..');
-
-let { random } = culori;
+import tape from 'tape';
+import { random } from '../src/index';
 
 tape('random (rgb)', test => {
 	let c1 = random();

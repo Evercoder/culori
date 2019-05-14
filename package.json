@@ -32,6 +32,7 @@
 	],
 	"devDependencies": {
 		"eslint": "^5.7.0",
+		"esm": "^3.2.22",
 		"gh-pages": "^2.0.1",
 		"husky": "^1.1.2",
 		"nyc": "^13.1.0",
@@ -45,12 +46,11 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
-		"pretest": "yarn build",
-		"test": "tape test/*.js | tap-spec",
+		"test": "tape -r esm test/*.js | tap-spec",
 		"benchmark": "node benchmark/index.js",
-		"prepublishOnly": "yarn test",
+		"prepublishOnly": "yarn build && yarn test",
 		"coverage:report": "nyc report --reporter=lcov",
-		"coverage:test": "nyc --produce-source-map tape test/*.js | tap-spec",
+		"coverage:test": "nyc --produce-source-map tape -r esm test/*.js | tap-spec",
 		"docs:start": "hugo serve --source docs",
 		"docs:build": "hugo --source docs",
 		"docs:deploy": "yarn docs:build && gh-pages -d docs/public",

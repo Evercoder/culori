@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let { hsv, rgb } = culori;
+import tape from 'tape';
+import { hsv, rgb } from '../src/index';
 
 tape('rgb() converts from HSV to RGB', function(test) {
 	test.deepEqual(

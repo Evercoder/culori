@@ -1,12 +1,12 @@
-let tape = require('tape');
-let culori = require('../');
+import tape from 'tape';
+import { clamp } from '../src/index';
 
-let clamp = culori.clamp('lch');
+let _clamp = clamp('lch');
 
 tape('RGB', function(test) {
-	test.deepEqual(clamp('red'), { mode: 'rgb', r: 1, g: 0, b: 0 });
+	test.deepEqual(_clamp('red'), { mode: 'rgb', r: 1, g: 0, b: 0 });
 
-	test.deepEqual(clamp('rgb(300, 255, 255)'), {
+	test.deepEqual(_clamp('rgb(300, 255, 255)'), {
 		mode: 'rgb',
 		r: 1,
 		g: 1,
@@ -17,7 +17,7 @@ tape('RGB', function(test) {
 });
 
 tape('LCh', function(test) {
-	test.deepEqual(clamp('lch(50 120 5)'), {
+	test.deepEqual(_clamp('lch(50 120 5)'), {
 		mode: 'lch',
 		l: 50,
 		c: 77.48291015625,

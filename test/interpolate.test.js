@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let { interpolate, formatter, rgb, samples } = culori;
+import tape from 'tape';
+import { interpolate, formatter, rgb, samples } from '../src/index';
 
 let hex = formatter('hex');
 

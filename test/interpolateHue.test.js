@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let { interpolateHue, formatter } = culori;
+import tape from 'tape';
+import { interpolateHue, formatter } from '../src/index';
 
 tape('interpolate/hue', function(test) {
 	test.deepEqual(interpolateHue([0, 360]), [0, 0], '[0, 360]');

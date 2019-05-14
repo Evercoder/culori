@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let { rgb, formatter } = culori;
+import tape from 'tape';
+import { rgb, formatter } from '../src/index';
 
 tape('rgb(Specifier)', function(test) {
 	test.deepEqual(formatter('hex')(rgb('#ffffff')), '#ffffff');

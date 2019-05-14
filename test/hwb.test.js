@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let { hwb } = culori;
+import tape from 'tape';
+import { hwb } from '../src/index';
 
 tape('hwb() parses hwb CSS strings', function(test) {
 	test.deepEqual(

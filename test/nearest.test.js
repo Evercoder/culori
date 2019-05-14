@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let { nearest, colorsNamed } = culori;
+import tape from 'tape';
+import { nearest, colorsNamed } from '../src/index';
 
 let nearestNamedColor = nearest(Object.keys(colorsNamed));
 
