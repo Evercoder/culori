@@ -9,15 +9,17 @@ export default (colors, mode = 'rgb', interpolations) => {
 
 	let conv_colors = [];
 	let positions = [];
+	let hints = {};
 
-	colors.forEach(color => {
-		if (Array.isArray(color)) {
-			conv_colors.push(conv(color[0]));
-			positions.push(color[1]);
-		} else if (typeof color === 'number') {
-			// TODO: add support for color hints
+	colors.forEach(val => {
+		if (Array.isArray(val)) {
+			conv_colors.push(conv(val[0]));
+			positions.push(val[1]);
+		} else if (typeof val === 'number') {
+			// Interpret numbers as color interpolation hints
+			hints[positions.length] = val;
 		} else {
-			conv_colors.push(conv(color));
+			conv_colors.push(conv(val));
 			positions.push(undefined);
 		}
 	});
@@ -63,8 +65,15 @@ export default (colors, mode = 'rgb', interpolations) => {
 		let idx = 0;
 		while (positions[idx] < t) idx++;
 		let start = positions[idx - 1];
-		let end = positions[idx];
-		let t0 = (idx - 1 + (t - start) / (end - start)) / n;
+		let delta = positions[idx] - start;
+
+		let P = (t - start) / delta;
+		if (hints[idx]) {
+			let H = (hints[idx] - start) / delta;
+			P = Math.pow(P, Math.log(0.5) / Math.log(H));
+		}
+
+		let t0 = (idx - 1 + P) / n;
 
 		return def.channels.reduce(
 			(res, channel) => {

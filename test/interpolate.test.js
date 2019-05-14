@@ -191,3 +191,21 @@ tape('bug checking', function(test) {
 	);
 	test.end();
 });
+
+tape('color interpolation hints', t => {
+	[0, 0.1, 0.2, 0.5, 0.8, 1].forEach(t0 => {
+		t.deepEqual(
+			interpolate(['red', 0.5, 'green'])(t0),
+			interpolate(['red', 'green'])(t0)
+		);
+	});
+
+	t.deepEqual(interpolate(['red', 0.2, 'green'])(0.5), {
+		mode: 'rgb',
+		r: 0.25808621995139014,
+		g: 0.37241162292636104,
+		b: 0
+	});
+
+	t.end();
+});

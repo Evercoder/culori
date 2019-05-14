@@ -257,7 +257,7 @@ In the image below, you can see the effect of interpolating with evenly-spaced c
 
 <img src='./.github/evenly-spaced-vs-positions.png' width='263'/>
 
-To specify a positioned color stop, use an array that contains the color followed by its position. For omitted (implicit) positions, we apply the rules from the spec:
+To specify a positioned color stop, use an array that contains the color followed by its position. For omitted (implicit) positions, we apply the rules [from the spec][css-images-4]:
 
 1. if the first color doesn't have a position, it's assumed to be `0`; if the last color doesn't have a position, it's assumed to be `1`;
 2. any other color stops that don't have a position will be evenly distributed along the gradient line.
