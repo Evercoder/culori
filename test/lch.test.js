@@ -1,6 +1,5 @@
-let tape = require('tape');
-// let culori = require('../');
-// let { round, rgb, convert, lch } = culori;
+import tape from 'tape';
+import { nearest, colorsNamed } from '../src/index';
 
 tape('convert(lch)', function(test) {
 	// 	test.deepEqual(

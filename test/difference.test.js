@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let {
+import tape from 'tape';
+import {
 	differenceEuclidean,
 	differenceCie76,
 	differenceCie94,
@@ -11,7 +10,7 @@ let {
 	lab,
 	round,
 	hsl
-} = culori;
+} from '../src/index';
 
 tape('euclidean distance in RGB', function(test) {
 	let delta = differenceEuclidean();

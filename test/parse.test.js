@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let { parse } = culori;
+import tape from 'tape';
+import { parse } from '../src/index';
 
 tape('named colors', function(test) {
 	test.deepEqual(

@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let { interpolate, formatter, rgb, samples } = culori;
+import tape from 'tape';
+import { interpolate, formatter, rgb, samples } from '../src/index';
 
 let hex = formatter('hex');
 
@@ -108,8 +107,7 @@ tape('interpolate between black and white in RGB/RGBA', function(test) {
 		r: 1,
 		g: 1,
 		b: 1,
-		mode: 'rgb',
-		alpha: 1
+		mode: 'rgb'
 	});
 	test.deepEqual(rgb(grays(0.1)), {
 		r: 0.9,
@@ -192,4 +190,22 @@ tape('bug checking', function(test) {
 		['#0000ff', '#5555ff', '#aaaaff', '#ffffff']
 	);
 	test.end();
+});
+
+tape('color interpolation hints', t => {
+	[0, 0.1, 0.2, 0.5, 0.8, 1].forEach(t0 => {
+		t.deepEqual(
+			interpolate(['red', 0.5, 'green'])(t0),
+			interpolate(['red', 'green'])(t0)
+		);
+	});
+
+	t.deepEqual(interpolate(['red', 0.2, 'green'])(0.5), {
+		mode: 'rgb',
+		r: 0.25808621995139014,
+		g: 0.37241162292636104,
+		b: 0
+	});
+
+	t.end();
 });

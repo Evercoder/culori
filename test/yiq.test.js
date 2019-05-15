@@ -1,6 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-let { yiq, formatter } = culori;
+import tape from 'tape';
+import { yiq, formatter } from '../src/index';
 
 let rgb = formatter('rgb');
 

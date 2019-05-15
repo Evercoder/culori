@@ -1,7 +1,5 @@
-let tape = require('tape');
-let culori = require('../');
-
-let { blend } = culori;
+import tape from 'tape';
+import { blend } from '../src/index';
 
 tape('blendNormal', function(test) {
 	test.deepEqual(blend(['white', 'rgba(0, 0, 0, 0.5)']), {
