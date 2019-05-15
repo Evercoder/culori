@@ -257,12 +257,30 @@ In the image below, you can see the effect of interpolating with evenly-spaced c
 
 <img src='./.github/evenly-spaced-vs-positions.png' width='263'/>
 
-To specify a positioned color stop, use an array that contains the color followed by its position. For omitted (implicit) positions, we apply the rules [from the spec][css-images-4]:
+To specify a positioned color stop, use an array that contains the color followed by its position. The color stops should be specified in ascending order.
+
+For omitted (implicit) positions, we apply the rules [from the spec][css-images-4]:
 
 1. if the first color doesn't have a position, it's assumed to be `0`; if the last color doesn't have a position, it's assumed to be `1`;
-2. any other color stops that don't have a position will be evenly distributed along the gradient line.
+2. any other color stops that don't have a position will be evenly distributed along the gradient line between the positioned color stops.
 
-Color stop positions should be in increasing order.
+#### Interpolation hints and easing functions
+
+You can add an interpolation hint or an easing function between any two colors in the array:
+
+```js
+// interpolation hint
+culori.interpolate(['red', 0.25, 'green']);
+
+// easing function
+culori.interpolate(['red', easeInOut, 'green']);
+```
+
+Any number in he _colors_ array will be interpreted as an interpolation hint.
+
+> 👉 As opposed to the CSS spec, interpolation hints [don't affect color stop positions](https://github.com/w3c/csswg-drafts/issues/3931) in culori.
+
+Any function in the _colors_ array will be interpreted as an easing function. The function is expected to take an argument `t` in the interval `[0, 1]` and return a value in the interval `[0, 1]`.
 
 #### Interpolation methods
 

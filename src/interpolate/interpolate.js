@@ -5,7 +5,7 @@ import samples from '../samples';
 
 // Color interpolation hint exponential function
 let hint = (P, H) =>
-	H === 0 ? 1 : H === 1 ? 0 : Math.pow(P, Math.log(0.5) / Math.log(H));
+	H <= 0 ? 1 : H >= 1 ? 0 : Math.pow(P, Math.log(0.5) / Math.log(H));
 
 export default (colors, mode = 'rgb', interpolations) => {
 	let def = getModeDefinition(mode);
