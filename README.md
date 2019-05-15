@@ -282,6 +282,8 @@ Any number in he _colors_ array will be interpreted as an interpolation hint.
 
 Any function in the _colors_ array will be interpreted as an easing function. The function is expected to take an argument `t` in the interval `[0, 1]` and return a value in the interval `[0, 1]`.
 
+See also: [The `midpoint` easing function](#the-midpoint-easing-function).
+
 #### Interpolation methods
 
 You'll use these methods when you want to override how colors get interpolated in a specific color space, or when defining the default interpolation for custom color spaces.
@@ -714,6 +716,8 @@ The channels in the `cubehelix` color space maintain the conventions from D3, na
 
 ## Culori Recipes
 
+A collection of useful functions that are not currently part of culori.
+
 #### Relative luminance of a color
 
 The [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) of a color is defined as:
@@ -733,7 +737,7 @@ function luminance(color) {
 }
 ```
 
-**Note:** The WCAG defines the luminance using a [deprecated value](https://github.com/w3c/wcag/issues/236#issuecomment-379526596) for converting sRGB to LRGB. If you'd like a strict implementation, you'll need to write your own sRGB → LRGB conversion.
+**Note:** The WCAG defines the luminance using a [deprecated value](https://github.com/w3c/wcag/issues/236#issuecomment-379526596) for converting sRGB to LRGB. If you'd like a strict implementation, you'll need to write a separate sRGB → LRGB conversion from scratch.
 
 #### Contrast ratio
 
@@ -745,6 +749,26 @@ function contrast(colorA, colorB) {
 	let L2 = luminance(colorB);
 	return (L1 + 0.05) / (L2 + 0.05);
 }
+```
+
+#### The `midpoint` easing function
+
+[Proposed here](https://github.com/w3c/csswg-drafts/issues/1332#issuecomment-492555433), the `midpoint` easing function lets you shift the midpoint of a gradient like in tools such as Adobe Photoshop:
+
+```js
+function midpoint(H) {
+	// return an easing function for t ∈ [0, 1]
+	return t =>
+		H <= 0 ? 1 : H >= 1 ? 0 : Math.pow(P, Math.log(0.5) / Math.log(H));
+}
+```
+
+You can use it with [`culori.interpolate`](#culoriInterpolate) as an alternative to interpolation hints:
+
+```js
+culori.interpolate(['red', midpoint(0.25), 'blue']);
+// equivalent to
+culori.interpolate(['red', 0.25, 'blue']);
 ```
 
 ## Related projects

@@ -8,23 +8,25 @@
 	"author": "Dan Burzo <danburzo@gmail.com>",
 	"description": "A general-purpose color library for JavaScript",
 	"keywords": [
+		"blend",
 		"ciede2000",
 		"cielab",
 		"color",
 		"color-difference",
 		"cubehelix",
 		"din99",
+		"gradients",
 		"hsi",
 		"hsl",
 		"hsv",
 		"hwb",
+		"interpolation",
 		"lab",
 		"lch",
 		"lrgb",
-		"rgb",
-		"yiq",
 		"mix",
-		"blend"
+		"rgb",
+		"yiq"
 	],
 	"license": "MIT",
 	"files": [
