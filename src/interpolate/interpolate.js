@@ -3,21 +3,25 @@ import { getModeDefinition } from '../modes';
 import normalizePositions from '../util/normalizePositions';
 import samples from '../samples';
 
+// Color interpolation hint exponential function
+let hint = (P, H) =>
+	H === 0 ? 1 : H === 1 ? 0 : Math.pow(P, Math.log(0.5) / Math.log(H));
+
 export default (colors, mode = 'rgb', interpolations) => {
 	let def = getModeDefinition(mode);
 	let conv = converter(mode);
 
 	let conv_colors = [];
 	let positions = [];
-	let hints = {};
+	let fns = {};
 
 	colors.forEach(val => {
 		if (Array.isArray(val)) {
 			conv_colors.push(conv(val[0]));
 			positions.push(val[1]);
-		} else if (typeof val === 'number') {
-			// Interpret numbers as color interpolation hints
-			hints[positions.length] = val;
+		} else if (typeof val === 'number' || typeof val === 'function') {
+			// Color interpolation hint or easing function
+			fns[positions.length] = val;
 		} else {
 			conv_colors.push(conv(val));
 			positions.push(undefined);
@@ -68,9 +72,9 @@ export default (colors, mode = 'rgb', interpolations) => {
 		let delta = positions[idx] - start;
 
 		let P = (t - start) / delta;
-		if (hints[idx]) {
-			let H = (hints[idx] - start) / delta;
-			P = Math.pow(P, Math.log(0.5) / Math.log(H));
+		let fn = fns[idx];
+		if (fn !== undefined) {
+			P = typeof fn === 'number' ? hint(P, (fn - start) / delta) : fn(P);
 		}
 
 		let t0 = (idx - 1 + P) / n;
