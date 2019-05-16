@@ -2,10 +2,7 @@ import converter from '../converter';
 import { getModeDefinition } from '../modes';
 import normalizePositions from '../util/normalizePositions';
 import samples from '../samples';
-
-// Color interpolation hint exponential function
-let hint = (P, H) =>
-	H <= 0 ? 1 : H >= 1 ? 0 : Math.pow(P, Math.log(0.5) / Math.log(H));
+import easingMidpoint from '../easing/midpoint';
 
 export default (colors, mode = 'rgb', interpolations) => {
 	let def = getModeDefinition(mode);
@@ -74,7 +71,10 @@ export default (colors, mode = 'rgb', interpolations) => {
 		let P = (t - start) / delta;
 		let fn = fns[idx];
 		if (fn !== undefined) {
-			P = typeof fn === 'number' ? hint(P, (fn - start) / delta) : fn(P);
+			if (typeof fn === 'number') {
+				fn = easingMidpoint((fn - start) / delta);
+			}
+			P = fn(P);
 		}
 
 		let t0 = (idx - 1 + P) / n;

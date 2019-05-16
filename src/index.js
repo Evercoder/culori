@@ -91,3 +91,8 @@ export {
 export { default as colorsNamed } from './colors/named';
 export { default as blend } from './blend';
 export { default as random } from './random';
+
+// Easings
+export { default as easingMidpoint } from './easing/midpoint';
+export { default as easingSmoothstep } from './easing/smoothstep';
+export { default as easingSmootherstep } from './easing/smootherstep';

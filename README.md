@@ -264,25 +264,56 @@ For omitted (implicit) positions, we apply the rules [from the spec][css-images-
 1. if the first color doesn't have a position, it's assumed to be `0`; if the last color doesn't have a position, it's assumed to be `1`;
 2. any other color stops that don't have a position will be evenly distributed along the gradient line between the positioned color stops.
 
-#### Interpolation hints and easing functions
+#### Easing functions
 
-You can add an interpolation hint or an easing function between any two colors in the array:
+You can add easing functions between any two colors in the array:
+
+```js
+const easeIn = t => t * t;
+culori.interpolate(['red', easeIn, 'green']);
+```
+
+Any function in the _colors_ array will be interpreted as an easing function, which is (for our purposes), a function that takes an argument `t ∈ [0, 1]` and returns a value `v ∈ [0, 1]`.
+
+Culori comes with [just a few](#built-in-easing-functions) easing functions, but you can find several online:
+
+-   [some classic easing functions](https://gist.github.com/gre/1650294);
+-   [eases](https://github.com/mattdesl/eases) by Matt DesLauriers;
+-   [bezier-easing](https://github.com/gre/bezier-easing) by Gaëtan Renaudeau builds `cubic-bezier` easings as defined in the [CSS Easing Functions Level 1][css-easing-1] spec;
+-   [d3-scale](https://github.com/d3/d3-scale) lets you set the scale's domain and range to `[0, 1]`.
+
+#### Interpolation hints
+
+Any number in he _colors_ array will be interpreted as an [interpolation hint](https://drafts.csswg.org/css-images-4/#color-stop-syntax):
 
 ```js
 // interpolation hint
 culori.interpolate(['red', 0.25, 'green']);
-
-// easing function
-culori.interpolate(['red', easeInOut, 'green']);
 ```
-
-Any number in he _colors_ array will be interpreted as an interpolation hint.
 
 > 👉 As opposed to the CSS spec, interpolation hints [don't affect color stop positions](https://github.com/w3c/csswg-drafts/issues/3931) in culori.
 
-Any function in the _colors_ array will be interpreted as an easing function. The function is expected to take an argument `t` in the interval `[0, 1]` and return a value in the interval `[0, 1]`.
+#### Built-in easing functions
 
-See also: [The `midpoint` easing function](#the-midpoint-easing-function).
+A few easing functions that come with culori:
+
+<a name="culoriEasingMidpoint" href="#culoriEasingMidpoint">#</a> culori.**easingMidpoint**(_H = 0.5_) [<>](https://github.com/evercoder/culori/blob/master/src/easing/midpoint.js 'Source')
+
+[Proposed here](https://github.com/w3c/csswg-drafts/issues/1332#issuecomment-492555433), the `midpoint` easing function lets you shift the midpoint of a gradient like in tools such as Adobe Photoshop. You can use it with [`culori.interpolate`](#culoriInterpolate) as an alternative to interpolation hints:
+
+```js
+culori.interpolate(['red', easingMidpoint(0.25), 'blue']);
+// equivalent to
+culori.interpolate(['red', 0.25, 'blue']);
+```
+
+<a name="culoriEasingSmoothstep" href="#culoriEasingSmoothstep">#</a> culori.**easingSmoothstep** [<>](https://github.com/evercoder/culori/blob/master/src/easing/smoothstep.js 'Source')
+
+The [Smoothstep][smoothstep] easing function.
+
+<a name="culoriEasingSmootherstep" href="#culoriEasingSmootherstep">#</a> culori.**easingSmoothstep** [<>](https://github.com/evercoder/culori/blob/master/src/easing/smootherstep.js 'Source')
+
+Smootherstep is a variant of the [Smoothstep][smoothstep] easing function.
 
 #### Interpolation methods
 
@@ -376,7 +407,7 @@ let grays = culori.interpolate(['#fff', '#000']);
 culori.samples(5).map(grays); // => five evenly-spaced colors
 ```
 
-Should you want samples distributed along a different function, you can pair it with an [easing function](https://gist.github.com/gre/1650294), a library such as [bezier-easing](https://github.com/gre/bezier-easing), [eases](https://github.com/mattdesl/eases), or [d3-scale](https://github.com/d3/d3-scale):
+As with the [`interpolate()`](#culoriInterpolate) method, you can map the samples through an easing function or scale to obtain a different distribution of the samples.
 
 ```js
 let culori = require('culori');
@@ -751,26 +782,6 @@ function contrast(colorA, colorB) {
 }
 ```
 
-#### The `midpoint` easing function
-
-[Proposed here](https://github.com/w3c/csswg-drafts/issues/1332#issuecomment-492555433), the `midpoint` easing function lets you shift the midpoint of a gradient like in tools such as Adobe Photoshop:
-
-```js
-function midpoint(H) {
-	// return an easing function for t ∈ [0, 1]
-	return t =>
-		H <= 0 ? 1 : H >= 1 ? 0 : Math.pow(P, Math.log(0.5) / Math.log(H));
-}
-```
-
-You can use it with [`culori.interpolate`](#culoriInterpolate) as an alternative to interpolation hints:
-
-```js
-culori.interpolate(['red', midpoint(0.25), 'blue']);
-// equivalent to
-culori.interpolate(['red', 0.25, 'blue']);
-```
-
 ## Related projects
 
 These projects add more functionality to culori, but they're separate as to keep the core bundle small:
@@ -816,14 +827,16 @@ _Please suggest more interesting projects._
 -   _Bundled with_ [rollup](https://github.com/rollup/rollup), [buble](https://github.com/Rich-Harris/buble), [terser](https://github.com/terser-js/terser)
 -   _Tested with_ [tape](https://github.com/substack/tape)
 
-[css4-colors]: https://drafts.csswg.org/css-color/
-[css4-named-colors]: https://drafts.csswg.org/css-color/#named-colors
 [cie76]: https://en.wikipedia.org/wiki/Color_difference#CIE76
 [cie94]: https://en.wikipedia.org/wiki/Color_difference#CIE94
 [ciede2000]: https://en.wikipedia.org/wiki/Color_difference#CIEDE2000
 [cmc]: https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)
+[css-easing-1]: http://drafts.csswg.org/css-easing-1
+[css-images-4]: https://drafts.csswg.org/css-images-4/#color-stop-syntax
+[css4-colors]: https://drafts.csswg.org/css-color/
+[css4-named-colors]: https://drafts.csswg.org/css-color/#named-colors
 [din99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
 [din99ode]: https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel
 [kotsarekno-ramos]: http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf
+[smoothstep]: https://en.wikipedia.org/wiki/Smoothstep
 [yiq]: https://en.wikipedia.org/wiki/YIQ
-[css-images-4]: https://drafts.csswg.org/css-images-4/#color-stop-syntax
