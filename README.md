@@ -299,7 +299,7 @@ A few easing functions that come with culori:
 
 <a name="culoriEasingMidpoint" href="#culoriEasingMidpoint">#</a> culori.**easingMidpoint**(_H = 0.5_) [<>](https://github.com/evercoder/culori/blob/master/src/easing/midpoint.js 'Source')
 
-[Proposed here](https://github.com/w3c/csswg-drafts/issues/1332#issuecomment-492555433), the `midpoint` easing function lets you shift the midpoint of a gradient like in tools such as Adobe Photoshop. You can use it with [`culori.interpolate`](#culoriInterpolate) as an alternative to interpolation hints:
+[Proposed here][midpoint], the `midpoint` easing function lets you shift the midpoint of a gradient like in tools such as Adobe Photoshop. You can use it with [`culori.interpolate`](#culoriInterpolate) as an alternative to interpolation hints:
 
 ```js
 culori.interpolate(['red', easingMidpoint(0.25), 'blue']);
@@ -745,78 +745,31 @@ The channels in the `cubehelix` color space maintain the conventions from D3, na
 | `s`     | `[0, 4.6143]` | Saturation (Called _hue_ in op. cit.)                                    |
 | `l`     | `[0, 1]`      | Lightness                                                                |
 
-## Culori Recipes
+## Related
 
-A collection of useful functions that are not currently part of culori.
-
-#### Relative luminance of a color
-
-The [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) of a color is defined as:
-
-```js
-L = 0.2126 * R + 0.7152 * G + 0.0722 * B;
-```
-
-Where R, G, and B are the components from the LRGB color space.
-
-To compute it in culori:
-
-```js
-function luminance(color) {
-	let c = culori.lrgb(color);
-	return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b;
-}
-```
-
-**Note:** The WCAG defines the luminance using a [deprecated value](https://github.com/w3c/wcag/issues/236#issuecomment-379526596) for converting sRGB to LRGB. If you'd like a strict implementation, you'll need to write a separate sRGB → LRGB conversion from scratch.
-
-#### Contrast ratio
-
-Using the `luminance()` function above, the `contrast()` ratio is simply the ratio between the luminances of two colors, with the values shifted by 0.05 to avoid division by zero when comparing against black.
-
-```js
-function contrast(colorA, colorB) {
-	let L1 = luminance(colorA);
-	let L2 = luminance(colorB);
-	return (L1 + 0.05) / (L2 + 0.05);
-}
-```
-
-## Related projects
+### Extras
 
 These projects add more functionality to culori, but they're separate as to keep the core bundle small:
 
-#### [culori-scales](https://github.com/evercoder/culori-scales)
+-   **[culori-scales](https://github.com/evercoder/culori-scales)** — color scales (ColorBrewer, matplotlib, etc).
+-   **[culori-names](https://github.com/evercoder/culori-names)** — More named colors, from a variety of sources.
 
-Color scales (ColorBrewer, matplotlib, etc).
+### Products using culori
 
-#### [culori-names](https://github.com/evercoder/culori-names)
+-   **[Moqups](https://moqups.com)** — all our color-manipulation functions are handled by culori.
+-   **[Dainty](https://dainty-vs.now.sh)** — Dainty is a configurable refined and balanced color theme for Visual Studio using Culori’s CIELAB capabilities for generating and processing colors.
 
-More named colors, from a variety of sources.
+> Does your product/project use culori? Create a PR and add yourself to this list!
 
-## Products using culori
+### Other projects
 
-#### [Moqups](https://moqups.com)
-
-All our color-manipulation functions are handled by culori.
-
-#### [Dainty](https://dainty-vs.now.sh)
-
-Dainty is a configurable refined and balanced color theme for Visual Studio using Culori’s CIELAB capabilities for generating and processing colors.
-
-_Does your product/project use culori? Create a PR and add yourself to this list!_
-
-## Other projects
-
-Some popular libraries you may want to look at are:
+Besides [d3-color](https://github.com/d3/d3-color) and [chroma.js](https://github.com/gka/chroma.js), some other popular libraries you may want to look at:
 
 -   [TinyColor](https://github.com/bgrins/TinyColor) by [Brian Grinstead](http://briangrinstead.com)
 -   [color](https://github.com/Qix-/color) by Heather Arthur
 -   [color.js](https://github.com/brehaut/color-js) by Andrew Brehaut et al
 -   [chromatist](https://github.com/jrus/chromatist) by [Jacob Rus](http://www.hcs.harvard.edu/~jrus/)
 -   [gradstop.js](https://github.com/Siddharth11/gradstop) by [Siddharth Parmar](https://github.com/Siddharth11)
-
-_Please suggest more interesting projects._
 
 ## Colophon
 
@@ -826,6 +779,7 @@ _Please suggest more interesting projects._
 -   _Dependencies_ none
 -   _Bundled with_ [rollup](https://github.com/rollup/rollup), [buble](https://github.com/Rich-Harris/buble), [terser](https://github.com/terser-js/terser)
 -   _Tested with_ [tape](https://github.com/substack/tape)
+-   _Formatted with_ [prettier](https://prettier.io)
 
 [cie76]: https://en.wikipedia.org/wiki/Color_difference#CIE76
 [cie94]: https://en.wikipedia.org/wiki/Color_difference#CIE94
@@ -838,5 +792,6 @@ _Please suggest more interesting projects._
 [din99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
 [din99ode]: https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel
 [kotsarekno-ramos]: http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf
+[midpoint]: https://github.com/w3c/csswg-drafts/issues/3935
 [smoothstep]: https://en.wikipedia.org/wiki/Smoothstep
 [yiq]: https://en.wikipedia.org/wiki/YIQ
