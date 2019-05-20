@@ -561,6 +561,16 @@ The value for any channel in the color space for which there are no constraints 
 
 Even with these ranges in place, a combination of channel values may not be displayable. Check if that's the case with [`culori.displayable()`](#culoriDisplayable), and pass the color through [`culori.clamp()`](#culoriClamp) to obtain a displayable version.
 
+### WCAG utilities
+
+<a name="culoriWcagLuminance" href="#culoriWcagLuminance">#</a> culori.**wcagLuminance**(_color_) [<>](https://github.com/evercoder/culori/blob/master/src/wcag.js 'Source')
+
+Computes the relative luminance of a color.
+
+<a name="culoriWcagContrast" href="#culoriWcagContrast">#</a> culori.**wcagContrast**(_colorA_, _colorB_) [<>](https://github.com/evercoder/culori/blob/master/src/wcag.js 'Source')
+
+Computes the contrast between two colors.
+
 ### Extending culori
 
 <a name="culoriDefineMode" href="#culoriDefineMode">#</a> culori.**defineMode**(_definition_) [<>](https://github.com/evercoder/culori/blob/master/src/modes.js 'Source')
