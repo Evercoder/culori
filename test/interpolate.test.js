@@ -202,8 +202,8 @@ tape('color interpolation hints', t => {
 
 	t.deepEqual(interpolate(['red', 0.2, 'green'])(0.5), {
 		mode: 'rgb',
-		r: 0.25808621995139014,
-		g: 0.37241162292636104,
+		r: 0.25808621995139025,
+		g: 0.372411622926361,
 		b: 0
 	});
 
