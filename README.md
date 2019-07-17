@@ -49,7 +49,7 @@ You can use [npm.runkit.com/culori](https://npm.runkit.com/culori) as a playgrou
 
 ### Install it as an npm package
 
-<a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat" alt="npm version"></a>
+<a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat" alt="npm version"></a> <a href="https://bundlephobia.com/result?p=culori"><img src="https://badgen.net/bundlephobia/minzip/culori" alt="bundlephobia"></a>
 
 culori is bundled as UMD and ES [on npm](https://npmjs.com/package/culori). Install it using `npm` or `yarn`:
 
