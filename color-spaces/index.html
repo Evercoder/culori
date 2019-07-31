@@ -8,70 +8,31 @@
 	</title>
 	<meta charset="utf-8">
 
-	<style>
-		body {
-			font-family: sans-serif;
-			line-height: 1.5;
-			padding: 2em;
-		}
-
-		nav .active {
-			font-weight: bold;
-		}
-
-		table {
-			width: 100%;
-			border-collapse: collapse;
-		}
-
-		table tr {
-			border-bottom: 1px solid #000;
-		}
-
-		table th { text-align:left; }
-
-		article {
-			margin: 2em 0;
-			max-width: 44em;
-		}
-
-		article img {
-			max-width: 100%;
-		}
-
-		header {
-			padding: 2em 0;
-			border-bottom: 3px solid #eee;
-		}
-
-		footer {
-			padding: 2em 0;
-			border-top: 3px solid #eee;
-		}
-
-	</style>
+		
+	<link rel='stylesheet' href='/culori/css/main.css'/>
+	<link rel='stylesheet' href='/culori/css/highlight.css' media='print' onload="this.media='all'"/>
 </head>
 <body>
 	<header>
-	<a href='/'>culori</a>
+	<a href='/culori/'>culori</a>
 
 	<nav>
 		<ul>
 		
 			<li>
-				<a href='/getting-started'>getting-started</a>
+				<a href='/culori/getting-started'>/getting-started</a>
 			</li>
 		
 			<li>
-				<a href='/api'>api</a>
+				<a href='/culori/api'>/api</a>
 			</li>
 		
 			<li>
-				<a href='/color-spaces'>color-spaces</a>
+				<a href='/culori/color-spaces'>/color-spaces</a>
 			</li>
 		
 			<li>
-				<a href='/resources'>resources</a>
+				<a href='/culori/resources'>/resources</a>
 			</li>
 		
 		</ul>
@@ -123,7 +84,7 @@
 </tbody>
 </table>
 <p>The figure below shows a slice of the HSL color space for a particular hue:</p>
-<p><img src="/img/hsl-spectrum.png" alt="HSL Spectrum"></p>
+<p><img src="/culori/img/hsl-spectrum.png" alt="HSL Spectrum"></p>
 <h3><code>hsv</code></h3>
 <table>
 <thead>
@@ -152,7 +113,7 @@
 </tbody>
 </table>
 <p>The figure below shows a slice of the HSV color space for a particular hue:</p>
-<p><img src="/img/hsv-spectrum.png" alt="HSV Spectrum"></p>
+<p><img src="/culori/img/hsv-spectrum.png" alt="HSV Spectrum"></p>
 <h3><code>hsi</code></h3>
 <table>
 <thead>
@@ -181,7 +142,7 @@
 </tbody>
 </table>
 <p>The figure below shows a slice of the HSI color space for a particular hue:</p>
-<p><img src="/img/hsi-spectrum.png" alt="HSI Spectrum"></p>
+<p><img src="/culori/img/hsi-spectrum.png" alt="HSI Spectrum"></p>
 <blockquote>
 <p>💡 While the <em>hue</em> in this family of color spaces retains its value in all of them, the <em>saturation</em> in HSL is <strong>not interchangeable</strong> with the <em>saturation</em> from HSV, nor HSI — they're computed differently, depending on the color space.</p>
 </blockquote>

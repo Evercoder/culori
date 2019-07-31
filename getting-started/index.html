@@ -8,70 +8,31 @@
 	</title>
 	<meta charset="utf-8">
 
-	<style>
-		body {
-			font-family: sans-serif;
-			line-height: 1.5;
-			padding: 2em;
-		}
-
-		nav .active {
-			font-weight: bold;
-		}
-
-		table {
-			width: 100%;
-			border-collapse: collapse;
-		}
-
-		table tr {
-			border-bottom: 1px solid #000;
-		}
-
-		table th { text-align:left; }
-
-		article {
-			margin: 2em 0;
-			max-width: 44em;
-		}
-
-		article img {
-			max-width: 100%;
-		}
-
-		header {
-			padding: 2em 0;
-			border-bottom: 3px solid #eee;
-		}
-
-		footer {
-			padding: 2em 0;
-			border-top: 3px solid #eee;
-		}
-
-	</style>
+		
+	<link rel='stylesheet' href='/culori/css/main.css'/>
+	<link rel='stylesheet' href='/culori/css/highlight.css' media='print' onload="this.media='all'"/>
 </head>
 <body>
 	<header>
-	<a href='/'>culori</a>
+	<a href='/culori/'>culori</a>
 
 	<nav>
 		<ul>
 		
 			<li>
-				<a href='/getting-started'>getting-started</a>
+				<a href='/culori/getting-started'>/getting-started</a>
 			</li>
 		
 			<li>
-				<a href='/api'>api</a>
+				<a href='/culori/api'>/api</a>
 			</li>
 		
 			<li>
-				<a href='/color-spaces'>color-spaces</a>
+				<a href='/culori/color-spaces'>/color-spaces</a>
 			</li>
 		
 			<li>
-				<a href='/resources'>resources</a>
+				<a href='/culori/resources'>/resources</a>
 			</li>
 		
 		</ul>
@@ -84,23 +45,12 @@
 <h2>Install it as an npm package</h2>
 <p><a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat" alt="npm version"></a> <a href="https://bundlephobia.com/result?p=culori"><img src="https://badgen.net/bundlephobia/minzip/culori" alt="bundlephobia"></a></p>
 <p>culori is bundled as UMD and ES <a href="https://npmjs.com/package/culori">on npm</a>. Install it using <code>npm</code> or <code>yarn</code>:</p>
-<pre><code class="language-bash"># using npm
-npm install culori
-
-# using yarn
-yarn add culori
-</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="highlight-line"><span class="token comment"># using npm</span></span><br><span class="highlight-line"><span class="token function">npm</span> <span class="token function">install</span> culori</span><br><span class="highlight-line"></span><br><span class="highlight-line"><span class="token comment"># using yarn</span></span><br><span class="highlight-line"><span class="token function">yarn</span> <span class="token function">add</span> culori</span></code></pre>
 <p>You can then import culori in your project:</p>
-<pre><code class="language-js">// CJS style: import the whole library
-let culori = require('culori');
-
-// ES style: import individual methods
-import { rgb } from 'culori';
-</code></pre>
+<pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token comment">// CJS style: import the whole library</span></span><br><span class="highlight-line"><span class="token keyword">let</span> culori <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'culori'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><br><span class="highlight-line"></span><br><span class="highlight-line"><span class="token comment">// ES style: import individual methods</span></span><br><span class="highlight-line"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span></span></code></pre>
 <h2>Add it via the <code>&lt;script&gt;</code> tag</h2>
 <p>To import culori as a <code>&lt;script&gt;</code> tag to use in a web page, you can load it from <a href="https://unpkg.com">unpkg</a>:</p>
-<pre><code class="language-html">&lt;script src='https://unpkg.com/culori'&gt;&lt;/script&gt;
-</code></pre>
+<pre class="language-html"><code class="language-html"><span class="highlight-line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">'</span>https://unpkg.com/culori<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></span></code></pre>
 
 	</article>
 	<footer>
