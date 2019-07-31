@@ -1,0 +1,13 @@
+<header>
+	<a href='{{"/" | url }}'>culori</a>
+
+	<nav>
+		<ul>
+		{% for item in menu %}
+			<li>
+				<a href='{{ item | url }}'>{{item}}</a>
+			</li>
+		{% endfor %}
+		</ul>
+	</nav>
+</header>

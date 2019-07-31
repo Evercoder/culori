@@ -1,0 +1,64 @@
+body {
+	font-family: sans-serif;
+	line-height: 1.5;
+	padding: 2em;
+}
+
+nav .active {
+	font-weight: bold;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5em 0 3em;
+}
+
+table tr {
+	border-bottom: 1px solid #000;
+}
+
+table th,
+table td {
+	text-align: left;
+	padding: 0.25em 0;
+}
+
+article {
+	margin: 2em 0;
+	max-width: 44em;
+}
+
+article img {
+	max-width: 100%;
+}
+
+header {
+	padding: 2em 0;
+	border-bottom: 3px solid #eee;
+}
+
+footer {
+	padding: 2em 0;
+	border-top: 3px solid #eee;
+}
+
+code,
+kbd,
+samp,
+var {
+	font-size: 0.9em;
+	font-family: Consolas, Menlo, Monaco, 'Andale Mono WT', 'Andale Mono',
+		'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono',
+		'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L',
+		'Courier New', Courier, monospace;
+	background: #dfe2f1;
+	color: #5e6687;
+	padding: 0.2em;
+}
+
+table code {
+	background: transparent;
+	color: inherit;
+	padding: 0;
+}

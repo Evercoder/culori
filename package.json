@@ -33,6 +33,8 @@
 		"build"
 	],
 	"devDependencies": {
+		"@11ty/eleventy": "^0.8.3",
+		"@11ty/eleventy-plugin-syntaxhighlight": "^2.0.3",
 		"eslint": "^5.7.0",
 		"esm": "^3.2.22",
 		"gh-pages": "^2.0.1",
@@ -53,9 +55,9 @@
 		"prepublishOnly": "yarn build && yarn test",
 		"coverage:report": "nyc report --reporter=lcov",
 		"coverage:test": "nyc --produce-source-map tape -r esm test/*.js | tap-spec",
-		"docs:start": "hugo serve --source docs",
-		"docs:build": "hugo --source docs",
-		"docs:deploy": "yarn docs:build && gh-pages -d docs/public",
+		"docs:start": "eleventy --serve",
+		"docs:build": "rm -rf www && eleventy",
+		"docs:deploy": "yarn docs:build && gh-pages -d www",
 		"lint": "yarn eslint {src,test}/**/*.js"
 	},
 	"husky": {

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		{% if title %} 
+			{{ title }} &middot; culori
+		{% else %}
+			culori
+		{% endif %}
+	</title>
+	<meta charset="utf-8">
+
+		
+	<link rel='stylesheet' href='{{"/css/main.css" | url }}'/>
+	<link rel='stylesheet' href='{{"/css/highlight.css" | url }}' media='print' onload="this.media='all'"/>
+</head>
+<body>
+	{% include 'partials/header.html' %}
+	<article>
+		<h1>{{ title }}</h1>
+		{{ content | safe }}
+	</article>
+	{% include 'partials/footer.html' %}
+</body>
+</html>

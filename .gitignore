@@ -6,4 +6,6 @@ node_modules
 .nyc_output/
 coverage/
 yarn-error.log
-docs/public
+
+# Website
+www/
