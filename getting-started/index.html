@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		 
+			Getting Started &middot; culori
+		
+	</title>
+	<meta charset="utf-8">
+
+	<style>
+		body {
+			font-family: sans-serif;
+			line-height: 1.5;
+			padding: 2em;
+		}
+
+		nav .active {
+			font-weight: bold;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		table tr {
+			border-bottom: 1px solid #000;
+		}
+
+		table th { text-align:left; }
+
+		article {
+			margin: 2em 0;
+			max-width: 44em;
+		}
+
+		article img {
+			max-width: 100%;
+		}
+
+		header {
+			padding: 2em 0;
+			border-bottom: 3px solid #eee;
+		}
+
+		footer {
+			padding: 2em 0;
+			border-top: 3px solid #eee;
+		}
+
+	</style>
+</head>
+<body>
+	<header>
+	<a href='/'>culori</a>
+
+	<nav>
+		<ul>
+		
+			<li>
+				<a href='/getting-started'>getting-started</a>
+			</li>
+		
+			<li>
+				<a href='/api'>api</a>
+			</li>
+		
+			<li>
+				<a href='/color-spaces'>color-spaces</a>
+			</li>
+		
+			<li>
+				<a href='/resources'>resources</a>
+			</li>
+		
+		</ul>
+	</nav>
+</header>
+	<article>
+		<h1>Getting Started</h1>
+		<h2>Try it online</h2>
+<p>You can use <a href="https://npm.runkit.com/culori">npm.runkit.com/culori</a> as a playground to test various API methods without installing culori in your project. <a href="https://beta.observablehq.com">Observable</a> is another great place to tinker with the library and see the results visually.</p>
+<h2>Install it as an npm package</h2>
+<p><a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat" alt="npm version"></a> <a href="https://bundlephobia.com/result?p=culori"><img src="https://badgen.net/bundlephobia/minzip/culori" alt="bundlephobia"></a></p>
+<p>culori is bundled as UMD and ES <a href="https://npmjs.com/package/culori">on npm</a>. Install it using <code>npm</code> or <code>yarn</code>:</p>
+<pre><code class="language-bash"># using npm
+npm install culori
+
+# using yarn
+yarn add culori
+</code></pre>
+<p>You can then import culori in your project:</p>
+<pre><code class="language-js">// CJS style: import the whole library
+let culori = require('culori');
+
+// ES style: import individual methods
+import { rgb } from 'culori';
+</code></pre>
+<h2>Add it via the <code>&lt;script&gt;</code> tag</h2>
+<p>To import culori as a <code>&lt;script&gt;</code> tag to use in a web page, you can load it from <a href="https://unpkg.com">unpkg</a>:</p>
+<pre><code class="language-html">&lt;script src='https://unpkg.com/culori'&gt;&lt;/script&gt;
+</code></pre>
+
+	</article>
+	<footer>
+	Source code available on <a href='https://github.com/evercoder/culori'>GitHub</a>
+</footer>
+</body>
+</html>

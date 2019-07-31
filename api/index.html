@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		 
+			API Reference &middot; culori
+		
+	</title>
+	<meta charset="utf-8">
+
+	<style>
+		body {
+			font-family: sans-serif;
+			line-height: 1.5;
+			padding: 2em;
+		}
+
+		nav .active {
+			font-weight: bold;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		table tr {
+			border-bottom: 1px solid #000;
+		}
+
+		table th { text-align:left; }
+
+		article {
+			margin: 2em 0;
+			max-width: 44em;
+		}
+
+		article img {
+			max-width: 100%;
+		}
+
+		header {
+			padding: 2em 0;
+			border-bottom: 3px solid #eee;
+		}
+
+		footer {
+			padding: 2em 0;
+			border-top: 3px solid #eee;
+		}
+
+	</style>
+</head>
+<body>
+	<header>
+	<a href='/'>culori</a>
+
+	<nav>
+		<ul>
+		
+			<li>
+				<a href='/getting-started'>getting-started</a>
+			</li>
+		
+			<li>
+				<a href='/api'>api</a>
+			</li>
+		
+			<li>
+				<a href='/color-spaces'>color-spaces</a>
+			</li>
+		
+			<li>
+				<a href='/resources'>resources</a>
+			</li>
+		
+		</ul>
+	</nav>
+</header>
+	<article>
+		<h1>API Reference</h1>
+		<ul>
+<li><a href="#color-representation">Color representation</a></li>
+<li><a href="#basic-methods">Basics methods</a></li>
+<li><a href="#interpolation">Interpolation</a></li>
+<li><a href="#difference">Difference</a></li>
+<li><a href="#blending">Blending</a></li>
+<li><a href="#random-colors">Random colors</a></li>
+<li><a href="#extending-culori">Extending culori</a></li>
+</ul>
+<h2>Color representation</h2>
+<p>Culori does not have a <em>Color</em> class. Instead, it uses plain objects to represent colors:</p>
+<pre><code class="language-js">// A color in the RGB space
+{
+  mode: 'rgb',
+  r: 0.1,
+  g: 0.2,
+  b: 1,
+  alpha: 1
+}
+</code></pre>
+<p>The object needs to have a <code>mode</code> property that identifies the color space, and values for each channel in that particular color space. See the <a href="./color-spaces">Color Spaces</a> section for the channels expected of each color space. Optionally, the <code>alpha</code> property is used for the color's alpha channel.</p>
+<h2>Basic methods</h2>
+<p><a name="parse" href="#parse">#</a> culori.<strong>parse</strong>(<em>string</em>) → <em>color</em> or <em>undefined</em> <a href="https://github.com/evercoder/culori/blob/master/src/parse.js" title="Source">&lt;&gt;</a></p>
+<p>Parses a string and returns the corresponding <em>color</em>. The color will be in the matching color space, e.g. RGB for hex strings, HSL for <code>hsl(…, …, …)</code> strings, et cetera. If no built-in parsers can match the string, the function will return <em>undefined</em>.</p>
+<pre><code class="language-js">// named colors:
+culori.parse('red');
+// =&gt; { r: 1, g: 0, b: 0, mode: 'rgb' }
+
+// hex strings:
+culori.parse('#ff0000');
+// =&gt; { r: 1, g: 0, b: 0, mode: 'rgb' }
+
+// HSL colors:
+culori.parse('hsl(60 50% 10% / 100%)');
+// =&gt; { h: 60, s: 0.5, b: 0.1, alpha: 1, mode: 'hsl' }
+
+// Lab colors:
+culori.parse('lab(100 -50 50)');
+// =&gt; { l: 100, a: -50, b: 50, mode: 'lab' }
+</code></pre>
+<blockquote>
+<p>You'll want to use a <a href="#converter">converter</a> in most cases. You can throw strings and color objects at a converter to get back an object in a predictable color space. <code>parse()</code>, on the other hand, is only meant for parsing strings.</p>
+</blockquote>
+<p><a name="converter" href="#converter">#</a> culori.<strong>converter</strong>(<em>mode = &quot;rgb&quot;</em>) → <em>function (color or String)</em> <a href="https://github.com/evercoder/culori/blob/master/src/converter.js" title="Source">&lt;&gt;</a></p>
+<p>Returns a <em>converter</em>: a function that can convert any color to the <em>mode</em> color space.</p>
+<pre><code class="language-js">let rgb = culori.converter('rgb');
+let lab = culori.converter('lab');
+
+rgb('#f0f0f0');
+// =&gt; { mode: &quot;rgb&quot;, r: 0.4980392156862745, g: 0.4980392156862745, b: 0.4980392156862745 }
+
+lab('#f0f0f0');
+// =&gt; { mode: &quot;lab&quot;, l: 94.79624582959184, a: 0 , b: 0 }&quot;
+</code></pre>
+<p>Converters accept either strings (which will be parsed with <code>culori.parse</code> under the hood) or color objects. If the <code>mode</code> key is absent from the color, it's assumed to be in the converter's color space.</p>
+<p>The available modes (color spaces) are listed below. For convenience, each color space included by default in culori has a shortcut to its converter. For example, you can use <code>culori.hsl</code> instead of <code>culori.converter('hsl')</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>For</th>
+<th>Shortcut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cubehelix</code></td>
+<td>Cubehelix color space</td>
+<td>culori.<strong>cubehelix</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>dlab</code></td>
+<td>DIN99o Lab color space</td>
+<td>culori.<strong>dlab</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>dlch</code></td>
+<td>DIN99o LCh color space</td>
+<td>culori.<strong>dlch</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>hsi</code></td>
+<td>HSI color space</td>
+<td>culori.<strong>hsi</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>hsl</code></td>
+<td>HSL color space</td>
+<td>culori.<strong>hsl</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>hsv</code></td>
+<td>HSV color space</td>
+<td>culori.<strong>hsv</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>hwb</code></td>
+<td>HWB color space</td>
+<td>culori.<strong>hwb</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>lab</code></td>
+<td>Lab color space</td>
+<td>culori.<strong>lab</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>lch</code></td>
+<td>LCh color space</td>
+<td>culori.<strong>lch</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>lrgb</code></td>
+<td>Linearized RGB color space</td>
+<td>culori.<strong>lrgb</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>rgb</code></td>
+<td>RGB color space</td>
+<td>culori.<strong>rgb</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>yiq</code></td>
+<td>YIQ color space</td>
+<td>culori.<strong>yiq</strong>(<em>color</em>)</td>
+</tr>
+</tbody>
+</table>
+<p><a name="formatter" href="#formatter">#</a> culori.<strong>formatter</strong>(<em>format = 'rgb'</em>) → <em>function (color)</em> <a href="https://github.com/evercoder/culori/blob/master/src/formatter.js" title="Source">&lt;&gt;</a></p>
+<p>Returns a <em>formatter</em>: a function that can transform colors to a useful string representation.</p>
+<pre><code class="language-js">let hex = culori.formatter('hex');
+
+hex('red'); // ⇒ &quot;#ff0000&quot;
+</code></pre>
+<p>Available formats:</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hex</code></td>
+<td>Returns the hex string for a color</td>
+</tr>
+<tr>
+<td><code>rgb</code></td>
+<td>Returns the <code>rgb(…)</code> / <code>rgba(…)</code> string for a color</td>
+</tr>
+</tbody>
+</table>
+<p><em>Reference:</em> <a href="https://drafts.csswg.org/cssom/#serialize-a-css-component-value">CSSOM standard serialization</a></p>
+<p><a name="displayable" href="#displayable">#</a> culori.<strong>displayable</strong>(<em>color</em> or <em>String</em>) <a href="https://github.com/evercoder/culori/blob/master/src/displayable.js" title="Source">&lt;&gt;</a></p>
+<p>Some color spaces (Lab and LCh in particular) allow you to express colors that can't be displayed on-screen. This function checks whether a particular color fits inside the sRGB gamut — i.e. its <code>r</code>, <code>g</code>, and <code>b</code> channels are all in the interval <code>[0, 1]</code>.</p>
+<pre><code class="language-js">culori.displayable('red'); // ⇒ true
+culori.displayable('rgb(300 255 255)'); // ⇒ false
+</code></pre>
+<p><a name="clamp" href="#clamp">#</a> culori.<strong>clamp</strong>(<em>method = 'rgb'</em>) → <em>function (color)</em> <a href="https://github.com/evercoder/culori/blob/master/src/clamp.js" title="Source">&lt;&gt;</a></p>
+<p>Returns a function which you use to retreive a representation that's displayable on the screen for any color. There are two available methods to squeeze the color into the displayable sRGB gamut:</p>
+<p><code>method = 'rgb'</code> clamps the <code>r</code>, <code>g</code>, <code>b</code> channel values of the color's RGB representation to the interval <code>[0, 1]</code>.</p>
+<p><code>method = 'lch'</code> converts the color to LCh and finds the largest Chroma value that's displayable for the given Lightness and Hue; if not even the achromatic version (Chroma = 0) of the LCh color is displayable, it falls back to the <code>rgb</code> method.</p>
+<pre><code class="language-js">// RGB clamping
+culori.clamp('rgb')('lab(50 100 100)');
+// =&gt; { mode: &quot;lab&quot;, l: 54.29173376861782, a: 80.8124553179771, b: 69.88504032350531 }
+
+// LCh clamping
+culori.clamp('lch')('lab(50 100 100)');
+// =&gt;  { mode: &quot;lab&quot;, l:50.0000028101302, a: 63.11644430269186, b: 63.11642289997279 }
+</code></pre>
+<p>The clamped color will always be returned in the original color space.</p>
+<p><a name="round" href="#round">#</a> culori.<strong>round</strong>(<em>n = 8</em>) <a href="https://github.com/evercoder/culori/blob/master/src/round.js" title="Source">&lt;&gt;</a></p>
+<p>Returns a <em>rounder</em>: a function with which to round numbers to at most <em>n</em> digits of precision.</p>
+<pre><code class="language-js">let approx = culori.round(4);
+approx(0.38393993);
+// =&gt; 0.3839
+</code></pre>
+<h2>Interpolation</h2>
+<p><a name="interpolate" href="#interpolate">#</a> culori.<strong>interpolate</strong>(<em>colors</em>, <em>mode = &quot;rgb&quot;</em>, <em>interpolations</em>) <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js" title="Source">&lt;&gt;</a></p>
+<p>Returns an <em>interpolator</em> in the <em>mode</em> color space for an array of colors: a function that accepts a value <em>t</em> in the interval <code>[0, 1]</code> and returns the interpolated color in the <em>mode</em> color space.</p>
+<p>The colors in the array can be in any color space, or they can even be strings.</p>
+<pre><code class="language-js">let grays = culori.interpolate(['#fff', '#000']);
+grays(0.5); // =&gt; { mode: 'rgb', r: 0.5, g: 0.5, b: 0.5 }
+</code></pre>
+<p>By default, colors in all spaces are interpolated linearly. You can override the way specific channels are interpolated with the <em>interpolations</em> object, the third argument of <code>interpolate()</code>.</p>
+<pre><code>let custom_interpolator = culori.interpolate(['blue', 'red'], 'lch', {
+	h: culori.interpolateLinear() // long-path hue interpolation
+});
+</code></pre>
+<p>There are a few interpolation methods available, listed below. Depending on the channel, the numeric values can be interpreted/interpolated in various <em>modes</em>. The hue channel, for example, is interpolated by taking into account the <em>shortest path around the hue circle</em> (<code>interpolateHue</code>). And the <code>interpolateAlpha</code> mode assumes an <em>undefined</em> alpha is <code>1</code>.</p>
+<h3>Color stop positions</h3>
+<p>You can specify positions of color stops to interpolate in the way they're defined in the <a href="https://drafts.csswg.org/css-images-4/#color-stop-syntax">CSS Images Module Level 4</a> specification:</p>
+<pre><code class="language-js">culori.interpolate(['red', ['green', 0.25], 'blue']);
+</code></pre>
+<p>In the image below, you can see the effect of interpolating with evenly-spaced colors (1) vs. positioned colors stops (2):</p>
+<p><img src="/img/evenly-spaced-vs-positions.png" alt="Evenly spaced vs. positions"></p>
+<p>To specify a positioned color stop, use an array that contains the color followed by its position. The color stops should be specified in ascending order.</p>
+<p>For omitted (implicit) positions, we apply the rules <a href="https://drafts.csswg.org/css-images-4/#color-stop-syntax">from the spec</a>:</p>
+<ol>
+<li>if the first color doesn't have a position, it's assumed to be <code>0</code>; if the last color doesn't have a position, it's assumed to be <code>1</code>;</li>
+<li>any other color stops that don't have a position will be evenly distributed along the gradient line between the positioned color stops.</li>
+</ol>
+<h3>Easing functions</h3>
+<p>You can add easing functions between any two colors in the array:</p>
+<pre><code class="language-js">const easeIn = t =&gt; t * t;
+culori.interpolate(['red', easeIn, 'green']);
+</code></pre>
+<p>Any function in the <em>colors</em> array will be interpreted as an easing function, which is (for our purposes), a function that takes an argument <code>t ∈ [0, 1]</code> and returns a value <code>v ∈ [0, 1]</code>.</p>
+<p>Culori comes with <a href="#built-in-easing-functions">just a few</a> easing functions, but you can find several online:</p>
+<ul>
+<li><a href="https://gist.github.com/gre/1650294">some classic easing functions</a>;</li>
+<li><a href="https://github.com/mattdesl/eases">eases</a> by Matt DesLauriers;</li>
+<li><a href="https://github.com/gre/bezier-easing">bezier-easing</a> by Gaëtan Renaudeau builds <code>cubic-bezier</code> easings as defined in the <a href="http://drafts.csswg.org/css-easing-1">CSS Easing Functions Level 1</a> spec;</li>
+<li><a href="https://github.com/d3/d3-scale">d3-scale</a> lets you set the scale's domain and range to <code>[0, 1]</code>.</li>
+</ul>
+<h3>Interpolation hints</h3>
+<p>Any number in he <em>colors</em> array will be interpreted as an <a href="https://drafts.csswg.org/css-images-4/#color-stop-syntax">interpolation hint</a>:</p>
+<pre><code class="language-js">// interpolation hint
+culori.interpolate(['red', 0.25, 'green']);
+</code></pre>
+<blockquote>
+<p>👉 As opposed to the CSS spec, interpolation hints <a href="https://github.com/w3c/csswg-drafts/issues/3931">don't affect color stop positions</a> in culori.</p>
+</blockquote>
+<h3>Built-in easing functions</h3>
+<p>A few easing functions that come with culori:</p>
+<p><a name="culoriEasingMidpoint" href="#culoriEasingMidpoint">#</a> culori.<strong>easingMidpoint</strong>(<em>H = 0.5</em>) <a href="https://github.com/evercoder/culori/blob/master/src/easing/midpoint.js" title="Source">&lt;&gt;</a></p>
+<p><a href="https://github.com/w3c/csswg-drafts/issues/3935">Proposed here</a>, the <code>midpoint</code> easing function lets you shift the midpoint of a gradient like in tools such as Adobe Photoshop. You can use it with <a href="#culoriInterpolate"><code>culori.interpolate</code></a> as an alternative to interpolation hints:</p>
+<pre><code class="language-js">culori.interpolate(['red', easingMidpoint(0.25), 'blue']);
+// equivalent to
+culori.interpolate(['red', 0.25, 'blue']);
+</code></pre>
+<p><a name="culoriEasingSmoothstep" href="#culoriEasingSmoothstep">#</a> culori.<strong>easingSmoothstep</strong> <a href="https://github.com/evercoder/culori/blob/master/src/easing/smoothstep.js" title="Source">&lt;&gt;</a></p>
+<p>The <a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep</a> easing function.</p>
+<p><a name="culoriEasingSmootherstep" href="#culoriEasingSmootherstep">#</a> culori.<strong>easingSmootherstep</strong> <a href="https://github.com/evercoder/culori/blob/master/src/easing/smootherstep.js" title="Source">&lt;&gt;</a></p>
+<p>Smootherstep is a variant of the <a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep</a> easing function.</p>
+<h3>Interpolation methods</h3>
+<p>You'll use these methods when you want to override how colors get interpolated in a specific color space, or when defining the default interpolation for custom color spaces.</p>
+<p><a name="culoriInterpolateLinear" href="#culoriInterpolateLinear">#</a> culori.<strong>interpolateLinear</strong>(<em>normalize = identity</em>, <em>γ = 1</em>) <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/linear.js" title="Source">&lt;&gt;</a></p>
+<p>A linear interpolator for values in a channel. By default does not normalize the values.</p>
+<p><a name="culoriInterpolateSplineBasis" href="#culoriInterpolateSplineBasis">#</a> culori.<strong>interpolateSplineBasis</strong>(<em>normalize = identity</em>, <em>type = &quot;default&quot;</em>, <em>γ = 1</em>) <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js" title="Source">&lt;&gt;</a></p>
+<p>A basis spline interpolator for values in a channel. The <em>type</em> can be one of the following:</p>
+<ul>
+<li><code>default</code> creates a basis spline that passes through the first and last values in the array.</li>
+<li><code>closed</code> creates a closed basis spline</li>
+<li><code>open</code> creates an open basis spline (<em>not yet implemented</em>)</li>
+</ul>
+<p><a name="culoriInterpolateSplineNatural" href="#culoriInterpolateSplineNatural">#</a> culori.<strong>interpolateSplineNatural</strong>(<em>normalize = identity</em>, <em>type = &quot;default&quot;</em>, <em>γ = 1</em>) <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js" title="Source">&lt;&gt;</a></p>
+<p>A natural spline interpolator for values in a channel. The <em>type</em> can be one of the following:</p>
+<ul>
+<li><code>default</code> creates a natural spline</li>
+<li><code>closed</code> creates a closed natural spline</li>
+</ul>
+<p><a name="culoriInterpolateSplineMonotone" href="#culoriInterpolateSplineMonotone">#</a> culori.<strong>interpolateSplineMonotone</strong>(<em>normalize = identity</em>, <em>type = &quot;default&quot;</em>, <em>γ = 1</em>) <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js" title="Source">&lt;&gt;</a></p>
+<p>A monotone spline interpolator for values in a channel. The <em>type</em> can be one of the following:</p>
+<ul>
+<li><code>default</code> creates a monotone spline</li>
+<li><code>closed</code> creates a closed monotone spline</li>
+<li><code>open</code> creates an open monotone spline (<em>not yet implemented</em>)</li>
+</ul>
+<p><a name="culoriInterpolateCosine" href="#culoriInterpolateCosine">#</a> culori.<strong>interpolateCosine</strong>(<em>normalize = identity</em>, <em>γ = 1</em>) <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/cosine.js" title="Source">&lt;&gt;</a></p>
+<p>Interpolates the value <a href="http://paulbourke.net/miscellaneous/interpolation/">using the cosine function</a>, which can offer a smoother alternative to linear interpolation.</p>
+<h3>Interpolation modes</h3>
+<p>By default, channel values that need to be interpolated are not normalized in any way. However, for some channels, we need to do some normalization before we interpolate the values:</p>
+<p><a name="culoriInterpolateHue" href="#culoriInterpolateHue">#</a> culori.<strong>interpolateHue</strong> <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/hue.js" title="Source">&lt;&gt;</a></p>
+<p>Used for the hue channel in various color spaces, normalizes the array such that the interpolator takes into account the <em>shortest path around the hue circle</em>:</p>
+<p><strong>hsl/definition.js</strong></p>
+<pre><code class="language-js">export default {
+	// ...
+	interpolate: {
+		h: interpolateLinear(interpolateHue),
+		s: interpolateLinear(),
+		l: interpolateLinear(),
+		alpha: interpolateLinear(interpolateAlpha)
+	}
+	// ...
+};
+</code></pre>
+<p>By default, hue channels in all color spaces will use this normalization. However, the example below interpolates colors in the HSL color space by treating hues as normal numeric values instead:</p>
+<pre><code class="language-js">let hsl_long = culori.interpolate(['blue', 'red', 'green'], 'hsl', {
+	h: culori.interpolateLinear()
+});
+</code></pre>
+<p>(Notice we're not sending <code>culori.interpolateHue</code> to <code>culori.interpolateLinear()</code> as the first argument.)</p>
+<p><a name="culoriInterpolateAlpha" href="#culoriInterpolateAlpha">#</a> culori.<strong>interpolateAlpha</strong> <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/alpha.js" title="Source">&lt;&gt;</a></p>
+<p>Used for the alpha channel in various color spaces such that <code>undefined</code> values are treated as <code>1</code> (full opacity) in some situations. This is the default for the alpha channel in all color spaces.</p>
+<h3>Evenly-spaced samples</h3>
+<p><a name="culoriSamples" href="#culoriSamples">#</a> culori.<strong>samples</strong>(<em>n = 2</em>, <em>γ = 1</em>) <a href="https://github.com/evercoder/culori/blob/master/src/samples.js" title="Source">&lt;&gt;</a></p>
+<p>Returns an array of <em>n</em> equally-spaced samples from the <code>[0, 1]</code> range, with <code>0</code> and <code>1</code> at the ends. The function also accepts a <em>γ</em> (gamma) parameter which will map each value <em>t</em> to <em>t</em><sup>γ</sup>.</p>
+<pre><code class="language-js">culori.samples(3); // =&gt; [0, 0.5, 1]
+culori.samples(5); // =&gt; [0, 0.25, 0.5, 0.75, 1]
+</code></pre>
+<p><img src="/img/culori-samples.png" alt="culori.samples() with various gamma values"></p>
+<p>The samples are useful for <a href="#culoriInterpolate">culori.interpolate()</a> to generate color scales:</p>
+<pre><code class="language-js">let grays = culori.interpolate(['#fff', '#000']);
+culori.samples(5).map(grays); // =&gt; five evenly-spaced colors
+</code></pre>
+<p>As with the <a href="#culoriInterpolate"><code>interpolate()</code></a> method, you can map the samples through an easing function or scale to obtain a different distribution of the samples.</p>
+<pre><code class="language-js">let culori = require('culori');
+let easing = require('bezier-easing');
+
+// Bezier easing
+let bezier = easing(0, 0, 1, 0.5);
+culori.samples(10).map(bezier);
+
+// easeInQuad
+culori.samples(10).map(t =&gt; t * t);
+</code></pre>
+<h2>Difference</h2>
+<p>These methods are concerned to finding the <a href="https://en.wikipedia.org/wiki/Color_difference">distance between two colors</a> based on various formulas. Each of these formulas will return a <em>function (colorA, colorB)</em> that lets you measure the distance between two colors.</p>
+<blockquote>
+<p>These are also available as a separate <a href="https://github.com/evercoder/d3-color-difference">D3 plugin</a>.</p>
+</blockquote>
+<p><a name="culoriDifferenceEuclidean" href="#culoriDifferenceEuclidean">#</a> culori.<strong>differenceEuclidean</strong>(<em>mode = 'rgb'</em>, <em>weights = [1, 1, 1, 0]</em>) <a href="https://github.com/evercoder/culori/blob/master/src/difference.js" title="Source">&lt;&gt;</a></p>
+<p>Returns a <a href="https://en.wikipedia.org/wiki/Color_difference#Euclidean">Euclidean distance</a> function in a certain color space.</p>
+<p>You can optionally assign different weights to the channels in the color space. See, for example, the <a href="#culoriDifferenceKotsarenkoRamos">Kotsarenko/Ramos distance</a>.</p>
+<p>The default weights <code>[1, 1, 1, 0]</code> mean that the <em>alpha</em>, which is the fourth channel in all the color spaces culori defines, is not taken into account. Send <code>[1, 1, 1, 1]</code> as the weights to include it in the computation.</p>
+<p>For the <code>h</code> channel in the color (in any color space that has this channel), we're using a <em>shortest hue distance</em> to compute the hue's contribution to the distance. In spaces such as HSL or HSV, where the range of this difference is <code>[0, 180]</code> — as opposed to <code>[0, 1]</code> for the other channels — consider adjusting the weights so that the hue contributes &quot;equally&quot; to the distance:</p>
+<pre><code class="language-js">let hsl_distance = culori.differenceEuclidean('hsl', [
+	1 / (180 * 180),
+	1,
+	1,
+	0
+]);
+</code></pre>
+<p><a name="culoriDifferenceCie76" href="#culoriDifferenceCie76">#</a> culori.<strong>differenceCie76</strong>() <a href="https://github.com/evercoder/culori/blob/master/src/difference.js" title="Source">&lt;&gt;</a></p>
+<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIE76">CIE76</a> ΔE*<sub>ab</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the Lab color space and it is analogous to <a href="#culoriDifferenceEuclidean">culori.differenceEuclidean('lab')</a>.</p>
+<p><a name="culoriDifferenceCie94" href="#culoriDifferenceCie94">#</a> culori.<strong>differenceCie94</strong>(<em>kL = 1</em>, <em>K1 = 0.045</em>, <em>K2 = 0.015</em>) <a href="https://github.com/evercoder/culori/blob/master/src/difference.js" title="Source">&lt;&gt;</a></p>
+<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIE94">CIE94</a> ΔE*<sub>94</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the Lab color space.</p>
+<p><a name="culoriDifferenceCiede2000" href="#culoriDifferenceCiede2000">#</a> culori.<strong>differenceCiede2000</strong>(<em>Kl = 1</em>, <em>Kc = 1</em>, <em>Kh = 1</em>) <a href="https://github.com/evercoder/culori/blob/master/src/difference.js" title="Source">&lt;&gt;</a></p>
+<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIEDE2000">CIEDE2000</a> ΔE*<sub>00</sub> color difference between the colors <em>a</em> and <em>b</em> as implemented by <a href="http://www2.ece.rochester.edu/~gsharma/ciede2000/">G. Sharma</a>. The computation is done in the Lab color space.</p>
+<p>Returns a <a href="https://en.wikipedia.org/wiki/Color_difference#CIEDE2000">CIEDE2000</a> Delta E* function.</p>
+<p><a name="culoriDifferenceCmc" href="#culoriDifferenceCmc">#</a> culori.<strong>differenceCmc</strong>() <a href="https://github.com/evercoder/culori/blob/master/src/difference.js" title="Source">&lt;&gt;</a></p>
+<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)">CMC l:c (1984)</a> ΔE*<sub>CMC</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the Lab color space.</p>
+<p><em>Note:</em> ΔE*<sub>CMC</sub> is not considered a metric since it's not symmetrical, i.e. the distance from <em>a</em> to <em>b</em> is not always equal to the distance from <em>b</em> to <em>a</em>. Therefore it cannot be reliably used with <a href="#culoriNearest">culori.nearest()</a>.</p>
+<p><a name="culoriDifferenceDin99o" href="#culoriDifferenceDin99o">#</a> culori.<strong>differenceDin99o</strong>() <a href="https://github.com/evercoder/culori/blob/master/src/difference.js" title="Source">&lt;&gt;</a></p>
+<p>Computes the <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel">DIN99o</a> ΔE*<sub>99o</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99o</a> color space.</p>
+<p><a name="culoriDifferenceKotsarenkoRamos" href="#culoriDifferenceKotsarenkoRamos">#</a> culori.<strong>differenceKotsarenkoRamos</strong>() <a href="https://github.com/evercoder/culori/blob/master/src/difference.js" title="Source">&lt;&gt;</a></p>
+<p>Computes the <a href="http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf">Kotsarenko/Ramos</a> color difference between the colors <em>a</em> and <em>b</em>. This is a weighted Euclidean distance in the <a href="https://en.wikipedia.org/wiki/YIQ">YIQ</a> color space.</p>
+<h3>Nearest color(s)</h3>
+<p><a name="culoriNearest" href="#culoriNearest">#</a> culori.<strong>nearest</strong>(<em>colors</em>, <em>metric = differenceEuclidean()</em>, <em>accessor = identity</em>) → <em>function(color, n = 1, τ = Infinity)</em> <a href="https://github.com/evercoder/culori/blob/master/src/nearest.js" title="Source">&lt;&gt;</a></p>
+<p>For a given <em>metric</em> color difference formula, and an array of <em>colors</em>, returns a function with which you can find <em>n</em> colors nearest to <em>color</em>, with a maximum distance of <em>τ</em>.</p>
+<p>Pass <em>n = Infinity</em> to get all colors in the array with a maximum distance of <em>τ</em>.</p>
+<h2>Blending</h2>
+<p>Color blending works as defined in the W3C <a href="https://drafts.fxtf.org/compositing-2/">Compositing and Blending Level 2</a> specification.</p>
+<p><a name="culoriBlend" href="#culoriBlend">#</a> culori.<strong>blend</strong>(<em>colors</em>, <em>type = 'normal'</em>, <em>mode = 'rgb'</em>) → <em>color</em> <a href="https://github.com/evercoder/culori/blob/master/src/blend.js" title="Source">&lt;&gt;</a></p>
+<p>Available blending modes:</p>
+<ul>
+<li><code>normal</code></li>
+<li><code>multiply</code></li>
+<li><code>screen</code></li>
+<li><code>hard-light</code></li>
+<li><code>overlay</code></li>
+<li><code>darken</code></li>
+<li><code>lighten</code></li>
+<li><code>color-dodge</code></li>
+<li><code>color-burn</code></li>
+<li><code>soft-light</code></li>
+<li><code>difference</code></li>
+<li><code>exclusion</code></li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> culori currently implements the <em>separable</em> blend modes, that is the blend modes that work on each channel in the color space independently. <em>color</em>, <em>hue</em>, <em>saturation</em>, and <em>lightness</em> modes are not yet available.</p>
+</blockquote>
+<p>An example of blending three colors:</p>
+<pre><code class="language-js">culori.blend(
+	['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'],
+	'screen'
+);
+// =&gt; { mode: 'rgb', alpha: 0.875, r: 0.57..., g: 0.57..., b:0.57... }
+</code></pre>
+<p>In addition to strings, the <em>type</em> parameter supports a <em>function (b, s) → v</em> that takes the values of the <em>backdrop</em> and <em>source</em> color to return the blended value. This allows you to write your own (separable) blending functions. For example, an <em>average</em> blending mode:</p>
+<pre><code class="language-js">culori.blend(['red', 'green'], function average(b, s) {
+	return (b + s) / 2;
+});
+</code></pre>
+<h2>Random colors</h2>
+<p><a name="culoriRandom" href="#culoriRandom">#</a> culori.<strong>random</strong>(<em>mode = 'rgb'</em>, <em>constraints = {}</em>) <a href="https://github.com/evercoder/culori/blob/master/src/random.js" title="Source">&lt;&gt;</a></p>
+<p>Obtain a random color from a particular color space, with optional constraints. The resulting color will be in the color space from where it has been picked.</p>
+<p>Basic usage:</p>
+<pre><code class="language-js">culori.random();
+// =&gt; { mode: 'rgb', r: 0.75, g: 0.12, b: 0.99 }
+</code></pre>
+<h3>Specifying constraints</h3>
+<p>Random colors are, by definition, all over the color space and not all of them will look particularly nice. Some color spaces, such as HSL or HSV, are also biased towards colors close to black and/or white, because of the way these color spaces stretch the RGB cube into cyllinders.</p>
+<p>For more control on how the colors are generated, you can specify constraints for each individual channel in the color space. Constraints can be either a <em>constant number</em> or an <em>interval</em> from where to pick the channel value:</p>
+<pre><code class="language-js">culori.random('hsv', {
+	h: 120 // number,
+	s: [0.25, 0.75] // interval
+});
+</code></pre>
+<p>The <em>alpha</em> channel is excluded by default. To obtain colors with random alpha values, include a constraint for <code>alpha</code>:</p>
+<pre><code class="language-js">culori.random('lrgb', { alpha: [0, 1] });
+</code></pre>
+<h3>Displayable random colors</h3>
+<p>The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as LAB or LCH, don't have explicit ranges for certain channels; for these, some approximate ranges <a href="https://github.com/evercoder/culori/blob/master/tools/ranges.js">have been pre-computed</a> as the limits of the displayable sRGB gamut.</p>
+<p>Even with these ranges in place, a combination of channel values may not be displayable. Check if that's the case with <a href="#culoriDisplayable"><code>culori.displayable()</code></a>, and pass the color through <a href="#culoriClamp"><code>culori.clamp()</code></a> to obtain a displayable version.</p>
+<h2>WCAG utilities</h2>
+<p><a name="culoriWcagLuminance" href="#culoriWcagLuminance">#</a> culori.<strong>wcagLuminance</strong>(<em>color</em>) <a href="https://github.com/evercoder/culori/blob/master/src/wcag.js" title="Source">&lt;&gt;</a></p>
+<p>Computes the relative luminance of a color.</p>
+<p><a name="culoriWcagContrast" href="#culoriWcagContrast">#</a> culori.<strong>wcagContrast</strong>(<em>colorA</em>, <em>colorB</em>) <a href="https://github.com/evercoder/culori/blob/master/src/wcag.js" title="Source">&lt;&gt;</a></p>
+<p>Computes the contrast between two colors.</p>
+<h2>Extending culori</h2>
+<p><a name="culoriDefineMode" href="#culoriDefineMode">#</a> culori.<strong>defineMode</strong>(<em>definition</em>) <a href="https://github.com/evercoder/culori/blob/master/src/modes.js" title="Source">&lt;&gt;</a></p>
+<p>Defines a new color space through a <em>definition</em> object. By way of example, here's the definition of the HSL color space:</p>
+<pre><code class="language-js">{
+	mode: 'hsl',
+	output: {
+		rgb: convertHslToRgb
+	},
+	input: {
+		rgb: convertRgbToHsl
+	},
+	channels: ['h', 's', 'l', 'alpha'],
+	ranges: {
+		h: [0, 360]
+	},
+	parsers: [parseHsl],
+	interpolate: {
+		h: interpolateLinear(interpolateHue),
+		s: interpolateLinear(),
+		l: interpolateLinear(),
+		alpha: interpolateLinear(interpolateAlpha)
+	}
+}
+</code></pre>
+<p>The properties a definition needs are the following:</p>
+<ul>
+<li><code>mode</code>: the string identifier for the color space</li>
+<li><code>output</code>: a set of functions to convert from the color space we're defining to other color spaces. At least <code>rgb</code> needs to be included; in case a specific conversion pair between two color spaces is missing, RGB is used as the &quot;buffer&quot; for the conversion.</li>
+<li><code>input</code>: opposite of <code>output</code>; a set of function to convert from various color spaces to the color space we're defining. At least <code>rgb</code> needs to be included.</li>
+<li><code>channels</code>: a list of channels for the color space.</li>
+<li><code>ranges</code>: the ranges for values in specific channels; if left unspecified, defaults to <code>[0, 1]</code>.</li>
+<li><code>parsers</code>: any parsers for the color space that can transform strings into colors</li>
+<li><code>interpolate</code>: the default interpolations for the color space.</li>
+</ul>
+<p><strong>Note:</strong> The order of the items in the <code>channels</code> array matters. To keep things simple, we're making the following conventions:</p>
+<ul>
+<li>the fourth item in the array should be <code>alpha</code></li>
+<li>any cyclical values (e.g. hue) should be identified by <code>h</code>, in the range <code>[0, 360)</code></li>
+</ul>
+<p>These constrains make sure <code>differenceEuclidean()</code> works as expected.</p>
+
+	</article>
+	<footer>
+	Source code available on <a href='https://github.com/evercoder/culori'>GitHub</a>
+</footer>
+</body>
+</html>

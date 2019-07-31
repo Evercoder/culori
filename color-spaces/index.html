@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		 
+			Color Spaces &middot; culori
+		
+	</title>
+	<meta charset="utf-8">
+
+	<style>
+		body {
+			font-family: sans-serif;
+			line-height: 1.5;
+			padding: 2em;
+		}
+
+		nav .active {
+			font-weight: bold;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		table tr {
+			border-bottom: 1px solid #000;
+		}
+
+		table th { text-align:left; }
+
+		article {
+			margin: 2em 0;
+			max-width: 44em;
+		}
+
+		article img {
+			max-width: 100%;
+		}
+
+		header {
+			padding: 2em 0;
+			border-bottom: 3px solid #eee;
+		}
+
+		footer {
+			padding: 2em 0;
+			border-top: 3px solid #eee;
+		}
+
+	</style>
+</head>
+<body>
+	<header>
+	<a href='/'>culori</a>
+
+	<nav>
+		<ul>
+		
+			<li>
+				<a href='/getting-started'>getting-started</a>
+			</li>
+		
+			<li>
+				<a href='/api'>api</a>
+			</li>
+		
+			<li>
+				<a href='/color-spaces'>color-spaces</a>
+			</li>
+		
+			<li>
+				<a href='/resources'>resources</a>
+			</li>
+		
+		</ul>
+	</nav>
+</header>
+	<article>
+		<h1>Color Spaces</h1>
+		<h2>RGB</h2>
+<blockquote>
+<p>🕳 expand this section</p>
+</blockquote>
+<h2>LRGB (Linear RGB)</h2>
+<blockquote>
+<p>🕳 expand this section</p>
+</blockquote>
+<blockquote>
+<p>📖 See Jamie Wong's <a href="http://jamie-wong.com/post/color/">excellent deep dive</a> into color.</p>
+</blockquote>
+<h2>HSL / HSV / HSI</h2>
+<p><a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSL, HSV, and HSI</a> are a family of representations of the RGB color space, created in 1970 to provide color spaces more closely aligned to how humans perceive colors.</p>
+<blockquote>
+<p>💡 In this family of color spaces, the <em>hue</em> is undefined for achromatic colors (i.e. shades of gray).</p>
+</blockquote>
+<h3><code>hsl</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td><code>[0, 1]</code></td>
+<td>Saturation in HSL</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 1]</code></td>
+<td>Lightness</td>
+</tr>
+</tbody>
+</table>
+<p>The figure below shows a slice of the HSL color space for a particular hue:</p>
+<p><img src="/img/hsl-spectrum.png" alt="HSL Spectrum"></p>
+<h3><code>hsv</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td><code>[0, 1]</code></td>
+<td>Saturation in HSV</td>
+</tr>
+<tr>
+<td><code>v</code></td>
+<td><code>[0, 1]</code></td>
+<td>Value</td>
+</tr>
+</tbody>
+</table>
+<p>The figure below shows a slice of the HSV color space for a particular hue:</p>
+<p><img src="/img/hsv-spectrum.png" alt="HSV Spectrum"></p>
+<h3><code>hsi</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td><code>[0, 1]</code></td>
+<td>Saturation in HSI</td>
+</tr>
+<tr>
+<td><code>i</code></td>
+<td><code>[0, 1]</code></td>
+<td>Intensity</td>
+</tr>
+</tbody>
+</table>
+<p>The figure below shows a slice of the HSI color space for a particular hue:</p>
+<p><img src="/img/hsi-spectrum.png" alt="HSI Spectrum"></p>
+<blockquote>
+<p>💡 While the <em>hue</em> in this family of color spaces retains its value in all of them, the <em>saturation</em> in HSL is <strong>not interchangeable</strong> with the <em>saturation</em> from HSV, nor HSI — they're computed differently, depending on the color space.</p>
+</blockquote>
+<h2>HWB</h2>
+<p><a href="https://en.wikipedia.org/wiki/HWB_color_model">The HWB color space</a> was developed by Alvy Ray Smith, who also created the HSV color space. It's meant to be more intuitive for humans to use and faster to compute.</p>
+<p><strong>References:</strong></p>
+<ul>
+<li>Smith, Alvy Ray (1996) — <a href="http://alvyray.com/Papers/CG/HWB_JGTv208.pdf">&quot;HWB — A More Intuitive Hue-Based Color Model&quot;</a>, Journal of Graphics, GPU and Game tools.</li>
+</ul>
+<h2>Lab / LCh (CIE)</h2>
+<blockquote>
+<p>As defined in the <a href="https://drafts.csswg.org/css-color/#lab-colors">CSS Color Module Level 4 spec</a>, we use the <a href="https://en.wikipedia.org/wiki/Standard_illuminant">D50 illuminant</a> as a reference white for these color spaces.</p>
+</blockquote>
+<h3><code>lab</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 100]</code></td>
+<td>Lightness</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><code>[-79.167, 93.408]</code></td>
+<td>Green–red component</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><code>[-111.859, 93.246]</code></td>
+<td>Blue–yellow component</td>
+</tr>
+</tbody>
+</table>
+<h3><code>lch</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 100]</code></td>
+<td>Lightness</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><code>[0, 131.008]</code></td>
+<td>Chroma</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 The range for the <code>a</code> and <code>b</code> channels in Lab, and the <code>c</code> channel in LCh, depend on the specific implementation. I've obtained the ranges from the tables above by converting all sRGB colors defined by <code>r, g, b ∈ ℕ ⋂ [0, 255]</code> into Lab and LCh respectively.</p>
+</blockquote>
+<h2>DIN99 Lab / LCh</h2>
+<p>The <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99</a> color space &quot;squishes&quot; the CIE Lab color space to obtain an <a href="#culoriDifferenceDin99o">effective color difference</a> metric that can be expressed as a simple Euclidean distance. We implement the latest iteration of the the standard, DIN99o.</p>
+<h3><code>dlab</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 100]</code></td>
+<td>Lightness</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><code>[-39.229, 45.166]</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><code>[-43.002, 44.424]</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3><code>dlch</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 100]</code></td>
+<td>Lightness</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><code>[0, 50.944]</code></td>
+<td>Chroma</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+</tbody>
+</table>
+<p><strong>References:</strong></p>
+<ul>
+<li><a href="https://www.springer.com/us/book/9781441911964">&quot;Industrial Color Physics&quot;</a>, Georg A. Klein, Springer (2010)</li>
+</ul>
+<h2>YIQ</h2>
+<p><a href="yiq">YIQ</a> is the color space used by the NTSC color TV system. It contains the following channels:</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Y</td>
+<td><code>[0, 1]</code></td>
+<td>Luma</td>
+</tr>
+<tr>
+<td>I</td>
+<td><code>[-0.593, 0.593]</code></td>
+<td>In-phase (orange-blue axis)</td>
+</tr>
+<tr>
+<td>Q</td>
+<td><code>[-0.520, 0.520]</code></td>
+<td>Quadrature (green-purple axis)</td>
+</tr>
+</tbody>
+</table>
+<h2>Cubehelix</h2>
+<p><a href="https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/">The Cubehelix color scheme</a> was described by Dave Green in this paper:</p>
+<ul>
+<li>Green, D. A., 2011, <a href="http://astron-soc.in/bulletin/11June/289392011.pdf"><em>&quot;A colour scheme for the display of astronomical intensity images&quot;</em></a>, Bulletin of the Astronomical Society of India, 39, 289. (<a href="https://ui.adsabs.harvard.edu/#abs/2011BASI...39..289G">2011BASI...39..289G</a> at <a href="https://ui.adsabs.harvard.edu/">ADS</a>)</li>
+</ul>
+<p>It was expanded into a color space by <a href="https://en.wikipedia.org/wiki/Mike_Bostock">Mike Bostock</a> and <a href="https://www.jasondavies.com/">Jason Davies</a> in <a href="https://github.com/d3/d3-color">D3</a>.</p>
+<h3><code>cubehelix</code></h3>
+<p>The channels in the <code>cubehelix</code> color space maintain the conventions from D3, namely:</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue (Based on <em>start color</em> and <em>rotations</em> as defined in Green's paper)</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td><code>[0, 4.6143]</code></td>
+<td>Saturation (Called <em>hue</em> in op. cit.)</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 1]</code></td>
+<td>Lightness</td>
+</tr>
+</tbody>
+</table>
+
+	</article>
+	<footer>
+	Source code available on <a href='https://github.com/evercoder/culori'>GitHub</a>
+</footer>
+</body>
+</html>
