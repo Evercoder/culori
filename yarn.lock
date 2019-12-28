@@ -400,7 +400,7 @@ async@1.5.2:
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
 
-async@^2.5.0, async@^2.6.1:
+async@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
   dependencies:
@@ -872,6 +872,11 @@ commander@^2.18.0:
 commander@~2.17.1:
   version "2.17.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
+
+commander@~2.20.3:
+  version "2.20.3"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
+  integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -2088,20 +2093,10 @@ hamljs@^0.6.2:
   resolved "https://registry.yarnpkg.com/hamljs/-/hamljs-0.6.2.tgz#7b7116cf6dbe7278e42b3f6ef8725a33e177c8e3"
   integrity sha1-e3EWz22+cnjkKz9u+HJaM+F3yOM=
 
-handlebars@^4.0.11:
-  version "4.0.12"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.12.tgz#2c15c8a96d46da5e266700518ba8cb8d919d5bc5"
-  dependencies:
-    async "^2.5.0"
-    optimist "^0.6.1"
-    source-map "^0.6.1"
-  optionalDependencies:
-    uglify-js "^3.1.4"
-
-handlebars@^4.1.1:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.1.2.tgz#b6b37c1ced0306b221e094fc7aca3ec23b131b67"
-  integrity sha512-nvfrjqvt9xQ8Z/w0ijewdD/vvWDTOweBUm96NTr66Wfvo1mJenBLwcYmPs3TIBP5ruzYGD7Hx/DaM9RmhroGPw==
+handlebars@^4.0.11, handlebars@^4.1.1:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.5.3.tgz#5cf75bd8714f7605713511a56be7c349becb0482"
+  integrity sha512-3yPecJoJHK/4c6aZhSvxOyG4vJKDshV36VHp0iVCDVh7o9w2vwi3NSnL2MMPj3YdduqaBcu7cGbggJQM0br9xA==
   dependencies:
     neo-async "^2.6.0"
     optimist "^0.6.1"
@@ -3118,6 +3113,7 @@ minimist@^1.2.0, minimist@~1.2.0:
 minimist@~0.0.1:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
+  integrity sha1-3j+YVD2/lggr5IrRoMfNqDYwHc8=
 
 minipass@^2.2.1, minipass@^2.3.5:
   version "2.3.5"
@@ -3478,6 +3474,7 @@ opn@5.3.0:
 optimist@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
+  integrity sha1-2j6nRob6IaGaERwybpDrFaAZZoY=
   dependencies:
     minimist "~0.0.1"
     wordwrap "~0.0.2"
@@ -4690,6 +4687,7 @@ source-map@^0.5.0, source-map@^0.5.6, source-map@~0.5.1:
 source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
 sourcemap-codec@^1.4.1:
   version "1.4.1"
@@ -4737,7 +4735,7 @@ split-string@^3.0.1, split-string@^3.0.2:
 
 split@1.0.0:
   version "1.0.0"
-  resolved "http://registry.npmjs.org/split/-/split-1.0.0.tgz#c4395ce683abcd254bc28fe1dabb6e5c27dcffae"
+  resolved "https://registry.npmjs.org/split/-/split-1.0.0.tgz#c4395ce683abcd254bc28fe1dabb6e5c27dcffae"
   dependencies:
     through "2"
 
@@ -5151,10 +5149,11 @@ uglify-js@^2.6.1:
     uglify-to-browserify "~1.0.0"
 
 uglify-js@^3.1.4:
-  version "3.4.9"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.4.9.tgz#af02f180c1207d76432e473ed24a28f4a782bae3"
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.7.3.tgz#f918fce9182f466d5140f24bb0ff35c2d32dcc6a"
+  integrity sha512-7tINm46/3puUA4hCkKYo4Xdts+JDaVC9ZPRcG8Xw9R4nhO/gZgUM3TENq8IF4Vatk8qCig4MzP/c8G4u2BkVQg==
   dependencies:
-    commander "~2.17.1"
+    commander "~2.20.3"
     source-map "~0.6.1"
 
 uglify-to-browserify@~1.0.0:
@@ -5331,6 +5330,7 @@ wordwrap@0.0.2:
 wordwrap@~0.0.2:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
+  integrity sha1-o9XabNXAvAAI03I0u68b7WMFkQc=
 
 wordwrap@~1.0.0:
   version "1.0.0"
