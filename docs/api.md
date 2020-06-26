@@ -48,7 +48,7 @@ culori.parse('hsl(60 50% 10% / 100%)');
 // => { h: 60, s: 0.5, b: 0.1, alpha: 1, mode: 'hsl' }
 
 // Lab colors:
-culori.parse('lab(100 -50 50)');
+culori.parse('lab(100% -50 50)');
 // => { l: 100, a: -50, b: 50, mode: 'lab' }
 ```
 
@@ -126,11 +126,11 @@ Returns a function which you use to retreive a representation that's displayable
 
 ```js
 // RGB clamping
-culori.clamp('rgb')('lab(50 100 100)');
+culori.clamp('rgb')('lab(50% 100 100)');
 // => { mode: "lab", l: 54.29173376861782, a: 80.8124553179771, b: 69.88504032350531 }
 
 // LCh clamping
-culori.clamp('lch')('lab(50 100 100)');
+culori.clamp('lch')('lab(50% 100 100)');
 // =>  { mode: "lab", l:50.0000028101302, a: 63.11644430269186, b: 63.11642289997279 }
 ```
 
