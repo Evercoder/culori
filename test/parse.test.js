@@ -271,6 +271,12 @@ tape('lab()', function(test) {
 		'gray + alpha'
 	);
 
+	test.deepEqual(
+		parse('lab(50% -5 10)'),
+		{ l: 50, a: -5, b: 10, mode: 'lab' },
+		'lab with percentage'
+	);
+
 	test.end();
 });
 
@@ -285,6 +291,12 @@ tape('lch()', function(test) {
 		parse('lch(50 -3 240deg / 50%)'),
 		{ l: 50, c: 0, h: 240, alpha: 0.5, mode: 'lch' },
 		'lch negative c'
+	);
+
+	test.deepEqual(
+		parse('lch(50% 3 240)'),
+		{ l: 50, c: 3, h: 240, mode: 'lch' },
+		'lch with percentage'
 	);
 
 	test.end();
