@@ -18,8 +18,9 @@ table tr {
 	border-bottom: 1px solid #000;
 }
 
-table th, table td { 
-	text-align:left; 
+table th,
+table td {
+	text-align: left;
 	padding: 0.25em 0;
 }
 
@@ -42,9 +43,15 @@ footer {
 	border-top: 3px solid #eee;
 }
 
-code, kbd, samp, var {
+code,
+kbd,
+samp,
+var {
 	font-size: 0.9em;
-	font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+	font-family: Consolas, Menlo, Monaco, 'Andale Mono WT', 'Andale Mono',
+		'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono',
+		'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L',
+		'Courier New', Courier, monospace;
 	background: #dfe2f1;
 	color: #5e6687;
 	padding: 0.2em;
