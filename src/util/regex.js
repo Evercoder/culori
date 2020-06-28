@@ -66,14 +66,6 @@ const lch = new RegExp(
 	`^lch\\(\\s*${per_or_num}${s}${num}${s}${hue}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`
 );
 
-/*
-	gray() regular expressions.
-	Reference: https://drafts.csswg.org/css-color/#grays
- */
-const gray = new RegExp(
-	`^gray\\(\\s*${num}()()\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`
-);
-
 export {
 	rgb_num_old,
 	rgb_num_new,
@@ -84,6 +76,5 @@ export {
 	hex,
 	hwb,
 	lab,
-	lch,
-	gray
+	lch
 };

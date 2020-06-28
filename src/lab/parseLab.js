@@ -1,27 +1,21 @@
-import { lab, gray } from '../util/regex';
+import { lab } from '../util/regex';
 
 export default color => {
-	if (typeof color !== 'string') return undefined;
-
-	let match, res;
-
-	if (match = color.match(lab)) {
-		res = {
-			mode: 'lab',
-			l: +match[1],
-			a: +match[2],
-			b: +match[3]
-		};
-	} else if (match = color.match(gray)) {
-		res = {
-			mode: 'lab',
-			l: +match[1],
-			a: 0,
-			b: 0
-		}
-	} else {
+	if (typeof color !== 'string') {
 		return undefined;
 	}
+
+	let match = color.match(lab);
+	if (!match) {
+		return undefined;
+	}
+
+	let res = {
+		mode: 'lab',
+		l: +match[1],
+		a: +match[2],
+		b: +match[3]
+	};
 
 	if (match[4] !== undefined) {
 		res.alpha = match[4] / 100;

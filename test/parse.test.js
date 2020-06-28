@@ -1,7 +1,7 @@
 import tape from 'tape';
 import { parse } from '../src/index';
 
-tape('named colors', function(test) {
+tape('named colors', function (test) {
 	test.deepEqual(
 		parse('tomato'),
 		{ mode: 'rgb', r: 1, g: 0.38823529411764707, b: 0.2784313725490196 },
@@ -22,7 +22,7 @@ tape('named colors', function(test) {
 	test.end();
 });
 
-tape('hex colors', function(test) {
+tape('hex colors', function (test) {
 	test.deepEqual(
 		parse('#369'),
 		{ mode: 'rgb', r: 0.2, g: 0.4, b: 0.6 },
@@ -96,7 +96,7 @@ tape('hex colors', function(test) {
 	test.end();
 });
 
-tape('rgb', function(test) {
+tape('rgb', function (test) {
 	test.deepEqual(
 		parse('rgb(255, 0, 0)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
@@ -148,7 +148,7 @@ tape('rgb', function(test) {
 	test.end();
 });
 
-tape('hsl', function(test) {
+tape('hsl', function (test) {
 	test.deepEqual(
 		parse('hsl(0, 1, 0.5)'),
 		undefined,
@@ -224,7 +224,7 @@ tape('hsl', function(test) {
 	test.end();
 });
 
-tape('hwb', function(test) {
+tape('hwb', function (test) {
 	test.deepEqual(
 		parse('hwb(100 0% 0%)'),
 		{ h: 100, w: 0, b: 0, mode: 'hwb' },
@@ -246,7 +246,7 @@ tape('hwb', function(test) {
 	test.end();
 });
 
-tape('transparent', function(test) {
+tape('transparent', function (test) {
 	test.deepEqual(parse('transparent'), {
 		r: 0,
 		g: 0,
@@ -258,17 +258,11 @@ tape('transparent', function(test) {
 	test.end();
 });
 
-tape('lab()', function(test) {
+tape('lab()', function (test) {
 	test.deepEqual(
 		parse('lab(50 -5 10 / 50%)'),
 		{ l: 50, a: -5, b: 10, alpha: 0.5, mode: 'lab' },
 		'lab + alpha'
-	);
-
-	test.deepEqual(
-		parse('gray(50 / 50%)'),
-		{ l: 50, a: 0, b: 0, alpha: 0.5, mode: 'lab' },
-		'gray + alpha'
 	);
 
 	test.deepEqual(
@@ -280,7 +274,7 @@ tape('lab()', function(test) {
 	test.end();
 });
 
-tape('lch()', function(test) {
+tape('lch()', function (test) {
 	test.deepEqual(
 		parse('lch(50 3 240 / 50%)'),
 		{ l: 50, c: 3, h: 240, alpha: 0.5, mode: 'lch' },
