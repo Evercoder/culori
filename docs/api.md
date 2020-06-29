@@ -11,6 +11,8 @@ title: API Reference
 -   [Random colors](#random-colors)
 -   [Extending culori](#extending-culori)
 
+> Note: Doing arithmetics on colors will often result in floating-point values with lots of decimals. In the examples below, for brevity, the values are truncated to two decimals, with ellipses (`…`) subsituted for the rest.
+
 ## Color representation
 
 Culori does not have a _Color_ class. Instead, it uses plain objects to represent colors:
@@ -29,6 +31,8 @@ Culori does not have a _Color_ class. Instead, it uses plain objects to represen
 The object needs to have a `mode` property that identifies the color space, and values for each channel in that particular color space. See the [Color Spaces](./color-spaces) section for the channels expected of each color space. Optionally, the `alpha` property is used for the color's alpha channel.
 
 ## Basic methods
+
+### Parsing and conversion
 
 <a name="parse" href="#parse">#</a> culori.**parse**(_string_) → _color_ or _undefined_ [<>](https://github.com/evercoder/culori/blob/master/src/parse.js 'Source')
 
@@ -63,10 +67,10 @@ let rgb = culori.converter('rgb');
 let lab = culori.converter('lab');
 
 rgb('#f0f0f0');
-// => { mode: "rgb", r: 0.4980392156862745, g: 0.4980392156862745, b: 0.4980392156862745 }
+// => { mode: "rgb", r: 0.49…, g: 0.49…, b: 0.49… }
 
 lab('#f0f0f0');
-// => { mode: "lab", l: 94.79624582959184, a: 0 , b: 0 }"
+// => { mode: "lab", l: 94.79…, a: 0, b: 0 }
 ```
 
 Converters accept either strings (which will be parsed with `culori.parse` under the hood) or color objects. If the `mode` key is absent from the color, it's assumed to be in the converter's color space.
@@ -88,53 +92,62 @@ The available modes (color spaces) are listed below. For convenience, each color
 | `rgb`       | RGB color space            | culori.**rgb**(_color_)       |
 | `yiq`       | YIQ color space            | culori.**yiq**(_color_)       |
 
-<a name="formatter" href="#formatter">#</a> culori.**formatter**(_format = 'rgb'_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/formatter.js 'Source')
+### Formatting
 
-Returns a _formatter_: a function that can transform colors to a useful string representation.
+<a name="formatHex" href="#formatHex">#</a> culori.**formatHex**(_color_) → _String_ [Source](https://github.com/evercoder/culori/blob/master/src/formatter.js)
+
+Returns the hex string for a color. Example:
 
 ```js
-let hex = culori.formatter('hex');
-
-hex('red'); // ⇒ "#ff0000"
+culori.formatHex('red'); // ⇒ "#ff0000"
 ```
 
-Available formats:
+<a name="formatRgb" href="#formatRgb">#</a> culori.**formatRgb**(_color_) → _String_ [Source](https://github.com/evercoder/culori/blob/master/src/formatter.js)
 
-| Format | Description                                         |
-| ------ | --------------------------------------------------- |
-| `hex`  | Returns the hex string for a color                  |
-| `rgb`  | Returns the `rgb(…)` / `rgba(…)` string for a color |
+Returns the `rgb(…)` / `rgba(…)` string for a color.
 
 _Reference:_ [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value)
 
+### Clamping
+
+Some color spaces (Lab and LCh in particular) allow you to express colors that can't be displayed on-screen. The methods below allow you to identify when that's the case and to produce displayable versions of the colors.
+
 <a name="displayable" href="#displayable">#</a> culori.**displayable**(_color_ or _String_) [<>](https://github.com/evercoder/culori/blob/master/src/displayable.js 'Source')
 
-Some color spaces (Lab and LCh in particular) allow you to express colors that can't be displayed on-screen. This function checks whether a particular color fits inside the sRGB gamut — i.e. its `r`, `g`, and `b` channels are all in the interval `[0, 1]`.
+Checks whether a particular color fits inside the sRGB gamut, by verifying that the `r`, `g`, and `b` channels are all in the interval `[0, 1]`.
 
 ```js
 culori.displayable('red'); // ⇒ true
 culori.displayable('rgb(300 255 255)'); // ⇒ false
 ```
 
-<a name="clamp" href="#clamp">#</a> culori.**clamp**(_method = 'rgb'_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/clamp.js 'Source')
+<a name="clampRgb" href="#clampRgb">#</a> culori.**clampRgb**(_color_) → _color_ [<>](https://github.com/evercoder/culori/blob/master/src/clamp.js 'Source')
 
-Returns a function which you use to retreive a representation that's displayable on the screen for any color. There are two available methods to squeeze the color into the displayable sRGB gamut:
+Obtains a displayable version of the color by clamping the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`. The returned color is in the same color space as the original color.
 
-`method = 'rgb'` clamps the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`.
+This is the faster, simpler, way to make a color displayable. It's what browsers do when you use a CSS color whose channels exceed the gamut. For example, `rgb(300 100 200)` is interpreted as `rgb(255 100 200)`.
 
-`method = 'lch'` converts the color to LCh and finds the largest Chroma value that's displayable for the given Lightness and Hue; if not even the achromatic version (Chroma = 0) of the LCh color is displayable, it falls back to the `rgb` method.
+Because clamping individual red, green, and blue values independently can alter their proportions in the final color, it often changes the color's hue.
 
 ```js
 // RGB clamping
-culori.clamp('rgb')('lab(50% 100 100)');
-// => { mode: "lab", l: 54.29173376861782, a: 80.8124553179771, b: 69.88504032350531 }
-
-// LCh clamping
-culori.clamp('lch')('lab(50% 100 100)');
-// =>  { mode: "lab", l:50.0000028101302, a: 63.11644430269186, b: 63.11642289997279 }
+culori.clampRgb('lab(50% 100 100)');
+// => { mode: "lab", l: 54.29…, a: 80.81…, b: 69.88… }
 ```
 
-The clamped color will always be returned in the original color space.
+<a name="clampChroma" href="#clampChroma">#</a> culori.**clampChroma**(_color_) → _color_ [<>](https://github.com/evercoder/culori/blob/master/src/clamp.js 'Source')
+
+Obtains a displayable version of the color by converting it to the `lch` color space, and trying to find the largest Chroma value that's displayable for the given Lightness and Hue. Compared to `clampRgb`, the function has the advantage of preserving the hue of the original color. The returned color is converted back to the original color space.
+
+If the chroma-finding algorithm fails to find a displayable color (which can happen when not even the achromatic version, with `Chroma = 0`, is displayable), the method falls back to the `clampRgb` method, as a last resort.
+
+The function uses [the bisection method](https://en.wikipedia.org/wiki/Bisection_method) to speed up the search for the largest Chroma value. However, due to discontinuities in the CIELCh color space, the function is not guaranteed to return the optimal result. [See this discussion](https://github.com/d3/d3-color/issues/33) for details.
+
+```js
+// LCh clamping
+culori.clamp('lch')('lab(50% 100 100)');
+// =>  { mode: "lab", l:50.00…, a: 63.11…, b: 63.11… }
+```
 
 <a name="round" href="#round">#</a> culori.**round**(_n = 8_) [<>](https://github.com/evercoder/culori/blob/master/src/round.js 'Source')
 
@@ -436,7 +449,7 @@ culori.blend(
 	['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'],
 	'screen'
 );
-// => { mode: 'rgb', alpha: 0.875, r: 0.57..., g: 0.57..., b:0.57... }
+// => { mode: 'rgb', alpha: 0.875, r: 0.57…, g: 0.57…, b:0.57… }
 ```
 
 In addition to strings, the _type_ parameter supports a _function (b, s) → v_ that takes the values of the _backdrop_ and _source_ color to return the blended value. This allows you to write your own (separable) blending functions. For example, an _average_ blending mode:

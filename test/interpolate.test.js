@@ -1,25 +1,23 @@
 import tape from 'tape';
-import { interpolate, formatter, rgb, samples } from '../src/index';
+import { interpolate, formatHex, rgb, samples } from '../src/index';
 
-let hex = formatter('hex');
-
-tape('interpolate between black and white in RGB', function(test) {
+tape('interpolate between black and white in RGB', function (test) {
 	let grays = interpolate(['#fff', '#000']);
-	test.equal(hex(grays(0.0)), '#ffffff');
-	test.equal(hex(grays(0.1)), '#e6e6e6');
-	test.equal(hex(grays(0.2)), '#cccccc');
-	test.equal(hex(grays(0.3)), '#b3b3b3');
-	test.equal(hex(grays(0.4)), '#999999');
-	test.equal(hex(grays(0.5)), '#808080');
-	test.equal(hex(grays(0.6)), '#666666');
-	test.equal(hex(grays(0.7)), '#4d4d4d');
-	test.equal(hex(grays(0.8)), '#333333');
-	test.equal(hex(grays(0.9)), '#191919');
-	test.equal(hex(grays(1.0)), '#000000');
+	test.equal(formatHex(grays(0.0)), '#ffffff');
+	test.equal(formatHex(grays(0.1)), '#e6e6e6');
+	test.equal(formatHex(grays(0.2)), '#cccccc');
+	test.equal(formatHex(grays(0.3)), '#b3b3b3');
+	test.equal(formatHex(grays(0.4)), '#999999');
+	test.equal(formatHex(grays(0.5)), '#808080');
+	test.equal(formatHex(grays(0.6)), '#666666');
+	test.equal(formatHex(grays(0.7)), '#4d4d4d');
+	test.equal(formatHex(grays(0.8)), '#333333');
+	test.equal(formatHex(grays(0.9)), '#191919');
+	test.equal(formatHex(grays(1.0)), '#000000');
 	test.end();
 });
 
-tape('interpolate between black and white in RGBA', function(test) {
+tape('interpolate between black and white in RGBA', function (test) {
 	let grays = interpolate(['#ffff', '#0000']);
 	test.deepEqual(rgb(grays(0.0)), {
 		r: 1,
@@ -101,7 +99,7 @@ tape('interpolate between black and white in RGBA', function(test) {
 	test.end();
 });
 
-tape('interpolate between black and white in RGB/RGBA', function(test) {
+tape('interpolate between black and white in RGB/RGBA', function (test) {
 	let grays = interpolate(['#fff', '#0000']);
 	test.deepEqual(rgb(grays(0.0)), {
 		r: 1,
@@ -182,11 +180,11 @@ tape('interpolate between black and white in RGB/RGBA', function(test) {
 	test.end();
 });
 
-tape('bug checking', function(test) {
+tape('bug checking', function (test) {
 	test.deepEqual(
 		samples(4)
 			.map(interpolate(['blue', 'white'], 'hsv'))
-			.map(hex),
+			.map(formatHex),
 		['#0000ff', '#5555ff', '#aaaaff', '#ffffff']
 	);
 	test.end();

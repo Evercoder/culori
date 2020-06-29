@@ -57,7 +57,7 @@ export {
 	yiq
 };
 
-export { default as formatter } from './formatter';
+export { formatter, formatHex, formatRgb } from './formatter';
 export { default as round } from './round';
 export { default as interpolate } from './interpolate/interpolate';
 export { default as interpolateHue } from './interpolate/hue';
@@ -66,16 +66,12 @@ export { default as interpolateAlpha } from './interpolate/alpha';
 export { default as interpolateLinear } from './interpolate/linear';
 export { default as interpolateCosine } from './interpolate/cosine';
 export { default as interpolateSplineBasis } from './interpolate/splineBasis';
-export {
-	default as interpolateSplineNatural
-} from './interpolate/splineNatural';
-export {
-	default as interpolateSplineMonotone
-} from './interpolate/splineMonotone';
+export { default as interpolateSplineNatural } from './interpolate/splineNatural';
+export { default as interpolateSplineMonotone } from './interpolate/splineMonotone';
 
 export { default as samples } from './samples';
 export { default as displayable } from './displayable';
-export { default as clamp } from './clamp';
+export { clamp, clampRgb, clampChroma } from './clamp';
 export { default as nearest } from './nearest';
 export { getModeDefinition } from './modes';
 export { default as parse } from './parse';

@@ -9,21 +9,20 @@ const prepare = color =>
 	color === undefined
 		? undefined
 		: typeof color !== 'object'
-			? parse(color)
-			: color.mode === undefined
-				? undefined
-				: color;
+		? parse(color)
+		: color.mode === undefined
+		? undefined
+		: color;
 
-const clamp_value = v => Math.max(0, Math.min(v, 1));
-const clamp_rgb = color => {
+const fixup_rgb = color => {
 	let c = rgb(color);
-	c.r = clamp_value(c.r);
-	c.g = clamp_value(c.g);
-	c.b = clamp_value(c.b);
+	c.r = Math.max(0, Math.min(c.r, 1));
+	c.g = Math.max(0, Math.min(c.g, 1));
+	c.b = Math.max(0, Math.min(c.b, 1));
 	return c;
 };
 
-export default (method = 'rgb') => color => {
+const clampRgb = color => {
 	color = prepare(color);
 
 	// if the color is undefined or displayable, return it directly
@@ -32,9 +31,17 @@ export default (method = 'rgb') => color => {
 	// keep track of color's original mode
 	let conv = converter(color.mode);
 
-	if (method === 'rgb') {
-		return conv(clamp_rgb(color));
-	}
+	return conv(fixup_rgb(color));
+};
+
+const clampChroma = color => {
+	color = prepare(color);
+
+	// if the color is undefined or displayable, return it directly
+	if (color === undefined || displayable(color)) return color;
+
+	// keep track of color's original mode
+	let conv = converter(color.mode);
 
 	// convert to LCh for clamping
 	color = lch(color);
@@ -45,7 +52,7 @@ export default (method = 'rgb') => color => {
 	// if not even chroma = 0 is displayable
 	// fall back to RGB clamping
 	if (!displayable(clamped)) {
-		return conv(clamp_rgb(clamped));
+		return conv(fixup_rgb(color));
 	}
 
 	// By this time we know chroma = 0 is displayable and our current chroma is not.
@@ -65,3 +72,17 @@ export default (method = 'rgb') => color => {
 
 	return conv(clamped);
 };
+
+const clamp = (method = 'rgb') => {
+	console.warn(
+		'culori.clamp() is deprecated and will be removed from the 1.x release.'
+	);
+	switch (method) {
+		case 'rgb':
+			return clampRgb;
+		case 'lch':
+			return clampChroma;
+	}
+};
+
+export { clampRgb, clampChroma, clamp };

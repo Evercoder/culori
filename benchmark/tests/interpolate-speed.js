@@ -18,19 +18,16 @@ benchmark('culori: #fff -> #000 in RGB', () => {
 		culori
 			.samples(count)
 			.map(culori.interpolate(['#fff', '#000']))
-			.map(culori.formatter('hex'));
+			.map(culori.formatHex);
 	}
 });
 
 let interpolator = culori.interpolate(['#fff', '#000']);
-let hex = culori.formatter('hex');
+let hex = culori.formatHex;
 
 benchmark('culori: #fff -> #000 in RGB (cached)', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori
-			.samples(count)
-			.map(interpolator)
-			.map(hex);
+		culori.samples(count).map(interpolator).map(hex);
 	}
 });
 
@@ -70,20 +67,14 @@ let colors = ['red', 'white', 'green', 'blue', 'black', 'fuchsia', 'cyan'];
 
 benchmark('culori: multiple colors in RGB', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori
-			.samples(count)
-			.map(culori.interpolate(colors))
-			.map(hex);
+		culori.samples(count).map(culori.interpolate(colors)).map(hex);
 	}
 });
 
 benchmark('culori: multiple colors in RGB (cached)', () => {
 	let lerp = culori.interpolate(colors);
 	for (var i = 0; i < iterations; i++) {
-		culori
-			.samples(count)
-			.map(lerp)
-			.map(hex);
+		culori.samples(count).map(lerp).map(hex);
 	}
 });
 

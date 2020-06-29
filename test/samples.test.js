@@ -1,13 +1,11 @@
 import tape from 'tape';
-import { interpolate, samples, formatter } from '../src/index';
+import { interpolate, samples, formatHex } from '../src/index';
 
-let hex = formatter('hex');
-
-tape('11 swatches between black and white in RGB', function(test) {
+tape('11 swatches between black and white in RGB', function (test) {
 	test.deepEqual(
 		samples(11)
 			.map(interpolate(['#fff', '#000']))
-			.map(hex),
+			.map(formatHex),
 		[
 			'#ffffff',
 			'#e6e6e6',
@@ -26,11 +24,11 @@ tape('11 swatches between black and white in RGB', function(test) {
 	test.end();
 });
 
-tape('11 swatches between black and white in Lab', function(test) {
+tape('11 swatches between black and white in Lab', function (test) {
 	test.deepEqual(
 		samples(11)
 			.map(interpolate(['#fff', '#000'], 'lab'))
-			.map(hex),
+			.map(formatHex),
 		[
 			'#ffffff',
 			'#e2e2e2',
@@ -49,11 +47,11 @@ tape('11 swatches between black and white in Lab', function(test) {
 	test.end();
 });
 
-tape('11 swatches between black and white in Lch', function(test) {
+tape('11 swatches between black and white in Lch', function (test) {
 	test.deepEqual(
 		samples(11)
 			.map(interpolate(['#fff', '#000'], 'lch'))
-			.map(hex),
+			.map(formatHex),
 		[
 			'#ffffff',
 			'#e2e2e2',
@@ -72,11 +70,11 @@ tape('11 swatches between black and white in Lch', function(test) {
 	test.end();
 });
 
-tape('11 swatches between black and white in DIN99o', function(test) {
+tape('11 swatches between black and white in DIN99o', function (test) {
 	test.deepEqual(
 		samples(11)
 			.map(interpolate(['#fff', '#000'], 'dlab'))
-			.map(hex),
+			.map(formatHex),
 		[
 			'#ffffff',
 			'#dedede',
@@ -93,7 +91,7 @@ tape('11 swatches between black and white in DIN99o', function(test) {
 	);
 
 	// test.deepEqual(
-	// 	samples(11).map(interpolate(['red', 'white'], 'dlch')).map(hex),
+	// 	samples(11).map(interpolate(['red', 'white'], 'dlch')).map(formatHex),
 	// 	[]
 	// )
 
@@ -115,7 +113,7 @@ tape('11 swatches between black and white in DIN99o', function(test) {
 // 	})
 
 // 	test.deepEqual(
-// 		samples(10).map(interpolate([start, end], 'cubehelix')).map(hex),
+// 		samples(10).map(interpolate([start, end], 'cubehelix')).map(formatHex),
 // 		['#000000', '#1a1935', '#15474e', '#2b6f39', '#767b33', '#c17a6f', '#d490c6', '#c3c0f2', '#ceebef', '#ffffff']
 // 	)
 

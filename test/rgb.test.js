@@ -1,8 +1,8 @@
 import tape from 'tape';
-import { rgb, formatter } from '../src/index';
+import { rgb, formatHex } from '../src/index';
 
-tape('rgb(Specifier)', function(test) {
-	test.deepEqual(formatter('hex')(rgb('#ffffff')), '#ffffff');
+tape('rgb(Specifier)', function (test) {
+	test.deepEqual(formatHex(rgb('#ffffff')), '#ffffff');
 
 	test.deepEqual(
 		rgb('tomato'),
@@ -37,7 +37,7 @@ tape('rgb(Specifier)', function(test) {
 	test.end();
 });
 
-tape('rgb(Object)', function(test) {
+tape('rgb(Object)', function (test) {
 	test.deepEqual(
 		rgb({ r: 1, g: 0, b: 0 }),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
