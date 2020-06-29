@@ -96,7 +96,7 @@ The available modes (color spaces) are listed below. For convenience, each color
 
 <a name="formatHex" href="#formatHex">#</a> culori.**formatHex**(_color_) → _String_ [Source](https://github.com/evercoder/culori/blob/master/src/formatter.js)
 
-Returns the hex string for a color. The color's `alpha` channel is omitted, and the red, green, and blue channels are clamped to the bounds of sRGB. Colors that are not displayable are, therefore, serialized as if they'd been passed through the `clampRgb` method.
+Returns the hex string for a color. The color's `alpha` channel is omitted, and the red, green, and blue channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
 
 ```js
 culori.formatHex('red'); // ⇒ "#ff0000"
@@ -104,9 +104,7 @@ culori.formatHex('red'); // ⇒ "#ff0000"
 
 <a name="formatRgb" href="#formatRgb">#</a> culori.**formatRgb**(_color_) → _String_ [Source](https://github.com/evercoder/culori/blob/master/src/formatter.js)
 
-Returns the `rgb(…)` / `rgba(…)` string for a color. Fully opaque colors will be serialized as `rgb()`, and semi-transparent colors as `rgba()`. Like in the case of `formatHex`, the red, green, and blue channels are clamped to the bounds of sRGB.
-
-_Reference:_ [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value)
+Returns the `rgb(…)` / `rgba(…)` string for a color. Fully opaque colors will be serialized as `rgb()`, and semi-transparent colors as `rgba()`, in accordance with the [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value). Like in the case of `formatHex`, the red, green, and blue channels are clamped to the interval `[0, 255]`.
 
 ### Clamping
 

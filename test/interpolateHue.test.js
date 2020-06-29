@@ -1,7 +1,7 @@
 import tape from 'tape';
-import { interpolateHue, formatter } from '../src/index';
+import { interpolateHue } from '../src/index';
 
-tape('interpolate/hue', function(test) {
+tape('interpolate/hue', function (test) {
 	test.deepEqual(interpolateHue([0, 360]), [0, 0], '[0, 360]');
 
 	test.deepEqual(interpolateHue([360, 0]), [0, 0], '[360, 0]');

@@ -1,7 +1,6 @@
 import converter from '../converter';
 import { getModeDefinition } from '../modes';
 import normalizePositions from '../util/normalizePositions';
-import samples from '../samples';
 import easingMidpoint from '../easing/midpoint';
 
 export default (colors, mode = 'rgb', interpolations) => {
@@ -89,7 +88,5 @@ export default (colors, mode = 'rgb', interpolations) => {
 			},
 			{ mode }
 		);
-
-		return res;
 	};
 };
