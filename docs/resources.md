@@ -19,10 +19,17 @@ These projects add more functionality to culori, but they're separate as to keep
 
 ## Other projects
 
-Besides [d3-color](https://github.com/d3/d3-color) and [chroma.js](https://github.com/gka/chroma.js), some other popular libraries you may want to look at:
+Besides [d3-color](https://github.com/d3/d3-color) and [chroma.js](https://github.com/gka/chroma.js), some other popular JavaScript color libraries you may want to look at:
 
 -   [TinyColor](https://github.com/bgrins/TinyColor) by [Brian Grinstead](http://briangrinstead.com)
 -   [color](https://github.com/Qix-/color) by Heather Arthur
 -   [color.js](https://github.com/brehaut/color-js) by Andrew Brehaut et al
 -   [chromatist](https://github.com/jrus/chromatist) by [Jacob Rus](http://www.hcs.harvard.edu/~jrus/)
--   [gradstop.js](https://github.com/Siddharth11/gradstop) by [Siddharth Parmar](https://github.com/Siddharth11)
+
+*   [graypegg/chromatism](https://github.com/graypegg/chromatism)
+
+And in other languages:
+
+-   [Colour](https://www.colour-science.org/) for Python
+-   [the `colorspace` package](http://colorspace.r-forge.r-project.org/) for R
+-   [the `Colors` package](https://github.com/JuliaGraphics/Colors.jl) for Julia
