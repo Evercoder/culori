@@ -94,3 +94,5 @@ export { default as easingSmoothstep } from './easing/smoothstep';
 export { default as easingSmootherstep } from './easing/smootherstep';
 
 export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
+
+export { deficiencyProt, deficiencyDeuter, deficiencyTrit } from './deficiency';

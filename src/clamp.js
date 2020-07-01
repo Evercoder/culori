@@ -1,18 +1,9 @@
 import converter from './converter';
 import displayable from './displayable';
-import parse from './parse';
+import prepare from './_prepare';
 
 let lch = converter('lch');
 let rgb = converter('rgb');
-
-const prepare = color =>
-	color === undefined
-		? undefined
-		: typeof color !== 'object'
-		? parse(color)
-		: color.mode === undefined
-		? undefined
-		: color;
 
 const fixup_rgb = color => {
 	let c = rgb(color);

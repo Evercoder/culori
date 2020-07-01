@@ -3,16 +3,6 @@ layout: layouts/default
 title: API Reference
 ---
 
--   [Color representation](#color-representation)
--   [Basics methods](#basic-methods)
--   [Interpolation](#interpolation)
--   [Difference](#difference)
--   [Blending](#blending)
--   [Random colors](#random-colors)
--   [Extending culori](#extending-culori)
-
-> Note: Doing arithmetics on colors will often result in floating-point values with lots of decimals. In the examples below, for brevity, the values are truncated to two decimals, with ellipses (`…`) subsituted for the rest.
-
 ## Color representation
 
 Culori does not have a _Color_ class. Instead, it uses plain objects to represent colors:
@@ -29,6 +19,8 @@ Culori does not have a _Color_ class. Instead, it uses plain objects to represen
 ```
 
 The object needs to have a `mode` property that identifies the color space, and values for each channel in that particular color space. See the [Color Spaces](./color-spaces) section for the channels expected of each color space. Optionally, the `alpha` property is used for the color's alpha channel.
+
+> Note: Doing arithmetics on colors will often result in floating-point values with lots of decimals. In the examples below, for brevity, the values are truncated to two decimals, with ellipses (`…`) subsituted for the rest.
 
 ## Basic methods
 
@@ -505,6 +497,37 @@ Computes the relative luminance of a color.
 <a name="culoriWcagContrast" href="#culoriWcagContrast">#</a> culori.**wcagContrast**(_colorA_, _colorB_) [<>](https://github.com/evercoder/culori/blob/master/src/wcag.js 'Source')
 
 Computes the contrast between two colors.
+
+## Color vision deficiency (CVD) simulation
+
+Simulate how a color may be perceived by people with color vision deficiencies (CVD).
+
+<a name="culoriDeficiencyProt" href="#culoriDeficiencyProt">#</a> culori.**deficiencyProt**(_severity = 1_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/deficiency.js 'Source')
+
+Simulate protanomaly and protanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to protanopia.
+
+<a name="culoriDeficiencyDeuter" href="#culoriDeficiencyDeuter">#</a> culori.**deficiencyDeuter**(_severity = 1_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/deficiency.js 'Source')
+
+Simulate deuteranomaly and deuteranopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to deuteranopia.
+
+<a name="culoriDeficiencyTrit" href="#culoriDeficiencyTrit">#</a> culori.**deficiencyTrit**(_severity = 1_) → _function (color)_ [<>](https://github.com/evercoder/culori/blob/master/src/deficiency.js 'Source')
+
+Simuate tritanomaly and tritanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to tritanopia.
+
+Examples:
+
+```js
+samples(5)
+	.map(interpolate(['red', 'green', 'blue']))
+	.map(deficiencyProt(0.5))
+	.map(formatHex);
+
+// => ["#751800", "#664200", "#576c00", "#1a3e82", "#0010ff"];
+```
+
+Based on the work of Machado, Oliveira and Fernandes (2009), using [precomputed matrices](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html) provided by the authors. References thanks to the [`colorspace` package for R](http://colorspace.r-forge.r-project.org/reference/simulate_cvd.html).
+
+> G. M. Machado, M. M. Oliveira and L. A. F. Fernandes, _"A Physiologically-based Model for Simulation of Color Vision Deficiency,"_ in IEEE Transactions on Visualization and Computer Graphics, vol. 15, no. 6, pp. 1291-1298, Nov.-Dec. 2009, [doi: 10.1109/TVCG.2009.113](https://doi.ieeecomputersociety.org/10.1109/TVCG.2009.113).
 
 ## Extending culori
 
