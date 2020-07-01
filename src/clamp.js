@@ -64,10 +64,8 @@ const clampChroma = color => {
 	return conv(clamped);
 };
 
+// Deprecated / no longer documented
 const clamp = (method = 'rgb') => {
-	console.warn(
-		'culori.clamp() is deprecated and will be removed from the 1.x release.'
-	);
 	switch (method) {
 		case 'rgb':
 			return clampRgb;

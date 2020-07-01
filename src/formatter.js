@@ -39,10 +39,8 @@ const formatRgb = c => {
 	}
 };
 
+// Deprecated / no longer documented
 const formatter = (format = 'rgb') => {
-	console.warn(
-		'culori.formatter() is deprecated and will be removed from the 1.x version. Use individual formatters instead.'
-	);
 	switch (format) {
 		case 'rgb':
 			return formatRgb;
