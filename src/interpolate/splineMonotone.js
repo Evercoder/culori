@@ -37,8 +37,8 @@ const monotone = (y_im1, y_i, y_ip1, y_ip2, h, t) => {
 		min(abs(s_i), abs(s_ip1), 0.5 * abs((y_ip2 - y_i) / (2 * h)));
 
 	return (
-		((yp_i + yp_ip1 - 2 * si) / h2) * t3 +
-		((3 * si - 2 * yp_i - yp_ip1) / h) * t2 +
+		((yp_i + yp_ip1 - 2 * s_i) / h2) * t3 +
+		((3 * s_i - 2 * yp_i - yp_ip1) / h) * t2 +
 		yp_i * t +
 		y_i
 	);
