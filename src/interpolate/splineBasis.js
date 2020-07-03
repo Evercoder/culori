@@ -1,7 +1,6 @@
 import identity from '../util/identity';
 
 /*
-
 	Basis spline
 	------------
 
