@@ -67,7 +67,12 @@ export { default as interpolateLinear } from './interpolate/linear';
 export { default as interpolateCosine } from './interpolate/cosine';
 export { default as interpolateSplineBasis } from './interpolate/splineBasis';
 export { default as interpolateSplineNatural } from './interpolate/splineNatural';
-export { default as interpolateSplineMonotone } from './interpolate/splineMonotone';
+export {
+	splineMonotone as interpolateSplineMonotone,
+	splineMonotoneClamped as interpolateSplineMonotoneClamped,
+	splineMonotoneClosed as interpolateSplineMonotoneClosed,
+	splineMonotoneOpen as interpolateSplineMonotoneOpen
+} from './interpolate/splineMonotone';
 
 export { default as samples } from './samples';
 export { default as displayable } from './displayable';
