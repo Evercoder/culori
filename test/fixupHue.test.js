@@ -13,8 +13,14 @@ tape('fixupHueShorter', t => {
 });
 
 tape('fixupHueLonger', t => {
-	let hues = [0, 340, 30, 0, 170];
-	t.deepEqual(fixupHueLonger(hues), [0, 340, 30, 360, 170]);
+	t.deepEqual(fixupHueLonger([0, 340, 30, 0, 170]), [0, 340, 30, 360, 170]);
+
+	t.deepEqual(
+		fixupHueLonger([0, 179, 179, 360]),
+		[0, -181, -181, 0],
+		'equal consecutive values'
+	);
+
 	t.end();
 });
 

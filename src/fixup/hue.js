@@ -1,43 +1,32 @@
 import normalizeHue from '../util/normalizeHue';
 
-const hue = (arr, fn) => {
-	let res = [];
-	for (let i = 0; i < arr.length; i++) {
-		// use undefined values as-is
-		if (arr[i] === undefined) {
-			res.push(undefined);
-			continue;
-		}
-
-		let curr = normalizeHue(arr[i]);
-		let prev = res[res.length - 1];
-
-		if (prev === undefined) {
-			res.push(curr);
-			continue;
-		}
-
-		res.push(fn(curr, prev));
-	}
-	return res;
+const hue = (hues, fn) => {
+	return hues
+		.map((hue, idx, arr) => {
+			if (hue === undefined) {
+				return hue;
+			}
+			let normalized = normalizeHue(hue);
+			if (idx === 0 || hues[idx - 1] === undefined) {
+				return normalized;
+			}
+			return fn(normalized - arr[idx - 1]);
+		})
+		.reduce((acc, curr) => {
+			if (!acc.length || acc[acc.length - 1] === undefined) {
+				acc.push(curr);
+				return acc;
+			}
+			acc.push(curr + acc[acc.length - 1]);
+			return acc;
+		}, []);
 };
 
 const hueShorter = arr =>
-	hue(arr, (c, p) =>
-		Math.abs(c - p) <= 180 ? c : c - 360 * Math.sign(c - p)
-	);
+	hue(arr, d => (Math.abs(d) <= 180 ? d : d - 360 * Math.sign(d)));
 const hueLonger = arr =>
-	hue(arr, (c, p) =>
-		Math.abs(c - p) >= 180 || c === p ? c : c - 360 * Math.sign(c - p)
-	);
-
-const hueIncreasing = arr =>
-	hue(arr, (c, p) =>
-		c >= p ? c : c + 360 * (1 + Math.floor(Math.abs(p - c) / 360))
-	);
-const hueDecreasing = arr =>
-	hue(arr, (c, p) =>
-		c <= p ? c : c - 360 * (1 + Math.floor(Math.abs(c - p) / 360))
-	);
+	hue(arr, d => (Math.abs(d) >= 180 || d === 0 ? d : d - 360 * Math.sign(d)));
+const hueIncreasing = arr => hue(arr, d => (d >= 0 ? d : d + 360));
+const hueDecreasing = arr => hue(arr, d => (d <= 0 ? d : d - 360));
 
 export { hueShorter, hueLonger, hueIncreasing, hueDecreasing };
