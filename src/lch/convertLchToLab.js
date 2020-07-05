@@ -7,9 +7,9 @@ export default ({ l, c, h, alpha }) => {
 	let res = {
 		mode: 'lab',
 		l: l,
-		a: c === 0 ? 0 : c * Math.cos( h / 180 * Math.PI ),
-		b: c === 0 ? 0 : c * Math.sin( h / 180 * Math.PI )
-	}
+		a: c ? c * Math.cos((h / 180) * Math.PI) : 0,
+		b: c ? c * Math.sin((h / 180) * Math.PI) : 0
+	};
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
