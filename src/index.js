@@ -96,3 +96,10 @@ export { default as easingSmootherstep } from './easing/smootherstep';
 export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
 
 export { deficiencyProt, deficiencyDeuter, deficiencyTrit } from './deficiency';
+
+export {
+	hueShorter as fixupHueShorter,
+	hueLonger as fixupHueLonger,
+	hueIncreasing as fixupHueIncreasing,
+	hueDecreasing as fixupHueDecreasing
+} from './fixup/hue';
