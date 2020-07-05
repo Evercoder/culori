@@ -31,7 +31,13 @@ const hueLonger = arr =>
 		Math.abs(c - p) >= 180 || c === p ? c : c - 360 * Math.sign(c - p)
 	);
 
-const hueIncreasing = arr => hue(arr, (c, p) => (c >= p ? c : 360 - c + p));
-const hueDecreasing = arr => hue(arr, (c, p) => (c <= p ? c : 2 * c - p - 360));
+const hueIncreasing = arr =>
+	hue(arr, (c, p) =>
+		c >= p ? c : c + 360 * (1 + Math.floor(Math.abs(p - c) / 360))
+	);
+const hueDecreasing = arr =>
+	hue(arr, (c, p) =>
+		c <= p ? c : c - 360 * (1 + Math.floor(Math.abs(c - p) / 360))
+	);
 
 export { hueShorter, hueLonger, hueIncreasing, hueDecreasing };

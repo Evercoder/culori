@@ -14,18 +14,18 @@ tape('fixupHueShorter', t => {
 
 tape('fixupHueLonger', t => {
 	let hues = [0, 340, 30, 0, 170];
-	t.deepEqual(fixupHueLonger(hues), [0, 340, 30, 360, 190]);
+	t.deepEqual(fixupHueLonger(hues), [0, 340, 30, 360, 170]);
 	t.end();
 });
 
 tape('fixupHueIncreasing', t => {
 	let hues = [0, 340, 30, 0, 170];
-	t.deepEqual(fixupHueIncreasing(hues), [0, 340, 670, 1030, 1220]);
+	t.deepEqual(fixupHueIncreasing(hues), [0, 340, 390, 720, 890]);
 	t.end();
 });
 
 tape('fixupHueDecreasing', t => {
 	let hues = [0, 340, 30, 0, 170];
-	t.deepEqual(fixupHueDecreasing(hues), [0, -20]);
+	t.deepEqual(fixupHueDecreasing(hues), [0, -20, -330, -360, -550]);
 	t.end();
 });
