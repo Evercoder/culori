@@ -60,7 +60,6 @@ export {
 export { formatter, formatHex, formatRgb } from './formatter';
 export { default as round } from './round';
 export { default as interpolate } from './interpolate/interpolate';
-export { default as interpolateHue } from './interpolate/hue';
 export { default as interpolateAlpha } from './interpolate/alpha';
 
 export { default as interpolateLinear } from './interpolate/linear';
@@ -98,8 +97,10 @@ export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
 export { deficiencyProt, deficiencyDeuter, deficiencyTrit } from './deficiency';
 
 export {
-	hueShorter as fixupHueShorter,
-	hueLonger as fixupHueLonger,
-	hueIncreasing as fixupHueIncreasing,
-	hueDecreasing as fixupHueDecreasing
+	// backwads compatibility
+	fixupHueShorter as interpolateHue,
+	fixupHueShorter,
+	fixupHueLonger,
+	fixupHueIncreasing,
+	fixupHueDecreasing
 } from './fixup/hue';

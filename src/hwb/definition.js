@@ -1,7 +1,7 @@
 import convertHwbToRgb from './convertHwbToRgb';
 import convertRgbToHwb from './convertRgbToHwb';
 import parseHwb from './parseHwb';
-import interpolateHue from '../interpolate/hue';
+import { fixupHueShorter } from '../fixup/hue';
 import interpolateAlpha from '../interpolate/alpha';
 import interpolateLinear from '../interpolate/linear';
 
@@ -19,7 +19,7 @@ export default {
 	},
 	parsers: [parseHwb],
 	interpolate: {
-		h: interpolateLinear(interpolateHue),
+		h: interpolateLinear(fixupHueShorter),
 		w: interpolateLinear(),
 		b: interpolateLinear(),
 		alpha: interpolateLinear(interpolateAlpha)

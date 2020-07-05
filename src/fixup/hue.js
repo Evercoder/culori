@@ -26,11 +26,16 @@ const hue = (hues, fn) => {
 		}, []);
 };
 
-const hueShorter = arr =>
+const fixupHueShorter = arr =>
 	hue(arr, d => (Math.abs(d) <= 180 ? d : d - 360 * Math.sign(d)));
-const hueLonger = arr =>
+const fixupHueLonger = arr =>
 	hue(arr, d => (Math.abs(d) >= 180 || d === 0 ? d : d - 360 * Math.sign(d)));
-const hueIncreasing = arr => hue(arr, d => (d >= 0 ? d : d + 360));
-const hueDecreasing = arr => hue(arr, d => (d <= 0 ? d : d - 360));
+const fixupHueIncreasing = arr => hue(arr, d => (d >= 0 ? d : d + 360));
+const fixupHueDecreasing = arr => hue(arr, d => (d <= 0 ? d : d - 360));
 
-export { hueShorter, hueLonger, hueIncreasing, hueDecreasing };
+export {
+	fixupHueShorter,
+	fixupHueLonger,
+	fixupHueIncreasing,
+	fixupHueDecreasing
+};

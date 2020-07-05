@@ -1,6 +1,6 @@
 import convertHsvToRgb from './convertHsvToRgb';
 import convertRgbToHsv from './convertRgbToHsv';
-import interpolateHue from '../interpolate/hue';
+import { fixupHueShorter } from '../fixup/hue';
 import interpolateAlpha from '../interpolate/alpha';
 import interpolateLinear from '../interpolate/linear';
 
@@ -17,7 +17,7 @@ export default {
 		h: [0, 360]
 	},
 	interpolate: {
-		h: interpolateLinear(interpolateHue),
+		h: interpolateLinear(fixupHueShorter),
 		s: interpolateLinear(),
 		v: interpolateLinear(),
 		alpha: interpolateLinear(interpolateAlpha)
