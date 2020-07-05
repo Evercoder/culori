@@ -13,7 +13,11 @@ const hue = (hues, fn) => {
 			return fn(normalized - arr[idx - 1]);
 		})
 		.reduce((acc, curr) => {
-			if (!acc.length || acc[acc.length - 1] === undefined) {
+			if (
+				!acc.length ||
+				curr === undefined ||
+				acc[acc.length - 1] === undefined
+			) {
 				acc.push(curr);
 				return acc;
 			}
