@@ -202,6 +202,18 @@ culori.interpolate(['red', easeIn, 'green']);
 
 Any function in the _colors_ array will be interpreted as an easing function, which is (for our purposes), a function that takes an argument `t ∈ [0, 1]` and returns a value `v ∈ [0, 1]`.
 
+To apply the same easing function between all color pairs, instead of individual ones, add the easing as the first element in the array:
+
+```js
+const easeIn = t => t * t;
+
+// this form:
+culori.interpolate([easeIn, 'red', 'green', 'blue']);
+
+// is equivalent to:
+culori.interpolate(['red', easeIn, 'green', easeIn, 'blue']);
+```
+
 Culori comes with [just a few](#built-in-easing-functions) easing functions, but you can find several online:
 
 -   [some classic easing functions](https://gist.github.com/gre/1650294);
