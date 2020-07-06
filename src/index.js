@@ -67,6 +67,8 @@ export {
 	interpolatorLinear
 } from './interpolate/linear';
 
+export { interpolatorPiecewise } from './interpolate/piecewise';
+
 export {
 	// backwards compatibility
 	interpolateCosine,

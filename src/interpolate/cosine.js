@@ -1,6 +1,10 @@
 /*
 	Cosine interpolation
-	------------------------------------
+	--------------------
+
+	Reference: 
+
+		http://paulbourke.net/miscellaneous/interpolation/
  */
 
 import identity from '../util/identity';

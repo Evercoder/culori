@@ -242,36 +242,49 @@ The [Smoothstep][smoothstep] easing function.
 
 Smootherstep is a variant of the [Smoothstep][smoothstep] easing function.
 
+<a name="culoriEasingCosine" href="#culoriEasingCosine">#</a> culori.**easingCosine** &middot; [Source](https://github.com/evercoder/culori/blob/master/src/easing/cosine.js)
+
+Used in cosine interpolation.
+
 ### Interpolation methods
 
 You'll use these methods when you want to override how colors get interpolated in a specific color space, or when defining the default interpolation for custom color spaces.
 
-<a name="culoriInterpolateLinear" href="#culoriInterpolateLinear">#</a> culori.**interpolateLinear**(_normalize = identity_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/linear.js)
+<a name="culoriInterpolatorLinear" href="#culoriInterpolatorLinear">#</a> culori.**interpolatorLinear**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/linear.js)
 
-A linear interpolator for values in a channel. By default does not normalize the values.
+A linear interpolator for values in a channel.
 
-<a name="culoriInterpolateSplineBasis" href="#culoriInterpolateSplineBasis">#</a> culori.**interpolateSplineBasis**(_normalize = identity_, _type = "default"_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js)
+#### Basis splines
 
-A basis spline interpolator for values in a channel. The _type_ can be one of the following:
+Basis splines are available in the following variants:
 
--   `default` creates a basis spline that passes through the first and last values in the array.
--   `closed` creates a closed basis spline
--   `open` creates an open basis spline (_not yet implemented_)
+<a name="culoriInterpolatorSplineBasisClamped" href="#culoriInterpolatorSplineBasisClamped">#</a> culori.**interpolatorSplineBasisClamped**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js)
 
-<a name="culoriInterpolateSplineNatural" href="#culoriInterpolateSplineNatural">#</a> culori.**interpolateSplineNatural**(_normalize = identity_, _type = "default"_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js)
+<a name="culoriInterpolatorSplineBasisClosed" href="#culoriInterpolatorSplineBasisClosed">#</a> culori.**interpolatorSplineBasisClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js)
 
-A natural spline interpolator for values in a channel. The _type_ can be one of the following:
+<a name="culoriInterpolatorSplineBasisOpen" href="#culoriInterpolatorSplineBasisOpen">#</a> culori.**interpolatorSplineBasisOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js) (⚠️ Not yet implemented)
 
--   `default` creates a natural spline
--   `closed` creates a closed natural spline
+#### Natural splines
 
-<a name="culoriInterpolateSplineMonotone" href="#culoriInterpolateSplineMonotone">#</a> culori.**interpolateSplineMonotone**(_normalize = identity_, _type = "default"_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
+Natural splines are available in the following variants:
 
-A monotone spline interpolator for values in a channel. The _type_ can be one of the following:
+<a name="culoriInterpolatorSplineNaturalClamped" href="#culoriInterpolatorSplineNaturalClamped">#</a> culori.**interpolatorSplineNaturalClamped**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js)
 
--   `default` creates a monotone spline
--   `closed` creates a closed monotone spline
--   `open` creates an open monotone spline (_not yet implemented_)
+<a name="culoriInterpolatorSplineNaturalClosed" href="#culoriInterpolatorSplineNaturalClosed">#</a> culori.**interpolatorSplineNaturalClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js)
+
+<a name="culoriInterpolatorSplineNaturalOpen" href="#culoriInterpolatorSplineNaturalOpen">#</a> culori.**interpolatorSplineNaturalsOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js) (⚠️ Not yet implemented)
+
+#### Monotone splines
+
+Monotone splines are available in the following variants:
+
+<a name="culoriInterpolatorSplineMonotoneClamped" href="#culoriInterpolatorSplineMonotoneClamped">#</a> culori.**interpolatorSplineMonotoneClamped**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
+
+<a name="culoriInterpolatorSplineMonotoneClosed" href="#culoriInterpolatorSplineMonotoneClosed">#</a> culori.**interpolatorSplineMonotoneClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
+
+<a name="culoriInterpolatorSplineMonotoneOpen" href="#culoriInterpolatorSplineMonotoneOpen">#</a> culori.**interpolatorSplineMonotoneOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js) (⚠️ Not yet implemented)
+
+#### Cosine interpolation
 
 <a name="culoriInterpolateCosine" href="#culoriInterpolateCosine">#</a> culori.**interpolateCosine**(_normalize = identity_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/cosine.js)
 
