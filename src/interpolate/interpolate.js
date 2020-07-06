@@ -92,7 +92,9 @@ export default (colors, mode = 'rgb', interpolations) => {
 		let delta = positions[idx] - start;
 
 		let P = (t - start) / delta;
-		let fn = fns[idx];
+
+		// use either the local easing, or the global easing, if any
+		let fn = fns[idx] || fns[0];
 		if (fn !== undefined) {
 			if (typeof fn === 'number') {
 				fn = easingMidpoint((fn - start) / delta);
