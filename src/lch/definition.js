@@ -3,8 +3,8 @@ import convertLchToLab from './convertLchToLab';
 import convertLchToRgb from './convertLchToRgb';
 import convertRgbToLch from './convertRgbToLch';
 import parseLch from './parseLch';
-import interpolateHue from '../interpolate/hue';
-import interpolateAlpha from '../interpolate/alpha';
+import { fixupHueShorter } from '../fixup/hue';
+import { fixupAlpha } from '../fixup/alpha';
 import interpolateLinear from '../interpolate/linear';
 
 export default {
@@ -25,9 +25,9 @@ export default {
 	},
 	parsers: [parseLch],
 	interpolate: {
-		h: interpolateLinear(interpolateHue),
+		h: interpolateLinear(fixupHueShorter),
 		c: interpolateLinear(),
 		l: interpolateLinear(),
-		alpha: interpolateLinear(interpolateAlpha)
+		alpha: interpolateLinear(fixupAlpha)
 	}
 };

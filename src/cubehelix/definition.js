@@ -31,8 +31,8 @@
 	with a variable Saturation and a Lightness interval other than the fixed 0 -> 1.
 */
 
-import interpolateHue from '../interpolate/hue';
-import interpolateAlpha from '../interpolate/alpha';
+import { fixupHueShorter } from '../fixup/hue';
+import { fixupAlpha } from '../fixup/alpha';
 import interpolateLinear from '../interpolate/linear';
 import convertRgbToCubehelix from './convertRgbToCubehelix';
 import convertCubehelixToRgb from './convertCubehelixToRgb';
@@ -51,9 +51,9 @@ export default {
 		rgb: convertCubehelixToRgb
 	},
 	interpolate: {
-		h: interpolateLinear(interpolateHue),
+		h: arr => interpolateLinear(fixupHueShorter),
 		s: interpolateLinear(),
 		l: interpolateLinear(),
-		alpha: interpolateLinear(interpolateAlpha)
+		alpha: interpolateLinear(fixupAlpha)
 	}
 };
