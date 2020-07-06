@@ -1,4 +1,5 @@
 import identity from '../util/identity';
+import gamma from '../easing/gamma';
 
 /* 
 	Monotone spline
@@ -102,16 +103,22 @@ const interpolatorSplineMonotoneOpen = arr => t => {
 	);
 };
 
-const interpolateSplineMonotone = (
-	normalize = identity,
-	type = 'default'
-) => arr => {
+const interpolateSplineMonotone = (fixup, type = 'default', γ = 1) => arr => {
 	if (type === 'closed') {
-		return interpolatorSplineMonotoneClosed(normalize(arr));
+		return t =>
+			interpolatorSplineMonotoneClosed((fixup || identity)(arr))(
+				gamma(t, γ)
+			);
 	} else if (type === 'open') {
-		return interpolatorSplineMonotoneOpen(normalize(arr));
+		return t =>
+			interpolatorSplineMonotoneOpen((fixup || identity)(arr))(
+				gamma(t, γ)
+			);
 	} else if (type === 'default') {
-		return interpolatorSplineMonotoneClamped(normalize(arr));
+		return t =>
+			interpolatorSplineMonotoneClamped((fixup || identity)(arr))(
+				gamma(t, γ)
+			);
 	}
 };
 

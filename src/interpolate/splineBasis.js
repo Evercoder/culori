@@ -1,4 +1,5 @@
 import identity from '../util/identity';
+import gamma from '../easing/gamma';
 
 /*
 	Basis spline
@@ -62,16 +63,20 @@ const interpolatorSplineBasisOpen = arr => t => {
 	throw new Error('open basis spline is not yet implemented');
 };
 
-const interpolateSplineBasis = (
-	normalize = identity,
-	type = 'default'
-) => arr => {
+const interpolateSplineBasis = (fixup, type = 'default', γ = 1) => arr => {
 	if (type === 'default') {
-		return interpolatorSplineBasisClamped(normalize(arr));
+		return t =>
+			interpolatorSplineBasisClamped((fixup || identity)(arr))(
+				gamma(t, γ)
+			);
 	} else if (type === 'closed') {
-		return interpolatorSplineBasisClosed(normalize(arr));
+		return t =>
+			interpolatorSplineBasisClosed((fixup || identity)(arr))(
+				gamma(t, γ)
+			);
 	} else if (type === 'open') {
-		return interpolatorSplineBasisOpen(normalize(arr));
+		return t =>
+			interpolatorSplineBasisOpen((fixup || identity)(arr))(gamma(t, γ));
 	}
 };
 
