@@ -34,38 +34,50 @@ const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 	);
 };
 
-export default (
+const interpolatorSplineBasisClamped = arr => t => {
+	let classes = arr.length - 1;
+	let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+	return bspline(
+		i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
+		arr[i],
+		arr[i + 1],
+		i < classes - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
+		(t - i / classes) * classes
+	);
+};
+
+const interpolatorSplineBasisClosed = arr => t => {
+	let classes = arr.length - 1;
+	let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+	return bspline(
+		arr[(i - 1 + arr.length) % arr.length],
+		arr[i],
+		arr[(i + 1) % arr.length],
+		arr[(i + 2) % arr.length],
+		(t - i / classes) * classes
+	);
+};
+
+const interpolatorSplineBasisOpen = arr => t => {
+	throw new Error('open basis spline is not yet implemented');
+};
+
+const interpolateSplineBasis = (
 	normalize = identity,
-	type = 'default',
-	γ = 1
-) => original_arr => {
-	let arr = (normalize || identity)(original_arr);
+	type = 'default'
+) => arr => {
+	if (type === 'default') {
+		return interpolatorSplineBasisClamped(normalize(arr));
+	} else if (type === 'closed') {
+		return interpolatorSplineBasisClosed(normalize(arr));
+	} else if (type === 'open') {
+		return interpolatorSplineBasisOpen(normalize(arr));
+	}
+};
 
-	return t => {
-		t = Math.pow(t, γ);
-
-		let classes = arr.length - 1;
-		let i = t === 1 ? classes - 1 : Math.floor(t * classes);
-
-		switch (type) {
-			case 'default':
-				return bspline(
-					i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
-					arr[i],
-					arr[i + 1],
-					i < classes - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
-					(t - i / classes) * classes
-				);
-			case 'closed':
-				return bspline(
-					arr[(i - 1 + arr.length) % arr.length],
-					arr[i],
-					arr[(i + 1) % arr.length],
-					arr[(i + 2) % arr.length],
-					(t - i / classes) * classes
-				);
-			case 'open':
-				throw new Error('open basis spline is not yet implemented');
-		}
-	};
+export {
+	interpolateSplineBasis,
+	interpolatorSplineBasisClamped,
+	interpolatorSplineBasisClosed,
+	interpolatorSplineBasisOpen
 };

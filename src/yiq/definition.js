@@ -1,6 +1,6 @@
 import convertRgbToYiq from './convertRgbToYiq';
 import convertYiqToRgb from './convertYiqToRgb';
-import interpolateLinear from '../interpolate/linear';
+import { interpolatorLinear } from '../interpolate/linear';
 import { fixupAlpha } from '../fixup/alpha';
 
 /*
@@ -37,9 +37,9 @@ export default {
 		q: [-0.52, 0.52]
 	},
 	interpolate: {
-		y: interpolateLinear(),
-		i: interpolateLinear(),
-		q: interpolateLinear(),
-		alpha: interpolateLinear(fixupAlpha)
+		y: interpolatorLinear,
+		i: interpolatorLinear,
+		q: interpolatorLinear,
+		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };

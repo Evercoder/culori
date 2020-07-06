@@ -16,9 +16,9 @@ import identity from '../util/identity';
 	(Reference thanks to `d3/d3-shape`)
 */
 
-const sgn = Math.sign,
-	min = Math.min,
-	abs = Math.abs;
+const sgn = Math.sign;
+const min = Math.min;
+const abs = Math.abs;
 
 const monotone = (y_im1, y_i, y_ip1, y_ip2, h, t) => {
 	let h2 = h * h;
@@ -45,95 +45,79 @@ const monotone = (y_im1, y_i, y_ip1, y_ip2, h, t) => {
 	);
 };
 
-const splineMonotoneClamped = (normalize, γ = 1) => original_arr => {
-	let arr = (normalize || identity)(original_arr);
-
-	return t => {
-		t = Math.pow(t, γ);
-		let n = arr.length - 1;
-		let i;
-		if (t === 1) {
-			i = n - 1;
-			t = 1;
-		} else {
-			i = Math.floor(t * n);
-		}
-
-		return monotone(
-			i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
-			arr[i],
-			arr[i + 1],
-			i < n - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
-			1 / n,
-			t - i / n
-		);
-	};
+const interpolatorSplineMonotoneClamped = arr => t => {
+	let n = arr.length - 1;
+	let i;
+	if (t === 1) {
+		i = n - 1;
+		t = 1;
+	} else {
+		i = Math.floor(t * n);
+	}
+	return monotone(
+		i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
+		arr[i],
+		arr[i + 1],
+		i < n - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
+		1 / n,
+		t - i / n
+	);
 };
 
-const splineMonotoneClosed = (normalize, γ = 1) => original_arr => {
-	let arr = (normalize || identity)(original_arr);
-
-	return t => {
-		t = Math.pow(t, γ);
-		let n = arr.length - 1;
-		let i;
-		if (t === 1) {
-			i = n - 1;
-			t = 1;
-		} else {
-			i = Math.floor(t * n);
-		}
-
-		return monotone(
-			arr[(i - 1 + arr.length) % arr.length],
-			arr[i],
-			arr[(i + 1) % arr.length],
-			arr[(i + 2) % arr.length],
-			1 / n,
-			t - i / n
-		);
-	};
+const interpolatorSplineMonotoneClosed = arr => t => {
+	let n = arr.length - 1;
+	let i;
+	if (t === 1) {
+		i = n - 1;
+		t = 1;
+	} else {
+		i = Math.floor(t * n);
+	}
+	return monotone(
+		arr[(i - 1 + arr.length) % arr.length],
+		arr[i],
+		arr[(i + 1) % arr.length],
+		arr[(i + 2) % arr.length],
+		1 / n,
+		t - i / n
+	);
 };
 
-const splineMonotoneOpen = (normalize, γ = 1) => original_arr => {
-	let arr = (normalize || identity)(original_arr);
-
-	return t => {
-		t = Math.pow(t, γ);
-		let n = arr.length - 1;
-		let i;
-		if (t === 1) {
-			i = n - 1;
-			t = 1;
-		} else {
-			i = Math.floor(t * n);
-		}
-
-		return monotone(
-			arr[(i - 1 + arr.length) % arr.length],
-			arr[i],
-			arr[(i + 1) % arr.length],
-			arr[(i + 2) % arr.length],
-			1 / n,
-			t - i / n
-		);
-	};
+const interpolatorSplineMonotoneOpen = arr => t => {
+	let n = arr.length - 1;
+	let i;
+	if (t === 1) {
+		i = n - 1;
+		t = 1;
+	} else {
+		i = Math.floor(t * n);
+	}
+	return monotone(
+		arr[(i - 1 + arr.length) % arr.length],
+		arr[i],
+		arr[(i + 1) % arr.length],
+		arr[(i + 2) % arr.length],
+		1 / n,
+		t - i / n
+	);
 };
 
-const splineMonotone = (normalize = identity, type = 'default', γ = 1) => {
-	switch (type) {
-		case 'closed':
-			return splineMonotoneClosed(normalize, γ);
-		case 'open':
-			return splineMonotoneOpen(normalize, γ);
-		case 'default':
-			return splineMonotoneClamped(normalize, γ);
+const interpolateSplineMonotone = (
+	normalize = identity,
+	type = 'default'
+) => arr => {
+	if (type === 'closed') {
+		return interpolatorSplineMonotoneClosed(normalize(arr));
+	} else if (type === 'open') {
+		return interpolatorSplineMonotoneOpen(normalize(arr));
+	} else if (type === 'default') {
+		return interpolatorSplineMonotoneClamped(normalize(arr));
 	}
 };
 
 export {
-	splineMonotone,
-	splineMonotoneOpen,
-	splineMonotoneClosed,
-	splineMonotoneClamped
+	interpolateSplineMonotone,
+	interpolatorSplineMonotoneOpen,
+	interpolatorSplineMonotoneClosed,
+	interpolatorSplineMonotoneClamped
 };

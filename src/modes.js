@@ -1,3 +1,5 @@
+import identity from './util/identity';
+
 const converters = {};
 const modes = {};
 const parsers = [];
@@ -23,6 +25,20 @@ const defineMode = definition => {
 		// undefined channel ranges default to the [0, 1] interval
 		if (definition.ranges[channel] === undefined) {
 			definition.ranges[channel] = [0, 1];
+		}
+
+		if (!definition.interpolate[channel]) {
+			throw new Error(`Missing interpolator for: ${channel}`);
+		}
+
+		if (typeof definition.interpolate[channel] === 'function') {
+			definition.interpolate[channel] = {
+				use: definition.interpolate[channel]
+			};
+		}
+
+		if (!definition.interpolate[channel].fixup) {
+			definition.interpolate[channel].fixup = identity;
 		}
 	});
 

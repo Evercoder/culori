@@ -4,27 +4,16 @@
  */
 
 import identity from '../util/identity';
+import lerp from '../util/lerp';
+import cosine from '../easing/cosine';
+import { interpolatorPiecewise } from './piecewise';
 
-export default (normalize = identity, γ = 1) => original_arr => {
-	let arr = (normalize || identity)(arr);
+const interpolatorCosine = interpolatorPiecewise((a, b, t) =>
+	lerp(a, b, cosine(t))
+);
 
-	return t => {
-		t = Math.pow(t, γ);
-
-		let cls = t * (arr.length - 1),
-			idx = Math.floor(cls),
-			a = arr[idx],
-			b = arr[idx + 1],
-			t0 = cls - idx;
-
-		let values = normalize([a, b], t0);
-		if (typeof values === 'object') {
-			a = values[0];
-			b = values[1];
-			let c = (1 - Math.cos(t0 * Math.PI)) / 2;
-			return a * (1 - c) + b * c;
-		} else {
-			return values;
-		}
-	};
+const interpolateCosine = (fixup = identity) => arr => {
+	return interpolatorCosine(fixup(arr));
 };
+
+export { interpolatorCosine, interpolateCosine };

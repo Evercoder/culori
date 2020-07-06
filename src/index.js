@@ -61,15 +61,37 @@ export { formatter, formatHex, formatRgb } from './formatter';
 export { default as round } from './round';
 export { default as interpolate } from './interpolate/interpolate';
 
-export { default as interpolateLinear } from './interpolate/linear';
-export { default as interpolateCosine } from './interpolate/cosine';
-export { default as interpolateSplineBasis } from './interpolate/splineBasis';
-export { default as interpolateSplineNatural } from './interpolate/splineNatural';
 export {
-	splineMonotone as interpolateSplineMonotone,
-	splineMonotoneClamped as interpolateSplineMonotoneClamped,
-	splineMonotoneClosed as interpolateSplineMonotoneClosed,
-	splineMonotoneOpen as interpolateSplineMonotoneOpen
+	// backwards compatibility
+	interpolateLinear,
+	interpolatorLinear
+} from './interpolate/linear';
+
+export {
+	// backwards compatibility
+	interpolateCosine,
+	interpolatorCosine
+} from './interpolate/cosine';
+
+export {
+	interpolateSplineBasis,
+	interpolatorSplineBasisClamped,
+	interpolatorSplineBasisClosed,
+	interpolatorSplineBasisOpen
+} from './interpolate/splineBasis';
+
+export {
+	interpolateSplineNatural,
+	interpolatorSplineNaturalClamped,
+	interpolatorSplineNaturalClosed,
+	interpolatorSplineNaturalOpen
+} from './interpolate/splineNatural';
+
+export {
+	interpolateSplineMonotone,
+	interpolatorSplineMonotoneClamped,
+	interpolatorSplineMonotoneClosed,
+	interpolatorSplineMonotoneOpen
 } from './interpolate/splineMonotone';
 
 export { default as samples } from './samples';
@@ -95,6 +117,7 @@ export { default as random } from './random';
 export { default as easingMidpoint } from './easing/midpoint';
 export { default as easingSmoothstep } from './easing/smoothstep';
 export { default as easingSmootherstep } from './easing/smootherstep';
+export { default as easingCosine } from './easing/cosine';
 
 export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
 

@@ -1,7 +1,7 @@
 import convertLabToRgb from './convertLabToRgb';
 import convertRgbToLab from './convertRgbToLab';
 import parseLab from './parseLab';
-import interpolateLinear from '../interpolate/linear';
+import { interpolatorLinear } from '../interpolate/linear';
 import { fixupAlpha } from '../fixup/alpha';
 
 export default {
@@ -20,9 +20,9 @@ export default {
 	},
 	parsers: [parseLab],
 	interpolate: {
-		l: interpolateLinear(),
-		a: interpolateLinear(),
-		b: interpolateLinear(),
-		alpha: interpolateLinear(fixupAlpha)
+		l: interpolatorLinear,
+		a: interpolatorLinear,
+		b: interpolatorLinear,
+		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };
