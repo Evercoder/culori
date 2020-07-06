@@ -6,7 +6,8 @@ import { interpolatorPiecewise } from './piecewise';
 const interpolatorLinear = interpolatorPiecewise(lerp);
 
 const interpolateLinear = (fixup, γ = 1) => arr => {
-	return t => interpolatorLinear((fixup || identity)(arr))(gamma(t, γ));
+	let ease = gamma(γ);
+	return t => interpolatorLinear((fixup || identity)(arr))(ease(t));
 };
 
 export {

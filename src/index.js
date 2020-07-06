@@ -120,6 +120,7 @@ export { default as easingMidpoint } from './easing/midpoint';
 export { default as easingSmoothstep } from './easing/smoothstep';
 export { default as easingSmootherstep } from './easing/smootherstep';
 export { default as easingCosine } from './easing/cosine';
+export { default as easingGamma } from './easing/gamma';
 
 export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
 

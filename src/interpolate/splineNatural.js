@@ -42,21 +42,16 @@ const interpolatorSplineNaturalOpen = arr =>
 	interpolatorSplineBasisOpen(solve(arr));
 
 const interpolateSplineNatural = (fixup, type = 'default', γ = 1) => arr => {
+	let ease = gamma(γ);
 	if (type === 'default') {
 		return t =>
-			interpolatorSplineNaturalClamped((fixup || identity)(arr))(
-				gamma(t, γ)
-			);
+			interpolatorSplineNaturalClamped((fixup || identity)(arr))(ease(t));
 	} else if (type === 'closed') {
 		return t =>
-			interpolatorSplineNaturalClosed((fixup || identity)(arr))(
-				gamma(t, γ)
-			);
+			interpolatorSplineNaturalClosed((fixup || identity)(arr))(ease(t));
 	} else if (type === 'open') {
 		return t =>
-			interpolatorSplineNaturalOpen((fixup || identity)(arr))(
-				gamma(t, γ)
-			);
+			interpolatorSplineNaturalOpen((fixup || identity)(arr))(ease(t));
 	}
 };
 

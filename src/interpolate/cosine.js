@@ -18,7 +18,8 @@ const interpolatorCosine = interpolatorPiecewise((a, b, t) =>
 );
 
 const interpolateCosine = (fixup, γ = 1) => arr => {
-	return t => interpolatorCosine((fixup || identity)(arr))(gamma(t, γ));
+	let ease = gamma(γ);
+	return t => interpolatorCosine((fixup || identity)(arr))(ease(t));
 };
 
 export { interpolatorCosine, interpolateCosine };

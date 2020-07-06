@@ -258,6 +258,10 @@ Smootherstep is a variant of the [Smoothstep][smoothstep] easing function.
 
 Used in cosine interpolation.
 
+<a name="culoriEasingGamma" href="#culoriEasingGammae">#</a> culori.**easingGamma** &middot; [Source](https://github.com/evercoder/culori/blob/master/src/easing/gamma.js)
+
+The gamma easing
+
 ### Interpolation methods
 
 You'll use these methods when you want to override how colors get interpolated in a specific color space, or when defining the default interpolation for custom color spaces.

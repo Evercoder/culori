@@ -104,20 +104,17 @@ const interpolatorSplineMonotoneOpen = arr => t => {
 };
 
 const interpolateSplineMonotone = (fixup, type = 'default', γ = 1) => arr => {
+	let ease = gamma(γ);
 	if (type === 'closed') {
 		return t =>
-			interpolatorSplineMonotoneClosed((fixup || identity)(arr))(
-				gamma(t, γ)
-			);
+			interpolatorSplineMonotoneClosed((fixup || identity)(arr))(ease(t));
 	} else if (type === 'open') {
 		return t =>
-			interpolatorSplineMonotoneOpen((fixup || identity)(arr))(
-				gamma(t, γ)
-			);
+			interpolatorSplineMonotoneOpen((fixup || identity)(arr))(ease(t));
 	} else if (type === 'default') {
 		return t =>
 			interpolatorSplineMonotoneClamped((fixup || identity)(arr))(
-				gamma(t, γ)
+				ease(t)
 			);
 	}
 };

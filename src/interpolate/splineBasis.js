@@ -64,19 +64,16 @@ const interpolatorSplineBasisOpen = arr => t => {
 };
 
 const interpolateSplineBasis = (fixup, type = 'default', γ = 1) => arr => {
+	let ease = gamma(γ);
 	if (type === 'default') {
 		return t =>
-			interpolatorSplineBasisClamped((fixup || identity)(arr))(
-				gamma(t, γ)
-			);
+			interpolatorSplineBasisClamped((fixup || identity)(arr))(ease(t));
 	} else if (type === 'closed') {
 		return t =>
-			interpolatorSplineBasisClosed((fixup || identity)(arr))(
-				gamma(t, γ)
-			);
+			interpolatorSplineBasisClosed((fixup || identity)(arr))(ease(t));
 	} else if (type === 'open') {
 		return t =>
-			interpolatorSplineBasisOpen((fixup || identity)(arr))(gamma(t, γ));
+			interpolatorSplineBasisOpen((fixup || identity)(arr))(ease(t));
 	}
 };
 
