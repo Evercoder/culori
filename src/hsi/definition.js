@@ -1,7 +1,7 @@
 import convertHsiToRgb from './convertHsiToRgb';
 import convertRgbToHsi from './convertRgbToHsi';
 import { fixupHueShorter } from '../fixup/hue';
-import interpolateAlpha from '../interpolate/alpha';
+import { fixupAlpha } from '../fixup/alpha';
 import interpolateLinear from '../interpolate/linear';
 
 export default {
@@ -20,6 +20,6 @@ export default {
 		h: interpolateLinear(fixupHueShorter),
 		s: interpolateLinear(),
 		i: interpolateLinear(),
-		alpha: interpolateLinear(interpolateAlpha)
+		alpha: interpolateLinear(fixupAlpha)
 	}
 };

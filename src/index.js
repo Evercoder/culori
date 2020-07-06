@@ -60,7 +60,6 @@ export {
 export { formatter, formatHex, formatRgb } from './formatter';
 export { default as round } from './round';
 export { default as interpolate } from './interpolate/interpolate';
-export { default as interpolateAlpha } from './interpolate/alpha';
 
 export { default as interpolateLinear } from './interpolate/linear';
 export { default as interpolateCosine } from './interpolate/cosine';
@@ -104,3 +103,9 @@ export {
 	fixupHueIncreasing,
 	fixupHueDecreasing
 } from './fixup/hue';
+
+export {
+	fixupAlpha,
+	// backwards compatibility
+	fixupAlpha as interpolateAlpha
+} from './fixup/alpha';

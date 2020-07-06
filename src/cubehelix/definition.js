@@ -32,7 +32,7 @@
 */
 
 import { fixupHueShorter } from '../fixup/hue';
-import interpolateAlpha from '../interpolate/alpha';
+import { fixupAlpha } from '../fixup/alpha';
 import interpolateLinear from '../interpolate/linear';
 import convertRgbToCubehelix from './convertRgbToCubehelix';
 import convertCubehelixToRgb from './convertCubehelixToRgb';
@@ -54,6 +54,6 @@ export default {
 		h: arr => interpolateLinear(fixupHueShorter),
 		s: interpolateLinear(),
 		l: interpolateLinear(),
-		alpha: interpolateLinear(interpolateAlpha)
+		alpha: interpolateLinear(fixupAlpha)
 	}
 };

@@ -1,7 +1,7 @@
 import convertRgbToYiq from './convertRgbToYiq';
 import convertYiqToRgb from './convertYiqToRgb';
 import interpolateLinear from '../interpolate/linear';
-import interpolateAlpha from '../interpolate/alpha';
+import { fixupAlpha } from '../fixup/alpha';
 
 /*
 	YIQ Color Space
@@ -40,6 +40,6 @@ export default {
 		y: interpolateLinear(),
 		i: interpolateLinear(),
 		q: interpolateLinear(),
-		alpha: interpolateLinear(interpolateAlpha)
+		alpha: interpolateLinear(fixupAlpha)
 	}
 };

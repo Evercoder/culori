@@ -2,7 +2,7 @@ import convertHslToRgb from './convertHslToRgb';
 import convertRgbToHsl from './convertRgbToHsl';
 import parseHsl from './parseHsl';
 import { fixupHueShorter } from '../fixup/hue';
-import interpolateAlpha from '../interpolate/alpha';
+import { fixupAlpha } from '../fixup/alpha';
 import interpolateLinear from '../interpolate/linear';
 
 export default {
@@ -22,6 +22,6 @@ export default {
 		h: interpolateLinear(fixupHueShorter),
 		s: interpolateLinear(),
 		l: interpolateLinear(),
-		alpha: interpolateLinear(interpolateAlpha)
+		alpha: interpolateLinear(fixupAlpha)
 	}
 };
