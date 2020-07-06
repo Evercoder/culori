@@ -7,8 +7,8 @@ import {
 } from '../src/index';
 
 tape('fixupHueShorter', t => {
-	let hues = [0, 340, 30, 0, 170];
-	t.deepEqual(fixupHueShorter(hues), [0, -20, 30, 0, 170]);
+	t.deepEqual(fixupHueShorter([0, 340, 30, 0, 170]), [0, -20, 30, 0, 170]);
+	t.deepEqual(fixupHueShorter([-250, -8]), [110, -8]);
 	t.end();
 });
 
