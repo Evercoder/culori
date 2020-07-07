@@ -2,7 +2,7 @@ import convertHsvToRgb from './convertHsvToRgb';
 import convertRgbToHsv from './convertRgbToHsv';
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
-import interpolateLinear from '../interpolate/linear';
+import { interpolatorLinear } from '../interpolate/linear';
 
 export default {
 	mode: 'hsv',
@@ -17,9 +17,9 @@ export default {
 		h: [0, 360]
 	},
 	interpolate: {
-		h: interpolateLinear(fixupHueShorter),
-		s: interpolateLinear(),
-		v: interpolateLinear(),
-		alpha: interpolateLinear(fixupAlpha)
+		h: { use: interpolatorLinear, fixup: fixupHueShorter },
+		s: interpolatorLinear,
+		v: interpolatorLinear,
+		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };

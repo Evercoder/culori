@@ -5,7 +5,7 @@ import convertRgbToLch from './convertRgbToLch';
 import parseLch from './parseLch';
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
-import interpolateLinear from '../interpolate/linear';
+import { interpolatorLinear } from '../interpolate/linear';
 
 export default {
 	mode: 'lch',
@@ -25,9 +25,9 @@ export default {
 	},
 	parsers: [parseLch],
 	interpolate: {
-		h: interpolateLinear(fixupHueShorter),
-		c: interpolateLinear(),
-		l: interpolateLinear(),
-		alpha: interpolateLinear(fixupAlpha)
+		h: { use: interpolatorLinear, fixup: fixupHueShorter },
+		c: interpolatorLinear,
+		l: interpolatorLinear,
+		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };

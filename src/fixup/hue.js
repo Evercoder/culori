@@ -10,7 +10,7 @@ const hue = (hues, fn) => {
 			if (idx === 0 || hues[idx - 1] === undefined) {
 				return normalized;
 			}
-			return fn(normalized - arr[idx - 1]);
+			return fn(normalized - normalizeHue(arr[idx - 1]));
 		})
 		.reduce((acc, curr) => {
 			if (

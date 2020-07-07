@@ -1,30 +1,23 @@
 /*
 	Cosine interpolation
-	------------------------------------
+	--------------------
+
+	Reference: 
+
+		http://paulbourke.net/miscellaneous/interpolation/
  */
 
 import identity from '../util/identity';
+import lerp from './lerp';
+import easeInOutSine from '../easing/inOutSine';
+import gamma from '../easing/gamma';
+import { interpolatorPiecewise } from './piecewise';
 
-export default (normalize = identity, γ = 1) => original_arr => {
-	let arr = (normalize || identity)(arr);
-
-	return t => {
-		t = Math.pow(t, γ);
-
-		let cls = t * (arr.length - 1),
-			idx = Math.floor(cls),
-			a = arr[idx],
-			b = arr[idx + 1],
-			t0 = cls - idx;
-
-		let values = normalize([a, b], t0);
-		if (typeof values === 'object') {
-			a = values[0];
-			b = values[1];
-			let c = (1 - Math.cos(t0 * Math.PI)) / 2;
-			return a * (1 - c) + b * c;
-		} else {
-			return values;
-		}
-	};
+// @deprecated
+export default (fixup, γ = 1) => arr => {
+	let ease = gamma(γ);
+	let interpolator = interpolatorPiecewise((a, b, t) =>
+		lerp(a, b, easeInOutSine(t))
+	)((fixup || identity)(arr));
+	return t => interpolator(ease(t));
 };

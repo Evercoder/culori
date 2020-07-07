@@ -72,9 +72,9 @@ benchmark('culori: multiple colors in RGB', () => {
 });
 
 benchmark('culori: multiple colors in RGB (cached)', () => {
-	let lerp = culori.interpolate(colors);
+	let it = culori.interpolate(colors);
 	for (var i = 0; i < iterations; i++) {
-		culori.samples(count).map(lerp).map(hex);
+		culori.samples(count).map(it).map(hex);
 	}
 });
 

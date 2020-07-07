@@ -8,7 +8,7 @@ import convertRgbToDlch from './convertRgbToDlch';
 
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
-import interpolateLinear from '../interpolate/linear';
+import { interpolatorLinear } from '../interpolate/linear';
 
 export default {
 	mode: 'dlch',
@@ -29,9 +29,15 @@ export default {
 		h: [0, 360]
 	},
 	interpolate: {
-		l: interpolateLinear(),
-		c: interpolateLinear(),
-		h: interpolateLinear(fixupHueShorter),
-		alpha: interpolateLinear(fixupAlpha)
+		l: interpolatorLinear,
+		c: interpolatorLinear,
+		h: {
+			use: interpolatorLinear,
+			fixup: fixupHueShorter
+		},
+		alpha: {
+			use: interpolatorLinear,
+			fixup: fixupAlpha
+		}
 	}
 };

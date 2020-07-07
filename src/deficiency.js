@@ -1,5 +1,6 @@
 import converter from './converter';
 import prepare from './_prepare';
+import lerp from './interpolate/lerp';
 
 let rgb = converter('rgb');
 
@@ -362,8 +363,6 @@ const TRIT = [
 		0.3039
 	]
 ];
-
-const lerp = (a, b, w) => (1 - w) * a + w * b;
 
 const deficiency = (lut, t) => {
 	let tt = Math.max(0, Math.min(1, t));

@@ -2,6 +2,7 @@ import converter from '../converter';
 import { getModeDefinition } from '../modes';
 import normalizePositions from '../util/normalizePositions';
 import easingMidpoint from '../easing/midpoint';
+import identity from '../util/identity';
 
 export default (colors, mode = 'rgb', interpolations) => {
 	let def = getModeDefinition(mode);
@@ -33,16 +34,39 @@ export default (colors, mode = 'rgb', interpolations) => {
 
 	// override the default interpolators
 	// from the color space definition with any custom ones
-	let interpolators = def.channels.reduce(
-		(res, channel) => {
-			res[channel] = res[channel](zipped[channel]);
-			return res;
-		},
-		{
-			...def.interpolate,
-			...interpolations
+
+	const interpolator = (ch, values) => {
+		let ifn, ffn;
+
+		if (typeof def.interpolate[ch] === 'function') {
+			ifn = def.interpolate[ch];
+			ffn = identity;
+		} else {
+			ifn = def.interpolate[ch].use;
+			ffn = def.interpolate[ch].fixup || identity;
 		}
-	);
+
+		if (typeof interpolations === 'function') {
+			ifn = interpolations;
+		} else if (typeof interpolations === 'object') {
+			if (typeof interpolations[ch] === 'function') {
+				ifn = interpolations[ch];
+			} else if (typeof interpolations[ch] === 'object') {
+				if (typeof interpolations[ch].use === 'function') {
+					ifn = interpolations[ch].use;
+				}
+				if (typeof interpolations[ch].fixup === 'function') {
+					ffn = interpolations[ch].fixup;
+				}
+			}
+		}
+		return ifn(ffn(values));
+	};
+
+	let interpolators = def.channels.reduce((res, ch) => {
+		res[ch] = interpolator(ch, zipped[ch]);
+		return res;
+	}, {});
 
 	let n = conv_colors.length - 1;
 
@@ -68,7 +92,9 @@ export default (colors, mode = 'rgb', interpolations) => {
 		let delta = positions[idx] - start;
 
 		let P = (t - start) / delta;
-		let fn = fns[idx];
+
+		// use either the local easing, or the global easing, if any
+		let fn = fns[idx] || fns[0];
 		if (fn !== undefined) {
 			if (typeof fn === 'number') {
 				fn = easingMidpoint((fn - start) / delta);

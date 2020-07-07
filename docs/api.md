@@ -166,7 +166,7 @@ By default, colors in all spaces are interpolated linearly. You can override the
 
 ```js
 let custom_interpolator = culori.interpolate(['blue', 'red'], 'lch', {
-	h: culori.interpolateLinear() // long-path hue interpolation
+	h: culori.interpolatorSplineBasis // spline instead of linear interpolation
 });
 ```
 
@@ -201,6 +201,44 @@ culori.interpolate(['red', easeIn, 'green']);
 ```
 
 Any function in the _colors_ array will be interpreted as an easing function, which is (for our purposes), a function that takes an argument `t ∈ [0, 1]` and returns a value `v ∈ [0, 1]`.
+
+To apply the same easing function between all color pairs, instead of individual ones, add the easing as the first element in the array:
+
+```js
+const easeIn = t => t * t;
+
+// this form:
+culori.interpolate([easeIn, 'red', 'green', 'blue']);
+
+// is equivalent to:
+culori.interpolate(['red', easeIn, 'green', easeIn, 'blue']);
+```
+
+The easing function can alternatively be applied the hard way:
+
+```js
+culori.interpolate(
+	['red', 'green', 'blue'],
+	'rgb',
+	culori.interpolatorPiecewise((a, b, t) => culori.lerp(a, b)(easeIn(t)))
+);
+```
+
+This formula can be helpful if you wanted to apply a different easing function per channel:
+
+```js
+function piecewiseEasing(easingFn) {
+	return culori.interpolatorPiecewise((a, b, t) =>
+		culori.lerp(a, b)(easingFn(t))
+	);
+}
+
+culori.interpolate(['red', 'green', 'blue'], 'rgb', {
+	r: piecewiseEasing(easeIn),
+	g: piecewiseEasing(easeOut),
+	b: piecewiseEasing(easeInOut)
+});
+```
 
 Culori comes with [just a few](#built-in-easing-functions) easing functions, but you can find several online:
 
@@ -242,40 +280,81 @@ The [Smoothstep][smoothstep] easing function.
 
 Smootherstep is a variant of the [Smoothstep][smoothstep] easing function.
 
+<a name="culoriEasingInOutSine" href="#culoriEasingInOutSine">#</a> culori.**easingInOutSine** &middot; [Source](https://github.com/evercoder/culori/blob/master/src/easing/inOutSine.js)
+
+Sinusoidal in-out easing. Can be used to create, for example, a cosine interpolation [as described by Paul Bourke](paulbourke.net/miscellaneous/interpolation/):
+
+```js
+culori.interpolate([culori.easingInOutSine, 'red', 'green', 'blue']);
+```
+
+<a name="culoriEasingGamma" href="#culoriEasingGamma">#</a> culori.**easingGamma**(_γ = 1_) → _function(t)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/easing/gamma.js)
+
+The [gamma](https://en.wikipedia.org/wiki/Gamma_correction) easing.
+
+```js
+culori.samples(5).map(culori.easingGamma(2));
+// => [ todo ];
+```
+
 ### Interpolation methods
 
 You'll use these methods when you want to override how colors get interpolated in a specific color space, or when defining the default interpolation for custom color spaces.
 
-<a name="culoriInterpolateLinear" href="#culoriInterpolateLinear">#</a> culori.**interpolateLinear**(_normalize = identity_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/linear.js)
+<a name="culoriInterpolatorLinear" href="#culoriInterpolatorLinear">#</a> culori.**interpolatorLinear**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/linear.js)
 
-A linear interpolator for values in a channel. By default does not normalize the values.
+A linear interpolator for values in a channel.
 
-<a name="culoriInterpolateSplineBasis" href="#culoriInterpolateSplineBasis">#</a> culori.**interpolateSplineBasis**(_normalize = identity_, _type = "default"_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js)
+#### Basis splines
 
-A basis spline interpolator for values in a channel. The _type_ can be one of the following:
+Basis splines are available in the following variants:
 
--   `default` creates a basis spline that passes through the first and last values in the array.
--   `closed` creates a closed basis spline
--   `open` creates an open basis spline (_not yet implemented_)
+<a name="culoriInterpolatorSplineBasis" href="#culoriInterpolatorSplineBasis">#</a> culori.**interpolatorSplineBasis**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js)
 
-<a name="culoriInterpolateSplineNatural" href="#culoriInterpolateSplineNatural">#</a> culori.**interpolateSplineNatural**(_normalize = identity_, _type = "default"_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js)
+<a name="culoriInterpolatorSplineBasisClosed" href="#culoriInterpolatorSplineBasisClosed">#</a> culori.**interpolatorSplineBasisClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js)
 
-A natural spline interpolator for values in a channel. The _type_ can be one of the following:
+<a name="culoriInterpolatorSplineBasisOpen" href="#culoriInterpolatorSplineBasisOpen">#</a> culori.**interpolatorSplineBasisOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js) (⚠️ Not yet implemented)
 
--   `default` creates a natural spline
--   `closed` creates a closed natural spline
+#### Natural splines
 
-<a name="culoriInterpolateSplineMonotone" href="#culoriInterpolateSplineMonotone">#</a> culori.**interpolateSplineMonotone**(_normalize = identity_, _type = "default"_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
+Natural splines are available in the following variants:
 
-A monotone spline interpolator for values in a channel. The _type_ can be one of the following:
+<a name="culoriInterpolatorSplineNatural" href="#culoriInterpolatorSplineNatural">#</a> culori.**interpolatorSplineNatural**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js)
 
--   `default` creates a monotone spline
--   `closed` creates a closed monotone spline
--   `open` creates an open monotone spline (_not yet implemented_)
+<a name="culoriInterpolatorSplineNaturalClosed" href="#culoriInterpolatorSplineNaturalClosed">#</a> culori.**interpolatorSplineNaturalClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js)
 
-<a name="culoriInterpolateCosine" href="#culoriInterpolateCosine">#</a> culori.**interpolateCosine**(_normalize = identity_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/cosine.js)
+<a name="culoriInterpolatorSplineNaturalOpen" href="#culoriInterpolatorSplineNaturalOpen">#</a> culori.**interpolatorSplineNaturalsOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js) (⚠️ Not yet implemented)
+
+#### Monotone splines
+
+Monotone splines are available in the following variants:
+
+<a name="culoriInterpolatorSplineMonotone" href="#culoriInterpolatorSplineMonotone">#</a> culori.**interpolatorSplineMonotone**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
+
+<a name="culoriInterpolatorSplineMonotoneClosed" href="#culoriInterpolatorSplineMonotoneClosed">#</a> culori.**interpolatorSplineMonotoneClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
+
+<a name="culoriInterpolatorSplineMonotoneOpen" href="#culoriInterpolatorSplineMonotoneOpen">#</a> culori.**interpolatorSplineMonotoneOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js) (⚠️ Not yet implemented)
+
+#### Cosine interpolation
+
+<a name="culoriInterpolatorCosine" href="#culoriInterpolatorCosine">#</a> culori.**interpolatorCosine** &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/cosine.js)
 
 Interpolates the value [using the cosine function](http://paulbourke.net/miscellaneous/interpolation/), which can offer a smoother alternative to linear interpolation.
+
+#### Custom piecewise interpolation
+
+<a href='culoriInterpolatorPiecewise' href='#culoriInterpolatorPiecewise'>#</a> culori.**interpolatorPiecewise**(_interpolator_) [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/piecewise.js)
+
+Use a custom piecewise interpolator function in the form `function (a, b, t) => value`:
+
+```js
+let linear = (a, b, t) => (1 - t) * a + t * b;
+culori.interpolate(['red', 'green'], culori.interpolatorPiecewise(linear));
+```
+
+When one of the two values to be interpolated is undefined, it will mirror the defined value: `[undefined, b]` becomes `[b, b]`. If both values are undefined, they are left as-is.
+
+The `interpolatorLinear()` and `interpolatorCosine()` functions use `interpolatorPiecewise()` under the hood.
 
 ### Interpolation Fixup
 
@@ -298,20 +377,28 @@ This is the default in all built-in color spaces using a hue channel. Below is a
 export default {
 	// ...
 	interpolate: {
-		h: interpolateLinear(fixupHue),
-		s: interpolateLinear(),
-		l: interpolateLinear(),
-		alpha: interpolateLinear(fixupAlpha)
+		h: {
+			use: interpolatorLinear,
+			fixup: fixupHue
+		},
+		s: interpolatorLinear,
+		l: interpolatorLinear,
+		alpha: {
+			use: interpolatorLinear,
+			fixup: fixupAlpha
+		}
 	}
 	// ...
 };
 ```
 
-To omit the fixup and treat hues as normal numbers, use a custom interpolation on the `h` channel, and omit the fixup function:
+To omit the fixup and treat hues as normal numbers, use a custom interpolation on the `h` channel, and overwrite the `fixup` function with an identity function:
 
 ```js
 let hsl_long = culori.interpolate(['blue', 'red', 'green'], 'hsl', {
-	h: culori.interpolateLinear()
+	h: {
+		fixup: arr => arr
+	}
 });
 ```
 
@@ -339,16 +426,14 @@ This is the default method for the alpha channel in all built-in color spaces.
 
 ### Evenly-spaced samples
 
-<a name="culoriSamples" href="#culoriSamples">#</a> culori.**samples**(_n = 2_, _γ = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/samples.js)
+<a name="culoriSamples" href="#culoriSamples">#</a> culori.**samples**(_n = 2_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/samples.js)
 
-Returns an array of _n_ equally-spaced samples from the `[0, 1]` range, with `0` and `1` at the ends. The function also accepts a _γ_ (gamma) parameter which will map each value _t_ to _t_<sup>γ</sup>.
+Returns an array of _n_ equally-spaced samples in the `[0, 1]` range, with `0` and `1` at the ends.
 
 ```js
 culori.samples(3); // => [0, 0.5, 1]
 culori.samples(5); // => [0, 0.25, 0.5, 0.75, 1]
 ```
-
-![culori.samples() with various gamma values]({{"/img/culori-samples.png" | url }})
 
 The samples are useful for [culori.interpolate()](#culoriInterpolate) to generate color scales:
 
@@ -369,6 +454,17 @@ culori.samples(10).map(bezier);
 
 // easeInQuad
 culori.samples(10).map(t => t * t);
+```
+
+### Lerp
+
+<a name="culoriLerp" href="#culoriLerp">#</a> culori.**lerp**(_a_, _b_, _t_) → _value_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/samples.js)
+
+Interpolates between the values `a` and `b` at the point `t ∈ [0, 1]`.
+
+```js
+culori.lerp(5, 10, 0.5);
+// => 7.5
 ```
 
 ## Difference
@@ -540,10 +636,11 @@ Simuate tritanomaly and tritanopia. The `severity` parameter is in the interval 
 Examples:
 
 ```js
-samples(5)
-	.map(interpolate(['red', 'green', 'blue']))
-	.map(deficiencyProt(0.5))
-	.map(formatHex);
+culori
+	.samples(5)
+	.map(culori.interpolate(['red', 'green', 'blue']))
+	.map(culori.deficiencyProt(0.5))
+	.map(culori.formatHex);
 
 // => ["#751800", "#664200", "#576c00", "#1a3e82", "#0010ff"];
 ```
@@ -556,7 +653,7 @@ Based on the work of Machado, Oliveira and Fernandes (2009), using [precomputed 
 
 <a name="culoriDefineMode" href="#culoriDefineMode">#</a> culori.**defineMode**(_definition_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/modes.js)
 
-Defines a new color space through a _definition_ object. By way of example, here's the definition of the HSL color space:
+Defines a new color space through a _definition_ object. Here's the full definition of the HSL color space:
 
 ```js
 {
@@ -573,12 +670,18 @@ Defines a new color space through a _definition_ object. By way of example, here
 	},
 	parsers: [parseHsl],
 	interpolate: {
-		h: interpolateLinear(fixupHue),
-		s: interpolateLinear(),
-		l: interpolateLinear(),
-		alpha: interpolateLinear(fixupAlpha)
+		h: {
+			use: interpolatorLinear,
+			fixup: fixupHueShorter
+		},
+		s: interpolatorLinear,
+		l: interpolatorLinear,
+		alpha: {
+			use: interpolatorLinear,
+			fixup: fixupAlpha
+		}
 	}
-}
+};
 ```
 
 The properties a definition needs are the following:
@@ -589,7 +692,7 @@ The properties a definition needs are the following:
 -   `channels`: a list of channels for the color space.
 -   `ranges`: the ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
 -   `parsers`: any parsers for the color space that can transform strings into colors
--   `interpolate`: the default interpolations for the color space.
+-   `interpolate`: the default interpolations for the color space, one for each channel. Each interpolation is defined by its interpolator (the `use` key) and its fixup function (the `fixup` key). When defined as a function, a channel interpolation is meant to define its interpolator, with the fixup being a no-op.
 
 **Note:** The order of the items in the `channels` array matters. To keep things simple, we're making the following conventions:
 
