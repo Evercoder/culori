@@ -1,7 +1,7 @@
 import {
 	interpolatorSplineBasisClosed,
 	interpolatorSplineBasisOpen,
-	interpolatorSplineBasisClamped
+	interpolatorSplineBasis
 } from './splineBasis';
 import identity from '../util/identity';
 import gamma from '../easing/gamma';
@@ -34,7 +34,7 @@ const solve = v => {
 	return sol;
 };
 
-const interpolatorSplineNaturalClamped = arr =>
+const interpolatorSplineNatural = arr =>
 	interpolatorSplineBasisClamped(solve(arr));
 const interpolatorSplineNaturalClosed = arr =>
 	interpolatorSplineBasisClosed(solve(arr));
@@ -45,7 +45,7 @@ const interpolateSplineNatural = (fixup, type = 'default', γ = 1) => arr => {
 	let ease = gamma(γ);
 	if (type === 'default') {
 		return t =>
-			interpolatorSplineNaturalClamped((fixup || identity)(arr))(ease(t));
+			interpolatorSplineNatural((fixup || identity)(arr))(ease(t));
 	} else if (type === 'closed') {
 		return t =>
 			interpolatorSplineNaturalClosed((fixup || identity)(arr))(ease(t));
@@ -57,7 +57,7 @@ const interpolateSplineNatural = (fixup, type = 'default', γ = 1) => arr => {
 
 export {
 	interpolateSplineNatural,
+	interpolatorSplineNatural,
 	interpolatorSplineNaturalClosed,
-	interpolatorSplineNaturalOpen,
-	interpolatorSplineNaturalClamped
+	interpolatorSplineNaturalOpen
 };

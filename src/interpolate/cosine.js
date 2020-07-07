@@ -8,18 +8,16 @@
  */
 
 import identity from '../util/identity';
-import lerp from '../util/lerp';
-import cosine from '../easing/cosine';
+import lerp from './lerp';
+import easeInOutSine from '../easing/inOutSine';
 import gamma from '../easing/gamma';
 import { interpolatorPiecewise } from './piecewise';
 
-const interpolatorCosine = interpolatorPiecewise((a, b, t) =>
-	lerp(a, b, cosine(t))
-);
-
-const interpolateCosine = (fixup, γ = 1) => arr => {
+// @deprecated
+export default (fixup, γ = 1) => arr => {
 	let ease = gamma(γ);
-	return t => interpolatorCosine((fixup || identity)(arr))(ease(t));
+	let interpolator = interpolatorPiecewise((a, b, t) =>
+		lerp(a, b, easeInOutSine(t))
+	)((fixup || identity)(arr));
+	return t => interpolator(ease(t));
 };
-
-export { interpolatorCosine, interpolateCosine };

@@ -46,7 +46,7 @@ const monotone = (y_im1, y_i, y_ip1, y_ip2, h, t) => {
 	);
 };
 
-const interpolatorSplineMonotoneClamped = arr => t => {
+const interpolatorSplineMonotone = arr => t => {
 	let n = arr.length - 1;
 	let i;
 	if (t === 1) {
@@ -113,15 +113,13 @@ const interpolateSplineMonotone = (fixup, type = 'default', γ = 1) => arr => {
 			interpolatorSplineMonotoneOpen((fixup || identity)(arr))(ease(t));
 	} else if (type === 'default') {
 		return t =>
-			interpolatorSplineMonotoneClamped((fixup || identity)(arr))(
-				ease(t)
-			);
+			interpolatorSplineMonotone((fixup || identity)(arr))(ease(t));
 	}
 };
 
 export {
 	interpolateSplineMonotone,
+	interpolatorSplineMonotone,
 	interpolatorSplineMonotoneOpen,
-	interpolatorSplineMonotoneClosed,
-	interpolatorSplineMonotoneClamped
+	interpolatorSplineMonotoneClosed
 };

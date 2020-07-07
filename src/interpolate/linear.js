@@ -1,5 +1,5 @@
 import identity from '../util/identity';
-import lerp from '../util/lerp';
+import lerp from './lerp';
 import gamma from '../easing/gamma';
 import { interpolatorPiecewise } from './piecewise';
 

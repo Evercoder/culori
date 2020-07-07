@@ -62,40 +62,37 @@ export { default as round } from './round';
 export { default as interpolate } from './interpolate/interpolate';
 
 export {
-	// backwards compatibility
-	interpolateLinear,
+	interpolateLinear, // @deprecated
 	interpolatorLinear
 } from './interpolate/linear';
 
 export { interpolatorPiecewise } from './interpolate/piecewise';
 
-export {
-	// backwards compatibility
-	interpolateCosine,
-	interpolatorCosine
-} from './interpolate/cosine';
+// @deprecated
+export { default as interpolateCosine } from './interpolate/cosine';
 
 export {
-	interpolateSplineBasis,
-	interpolatorSplineBasisClamped,
+	interpolateSplineBasis, // @deprecated
+	interpolatorSplineBasis,
 	interpolatorSplineBasisClosed,
 	interpolatorSplineBasisOpen
 } from './interpolate/splineBasis';
 
 export {
-	interpolateSplineNatural,
-	interpolatorSplineNaturalClamped,
+	interpolateSplineNatural, // @deprecated
+	interpolatorSplineNatural,
 	interpolatorSplineNaturalClosed,
 	interpolatorSplineNaturalOpen
 } from './interpolate/splineNatural';
 
 export {
-	interpolateSplineMonotone,
-	interpolatorSplineMonotoneClamped,
+	interpolateSplineMonotone, // @deprecated
+	interpolatorSplineMonotone,
 	interpolatorSplineMonotoneClosed,
 	interpolatorSplineMonotoneOpen
 } from './interpolate/splineMonotone';
 
+export { default as lerp } from './interpolate/lerp';
 export { default as samples } from './samples';
 export { default as displayable } from './displayable';
 export { clamp, clampRgb, clampChroma } from './clamp';
@@ -119,7 +116,7 @@ export { default as random } from './random';
 export { default as easingMidpoint } from './easing/midpoint';
 export { default as easingSmoothstep } from './easing/smoothstep';
 export { default as easingSmootherstep } from './easing/smootherstep';
-export { default as easingCosine } from './easing/cosine';
+export { default as easingInOutSine } from './easing/inOutSine';
 export { default as easingGamma } from './easing/gamma';
 
 export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
@@ -127,8 +124,7 @@ export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
 export { deficiencyProt, deficiencyDeuter, deficiencyTrit } from './deficiency';
 
 export {
-	// backwads compatibility
-	fixupHueShorter as interpolateHue,
+	fixupHueShorter as interpolateHue, // @deprecated
 	fixupHueShorter,
 	fixupHueLonger,
 	fixupHueIncreasing,
@@ -137,6 +133,5 @@ export {
 
 export {
 	fixupAlpha,
-	// backwards compatibility
-	fixupAlpha as interpolateAlpha
+	fixupAlpha as interpolateAlpha // @deprecated
 } from './fixup/alpha';

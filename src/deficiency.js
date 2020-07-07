@@ -1,6 +1,6 @@
 import converter from './converter';
 import prepare from './_prepare';
-import lerp from './util/lerp';
+import lerp from './interpolate/lerp';
 
 let rgb = converter('rgb');
 

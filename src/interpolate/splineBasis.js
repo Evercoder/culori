@@ -35,7 +35,7 @@ const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 	);
 };
 
-const interpolatorSplineBasisClamped = arr => t => {
+const interpolatorSplineBasis = arr => t => {
 	let classes = arr.length - 1;
 	let i = t === 1 ? classes - 1 : Math.floor(t * classes);
 	return bspline(
@@ -66,8 +66,7 @@ const interpolatorSplineBasisOpen = arr => t => {
 const interpolateSplineBasis = (fixup, type = 'default', γ = 1) => arr => {
 	let ease = gamma(γ);
 	if (type === 'default') {
-		return t =>
-			interpolatorSplineBasisClamped((fixup || identity)(arr))(ease(t));
+		return t => interpolatorSplineBasis((fixup || identity)(arr))(ease(t));
 	} else if (type === 'closed') {
 		return t =>
 			interpolatorSplineBasisClosed((fixup || identity)(arr))(ease(t));
@@ -79,7 +78,7 @@ const interpolateSplineBasis = (fixup, type = 'default', γ = 1) => arr => {
 
 export {
 	interpolateSplineBasis,
-	interpolatorSplineBasisClamped,
+	interpolatorSplineBasis,
 	interpolatorSplineBasisClosed,
 	interpolatorSplineBasisOpen
 };
