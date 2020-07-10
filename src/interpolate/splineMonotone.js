@@ -1,4 +1,5 @@
 import identity from '../util/identity';
+import gamma from '../easing/gamma';
 
 /* 
 	Monotone spline
@@ -16,25 +17,26 @@ import identity from '../util/identity';
 	(Reference thanks to `d3/d3-shape`)
 */
 
-const sgn = Math.sign,
-	min = Math.min,
-	abs = Math.abs;
+const sgn = Math.sign;
+const min = Math.min;
+const abs = Math.abs;
 
 const monotone = (y_im1, y_i, y_ip1, y_ip2, h, t) => {
 	let h2 = h * h;
 	let t2 = t * t;
 	let t3 = t2 * t;
 
-	let s_im1 = (y_i - y_im1) / h;
 	let s_i = (y_ip1 - y_i) / h;
-	let s_ip1 = (y_ip2 - y_ip1) / h;
 
+	let s_im1 = (y_i - y_im1) / h;
+	let p_i = (y_ip1 - y_im1) / (2 * h);
 	let yp_i =
-		(sgn(s_im1) + sgn(s_i)) *
-		min(abs(s_im1), abs(s_i), 0.5 * abs((y_ip1 - y_im1) / (2 * h)));
+		(sgn(s_im1) + sgn(s_i)) * min(abs(s_im1), abs(s_i), 0.5 * abs(p_i));
+
+	let s_ip1 = (y_ip2 - y_ip1) / h;
+	let p_ip1 = (y_ip2 - y_i) / (2 * h);
 	let yp_ip1 =
-		(sgn(s_i) + sgn(s_ip1)) *
-		min(abs(s_i), abs(s_ip1), 0.5 * abs((y_ip2 - y_i) / (2 * h)));
+		(sgn(s_i) + sgn(s_ip1)) * min(abs(s_i), abs(s_ip1), 0.5 * abs(p_ip1));
 
 	return (
 		((yp_i + yp_ip1 - 2 * s_i) / h2) * t3 +
@@ -44,47 +46,80 @@ const monotone = (y_im1, y_i, y_ip1, y_ip2, h, t) => {
 	);
 };
 
-export default (
-	normalize = identity,
-	type = 'default',
-	γ = 1
-) => original_arr => {
-	let arr = (normalize || identity)(original_arr);
+const interpolatorSplineMonotone = arr => t => {
+	let n = arr.length - 1;
+	let i;
+	if (t === 1) {
+		i = n - 1;
+		t = 1;
+	} else {
+		i = Math.floor(t * n);
+	}
+	return monotone(
+		i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
+		arr[i],
+		arr[i + 1],
+		i < n - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
+		1 / n,
+		t - i / n
+	);
+};
 
-	return t => {
-		t = Math.pow(t, γ);
+const interpolatorSplineMonotoneClosed = arr => t => {
+	let n = arr.length - 1;
+	let i;
+	if (t === 1) {
+		i = n - 1;
+		t = 1;
+	} else {
+		i = Math.floor(t * n);
+	}
+	return monotone(
+		arr[(i - 1 + arr.length) % arr.length],
+		arr[i],
+		arr[(i + 1) % arr.length],
+		arr[(i + 2) % arr.length],
+		1 / n,
+		t - i / n
+	);
+};
 
-		let n = arr.length - 1;
+const interpolatorSplineMonotoneOpen = arr => t => {
+	let n = arr.length - 1;
+	let i;
+	if (t === 1) {
+		i = n - 1;
+		t = 1;
+	} else {
+		i = Math.floor(t * n);
+	}
+	return monotone(
+		arr[(i - 1 + arr.length) % arr.length],
+		arr[i],
+		arr[(i + 1) % arr.length],
+		arr[(i + 2) % arr.length],
+		1 / n,
+		t - i / n
+	);
+};
 
-		let i;
-		if (t === 1) {
-			i = n - 1;
-			t = 1;
-		} else {
-			i = Math.floor(t * n);
-		}
+const interpolateSplineMonotone = (fixup, type = 'default', γ = 1) => arr => {
+	let ease = gamma(γ);
+	if (type === 'closed') {
+		return t =>
+			interpolatorSplineMonotoneClosed((fixup || identity)(arr))(ease(t));
+	} else if (type === 'open') {
+		return t =>
+			interpolatorSplineMonotoneOpen((fixup || identity)(arr))(ease(t));
+	} else if (type === 'default') {
+		return t =>
+			interpolatorSplineMonotone((fixup || identity)(arr))(ease(t));
+	}
+};
 
-		switch (type) {
-			case 'default':
-				return monotone(
-					i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
-					arr[i],
-					arr[i + 1],
-					i < n - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
-					1 / n,
-					t - i / n
-				);
-			case 'closed':
-				return monotone(
-					arr[(i - 1 + arr.length) % arr.length],
-					arr[i],
-					arr[(i + 1) % arr.length],
-					arr[(i + 2) % arr.length],
-					1 / n,
-					t - i / n
-				);
-			case 'open':
-				throw new Error('open monotone spline not implemented yet');
-		}
-	};
+export {
+	interpolateSplineMonotone,
+	interpolatorSplineMonotone,
+	interpolatorSplineMonotoneOpen,
+	interpolatorSplineMonotoneClosed
 };

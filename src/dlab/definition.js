@@ -2,8 +2,8 @@ import convertDlabToLab from './convertDlabToLab';
 import convertDlabToRgb from './convertDlabToRgb';
 import convertLabToDlab from './convertLabToDlab';
 import convertRgbToDlab from './convertRgbToDlab';
-import interpolateLinear from '../interpolate/linear';
-import interpolateAlpha from '../interpolate/alpha';
+import { interpolatorLinear } from '../interpolate/linear';
+import { fixupAlpha } from '../fixup/alpha';
 
 export default {
 	mode: 'dlab',
@@ -22,9 +22,12 @@ export default {
 		b: [-43.002, 44.424]
 	},
 	interpolate: {
-		l: interpolateLinear(),
-		a: interpolateLinear(),
-		b: interpolateLinear(),
-		alpha: interpolateLinear(interpolateAlpha)
+		l: interpolatorLinear,
+		a: interpolatorLinear,
+		b: interpolatorLinear,
+		alpha: {
+			use: interpolatorLinear,
+			fixup: fixupAlpha
+		}
 	}
 };

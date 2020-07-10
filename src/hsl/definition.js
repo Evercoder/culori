@@ -1,9 +1,9 @@
 import convertHslToRgb from './convertHslToRgb';
 import convertRgbToHsl from './convertRgbToHsl';
 import parseHsl from './parseHsl';
-import interpolateHue from '../interpolate/hue';
-import interpolateAlpha from '../interpolate/alpha';
-import interpolateLinear from '../interpolate/linear';
+import { fixupHueShorter } from '../fixup/hue';
+import { fixupAlpha } from '../fixup/alpha';
+import { interpolatorLinear } from '../interpolate/linear';
 
 export default {
 	mode: 'hsl',
@@ -19,9 +19,9 @@ export default {
 	},
 	parsers: [parseHsl],
 	interpolate: {
-		h: interpolateLinear(interpolateHue),
-		s: interpolateLinear(),
-		l: interpolateLinear(),
-		alpha: interpolateLinear(interpolateAlpha)
+		h: { use: interpolatorLinear, fixup: fixupHueShorter },
+		s: interpolatorLinear,
+		l: interpolatorLinear,
+		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };

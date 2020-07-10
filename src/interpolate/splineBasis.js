@@ -1,4 +1,5 @@
 import identity from '../util/identity';
+import gamma from '../easing/gamma';
 
 /*
 	Basis spline
@@ -34,38 +35,50 @@ const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 	);
 };
 
-export default (
-	normalize = identity,
-	type = 'default',
-	γ = 1
-) => original_arr => {
-	let arr = (normalize || identity)(original_arr);
+const interpolatorSplineBasis = arr => t => {
+	let classes = arr.length - 1;
+	let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+	return bspline(
+		i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
+		arr[i],
+		arr[i + 1],
+		i < classes - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
+		(t - i / classes) * classes
+	);
+};
 
-	return t => {
-		t = Math.pow(t, γ);
+const interpolatorSplineBasisClosed = arr => t => {
+	let classes = arr.length - 1;
+	let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+	return bspline(
+		arr[(i - 1 + arr.length) % arr.length],
+		arr[i],
+		arr[(i + 1) % arr.length],
+		arr[(i + 2) % arr.length],
+		(t - i / classes) * classes
+	);
+};
 
-		let classes = arr.length - 1;
-		let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+const interpolatorSplineBasisOpen = arr => t => {
+	throw new Error('open basis spline is not yet implemented');
+};
 
-		switch (type) {
-			case 'default':
-				return bspline(
-					i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
-					arr[i],
-					arr[i + 1],
-					i < classes - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
-					(t - i / classes) * classes
-				);
-			case 'closed':
-				return bspline(
-					arr[(i - 1 + arr.length) % arr.length],
-					arr[i],
-					arr[(i + 1) % arr.length],
-					arr[(i + 2) % arr.length],
-					(t - i / classes) * classes
-				);
-			case 'open':
-				throw new Error('open basis spline is not yet implemented');
-		}
-	};
+const interpolateSplineBasis = (fixup, type = 'default', γ = 1) => arr => {
+	let ease = gamma(γ);
+	if (type === 'default') {
+		return t => interpolatorSplineBasis((fixup || identity)(arr))(ease(t));
+	} else if (type === 'closed') {
+		return t =>
+			interpolatorSplineBasisClosed((fixup || identity)(arr))(ease(t));
+	} else if (type === 'open') {
+		return t =>
+			interpolatorSplineBasisOpen((fixup || identity)(arr))(ease(t));
+	}
+};
+
+export {
+	interpolateSplineBasis,
+	interpolatorSplineBasis,
+	interpolatorSplineBasisClosed,
+	interpolatorSplineBasisOpen
 };

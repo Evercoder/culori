@@ -1,5 +1,10 @@
-import splineBasis from './splineBasis';
+import {
+	interpolatorSplineBasisClosed,
+	interpolatorSplineBasisOpen,
+	interpolatorSplineBasis
+} from './splineBasis';
 import identity from '../util/identity';
+import gamma from '../easing/gamma';
 
 const solve = v => {
 	let i;
@@ -29,11 +34,30 @@ const solve = v => {
 	return sol;
 };
 
-export default (
-	normalize = identity,
-	type = 'default',
-	γ = 1
-) => original_arr => {
-	let arr = (normalize || identity)(original_arr);
-	return splineBasis(identity, type, γ)(solve(arr));
+const interpolatorSplineNatural = arr =>
+	interpolatorSplineBasisClamped(solve(arr));
+const interpolatorSplineNaturalClosed = arr =>
+	interpolatorSplineBasisClosed(solve(arr));
+const interpolatorSplineNaturalOpen = arr =>
+	interpolatorSplineBasisOpen(solve(arr));
+
+const interpolateSplineNatural = (fixup, type = 'default', γ = 1) => arr => {
+	let ease = gamma(γ);
+	if (type === 'default') {
+		return t =>
+			interpolatorSplineNatural((fixup || identity)(arr))(ease(t));
+	} else if (type === 'closed') {
+		return t =>
+			interpolatorSplineNaturalClosed((fixup || identity)(arr))(ease(t));
+	} else if (type === 'open') {
+		return t =>
+			interpolatorSplineNaturalOpen((fixup || identity)(arr))(ease(t));
+	}
+};
+
+export {
+	interpolateSplineNatural,
+	interpolatorSplineNatural,
+	interpolatorSplineNaturalClosed,
+	interpolatorSplineNaturalOpen
 };
