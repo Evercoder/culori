@@ -19,6 +19,18 @@ const formatHex = c => {
 	return '#' + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
 };
 
+const formatHex8 = c => {
+	let color = rgb(c);
+
+	if (color === undefined) {
+		return undefined;
+	}
+
+	let a = fixup(color.alpha !== undefined ? color.alpha : 1);
+
+	return formatHex(color) + ((1 << 8) | a).toString(16).slice(1);
+};
+
 const formatRgb = c => {
 	let color = rgb(c);
 
@@ -50,4 +62,4 @@ const formatter = (format = 'rgb') => {
 	return undefined;
 };
 
-export { formatHex, formatRgb, formatter };
+export { formatHex, formatHex8, formatRgb, formatter };

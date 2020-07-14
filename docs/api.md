@@ -94,6 +94,14 @@ Returns the hex string for a color. The color's `alpha` channel is omitted, and 
 culori.formatHex('red'); // ⇒ "#ff0000"
 ```
 
+<a name="culoriFormatHex8" href="#culoriFormatHex8">#</a> culori.**formatHex8**(_color_) → _String_ [Source](https://github.com/evercoder/culori/blob/master/src/formatter.js)
+
+Returns the 8-character hex string for a color. The red, green, blue, and alpha channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
+
+```js
+culori.formatHex8({ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 }); // ⇒ "#ff000080"
+```
+
 <a name="formatRgb" href="#formatRgb">#</a> culori.**formatRgb**(_color_) → _String_ [Source](https://github.com/evercoder/culori/blob/master/src/formatter.js)
 
 Returns the `rgb(…)` / `rgba(…)` string for a color. Fully opaque colors will be serialized as `rgb()`, and semi-transparent colors as `rgba()`, in accordance with the [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value). Like in the case of `formatHex`, the red, green, and blue channels are clamped to the interval `[0, 255]`.
