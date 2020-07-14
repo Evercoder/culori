@@ -4,7 +4,11 @@ import normalizePositions from '../util/normalizePositions';
 import easingMidpoint from '../easing/midpoint';
 import identity from '../util/identity';
 
-export default (colors, mode = 'rgb', interpolations) => {
+const isfn = o => typeof o === 'function';
+const isobj = o => o && typeof o === 'object';
+const isnum = o => typeof o === 'number';
+
+export default (colors, mode = 'rgb', overrides, transforms) => {
 	let def = getModeDefinition(mode);
 	let conv = converter(mode);
 
@@ -12,11 +16,15 @@ export default (colors, mode = 'rgb', interpolations) => {
 	let positions = [];
 	let fns = {};
 
+	let tpre = isobj(transforms) && transforms.pre ? transforms.pre : undefined;
+	let tpost =
+		isobj(transforms) && transforms.post ? transforms.post : undefined;
+
 	colors.forEach(val => {
 		if (Array.isArray(val)) {
 			conv_colors.push(conv(val[0]));
 			positions.push(val[1]);
-		} else if (typeof val === 'number' || typeof val === 'function') {
+		} else if (isnum(val) || isfn(val)) {
 			// Color interpolation hint or easing function
 			fns[positions.length] = val;
 		} else {
@@ -28,7 +36,9 @@ export default (colors, mode = 'rgb', interpolations) => {
 	normalizePositions(positions);
 
 	let zipped = def.channels.reduce((res, channel) => {
-		res[channel] = conv_colors.map(color => color[channel]);
+		res[channel] = conv_colors.map(color =>
+			tpre ? tpre(color[channel], channel, color) : color[channel]
+		);
 		return res;
 	}, {});
 
@@ -37,27 +47,21 @@ export default (colors, mode = 'rgb', interpolations) => {
 
 	const interpolator = (ch, values) => {
 		let ifn, ffn;
-
-		if (typeof def.interpolate[ch] === 'function') {
+		if (isfn(def.interpolate[ch])) {
 			ifn = def.interpolate[ch];
 			ffn = identity;
 		} else {
 			ifn = def.interpolate[ch].use;
 			ffn = def.interpolate[ch].fixup || identity;
 		}
-
-		if (typeof interpolations === 'function') {
-			ifn = interpolations;
-		} else if (typeof interpolations === 'object') {
-			if (typeof interpolations[ch] === 'function') {
-				ifn = interpolations[ch];
-			} else if (typeof interpolations[ch] === 'object') {
-				if (typeof interpolations[ch].use === 'function') {
-					ifn = interpolations[ch].use;
-				}
-				if (typeof interpolations[ch].fixup === 'function') {
-					ffn = interpolations[ch].fixup;
-				}
+		if (isfn(overrides)) {
+			ifn = overrides;
+		} else if (isobj(overrides)) {
+			if (isfn(overrides[ch])) {
+				ifn = overrides[ch];
+			} else if (isobj(overrides[ch])) {
+				ifn = isfn(overrides[ch].use) ? overrides[ch].use : ifn;
+				ffn = isfn(overrides[ch].fixup) ? overrides[ch].fixup : ffn;
 			}
 		}
 		return ifn(ffn(values));
@@ -96,7 +100,7 @@ export default (colors, mode = 'rgb', interpolations) => {
 		// use either the local easing, or the global easing, if any
 		let fn = fns[idx] || fns[0];
 		if (fn !== undefined) {
-			if (typeof fn === 'number') {
+			if (isnum(fn)) {
 				fn = easingMidpoint((fn - start) / delta);
 			}
 			P = fn(P);
@@ -104,9 +108,22 @@ export default (colors, mode = 'rgb', interpolations) => {
 
 		let t0 = (idx - 1 + P) / n;
 
-		return def.channels.reduce(
+		let icolor = def.channels.reduce(
 			(res, channel) => {
 				let val = interpolators[channel](t0);
+				if (val !== undefined) {
+					res[channel] = val;
+				}
+				return res;
+			},
+			{ mode }
+		);
+		if (!tpost) {
+			return icolor;
+		}
+		return def.channels.reduce(
+			(res, channel) => {
+				let val = tpost(icolor[channel], channel, icolor);
 				if (val !== undefined) {
 					res[channel] = val;
 				}

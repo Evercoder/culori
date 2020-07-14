@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { interpolate, formatHex, rgb, samples } from '../src/index';
+import { interpolate, formatHex, formatHex8, rgb, samples } from '../src/index';
 
 tape('interpolate between black and white in RGB', function (test) {
 	let grays = interpolate(['#fff', '#000']);
