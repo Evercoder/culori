@@ -11,7 +11,7 @@ const mapper = (fn, mode = 'rgb') => {
 		return (channels || getModeDefinition(color.mode).channels).reduce(
 			(res, ch) => {
 				let v = fn(conv_color[ch], ch, conv_color, mode);
-				if (v !== undefined) {
+				if (v !== undefined && !isNaN(v)) {
 					res[ch] = v;
 				}
 				return res;

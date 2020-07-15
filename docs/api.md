@@ -512,7 +512,7 @@ multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 });
 
 All channels are included in the mapping, so you might want to exclude the `alpha` channel from your function, like we do above.
 
-Returning `undefined` from the function will omit that channel from the resulting color.
+Returning `undefined` or `NaN` from the function will omit that channel from the resulting color.
 
 #### Built-in mappings
 
