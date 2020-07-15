@@ -146,9 +146,11 @@ body {
 	font-family: var(--ff-main);
 	line-height: 1.5;
 	margin: 0;
-	background: var(--whitesmoke);
 
 	--aside-bg: var(--papayawhip);
+	--listing-bg: var(--whitesmoke);
+	--link-color: var(--indigo);
+	
 	--ff-main: sans-serif;
 	--ff-code: 'Consolas', monospace;
 }
@@ -237,14 +239,14 @@ h6 {
 }
 
 blockquote {
-	background: var(--papayawhip);
+	background: var(--aside-bg);
 	margin: 1em 0;
 	padding: 1em;
 	border-left: 0.25em solid rgba(0, 0, 0, 0.1);
 }
 
 a {
-	color: var(--navy);
+	color: var(--link-color);
 }
 
 a:visited {
@@ -280,6 +282,7 @@ pre[class*='language-'] {
 	margin: 1em 0;
 	padding: 1em 2em;
 	font-size: 1em;
+	background: var(--listing-bg);
 }
 
 :not(pre) > code[class*='language-'] {
