@@ -75,5 +75,6 @@
 		"jsxBracketSameLine": false,
 		"arrowParens": "avoid",
 		"printWidth": 80
-	}
+	},
+	"sideEffects": false
 }
