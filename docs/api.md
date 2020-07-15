@@ -159,7 +159,7 @@ approx(0.38393993);
 
 ## Interpolation
 
-<a name="interpolate" href="#interpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_, _interpolations_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js)
+<a name="interpolate" href="#interpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_, _interpolations_, _transform_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js)
 
 Returns an _interpolator_ in the _mode_ color space for an array of colors: a function that accepts a value _t_ in the interval `[0, 1]` and returns the interpolated color in the _mode_ color space.
 

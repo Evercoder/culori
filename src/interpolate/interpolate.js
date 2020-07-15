@@ -3,12 +3,13 @@ import { getModeDefinition } from '../modes';
 import normalizePositions from '../util/normalizePositions';
 import easingMidpoint from '../easing/midpoint';
 import identity from '../util/identity';
+import { mapper, mapAlphaMultiply, mapAlphaDivide } from '../map';
 
 const isfn = o => typeof o === 'function';
 const isobj = o => o && typeof o === 'object';
 const isnum = o => typeof o === 'number';
 
-export default (colors, mode = 'rgb', overrides, transforms) => {
+const interpolate_fn = (colors, mode = 'rgb', overrides, pre = identity) => {
 	let def = getModeDefinition(mode);
 	let conv = converter(mode);
 
@@ -16,19 +17,15 @@ export default (colors, mode = 'rgb', overrides, transforms) => {
 	let positions = [];
 	let fns = {};
 
-	let tpre = isobj(transforms) && transforms.pre ? transforms.pre : undefined;
-	let tpost =
-		isobj(transforms) && transforms.post ? transforms.post : undefined;
-
 	colors.forEach(val => {
 		if (Array.isArray(val)) {
-			conv_colors.push(conv(val[0]));
+			conv_colors.push(pre(conv(val[0])));
 			positions.push(val[1]);
 		} else if (isnum(val) || isfn(val)) {
 			// Color interpolation hint or easing function
 			fns[positions.length] = val;
 		} else {
-			conv_colors.push(conv(val));
+			conv_colors.push(pre(conv(val)));
 			positions.push(undefined);
 		}
 	});
@@ -36,9 +33,7 @@ export default (colors, mode = 'rgb', overrides, transforms) => {
 	normalizePositions(positions);
 
 	let zipped = def.channels.reduce((res, channel) => {
-		res[channel] = conv_colors.map(color =>
-			tpre ? tpre(color[channel], channel, color) : color[channel]
-		);
+		res[channel] = conv_colors.map(color => color[channel]);
 		return res;
 	}, {});
 
@@ -108,7 +103,7 @@ export default (colors, mode = 'rgb', overrides, transforms) => {
 
 		let t0 = (idx - 1 + P) / n;
 
-		let icolor = def.channels.reduce(
+		return def.channels.reduce(
 			(res, channel) => {
 				let val = interpolators[channel](t0);
 				if (val !== undefined) {
@@ -118,18 +113,26 @@ export default (colors, mode = 'rgb', overrides, transforms) => {
 			},
 			{ mode }
 		);
-		if (!tpost) {
-			return icolor;
-		}
-		return def.channels.reduce(
-			(res, channel) => {
-				let val = tpost(icolor[channel], channel, icolor);
-				if (val !== undefined) {
-					res[channel] = val;
-				}
-				return res;
-			},
-			{ mode }
-		);
 	};
 };
+
+const interpolate = (colors, mode = 'rgb', overrides) =>
+	interpolate_fn(colors, mode, overrides);
+
+const interpolateWith = (pre_map, post_map) => (
+	colors,
+	mode = 'rgb',
+	overrides
+) => {
+	let pre = mapper(pre_map, mode);
+	let post = mapper(post_map, mode);
+	let it = interpolate_fn(colors, mode, overrides, pre);
+	return t => post(it(t));
+};
+
+const interpolateWithPremultipliedAlpha = interpolateWith(
+	mapAlphaMultiply,
+	mapAlphaDivide
+);
+
+export { interpolate, interpolateWith, interpolateWithPremultipliedAlpha };

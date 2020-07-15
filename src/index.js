@@ -59,7 +59,11 @@ export {
 
 export { formatter, formatHex, formatHex8, formatRgb } from './formatter';
 export { default as round } from './round';
-export { default as interpolate } from './interpolate/interpolate';
+export {
+	interpolate,
+	interpolateWith,
+	interpolateWithPremultipliedAlpha
+} from './interpolate/interpolate';
 
 export {
 	interpolateLinear, // @deprecated
@@ -136,4 +140,4 @@ export {
 	fixupAlpha as interpolateAlpha // @deprecated
 } from './fixup/alpha';
 
-export { premultiplyAlpha } from './fixup/premultiply';
+export { mapper, mapAlphaMultiply, mapAlphaDivide } from './map';
