@@ -1,21 +1,29 @@
-import convertLabToLch from './convertLabToLch';
-import convertLchToLab from './convertLchToLab';
-import convertLchToRgb from './convertLchToRgb';
-import convertRgbToLch from './convertRgbToLch';
-import parseLch from './parseLch';
+/*
+	CIELChuv color space
+	--------------------
+
+	Reference: 
+
+		https://en.wikipedia.org/wiki/CIELUV
+ */
+
+import convertLuvToLchuv from './convertLuvToLchuv';
+import convertLchuvToLuv from './convertLchuvToLuv';
+import convertLchuvToRgb from './convertLchuvToRgb';
+import convertRgbToLchuv from './convertRgbToLchuv';
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
 import { interpolatorLinear } from '../interpolate/linear';
 
 export default {
-	mode: 'lch',
+	mode: 'lchuv',
 	output: {
-		lab: convertLchToLab,
-		rgb: convertLchToRgb
+		luv: convertLchuvToLuv,
+		rgb: convertLchuvToRgb
 	},
 	input: {
-		rgb: convertRgbToLch,
-		lab: convertLabToLch
+		rgb: convertRgbToLchuv,
+		luv: convertLuvToLchuv
 	},
 	channels: ['l', 'c', 'h', 'alpha'],
 	ranges: {
@@ -23,7 +31,6 @@ export default {
 		c: [0, 131.008],
 		h: [0, 360]
 	},
-	parsers: [parseLch],
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },
 		c: interpolatorLinear,
