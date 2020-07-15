@@ -150,7 +150,7 @@ body {
 	--aside-bg: var(--papayawhip);
 	--listing-bg: var(--whitesmoke);
 	--link-color: var(--indigo);
-	
+
 	--ff-main: sans-serif;
 	--ff-code: 'Consolas', monospace;
 }
@@ -245,7 +245,7 @@ blockquote {
 	border-left: 0.25em solid rgba(0, 0, 0, 0.1);
 }
 
-a {
+a:link {
 	color: var(--link-color);
 }
 
