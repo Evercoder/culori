@@ -1,5 +1,13 @@
 import tape from 'tape';
-import { interpolate, formatHex, rgb, samples } from '../src/index';
+import {
+	interpolate,
+	interpolateWith,
+	interpolateWithPremultipliedAlpha,
+	formatHex,
+	formatHex8,
+	rgb,
+	samples
+} from '../src/index';
 
 tape('interpolate between black and white in RGB', function (test) {
 	let grays = interpolate(['#fff', '#000']);
@@ -204,6 +212,30 @@ tape('color interpolation hints', t => {
 		g: 0.372411622926361,
 		b: 0
 	});
+
+	t.end();
+});
+
+tape('interpolateWith()', t => {
+	let colors = ['red', ['transparent', 0.33], 'blue'];
+	let it = interpolate(colors);
+	let it2 = interpolateWith(v => v / 2)(colors);
+
+	t.equal(formatHex8(it2(0.25)), '#1f00003e', 'w premultiplication');
+	t.equal(formatHex8(it2(0.75)), '#000050a0', 'w premultiplication');
+
+	t.end();
+});
+
+tape('interpolateWithPremultipliedAlpha()', t => {
+	let colors = ['red', 'transparent', 'blue'];
+	let it = interpolate(colors);
+	let it2 = interpolateWithPremultipliedAlpha(colors);
+
+	t.equal(formatHex8(it(0.25)), '#80000080', 'w/o premultiplication');
+	t.equal(formatHex8(it(0.75)), '#00008080', 'w/o premultiplication');
+	t.equal(formatHex8(it2(0.25)), '#ff000080', 'w premultiplication');
+	t.equal(formatHex8(it2(0.75)), '#0000ff80', 'w premultiplication');
 
 	t.end();
 });

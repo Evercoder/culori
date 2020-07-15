@@ -57,9 +57,13 @@ export {
 	yiq
 };
 
-export { formatter, formatHex, formatRgb } from './formatter';
+export { formatter, formatHex, formatHex8, formatRgb } from './formatter';
 export { default as round } from './round';
-export { default as interpolate } from './interpolate/interpolate';
+export {
+	interpolate,
+	interpolateWith,
+	interpolateWithPremultipliedAlpha
+} from './interpolate/interpolate';
 
 export {
 	interpolateLinear, // @deprecated
@@ -135,3 +139,5 @@ export {
 	fixupAlpha,
 	fixupAlpha as interpolateAlpha // @deprecated
 } from './fixup/alpha';
+
+export { mapper, mapAlphaMultiply, mapAlphaDivide } from './map';

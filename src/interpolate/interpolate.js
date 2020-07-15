@@ -3,8 +3,13 @@ import { getModeDefinition } from '../modes';
 import normalizePositions from '../util/normalizePositions';
 import easingMidpoint from '../easing/midpoint';
 import identity from '../util/identity';
+import { mapper, mapAlphaMultiply, mapAlphaDivide } from '../map';
 
-export default (colors, mode = 'rgb', interpolations) => {
+const isfn = o => typeof o === 'function';
+const isobj = o => o && typeof o === 'object';
+const isnum = o => typeof o === 'number';
+
+const interpolate_fn = (colors, mode = 'rgb', overrides, pre = identity) => {
 	let def = getModeDefinition(mode);
 	let conv = converter(mode);
 
@@ -14,13 +19,13 @@ export default (colors, mode = 'rgb', interpolations) => {
 
 	colors.forEach(val => {
 		if (Array.isArray(val)) {
-			conv_colors.push(conv(val[0]));
+			conv_colors.push(pre(conv(val[0])));
 			positions.push(val[1]);
-		} else if (typeof val === 'number' || typeof val === 'function') {
+		} else if (isnum(val) || isfn(val)) {
 			// Color interpolation hint or easing function
 			fns[positions.length] = val;
 		} else {
-			conv_colors.push(conv(val));
+			conv_colors.push(pre(conv(val)));
 			positions.push(undefined);
 		}
 	});
@@ -37,27 +42,21 @@ export default (colors, mode = 'rgb', interpolations) => {
 
 	const interpolator = (ch, values) => {
 		let ifn, ffn;
-
-		if (typeof def.interpolate[ch] === 'function') {
+		if (isfn(def.interpolate[ch])) {
 			ifn = def.interpolate[ch];
 			ffn = identity;
 		} else {
 			ifn = def.interpolate[ch].use;
 			ffn = def.interpolate[ch].fixup || identity;
 		}
-
-		if (typeof interpolations === 'function') {
-			ifn = interpolations;
-		} else if (typeof interpolations === 'object') {
-			if (typeof interpolations[ch] === 'function') {
-				ifn = interpolations[ch];
-			} else if (typeof interpolations[ch] === 'object') {
-				if (typeof interpolations[ch].use === 'function') {
-					ifn = interpolations[ch].use;
-				}
-				if (typeof interpolations[ch].fixup === 'function') {
-					ffn = interpolations[ch].fixup;
-				}
+		if (isfn(overrides)) {
+			ifn = overrides;
+		} else if (isobj(overrides)) {
+			if (isfn(overrides[ch])) {
+				ifn = overrides[ch];
+			} else if (isobj(overrides[ch])) {
+				ifn = isfn(overrides[ch].use) ? overrides[ch].use : ifn;
+				ffn = isfn(overrides[ch].fixup) ? overrides[ch].fixup : ffn;
 			}
 		}
 		return ifn(ffn(values));
@@ -96,7 +95,7 @@ export default (colors, mode = 'rgb', interpolations) => {
 		// use either the local easing, or the global easing, if any
 		let fn = fns[idx] || fns[0];
 		if (fn !== undefined) {
-			if (typeof fn === 'number') {
+			if (isnum(fn)) {
 				fn = easingMidpoint((fn - start) / delta);
 			}
 			P = fn(P);
@@ -116,3 +115,24 @@ export default (colors, mode = 'rgb', interpolations) => {
 		);
 	};
 };
+
+const interpolate = (colors, mode = 'rgb', overrides) =>
+	interpolate_fn(colors, mode, overrides);
+
+const interpolateWith = (premap, postmap) => (
+	colors,
+	mode = 'rgb',
+	overrides
+) => {
+	let pre = premap ? mapper(premap, mode) : undefined;
+	let post = postmap ? mapper(postmap, mode) : identity;
+	let it = interpolate_fn(colors, mode, overrides, pre);
+	return t => post(it(t));
+};
+
+const interpolateWithPremultipliedAlpha = interpolateWith(
+	mapAlphaMultiply,
+	mapAlphaDivide
+);
+
+export { interpolate, interpolateWith, interpolateWithPremultipliedAlpha };

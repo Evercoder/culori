@@ -34,8 +34,7 @@ const solve = v => {
 	return sol;
 };
 
-const interpolatorSplineNatural = arr =>
-	interpolatorSplineBasisClamped(solve(arr));
+const interpolatorSplineNatural = arr => interpolatorSplineBasis(solve(arr));
 const interpolatorSplineNaturalClosed = arr =>
 	interpolatorSplineBasisClosed(solve(arr));
 const interpolatorSplineNaturalOpen = arr =>
