@@ -144,10 +144,10 @@
 
 body {
 	font-family: var(--ff-main);
-	line-height: 1.5;
+	line-height: 1.6;
 	margin: 0;
 
-	--aside-bg: var(--papayawhip);
+	--aside-bg: var(--lavender);
 	--listing-bg: var(--whitesmoke);
 	--link-color: var(--indigo);
 
@@ -158,7 +158,21 @@ body {
 .container {
 	max-width: 50rem;
 	margin: 0 auto;
-	padding: 1rem;
+	padding: 0 1rem;
+}
+
+.logo {
+	font-size: 2em;
+	padding: 0.5em 0;
+	font-weight: bold;
+}
+
+.logo span {
+	font-weight: normal;
+	opacity: 0.75;
+	font-size: 0.6em;
+	display: inline-block;
+	vertical-align: top;
 }
 
 nav .active {
@@ -190,12 +204,9 @@ article img {
 	max-width: 100%;
 }
 
-header {
-	background: var(--aside-bg);
-}
-
+header,
 footer {
-	padding: 2em 0;
+	padding: 0.25em 0;
 	background: var(--aside-bg);
 }
 
@@ -249,10 +260,6 @@ a:link {
 	color: var(--link-color);
 }
 
-a:visited {
-	color: currentColor;
-}
-
 pre,
 code,
 kbd,
@@ -280,9 +287,10 @@ pre[class*='language-'] {
 	overflow: auto;
 	position: relative;
 	margin: 1em 0;
-	padding: 1em 2em;
+	padding: 1em;
 	font-size: 1em;
 	background: var(--listing-bg);
+	border-left: 0.25em solid rgba(0, 0, 0, 0.1);
 }
 
 :not(pre) > code[class*='language-'] {
