@@ -218,7 +218,6 @@ tape('color interpolation hints', t => {
 
 tape('interpolateWith()', t => {
 	let colors = ['red', ['transparent', 0.33], 'blue'];
-	let it = interpolate(colors);
 	let it2 = interpolateWith(v => v / 2)(colors);
 
 	t.equal(formatHex8(it2(0.25)), '#1f00001f', 'w premultiplication');

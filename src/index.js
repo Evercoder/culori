@@ -9,6 +9,7 @@ import lchDef from './lch/definition';
 import cubehelixDef from './cubehelix/definition';
 import dlabDef from './dlab/definition';
 import dlchDef from './dlch/definition';
+import xyzDef from './xyz/definition';
 import yiqDef from './yiq/definition';
 
 import { defineMode } from './modes';
@@ -26,6 +27,7 @@ defineMode(cubehelixDef);
 defineMode(dlabDef);
 defineMode(dlchDef);
 defineMode(yiqDef);
+defineMode(xyzDef);
 
 let rgb = converter('rgb');
 let lrgb = converter('lrgb');
@@ -39,6 +41,7 @@ let cubehelix = converter('cubehelix');
 let dlab = converter('dlab');
 let dlch = converter('dlch');
 let yiq = converter('yiq');
+let xyz = converter('xyz');
 
 export {
 	defineMode,
@@ -54,7 +57,8 @@ export {
 	cubehelix,
 	dlab,
 	dlch,
-	yiq
+	yiq,
+	xyz
 };
 
 export { formatter, formatHex, formatHex8, formatRgb } from './formatter';

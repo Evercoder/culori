@@ -83,6 +83,7 @@ The available modes (color spaces) are listed below. For convenience, each color
 | `lch`       | LCh color space            | culori.**lch**(_color_)       |
 | `lrgb`      | Linearized RGB color space | culori.**lrgb**(_color_)      |
 | `rgb`       | RGB color space            | culori.**rgb**(_color_)       |
+| `xyz`       | XYZ D50 color space        | culori.**xyz**(_color_)       |
 | `yiq`       | YIQ color space            | culori.**yiq**(_color_)       |
 
 ### Formatting

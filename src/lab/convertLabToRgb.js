@@ -1,5 +1,5 @@
 import convertLabToXyz from './convertLabToXyz';
-import convertXyzToRgb from './convertXyzToRgb';
+import convertXyzToRgb from '../xyz/convertXyzToRgb';
 
 export default lab => {
 	let res = convertXyzToRgb(convertLabToXyz(lab));

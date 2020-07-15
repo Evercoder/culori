@@ -1,16 +1,22 @@
-import { Xn, Yn, Zn, k, e } from './constants';
+import { Xn, Yn, Zn, k, e } from '../xyz/constants';
 
-let fn = v => Math.pow(v, 3) > e ? Math.pow(v, 3) : (116 * v - 16) / k;
+let fn = v => (Math.pow(v, 3) > e ? Math.pow(v, 3) : (116 * v - 16) / k);
 
-export default ({ l, a, b }) => {
-
+export default ({ l, a, b, alpha }) => {
 	let fy = (l + 16) / 116;
- 	let fx = a / 500 + fy;
- 	let fz = fy - b / 200;
+	let fx = a / 500 + fy;
+	let fz = fy - b / 200;
 
-	return {
+	let res = {
+		mode: 'xyz',
 		x: fn(fx) * Xn,
 		y: fn(fy) * Yn,
 		z: fn(fz) * Zn
 	};
+
+	if (alpha !== undefined) {
+		res.alpha = alpha;
+	}
+
+	return res;
 };
