@@ -1,5 +1,7 @@
 import convertLabToRgb from './convertLabToRgb';
+import convertLabToXyz from './convertLabToXyz';
 import convertRgbToLab from './convertRgbToLab';
+import convertXyzToLab from './convertXyzToLab';
 import parseLab from './parseLab';
 import { interpolatorLinear } from '../interpolate/linear';
 import { fixupAlpha } from '../fixup/alpha';
@@ -7,9 +9,11 @@ import { fixupAlpha } from '../fixup/alpha';
 export default {
 	mode: 'lab',
 	output: {
+		xyz: convertLabToXyz,
 		rgb: convertLabToRgb
 	},
 	input: {
+		xyz: convertXyzToLab,
 		rgb: convertRgbToLab
 	},
 	channels: ['l', 'a', 'b', 'alpha'],

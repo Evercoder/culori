@@ -122,6 +122,22 @@ The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an 
 | I       | `[-0.593, 0.593]` | In-phase (orange-blue axis)    |
 | Q       | `[-0.520, 0.520]` | Quadrature (green-purple axis) |
 
+## XYZ
+
+The [CIEXYZ color space](https://en.wikipedia.org/wiki/CIE_1931_color_space).
+
+### `xyz`
+
+The D50 XYZ color space.
+
+It contains the following channels:
+
+| Channel | Range        | Description |
+| ------- | ------------ | ----------- |
+| X       | `[0, 0.962]` | ?           |
+| Y       | `[0, 0.997]` | ?           |
+| Z       | `[0, 0.823]` | ?           |
+
 ## Cubehelix
 
 [The Cubehelix color scheme](https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/) was described by Dave Green in this paper:
