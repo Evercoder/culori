@@ -1,47 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>
-		 
-			API Reference &middot; culori
-		
-	</title>
+	<head>
+		<meta charset="utf-8" />
+		<title>
+			 API Reference &middot; culori 
+		</title>
 
-		
-	<link rel='stylesheet' href='/css/main.css'/>
-	<link rel='stylesheet' href='/css/highlight.css' media='print' onload="this.media='all'"/>
-	
-</head>
-<body>
-	<header>
-	<a href='/'>culori</a>
-
-	<nav>
-		<ul>
-		
-			<li>
-				<a href='/getting-started'>/getting-started</a>
-			</li>
-		
-			<li>
-				<a href='/api'>/api</a>
-			</li>
-		
-			<li>
-				<a href='/color-spaces'>/color-spaces</a>
-			</li>
-		
-			<li>
-				<a href='/resources'>/resources</a>
-			</li>
-		
-		</ul>
-	</nav>
+		<link rel="stylesheet" href='/css/main.css' />
+	</head>
+	<body>
+		<header>
+	<div class="container">
+		<div class="logo">
+			<a href='/'>culori</a>
+			v0.12.1
+		</div>
+		<nav>
+			<ul><li class="">
+					<a href="/">Home</a>
+				</li><li class="">
+					<a href="/getting-started/">Getting Started</a>
+				</li><li class="active ">
+					<a href="/api/">API Reference</a>
+				</li><li class="">
+					<a href="/color-spaces/">Color Spaces</a>
+				</li><li class="">
+					<a href="/resources/">Resources</a>
+				</li></ul>
+		</nav>
+	</div>
 </header>
-	<article>
-		<h1>API Reference</h1>
-		<h2>Color representation</h2>
+
+		<div class="container">
+			<article>
+				<h1>API Reference</h1>
+				<h2>Color representation</h2>
 <p>Culori does not have a <em>Color</em> class. Instead, it uses plain objects to represent colors:</p>
 <pre class="language-js"><code class="language-js"><span class="token comment">// A color in the RGB space</span><br><span class="token punctuation">{</span><br>  mode<span class="token operator">:</span> <span class="token string">'rgb'</span><span class="token punctuation">,</span><br>  r<span class="token operator">:</span> <span class="token number">0.1</span><span class="token punctuation">,</span><br>  g<span class="token operator">:</span> <span class="token number">0.2</span><span class="token punctuation">,</span><br>  b<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><br>  alpha<span class="token operator">:</span> <span class="token number">1</span><br><span class="token punctuation">}</span></code></pre>
 <p>The object needs to have a <code>mode</code> property that identifies the color space, and values for each channel in that particular color space. See the <a href="./color-spaces">Color Spaces</a> section for the channels expected of each color space. Optionally, the <code>alpha</code> property is used for the color's alpha channel.</p>
@@ -423,9 +416,17 @@
 </ul>
 <p>These constrains make sure <code>differenceEuclidean()</code> works as expected.</p>
 
-	</article>
-	<footer>
-	Source code available on <a href='https://github.com/evercoder/culori'>GitHub</a>
+			</article>
+		</div>
+		<footer>
+	<div class="container">
+		<p>
+			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Source
+			code available on
+			<a href="https://github.com/evercoder/culori">GitHub</a>.
+		</p>
+	</div>
 </footer>
-</body>
+
+	</body>
 </html>

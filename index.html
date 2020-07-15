@@ -1,47 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>
-		
-			culori
-		
-	</title>
+	<head>
+		<meta charset="utf-8" />
+		<title>
+			 Home &middot; culori 
+		</title>
 
-		
-	<link rel='stylesheet' href='/css/main.css'/>
-	<link rel='stylesheet' href='/css/highlight.css' media='print' onload="this.media='all'"/>
-	
-</head>
-<body>
-	<header>
-	<a href='/'>culori</a>
-
-	<nav>
-		<ul>
-		
-			<li>
-				<a href='/getting-started'>/getting-started</a>
-			</li>
-		
-			<li>
-				<a href='/api'>/api</a>
-			</li>
-		
-			<li>
-				<a href='/color-spaces'>/color-spaces</a>
-			</li>
-		
-			<li>
-				<a href='/resources'>/resources</a>
-			</li>
-		
-		</ul>
-	</nav>
+		<link rel="stylesheet" href='/css/main.css' />
+	</head>
+	<body>
+		<header>
+	<div class="container">
+		<div class="logo">
+			<a href='/'>culori</a>
+			v0.12.1
+		</div>
+		<nav>
+			<ul><li class="active ">
+					<a href="/">Home</a>
+				</li><li class="">
+					<a href="/getting-started/">Getting Started</a>
+				</li><li class="">
+					<a href="/api/">API Reference</a>
+				</li><li class="">
+					<a href="/color-spaces/">Color Spaces</a>
+				</li><li class="">
+					<a href="/resources/">Resources</a>
+				</li></ul>
+		</nav>
+	</div>
 </header>
-	<article>
-		<h1></h1>
-		<p>Culori is a color library for JavaScript that works across many color spaces to offer conversion, interpolation, color difference formulas, and blending functions.</p>
+
+		<div class="container">
+			<article>
+				<h1>Home</h1>
+				<p>Culori is a color library for JavaScript that works across many color spaces to offer conversion, interpolation, color difference formulas, and blending functions.</p>
 <h2>What can it do?</h2>
 <p>Culori supports most color spaces and formats defined in the <a href="https://drafts.csswg.org/css-color/">CSS Colors Level 4</a> spec: <a href="https://drafts.csswg.org/css-color/#named-colors">Named colors</a>, <a href="https://drafts.csswg.org/css-color/#hex-notation">Hex colors</a> (with 3 to 8 digits), <a href="https://drafts.csswg.org/css-color/#rgb-functions">RGB</a>, <a href="https://drafts.csswg.org/css-color/#the-hsl-notation">HSL</a>, <a href="https://drafts.csswg.org/css-color/#the-hwb-notation">HWB</a>, <a href="https://drafts.csswg.org/css-color/#lab-colors">Lab and LCh</a>. On top of that, it handles <a href="https://en.wikipedia.org/wiki/SRGB#The_sRGB_transfer_function_(%22gamma%22)">Linear RGB</a>, <a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSV</a> (also known as HSB), <a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSI</a>, <a href="https://www.mrao.cam.ac.uk/%7Edag/CUBEHELIX/">Cubehelix</a>, <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99o</a>, and <a href="https://en.wikipedia.org/wiki/YIQ">YIQ</a>.</p>
 <p>You can compute <a href="https://en.wikipedia.org/wiki/Color_difference">color differences</a> based on a variety of formulas: simple Euclidean distance, CIELAB Delta E*, and Kotsarenko/Ramos distance.</p>
@@ -63,9 +56,17 @@
 </ul>
 <p>Culori is inspired by Mike Bostock's <a href="https://github.com/d3">D3.js</a> and Gregor Aisch's <a href="https://github.com/gka/chroma.js">chroma.js</a>. D3, in particular, is a treasure-trove of ideas and academic references.</p>
 
-	</article>
-	<footer>
-	Source code available on <a href='https://github.com/evercoder/culori'>GitHub</a>
+			</article>
+		</div>
+		<footer>
+	<div class="container">
+		<p>
+			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Source
+			code available on
+			<a href="https://github.com/evercoder/culori">GitHub</a>.
+		</p>
+	</div>
 </footer>
-</body>
+
+	</body>
 </html>
