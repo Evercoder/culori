@@ -1,10 +1,11 @@
 import converter from './converter';
 import identity from './util/identity';
+import _prepare from './_prepare';
 import { getModeDefinition } from './modes';
 
 const mapper = (fn, mode = 'rgb') => {
 	let channels = mode ? getModeDefinition(mode).channels : null;
-	let conv = mode ? converter(mode) : identity;
+	let conv = mode ? converter(mode) : _prepare;
 	return color => {
 		let conv_color = conv(color);
 		return (channels || getModeDefinition(color.mode).channels).reduce(

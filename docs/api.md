@@ -159,7 +159,7 @@ approx(0.38393993);
 
 ## Interpolation
 
-<a name="interpolate" href="#interpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_, _interpolations_, _transform_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js)
+<a name="interpolate" href="#interpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_, _interpolations_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js)
 
 Returns an _interpolator_ in the _mode_ color space for an array of colors: a function that accepts a value _t_ in the interval `[0, 1]` and returns the interpolated color in the _mode_ color space.
 
@@ -474,6 +474,107 @@ Interpolates between the values `a` and `b` at the point `t ∈ [0, 1]`.
 culori.lerp(5, 10, 0.5);
 // => 7.5
 ```
+
+### Mappings
+
+<a name="culoriMapper" href="#culoriMapper">#</a> culori.**mapper**(_fn_, _mode = "rgb"_) → _function (color | string)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
+
+Creates a mapping that applies _fn_ on each channel of the color in the _mode_ color space.
+
+The resulting function accepts a single argument (a color object or a string), which it converts to the _mode_ color space if not already there.
+
+The _mode_ parameter can be omitted, in which case the mappe will iterate through all the channels in the color's original color space.
+
+The _fn_ callback has the following signature:
+
+**fn**(_value_, _channel_, _color_, _mode_)
+
+where:
+
+-   `value` is the current value;
+-   `channel` is the current channel;
+-   `color` is a reference to the entire color object;
+-   `mode` is forwarded from the call to `culori.mapper`.
+
+Here's the implementation of alpha premultiplication:
+
+```js
+const multiplyAlpha = culori.mapper((val, ch, color) => {
+	if (ch !== 'alpha' && val !== undefined) {
+		return val / (color.alpha !== undefined ? color.alpha : 1);
+	}
+	return val;
+}, 'rgb');
+
+multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 });
+// => { mode: 'rgb', r: 0.5, g: 0.3, b: 0.2, a: 0.5 }
+```
+
+All channels are included in the mapping, so you might want to exclude the `alpha` channel from your function, like we do above.
+
+Returning `undefined` from the function will omit that channel from the resulting color.
+
+#### Built-in mappings
+
+<a name="culoriMapAlphaMultiply" href="#culoriMapAlphaMultiply">#</a> culori.**mapAlphaMultiply** &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
+
+Multiplies the color's alpha value into all its other channels:
+
+```js
+let multiplyAlpha = culori.mapper(culori.mapAlphaMultiply, 'rgb');
+multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 });
+// => { mode: 'rgb', r: 0.5, g: 0.3, b: 0.2, a: 0.5 }
+```
+
+<a name="culoriMapAlphaDivide" href="#culoriMapAlphaDivide">#</a> culori.**mapAlphaDivide** &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
+
+Divides a color's other channels by its alpha value. It's the opposite of `culori.mapAlphaMultiply`, and is used in interpolation with alpha premultiplication:
+
+```js
+let multiplyAlpha = culori.mapper(culori.mapAlphaMultiply, 'rgb');
+let divideAlpha = culori.mapper(culori.mapAlphaDivide, 'rgb');
+
+divideAlpha(multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 }));
+// => { mode: 'rgb', r: 1, g: 0.6, b: 0.4, a: 0.5 }
+```
+
+#### Interpolating with mappings
+
+<a name="culoriInterpolateWith" href="#culoriInterpolateWith">#</a> culori.**interpolateWith**(_premap_, _postmap_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
+
+Adds a _pre-mapping_ and a _post-mapping_ to an interpolation, to enable things like alpha premultiplication:
+
+```js
+let interpolateWithAlphaPremult = culori.interpolateWith(
+	culori.mapAlphaMultiply,
+	culori.mapAlphaDivide
+);
+
+interpolateWithAlphaPremult(['red', 'transparent', 'blue'])(0.25);
+```
+
+To chain more than one mapping:
+
+```js
+const mapChromaMultiply = (v, ch, c, mode) => {
+	// ...
+};
+
+const mapChromaDivide = (v, ch, c, mode) => {
+	// ...
+};
+
+let interpolateWithAlphaChromaPremult = culori.interpolateWith(
+	(...args) => mapChromaMultiply(culori.mapAlphaMultiply(...args)),
+	(...args) => culori.mapAlphaDivide(mapChromaDivide(...args))
+);
+
+interpolateWithAlphaPremult(['red', 'transparent', 'blue'])(0.25);
+```
+
+<a name="culoriInterpolateWithPremultipliedAlpha" href="#culoriInterpolateWithPremultipliedAlpha">#</a> culori.**interpolateWithPremultipliedAlpha**(_colors_, _mode = "rgb"_, _overrides_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
+
+Works like `culori.interpolate()`, but with alpha premultiplication.
 
 ## Difference
 

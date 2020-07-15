@@ -119,13 +119,13 @@ const interpolate_fn = (colors, mode = 'rgb', overrides, pre = identity) => {
 const interpolate = (colors, mode = 'rgb', overrides) =>
 	interpolate_fn(colors, mode, overrides);
 
-const interpolateWith = (pre_map, post_map) => (
+const interpolateWith = (premap, postmap) => (
 	colors,
 	mode = 'rgb',
 	overrides
 ) => {
-	let pre = mapper(pre_map, mode);
-	let post = mapper(post_map, mode);
+	let pre = premap ? mapper(premap, mode) : undefined;
+	let post = postmap ? mapper(postmap, mode) : identity;
 	let it = interpolate_fn(colors, mode, overrides, pre);
 	return t => post(it(t));
 };
