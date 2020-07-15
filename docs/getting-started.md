@@ -1,6 +1,7 @@
 ---
 layout: layouts/default
 title: Getting Started
+menu-order: 1
 ---
 
 ## Try it online
@@ -36,5 +37,5 @@ import { rgb } from 'culori';
 To import culori as a `<script>` tag to use in a web page, you can load it from [unpkg](https://unpkg.com):
 
 ```html
-<script src='https://unpkg.com/culori'></script>
+<script src="https://unpkg.com/culori"></script>
 ```

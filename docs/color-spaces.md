@@ -1,15 +1,16 @@
 ---
 layout: layouts/default
 title: Color Spaces
+menu-order: 3
 ---
 
 ## RGB
 
-> 🕳 expand this section
+> TODO: expand this section
 
 ## LRGB (Linear RGB)
 
-> 🕳 expand this section
+> TODO: expand this section
 
 > 📖 See Jamie Wong's [excellent deep dive](http://jamie-wong.com/post/color/) into color.
 
@@ -125,7 +126,7 @@ The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an 
 
 [The Cubehelix color scheme](https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/) was described by Dave Green in this paper:
 
--   Green, D. A., 2011, [_"A colour scheme for the display of astronomical intensity images"_](http://astron-soc.in/bulletin/11June/289392011.pdf), Bulletin of the Astronomical Society of India, 39, 289. ([2011BASI...39..289G](https://ui.adsabs.harvard.edu/#abs/2011BASI...39..289G) at [ADS](https://ui.adsabs.harvard.edu/))
+> Green, D. A., 2011, [_"A colour scheme for the display of astronomical intensity images"_](http://astron-soc.in/bulletin/11June/289392011.pdf), Bulletin of the Astronomical Society of India, 39, 289. ([2011BASI...39..289G](https://ui.adsabs.harvard.edu/#abs/2011BASI...39..289G) at [ADS](https://ui.adsabs.harvard.edu/))
 
 It was expanded into a color space by [Mike Bostock](https://en.wikipedia.org/wiki/Mike_Bostock) and [Jason Davies](https://www.jasondavies.com/) in [D3](https://github.com/d3/d3-color).
 

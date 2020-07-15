@@ -1,6 +1,7 @@
 ---
 layout: layouts/default
 title: Resources
+menu-order: 4
 ---
 
 ## Extras
@@ -25,11 +26,11 @@ Besides [d3-color](https://github.com/d3/d3-color) and [chroma.js](https://githu
 -   [color](https://github.com/Qix-/color) by Heather Arthur
 -   [color.js](https://github.com/brehaut/color-js) by Andrew Brehaut et al
 -   [chromatist](https://github.com/jrus/chromatist) by [Jacob Rus](http://www.hcs.harvard.edu/~jrus/)
-
-*   [graypegg/chromatism](https://github.com/graypegg/chromatism)
+-   [graypegg/chromatism](https://github.com/graypegg/chromatism)
 
 And in other languages:
 
 -   [Colour](https://www.colour-science.org/) for Python
 -   [the `colorspace` package](http://colorspace.r-forge.r-project.org/) for R
 -   [the `Colors` package](https://github.com/JuliaGraphics/Colors.jl) for Julia
+-   [colorio](https://github.com/nschloe/colorio) for Python by Nico Schlömer

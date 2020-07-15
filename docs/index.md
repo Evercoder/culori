@@ -1,5 +1,7 @@
 ---
+title: Home
 layout: layouts/default
+menu-order: 0
 ---
 
 Culori is a color library for JavaScript that works across many color spaces to offer conversion, interpolation, color difference formulas, and blending functions.
