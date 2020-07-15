@@ -221,8 +221,8 @@ tape('interpolateWith()', t => {
 	let it = interpolate(colors);
 	let it2 = interpolateWith(v => v / 2)(colors);
 
-	t.equal(formatHex8(it2(0.25)), '#1f00003e', 'w premultiplication');
-	t.equal(formatHex8(it2(0.75)), '#000050a0', 'w premultiplication');
+	t.equal(formatHex8(it2(0.25)), '#1f00001f', 'w premultiplication');
+	t.equal(formatHex8(it2(0.75)), '#00005050', 'w premultiplication');
 
 	t.end();
 });

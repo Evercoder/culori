@@ -500,8 +500,8 @@ Here's the implementation of alpha premultiplication:
 
 ```js
 const multiplyAlpha = culori.mapper((val, ch, color) => {
-	if (ch !== 'alpha' && val !== undefined) {
-		return val / (color.alpha !== undefined ? color.alpha : 1);
+	if (ch !== 'alpha') {
+		return (val || 0) / (color.alpha !== undefined ? color.alpha : 1);
 	}
 	return val;
 }, 'rgb');
@@ -526,6 +526,8 @@ multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 });
 // => { mode: 'rgb', r: 0.5, g: 0.3, b: 0.2, a: 0.5 }
 ```
 
+Any `undefined` channel value will be considered to be `0` (zero), to enable alpha-premultiplied interpolation with achromatic colors in hue-based color spaces (HSL, LCh, etc.).
+
 <a name="culoriMapAlphaDivide" href="#culoriMapAlphaDivide">#</a> culori.**mapAlphaDivide** &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
 
 Divides a color's other channels by its alpha value. It's the opposite of `culori.mapAlphaMultiply`, and is used in interpolation with alpha premultiplication:
@@ -538,9 +540,11 @@ divideAlpha(multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 }));
 // => { mode: 'rgb', r: 1, g: 0.6, b: 0.4, a: 0.5 }
 ```
 
+Any `undefined` channel value will be considered to be `0` (zero), to enable alpha-premultiplied interpolation with achromatic colors in hue-based color spaces (HSL, LCh, etc.).
+
 #### Interpolating with mappings
 
-<a name="culoriInterpolateWith" href="#culoriInterpolateWith">#</a> culori.**interpolateWith**(_premap_, _postmap_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
+<a name="culoriInterpolateWith" href="#culoriInterpolateWith">#</a> culori.**interpolateWith**(_premap_, _postmap_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate.js)
 
 Adds a _pre-mapping_ and a _post-mapping_ to an interpolation, to enable things like alpha premultiplication:
 
@@ -572,7 +576,7 @@ let interpolateWithAlphaChromaPremult = culori.interpolateWith(
 interpolateWithAlphaPremult(['red', 'transparent', 'blue'])(0.25);
 ```
 
-<a name="culoriInterpolateWithPremultipliedAlpha" href="#culoriInterpolateWithPremultipliedAlpha">#</a> culori.**interpolateWithPremultipliedAlpha**(_colors_, _mode = "rgb"_, _overrides_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
+<a name="culoriInterpolateWithPremultipliedAlpha" href="#culoriInterpolateWithPremultipliedAlpha">#</a> culori.**interpolateWithPremultipliedAlpha**(_colors_, _mode = "rgb"_, _overrides_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate.js)
 
 Works like `culori.interpolate()`, but with alpha premultiplication.
 

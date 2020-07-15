@@ -22,15 +22,15 @@ const mapper = (fn, mode = 'rgb') => {
 };
 
 const mapAlphaMultiply = (v, ch, c) => {
-	if (ch !== 'alpha' && v !== undefined) {
-		return v * (c.alpha !== undefined ? c.alpha : 1);
+	if (ch !== 'alpha') {
+		return (v || 0) * (c.alpha !== undefined ? c.alpha : 1);
 	}
 	return v;
 };
 
 const mapAlphaDivide = (v, ch, c) => {
-	if (ch !== 'alpha' && v !== undefined) {
-		return v === 0 ? 0 : v / (c.alpha !== undefined ? c.alpha : 1);
+	if (ch !== 'alpha' && c.alpha !== 0) {
+		return (v || 0) / (c.alpha !== undefined ? c.alpha : 1);
 	}
 	return v;
 };
