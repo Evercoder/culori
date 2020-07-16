@@ -88,6 +88,32 @@ The figure below shows a slice of the HSI color space for a particular hue:
 
 > 💡 The range for the `a` and `b` channels in Lab, and the `c` channel in LCh, depend on the specific implementation. I've obtained the ranges from the tables above by converting all sRGB colors defined by `r, g, b ∈ ℕ ⋂ [0, 255]` into Lab and LCh respectively.
 
+## Luv / LCHuv (CIE)
+
+[CIELuv color space](https://en.wikipedia.org/wiki/CIELUV) in cartesian and polar forms, using the D50 standard illuminant.
+
+### `luv`
+
+| Channel | Range                | Description           |
+| ------- | -------------------- | --------------------- |
+| `l`     | `[0, 100]`           | Lightness             |
+| `u`     | `[-84.86, 174.87]`   | Green–red component   |
+| `v`     | `[-125.744, 87.165]` | Blue–yellow component |
+
+### `lchuv`
+
+| Channel | Range          | Description |
+| ------- | -------------- | ----------- |
+| `l`     | `[0, 100]`     | Lightness   |
+| `c`     | `[0, 176.609]` | Chroma      |
+| `h`     | `[0, 360)`     | Hue         |
+
+CIELuv supports an Euclidean color difference function:
+
+```js
+let deltaE_uv = culori.colorDifferenceEuclidean('luv');
+```
+
 ## DIN99 Lab / LCh
 
 The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an [effective color difference](#culoriDifferenceDin99o) metric that can be expressed as a simple Euclidean distance. We implement the latest iteration of the the standard, DIN99o.
