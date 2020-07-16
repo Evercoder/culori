@@ -271,6 +271,7 @@ const differenceKotsarenkoRamos = () =>
 export {
 	differenceHueChroma,
 	differenceHueSaturation,
+	differenceHueNaive,
 	differenceEuclidean,
 	differenceCie76,
 	differenceCie94,

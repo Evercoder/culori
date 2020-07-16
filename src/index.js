@@ -124,7 +124,8 @@ export {
 	differenceDin99o,
 	differenceKotsarenkoRamos,
 	differenceHueSaturation,
-	differenceHueChroma
+	differenceHueChroma,
+	differenceHueNaive
 } from './difference';
 export { default as colorsNamed } from './colors/named';
 export { default as blend } from './blend';
