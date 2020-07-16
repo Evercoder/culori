@@ -270,7 +270,7 @@ Any number in he _colors_ array will be interpreted as an [interpolation hint](h
 culori.interpolate(['red', 0.25, 'green']);
 ```
 
-> **Note:** As opposed to the CSS spec, interpolation hints [don't affect color stop positions](https://github.com/w3c/csswg-drafts/issues/3931) in culori.
+As opposed to how current browsers implement the CSS spec ([see discussion](https://github.com/w3c/csswg-drafts/issues/3931)), interpolation hints _do not_ affect color stop positions in culori.
 
 ### Built-in easing functions
 
@@ -323,7 +323,7 @@ A linear interpolator for values in a channel.
 
 #### Basis splines
 
-Basis splines are available in the following variants:
+[Basis splines](https://en.wikipedia.org/wiki/B-spline) are available in the following variants:
 
 <a name="interpolatorSplineBasis" href="#interpolatorSplineBasis">#</a> culori.**interpolatorSplineBasis**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js)
 
@@ -333,7 +333,7 @@ Basis splines are available in the following variants:
 
 #### Natural splines
 
-Natural splines are available in the following variants:
+[Natural splines](https://en.wikipedia.org/wiki/Spline_interpolation) are available in the following variants:
 
 <a name="interpolatorSplineNatural" href="#interpolatorSplineNatural">#</a> culori.**interpolatorSplineNatural**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js)
 
@@ -350,6 +350,10 @@ Monotone splines are available in the following variants:
 <a name="interpolatorSplineMonotoneClosed" href="#interpolatorSplineMonotoneClosed">#</a> culori.**interpolatorSplineMonotoneClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
 
 <a name="interpolatorSplineMonotoneOpen" href="#interpolatorSplineMonotoneOpen">#</a> culori.**interpolatorSplineMonotoneOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js) (⚠️ Not yet implemented)
+
+The monotone spline is based on the following paper (via [d3-shape](https://github.com/d3/d3-shape)):
+
+> Steffen, M. [_"A simple method for monotonic interpolation in one dimension."_](https://ui.adsabs.harvard.edu/abs/1990A&A...239..443S) in Astronomy and Astrophysics, Vol. 239, p. 443-450 (Nov. 1990), Provided by the SAO/NASA Astrophysics Data System.
 
 #### Custom piecewise interpolation
 
@@ -412,7 +416,7 @@ let hsl_long = culori.interpolate(['blue', 'red', 'green'], 'hsl', {
 });
 ```
 
-> **Note:** Treating the hues array as-is (with an _identity function_) corresponds to the `specified` fixup method [in the CSSWG issue](https://github.com/w3c/csswg-drafts/issues/4735) mentioned earlier.
+Treating the hues array as-is (with an _identity function_) corresponds to the `specified` fixup method [in the CSSWG issue](https://github.com/w3c/csswg-drafts/issues/4735) mentioned earlier.
 
 <a name="fixupHueLonger" href="#fixupHueLonger">#</a> culori.**fixupHueLonger**(_values_) → _Array_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/fixup/hue.js)
 
@@ -584,7 +588,17 @@ interpolateWithAlphaPremult(['red', 'transparent', 'blue'])(0.25);
 
 <a name="interpolateWithPremultipliedAlpha" href="#interpolateWithPremultipliedAlpha">#</a> culori.**interpolateWithPremultipliedAlpha**(_colors_, _mode = "rgb"_, _overrides_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate.js)
 
-Works like `culori.interpolate()`, but with alpha premultiplication.
+Takes the same arguments as [`culori.interpolate()`](#interpolate), but applies [alpha premultiplication](https://drafts.csswg.org/css-images-4/#premultiplied).
+
+```js
+let colors = ['red', 'transparent', 'blue'];
+
+// alpha ignored for the R/G/B channels:
+culori.interpolate(colors, 'rgb');
+
+// alpha premultiplied into the R/G/B channels:
+culori.interpolateWithPremultipliedAlpha(colors, 'rgb');
+```
 
 ## Difference
 
@@ -618,7 +632,7 @@ Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) 
 
 Computes the [CMC l:c (1984)][cmc] ΔE\*<sub>CMC</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space.
 
-> **Note:** ΔE\*<sub>CMC</sub> is not considered a metric since it's not symmetrical, i.e. the distance from _a_ to _b_ is not always equal to the distance from _b_ to _a_. Therefore it cannot be reliably used with [`culori.nearest()`](#nearest).
+ΔE\*<sub>CMC</sub> is not considered a metric since it's not symmetrical, that is the distance from _a_ to _b_ is not always equal to the distance from _b_ to _a_. Therefore it cannot be reliably used with [`culori.nearest()`](#nearest).
 
 <a name="differenceDin99o" href="#differenceDin99o">#</a> culori.**differenceDin99o**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
@@ -630,7 +644,7 @@ Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the c
 
 ### Handling hue
 
-Euclidean distances are tricky in cylindrical spaces, containing a hue. Depending on the color space, hue is treated in a variety of ways:
+Euclidean distances are tricky in cylindrical spaces, containing a hue. Depending on the color space, hue is treated in a variety of ways. The functions below are used internally:
 
 <a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.**differenceHueChroma**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
@@ -642,7 +656,7 @@ This is a handling of hue in the HSL / HSV / HSI family of color spaces. It's a 
 
 <a name="differenceHueNaive" href="#differenceHueNaive">#</a> culori.**differenceHueNaive**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
-For remaining color spaces (HWB), we consider hues numbers, but apply a _shortest path around the hue circle_ (analogous to [`fixupHueShorter`](#fixupHueShorter)). If you insist on using Euclidean distances on these spaces, you can use the `weights` to control the contribution of the hue difference towards the total difference.
+For remaining color spaces (HWB), we consider hues numbers, but apply a _shortest path around the hue circle_ (analogous to [`culori.fixupHueShorter`](#fixupHueShorter)). If you insist on using Euclidean distances on these spaces, you can use the `weights` to control the contribution of the hue difference towards the total difference.
 
 ### Nearest color(s)
 
@@ -651,6 +665,18 @@ For remaining color spaces (HWB), we consider hues numbers, but apply a _shortes
 For a given _metric_ color difference formula, and an array of _colors_, returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_.
 
 Pass _n = Infinity_ to get all colors in the array with a maximum distance of _τ_.
+
+```js
+/*
+	Get the three closest CSS named colors
+ */
+
+let colors = Object.keys(culori.colorsNamed);
+let nearestNamedColors = culori.nearest(colors, culori.differenceCiede2000());
+
+nearestNamedColors('lch(50% 70 60)', 3);
+// => ["chocolate", "sienna", "peru"]
+```
 
 ## Blending
 
@@ -714,15 +740,20 @@ For more control on how the colors are generated, you can specify constraints fo
 
 ```js
 culori.random('hsv', {
-	h: 120 // number,
+	h: 120, // number
 	s: [0.25, 0.75] // interval
 });
+// ⇒ { mode: 'hsv', h: 120, s: 0.51…, v: 0.89… }
 ```
 
 The _alpha_ channel is excluded by default. To obtain colors with random alpha values, include a constraint for `alpha`:
 
 ```js
+culori.random('lrgb');
+// ⇒ { mode: 'lrgb', r: 0.74…, g: 0.15…, b: 0.34… }
+
 culori.random('lrgb', { alpha: [0, 1] });
+// ⇒ { mode: 'lrgb', r: 0.33…, g: 0.72…, b: 0.04…, alpha: 0.12… }
 ```
 
 ### Displayable random colors
@@ -818,6 +849,9 @@ Defines a new color space through a _definition_ object. Here's the full definit
 			use: interpolatorLinear,
 			fixup: fixupAlpha
 		}
+	},
+	difference: {
+		h: differenceHueSaturation
 	}
 };
 ```
@@ -831,13 +865,14 @@ The properties a definition needs are the following:
 -   `ranges`: the ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
 -   `parsers`: any parsers for the color space that can transform strings into colors
 -   `interpolate`: the default interpolations for the color space, one for each channel. Each interpolation is defined by its interpolator (the `use` key) and its fixup function (the `fixup` key). When defined as a function, a channel interpolation is meant to define its interpolator, with the fixup being a no-op.
+-   `difference`: the default Euclidean distance method for each channel in the color space; mostly used for the `h` channel in cylindrical color spaces.
 
-**Note:** The order of the items in the `channels` array matters. To keep things simple, we're making the following conventions:
+All built-in color spaces follow these conventions in regards to the `channels` array follows:
 
--   the fourth item in the array should be `alpha`
--   any cyclical values (e.g. hue) should be identified by `h`, in the range `[0, 360)`
+-   there are four channels in the color space;
+-   the fourth channel is always `alpha`.
 
-These constrains make sure `differenceEuclidean()` works as expected.
+This makes sure [`culori.differenceEuclidean()`](#differenceEuclidean) works as expected, but there may be more hidden assumptions in the codebase.
 
 [css-images-4]: https://drafts.csswg.org/css-images-4/#color-stop-syntax
 [css-easing-1]: http://drafts.csswg.org/css-easing-1
