@@ -1,6 +1,6 @@
 {
 	"name": "culori",
-	"version": "0.12.5",
+	"version": "0.12.6",
 	"main": "build/culori.umd.js",
 	"browser": "build/culori.umd.js",
 	"module": "build/culori.js",
