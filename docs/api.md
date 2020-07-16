@@ -600,17 +600,6 @@ You can optionally assign different weights to the channels in the color space. 
 
 The default weights `[1, 1, 1, 0]` mean that the _alpha_, which is the fourth channel in all the color spaces culori defines, is not taken into account. Send `[1, 1, 1, 1]` as the weights to include it in the computation.
 
-For the `h` channel in the color (in any color space that has this channel), we're using a _shortest hue distance_ to compute the hue's contribution to the distance. In spaces such as HSL or HSV, where the range of this difference is `[0, 180]` — as opposed to `[0, 1]` for the other channels — consider adjusting the weights so that the hue contributes "equally" to the distance:
-
-```js
-let hsl_distance = culori.differenceEuclidean('hsl', [
-	1 / (180 * 180),
-	1,
-	1,
-	0
-]);
-```
-
 <a name="differenceCie76" href="#differenceCie76">#</a> culori.**differenceCie76**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
 Computes the [CIE76][cie76] ΔE\*<sub>ab</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space and it is analogous to [`culori.differenceEuclidean('lab')`](#differenceEuclidean).
@@ -638,6 +627,22 @@ Computes the [DIN99o][din99ode] ΔE\*<sub>99o</sub> color difference between the
 <a name="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> culori.**differenceKotsarenkoRamos**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
 Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the colors _a_ and _b_. This is a weighted Euclidean distance in the [YIQ][yiq] color space.
+
+### Handling hue
+
+Euclidean distances are tricky in cylindrical spaces, containing a hue. Depending on the color space, hue is treated in a variety of ways:
+
+<a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.**differenceHueChroma**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+This is the handling of hue in CIE-derived cylindrical spaces (`lch`, `lchuv`, `dlch`).
+
+<a name="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.**differenceHueSaturation**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+This is a handling of hue in the HSL / HSV / HSI family of color spaces. It's a (possibly wrong!) extrapolation of `differenceHueChroma`.
+
+<a name="differenceHueNaive" href="#differenceHueNaive">#</a> culori.**differenceHueNaive**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+For remaining color spaces (HWB), we consider hues numbers, but apply a _shortest path around the hue circle_ (analogous to [`fixupHueShorter`](#fixupHueShorter)). If you insist on using Euclidean distances on these spaces, you can use the `weights` to control the contribution of the hue difference towards the total difference.
 
 ### Nearest color(s)
 

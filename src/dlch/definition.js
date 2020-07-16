@@ -9,6 +9,7 @@ import convertRgbToDlch from './convertRgbToDlch';
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
 import { interpolatorLinear } from '../interpolate/linear';
+import { differenceHueChroma } from '../difference';
 
 export default {
 	mode: 'dlch',
@@ -39,5 +40,8 @@ export default {
 			use: interpolatorLinear,
 			fixup: fixupAlpha
 		}
+	},
+	difference: {
+		h: differenceHueChroma
 	}
 };

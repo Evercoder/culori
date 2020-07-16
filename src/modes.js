@@ -21,6 +21,10 @@ const defineMode = definition => {
 		definition.ranges = {};
 	}
 
+	if (!definition.difference) {
+		definition.difference = {};
+	}
+
 	definition.channels.forEach(channel => {
 		// undefined channel ranges default to the [0, 1] interval
 		if (definition.ranges[channel] === undefined) {

@@ -12,7 +12,7 @@ import {
 	hsl
 } from '../src/index';
 
-tape('euclidean distance in RGB', function(test) {
+tape('euclidean distance in RGB', function (test) {
 	let delta = differenceEuclidean();
 
 	test.equal(
@@ -28,28 +28,28 @@ tape('euclidean distance in RGB', function(test) {
 	test.end();
 });
 
-tape('euclidean distance in HSL', function(test) {
+tape('euclidean distance in HSL', function (test) {
 	let delta = differenceEuclidean('hsl');
 
 	test.equal(
 		delta(hsl({ h: 0, s: 1, l: 1 }), hsl({ h: 180, s: 1, l: 1 })),
-		180
+		2
 	);
 
 	test.equal(
 		delta(hsl({ h: 0, s: 1, l: 1 }), hsl({ h: 360, s: 1, l: 1 })),
-		0
+		2.4492935982947064e-16
 	);
 
 	test.equal(
 		delta(hsl({ h: 60, s: 1, l: 1 }), hsl({ h: -540, s: 1, l: 1 })),
-		120
+		1.732050807568877
 	);
 
 	test.end();
 });
 
-tape('cie76 difference', function(test) {
+tape('cie76 difference', function (test) {
 	test.equal(
 		differenceCie76()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
@@ -61,7 +61,7 @@ tape('cie76 difference', function(test) {
 	test.end();
 });
 
-tape('cie94 difference', function(test) {
+tape('cie94 difference', function (test) {
 	test.equal(
 		differenceCie94()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
@@ -73,7 +73,7 @@ tape('cie94 difference', function(test) {
 	test.end();
 });
 
-tape('ciede2000 difference', function(test) {
+tape('ciede2000 difference', function (test) {
 	let approx = round(4);
 
 	// Test data from: http://www2.ece.rochester.edu/~gsharma/ciede2000/
@@ -141,7 +141,7 @@ tape('ciede2000 difference', function(test) {
 	test.end();
 });
 
-tape('differenceCmc', function(test) {
+tape('differenceCmc', function (test) {
 	test.equal(
 		differenceCmc()(
 			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
@@ -168,11 +168,16 @@ tape('differenceCmc', function(test) {
 	test.end();
 });
 
-tape('differenceKotsarenkoRamos', function(test) {
+tape('differenceKotsarenkoRamos', function (test) {
 	test.equal(
 		differenceKotsarenkoRamos()('white', 'black'),
 		0.7108445752103619
 	);
 
 	test.end();
+});
+
+tape('difference in LCh space', t => {
+	t.equal(differenceEuclidean('lch')('red', 'green'), 130.3764124621912);
+	t.end();
 });

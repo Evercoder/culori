@@ -122,7 +122,9 @@ export {
 	differenceCiede2000,
 	differenceCmc,
 	differenceDin99o,
-	differenceKotsarenkoRamos
+	differenceKotsarenkoRamos,
+	differenceHueSaturation,
+	differenceHueChroma
 } from './difference';
 export { default as colorsNamed } from './colors/named';
 export { default as blend } from './blend';

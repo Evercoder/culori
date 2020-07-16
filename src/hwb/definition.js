@@ -4,6 +4,7 @@ import parseHwb from './parseHwb';
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
 import { interpolatorLinear } from '../interpolate/linear';
+import { differenceHueNaive } from '../difference';
 
 export default {
 	mode: 'hwb',
@@ -23,5 +24,8 @@ export default {
 		w: interpolatorLinear,
 		b: interpolatorLinear,
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
+	},
+	difference: {
+		h: differenceHueNaive
 	}
 };

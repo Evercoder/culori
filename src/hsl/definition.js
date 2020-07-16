@@ -4,6 +4,7 @@ import parseHsl from './parseHsl';
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
 import { interpolatorLinear } from '../interpolate/linear';
+import { differenceHueSaturation } from '../difference';
 
 export default {
 	mode: 'hsl',
@@ -23,5 +24,8 @@ export default {
 		s: interpolatorLinear,
 		l: interpolatorLinear,
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
+	},
+	difference: {
+		h: differenceHueSaturation
 	}
 };

@@ -3,6 +3,7 @@ import convertRgbToHsv from './convertRgbToHsv';
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
 import { interpolatorLinear } from '../interpolate/linear';
+import { differenceHueSaturation } from '../difference';
 
 export default {
 	mode: 'hsv',
@@ -21,5 +22,8 @@ export default {
 		s: interpolatorLinear,
 		v: interpolatorLinear,
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
+	},
+	difference: {
+		h: differenceHueSaturation
 	}
 };

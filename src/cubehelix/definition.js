@@ -36,6 +36,7 @@ import { fixupAlpha } from '../fixup/alpha';
 import { interpolatorLinear } from '../interpolate/linear';
 import convertRgbToCubehelix from './convertRgbToCubehelix';
 import convertCubehelixToRgb from './convertCubehelixToRgb';
+import { differenceHueSaturation } from '../difference';
 
 export default {
 	mode: 'cubehelix',
@@ -61,5 +62,8 @@ export default {
 			use: interpolatorLinear,
 			fixup: fixupAlpha
 		}
+	},
+	difference: {
+		h: differenceHueSaturation
 	}
 };

@@ -2,28 +2,51 @@ import { getModeDefinition } from './modes';
 import converter from './converter';
 import normalizeHue from './util/normalizeHue';
 
-const hue_difference = (a, b) => {
-	let na = normalizeHue(a);
-	let nb = normalizeHue(b);
-	if (Math.abs(nb - na) > 180) {
-		// todo should this be normalized once again?
-		return na - (nb - 360 * Math.sign(nb - na));
+const isfn = o => typeof o === 'function';
+
+const differenceHueSaturation = (std, smp) => {
+	if (std.h === undefined || smp.h === undefined || !std.s || !smp.s) {
+		return 0;
 	}
-	return na - nb;
+	let std_h = normalizeHue(std.h);
+	let smp_h = normalizeHue(smp.h);
+	let dH = Math.sin((((smp_h - std_h + 360) / 2) * Math.PI) / 180);
+	return 2 * Math.sqrt(std.s * smp.s) * dH;
+};
+
+const differenceHueNaive = (std, smp) => {
+	let std_h = normalizeHue(std.h);
+	let smp_h = normalizeHue(smp.h);
+	if (Math.abs(smp_h - std_h) > 180) {
+		// todo should this be normalized once again?
+		return std_h - (smp_h - 360 * Math.sign(smp_h - std_h));
+	}
+	return smp_h - std_h;
+};
+
+const differenceHueChroma = (std, smp) => {
+	if (std.h === undefined || smp.h === undefined || !std.c || !smp.c) {
+		return 0;
+	}
+	let std_h = normalizeHue(std.h);
+	let smp_h = normalizeHue(smp.h);
+	let dH = Math.sin((((smp_h - std_h + 360) / 2) * Math.PI) / 180);
+	return 2 * Math.sqrt(std.c * smp.c) * dH;
 };
 
 const differenceEuclidean = (mode = 'rgb', weights = [1, 1, 1, 0]) => {
-	let channels = getModeDefinition(mode).channels;
+	let def = getModeDefinition(mode);
+	let channels = def.channels;
+	let diffs = def.difference;
 	let conv = converter(mode);
 	return (std, smp) => {
 		let ConvStd = conv(std);
 		let ConvSmp = conv(smp);
 		return Math.sqrt(
 			channels.reduce((sum, k, idx) => {
-				let delta =
-					k === 'h'
-						? hue_difference(ConvStd[k], ConvSmp[k])
-						: ConvStd[k] - ConvSmp[k];
+				let delta = diffs[k]
+					? diffs[k](ConvStd, ConvSmp)
+					: ConvStd[k] - ConvSmp[k];
 				return (
 					sum +
 					(weights[idx] || 0) * Math.pow(isNaN(delta) ? 0 : delta, 2)
@@ -246,6 +269,8 @@ const differenceKotsarenkoRamos = () =>
 	differenceEuclidean('yiq', [0.5053, 0.299, 0.1957]);
 
 export {
+	differenceHueChroma,
+	differenceHueSaturation,
 	differenceEuclidean,
 	differenceCie76,
 	differenceCie94,
