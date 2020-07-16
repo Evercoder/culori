@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="logo">
 			<a href='/'>culori</a>
-			<span>0.12.1 (alpha)</span>
+			<span>0.12.2 (alpha)</span>
 		</div>
 		<nav>
 			<ul><li class="">
@@ -107,6 +107,16 @@
 <td>culori.<strong>lch</strong>(<em>color</em>)</td>
 </tr>
 <tr>
+<td><code>luv</code></td>
+<td>CIELuv color space</td>
+<td>culori.<strong>luv</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>lchuv</code></td>
+<td>CIELCHuv color space</td>
+<td>culori.<strong>lchuv</strong>(<em>color</em>)</td>
+</tr>
+<tr>
 <td><code>lrgb</code></td>
 <td>Linearized RGB color space</td>
 <td>culori.<strong>lrgb</strong>(<em>color</em>)</td>
@@ -115,6 +125,11 @@
 <td><code>rgb</code></td>
 <td>RGB color space</td>
 <td>culori.<strong>rgb</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>xyz</code></td>
+<td>XYZ D50 color space</td>
+<td>culori.<strong>xyz</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>yiq</code></td>
@@ -126,7 +141,7 @@
 <h3>Formatting</h3>
 <p><a name="formatHex" href="#formatHex">#</a> culori.<strong>formatHex</strong>(<em>color</em> or <em>string</em>) → <em>string</em> · <a href="https://github.com/evercoder/culori/blob/master/src/formatter.js">Source</a></p>
 <p>Returns the hex string for a color. The color's <code>alpha</code> channel is omitted, and the red, green, and blue channels are clamped to the the interval <code>[0, 255]</code>, i.e. colors that are not displayable are serialized as if they'd been passed through the <code>clampRgb</code> method.</p>
-<pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">formatHex</span><span class="token punctuation">(</span><span class="token string">'red'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <br><span class="token comment">// ⇒ "#ff0000"</span></code></pre>
+<pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">formatHex</span><span class="token punctuation">(</span><span class="token string">'red'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ "#ff0000"</span></code></pre>
 <p><a name="formatHex8" href="#formatHex8">#</a> culori.<strong>formatHex8</strong>(<em>color</em> or <em>string</em>) → <em>string</em> · <a href="https://github.com/evercoder/culori/blob/master/src/formatter.js">Source</a></p>
 <p>Returns the 8-character hex string for a color. The red, green, blue, and alpha channels are clamped to the the interval <code>[0, 255]</code>, i.e. colors that are not displayable are serialized as if they'd been passed through the <code>clampRgb</code> method.</p>
 <pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">formatHex8</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mode<span class="token operator">:</span> <span class="token string">'rgb'</span><span class="token punctuation">,</span> r<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> g<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> alpha<span class="token operator">:</span> <span class="token number">0.5</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ "#ff000080"</span></code></pre>
@@ -137,7 +152,7 @@
 <p>Some color spaces (Lab and LCh in particular) allow you to express colors that can't be displayed on-screen. The methods below allow you to identify when that's the case and to produce displayable versions of the colors.</p>
 <p><a name="displayable" href="#displayable">#</a> culori.<strong>displayable</strong>(<em>color</em> or <em>string</em>) → <em>boolean</em> · <a href="https://github.com/evercoder/culori/blob/master/src/displayable.js">Source</a></p>
 <p>Checks whether a particular color fits inside the sRGB gamut, by verifying that the <code>r</code>, <code>g</code>, and <code>b</code> channels are all in the interval <code>[0, 1]</code>.</p>
-<pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">displayable</span><span class="token punctuation">(</span><span class="token string">'red'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <br><span class="token comment">// ⇒ true</span><br><br>culori<span class="token punctuation">.</span><span class="token function">displayable</span><span class="token punctuation">(</span><span class="token string">'rgb(300 255 255)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <br><span class="token comment">// ⇒ false</span></code></pre>
+<pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">displayable</span><span class="token punctuation">(</span><span class="token string">'red'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ true</span><br><br>culori<span class="token punctuation">.</span><span class="token function">displayable</span><span class="token punctuation">(</span><span class="token string">'rgb(300 255 255)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ false</span></code></pre>
 <p><a name="clampRgb" href="#clampRgb">#</a> culori.<strong>clampRgb</strong>(<em>color</em> or <em>string</em>) → <em>color</em> · <a href="https://github.com/evercoder/culori/blob/master/src/clamp.js">Source</a></p>
 <p>Obtains a displayable version of the color by clamping the <code>r</code>, <code>g</code>, <code>b</code> channel values of the color's RGB representation to the interval <code>[0, 1]</code>. The returned color is in the same color space as the original color.</p>
 <p>This is the faster, simpler, way to make a color displayable. It's what browsers do when you use a CSS color whose channels exceed the gamut. For example, <code>rgb(300 100 200)</code> is interpreted as <code>rgb(255 100 200)</code>.</p>
@@ -257,9 +272,9 @@
 <h3>Evenly-spaced samples</h3>
 <p><a name="samples" href="#samples">#</a> culori.<strong>samples</strong>(<em>n = 2</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/samples.js">Source</a></p>
 <p>Returns an array of <em>n</em> equally-spaced samples in the <code>[0, 1]</code> range, with <code>0</code> and <code>1</code> at the ends.</p>
-<pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <br><span class="token comment">// ⇒ [0, 0.5, 1]</span><br><br>culori<span class="token punctuation">.</span><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <br><span class="token comment">// ⇒ [0, 0.25, 0.5, 0.75, 1]</span></code></pre>
+<pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ [0, 0.5, 1]</span><br><br>culori<span class="token punctuation">.</span><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ [0, 0.25, 0.5, 0.75, 1]</span></code></pre>
 <p>The samples are useful for <a href="#interpolate"><code>culori.interpolate()</code></a> to generate color scales:</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">let</span> grays <span class="token operator">=</span> culori<span class="token punctuation">.</span><span class="token function">interpolate</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'#fff'</span><span class="token punctuation">,</span> <span class="token string">'#000'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>culori<span class="token punctuation">.</span><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>grays<span class="token punctuation">)</span><span class="token punctuation">;</span> <br><span class="token comment">// ⇒ five evenly-spaced colors</span></code></pre>
+<pre class="language-js"><code class="language-js"><span class="token keyword">let</span> grays <span class="token operator">=</span> culori<span class="token punctuation">.</span><span class="token function">interpolate</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'#fff'</span><span class="token punctuation">,</span> <span class="token string">'#000'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>culori<span class="token punctuation">.</span><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>grays<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ five evenly-spaced colors</span></code></pre>
 <p>As with the <a href="#interpolate"><code>culori.interpolate()</code></a> method, you can map the samples through an easing function or scale to obtain a different distribution of the samples.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">let</span> culori <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'culori'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">let</span> easing <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'bezier-easing'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// Bezier easing:</span><br><span class="token keyword">let</span> bezier <span class="token operator">=</span> <span class="token function">easing</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>culori<span class="token punctuation">.</span><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>bezier<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// easeInQuad:</span><br>culori<span class="token punctuation">.</span><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">t</span> <span class="token operator">=></span> t <span class="token operator">*</span> t<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h3>Lerp</h3>

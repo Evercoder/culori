@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="logo">
 			<a href='/'>culori</a>
-			<span>0.12.1 (alpha)</span>
+			<span>0.12.2 (alpha)</span>
 		</div>
 		<nav>
 			<ul><li class="">
@@ -207,6 +207,64 @@
 <blockquote>
 <p>💡 The range for the <code>a</code> and <code>b</code> channels in Lab, and the <code>c</code> channel in LCh, depend on the specific implementation. I've obtained the ranges from the tables above by converting all sRGB colors defined by <code>r, g, b ∈ ℕ ⋂ [0, 255]</code> into Lab and LCh respectively.</p>
 </blockquote>
+<h2>Luv / LCHuv (CIE)</h2>
+<p><a href="https://en.wikipedia.org/wiki/CIELUV">CIELuv color space</a> in cartesian and polar forms, using the D50 standard illuminant.</p>
+<h3><code>luv</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 100]</code></td>
+<td>Lightness</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td><code>[-84.86, 174.87]</code></td>
+<td>Green–red component</td>
+</tr>
+<tr>
+<td><code>v</code></td>
+<td><code>[-125.744, 87.165]</code></td>
+<td>Blue–yellow component</td>
+</tr>
+</tbody>
+</table>
+<h3><code>lchuv</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 100]</code></td>
+<td>Lightness</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><code>[0, 176.609]</code></td>
+<td>Chroma</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+</tbody>
+</table>
+<p>CIELuv supports an Euclidean color difference function:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">let</span> deltaE_uv <span class="token operator">=</span> culori<span class="token punctuation">.</span><span class="token function">colorDifferenceEuclidean</span><span class="token punctuation">(</span><span class="token string">'luv'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h2>DIN99 Lab / LCh</h2>
 <p>The <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99</a> color space &quot;squishes&quot; the CIE Lab color space to obtain an <a href="#culoriDifferenceDin99o">effective color difference</a> metric that can be expressed as a simple Euclidean distance. We implement the latest iteration of the the standard, DIN99o.</p>
 <h3><code>dlab</code></h3>
@@ -292,6 +350,37 @@
 <td>Q</td>
 <td><code>[-0.520, 0.520]</code></td>
 <td>Quadrature (green-purple axis)</td>
+</tr>
+</tbody>
+</table>
+<h2>XYZ</h2>
+<p>The <a href="https://en.wikipedia.org/wiki/CIE_1931_color_space">CIEXYZ color space</a>.</p>
+<h3><code>xyz</code></h3>
+<p>The D50 XYZ color space.</p>
+<p>It contains the following channels:</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X</td>
+<td><code>[0, 0.962]</code></td>
+<td>?</td>
+</tr>
+<tr>
+<td>Y</td>
+<td><code>[0, 0.997]</code></td>
+<td>?</td>
+</tr>
+<tr>
+<td>Z</td>
+<td><code>[0, 0.823]</code></td>
+<td>?</td>
 </tr>
 </tbody>
 </table>
