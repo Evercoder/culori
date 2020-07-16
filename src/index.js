@@ -6,6 +6,8 @@ import hsiDef from './hsi/definition';
 import hwbDef from './hwb/definition';
 import labDef from './lab/definition';
 import lchDef from './lch/definition';
+import luvDef from './luv/definition';
+import lchuvDef from './lchuv/definition';
 import cubehelixDef from './cubehelix/definition';
 import dlabDef from './dlab/definition';
 import dlchDef from './dlch/definition';
@@ -23,6 +25,8 @@ defineMode(hsiDef);
 defineMode(hwbDef);
 defineMode(labDef);
 defineMode(lchDef);
+defineMode(luvDef);
+defineMode(lchuvDef);
 defineMode(cubehelixDef);
 defineMode(dlabDef);
 defineMode(dlchDef);
@@ -37,6 +41,8 @@ let hsi = converter('hsi');
 let hwb = converter('hwb');
 let lab = converter('lab');
 let lch = converter('lch');
+let luv = converter('luv');
+let lchuv = converter('lchuv');
 let cubehelix = converter('cubehelix');
 let dlab = converter('dlab');
 let dlch = converter('dlch');
@@ -53,6 +59,8 @@ export {
 	rgb,
 	lab,
 	lch,
+	luv,
+	lchuv,
 	lrgb,
 	cubehelix,
 	dlab,

@@ -10,6 +10,5 @@ export default rgb => {
 	if ((rgb.r === rgb.b) === rgb.g) {
 		res.a = res.b = 0;
 	}
-	if (rgb.alpha !== undefined) res.alpha = rgb.alpha;
 	return res;
 };

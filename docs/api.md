@@ -81,6 +81,8 @@ The available modes (color spaces) are listed below. For convenience, each color
 | `hwb`       | HWB color space            | culori.**hwb**(_color_)       |
 | `lab`       | Lab color space            | culori.**lab**(_color_)       |
 | `lch`       | LCh color space            | culori.**lch**(_color_)       |
+| `luv`       | CIELuv color space         | culori.**luv**(_color_)       |
+| `lchuv`     | CIELCHuv color space       | culori.**lchuv**(_color_)     |
 | `lrgb`      | Linearized RGB color space | culori.**lrgb**(_color_)      |
 | `rgb`       | RGB color space            | culori.**rgb**(_color_)       |
 | `xyz`       | XYZ D50 color space        | culori.**xyz**(_color_)       |
