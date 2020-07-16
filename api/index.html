@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="logo">
 			<a href='/'>culori</a>
-			<span>0.12.3 (alpha)</span>
+			<span>0.12.5 (alpha)</span>
 		</div>
 		<nav>
 			<ul><li class="">
@@ -325,8 +325,6 @@
 <p>Returns a <a href="https://en.wikipedia.org/wiki/Color_difference#Euclidean">Euclidean distance</a> function in a certain color space.</p>
 <p>You can optionally assign different weights to the channels in the color space. See, for example, the <a href="#differenceKotsarenkoRamos">Kotsarenko/Ramos distance</a>.</p>
 <p>The default weights <code>[1, 1, 1, 0]</code> mean that the <em>alpha</em>, which is the fourth channel in all the color spaces culori defines, is not taken into account. Send <code>[1, 1, 1, 1]</code> as the weights to include it in the computation.</p>
-<p>For the <code>h</code> channel in the color (in any color space that has this channel), we're using a <em>shortest hue distance</em> to compute the hue's contribution to the distance. In spaces such as HSL or HSV, where the range of this difference is <code>[0, 180]</code> — as opposed to <code>[0, 1]</code> for the other channels — consider adjusting the weights so that the hue contributes &quot;equally&quot; to the distance:</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">let</span> hsl_distance <span class="token operator">=</span> culori<span class="token punctuation">.</span><span class="token function">differenceEuclidean</span><span class="token punctuation">(</span><span class="token string">'hsl'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><br>	<span class="token number">1</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">180</span> <span class="token operator">*</span> <span class="token number">180</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>	<span class="token number">1</span><span class="token punctuation">,</span><br>	<span class="token number">1</span><span class="token punctuation">,</span><br>	<span class="token number">0</span><br><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p><a name="differenceCie76" href="#differenceCie76">#</a> culori.<strong>differenceCie76</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
 <p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIE76">CIE76</a> ΔE*<sub>ab</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the Lab color space and it is analogous to <a href="#differenceEuclidean"><code>culori.differenceEuclidean('lab')</code></a>.</p>
 <p><a name="differenceCie94" href="#differenceCie94">#</a> culori.<strong>differenceCie94</strong>(<em>kL = 1</em>, <em>K1 = 0.045</em>, <em>K2 = 0.015</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
@@ -343,6 +341,14 @@
 <p>Computes the <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel">DIN99o</a> ΔE*<sub>99o</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99o</a> color space.</p>
 <p><a name="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> culori.<strong>differenceKotsarenkoRamos</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
 <p>Computes the <a href="http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf">Kotsarenko/Ramos</a> color difference between the colors <em>a</em> and <em>b</em>. This is a weighted Euclidean distance in the <a href="https://en.wikipedia.org/wiki/YIQ">YIQ</a> color space.</p>
+<h3>Handling hue</h3>
+<p>Euclidean distances are tricky in cylindrical spaces, containing a hue. Depending on the color space, hue is treated in a variety of ways:</p>
+<p><a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.<strong>differenceHueChroma</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
+<p>This is the handling of hue in CIE-derived cylindrical spaces (<code>lch</code>, <code>lchuv</code>, <code>dlch</code>).</p>
+<p><a name="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.<strong>differenceHueSaturation</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
+<p>This is a handling of hue in the HSL / HSV / HSI family of color spaces. It's a (possibly wrong!) extrapolation of <code>differenceHueChroma</code>.</p>
+<p><a name="differenceHueNaive" href="#differenceHueNaive">#</a> culori.<strong>differenceHueNaive</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
+<p>For remaining color spaces (HWB), we consider hues numbers, but apply a <em>shortest path around the hue circle</em> (analogous to <a href="#fixupHueShorter"><code>fixupHueShorter</code></a>). If you insist on using Euclidean distances on these spaces, you can use the <code>weights</code> to control the contribution of the hue difference towards the total difference.</p>
 <h3>Nearest color(s)</h3>
 <p><a name="nearest" href="#nearest">#</a> culori.<strong>nearest</strong>(<em>colors</em>, <em>metric = differenceEuclidean()</em>, <em>accessor = identity</em>) → <em>function(color, n = 1, τ = Infinity)</em> · <a href="https://github.com/evercoder/culori/blob/master/src/nearest.js">Source</a></p>
 <p>For a given <em>metric</em> color difference formula, and an array of <em>colors</em>, returns a function with which you can find <em>n</em> colors nearest to <em>color</em>, with a maximum distance of <em>τ</em>.</p>
