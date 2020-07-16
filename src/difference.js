@@ -15,6 +15,9 @@ const differenceHueSaturation = (std, smp) => {
 };
 
 const differenceHueNaive = (std, smp) => {
+	if (std.h === undefined || smp.h === undefined) {
+		return 0;
+	}
 	let std_h = normalizeHue(std.h);
 	let smp_h = normalizeHue(smp.h);
 	if (Math.abs(smp_h - std_h) > 180) {
