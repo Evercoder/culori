@@ -72,6 +72,30 @@ const matrixGrayscale = amount => {
 	];
 };
 
+const matrixHueRotate = degrees => {
+	let rad = (Math.PI * degrees) / 180;
+	let c = Math.cos(rad);
+	let s = Math.sin(rad);
+	return [
+		0.213 + c * 0.787 - s * 0.213,
+		0.715 - c * 0.715 - s * 0.715,
+		0.072 - c * 0.072 + s * 0.928,
+		0,
+		0.213 - c * 0.213 + s * 0.143,
+		0.715 + c * 0.285 + s * 0.14,
+		0.072 - c * 0.072 - s * 0.283,
+		0,
+		0.213 - c * 0.213 - s * 0.787,
+		0.715 - c * 0.715 + s * 0.715,
+		0.072 + c * 0.928 + s * 0.072,
+		0,
+		0,
+		0,
+		0,
+		1
+	];
+};
+
 const matrix = (values, mode) => {
 	let conv = converter(mode);
 	let channels = getModeDefinition(mode).channels;
@@ -109,6 +133,8 @@ const filterInvert = (amt = 1, mode = 'rgb') => {
 	let a = clamp(amt);
 	return mapper((v, ch) => (ch === 'alpha' ? v : lerp(a, 1 - a, v)), mode);
 };
+const filterHueRotate = (deg = 0, mode = 'rgb') =>
+	matrix(matrixHueRotate(deg), mode);
 
 export {
 	filterBrightness,
@@ -116,5 +142,6 @@ export {
 	filterSepia,
 	filterSaturate,
 	filterGrayscale,
-	filterInvert
+	filterInvert,
+	filterHueRotate
 };

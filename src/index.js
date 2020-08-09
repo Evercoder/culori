@@ -169,5 +169,6 @@ export {
 	filterSepia,
 	filterInvert,
 	filterSaturate,
-	filterGrayscale
+	filterGrayscale,
+	filterHueRotate
 } from './filter';
