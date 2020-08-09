@@ -3,20 +3,30 @@ import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
 export default [
-	// UMD, minified
+	// IIFE, minified
 	{
-		input: 'src/index.js',
+		input: pkg.source,
 		output: {
-			file: pkg.main,
-			format: 'umd',
+			file: pkg.unpkg,
+			format: 'iife',
 			name: 'culori'
 		},
 		plugins: [buble({ objectAssign: 'Object.assign' }), terser()]
 	},
 
+	// CJS
+	{
+		input: pkg.source,
+		output: {
+			file: pkg.main,
+			format: 'cjs'
+		},
+		plugins: [buble({ objectAssign: 'Object.assign' })]
+	},
+
 	// ES6 modules
 	{
-		input: 'src/index.js',
+		input: pkg.source,
 		output: {
 			file: pkg.module,
 			format: 'es'
