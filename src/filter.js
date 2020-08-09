@@ -3,8 +3,11 @@ import converter from './converter';
 import lerp from './util/lerp';
 import { getModeDefinition } from './modes';
 
+const minzero = v => Math.max(v, 0);
+const clamp = v => Math.max(Math.min(v, 1), 0);
+
 const matrixSepia = amount => {
-	let a = 1 - Math.min(amount, 1);
+	let a = 1 - clamp(amount);
 	return [
 		0.393 + 0.607 * a,
 		0.769 - 0.769 * a,
@@ -26,18 +29,19 @@ const matrixSepia = amount => {
 };
 
 const matrixSaturate = sat => {
+	let s = minzero(sat);
 	return [
-		0.213 + 0.787 * sat,
-		0.715 - 0.715 * sat,
-		0.072 - 0.072 * sat,
+		0.213 + 0.787 * s,
+		0.715 - 0.715 * s,
+		0.072 - 0.072 * s,
 		0,
-		0.213 - 0.213 * sat,
-		0.715 + 0.285 * sat,
-		0.072 - 0.072 * sat,
+		0.213 - 0.213 * s,
+		0.715 + 0.285 * s,
+		0.072 - 0.072 * s,
 		0,
-		0.213 - 0.213 * sat,
-		0.715 - 0.715 * sat,
-		0.072 + 0.928 * sat,
+		0.213 - 0.213 * s,
+		0.715 - 0.715 * s,
+		0.072 + 0.928 * s,
 		0,
 		0,
 		0,
@@ -47,7 +51,7 @@ const matrixSaturate = sat => {
 };
 
 const matrixGrayscale = amount => {
-	let a = 1 - Math.min(amount, 1);
+	let a = 1 - clamp(amount);
 	return [
 		0.2126 + 0.7874 * a,
 		0.7152 - 0.7152 * a,
@@ -88,17 +92,23 @@ const matrix = (values, mode) => {
 	};
 };
 
-const filterBrightness = (amt = 1, mode = 'rgb') =>
-	mapper(mapTransferLinear(amt), mode);
-const filterContrast = (amt = 1, mode = 'rgb') =>
-	mapper(mapTransferLinear(amt, (1 - amt) / 2), mode);
+const filterBrightness = (amt = 1, mode = 'rgb') => {
+	let a = minzero(amt);
+	return mapper(mapTransferLinear(a), mode);
+};
+const filterContrast = (amt = 1, mode = 'rgb') => {
+	let a = minzero(amt);
+	return mapper(mapTransferLinear(a, (1 - a) / 2), mode);
+};
 const filterSepia = (amt = 1, mode = 'rgb') => matrix(matrixSepia(amt), mode);
 const filterSaturate = (amt = 1, mode = 'rgb') =>
 	matrix(matrixSaturate(amt), mode);
 const filterGrayscale = (amt = 1, mode = 'rgb') =>
 	matrix(matrixGrayscale(amt), mode);
-const filterInvert = (amt = 1, mode = 'rgb') =>
-	mapper((v, ch) => (ch === 'alpha' ? v : lerp(amt, 1 - amt, v)), mode);
+const filterInvert = (amt = 1, mode = 'rgb') => {
+	let a = clamp(amt);
+	return mapper((v, ch) => (ch === 'alpha' ? v : lerp(a, 1 - a, v)), mode);
+};
 
 export {
 	filterBrightness,
