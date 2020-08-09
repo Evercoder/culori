@@ -725,31 +725,31 @@ culori.blend(['red', 'green'], function average(b, s) {
 
 ## Filter effects
 
-Culori implements some of the filters defined by the W3C [Filter Effects Module Level 1](https://drafts.fxtf.org/filter-effects-1/).
+Culori implements some of the filter effects defined by the W3C [Filter Effects Module Level 1](https://drafts.fxtf.org/filter-effects-1/). The _amount_ parameter is usually in the `[0, 1]` interval, but may go above `1` for some filters. The filters were designed for RGB colors, so the _mode_ parameter is expected to be `rgb` or `lrgb`.
 
 <a name="filterBrightness" href="#filterBrightness">#</a> culori.**filterBrightness**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
 
-The [`brightness()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness) filter.
+The [`brightness()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness) CSS filter. An _amount_ of `1` leaves the color unchanged. Smaller values darken the color (with `0` being fully black), while larger values brighten it.
 
 <a name="filterContrast" href="#filterContrast">#</a> culori.**filterContrast**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
 
-The [`contrast()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast) filter.
+The [`contrast()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast) filter. An _amount_ of `1` leaves the color unchanged. Smaller values decrease the contrast (with `0` being fully gray), while larger values increase it.
 
 <a name="filterSepia" href="#filterSepia">#</a> culori.**filterSepia**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
 
-The [`sepia()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia) filter.
+The [`sepia()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia) filter. An _amount_ of `0` leaves the color unchanged, and `1` applies the sepia effect fully.
 
 <a name="filterGrayscale" href="#filterGrayscale">#</a> culori.**filterGrayscale**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
 
-The [`grayscale()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale) filter.
+The [`grayscale()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale) filter. An _amount_ of `0` leaves the color unchanged, and `1` makes the color fully achromatic.
 
 <a name="filterSaturate" href="#filterSaturate">#</a> culori.**filterSaturate**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
 
-The [`saturate()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate) filter.
+The [`saturate()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate) filter. An _amount_ of `1` leaves the color unchanged. Smaller values desaturate the color (with `0` being fully achromatic), while larger values saturate it.
 
 <a name="filterInvert" href="#filterInvert">#</a> culori.**filterInvert**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
 
-The [`invert()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert) filter.
+The [`invert()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert) filter. An _amount_ of `0` leaves the color unchanged, and `1` makes the color fully inverted.
 
 ## Random colors
 
