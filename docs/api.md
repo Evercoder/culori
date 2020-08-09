@@ -552,6 +552,10 @@ divideAlpha(multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 }));
 
 Any `undefined` channel value will be considered to be `0` (zero), to enable alpha-premultiplied interpolation with achromatic colors in hue-based color spaces (HSL, LCh, etc.).
 
+<a name="mapTransferLinear" href="#mapTransferLinear">#</a> culori.**mapTransferLinear**(_slope = 1_, _intercept = 0_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
+
+<a name="mapTransferGamma" href="#mapTransferGamma">#</a> culori.**mapTransferGamma**(_amplitude = 1_, _exponent = 1_, _offset = 0_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/map.js)
+
 #### Interpolating with mappings
 
 <a name="interpolateWith" href="#interpolateWith">#</a> culori.**interpolateWith**(_premap_, _postmap_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate.js)
@@ -718,6 +722,34 @@ culori.blend(['red', 'green'], function average(b, s) {
 	return (b + s) / 2;
 });
 ```
+
+## Filter effects
+
+Culori implements some of the filters defined by the W3C [Filter Effects Module Level 1](https://drafts.fxtf.org/filter-effects-1/).
+
+<a name="filterBrightness" href="#filterBrightness">#</a> culori.**filterBrightness**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
+
+The [`brightness()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness) filter.
+
+<a name="filterContrast" href="#filterContrast">#</a> culori.**filterContrast**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
+
+The [`contrast()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast) filter.
+
+<a name="filterSepia" href="#filterSepia">#</a> culori.**filterSepia**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
+
+The [`sepia()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia) filter.
+
+<a name="filterGrayscale" href="#filterGrayscale">#</a> culori.**filterGrayscale**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
+
+The [`grayscale()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale) filter.
+
+<a name="filterSaturate" href="#filterSaturate">#</a> culori.**filterSaturate**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
+
+The [`saturate()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate) filter.
+
+<a name="filterInvert" href="#filterInvert">#</a> culori.**filterInvert**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
+
+The [`invert()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert) filter.
 
 ## Random colors
 

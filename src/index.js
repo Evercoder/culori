@@ -155,4 +155,19 @@ export {
 	fixupAlpha as interpolateAlpha // @deprecated
 } from './fixup/alpha';
 
-export { mapper, mapAlphaMultiply, mapAlphaDivide } from './map';
+export {
+	mapper,
+	mapAlphaMultiply,
+	mapAlphaDivide,
+	mapTransferLinear,
+	mapTransferGamma
+} from './map';
+
+export {
+	filterBrightness,
+	filterContrast,
+	filterSepia,
+	filterInvert,
+	filterSaturate,
+	filterGrayscale
+} from './filter';

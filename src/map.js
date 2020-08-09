@@ -35,4 +35,27 @@ const mapAlphaDivide = (v, ch, c) => {
 	return v;
 };
 
-export { mapper, mapAlphaMultiply, mapAlphaDivide };
+const mapTransferLinear = (slope = 1, intercept = 0) => (v, ch) => {
+	if (ch !== 'alpha') {
+		return v * slope + intercept;
+	}
+	return v;
+};
+
+const mapTransferGamma = (amplitude = 1, exponent = 1, offset = 0) => (
+	v,
+	ch
+) => {
+	if (ch !== 'alpha') {
+		return amplitude * pow(v, exponent) + offset;
+	}
+	return v;
+};
+
+export {
+	mapper,
+	mapAlphaMultiply,
+	mapAlphaDivide,
+	mapTransferLinear,
+	mapTransferGamma
+};
