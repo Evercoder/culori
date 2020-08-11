@@ -836,15 +836,15 @@ culori
 
 Simulate how a color may be perceived by people with color vision deficiencies (CVD).
 
-<a name="deficiencyProt" href="#deficiencyProt">#</a> culori.**deficiencyProt**(_severity = 1_) → _function (color)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/deficiency.js)
+<a name="filterDeficiencyProt" href="#filterDeficiencyProt">#</a> culori.**filterDeficiencyProt**(_severity = 1_) → _function (color)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/deficiency.js)
 
 Simulate protanomaly and protanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to protanopia.
 
-<a name="deficiencyDeuter" href="#deficiencyDeuter">#</a> culori.**deficiencyDeuter**(_severity = 1_) → _function (color)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/deficiency.js)
+<a name="filterDeficiencyDeuter" href="#filterDeficiencyDeuter">#</a> culori.**filterDeficiencyDeuter**(_severity = 1_) → _function (color)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/deficiency.js)
 
 Simulate deuteranomaly and deuteranopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to deuteranopia.
 
-<a name="deficiencyTrit" href="#deficiencyTrit">#</a> culori.**deficiencyTrit**(_severity = 1_) → _function (color)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/deficiency.js)
+<a name="filterDeficiencyTrit" href="#filterDeficiencyTrit">#</a> culori.**filterDeficiencyTrit**(_severity = 1_) → _function (color)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/deficiency.js)
 
 Simuate tritanomaly and tritanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to tritanopia.
 
@@ -854,7 +854,7 @@ Examples:
 culori
 	.samples(5)
 	.map(culori.interpolate(['red', 'green', 'blue']))
-	.map(culori.deficiencyProt(0.5))
+	.map(culori.filterDeficiencyProt(0.5))
 	.map(culori.formatHex);
 
 // ⇒ ["#751800", "#664200", "#576c00", "#1a3e82", "#0010ff"];

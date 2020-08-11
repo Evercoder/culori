@@ -1,5 +1,5 @@
-# Culori
+![(culori logo)](./docs/img/culori.svg)
 
-A color library for JavaScript that works across many color spaces to offer conversion, interpolation, color difference formulas, and blending functions.
+culori is a color library for JavaScript that works across many color spaces to offer conversion, interpolation, color difference formulas, and blending functions.
 
-[**Documentation**](https://culorijs.org)
+[**Read the documentation**](https://culorijs.org)
