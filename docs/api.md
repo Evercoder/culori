@@ -684,26 +684,12 @@ nearestNamedColors('lch(50% 70 60)', 3);
 
 ## Blending
 
-Color blending works as defined in the W3C [Compositing and Blending Level 2](https://drafts.fxtf.org/compositing-2/) specification.
+Culori makes available the separable blend modes defined in the W3C [Compositing and Blending Level 2](https://drafts.fxtf.org/compositing-2/) specification.
 
 <a name="blend" href="#blend">#</a> culori.**blend**(_colors_, _type = 'normal'_, _mode = 'rgb'_) → _color_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/blend.js)
 
-Available blending modes:
-
--   `normal`
--   `multiply`
--   `screen`
--   `hard-light`
--   `overlay`
--   `darken`
--   `lighten`
--   `color-dodge`
--   `color-burn`
--   `soft-light`
--   `difference`
--   `exclusion`
-
-> **Note:** culori currently implements the _separable_ blend modes, that is the blend modes that work on each channel in the color space independently. _color_, _hue_, _saturation_, and _lightness_ modes are not yet available.
+A separable blend mode is a simple formula that gets applied to each channel in the color space independently. The available blend modes are `color-burn`, `color-dodge`, `darken`, `difference`, `exclusion`, `hard-light`, `lighten`, `multiply`, `normal`, `overlay`, `screen`
+, and `soft-light`. They are designed to work on RGB colors, so _mode_ is expected to be `rgb` or `lrgb`.
 
 An example of blending three colors:
 
@@ -722,6 +708,8 @@ culori.blend(['red', 'green'], function average(b, s) {
 	return (b + s) / 2;
 });
 ```
+
+The non-separable blend modes — `color`, `hue`, `saturation`, and `lightness` — are not available. The effect which they mean to produce is better obtained with simple formulas on a cylindrical color space (e.g. HSL).
 
 ## Random colors
 
@@ -790,13 +778,25 @@ culori.wcagContrast('red', 'black');
 
 ## Filters
 
-### CSS filter effects
+Filters apply certain graphical effects to a color. Culori currently implements two sets of filter functions:
 
-Culori implements some of the filter effects defined by the W3C [Filter Effects Module Level 1](https://drafts.fxtf.org/filter-effects-1/). The _amount_ parameter is usually in the `[0, 1]` interval, but may go above `1` for some filters. The filters were designed for RGB colors, so the _mode_ parameter is expected to be `rgb` or `lrgb`.
+### CSS Filter Effects
+
+These correspond to the filter effects defined in the W3C [Filter Effects Module Level 1](https://drafts.fxtf.org/filter-effects-1/) specification.
+
+The _amount_ parameter is usually in the `[0, 1]` interval, but may go above `1` for some filters. The filters were designed for RGB colors, so the _mode_ parameter is expected to be `rgb` or `lrgb`.
+
+The resulting color is returned in the color space of the original color.
 
 <a name="filterBrightness" href="#filterBrightness">#</a> culori.**filterBrightness**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
 
 The [`brightness()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness) CSS filter. An _amount_ of `1` leaves the color unchanged. Smaller values darken the color (with `0` being fully black), while larger values brighten it.
+
+```js
+let brighten = culori.filterBrightness(2, 'lrgb');
+brighten('salmon');
+// ⇒ { mode: 'rgb', r: 1.32…, g: 0.68…, b: 0.61… }
+```
 
 <a name="filterContrast" href="#filterContrast">#</a> culori.**filterContrast**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/filter.js)
 
@@ -831,6 +831,8 @@ culori
 
 // ⇒ ["#751800", "#664200", "#576c00", "#1a3e82", "#0010ff"];
 ```
+
+Some of the effects may be obtained more straightforwardly with simple calculations in other color spaces. For example, [hue rotation](#filterHueRotate) can just as well be implemented as `color.h += angle` in a cylindrical color space such as HSL.
 
 ### Color vision deficiency (CVD) simulation
 

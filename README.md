@@ -1,5 +1,7 @@
-![(culori logo)](./docs/img/culori.svg)
+![culori](./docs/img/culori.svg)
 
-culori is a color library for JavaScript that works across many color spaces to offer conversion, interpolation, color difference formulas, and blending functions.
+<a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat-square&labelColor=d84f4c&color=black" alt="npm version"></a> <a href="https://bundlephobia.com/result?p=culori"><img src="https://img.shields.io/bundlephobia/minzip/culori?style=flat-square&labelColor=d84f4c&color=black" alt="npm version"></a>
+
+culori is a color library for JavaScript that works across many color spaces to offer conversion, interpolation, color difference formulas, blending functions, and more.
 
 [**Read the documentation**](https://culorijs.org)

@@ -11,10 +11,25 @@ import {
 } from '../src/index';
 
 tape('filterBrightness', t => {
+	t.deepEqual(
+		filterBrightness(1)('hsl(60 100% 50% / 25%)'),
+		{ mode: 'hsl', h: 60, s: 1, l: 0.5, alpha: 0.25 },
+		'unchanged in the original color space'
+	);
+	t.equal(
+		formatHex(filterBrightness(2)('#003366')),
+		'#0066cc',
+		'brightens the color'
+	);
 	t.end();
 });
 
 tape('filterContrast', t => {
+	t.equal(
+		formatHex(filterContrast(2)('#003366')),
+		'#00004d',
+		'Increases the contrast'
+	);
 	t.end();
 });
 

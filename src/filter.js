@@ -1,5 +1,6 @@
 import { mapper, mapTransferLinear } from './map';
 import converter from './converter';
+import prepare from './_prepare';
 import lerp from './util/lerp';
 import { getModeDefinition } from './modes';
 
@@ -96,14 +97,17 @@ const matrixHueRotate = degrees => {
 	];
 };
 
-const matrix = (values, mode) => {
+const matrix = (values, mode, preserve_mode = false) => {
 	let conv = converter(mode);
 	let channels = getModeDefinition(mode).channels;
 	return color => {
 		let c = conv(color);
+		if (!c) {
+			return undefined;
+		}
 		let res = { mode };
-		let ch,
-			count = channels.length;
+		let ch;
+		let count = channels.length;
 		for (let i = 0; i < values.length; i++) {
 			ch = channels[Math.floor(i / count)];
 			if (c[ch] === undefined) {
@@ -112,29 +116,39 @@ const matrix = (values, mode) => {
 			res[ch] =
 				(res[ch] || 0) + values[i] * (c[channels[i % count]] || 0);
 		}
-		return res;
+		if (!preserve_mode) {
+			return res;
+		}
+		let prep = prepare(color);
+		return prep && res.mode !== prep.mode ? converter(prep.mode)(res) : res;
 	};
 };
 
 const filterBrightness = (amt = 1, mode = 'rgb') => {
 	let a = minzero(amt);
-	return mapper(mapTransferLinear(a), mode);
+	return mapper(mapTransferLinear(a), mode, true);
 };
+
 const filterContrast = (amt = 1, mode = 'rgb') => {
 	let a = minzero(amt);
-	return mapper(mapTransferLinear(a, (1 - a) / 2), mode);
+	return mapper(mapTransferLinear(a, (1 - a) / 2), mode, true);
 };
-const filterSepia = (amt = 1, mode = 'rgb') => matrix(matrixSepia(amt), mode);
+const filterSepia = (amt = 1, mode = 'rgb') =>
+	matrix(matrixSepia(amt), mode, true);
 const filterSaturate = (amt = 1, mode = 'rgb') =>
-	matrix(matrixSaturate(amt), mode);
+	matrix(matrixSaturate(amt), mode, true);
 const filterGrayscale = (amt = 1, mode = 'rgb') =>
-	matrix(matrixGrayscale(amt), mode);
+	matrix(matrixGrayscale(amt), mode, true);
 const filterInvert = (amt = 1, mode = 'rgb') => {
 	let a = clamp(amt);
-	return mapper((v, ch) => (ch === 'alpha' ? v : lerp(a, 1 - a, v)), mode);
+	return mapper(
+		(v, ch) => (ch === 'alpha' ? v : lerp(a, 1 - a, v)),
+		mode,
+		true
+	);
 };
 const filterHueRotate = (deg = 0, mode = 'rgb') =>
-	matrix(matrixHueRotate(deg), mode);
+	matrix(matrixHueRotate(deg), mode, true);
 
 export {
 	filterBrightness,

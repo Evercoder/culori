@@ -1,14 +1,14 @@
 import converter from './converter';
 import identity from './util/identity';
-import _prepare from './_prepare';
+import prepare from './_prepare';
 import { getModeDefinition } from './modes';
 
-const mapper = (fn, mode = 'rgb') => {
+const mapper = (fn, mode = 'rgb', preserve_mode = false) => {
 	let channels = mode ? getModeDefinition(mode).channels : null;
-	let conv = mode ? converter(mode) : _prepare;
+	let conv = mode ? converter(mode) : prepare;
 	return color => {
 		let conv_color = conv(color);
-		return (channels || getModeDefinition(color.mode).channels).reduce(
+		let res = (channels || getModeDefinition(color.mode).channels).reduce(
 			(res, ch) => {
 				let v = fn(conv_color[ch], ch, conv_color, mode);
 				if (v !== undefined && !isNaN(v)) {
@@ -18,6 +18,14 @@ const mapper = (fn, mode = 'rgb') => {
 			},
 			{ mode }
 		);
+		if (!preserve_mode) {
+			return res;
+		}
+		let prep = prepare(color);
+		if (prep && prep.mode !== res.mode) {
+			return converter(prep.mode)(res);
+		}
+		return res;
 	};
 };
 
