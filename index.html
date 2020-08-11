@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>
 			 Home &middot; culori 
 		</title>
@@ -12,9 +13,11 @@
 		<header>
 	<div class="container">
 		<div class="logo">
-			<a href='/'>culori</a>
+			<a href='/'>
+				<img src='/img/culori.svg' alt="culori" />
+			</a>
 			<span
-				>v0.13.1 alpha (<a
+				>v0.13.2 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -41,8 +44,9 @@
 		<div class="container">
 			<article>
 				<h1>Home</h1>
-				<p>Culori is a color library for JavaScript that supports most color spaces and formats defined in the <a href="https://drafts.csswg.org/css-color/">CSS Colors Level 4</a> spec (<a href="https://drafts.csswg.org/css-color/#named-colors">named colors</a>, <a href="hex-colors">Hex colors</a> (3 to 8 digits), <a href="rgb-colors">RGB</a>, <a href="hsl-colors">HSL</a>, <a href="hwb-colors">HWB</a>, <a href="lab-colors">Lab and LCh</a>), plus <a href="./color-spaces">additional color spaces</a>.</p>
+				<p>Culori is a color library for JavaScript that supports most color spaces and formats defined in the <a href="https://drafts.csswg.org/css-color/">CSS Colors Level 4</a> spec (<a href="https://drafts.csswg.org/css-color/#named-colors">named colors</a>, <a href="hex-colors">Hex colors</a> with 3 to 8 digits, <a href="rgb-colors">RGB</a>, <a href="hsl-colors">HSL</a>, <a href="hwb-colors">HWB</a>, <a href="lab-colors">Lab and LCh</a>), plus <a href="./color-spaces">additional color spaces</a>.</p>
 <p>It handles <a href="https://en.wikipedia.org/wiki/Color_difference">color differences</a>, interpolation, gradients, blend modes <a href="./api">and more</a>.</p>
+<p><a class='btn-link' href='./getting-started'>Get started</a></p>
 <h2>Another JS color library?</h2>
 <p>Mike Bostock's <a href="https://github.com/d3/d3-color">d3-color</a>, and Gregor Aisch's <a href="https://github.com/gka/chroma.js">chroma.js</a> are two excellent, robust libraries that provide most of what you need for working with colors on the web. The <a href="./resources">Resources</a> section for even more libraries you can try.</p>
 <p>Culori does a few things differently:</p>

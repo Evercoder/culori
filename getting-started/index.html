@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>
 			 Getting Started &middot; culori 
 		</title>
@@ -12,9 +13,11 @@
 		<header>
 	<div class="container">
 		<div class="logo">
-			<a href='/'>culori</a>
+			<a href='/'>
+				<img src='/img/culori.svg' alt="culori" />
+			</a>
 			<span
-				>v0.13.1 alpha (<a
+				>v0.13.2 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -44,13 +47,13 @@
 				<h2>Try it online</h2>
 <p>You can use culori in the Runkit npm playground (<a href="https://npm.runkit.com/culori">npm.runkit.com/culori</a>) to test the API without installing anything.</p>
 <p><a href="https://beta.observablehq.com">Observable</a> is another great place to tinker with the library. Add this cell and you're good to go:</p>
-<pre><code>culori = require('culori@0.13.1');
+<pre><code>culori = require('culori@0.13.2');
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> You can also omit the version but it's useful to be specific while the API is still unstable, so that your old notebooks don't crash when something changes.</p>
 </blockquote>
 <h2>Install it as an npm package</h2>
-<p><a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat" alt="npm version"></a> <a href="https://bundlephobia.com/result?p=culori"><img src="https://badgen.net/bundlephobia/minzip/culori" alt="bundlephobia"></a></p>
+<p><a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat-square&labelColor=d84f4c&color=black" alt="npm version"></a> <a href="https://bundlephobia.com/result?p=culori"><img src="https://img.shields.io/bundlephobia/minzip/culori?style=flat-square&labelColor=d84f4c&color=black" alt="npm version"></a></p>
 <p>culori is bundled as both UMD and ES <a href="https://npmjs.com/package/culori">on npm</a>. Install it using <code>npm</code> or <code>yarn</code>:</p>
 <pre class="language-bash"><code class="language-bash"><span class="token comment"># using npm</span><br><span class="token function">npm</span> <span class="token function">install</span> culori<br><br><span class="token comment"># using yarn</span><br><span class="token function">yarn</span> <span class="token function">add</span> culori</code></pre>
 <p>You can then import culori in your project:</p>
