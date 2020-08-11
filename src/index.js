@@ -140,7 +140,15 @@ export { default as easingGamma } from './easing/gamma';
 
 export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
 
-export { deficiencyProt, deficiencyDeuter, deficiencyTrit } from './deficiency';
+export {
+	deficiencyProt as filterDeficiencyProt,
+	deficiencyDeuter as filterDeficiencyDeuter,
+	deficiencyTrit as filterDeficiencyTrit,
+	// @deprecated
+	deficiencyProt,
+	deficiencyDeuter,
+	deficiencyTrit
+} from './deficiency';
 
 export {
 	fixupHueShorter as interpolateHue, // @deprecated
