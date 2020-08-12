@@ -180,3 +180,5 @@ export {
 	filterGrayscale,
 	filterHueRotate
 } from './filter';
+
+export { average, averageAngle, averageNumber } from './average';

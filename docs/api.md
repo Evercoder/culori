@@ -709,6 +709,22 @@ culori.blend(['red', 'green'], function average(b, s) {
 
 The non-separable blend modes — `color`, `hue`, `saturation`, and `lightness` — are not available. The effect which they mean to produce is better obtained with simple formulas on a cylindrical color space (e.g. HSL).
 
+## Average color
+
+<a name="average" href="#average">#</a> culori.**average**(_colors_, _mode = 'rgb'_, _overrides_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/average.js)
+
+Returns the average color of the _colors_ array, in the color space specified by the _mode_ argument. The color is obtained by the arithmetic average of values on each individual channel.
+
+Colors with undefined values on a channel don't participate in the average for that channel.
+
+<a name="averageNumber" href="#averageNumber">#</a> culori.**averageNumber**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/average.js)
+
+The arithmetic mean of values in the _values_ array.
+
+<a name="averageAngle" href="#averageAngle">#</a> culori.**averageAngle**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/average.js)
+
+The function used by default to average hue values in all built-in color spaces, using the formula for [the mean of circular quantities](https://en.wikipedia.org/wiki/Mean_of_circular_quantities).
+
 ## Random colors
 
 <a name="random" href="#random">#</a> culori.**random**(_mode = 'rgb'_, _constraints = {}_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/random.js)

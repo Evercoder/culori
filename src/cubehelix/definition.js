@@ -37,6 +37,7 @@ import { interpolatorLinear } from '../interpolate/linear';
 import convertRgbToCubehelix from './convertRgbToCubehelix';
 import convertCubehelixToRgb from './convertCubehelixToRgb';
 import { differenceHueSaturation } from '../difference';
+import { averageAngle } from '../average';
 
 export default {
 	mode: 'cubehelix',
@@ -65,5 +66,8 @@ export default {
 	},
 	difference: {
 		h: differenceHueSaturation
+	},
+	average: {
+		h: averageAngle
 	}
 };

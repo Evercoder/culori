@@ -7,6 +7,7 @@ import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
 import { interpolatorLinear } from '../interpolate/linear';
 import { differenceHueChroma } from '../difference';
+import { averageAngle } from '../average';
 
 export default {
 	mode: 'lch',
@@ -33,5 +34,8 @@ export default {
 	},
 	difference: {
 		h: differenceHueChroma
+	},
+	average: {
+		h: averageAngle
 	}
 };

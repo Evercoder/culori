@@ -4,6 +4,7 @@ import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
 import { interpolatorLinear } from '../interpolate/linear';
 import { differenceHueSaturation } from '../difference';
+import { averageAngle } from '../average';
 
 export default {
 	mode: 'hsv',
@@ -25,5 +26,8 @@ export default {
 	},
 	difference: {
 		h: differenceHueSaturation
+	},
+	average: {
+		h: averageAngle
 	}
 };
