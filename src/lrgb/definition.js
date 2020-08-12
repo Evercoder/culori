@@ -1,9 +1,9 @@
+import rgb from '../rgb/definition';
 import convertRgbToLrgb from './convertRgbToLrgb';
 import convertLrgbToRgb from './convertLrgbToRgb';
-import { interpolatorLinear } from '../interpolate/linear';
-import { fixupAlpha } from '../fixup/alpha';
 
 export default {
+	...rgb,
 	mode: 'lrgb',
 	output: {
 		rgb: convertLrgbToRgb
@@ -11,11 +11,5 @@ export default {
 	input: {
 		rgb: convertRgbToLrgb
 	},
-	channels: ['r', 'g', 'b', 'alpha'],
-	interpolate: {
-		r: interpolatorLinear,
-		g: interpolatorLinear,
-		b: interpolatorLinear,
-		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
-	}
+	parsers: []
 };

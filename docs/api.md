@@ -717,6 +717,11 @@ Returns the average color of the _colors_ array, in the color space specified by
 
 Colors with undefined values on a channel don't participate in the average for that channel.
 
+```js
+culori.average(['salmon', 'tomato'], 'lab');
+// ⇒ { 'mode': 'lab', l: 65.41…, a: 53.00…, b: 39.01… }
+```
+
 <a name="averageNumber" href="#averageNumber">#</a> culori.**averageNumber**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/average.js)
 
 The arithmetic mean of values in the _values_ array.
@@ -928,6 +933,9 @@ Defines a new color space through a _definition_ object. Here's the full definit
 	},
 	difference: {
 		h: differenceHueSaturation
+	},
+	average: {
+		h: averageAngle
 	}
 };
 ```
@@ -942,6 +950,7 @@ The properties a definition needs are the following:
 -   `parsers`: any parsers for the color space that can transform strings into colors
 -   `interpolate`: the default interpolations for the color space, one for each channel. Each interpolation is defined by its interpolator (the `use` key) and its fixup function (the `fixup` key). When defined as a function, a channel interpolation is meant to define its interpolator, with the fixup being a no-op.
 -   `difference`: the default Euclidean distance method for each channel in the color space; mostly used for the `h` channel in cylindrical color spaces.
+-   `average`: the default average function for each channel in the color space; when left unspecified, defaults to [`averageNumber`](#averageNumber).
 
 All built-in color spaces follow these conventions in regards to the `channels` array follows:
 

@@ -1,5 +1,9 @@
 import rgbDef from './rgb/definition';
 import lrgbDef from './lrgb/definition';
+import a98Def from './a98/definition';
+import p3Def from './p3/definition';
+import prophotoDef from './prophoto/definition';
+import rec2020Def from './rec2020/definition';
 import hslDef from './hsl/definition';
 import hsvDef from './hsv/definition';
 import hsiDef from './hsi/definition';
@@ -19,6 +23,10 @@ import converter from './converter';
 
 defineMode(rgbDef);
 defineMode(lrgbDef);
+defineMode(a98Def);
+defineMode(p3Def);
+defineMode(prophotoDef);
+defineMode(rec2020Def);
 defineMode(hslDef);
 defineMode(hsvDef);
 defineMode(hsiDef);
@@ -35,6 +43,10 @@ defineMode(xyzDef);
 
 let rgb = converter('rgb');
 let lrgb = converter('lrgb');
+let p3 = converter('p3');
+let prophoto = converter('prophoto');
+let a98 = converter('a98');
+let rec2020 = converter('rec2020');
 let hsl = converter('hsl');
 let hsv = converter('hsv');
 let hsi = converter('hsi');
@@ -50,23 +62,27 @@ let yiq = converter('yiq');
 let xyz = converter('xyz');
 
 export {
-	defineMode,
+	a98,
 	converter,
-	hsl,
-	hsv,
-	hsi,
-	hwb,
-	rgb,
-	lab,
-	lch,
-	luv,
-	lchuv,
-	lrgb,
 	cubehelix,
+	defineMode,
 	dlab,
 	dlch,
-	yiq,
-	xyz
+	hsi,
+	hsl,
+	hsv,
+	hwb,
+	lab,
+	lch,
+	lchuv,
+	lrgb,
+	luv,
+	p3,
+	prophoto,
+	rec2020,
+	rgb,
+	xyz,
+	yiq
 };
 
 export { formatter, formatHex, formatHex8, formatRgb } from './formatter';
