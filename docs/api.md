@@ -21,8 +21,6 @@ Culori does not have a _Color_ class. Instead, it uses plain objects to represen
 
 The object needs to have a `mode` property that identifies the color space, and values for each channel in that particular color space. See the [Color Spaces](./color-spaces) section for the channels expected of each color space. Optionally, the `alpha` property is used for the color's alpha channel.
 
-> **A note on the examples:** Doing arithmetics on colors will often result in floating-point values with lots of decimals. In the examples below, for brevity, the values are truncated to two decimals, with ellipses (`…`) subsituted for the rest.
-
 ## Basic methods
 
 ### Parsing and conversion

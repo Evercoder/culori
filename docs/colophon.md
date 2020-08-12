@@ -4,15 +4,12 @@ title: Colophon
 menu-order: 5
 ---
 
-Culori is the Romanian word for ‘colors’.
+Authored by [Dan Burzo](http://danburzo.ro), and released under the MIT license.
 
--   _Author_: [Dan Burzo](http://danburzo.ro)
--   _License_: MIT
--   _Dependencies_: none
--   _Bundled with_: [rollup](https://github.com/rollup/rollup), [buble](https://github.com/Rich-Harris/buble), [terser](https://github.com/terser-js/terser)
--   _Tested with_: [tape](https://github.com/substack/tape)
--   _Formatted with_: [prettier](https://prettier.io)
+Culori is the Romanian word for ‘colors’. The logo is typeset in [Hatch](https://pstypelab.com/hatchfont) by Mark Caneso.
 
 Culori is indebted to Mike Bostock's [D3.js](https://github.com/d3) and Gregor Aisch's [chroma.js](https://github.com/gka/chroma.js). D3, in particular, has been a treasure-trove of ideas and academic references.
 
-This website is statically-generated using [Eleventy](https://11ty.dev).
+The code is formatted with [prettier](https://prettier.io) and bundled with [rollup](https://github.com/rollup/rollup), [buble](https://github.com/Rich-Harris/buble), and [terser](https://github.com/terser-js/terser). Tests use [tape](https://github.com/substack/tape). The library does not have external run-time dependencies.
+
+This website is statically generated using [Eleventy](https://11ty.dev) by Zach Leatherman.
