@@ -1,8 +1,3 @@
-// D65 white
-// export const Xn = 0.95047;
-// export const Yn = 1.00000;
-// export const Zn = 1.08883;
-
 // D50 white
 export const Xn = 0.96422;
 export const Yn = 1.0;
