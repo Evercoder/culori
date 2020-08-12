@@ -1,7 +1,28 @@
 import rgb from '../rgb/definition';
 
+import convertXyzToProphoto from './convertXyzToProphoto';
+import convertProphotoToXyz from './convertProphotoToXyz';
+
+import convertXyzToRgb from '../xyz/convertXyzToRgb';
+import convertRgbToXyz from '../xyz/convertRgbToXyz';
+
+/*
+	ProPhoto RGB Color space
+
+	References:
+		* https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space
+ */
+
 export default {
 	...rgb,
 	mode: 'prophoto',
-	parsers: []
+	parsers: [],
+	input: {
+		xyz: convertXyzToProphoto,
+		rgb: color => convertXyzToProphoto(convertRgbToXyz(color))
+	},
+	output: {
+		xyz: convertProphotoToXyz,
+		rgb: color => convertXyzToRgb(convertProphotoToXyz(color))
+	}
 };
