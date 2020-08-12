@@ -17,7 +17,7 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.13.2 alpha (<a
+				>v0.14.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,9 +48,6 @@
 <p>Culori does not have a <em>Color</em> class. Instead, it uses plain objects to represent colors:</p>
 <pre class="language-js"><code class="language-js"><span class="token comment">// A color in the RGB space:</span><br><span class="token punctuation">{</span><br>  mode<span class="token operator">:</span> <span class="token string">'rgb'</span><span class="token punctuation">,</span><br>  r<span class="token operator">:</span> <span class="token number">0.1</span><span class="token punctuation">,</span><br>  g<span class="token operator">:</span> <span class="token number">0.2</span><span class="token punctuation">,</span><br>  b<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><br>  alpha<span class="token operator">:</span> <span class="token number">1</span><br><span class="token punctuation">}</span></code></pre>
 <p>The object needs to have a <code>mode</code> property that identifies the color space, and values for each channel in that particular color space. See the <a href="./color-spaces">Color Spaces</a> section for the channels expected of each color space. Optionally, the <code>alpha</code> property is used for the color's alpha channel.</p>
-<blockquote>
-<p><strong>A note on the examples:</strong> Doing arithmetics on colors will often result in floating-point values with lots of decimals. In the examples below, for brevity, the values are truncated to two decimals, with ellipses (<code>…</code>) subsituted for the rest.</p>
-</blockquote>
 <h2>Basic methods</h2>
 <h3>Parsing and conversion</h3>
 <p><a name="parse" href="#parse">#</a> culori.<strong>parse</strong>(<em>string</em>) → <em>color</em> or <em>undefined</em> · <a href="https://github.com/evercoder/culori/blob/master/src/parse.js">Source</a></p>
@@ -375,6 +372,14 @@
 <p>In addition to strings, the <em>type</em> parameter supports a <em>function (b, s) → v</em> that takes the values of the <em>backdrop</em> and <em>source</em> color to return the blended value. This allows you to write your own (separable) blending functions. For example, an <em>average</em> blending mode:</p>
 <pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">blend</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token function">average</span><span class="token punctuation">(</span><span class="token parameter">b<span class="token punctuation">,</span> s</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>	<span class="token keyword">return</span> <span class="token punctuation">(</span>b <span class="token operator">+</span> s<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>The non-separable blend modes — <code>color</code>, <code>hue</code>, <code>saturation</code>, and <code>lightness</code> — are not available. The effect which they mean to produce is better obtained with simple formulas on a cylindrical color space (e.g. HSL).</p>
+<h2>Average color</h2>
+<p><a name="average" href="#average">#</a> culori.<strong>average</strong>(<em>colors</em>, <em>mode = 'rgb'</em>, <em>overrides</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/average.js">Source</a></p>
+<p>Returns the average color of the <em>colors</em> array, in the color space specified by the <em>mode</em> argument. The color is obtained by the arithmetic average of values on each individual channel.</p>
+<p>Colors with undefined values on a channel don't participate in the average for that channel.</p>
+<p><a name="averageNumber" href="#averageNumber">#</a> culori.<strong>averageNumber</strong>(<em>values</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/average.js">Source</a></p>
+<p>The arithmetic mean of values in the <em>values</em> array.</p>
+<p><a name="averageAngle" href="#averageAngle">#</a> culori.<strong>averageAngle</strong>(<em>values</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/average.js">Source</a></p>
+<p>The function used by default to average hue values in all built-in color spaces, using the formula for <a href="https://en.wikipedia.org/wiki/Mean_of_circular_quantities">the mean of circular quantities</a>.</p>
 <h2>Random colors</h2>
 <p><a name="random" href="#random">#</a> culori.<strong>random</strong>(<em>mode = 'rgb'</em>, <em>constraints = {}</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/random.js">Source</a></p>
 <p>Obtain a random color from a particular color space, with optional constraints. The resulting color will be in the color space from where it has been picked.</p>
@@ -472,8 +477,18 @@
 			code available on
 			<a href="https://github.com/evercoder/culori">GitHub</a>.
 		</p>
+
+		<p>
+			Can this page be improved?
+			<a
+				href="https://github.com/Evercoder/culori/blob/master/./docs/api.md"
+				>Edit it on GitHub</a
+			>.
+		</p>
 	</div>
 </footer>
 
+
+		<script src="https://unpkg.com/culori"></script>
 	</body>
 </html>
