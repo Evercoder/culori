@@ -11,6 +11,7 @@ import { averageAngle } from '../average';
 
 export default {
 	mode: 'lch',
+	alias: ['lch-d50'],
 	output: {
 		lab: convertLchToLab,
 		rgb: convertLchToRgb

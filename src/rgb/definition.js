@@ -5,9 +5,14 @@ import parseTransparent from './parseTransparent';
 import { interpolatorLinear } from '../interpolate/linear';
 import { fixupAlpha } from '../fixup/alpha';
 
+/*
+	sRGB color space
+ */
+
 export default {
 	mode: 'rgb',
 	channels: ['r', 'g', 'b', 'alpha'],
+	alias: ['srgb'],
 	parsers: [parseHex, parseRgb, parseNamed, parseTransparent],
 	interpolate: {
 		r: interpolatorLinear,

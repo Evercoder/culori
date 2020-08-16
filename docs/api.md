@@ -68,23 +68,28 @@ Converters accept either strings (which will be parsed with `culori.parse` under
 
 The available modes (color spaces) are listed below. For convenience, each color space included by default in culori has a shortcut to its converter. For example, you can use `culori.hsl` instead of `culori.converter('hsl')`.
 
-| Mode        | For                        | Shortcut                      |
-| ----------- | -------------------------- | ----------------------------- |
-| `cubehelix` | Cubehelix color space      | culori.**cubehelix**(_color_) |
-| `dlab`      | DIN99o Lab color space     | culori.**dlab**(_color_)      |
-| `dlch`      | DIN99o LCh color space     | culori.**dlch**(_color_)      |
-| `hsi`       | HSI color space            | culori.**hsi**(_color_)       |
-| `hsl`       | HSL color space            | culori.**hsl**(_color_)       |
-| `hsv`       | HSV color space            | culori.**hsv**(_color_)       |
-| `hwb`       | HWB color space            | culori.**hwb**(_color_)       |
-| `lab`       | Lab color space            | culori.**lab**(_color_)       |
-| `lch`       | LCh color space            | culori.**lch**(_color_)       |
-| `luv`       | CIELuv color space         | culori.**luv**(_color_)       |
-| `lchuv`     | CIELCHuv color space       | culori.**lchuv**(_color_)     |
-| `lrgb`      | Linearized RGB color space | culori.**lrgb**(_color_)      |
-| `rgb`       | RGB color space            | culori.**rgb**(_color_)       |
-| `xyz`       | XYZ D50 color space        | culori.**xyz**(_color_)       |
-| `yiq`       | YIQ color space            | culori.**yiq**(_color_)       |
+| Mode        | For                           | Shortcut                      |
+| ----------- | ----------------------------- | ----------------------------- |
+| `a98`       | Adobe RGB (1998) color space  | culori.**a98**(_color_)       |
+| `cubehelix` | Cubehelix color space         | culori.**cubehelix**(_color_) |
+| `dlab`      | DIN99o Lab color space        | culori.**dlab**(_color_)      |
+| `dlch`      | DIN99o LCh color space        | culori.**dlch**(_color_)      |
+| `hsi`       | HSI color space               | culori.**hsi**(_color_)       |
+| `hsl`       | HSL color space               | culori.**hsl**(_color_)       |
+| `hsv`       | HSV color space               | culori.**hsv**(_color_)       |
+| `hwb`       | HWB color space               | culori.**hwb**(_color_)       |
+| `lab`       | Lab color space (D50)         | culori.**lab**(_color_)       |
+| `lch`       | LCh color space (D50)         | culori.**lch**(_color_)       |
+| `lchuv`     | CIELCHuv color space          | culori.**lchuv**(_color_)     |
+| `lrgb`      | Linear-light sRGB color space | culori.**lrgb**(_color_)      |
+| `luv`       | CIELuv color space            | culori.**luv**(_color_)       |
+| `p3`        | Display P3 color space        | culori.**p3**(_color_)        |
+| `prophoto`  | ProPhoto RGB color space      | culori.**prophoto**(_color_)  |
+| `rec2020`   | Rec. 2020 RGB color space     | culori.**rec2020**(_color_)   |
+| `rgb`       | sRGB color space              | culori.**rgb**(_color_)       |
+| `xyz65`     | XYZ D65 color space           | culori.**xyz65**(_color_)     |
+| `xyz`       | XYZ D50 color space           | culori.**xyz**(_color_)       |
+| `yiq`       | YIQ color space               | culori.**yiq**(_color_)       |
 
 ### Formatting
 
@@ -717,6 +722,11 @@ Returns the average color of the _colors_ array, in the color space specified by
 
 Colors with undefined values on a channel don't participate in the average for that channel.
 
+```js
+culori.average(['salmon', 'tomato'], 'lab');
+// ⇒ { 'mode': 'lab', l: 65.41…, a: 53.00…, b: 39.01… }
+```
+
 <a name="averageNumber" href="#averageNumber">#</a> culori.**averageNumber**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/average.js)
 
 The arithmetic mean of values in the _values_ array.
@@ -928,6 +938,9 @@ Defines a new color space through a _definition_ object. Here's the full definit
 	},
 	difference: {
 		h: differenceHueSaturation
+	},
+	average: {
+		h: averageAngle
 	}
 };
 ```
@@ -942,6 +955,7 @@ The properties a definition needs are the following:
 -   `parsers`: any parsers for the color space that can transform strings into colors
 -   `interpolate`: the default interpolations for the color space, one for each channel. Each interpolation is defined by its interpolator (the `use` key) and its fixup function (the `fixup` key). When defined as a function, a channel interpolation is meant to define its interpolator, with the fixup being a no-op.
 -   `difference`: the default Euclidean distance method for each channel in the color space; mostly used for the `h` channel in cylindrical color spaces.
+-   `average`: the default average function for each channel in the color space; when left unspecified, defaults to [`averageNumber`](#averageNumber).
 
 All built-in color spaces follow these conventions in regards to the `channels` array follows:
 

@@ -31,4 +31,4 @@ let ranges = (mode, step = 0.01) => {
 	return res;
 };
 
-console.log(ranges('lchuv', 0.002));
+console.log(ranges('xyz65', 0.002));

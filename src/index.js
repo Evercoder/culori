@@ -1,5 +1,9 @@
 import rgbDef from './rgb/definition';
 import lrgbDef from './lrgb/definition';
+import a98Def from './a98/definition';
+import p3Def from './p3/definition';
+import prophotoDef from './prophoto/definition';
+import rec2020Def from './rec2020/definition';
 import hslDef from './hsl/definition';
 import hsvDef from './hsv/definition';
 import hsiDef from './hsi/definition';
@@ -12,61 +16,77 @@ import cubehelixDef from './cubehelix/definition';
 import dlabDef from './dlab/definition';
 import dlchDef from './dlch/definition';
 import xyzDef from './xyz/definition';
+import xyz65Def from './xyz65/definition';
 import yiqDef from './yiq/definition';
 
 import { defineMode } from './modes';
 import converter from './converter';
 
-defineMode(rgbDef);
-defineMode(lrgbDef);
-defineMode(hslDef);
-defineMode(hsvDef);
-defineMode(hsiDef);
-defineMode(hwbDef);
-defineMode(labDef);
-defineMode(lchDef);
-defineMode(luvDef);
-defineMode(lchuvDef);
+defineMode(a98Def);
 defineMode(cubehelixDef);
 defineMode(dlabDef);
 defineMode(dlchDef);
-defineMode(yiqDef);
+defineMode(hsiDef);
+defineMode(hslDef);
+defineMode(hsvDef);
+defineMode(hwbDef);
+defineMode(labDef);
+defineMode(lchDef);
+defineMode(lchuvDef);
+defineMode(lrgbDef);
+defineMode(luvDef);
+defineMode(p3Def);
+defineMode(prophotoDef);
+defineMode(rec2020Def);
+defineMode(rgbDef);
+defineMode(xyz65Def);
 defineMode(xyzDef);
+defineMode(yiqDef);
 
-let rgb = converter('rgb');
-let lrgb = converter('lrgb');
-let hsl = converter('hsl');
-let hsv = converter('hsv');
-let hsi = converter('hsi');
-let hwb = converter('hwb');
-let lab = converter('lab');
-let lch = converter('lch');
-let luv = converter('luv');
-let lchuv = converter('lchuv');
+let a98 = converter('a98');
 let cubehelix = converter('cubehelix');
 let dlab = converter('dlab');
 let dlch = converter('dlch');
-let yiq = converter('yiq');
+let hsi = converter('hsi');
+let hsl = converter('hsl');
+let hsv = converter('hsv');
+let hwb = converter('hwb');
+let lab = converter('lab');
+let lch = converter('lch');
+let lchuv = converter('lchuv');
+let lrgb = converter('lrgb');
+let luv = converter('luv');
+let p3 = converter('p3');
+let prophoto = converter('prophoto');
+let rec2020 = converter('rec2020');
+let rgb = converter('rgb');
 let xyz = converter('xyz');
+let xyz65 = converter('xyz65');
+let yiq = converter('yiq');
 
 export {
-	defineMode,
+	a98,
 	converter,
-	hsl,
-	hsv,
-	hsi,
-	hwb,
-	rgb,
-	lab,
-	lch,
-	luv,
-	lchuv,
-	lrgb,
 	cubehelix,
+	defineMode,
 	dlab,
 	dlch,
-	yiq,
-	xyz
+	hsi,
+	hsl,
+	hsv,
+	hwb,
+	lab,
+	lch,
+	lchuv,
+	lrgb,
+	luv,
+	p3,
+	prophoto,
+	rec2020,
+	rgb,
+	xyz,
+	xyz65,
+	yiq
 };
 
 export { formatter, formatHex, formatHex8, formatRgb } from './formatter';
