@@ -4,7 +4,6 @@ import {
 	mapAlphaMultiply,
 	mapAlphaDivide,
 	mapTransferLinear,
-	mapTransferGamma,
 	formatHex,
 	formatHex8
 } from '../src/index';

@@ -23,6 +23,12 @@ export default {
 		rgb: convertRgbToXyz65,
 		xyz: convertXyzToXyz65
 	},
+	ranges: {
+		x: [0, 0.946],
+		y: [0, 0.995],
+		z: [0, 1.083],
+		alpha: [0, 1]
+	},
 	channels: ['x', 'y', 'z', 'alpha'],
 	interpolate: {
 		x: interpolatorLinear,

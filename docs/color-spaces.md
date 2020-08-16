@@ -6,13 +6,39 @@ menu-order: 3
 
 ## RGB
 
-> TODO: expand this section
-
-## LRGB (Linear RGB)
-
-> TODO: expand this section
-
 > 📖 See Jamie Wong's [excellent deep dive](http://jamie-wong.com/post/color/) into color.
+
+All RGB color spaces contain the following channels:
+
+| Channel | Range    | Description   |
+| ------- | -------- | ------------- |
+| `r`     | `[0, 1]` | Red channel   |
+| `g`     | `[0, 1]` | Green channel |
+| `b`     | `[0, 1]` | Blue channel  |
+
+### `rgb`
+
+The [sRGB color space](https://en.wikipedia.org/wiki/SRGB).
+
+### `lrgb`
+
+The linear-light sRGB color space.
+
+### `a98`
+
+The [Adobe RGB (1998) color space](https://en.wikipedia.org/wiki/Adobe_RGB_color_space).
+
+### `p3`
+
+The [Display P3 color space](https://en.wikipedia.org/wiki/DCI-P3#Display_P3).
+
+### `prophoto`
+
+The [ProPhoto RGB color space](https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space).
+
+### `rec2020`
+
+The [Rec. 2020 color space](https://en.wikipedia.org/wiki/Rec._2020).
 
 ## HSL / HSV / HSI
 
@@ -163,6 +189,18 @@ It contains the following channels:
 | X       | `[0, 0.962]` | ?           |
 | Y       | `[0, 0.997]` | ?           |
 | Z       | `[0, 0.823]` | ?           |
+
+### `xyz65`
+
+The D65 XYZ color space.
+
+It contains the following channels:
+
+| Channel | Range        | Description |
+| ------- | ------------ | ----------- |
+| X       | `[0, 0.946]` | ?           |
+| Y       | `[0, 0.995]` | ?           |
+| Z       | `[0, 1.083]` | ?           |
 
 ## Cubehelix
 

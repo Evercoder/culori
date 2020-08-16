@@ -6,7 +6,7 @@
 		* http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
 */
 
-const linearize = v => (v >= 16 / 512 ? Math.pow(val, 1.8) : v / 16);
+const linearize = v => (v >= 16 / 512 ? Math.pow(v, 1.8) : v / 16);
 
 export default prophoto => {
 	let r = linearize(prophoto.r);
