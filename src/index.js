@@ -8,6 +8,8 @@ import hslDef from './hsl/definition';
 import hsvDef from './hsv/definition';
 import hsiDef from './hsi/definition';
 import hwbDef from './hwb/definition';
+import jabDef from './jab/definition';
+import jchDef from './jch/definition';
 import labDef from './lab/definition';
 import lchDef from './lch/definition';
 import luvDef from './luv/definition';
@@ -30,6 +32,8 @@ defineMode(hsiDef);
 defineMode(hslDef);
 defineMode(hsvDef);
 defineMode(hwbDef);
+defineMode(jabDef);
+defineMode(jchDef);
 defineMode(labDef);
 defineMode(lchDef);
 defineMode(lchuvDef);
@@ -51,6 +55,8 @@ let hsi = converter('hsi');
 let hsl = converter('hsl');
 let hsv = converter('hsv');
 let hwb = converter('hwb');
+let jab = converter('jab');
+let jch = converter('jch');
 let lab = converter('lab');
 let lch = converter('lch');
 let lchuv = converter('lchuv');
@@ -75,6 +81,8 @@ export {
 	hsl,
 	hsv,
 	hwb,
+	jab,
+	jch,
 	lab,
 	lch,
 	lchuv,

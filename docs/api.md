@@ -78,6 +78,8 @@ The available modes (color spaces) are listed below. For convenience, each color
 | `hsl`       | HSL color space               | culori.**hsl**(_color_)       |
 | `hsv`       | HSV color space               | culori.**hsv**(_color_)       |
 | `hwb`       | HWB color space               | culori.**hwb**(_color_)       |
+| `jab`       | JzAzBz color space            | culori.**jab**(_color_)       |
+| `jch`       | JzAzBz in polar form          | culori.**jch**(_color_)       |
 | `lab`       | Lab color space (D50)         | culori.**lab**(_color_)       |
 | `lch`       | LCh color space (D50)         | culori.**lch**(_color_)       |
 | `lchuv`     | CIELCHuv color space          | culori.**lchuv**(_color_)     |
@@ -655,7 +657,7 @@ Euclidean distances are tricky in cylindrical spaces, containing a hue. Dependin
 
 <a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.**differenceHueChroma**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
-This is the handling of hue in CIE-derived cylindrical spaces (`lch`, `lchuv`, `dlch`).
+This is the handling of hue in CIE-derived cylindrical spaces (`lch`, `lchuv`, `dlch`) and the polar version of JzAzBz (`jch`).
 
 <a name="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.**differenceHueSaturation**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
