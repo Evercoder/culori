@@ -1,7 +1,7 @@
 import convertLabToLch from './convertLabToLch';
 import convertLchToLab from './convertLchToLab';
-import convertLchToRgb from './convertLchToRgb';
-import convertRgbToLch from './convertRgbToLch';
+import convertLabToRgb from '../lab/convertLabToRgb';
+import convertRgbToLab from '../lab/convertRgbToLab';
 import parseLch from './parseLch';
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
@@ -14,10 +14,10 @@ export default {
 	alias: ['lch-d50'],
 	output: {
 		lab: convertLchToLab,
-		rgb: convertLchToRgb
+		rgb: c => convertLabToRgb(convertLchToLab(c))
 	},
 	input: {
-		rgb: convertRgbToLch,
+		rgb: c => convertLabToLch(convertRgbToLab(c)),
 		lab: convertLabToLch
 	},
 	channels: ['l', 'c', 'h', 'alpha'],
