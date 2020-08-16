@@ -8,6 +8,7 @@ import { fixupAlpha } from '../fixup/alpha';
 
 export default {
 	mode: 'lab',
+	alias: ['lab-d50'],
 	output: {
 		xyz: convertLabToXyz,
 		rgb: convertLabToRgb

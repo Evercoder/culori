@@ -8,6 +8,7 @@ import convertXyz65ToRgb from '../xyz65/convertXyz65ToRgb';
 export default {
 	...rgb,
 	mode: 'a98',
+	alias: ['a98-rgb'],
 	parsers: [],
 	input: {
 		rgb: color => convertXyz65ToA98(convertRgbToXyz65(color)),

@@ -7,6 +7,7 @@ import convertXyz65ToRgb from '../xyz65/convertXyz65ToRgb';
 export default {
 	...rgb,
 	mode: 'p3',
+	alias: ['display-p3'],
 	input: {
 		rgb: color => convertXyz65ToP3(convertRgbToXyz65(color)),
 		xyz65: convertXyz65ToP3

@@ -16,6 +16,7 @@ import convertRgbToXyz from '../xyz/convertRgbToXyz';
 export default {
 	...rgb,
 	mode: 'prophoto',
+	alias: ['prophoto-rgb'],
 	parsers: [],
 	input: {
 		xyz: convertXyzToProphoto,

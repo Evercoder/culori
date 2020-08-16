@@ -12,6 +12,7 @@ import { fixupAlpha } from '../fixup/alpha';
 export default {
 	mode: 'rgb',
 	channels: ['r', 'g', 'b', 'alpha'],
+	alias: ['srgb'],
 	parsers: [parseHex, parseRgb, parseNamed, parseTransparent],
 	interpolate: {
 		r: interpolatorLinear,
