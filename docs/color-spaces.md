@@ -164,6 +164,32 @@ The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an 
 
 -   ["Industrial Color Physics"](https://www.springer.com/us/book/9781441911964), Georg A. Klein, Springer (2010)
 
+### JzAzBz
+
+The JzAzBz color space, as defined by:
+
+> Muhammad Safdar, Guihua Cui, Youn Jin Kim, and Ming Ronnier Luo, _"Perceptually uniform color space for image signals including high dynamic range and wide gamut"_, Opt. Express 25, 15131-15151 (2017) https://doi.org/10.1364/OE.25.015131
+
+#### `jab`
+
+The cartesian representation of the JzAzBz color space.
+
+| Channel | Range             | Description           |
+| ------- | ----------------- | --------------------- |
+| `l`     | `[0, 0.221]`      | Lightness             |
+| `a`     | `[-0.108, 0.129]` | Green–red component   |
+| `b`     | `[-0.185, 0.134]` | Blue–yellow component |
+
+#### `jch`
+
+The polar representation of the JzAzBz color space.
+
+| Channel | Range        | Description |
+| ------- | ------------ | ----------- |
+| `l`     | `[0, 0.221]` | Lightness   |
+| `c`     | `[0, 0.190]` | Chroma      |
+| `h`     | `[0, 360)`   | Hue         |
+
 ## YIQ
 
 [YIQ](yiq) is the color space used by the NTSC color TV system. It contains the following channels:
