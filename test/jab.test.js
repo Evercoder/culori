@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { jab, xyz, xyz65, mapper } from '../src/index';
+import { jab, formatHex } from '../src/index';
 
 tape('jab', t => {
 	t.deepEqual(
@@ -24,5 +24,10 @@ tape('jab', t => {
 		},
 		'red'
 	);
+	t.end();
+});
+
+tape('rgb -> jab -> rgb', t => {
+	t.equal(formatHex(jab('#cc3302')), '#cc3302', '#cc3302');
 	t.end();
 });
