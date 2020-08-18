@@ -26,7 +26,7 @@ The linear-light sRGB color space.
 
 ### `a98`
 
-The [Adobe RGB (1998) color space](https://en.wikipedia.org/wiki/Adobe_RGB_color_space).
+The A98 RGB color space, which is compatible with, [but not the actual](https://www.adobe.com/digitalimag/adobergb.html), [Adobe RGB (1998) color space](https://en.wikipedia.org/wiki/Adobe_RGB_color_space).
 
 ### `p3`
 

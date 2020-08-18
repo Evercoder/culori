@@ -1,5 +1,5 @@
 /*
-	Convert Adobe RGB (1998) values to CIE XYZ D65
+	Convert A98 RGB values to CIE XYZ D65
 
 	References:
 		* https://drafts.csswg.org/css-color/#color-conversion-code
