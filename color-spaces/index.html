@@ -17,7 +17,7 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.14.0 alpha (<a
+				>v0.15.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -46,15 +46,47 @@
 				<h1>Color Spaces</h1>
 				<h2>RGB</h2>
 <blockquote>
-<p>TODO: expand this section</p>
-</blockquote>
-<h2>LRGB (Linear RGB)</h2>
-<blockquote>
-<p>TODO: expand this section</p>
-</blockquote>
-<blockquote>
 <p>📖 See Jamie Wong's <a href="http://jamie-wong.com/post/color/">excellent deep dive</a> into color.</p>
 </blockquote>
+<p>All RGB color spaces contain the following channels:</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td><code>[0, 1]</code></td>
+<td>Red channel</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td><code>[0, 1]</code></td>
+<td>Green channel</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><code>[0, 1]</code></td>
+<td>Blue channel</td>
+</tr>
+</tbody>
+</table>
+<h3><code>rgb</code></h3>
+<p>The <a href="https://en.wikipedia.org/wiki/SRGB">sRGB color space</a>.</p>
+<h3><code>lrgb</code></h3>
+<p>The linear-light sRGB color space.</p>
+<h3><code>a98</code></h3>
+<p>The A98 RGB color space, which is compatible with, <a href="https://www.adobe.com/digitalimag/adobergb.html">but not the actual</a>, <a href="https://en.wikipedia.org/wiki/Adobe_RGB_color_space">Adobe RGB (1998) color space</a>.</p>
+<h3><code>p3</code></h3>
+<p>The <a href="https://en.wikipedia.org/wiki/DCI-P3#Display_P3">Display P3 color space</a>.</p>
+<h3><code>prophoto</code></h3>
+<p>The <a href="https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space">ProPhoto RGB color space</a>.</p>
+<h3><code>rec2020</code></h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Rec._2020">Rec. 2020 color space</a>.</p>
 <h2>HSL / HSV / HSI</h2>
 <p><a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSL, HSV, and HSI</a> are a family of representations of the RGB color space, created in 1970 to provide color spaces more closely aligned to how humans perceive colors.</p>
 <blockquote>
@@ -335,6 +367,67 @@
 <ul>
 <li><a href="https://www.springer.com/us/book/9781441911964">&quot;Industrial Color Physics&quot;</a>, Georg A. Klein, Springer (2010)</li>
 </ul>
+<h3>JzAzBz</h3>
+<p>The JzAzBz color space, as defined by:</p>
+<blockquote>
+<p>Muhammad Safdar, Guihua Cui, Youn Jin Kim, and Ming Ronnier Luo, <em>&quot;Perceptually uniform color space for image signals including high dynamic range and wide gamut&quot;</em>, Opt. Express 25, 15131-15151 (2017) https://doi.org/10.1364/OE.25.015131</p>
+</blockquote>
+<h4><code>jab</code></h4>
+<p>The cartesian representation of the JzAzBz color space.</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 0.221]</code></td>
+<td>Lightness</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td><code>[-0.108, 0.129]</code></td>
+<td>Green–red component</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><code>[-0.185, 0.134]</code></td>
+<td>Blue–yellow component</td>
+</tr>
+</tbody>
+</table>
+<h4><code>jch</code></h4>
+<p>The polar representation of the JzAzBz color space.</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 0.221]</code></td>
+<td>Lightness</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><code>[0, 0.190]</code></td>
+<td>Chroma</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+</tbody>
+</table>
 <h2>YIQ</h2>
 <p><a href="yiq">YIQ</a> is the color space used by the NTSC color TV system. It contains the following channels:</p>
 <table>
@@ -390,6 +483,35 @@
 <tr>
 <td>Z</td>
 <td><code>[0, 0.823]</code></td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<h3><code>xyz65</code></h3>
+<p>The D65 XYZ color space.</p>
+<p>It contains the following channels:</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X</td>
+<td><code>[0, 0.946]</code></td>
+<td>?</td>
+</tr>
+<tr>
+<td>Y</td>
+<td><code>[0, 0.995]</code></td>
+<td>?</td>
+</tr>
+<tr>
+<td>Z</td>
+<td><code>[0, 1.083]</code></td>
 <td>?</td>
 </tr>
 </tbody>

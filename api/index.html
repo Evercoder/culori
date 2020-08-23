@@ -17,7 +17,7 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.14.0 alpha (<a
+				>v0.15.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -69,6 +69,11 @@
 </thead>
 <tbody>
 <tr>
+<td><code>a98</code></td>
+<td>A98 RGB color space (Compatible with Adobe RGB (1998))</td>
+<td>culori.<strong>a98</strong>(<em>color</em>)</td>
+</tr>
+<tr>
 <td><code>cubehelix</code></td>
 <td>Cubehelix color space</td>
 <td>culori.<strong>cubehelix</strong>(<em>color</em>)</td>
@@ -104,19 +109,24 @@
 <td>culori.<strong>hwb</strong>(<em>color</em>)</td>
 </tr>
 <tr>
+<td><code>jab</code></td>
+<td>JzAzBz color space</td>
+<td>culori.<strong>jab</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>jch</code></td>
+<td>JzAzBz in polar form</td>
+<td>culori.<strong>jch</strong>(<em>color</em>)</td>
+</tr>
+<tr>
 <td><code>lab</code></td>
-<td>Lab color space</td>
+<td>Lab color space (D50)</td>
 <td>culori.<strong>lab</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>lch</code></td>
-<td>LCh color space</td>
+<td>LCh color space (D50)</td>
 <td>culori.<strong>lch</strong>(<em>color</em>)</td>
-</tr>
-<tr>
-<td><code>luv</code></td>
-<td>CIELuv color space</td>
-<td>culori.<strong>luv</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>lchuv</code></td>
@@ -125,13 +135,38 @@
 </tr>
 <tr>
 <td><code>lrgb</code></td>
-<td>Linearized RGB color space</td>
+<td>Linear-light sRGB color space</td>
 <td>culori.<strong>lrgb</strong>(<em>color</em>)</td>
 </tr>
 <tr>
+<td><code>luv</code></td>
+<td>CIELuv color space</td>
+<td>culori.<strong>luv</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>p3</code></td>
+<td>Display P3 color space</td>
+<td>culori.<strong>p3</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>prophoto</code></td>
+<td>ProPhoto RGB color space</td>
+<td>culori.<strong>prophoto</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>rec2020</code></td>
+<td>Rec. 2020 RGB color space</td>
+<td>culori.<strong>rec2020</strong>(<em>color</em>)</td>
+</tr>
+<tr>
 <td><code>rgb</code></td>
-<td>RGB color space</td>
+<td>sRGB color space</td>
 <td>culori.<strong>rgb</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>xyz65</code></td>
+<td>XYZ D65 color space</td>
+<td>culori.<strong>xyz65</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>xyz</code></td>
@@ -352,7 +387,7 @@
 <h3>Handling hue</h3>
 <p>Euclidean distances are tricky in cylindrical spaces, containing a hue. Depending on the color space, hue is treated in a variety of ways. The functions below are used internally:</p>
 <p><a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.<strong>differenceHueChroma</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
-<p>This is the handling of hue in CIE-derived cylindrical spaces (<code>lch</code>, <code>lchuv</code>, <code>dlch</code>).</p>
+<p>This is the handling of hue in CIE-derived cylindrical spaces (<code>lch</code>, <code>lchuv</code>, <code>dlch</code>) and the polar version of JzAzBz (<code>jch</code>).</p>
 <p><a name="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.<strong>differenceHueSaturation</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
 <p>This is a handling of hue in the HSL / HSV / HSI family of color spaces. It's a (possibly wrong!) extrapolation of <code>differenceHueChroma</code>.</p>
 <p><a name="differenceHueNaive" href="#differenceHueNaive">#</a> culori.<strong>differenceHueNaive</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
@@ -376,6 +411,7 @@
 <p><a name="average" href="#average">#</a> culori.<strong>average</strong>(<em>colors</em>, <em>mode = 'rgb'</em>, <em>overrides</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/average.js">Source</a></p>
 <p>Returns the average color of the <em>colors</em> array, in the color space specified by the <em>mode</em> argument. The color is obtained by the arithmetic average of values on each individual channel.</p>
 <p>Colors with undefined values on a channel don't participate in the average for that channel.</p>
+<pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">average</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'salmon'</span><span class="token punctuation">,</span> <span class="token string">'tomato'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'lab'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ { 'mode': 'lab', l: 65.41…, a: 53.00…, b: 39.01… }</span></code></pre>
 <p><a name="averageNumber" href="#averageNumber">#</a> culori.<strong>averageNumber</strong>(<em>values</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/average.js">Source</a></p>
 <p>The arithmetic mean of values in the <em>values</em> array.</p>
 <p><a name="averageAngle" href="#averageAngle">#</a> culori.<strong>averageAngle</strong>(<em>values</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/average.js">Source</a></p>
@@ -449,7 +485,7 @@
 </blockquote>
 <p><a name="defineMode" href="#defineMode">#</a> culori.<strong>defineMode</strong>(<em>definition</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/modes.js">Source</a></p>
 <p>Defines a new color space through a <em>definition</em> object. Here's the full definition of the HSL color space:</p>
-<pre class="language-js"><code class="language-js"><span class="token punctuation">{</span><br>	mode<span class="token operator">:</span> <span class="token string">'hsl'</span><span class="token punctuation">,</span><br>	output<span class="token operator">:</span> <span class="token punctuation">{</span><br>		rgb<span class="token operator">:</span> convertHslToRgb<br>	<span class="token punctuation">}</span><span class="token punctuation">,</span><br>	input<span class="token operator">:</span> <span class="token punctuation">{</span><br>		rgb<span class="token operator">:</span> convertRgbToHsl<br>	<span class="token punctuation">}</span><span class="token punctuation">,</span><br>	channels<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'h'</span><span class="token punctuation">,</span> <span class="token string">'s'</span><span class="token punctuation">,</span> <span class="token string">'l'</span><span class="token punctuation">,</span> <span class="token string">'alpha'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>	ranges<span class="token operator">:</span> <span class="token punctuation">{</span><br>		h<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">360</span><span class="token punctuation">]</span><br>	<span class="token punctuation">}</span><span class="token punctuation">,</span><br>	parsers<span class="token operator">:</span> <span class="token punctuation">[</span>parseHsl<span class="token punctuation">]</span><span class="token punctuation">,</span><br>	interpolate<span class="token operator">:</span> <span class="token punctuation">{</span><br>		h<span class="token operator">:</span> <span class="token punctuation">{</span><br>			use<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>			fixup<span class="token operator">:</span> fixupHueShorter<br>		<span class="token punctuation">}</span><span class="token punctuation">,</span><br>		s<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>		l<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>		alpha<span class="token operator">:</span> <span class="token punctuation">{</span><br>			use<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>			fixup<span class="token operator">:</span> fixupAlpha<br>		<span class="token punctuation">}</span><br>	<span class="token punctuation">}</span><span class="token punctuation">,</span><br>	difference<span class="token operator">:</span> <span class="token punctuation">{</span><br>		h<span class="token operator">:</span> differenceHueSaturation<br>	<span class="token punctuation">}</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-js"><code class="language-js"><span class="token punctuation">{</span><br>	mode<span class="token operator">:</span> <span class="token string">'hsl'</span><span class="token punctuation">,</span><br>	output<span class="token operator">:</span> <span class="token punctuation">{</span><br>		rgb<span class="token operator">:</span> convertHslToRgb<br>	<span class="token punctuation">}</span><span class="token punctuation">,</span><br>	input<span class="token operator">:</span> <span class="token punctuation">{</span><br>		rgb<span class="token operator">:</span> convertRgbToHsl<br>	<span class="token punctuation">}</span><span class="token punctuation">,</span><br>	channels<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'h'</span><span class="token punctuation">,</span> <span class="token string">'s'</span><span class="token punctuation">,</span> <span class="token string">'l'</span><span class="token punctuation">,</span> <span class="token string">'alpha'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>	ranges<span class="token operator">:</span> <span class="token punctuation">{</span><br>		h<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">360</span><span class="token punctuation">]</span><br>	<span class="token punctuation">}</span><span class="token punctuation">,</span><br>	parsers<span class="token operator">:</span> <span class="token punctuation">[</span>parseHsl<span class="token punctuation">]</span><span class="token punctuation">,</span><br>	interpolate<span class="token operator">:</span> <span class="token punctuation">{</span><br>		h<span class="token operator">:</span> <span class="token punctuation">{</span><br>			use<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>			fixup<span class="token operator">:</span> fixupHueShorter<br>		<span class="token punctuation">}</span><span class="token punctuation">,</span><br>		s<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>		l<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>		alpha<span class="token operator">:</span> <span class="token punctuation">{</span><br>			use<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>			fixup<span class="token operator">:</span> fixupAlpha<br>		<span class="token punctuation">}</span><br>	<span class="token punctuation">}</span><span class="token punctuation">,</span><br>	difference<span class="token operator">:</span> <span class="token punctuation">{</span><br>		h<span class="token operator">:</span> differenceHueSaturation<br>	<span class="token punctuation">}</span><span class="token punctuation">,</span><br>	average<span class="token operator">:</span> <span class="token punctuation">{</span><br>		h<span class="token operator">:</span> averageAngle<br>	<span class="token punctuation">}</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>The properties a definition needs are the following:</p>
 <ul>
 <li><code>mode</code>: the string identifier for the color space</li>
@@ -460,6 +496,7 @@
 <li><code>parsers</code>: any parsers for the color space that can transform strings into colors</li>
 <li><code>interpolate</code>: the default interpolations for the color space, one for each channel. Each interpolation is defined by its interpolator (the <code>use</code> key) and its fixup function (the <code>fixup</code> key). When defined as a function, a channel interpolation is meant to define its interpolator, with the fixup being a no-op.</li>
 <li><code>difference</code>: the default Euclidean distance method for each channel in the color space; mostly used for the <code>h</code> channel in cylindrical color spaces.</li>
+<li><code>average</code>: the default average function for each channel in the color space; when left unspecified, defaults to <a href="#averageNumber"><code>averageNumber</code></a>.</li>
 </ul>
 <p>All built-in color spaces follow these conventions in regards to the <code>channels</code> array follows:</p>
 <ul>
