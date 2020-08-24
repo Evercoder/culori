@@ -1,10 +1,9 @@
-import convertDlchToDlab from './convertDlchToDlab';
-import convertDlchToLab from './convertDlchToLab';
-import convertDlchToRgb from './convertDlchToRgb';
-
-import convertLabToDlch from './convertLabToDlch';
 import convertDlabToDlch from './convertDlabToDlch';
-import convertRgbToDlch from './convertRgbToDlch';
+import convertDlchToDlab from './convertDlchToDlab';
+import convertDlchToLab65 from './convertDlchToLab65';
+import convertLab65ToDlch from './convertLab65ToDlch';
+import convertLab65ToRgb from '../lab65/convertLab65ToRgb';
+import convertRgbToLab65 from '../lab65/convertRgbToLab65';
 
 import { fixupHueShorter } from '../fixup/hue';
 import { fixupAlpha } from '../fixup/alpha';
@@ -15,19 +14,19 @@ import { averageAngle } from '../average';
 export default {
 	mode: 'dlch',
 	output: {
-		lab: convertDlchToLab,
+		lab65: convertDlchToLab65,
 		dlab: convertDlchToDlab,
-		rgb: convertDlchToRgb
+		rgb: c => convertLab65ToRgb(convertDlchToLab65(c))
 	},
 	input: {
-		lab: convertLabToDlch,
+		lab65: convertLab65ToDlch,
 		dlab: convertDlabToDlch,
-		rgb: convertRgbToDlch
+		rgb: c => convertLab65ToDlch(convertRgbToLab65(c))
 	},
 	channels: ['l', 'c', 'h', 'alpha'],
 	ranges: {
 		l: [0, 100],
-		c: [0, 50.944],
+		c: [0, 51.484],
 		h: [0, 360]
 	},
 	interpolate: {

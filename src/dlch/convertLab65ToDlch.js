@@ -1,7 +1,9 @@
 import { kCH, kE, sinθ, cosθ, θ, factor } from './constants';
+import normalizeHue from '../util/normalizeHue';
 
 /*
-	Convert CIELab to DIN99o LCh
+	Convert CIELab D65 to DIN99o LCh
+	================================
  */
 
 export default ({ l, a, b, alpha }) => {
@@ -15,7 +17,7 @@ export default ({ l, a, b, alpha }) => {
 	};
 
 	if (res.c) {
-		res.h = ((Math.atan2(f, e) + θ) / Math.PI) * 180;
+		res.h = normalizeHue(((Math.atan2(f, e) + θ) / Math.PI) * 180);
 	}
 
 	if (alpha !== undefined) res.alpha = alpha;
