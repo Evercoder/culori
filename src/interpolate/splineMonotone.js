@@ -1,4 +1,5 @@
 import gamma from '../easing/gamma';
+import { interpolatorLinear } from './linear';
 
 /* 
 	Monotone spline
@@ -20,86 +21,109 @@ const sgn = Math.sign;
 const min = Math.min;
 const abs = Math.abs;
 
-const monotone = (y_im1, y_i, y_ip1, y_ip2, h, t) => {
-	let h2 = h * h;
-	let t2 = t * t;
-	let t3 = t2 * t;
-
-	let s_i = (y_ip1 - y_i) / h;
-
-	let s_im1 = (y_i - y_im1) / h;
-	let p_i = (y_ip1 - y_im1) / (2 * h);
-	let yp_i =
-		(sgn(s_im1) + sgn(s_i)) * min(abs(s_im1), abs(s_i), 0.5 * abs(p_i));
-
-	let s_ip1 = (y_ip2 - y_ip1) / h;
-	let p_ip1 = (y_ip2 - y_i) / (2 * h);
-	let yp_ip1 =
-		(sgn(s_i) + sgn(s_ip1)) * min(abs(s_i), abs(s_ip1), 0.5 * abs(p_ip1));
-
-	return (
-		((yp_i + yp_ip1 - 2 * s_i) / h2) * t3 +
-		((3 * s_i - 2 * yp_i - yp_ip1) / h) * t2 +
-		yp_i * t +
-		y_i
-	);
+const mono = arr => {
+	let n = arr.length - 1;
+	let s = [],
+		p = [],
+		yp = [];
+	for (let i = 0; i < n; i++) {
+		s.push((arr[i + 1] - arr[i]) * n);
+		p.push(i > 0 ? 0.5 * (arr[i + 1] - arr[i - 1]) * n : undefined);
+		yp.push(
+			i > 0
+				? (sgn(s[i - 1]) + sgn(s[i])) *
+						min(abs(s[i - 1]), abs(s[i]), 0.5 * abs(p[i]))
+				: undefined
+		);
+	}
+	return [s, p, yp];
 };
 
-const interpolatorSplineMonotone = arr => t => {
+const interpolator = (arr, yp, s) => {
 	let n = arr.length - 1;
-	let i;
-	if (t === 1) {
-		i = n - 1;
-		t = 1;
-	} else {
-		i = Math.floor(t * n);
-	}
-	return monotone(
-		i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
-		arr[i],
-		arr[i + 1],
-		i < n - 1 ? arr[i + 2] : 2 * arr[i + 1] - arr[i],
-		1 / n,
-		t - i / n
-	);
+	let n2 = n * n;
+	return t => {
+		let i;
+		if (t === 1) {
+			i = n - 1;
+			t = 1;
+		} else {
+			i = Math.floor(t * n);
+		}
+		let t1 = t - i / n;
+		let t2 = t1 * t1;
+		let t3 = t2 * t1;
+		return (
+			(yp[i] + yp[i + 1] - 2 * s[i]) * n2 * t3 +
+			(3 * s[i] - 2 * yp[i] - yp[i + 1]) * n * t2 +
+			yp[i] * t1 +
+			arr[i]
+		);
+	};
 };
 
-const interpolatorSplineMonotoneClosed = arr => t => {
-	let n = arr.length - 1;
-	let i;
-	if (t === 1) {
-		i = n - 1;
-		t = 1;
-	} else {
-		i = Math.floor(t * n);
+/*
+	The clamped monotone spline derives the values of y' 
+	at the boundary points by tracing a parabola 
+	through the first/last three points.
+
+	For arrays of less than three values, we fall back to 
+	linear interpolation.
+
+	A simpler, alternate solution is to just use 
+	one-sided finite differences:
+
+	yp[0] = s[0]
+	yp[n] = s[n-1]
+	
+	(I'm not sure which variant creates nicer interpolations)
+ */
+
+const interpolatorSplineMonotone = arr => {
+	if (arr.length < 3) {
+		return interpolatorLinear(arr);
 	}
-	return monotone(
-		arr[(i - 1 + arr.length) % arr.length],
-		arr[i],
-		arr[(i + 1) % arr.length],
-		arr[(i + 2) % arr.length],
-		1 / n,
-		t - i / n
-	);
+	let n = arr.length - 1;
+	let [s, p, yp] = mono(arr);
+	p[0] = (arr[1] * 2 - arr[0] * 1.5 - arr[2] * 0.5) * n;
+	p[n] = (arr[n] * 1.5 - arr[n - 1] * 2 + arr[n - 2] * 0.5) * n;
+	yp[0] = p[0] * s[0] <= 0 ? 0 : abs(p[0]) > 2 * abs(s[0]) ? 2 * s[0] : p[0];
+	yp[n] =
+		p[n] * s[n - 1] <= 0
+			? 0
+			: abs(p[n]) > 2 * abs(s[n - 1])
+			? 2 * s[n - 1]
+			: p[n];
+	return interpolator(arr, yp, s);
+};
+
+/*
+	The closed monotone spline considers 
+	the array to be periodic:
+
+	arr[-1] = arr[arr.length - 1]
+	arr[arr.length] = arr[0]
+
+	...and so on.
+ */
+const interpolatorSplineMonotoneClosed = arr => {
+	let n = arr.length - 1;
+	let [s, p, yp] = mono(arr);
+	// boundary conditions
+	p[0] = 0.5 * (arr[1] - arr[n]) * n;
+	p[n] = 0.5 * (arr[0] - arr[n - 1]) * n;
+	let s_m1 = (arr[0] - arr[n]) * n;
+	let s_n = s_m1;
+	yp[0] =
+		(sgn(s_m1) + sgn(s[0])) * min(abs(s_m1), abs(s[0]), 0.5 * abs(p[0]));
+	yp[n] =
+		(sgn(s[n - 1]) + sgn(s_n)) *
+		min(abs(s[n - 1]), abs(s_n), 0.5 * abs(p[n]));
+	return interpolator(arr, yp, s);
 };
 
 const interpolatorSplineMonotoneOpen = arr => t => {
-	let n = arr.length - 1;
-	let i;
-	if (t === 1) {
-		i = n - 1;
-		t = 1;
-	} else {
-		i = Math.floor(t * n);
-	}
-	return monotone(
-		arr[(i - 1 + arr.length) % arr.length],
-		arr[i],
-		arr[(i + 1) % arr.length],
-		arr[(i + 2) % arr.length],
-		1 / n,
-		t - i / n
-	);
+	return undefined;
 };
 
 const interpolateSplineMonotone = (fixup, type = 'default', γ = 1) => arr => {
