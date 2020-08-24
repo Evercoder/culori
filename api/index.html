@@ -17,7 +17,7 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.15.0 alpha (<a
+				>v0.16.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -120,17 +120,27 @@
 </tr>
 <tr>
 <td><code>lab</code></td>
-<td>Lab color space (D50)</td>
+<td>Lab color space (D50 Illuminant)</td>
 <td>culori.<strong>lab</strong>(<em>color</em>)</td>
 </tr>
 <tr>
+<td><code>lab65</code></td>
+<td>Lab color space (D65 Illuminant)</td>
+<td>culori.<strong>lab65</strong>(<em>color</em>)</td>
+</tr>
+<tr>
 <td><code>lch</code></td>
-<td>LCh color space (D50)</td>
+<td>LCh color space (D50 Illuminant)</td>
 <td>culori.<strong>lch</strong>(<em>color</em>)</td>
 </tr>
 <tr>
+<td><code>lch65</code></td>
+<td>LCh color space (D65 Illuminant)</td>
+<td>culori.<strong>lch65</strong>(<em>color</em>)</td>
+</tr>
+<tr>
 <td><code>lchuv</code></td>
-<td>CIELCHuv color space</td>
+<td>CIELCHuv color space (D50 Illuminant)</td>
 <td>culori.<strong>lchuv</strong>(<em>color</em>)</td>
 </tr>
 <tr>
@@ -140,7 +150,7 @@
 </tr>
 <tr>
 <td><code>luv</code></td>
-<td>CIELuv color space</td>
+<td>CIELuv color space (D50 Illuminant)</td>
 <td>culori.<strong>luv</strong>(<em>color</em>)</td>
 </tr>
 <tr>
@@ -277,6 +287,7 @@
 <h4>Monotone splines</h4>
 <p>Monotone splines are available in the following variants:</p>
 <p><a name="interpolatorSplineMonotone" href="#interpolatorSplineMonotone">#</a> culori.<strong>interpolatorSplineMonotone</strong>(<em>values</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js">Source</a></p>
+<p><a name="interpolatorSplineMonotone2" href="#interpolatorSplineMonotone2">#</a> culori.<strong>interpolatorSplineMonotone2</strong>(<em>values</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js">Source</a></p>
 <p><a name="interpolatorSplineMonotoneClosed" href="#interpolatorSplineMonotoneClosed">#</a> culori.<strong>interpolatorSplineMonotoneClosed</strong>(<em>values</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js">Source</a></p>
 <p><a name="interpolatorSplineMonotoneOpen" href="#interpolatorSplineMonotoneOpen">#</a> culori.<strong>interpolatorSplineMonotoneOpen</strong>(<em>values</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js">Source</a> (⚠️ Not yet implemented)</p>
 <p>The monotone spline is based on the following paper (via <a href="https://github.com/d3/d3-shape">d3-shape</a>):</p>

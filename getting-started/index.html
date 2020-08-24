@@ -17,7 +17,7 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.15.0 alpha (<a
+				>v0.16.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -47,7 +47,7 @@
 				<h2>Try it online</h2>
 <p>The library is added to every page of this website, so you can try the API in your browser's console as you read through the examples. You can also use culori in the Runkit npm playground (<a href="https://npm.runkit.com/culori">npm.runkit.com/culori</a>) to test the API without installing anything.</p>
 <p>If you prefer to see the results visually, <a href="https://beta.observablehq.com">Observable</a> is a great place to tinker with the library. Add this cell and you're good to go:</p>
-<pre><code>culori = require('culori@0.15.0');
+<pre><code>culori = require('culori@0.16.0');
 </code></pre>
 <p>(You can omit the version but it's useful to be specific while the API is still unstable, so that your old notebooks don't crash when something changes.)</p>
 <h2>Install it as an npm package</h2>
@@ -58,7 +58,7 @@
 <pre class="language-js"><code class="language-js"><span class="token comment">// CJS style: import the whole library</span><br><span class="token keyword">let</span> culori <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'culori'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// ES style: import individual methods</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span></code></pre>
 <h2>Add it via the <code>&lt;script&gt;</code> tag</h2>
 <p>To import culori as a <code>&lt;script&gt;</code> tag to use in a web page, you can load it from <a href="https://unpkg.com">unpkg</a>. The library will be made available under the <code>culori</code> global variable.</p>
-<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://unpkg.com/culori<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>culori<span class="token punctuation">.</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'salmon'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/culori<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>culori<span class="token punctuation">.</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'salmon'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 
 			</article>
 		</div>
