@@ -1,5 +1,13 @@
 import { differenceEuclidean } from './difference';
 
+/*
+	This works linearly right now, but we might get better performance
+	with a V-P Tree (Vantage Point Tree). 
+
+	Reference:
+	* http://pnylab.com/papers/vptree/main.html
+ */
+
 export default (colors, metric = differenceEuclidean(), accessor = d => d) => {
 	let arr = colors.map((c, idx) => ({ color: accessor(c), i: idx }));
 	return (color, n = 1, τ = Infinity) => {
