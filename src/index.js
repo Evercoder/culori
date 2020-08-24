@@ -11,7 +11,9 @@ import hwbDef from './hwb/definition';
 import jabDef from './jab/definition';
 import jchDef from './jch/definition';
 import labDef from './lab/definition';
+import lab65Def from './lab65/definition';
 import lchDef from './lch/definition';
+import lch65Def from './lch65/definition';
 import luvDef from './luv/definition';
 import lchuvDef from './lchuv/definition';
 import cubehelixDef from './cubehelix/definition';
@@ -35,7 +37,9 @@ defineMode(hwbDef);
 defineMode(jabDef);
 defineMode(jchDef);
 defineMode(labDef);
+defineMode(lab65Def);
 defineMode(lchDef);
+defineMode(lch65Def);
 defineMode(lchuvDef);
 defineMode(lrgbDef);
 defineMode(luvDef);
@@ -58,7 +62,9 @@ let hwb = converter('hwb');
 let jab = converter('jab');
 let jch = converter('jch');
 let lab = converter('lab');
+let lab65 = converter('lab65');
 let lch = converter('lch');
+let lch65 = converter('lch65');
 let lchuv = converter('lchuv');
 let lrgb = converter('lrgb');
 let luv = converter('luv');
@@ -84,7 +90,9 @@ export {
 	jab,
 	jch,
 	lab,
+	lab65,
 	lch,
+	lch65,
 	lchuv,
 	lrgb,
 	luv,

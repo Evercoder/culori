@@ -114,6 +114,14 @@ The figure below shows a slice of the HSI color space for a particular hue:
 
 > 💡 The range for the `a` and `b` channels in Lab, and the `c` channel in LCh, depend on the specific implementation. I've obtained the ranges from the tables above by converting all sRGB colors defined by `r, g, b ∈ ℕ ⋂ [0, 255]` into Lab and LCh respectively.
 
+### `lab65`
+
+CIELab that uses the D65 illuminant.
+
+### `lch65`
+
+CIELCh that uses the D65 illuminant.
+
 ## Luv / LCHuv (CIE)
 
 [CIELuv color space](https://en.wikipedia.org/wiki/CIELUV) in cartesian and polar forms, using the D50 standard illuminant.

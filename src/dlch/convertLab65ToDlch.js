@@ -1,7 +1,8 @@
 import { kCH, kE, sinθ, cosθ, θ, factor } from './constants';
 
 /*
-	Convert CIELab to DIN99o LCh
+	Convert CIELab D65 to DIN99o LCh
+	================================
  */
 
 export default ({ l, a, b, alpha }) => {
