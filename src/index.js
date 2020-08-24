@@ -140,6 +140,7 @@ export {
 export {
 	interpolateSplineMonotone, // @deprecated
 	interpolatorSplineMonotone,
+	interpolatorSplineMonotone2,
 	interpolatorSplineMonotoneClosed,
 	interpolatorSplineMonotoneOpen
 } from './interpolate/splineMonotone';

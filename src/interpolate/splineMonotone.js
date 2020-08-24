@@ -62,6 +62,17 @@ const interpolator = (arr, yp, s) => {
 	};
 };
 
+const interpolatorSplineMonotone2 = arr => {
+	if (arr.length < 3) {
+		return interpolatorLinear(arr);
+	}
+	let n = arr.length - 1;
+	let [s, p, yp] = mono(arr);
+	yp[0] = s[0];
+	yp[n] = s[n - 1];
+	return interpolator(arr, yp, s);
+};
+
 /*
 	The clamped monotone spline derives the values of y' 
 	at the boundary points by tracing a parabola 
@@ -69,14 +80,6 @@ const interpolator = (arr, yp, s) => {
 
 	For arrays of less than three values, we fall back to 
 	linear interpolation.
-
-	A simpler, alternate solution is to just use 
-	one-sided finite differences:
-
-	yp[0] = s[0]
-	yp[n] = s[n-1]
-	
-	(I'm not sure which variant creates nicer interpolations)
  */
 
 const interpolatorSplineMonotone = arr => {
@@ -143,6 +146,7 @@ const interpolateSplineMonotone = (fixup, type = 'default', γ = 1) => arr => {
 export {
 	interpolateSplineMonotone,
 	interpolatorSplineMonotone,
+	interpolatorSplineMonotone2,
 	interpolatorSplineMonotoneOpen,
 	interpolatorSplineMonotoneClosed
 };
