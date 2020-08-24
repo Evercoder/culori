@@ -62,7 +62,7 @@ const interpolator = (arr, yp, s) => {
 	};
 };
 
-const interpolatorSplineMonotone2 = arr => {
+const interpolatorSplineMonotone = arr => {
 	if (arr.length < 3) {
 		return interpolatorLinear(arr);
 	}
@@ -82,7 +82,7 @@ const interpolatorSplineMonotone2 = arr => {
 	linear interpolation.
  */
 
-const interpolatorSplineMonotone = arr => {
+const interpolatorSplineMonotone2 = arr => {
 	if (arr.length < 3) {
 		return interpolatorLinear(arr);
 	}
