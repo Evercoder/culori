@@ -3,7 +3,6 @@ import {
 	interpolatorSplineBasisOpen,
 	interpolatorSplineBasis
 } from './splineBasis';
-import identity from '../util/identity';
 import gamma from '../easing/gamma';
 
 const solve = v => {
@@ -44,13 +43,13 @@ const interpolateSplineNatural = (fixup, type = 'default', γ = 1) => arr => {
 	let ease = gamma(γ);
 	if (type === 'default') {
 		return t =>
-			interpolatorSplineNatural((fixup || identity)(arr))(ease(t));
+			interpolatorSplineNatural((fixup || (v => v))(arr))(ease(t));
 	} else if (type === 'closed') {
 		return t =>
-			interpolatorSplineNaturalClosed((fixup || identity)(arr))(ease(t));
+			interpolatorSplineNaturalClosed((fixup || (v => v))(arr))(ease(t));
 	} else if (type === 'open') {
 		return t =>
-			interpolatorSplineNaturalOpen((fixup || identity)(arr))(ease(t));
+			interpolatorSplineNaturalOpen((fixup || (v => v))(arr))(ease(t));
 	}
 };
 

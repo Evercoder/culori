@@ -1,8 +1,7 @@
-import identity from './util/identity';
-
 const converters = {};
 const modes = {};
 const parsers = [];
+const identity = v => v;
 
 const defineMode = definition => {
 	converters[definition.mode] = Object.assign(

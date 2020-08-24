@@ -1,5 +1,4 @@
 import converter from './converter';
-import identity from './util/identity';
 import prepare from './_prepare';
 import { getModeDefinition } from './modes';
 

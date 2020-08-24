@@ -2,7 +2,6 @@ import converter from '../converter';
 import { getModeDefinition } from '../modes';
 import normalizePositions from '../util/normalizePositions';
 import easingMidpoint from '../easing/midpoint';
-import identity from '../util/identity';
 import { mapper, mapAlphaMultiply, mapAlphaDivide } from '../map';
 
 const isfn = o => typeof o === 'function';
@@ -41,7 +40,7 @@ const interpolate_fn = (colors, mode = 'rgb', overrides, premap) => {
 		} else if (isobj(def.interpolate[ch]) && def.interpolate[ch].fixup) {
 			ffn = def.interpolate[ch].fixup;
 		} else {
-			ffn = identity;
+			ffn = v => v;
 		}
 		res[ch] = ffn(conv_colors.map(color => color[ch]));
 		return res;

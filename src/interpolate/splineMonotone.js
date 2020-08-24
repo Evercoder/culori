@@ -1,4 +1,3 @@
-import identity from '../util/identity';
 import gamma from '../easing/gamma';
 
 /* 
@@ -107,13 +106,13 @@ const interpolateSplineMonotone = (fixup, type = 'default', γ = 1) => arr => {
 	let ease = gamma(γ);
 	if (type === 'closed') {
 		return t =>
-			interpolatorSplineMonotoneClosed((fixup || identity)(arr))(ease(t));
+			interpolatorSplineMonotoneClosed((fixup || (v => v))(arr))(ease(t));
 	} else if (type === 'open') {
 		return t =>
-			interpolatorSplineMonotoneOpen((fixup || identity)(arr))(ease(t));
+			interpolatorSplineMonotoneOpen((fixup || (v => v))(arr))(ease(t));
 	} else if (type === 'default') {
 		return t =>
-			interpolatorSplineMonotone((fixup || identity)(arr))(ease(t));
+			interpolatorSplineMonotone((fixup || (v => v))(arr))(ease(t));
 	}
 };
 

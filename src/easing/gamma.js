@@ -1,2 +1,1 @@
-import identity from '../util/identity';
-export default (γ = 1) => (γ === 1 ? identity : t => Math.pow(t, γ));
+export default (γ = 1) => (γ === 1 ? t => t : t => Math.pow(t, γ));
