@@ -116,11 +116,23 @@ The figure below shows a slice of the HSI color space for a particular hue:
 
 ### `lab65`
 
-CIELab that uses the D65 illuminant.
+CIELab relative to the D65 illuminant.
+
+| Channel | Range               | Description           |
+| ------- | ------------------- | --------------------- |
+| `l`     | `[0, 100]`          | Lightness             |
+| `a`     | `[-86.183, 98.234]` | Green–red component   |
+| `b`     | `[-107.86, 94.478]` | Blue–yellow component |
 
 ### `lch65`
 
-CIELCh that uses the D65 illuminant.
+CIELCh relative to the D65 illuminant.
+
+| Channel | Range          | Description |
+| ------- | -------------- | ----------- |
+| `l`     | `[0, 100]`     | Lightness   |
+| `c`     | `[0, 133.807]` | Chroma      |
+| `h`     | `[0, 360)`     | Hue         |
 
 ## Luv / LCHuv (CIE)
 
@@ -154,18 +166,18 @@ The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an 
 
 ### `dlab`
 
-| Channel | Range               | Description |
-| ------- | ------------------- | ----------- |
-| `l`     | `[0, 100]`          | Lightness   |
-| `a`     | `[-39.229, 45.166]` |
-| `b`     | `[-43.002, 44.424]` |
+| Channel | Range              | Description |
+| ------- | ------------------ | ----------- |
+| `l`     | `[0, 100]`         | Lightness   |
+| `a`     | `[-40.09, 45.5]`   |
+| `b`     | `[-40.47, 44.344]` |
 
 ### `dlch`
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
 | `l`     | `[0, 100]`    | Lightness   |
-| `c`     | `[0, 50.944]` | Chroma      |
+| `c`     | `[0, 51.484]` | Chroma      |
 | `h`     | `[0, 360)`    | Hue         |
 
 **References:**

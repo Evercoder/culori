@@ -80,11 +80,13 @@ The available modes (color spaces) are listed below. For convenience, each color
 | `hwb`       | HWB color space                                        | culori.**hwb**(_color_)       |
 | `jab`       | JzAzBz color space                                     | culori.**jab**(_color_)       |
 | `jch`       | JzAzBz in polar form                                   | culori.**jch**(_color_)       |
-| `lab`       | Lab color space (D50)                                  | culori.**lab**(_color_)       |
-| `lch`       | LCh color space (D50)                                  | culori.**lch**(_color_)       |
-| `lchuv`     | CIELCHuv color space                                   | culori.**lchuv**(_color_)     |
+| `lab`       | Lab color space (D50 Illuminant)                       | culori.**lab**(_color_)       |
+| `lab65`     | Lab color space (D65 Illuminant)                       | culori.**lab65**(_color_)     |
+| `lch`       | LCh color space (D50 Illuminant)                       | culori.**lch**(_color_)       |
+| `lch65`     | LCh color space (D65 Illuminant)                       | culori.**lch65**(_color_)     |
+| `lchuv`     | CIELCHuv color space (D50 Illuminant)                  | culori.**lchuv**(_color_)     |
 | `lrgb`      | Linear-light sRGB color space                          | culori.**lrgb**(_color_)      |
-| `luv`       | CIELuv color space                                     | culori.**luv**(_color_)       |
+| `luv`       | CIELuv color space (D50 Illuminant)                    | culori.**luv**(_color_)       |
 | `p3`        | Display P3 color space                                 | culori.**p3**(_color_)        |
 | `prophoto`  | ProPhoto RGB color space                               | culori.**prophoto**(_color_)  |
 | `rec2020`   | Rec. 2020 RGB color space                              | culori.**rec2020**(_color_)   |

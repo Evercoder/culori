@@ -18,8 +18,8 @@ export default {
 	channels: ['l', 'a', 'b', 'alpha'],
 	ranges: {
 		l: [0, 100],
-		a: [-39.229, 45.166],
-		b: [-43.002, 44.424]
+		a: [-40.09, 45.5],
+		b: [-40.47, 44.344]
 	},
 	interpolate: {
 		l: interpolatorLinear,
