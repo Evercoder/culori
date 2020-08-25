@@ -25,8 +25,7 @@ export default {
 	ranges: {
 		x: [0, 0.962],
 		y: [0, 0.997],
-		z: [0, 0.823],
-		alpha: [0, 1]
+		z: [0, 0.823]
 	},
 	interpolate: {
 		x: interpolatorLinear,

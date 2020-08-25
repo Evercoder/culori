@@ -10,6 +10,7 @@ These projects add more functionality to culori, but they're separate as to keep
 
 -   [culori-scales](https://github.com/evercoder/culori-scales) — color scales (ColorBrewer, matplotlib, etc).
 -   [culori-names](https://github.com/evercoder/culori-names) — More named colors, from a variety of sources.
+-   [d3-color-difference](https://github.com/evercoder/d3-color-difference) — a separate D3.js plugin to compute color differences
 
 ## Products using culori
 
@@ -43,6 +44,11 @@ In other languages:
 
 -   David Briggs's [The Dimensions of Color](http://www.huevaluechroma.com/)
 -   Bruce Lindbloom's [Useful Color Math](http://www.brucelindbloom.com/index.html?Math.html)
+-   Rune Madsen's [Programming Design Systems](https://programmingdesignsystems.com/)
+
+### Articles
+
+-   [Color: From Hexcodes to Eyeballs](http://jamie-wong.com/post/color/) by Jamie Wong
 
 ### Books
 

@@ -3,8 +3,7 @@ import {
 	samples,
 	interpolatorSplineMonotone,
 	interpolatorSplineMonotone2,
-	interpolatorSplineMonotoneClosed,
-	interpolatorSplineMonotoneOpen
+	interpolatorSplineMonotoneClosed
 } from '../src/index';
 
 tape('interpolatorSplineMonotone', t => {
@@ -54,23 +53,6 @@ tape('interpolatorSplineMonotoneClosed', t => {
 		0.40631001371742104,
 		0.08950617283950621,
 		0.04999999999999999
-	]);
-	t.end();
-});
-
-tape('interpolatorSplineMonotoneOpen', t => {
-	let data = [3, 2.8, 2.5, 1, 0.95, 0.8, 0.5, 0.1, 0.05];
-	t.deepEqual(samples(10).map(interpolatorSplineMonotoneOpen(data)), [
-		undefined,
-		undefined,
-		undefined,
-		undefined,
-		undefined,
-		undefined,
-		undefined,
-		undefined,
-		undefined,
-		undefined
 	]);
 	t.end();
 });

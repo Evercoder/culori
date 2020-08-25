@@ -22,7 +22,6 @@ Culori does a few things differently:
 [css4-colors]: https://drafts.csswg.org/css-color/
 [css4-named-colors]: https://drafts.csswg.org/css-color/#named-colors
 [din99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
-[yiq]: https://en.wikipedia.org/wiki/YIQ
 [hex-colors]: https://drafts.csswg.org/css-color/#hex-notation
 [rgb-colors]: https://drafts.csswg.org/css-color/#rgb-functions
 [hsl-colors]: https://drafts.csswg.org/css-color/#the-hsl-notation

@@ -58,10 +58,6 @@ const interpolatorSplineBasisClosed = arr => t => {
 	);
 };
 
-const interpolatorSplineBasisOpen = arr => t => {
-	throw new Error('open basis spline is not yet implemented');
-};
-
 const interpolateSplineBasis = (fixup, type = 'default', γ = 1) => arr => {
 	let ease = gamma(γ);
 	if (type === 'default') {
@@ -69,15 +65,11 @@ const interpolateSplineBasis = (fixup, type = 'default', γ = 1) => arr => {
 	} else if (type === 'closed') {
 		return t =>
 			interpolatorSplineBasisClosed((fixup || (v => v))(arr))(ease(t));
-	} else if (type === 'open') {
-		return t =>
-			interpolatorSplineBasisOpen((fixup || (v => v))(arr))(ease(t));
 	}
 };
 
 export {
 	interpolateSplineBasis,
 	interpolatorSplineBasis,
-	interpolatorSplineBasisClosed,
-	interpolatorSplineBasisOpen
+	interpolatorSplineBasisClosed
 };

@@ -126,23 +126,20 @@ export { default as interpolateCosine } from './interpolate/cosine';
 export {
 	interpolateSplineBasis, // @deprecated
 	interpolatorSplineBasis,
-	interpolatorSplineBasisClosed,
-	interpolatorSplineBasisOpen
+	interpolatorSplineBasisClosed
 } from './interpolate/splineBasis';
 
 export {
 	interpolateSplineNatural, // @deprecated
 	interpolatorSplineNatural,
-	interpolatorSplineNaturalClosed,
-	interpolatorSplineNaturalOpen
+	interpolatorSplineNaturalClosed
 } from './interpolate/splineNatural';
 
 export {
 	interpolateSplineMonotone, // @deprecated
 	interpolatorSplineMonotone,
 	interpolatorSplineMonotone2,
-	interpolatorSplineMonotoneClosed,
-	interpolatorSplineMonotoneOpen
+	interpolatorSplineMonotoneClosed
 } from './interpolate/splineMonotone';
 
 export { default as lerp } from './interpolate/lerp';

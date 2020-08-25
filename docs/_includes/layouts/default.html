@@ -8,6 +8,7 @@
 			endif %}
 		</title>
 
+		<link rel="icon" type="image/png" href='{{"/favicon.png" | url }}' />
 		<link rel="stylesheet" href='{{"/css/main.css" | url }}' />
 	</head>
 	<body>
@@ -21,5 +22,15 @@
 		{% include 'partials/footer.html' %}
 
 		<script src="https://unpkg.com/culori"></script>
+		<script type="text/javascript">
+			document.body.style.setProperty(
+				'--random-1',
+				culori.formatHex(culori.random('lch', { l: [10, 50] }))
+			);
+			document.body.style.setProperty(
+				'--random-2',
+				culori.formatHex(culori.random('lch', { l: [10, 50] }))
+			);
+		</script>
 	</body>
 </html>

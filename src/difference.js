@@ -59,10 +59,10 @@ const differenceEuclidean = (mode = 'rgb', weights = [1, 1, 1, 0]) => {
 	};
 };
 
-const differenceCie76 = () => differenceEuclidean('lab');
+const differenceCie76 = () => differenceEuclidean('lab65');
 
 const differenceCie94 = (kL = 1, K1 = 0.045, K2 = 0.015) => {
-	let lab = converter('lab');
+	let lab = converter('lab65');
 
 	return (std, smp) => {
 		let LabStd = lab(std);
@@ -99,7 +99,7 @@ const differenceCie94 = (kL = 1, K1 = 0.045, K2 = 0.015) => {
  */
 
 const differenceCiede2000 = (Kl = 1, Kc = 1, Kh = 1) => {
-	let lab = converter('lab');
+	let lab = converter('lab65');
 	return (std, smp) => {
 		let LabStd = lab(std);
 		let LabSmp = lab(smp);
@@ -200,7 +200,7 @@ const differenceCiede2000 = (Kl = 1, Kc = 1, Kh = 1) => {
 		http://www.brucelindbloom.com/index.html?Eqn_DeltaE_CMC.html
  */
 const differenceCmc = (l = 1, c = 1) => {
-	let lab = converter('lab');
+	let lab = converter('lab65');
 
 	/*
 		Comparte two colors:

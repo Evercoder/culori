@@ -4,12 +4,12 @@ title: API Reference
 menu-order: 2
 ---
 
-## Color representation
+## Colors are plain objects
 
 Culori does not have a _Color_ class. Instead, it uses plain objects to represent colors:
 
 ```js
-// A color in the RGB space:
+/* A RGB color */
 {
   mode: 'rgb',
   r: 0.1,
@@ -19,35 +19,33 @@ Culori does not have a _Color_ class. Instead, it uses plain objects to represen
 }
 ```
 
-The object needs to have a `mode` property that identifies the color space, and values for each channel in that particular color space. See the [Color Spaces](./color-spaces) section for the channels expected of each color space. Optionally, the `alpha` property is used for the color's alpha channel.
+The object needs to have a `mode` property that identifies the color space, and values for each channel in that particular color space (see the [Color Spaces](/color-spaces) page for the channels and ranges expected for each color space). Optionally, the `alpha` property is used for the color's alpha channel.
 
-## Basic methods
-
-### Parsing and conversion
+## Parsing and conversion
 
 <a name="parse" href="#parse">#</a> culori.**parse**(_string_) → _color_ or _undefined_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/parse.js)
 
 Parses a string and returns the corresponding _color_. The color will be in the matching color space, e.g. RGB for hex strings, HSL for `hsl(…, …, …)` strings, et cetera. If no built-in parsers can match the string, the function will return _undefined_.
 
 ```js
-// named colors:
+/* A named color */
 culori.parse('red');
 // ⇒ { r: 1, g: 0, b: 0, mode: 'rgb' }
 
-// hex strings:
+/* A hex color */
 culori.parse('#ff0000');
 // ⇒ { r: 1, g: 0, b: 0, mode: 'rgb' }
 
-// HSL colors:
+/* A HSL color */
 culori.parse('hsl(60 50% 10% / 100%)');
 // ⇒ { h: 60, s: 0.5, b: 0.1, alpha: 1, mode: 'hsl' }
 
-// Lab colors:
+/* A Lab color */
 culori.parse('lab(100% -50 50)');
 // ⇒ { l: 100, a: -50, b: 50, mode: 'lab' }
 ```
 
-In most cases you'll want to use a [converter](#converter) instead. You can throw strings and color objects at a converter to get back an object in a predictable color space. `parse()`, on the other hand, is only meant for parsing strings.
+In most cases, instead of using `parse()` directly (which only operates on strings), you'll want to use a [`converter()`](#converter), which accepts strings and color objects and returns objects in a predictable color space.
 
 <a name="converter" href="#converter">#</a> culori.**converter**(_mode = "rgb"_) → _function (color or String)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/converter.js)
 
@@ -64,38 +62,40 @@ lab('#f0f0f0');
 // ⇒ { mode: "lab", l: 94.79…, a: 0, b: 0 }
 ```
 
-Converters accept either strings (which will be parsed with `culori.parse` under the hood) or color objects. If the `mode` key is absent from the color, it's assumed to be in the converter's color space.
+Converters accept either strings (which will be parsed with `culori.parse` under the hood) or color objects. If the `mode` key is absent from the color object passed to a converter, it's assumed to be in the converter's color space.
 
-The available modes (color spaces) are listed below. For convenience, each color space included by default in culori has a shortcut to its converter. For example, you can use `culori.hsl` instead of `culori.converter('hsl')`.
+The available modes (color spaces) are listed below. For convenience, each color space built into culori has a shortcut to its converter. For example, instead of `culori.converter('hsl')`, you can use `culori.hsl`.
 
-| Mode        | For                                                    | Shortcut                      |
-| ----------- | ------------------------------------------------------ | ----------------------------- |
-| `a98`       | A98 RGB color space (Compatible with Adobe RGB (1998)) | culori.**a98**(_color_)       |
-| `cubehelix` | Cubehelix color space                                  | culori.**cubehelix**(_color_) |
-| `dlab`      | DIN99o Lab color space                                 | culori.**dlab**(_color_)      |
-| `dlch`      | DIN99o LCh color space                                 | culori.**dlch**(_color_)      |
-| `hsi`       | HSI color space                                        | culori.**hsi**(_color_)       |
-| `hsl`       | HSL color space                                        | culori.**hsl**(_color_)       |
-| `hsv`       | HSV color space                                        | culori.**hsv**(_color_)       |
-| `hwb`       | HWB color space                                        | culori.**hwb**(_color_)       |
-| `jab`       | JzAzBz color space                                     | culori.**jab**(_color_)       |
-| `jch`       | JzAzBz in polar form                                   | culori.**jch**(_color_)       |
-| `lab`       | Lab color space (D50 Illuminant)                       | culori.**lab**(_color_)       |
-| `lab65`     | Lab color space (D65 Illuminant)                       | culori.**lab65**(_color_)     |
-| `lch`       | LCh color space (D50 Illuminant)                       | culori.**lch**(_color_)       |
-| `lch65`     | LCh color space (D65 Illuminant)                       | culori.**lch65**(_color_)     |
-| `lchuv`     | CIELCHuv color space (D50 Illuminant)                  | culori.**lchuv**(_color_)     |
-| `lrgb`      | Linear-light sRGB color space                          | culori.**lrgb**(_color_)      |
-| `luv`       | CIELuv color space (D50 Illuminant)                    | culori.**luv**(_color_)       |
-| `p3`        | Display P3 color space                                 | culori.**p3**(_color_)        |
-| `prophoto`  | ProPhoto RGB color space                               | culori.**prophoto**(_color_)  |
-| `rec2020`   | Rec. 2020 RGB color space                              | culori.**rec2020**(_color_)   |
-| `rgb`       | sRGB color space                                       | culori.**rgb**(_color_)       |
-| `xyz65`     | XYZ D65 color space                                    | culori.**xyz65**(_color_)     |
-| `xyz`       | XYZ D50 color space                                    | culori.**xyz**(_color_)       |
-| `yiq`       | YIQ color space                                        | culori.**yiq**(_color_)       |
+| Mode        | Color space                                                 | Shortcut                      |
+| ----------- | ----------------------------------------------------------- | ----------------------------- |
+| `a98`       | A98 RGB color space, compatible with Adobe RGB (1998)       | culori.**a98**(_color_)       |
+| `cubehelix` | Cubehelix color space                                       | culori.**cubehelix**(_color_) |
+| `dlab`      | DIN99o Lab color space                                      | culori.**dlab**(_color_)      |
+| `dlch`      | DIN99o LCh color space                                      | culori.**dlch**(_color_)      |
+| `hsi`       | HSI color space                                             | culori.**hsi**(_color_)       |
+| `hsl`       | HSL color space                                             | culori.**hsl**(_color_)       |
+| `hsv`       | HSV color space                                             | culori.**hsv**(_color_)       |
+| `hwb`       | HWB color space                                             | culori.**hwb**(_color_)       |
+| `jab`       | J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space         | culori.**jab**(_color_)       |
+| `jch`       | J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> in cylindrical form | culori.**jch**(_color_)       |
+| `lab`       | CIELAB color space (D50 Illuminant)                         | culori.**lab**(_color_)       |
+| `lab65`     | CIELAB color space (D65 Illuminant)                         | culori.**lab65**(_color_)     |
+| `lch`       | CIELCh color space (D50 Illuminant)                         | culori.**lch**(_color_)       |
+| `lch65`     | CIELCh color space (D65 Illuminant)                         | culori.**lch65**(_color_)     |
+| `lchuv`     | CIELCHuv color space (D50 Illuminant)                       | culori.**lchuv**(_color_)     |
+| `lrgb`      | Linear-light sRGB color space                               | culori.**lrgb**(_color_)      |
+| `luv`       | CIELUV color space (D50 Illuminant)                         | culori.**luv**(_color_)       |
+| `p3`        | Display P3 color space                                      | culori.**p3**(_color_)        |
+| `prophoto`  | ProPhoto RGB color space                                    | culori.**prophoto**(_color_)  |
+| `rec2020`   | Rec. 2020 RGB color space                                   | culori.**rec2020**(_color_)   |
+| `rgb`       | sRGB color space                                            | culori.**rgb**(_color_)       |
+| `xyz65`     | XYZ D65 color space                                         | culori.**xyz65**(_color_)     |
+| `xyz`       | XYZ D50 color space                                         | culori.**xyz**(_color_)       |
+| `yiq`       | YIQ color space                                             | culori.**yiq**(_color_)       |
 
-### Formatting
+## Formatting
+
+These methods serialize colors to strings, in various formats.
 
 <a name="formatHex" href="#formatHex">#</a> culori.**formatHex**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/formatter.js)
 
@@ -124,7 +124,7 @@ culori.formatRgb('lab(50 0 0 / 25%)');
 // ⇒ "rgba(119, 119, 119, 0.25)"
 ```
 
-### Clamping
+## Clamping
 
 Some color spaces (Lab and LCh in particular) allow you to express colors that can't be displayed on-screen. The methods below allow you to identify when that's the case and to produce displayable versions of the colors.
 
@@ -170,9 +170,15 @@ culori.clampChroma('lab(50% 100 100)');
 
 ## Interpolation
 
+In any color space, colors occupy positions given by their values for each channel. Interpolating colors means tracing a line through the coordinates of these colors, and figuring out what colors reside on the line at various positions.
+
+<img src='{{"/img/red-blue.png" | url }}' height='20' alt='red and blue, linearly interpolated'/>
+
+Above is the path between red and blue in the RGB color space. Going from left to right, we start at red and steadily blend in more and more blue as we progress, until the color is fully blue at destination. This is a _linear interpolation_ between two colors.
+
 <a name="interpolate" href="#interpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_, _overrides_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/interpolate.js)
 
-Returns an _interpolator_ in the _mode_ color space for an array of colors: a function that accepts a value _t_ in the interval `[0, 1]` and returns the interpolated color in the _mode_ color space.
+Returns an _interpolator_ in the _mode_ color space for an array of _colors_. The interpolator is a function that accepts a value _t_ in the interval `[0, 1]` and returns the interpolated color in the _mode_ color space.
 
 The colors in the array can be in any color space, or they can even be strings.
 
@@ -182,7 +188,7 @@ grays(0.5);
 // ⇒ { mode: 'rgb', r: 0.5, g: 0.5, b: 0.5 }
 ```
 
-By default, colors in all spaces are interpolated linearly. You can override the way specific channels are interpolated with the _overrides_ object, the third argument of `interpolate()`.
+By default, colors in all spaces are interpolated linearly across all channels. You can override the way specific channels are interpolated with the _overrides_ object, the third argument of `interpolate()`.
 
 ```js
 let my_interpolator = culori.interpolate(['blue', 'red'], 'lch', {
@@ -330,13 +336,15 @@ A linear interpolator for values in a channel.
 
 #### Basis splines
 
-[Basis splines](https://en.wikipedia.org/wiki/B-spline) are available in the following variants:
+[Basis splines](https://en.wikipedia.org/wiki/B-spline) (also called _B-splines_) are available in the following variants:
 
 <a name="interpolatorSplineBasis" href="#interpolatorSplineBasis">#</a> culori.**interpolatorSplineBasis**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js)
 
+A basis spline which uses one-sided finite differences for the slopes at the boundaries.
+
 <a name="interpolatorSplineBasisClosed" href="#interpolatorSplineBasisClosed">#</a> culori.**interpolatorSplineBasisClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js)
 
-<a name="interpolatorSplineBasisOpen" href="#interpolatorSplineBasisOpen">#</a> culori.**interpolatorSplineBasisOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineBasis.js) (⚠️ Not yet implemented)
+A basis spline which considers the _values_ array to be periodic.
 
 #### Natural splines
 
@@ -344,25 +352,31 @@ A linear interpolator for values in a channel.
 
 <a name="interpolatorSplineNatural" href="#interpolatorSplineNatural">#</a> culori.**interpolatorSplineNatural**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js)
 
+A natural spline which uses one-sided finite differences for the slopes at the boundaries.
+
 <a name="interpolatorSplineNaturalClosed" href="#interpolatorSplineNaturalClosed">#</a> culori.**interpolatorSplineNaturalClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js)
 
-<a name="interpolatorSplineNaturalOpen" href="#interpolatorSplineNaturalOpen">#</a> culori.**interpolatorSplineNaturalsOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineNatural.js) (⚠️ Not yet implemented)
+A natural spline which considers the _values_ array to be periodic.
 
 #### Monotone splines
 
-Monotone splines are available in the following variants:
+The monotone splines are based on the following paper (via [d3-shape](https://github.com/d3/d3-shape)):
+
+> Steffen, M. [_"A simple method for monotonic interpolation in one dimension."_](https://ui.adsabs.harvard.edu/abs/1990A&A...239..443S) in Astronomy and Astrophysics, Vol. 239, p. 443-450 (Nov. 1990), Provided by the SAO/NASA Astrophysics Data System.
+
+The following variants are available:
 
 <a name="interpolatorSplineMonotone" href="#interpolatorSplineMonotone">#</a> culori.**interpolatorSplineMonotone**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
 
+A monotone spline that uses one-sided finite differences to find the slopes at the boundaries.
+
 <a name="interpolatorSplineMonotone2" href="#interpolatorSplineMonotone2">#</a> culori.**interpolatorSplineMonotone2**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
+
+A monotone spline for which we derive the slopes at the boundaries by tracing a parabola through the first/last three values.
 
 <a name="interpolatorSplineMonotoneClosed" href="#interpolatorSplineMonotoneClosed">#</a> culori.**interpolatorSplineMonotoneClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js)
 
-<a name="interpolatorSplineMonotoneOpen" href="#interpolatorSplineMonotoneOpen">#</a> culori.**interpolatorSplineMonotoneOpen**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/interpolate/splineMonotone.js) (⚠️ Not yet implemented)
-
-The monotone spline is based on the following paper (via [d3-shape](https://github.com/d3/d3-shape)):
-
-> Steffen, M. [_"A simple method for monotonic interpolation in one dimension."_](https://ui.adsabs.harvard.edu/abs/1990A&A...239..443S) in Astronomy and Astrophysics, Vol. 239, p. 443-450 (Nov. 1990), Provided by the SAO/NASA Astrophysics Data System.
+A monotone spline which considers the _values_ array to be periodic.
 
 #### Custom piecewise interpolation
 
@@ -465,8 +479,8 @@ The samples are useful for [`culori.interpolate()`](#interpolate) to generate co
 
 ```js
 let grays = culori.interpolate(['#fff', '#000']);
-culori.samples(5).map(grays);
-// ⇒ five evenly-spaced colors
+culori.samples(5).map(grays).map(culori.formatHex);
+// ⇒ ["#ffffff", "#bfbfbf", "#808080", "#404040", "#000000"]
 ```
 
 As with the [`culori.interpolate()`](#interpolate) method, you can map the samples through an easing function or scale to obtain a different distribution of the samples.
@@ -613,11 +627,11 @@ culori.interpolate(colors, 'rgb');
 culori.interpolateWithPremultipliedAlpha(colors, 'rgb');
 ```
 
-## Difference
+## Color Difference
 
 These methods are concerned to finding the [distance between two colors](https://en.wikipedia.org/wiki/Color_difference) based on various formulas. Each of these formulas will return a _function (colorA, colorB)_ that lets you measure the distance between two colors.
 
-> **Note:** These methods are also available as a separate [D3 plugin](https://github.com/evercoder/d3-color-difference).
+### Euclidean distance
 
 <a name="differenceEuclidean" href="#differenceEuclidean">#</a> culori.**differenceEuclidean**(_mode = 'rgb'_, _weights = [1, 1, 1, 0]_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
@@ -627,41 +641,11 @@ You can optionally assign different weights to the channels in the color space. 
 
 The default weights `[1, 1, 1, 0]` mean that the _alpha_, which is the fourth channel in all the color spaces culori defines, is not taken into account. Send `[1, 1, 1, 1]` as the weights to include it in the computation.
 
-<a name="differenceCie76" href="#differenceCie76">#</a> culori.**differenceCie76**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
-
-Computes the [CIE76][cie76] ΔE\*<sub>ab</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space and it is analogous to [`culori.differenceEuclidean('lab')`](#differenceEuclidean).
-
-<a name="differenceCie94" href="#differenceCie94">#</a> culori.**differenceCie94**(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
-
-Computes the [CIE94][cie94] ΔE\*<sub>94</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space.
-
-<a name="differenceCiede2000" href="#differenceCiede2000">#</a> culori.**differenceCiede2000**(_Kl = 1_, _Kc = 1_, _Kh = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
-
-Computes the [CIEDE2000][ciede2000] ΔE\*<sub>00</sub> color difference between the colors _a_ and _b_ as implemented by [G. Sharma](http://www2.ece.rochester.edu/~gsharma/ciede2000/). The computation is done in the Lab color space.
-
-Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E\* function.
-
-<a name="differenceCmc" href="#differenceCmc">#</a> culori.**differenceCmc**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
-
-Computes the [CMC l:c (1984)][cmc] ΔE\*<sub>CMC</sub> color difference between the colors _a_ and _b_. The computation is done in the Lab color space.
-
-ΔE\*<sub>CMC</sub> is not considered a metric since it's not symmetrical, that is the distance from _a_ to _b_ is not always equal to the distance from _b_ to _a_. Therefore it cannot be reliably used with [`culori.nearest()`](#nearest).
-
-<a name="differenceDin99o" href="#differenceDin99o">#</a> culori.**differenceDin99o**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
-
-Computes the [DIN99o][din99ode] ΔE\*<sub>99o</sub> color difference between the colors _a_ and _b_. The computation is done in the [DIN99o][din99o] color space.
-
-<a name="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> culori.**differenceKotsarenkoRamos**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
-
-Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the colors _a_ and _b_. This is a weighted Euclidean distance in the [YIQ][yiq] color space.
-
-### Handling hue
-
-Euclidean distances are tricky in cylindrical spaces, containing a hue. Depending on the color space, hue is treated in a variety of ways. The functions below are used internally:
+In cylindrical spaces, the hue is factored into the Euclidean distance in a variety of ways. The functions below are used internally:
 
 <a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.**differenceHueChroma**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
-This is the handling of hue in CIE-derived cylindrical spaces (`lch`, `lchuv`, `dlch`) and the polar version of JzAzBz (`jch`).
+This is the handling of hue in cylindrical forms of CIE-based color spaces (`lch`, `lchuv`, `dlch`) and J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> (`jch`).
 
 <a name="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.**differenceHueSaturation**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
@@ -670,6 +654,40 @@ This is a handling of hue in the HSL / HSV / HSI family of color spaces. It's a 
 <a name="differenceHueNaive" href="#differenceHueNaive">#</a> culori.**differenceHueNaive**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
 For remaining color spaces (HWB), we consider hues numbers, but apply a _shortest path around the hue circle_ (analogous to [`culori.fixupHueShorter`](#fixupHueShorter)). If you insist on using Euclidean distances on these spaces, you can use the `weights` to control the contribution of the hue difference towards the total difference.
+
+### CIE color difference formulas
+
+All these color difference functions operate on the `lab65` color space.
+
+<a name="differenceCie76" href="#differenceCie76">#</a> culori.**differenceCie76**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+Computes the [CIE76][cie76] ΔE\*<sub>ab</sub> color difference between the colors _a_ and _b_. The function is identical to [`culori.differenceEuclidean('lab65')`](#differenceEuclidean).
+
+<a name="differenceCie94" href="#differenceCie94">#</a> culori.**differenceCie94**(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+Computes the [CIE94][cie94] ΔE\*<sub>94</sub> color difference between the colors _a_ and _b_.
+
+<a name="differenceCiede2000" href="#differenceCiede2000">#</a> culori.**differenceCiede2000**(_Kl = 1_, _Kc = 1_, _Kh = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+Computes the [CIEDE2000][ciede2000] ΔE\*<sub>00</sub> color difference between the colors _a_ and _b_ as implemented by [G. Sharma](http://www2.ece.rochester.edu/~gsharma/ciede2000/).
+
+Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E\* function.
+
+<a name="differenceCmc" href="#differenceCmc">#</a> culori.**differenceCmc**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+Computes the [CMC l:c (1984)][cmc] ΔE\*<sub>CMC</sub> color difference between the colors _a_ and _b_.
+
+ΔE\*<sub>CMC</sub> is not considered a metric since it's not symmetrical, that is the distance from _a_ to _b_ is not always equal to the distance from _b_ to _a_. Therefore it cannot be reliably used with [`culori.nearest()`](#nearest).
+
+### Other difference formulas
+
+<a name="differenceDin99o" href="#differenceDin99o">#</a> culori.**differenceDin99o**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+Computes the [DIN99o][din99ode] ΔE\*<sub>99o</sub> color difference between the colors _a_ and _b_. The computation is done in the `dlab` color space.
+
+<a name="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> culori.**differenceKotsarenkoRamos**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the colors _a_ and _b_. This is a weighted Euclidean distance in the `yiq` color space.
 
 ### Nearest color(s)
 
@@ -756,7 +774,7 @@ culori.random();
 
 ### Specifying constraints
 
-Random colors are, by definition, all over the color space and not all of them will look particularly nice. Some color spaces, such as HSL or HSV, are also biased towards colors close to black and/or white, because of the way these color spaces stretch the RGB cube into cyllinders.
+Random colors are, by definition, all over the color space and not all of them will look particularly nice. Some color spaces, such as HSL or HSV, are also biased towards colors close to black and/or white, because of the way these color spaces stretch the RGB cube into cylinders.
 
 For more control on how the colors are generated, you can specify constraints for each individual channel in the color space. Constraints can be either a _constant number_ or an _interval_ from where to pick the channel value:
 
@@ -780,7 +798,7 @@ culori.random('lrgb', { alpha: [0, 1] });
 
 ### Displayable random colors
 
-The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as LAB or LCH, don't have explicit ranges for certain channels; for these, some approximate ranges [have been pre-computed](https://github.com/evercoder/culori/blob/master/tools/ranges.js) as the limits of the displayable sRGB gamut.
+The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as CIELAB or CIELCH, don't have explicit ranges for certain channels; for these, some approximate ranges [have been pre-computed](https://github.com/evercoder/culori/blob/master/tools/ranges.js) as the limits of the displayable sRGB gamut.
 
 Even with these ranges in place, a combination of channel values may not be displayable. Check if that's the case with [`culori.displayable()`](#displayable), and pass the color through a [`culori.clamp*`](#clampRgb) function to obtain a displayable version.
 
@@ -977,8 +995,6 @@ This makes sure [`culori.differenceEuclidean()`](#differenceEuclidean) works as 
 [cie94]: https://en.wikipedia.org/wiki/Color_difference#CIE94
 [ciede2000]: https://en.wikipedia.org/wiki/Color_difference#CIEDE2000
 [cmc]: https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)
-[din99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
 [kotsarekno-ramos]: http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf
 [din99ode]: https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel
-[yiq]: https://en.wikipedia.org/wiki/YIQ
 [midpoint]: https://github.com/w3c/csswg-drafts/issues/3935

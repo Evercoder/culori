@@ -7,7 +7,7 @@ import {
 	differenceCmc,
 	differenceKotsarenkoRamos,
 	rgb,
-	lab,
+	lab65,
 	round,
 	hsl
 } from '../src/index';
@@ -52,8 +52,8 @@ tape('euclidean distance in HSL', function (test) {
 tape('cie76 difference', function (test) {
 	test.equal(
 		differenceCie76()(
-			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
-			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
+			lab65({ l: 1, a: 0, b: 0, alpha: 0.5 }),
+			lab65({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
 		1.4142135623730951
 	);
@@ -64,8 +64,8 @@ tape('cie76 difference', function (test) {
 tape('cie94 difference', function (test) {
 	test.equal(
 		differenceCie94()(
-			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
-			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
+			lab65({ l: 1, a: 0, b: 0, alpha: 0.5 }),
+			lab65({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
 		1.4142135623730951
 	);
@@ -119,8 +119,8 @@ tape('ciede2000 difference', function (test) {
 		test.equal(
 			approx(
 				differenceCiede2000()(
-					lab({ l: +line[0], a: +line[1], b: +line[2] }),
-					lab({ l: +line[3], a: +line[4], b: +line[5] })
+					lab65({ l: +line[0], a: +line[1], b: +line[2] }),
+					lab65({ l: +line[3], a: +line[4], b: +line[5] })
 				)
 			),
 			+line[6]
@@ -130,8 +130,8 @@ tape('ciede2000 difference', function (test) {
 		test.equal(
 			approx(
 				differenceCiede2000()(
-					lab({ l: +line[3], a: +line[4], b: +line[5] }),
-					lab({ l: +line[0], a: +line[1], b: +line[2] })
+					lab65({ l: +line[3], a: +line[4], b: +line[5] }),
+					lab65({ l: +line[0], a: +line[1], b: +line[2] })
 				)
 			),
 			+line[6]
@@ -144,25 +144,25 @@ tape('ciede2000 difference', function (test) {
 tape('differenceCmc', function (test) {
 	test.equal(
 		differenceCmc()(
-			lab({ l: 1, a: 0, b: 0, alpha: 0.5 }),
-			lab({ l: 0, a: 1, b: 0, alpha: 0.75 })
+			lab65({ l: 1, a: 0, b: 0, alpha: 0.5 }),
+			lab65({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
 		2.507265255284643
 	);
 
 	test.equal(
 		differenceCmc()('rgb(55, 60, 48)', 'rgb(55, 65, 53)'),
-		3.6725610403812463
+		3.5905910602807696
 	);
 
 	test.equal(
 		differenceCmc(2, 1)('rgb(55, 60, 48)', 'rgb(55, 65, 53)'),
-		2.944236531878115
+		2.8209138816986568
 	);
 
 	test.equal(
 		differenceCmc()('lab(50 40 20)', 'lab(60 20 100)'),
-		50.913226714067704
+		53.10787441404076
 	);
 
 	test.end();

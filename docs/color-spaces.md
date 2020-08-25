@@ -4,11 +4,23 @@ title: Color Spaces
 menu-order: 3
 ---
 
-## RGB
+This is an overview of the color spaces built into culori, listing their channels and expected ranges.
 
-> 📖 See Jamie Wong's [excellent deep dive](http://jamie-wong.com/post/color/) into color.
+## A note on terminology
 
-All RGB color spaces contain the following channels:
+A [color model](https://en.wikipedia.org/wiki/Color_model) is a way to describe colors along certain dimensions. RGB, for example, is a color model: color is expressed as a combination of red, green and blue.
+
+A color model, along with a precise description of how colors in the model are to be interpreted, makes a color _space_. sRGB, Display P3 and ProPhoto RGB are all color spaces that employ the RGB model: they describe colors as combination of red, green, and blue primaries; however, they have different notions of how these red, green, and blue primary colors look.
+
+In some color spaces, such as CIELAB or CIELCh, some channels don't have fixed ranges. For these channels, approximate ranges are obtained by converting all sRGB colors defined by `r, g, b ∈ ℕ ⋂ [0, 255]` to that specific color space. Whenever that's the case, the range is marked with the approximation symbol `≈`.
+
+In addition to the channels listed below, all color spaces also take an optional `alpha` channel with the range `[0, 1]`.
+
+## Built-in color spaces
+
+### The RGB model
+
+The [RGB color model](https://en.wikipedia.org/wiki/RGB_color_model) describes colors as mixtures of red, green, and blue primaries. Culori implements several RGB color spaces, all sharing these channels:
 
 | Channel | Range    | Description   |
 | ------- | -------- | ------------- |
@@ -16,37 +28,41 @@ All RGB color spaces contain the following channels:
 | `g`     | `[0, 1]` | Green channel |
 | `b`     | `[0, 1]` | Blue channel  |
 
-### `rgb`
+#### `rgb`
 
-The [sRGB color space](https://en.wikipedia.org/wiki/SRGB).
+The [sRGB color space](https://en.wikipedia.org/wiki/SRGB), which most people refer to when talking about RGB colors.
 
-### `lrgb`
+#### `lrgb`
 
-The linear-light sRGB color space.
+The linear-light form of the sRGB color space.
 
-### `a98`
+#### `a98`
 
-The A98 RGB color space, which is compatible with, [but not the actual](https://www.adobe.com/digitalimag/adobergb.html), [Adobe RGB (1998) color space](https://en.wikipedia.org/wiki/Adobe_RGB_color_space).
+The A98 RGB color space, compatible with the [Adobe RGB (1998) color space](https://en.wikipedia.org/wiki/Adobe_RGB_color_space). It's called `a98-rgb` in the CSS Color Level 4 specification.
 
-### `p3`
+#### `p3`
 
-The [Display P3 color space](https://en.wikipedia.org/wiki/DCI-P3#Display_P3).
+The [Display P3 color space](https://en.wikipedia.org/wiki/DCI-P3#Display_P3). It's called `display-p3` in the CSS Color Level 4 specification.
 
-### `prophoto`
+#### `prophoto`
 
-The [ProPhoto RGB color space](https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space).
+The [ProPhoto RGB color space](https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space). It's called `prophoto-rgb` in the CSS Color Level 4 specification.
 
-### `rec2020`
+#### `rec2020`
 
-The [Rec. 2020 color space](https://en.wikipedia.org/wiki/Rec._2020).
+The [Rec. 2020 color space](https://en.wikipedia.org/wiki/Rec._2020). It's called `display-p3` in the CSS Color Level 4 specification.
 
-## HSL / HSV / HSI
+### The HSL/HSV/HSI family
 
-[HSL, HSV, and HSI](https://en.wikipedia.org/wiki/HSL_and_HSV) are a family of representations of the RGB color space, created in 1970 to provide color spaces more closely aligned to how humans perceive colors.
+[HSL, HSV, and HSI](https://en.wikipedia.org/wiki/HSL_and_HSV) are alternative representations of the RGB color model, created in an attempt to provide a more intuitive way to specify colors.
 
-> 💡 In this family of color spaces, the _hue_ is undefined for achromatic colors (i.e. shades of gray).
+The _hue_ is identical across all color models in this family; however, the _saturaton_ is computed differently in each. The saturation in HSL is **not interchangeable** with the saturation from HSV, nor HSI. Achromatic colors (shades of gray) will have an `undefined` hue.
 
-### `hsl`
+As color spaces, they relate to the [`sRGB` color space](#rgb).
+
+#### `hsl`
+
+The HSL color space.
 
 | Channel | Range      | Description       |
 | ------- | ---------- | ----------------- |
@@ -54,11 +70,9 @@ The [Rec. 2020 color space](https://en.wikipedia.org/wiki/Rec._2020).
 | `s`     | `[0, 1]`   | Saturation in HSL |
 | `l`     | `[0, 1]`   | Lightness         |
 
-The figure below shows a slice of the HSL color space for a particular hue:
+#### `hsv`
 
-![HSL Spectrum]({{"/img/hsl-spectrum.png" | url }})
-
-### `hsv`
+The HSV color space.
 
 | Channel | Range      | Description       |
 | ------- | ---------- | ----------------- |
@@ -66,11 +80,9 @@ The figure below shows a slice of the HSL color space for a particular hue:
 | `s`     | `[0, 1]`   | Saturation in HSV |
 | `v`     | `[0, 1]`   | Value             |
 
-The figure below shows a slice of the HSV color space for a particular hue:
+#### `hsi`
 
-![HSV Spectrum]({{"/img/hsv-spectrum.png" | url }})
-
-### `hsi`
+The HSI color space.
 
 | Channel | Range      | Description       |
 | ------- | ---------- | ----------------- |
@@ -78,185 +90,183 @@ The figure below shows a slice of the HSV color space for a particular hue:
 | `s`     | `[0, 1]`   | Saturation in HSI |
 | `i`     | `[0, 1]`   | Intensity         |
 
-The figure below shows a slice of the HSI color space for a particular hue:
+### HWB
 
-![HSI Spectrum]({{"/img/hsi-spectrum.png" | url }})
+[The HWB color model](https://en.wikipedia.org/wiki/HWB_color_model) was developed by Alvy Ray Smith, who also created the HSV color model. It's meant to be more intuitive for humans to use and faster to compute.
 
-> 💡 While the _hue_ in this family of color spaces retains its value in all of them, the _saturation_ in HSL is **not interchangeable** with the _saturation_ from HSV, nor HSI — they're computed differently, depending on the color space.
+| Channel | Range      | Description |
+| ------- | ---------- | ----------- |
+| `h`     | `[0, 360)` | Hue         |
+| `w`     | `[0, 1]`   | Whiteness   |
+| `b`     | `[0, 1]`   | Blackness   |
 
-## HWB
+> Smith, Alvy Ray (1996) — ["HWB — A More Intuitive Hue-Based Color Model"](http://alvyray.com/Papers/CG/HWB_JGTv208.pdf), Journal of Graphics, GPU and Game tools.
 
-[The HWB color space](https://en.wikipedia.org/wiki/HWB_color_model) was developed by Alvy Ray Smith, who also created the HSV color space. It's meant to be more intuitive for humans to use and faster to compute.
+### CIELAB
 
-**References:**
+The [CIELAB color space](https://en.wikipedia.org/wiki/CIELAB_color_space), also known as CIE 1976 L\*a\*b\*, in Cartesian (Lab) and cylindrical (LCh) forms.
 
--   Smith, Alvy Ray (1996) — ["HWB — A More Intuitive Hue-Based Color Model"](http://alvyray.com/Papers/CG/HWB_JGTv208.pdf), Journal of Graphics, GPU and Game tools.
+#### `lab`
 
-## Lab / LCh (CIE)
+The CIELAB color space using the [D50 standard illuminant](https://en.wikipedia.org/wiki/Standard_illuminant) as the reference white, following the [CSS Color Module Level 4 specification](https://drafts.csswg.org/css-color/#lab-colors).
 
-> As defined in the [CSS Color Module Level 4 spec](https://drafts.csswg.org/css-color/#lab-colors), we use the [D50 illuminant](https://en.wikipedia.org/wiki/Standard_illuminant) as a reference white for these color spaces.
+| Channel | Range                 | Description           |
+| ------- | --------------------- | --------------------- |
+| `l`     | `[0, 100]`            | Lightness             |
+| `a`     | `[-79.167, 93.408]`≈  | Green–red component   |
+| `b`     | `[-111.859, 93.246]`≈ | Blue–yellow component |
 
-### `lab`
+#### `lch`
 
-| Channel | Range                | Description           |
-| ------- | -------------------- | --------------------- |
-| `l`     | `[0, 100]`           | Lightness             |
-| `a`     | `[-79.167, 93.408]`  | Green–red component   |
-| `b`     | `[-111.859, 93.246]` | Blue–yellow component |
+The CIELCh color space using the D50 standard illuminant.
 
-### `lch`
+| Channel | Range           | Description |
+| ------- | --------------- | ----------- |
+| `l`     | `[0, 100]`      | Lightness   |
+| `c`     | `[0, 131.008]`≈ | Chroma      |
+| `h`     | `[0, 360)`      | Hue         |
 
-| Channel | Range          | Description |
-| ------- | -------------- | ----------- |
-| `l`     | `[0, 100]`     | Lightness   |
-| `c`     | `[0, 131.008]` | Chroma      |
-| `h`     | `[0, 360)`     | Hue         |
+#### `lab65`
 
-> 💡 The range for the `a` and `b` channels in Lab, and the `c` channel in LCh, depend on the specific implementation. I've obtained the ranges from the tables above by converting all sRGB colors defined by `r, g, b ∈ ℕ ⋂ [0, 255]` into Lab and LCh respectively.
-
-### `lab65`
-
-CIELab relative to the D65 illuminant.
-
-| Channel | Range               | Description           |
-| ------- | ------------------- | --------------------- |
-| `l`     | `[0, 100]`          | Lightness             |
-| `a`     | `[-86.183, 98.234]` | Green–red component   |
-| `b`     | `[-107.86, 94.478]` | Blue–yellow component |
-
-### `lch65`
-
-CIELCh relative to the D65 illuminant.
-
-| Channel | Range          | Description |
-| ------- | -------------- | ----------- |
-| `l`     | `[0, 100]`     | Lightness   |
-| `c`     | `[0, 133.807]` | Chroma      |
-| `h`     | `[0, 360)`     | Hue         |
-
-## Luv / LCHuv (CIE)
-
-[CIELuv color space](https://en.wikipedia.org/wiki/CIELUV) in cartesian and polar forms, using the D50 standard illuminant.
-
-### `luv`
+CIELAB relative to the D65 standard illuminant.
 
 | Channel | Range                | Description           |
 | ------- | -------------------- | --------------------- |
 | `l`     | `[0, 100]`           | Lightness             |
-| `u`     | `[-84.86, 174.87]`   | Green–red component   |
-| `v`     | `[-125.744, 87.165]` | Blue–yellow component |
+| `a`     | `[-86.183, 98.234]`≈ | Green–red component   |
+| `b`     | `[-107.86, 94.478]`≈ | Blue–yellow component |
 
-### `lchuv`
+#### `lch65`
 
-| Channel | Range          | Description |
-| ------- | -------------- | ----------- |
-| `l`     | `[0, 100]`     | Lightness   |
-| `c`     | `[0, 176.609]` | Chroma      |
-| `h`     | `[0, 360)`     | Hue         |
+CIELCh relative to the D65 standard illuminant.
 
-CIELuv supports an Euclidean color difference function:
+| Channel | Range           | Description |
+| ------- | --------------- | ----------- |
+| `l`     | `[0, 100]`      | Lightness   |
+| `c`     | `[0, 133.807]`≈ | Chroma      |
+| `h`     | `[0, 360)`      | Hue         |
+
+### CIELUV
+
+The [CIELUV color space](https://en.wikipedia.org/wiki/CIELUV) in Cartesian (Luv) and cylindrical (LCh) forms, using the D50 standard illuminant.
+
+CIELuv has an effective Euclidean color difference function:
 
 ```js
 let deltaE_uv = culori.colorDifferenceEuclidean('luv');
 ```
 
-## DIN99 Lab / LCh
+#### `luv`
 
-The [DIN99][din99o] color space "squishes" the CIE Lab color space to obtain an [effective color difference](#culoriDifferenceDin99o) metric that can be expressed as a simple Euclidean distance. We implement the latest iteration of the the standard, DIN99o.
+| Channel | Range                 | Description           |
+| ------- | --------------------- | --------------------- |
+| `l`     | `[0, 100]`            | Lightness             |
+| `u`     | `[-84.86, 174.87]`≈   | Green–red component   |
+| `v`     | `[-125.744, 87.165]`≈ | Blue–yellow component |
 
-### `dlab`
+#### `lchuv`
 
-| Channel | Range              | Description |
-| ------- | ------------------ | ----------- |
-| `l`     | `[0, 100]`         | Lightness   |
-| `a`     | `[-40.09, 45.5]`   |
-| `b`     | `[-40.47, 44.344]` |
+| Channel | Range           | Description |
+| ------- | --------------- | ----------- |
+| `l`     | `[0, 100]`      | Lightness   |
+| `c`     | `[0, 176.609]`≈ | Chroma      |
+| `h`     | `[0, 360)`      | Hue         |
 
-### `dlch`
+### DIN99 Lab / LCh
 
-| Channel | Range         | Description |
-| ------- | ------------- | ----------- |
-| `l`     | `[0, 100]`    | Lightness   |
-| `c`     | `[0, 51.484]` | Chroma      |
-| `h`     | `[0, 360)`    | Hue         |
+The [DIN99][din99o] color space "squishes" the CIELAB D65 color space to obtain an [effective color difference](#culoriDifferenceDin99o) metric that can be expressed as a simple Euclidean distance. The latest iteration of the the standard, DIN99o, is available in Cartesian (`dlab`) and plar (`dlch`) form.
 
-**References:**
+> ["Industrial Color Physics"](https://www.springer.com/us/book/9781441911964), Georg A. Klein, Springer (2010)
 
--   ["Industrial Color Physics"](https://www.springer.com/us/book/9781441911964), Georg A. Klein, Springer (2010)
+#### `dlab`
 
-### JzAzBz
+The DIN99o color space in Cartesian form.
 
-The JzAzBz color space, as defined by:
+| Channel | Range               | Description |
+| ------- | ------------------- | ----------- |
+| `l`     | `[0, 100]`          | Lightness   |
+| `a`     | `[-40.09, 45.5]`≈   |
+| `b`     | `[-40.47, 44.344]`≈ |
 
-> Muhammad Safdar, Guihua Cui, Youn Jin Kim, and Ming Ronnier Luo, _"Perceptually uniform color space for image signals including high dynamic range and wide gamut"_, Opt. Express 25, 15131-15151 (2017) https://doi.org/10.1364/OE.25.015131
+#### `dlch`
+
+The DIN99o color space in cylindrical form.
+
+| Channel | Range          | Description |
+| ------- | -------------- | ----------- |
+| `l`     | `[0, 100]`     | Lightness   |
+| `c`     | `[0, 51.484]`≈ | Chroma      |
+| `h`     | `[0, 360)`     | Hue         |
+
+### J<sub>z</sub>a<sub>z</sub>b<sub>z</sub>
+
+The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space, as defined by:
+
+> Muhammad Safdar, Guihua Cui, Youn Jin Kim, and Ming Ronnier Luo, [_"Perceptually uniform color space for image signals including high dynamic range and wide gamut"_](https://doi.org/10.1364/OE.25.015131), Opt. Express 25, 15131-15151 (2017)
 
 #### `jab`
 
-The cartesian representation of the JzAzBz color space.
+The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in Cartesian form.
 
-| Channel | Range             | Description           |
-| ------- | ----------------- | --------------------- |
-| `l`     | `[0, 0.221]`      | Lightness             |
-| `a`     | `[-0.108, 0.129]` | Green–red component   |
-| `b`     | `[-0.185, 0.134]` | Blue–yellow component |
+| Channel | Range              | Description           |
+| ------- | ------------------ | --------------------- |
+| `l`     | `[0, 0.221]`≈      | Lightness             |
+| `a`     | `[-0.108, 0.129]`≈ | Green–red component   |
+| `b`     | `[-0.185, 0.134]`≈ | Blue–yellow component |
 
 #### `jch`
 
-The polar representation of the JzAzBz color space.
+The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.
 
-| Channel | Range        | Description |
-| ------- | ------------ | ----------- |
-| `l`     | `[0, 0.221]` | Lightness   |
-| `c`     | `[0, 0.190]` | Chroma      |
-| `h`     | `[0, 360)`   | Hue         |
+| Channel | Range         | Description |
+| ------- | ------------- | ----------- |
+| `l`     | `[0, 0.221]`≈ | Lightness   |
+| `c`     | `[0, 0.190]`≈ | Chroma      |
+| `h`     | `[0, 360)`    | Hue         |
 
-## YIQ
+### YIQ
 
-[YIQ](yiq) is the color space used by the NTSC color TV system. It contains the following channels:
+[YIQ][yiq] is the color space used by the NTSC color TV system. It contains the following channels:
 
-| Channel | Range             | Description                    |
-| ------- | ----------------- | ------------------------------ |
-| Y       | `[0, 1]`          | Luma                           |
-| I       | `[-0.593, 0.593]` | In-phase (orange-blue axis)    |
-| Q       | `[-0.520, 0.520]` | Quadrature (green-purple axis) |
+| Channel | Range              | Description                    |
+| ------- | ------------------ | ------------------------------ |
+| Y       | `[0, 1]`           | Luma                           |
+| I       | `[-0.593, 0.593]`≈ | In-phase (orange-blue axis)    |
+| Q       | `[-0.520, 0.520]`≈ | Quadrature (green-purple axis) |
 
-## XYZ
+### CIE XYZ
 
-The [CIEXYZ color space](https://en.wikipedia.org/wiki/CIE_1931_color_space).
+The [CIE XYZ color space](https://en.wikipedia.org/wiki/CIE_1931_color_space), also known as the CIE 1931 color space.
 
-### `xyz`
+#### `xyz`
 
-The D50 XYZ color space.
+The CIE XYZ color space in respect to the D50 standard illuminant.
 
-It contains the following channels:
+| Channel | Range         | Description |
+| ------- | ------------- | ----------- |
+| X       | `[0, 0.962]`≈ | ?           |
+| Y       | `[0, 0.997]`≈ | ?           |
+| Z       | `[0, 0.823]`≈ | ?           |
 
-| Channel | Range        | Description |
-| ------- | ------------ | ----------- |
-| X       | `[0, 0.962]` | ?           |
-| Y       | `[0, 0.997]` | ?           |
-| Z       | `[0, 0.823]` | ?           |
+#### `xyz65`
 
-### `xyz65`
+The CIE XYZ color space in respect to the D65 standard illuminant.
 
-The D65 XYZ color space.
+| Channel | Range         | Description |
+| ------- | ------------- | ----------- |
+| X       | `[0, 0.946]`≈ | ?           |
+| Y       | `[0, 0.995]`≈ | ?           |
+| Z       | `[0, 1.083]`≈ | ?           |
 
-It contains the following channels:
-
-| Channel | Range        | Description |
-| ------- | ------------ | ----------- |
-| X       | `[0, 0.946]` | ?           |
-| Y       | `[0, 0.995]` | ?           |
-| Z       | `[0, 1.083]` | ?           |
-
-## Cubehelix
+### Cubehelix
 
 [The Cubehelix color scheme](https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/) was described by Dave Green in this paper:
 
 > Green, D. A., 2011, [_"A colour scheme for the display of astronomical intensity images"_](http://astron-soc.in/bulletin/11June/289392011.pdf), Bulletin of the Astronomical Society of India, 39, 289. ([2011BASI...39..289G](https://ui.adsabs.harvard.edu/#abs/2011BASI...39..289G) at [ADS](https://ui.adsabs.harvard.edu/))
 
-It was expanded into a color space by [Mike Bostock](https://en.wikipedia.org/wiki/Mike_Bostock) and [Jason Davies](https://www.jasondavies.com/) in [D3](https://github.com/d3/d3-color).
+It was expanded into a cylindrical color space by [Mike Bostock](https://en.wikipedia.org/wiki/Mike_Bostock) and [Jason Davies](https://www.jasondavies.com/) in [D3](https://github.com/d3/d3-color).
 
-### `cubehelix`
+#### `cubehelix`
 
 The channels in the `cubehelix` color space maintain the conventions from D3, namely:
 
@@ -267,3 +277,4 @@ The channels in the `cubehelix` color space maintain the conventions from D3, na
 | `l`     | `[0, 1]`      | Lightness                                                                |
 
 [din99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
+[yiq]: https://en.wikipedia.org/wiki/YIQ

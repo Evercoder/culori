@@ -23,9 +23,9 @@ const abs = Math.abs;
 
 const mono = arr => {
 	let n = arr.length - 1;
-	let s = [],
-		p = [],
-		yp = [];
+	let s = [];
+	let p = [];
+	let yp = [];
 	for (let i = 0; i < n; i++) {
 		s.push((arr[i + 1] - arr[i]) * n);
 		p.push(i > 0 ? 0.5 * (arr[i + 1] - arr[i - 1]) * n : undefined);
@@ -62,6 +62,10 @@ const interpolator = (arr, yp, s) => {
 	};
 };
 
+/*
+	A monotone spline which uses one-sided finite differences
+	at the boundaries.
+ */
 const interpolatorSplineMonotone = arr => {
 	if (arr.length < 3) {
 		return interpolatorLinear(arr);
@@ -78,7 +82,7 @@ const interpolatorSplineMonotone = arr => {
 	at the boundary points by tracing a parabola 
 	through the first/last three points.
 
-	For arrays of less than three values, we fall back to 
+	For arrays of fewer than three values, we fall back to 
 	linear interpolation.
  */
 
@@ -125,18 +129,11 @@ const interpolatorSplineMonotoneClosed = arr => {
 	return interpolator(arr, yp, s);
 };
 
-const interpolatorSplineMonotoneOpen = arr => t => {
-	return undefined;
-};
-
 const interpolateSplineMonotone = (fixup, type = 'default', γ = 1) => arr => {
 	let ease = gamma(γ);
 	if (type === 'closed') {
 		return t =>
 			interpolatorSplineMonotoneClosed((fixup || (v => v))(arr))(ease(t));
-	} else if (type === 'open') {
-		return t =>
-			interpolatorSplineMonotoneOpen((fixup || (v => v))(arr))(ease(t));
 	} else if (type === 'default') {
 		return t =>
 			interpolatorSplineMonotone((fixup || (v => v))(arr))(ease(t));
@@ -147,6 +144,5 @@ export {
 	interpolateSplineMonotone,
 	interpolatorSplineMonotone,
 	interpolatorSplineMonotone2,
-	interpolatorSplineMonotoneOpen,
 	interpolatorSplineMonotoneClosed
 };

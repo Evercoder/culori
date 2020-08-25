@@ -28,8 +28,7 @@ export default {
 	ranges: {
 		l: [0, 100],
 		u: [-84.86, 174.87],
-		v: [-125.744, 87.165],
-		alpha: [0, 1]
+		v: [-125.744, 87.165]
 	},
 	interpolate: {
 		l: interpolatorLinear,
