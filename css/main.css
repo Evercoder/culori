@@ -1,155 +1,14 @@
-:root {
-	--aliceblue: #f2f7fd;
-	--antiquewhite: #fbebd6;
-	--aqua: #72cdde;
-	--aquamarine: #9bd5c2;
-	--azure: #f2fafb;
-	--beige: #f7f4db;
-	--bisque: #ffe4c4;
-	--black: #080809;
-	--blanchedalmond: #ffebcd;
-	--blue: #5e6eb3;
-	--blueviolet: #8368ae;
-	--brown: #9c4845;
-	--burlywood: #e0b886;
-	--cadetblue: #619d9f;
-	--chartreuse: #8fc84f;
-	--chocolate: #d26b44;
-	--coral: #f77e51;
-	--cornflowerblue: #6d90cc;
-	--cornsilk: #fff7dc;
-	--crimson: #d84f4c;
-	--cyan: #72cdde;
-	--darkblue: #3e4580;
-	--darkcyan: #0c8b8b;
-	--darkgoldenrod: #b88746;
-	--darkgray: #aaa8a7;
-	--darkgreen: #3d6341;
-	--darkkhaki: #bfb768;
-	--darkmagenta: #85538d;
-	--darkolivegreen: #596c42;
-	--darkorange: #f98d3d;
-	--darkorchid: #8d62a9;
-	--darkred: #7b3b3f;
-	--darksalmon: #ea9478;
-	--darkseagreen: #90bb8d;
-	--darkslateblue: #54538c;
-	--darkslategray: #334f4e;
-	--darkturquoise: #3fc1c8;
-	--darkviolet: #8961a8;
-	--deeppink: #f15699;
-	--deepskyblue: #3bb9ed;
-	--dimgray: #6c6968;
-	--dodgerblue: #558cca;
-	--firebrick: #a74b46;
-	--floralwhite: #fff9f0;
-	--forestgreen: #418c55;
-	--fuchsia: #ba69aa;
-	--gainsboro: #dedbdb;
-	--ghostwhite: #f9f7fc;
-	--gold: #fed633;
-	--goldenrod: #d9a543;
-	--gray: #82807f;
-	--green: #438051;
-	--greenyellow: #b0d347;
-	--honeydew: #f2f8ed;
-	--hotpink: #f66ba9;
-	--indianred: #ce5b5b;
-	--indigo: #57467d;
-	--ivory: #fffef0;
-	--khaki: #f1e588;
-	--lavender: #e8e5f4;
-	--lavenderblush: #ffeff3;
-	--lawngreen: #8bc750;
-	--lemonchiffon: #ffface;
-	--lightblue: #afd7e5;
-	--lightcoral: #f17e7e;
-	--lightcyan: #e5f4f8;
-	--lightgoldenrodyellow: #faf8d2;
-	--lightgray: #d5d2d2;
-	--lightgreen: #9ad08b;
-	--lightpink: #fcb5c0;
-	--lightsalmon: #fc9f7a;
-	--lightseagreen: #26b1a9;
-	--lightskyblue: #8dccf2;
-	--lightslategray: #798798;
-	--lightsteelblue: #b2c4dd;
-	--lightyellow: #fefbe1;
-	--lime: #60bc57;
-	--limegreen: #4bb859;
-	--linen: #fcf0e5;
-	--magenta: #ba69aa;
-	--maroon: #71393c;
-	--mediumaquamarine: #6dc6a7;
-	--mediumblue: #5561a9;
-	--mediumorchid: #a26cae;
-	--mediumpurple: #8a79b8;
-	--mediumseagreen: #40b26e;
-	--mediumslateblue: #7b79b9;
-	--mediumspringgreen: #67c289;
-	--mediumturquoise: #5ac5c4;
-	--mediumvioletred: #bd578e;
-	--midnightblue: #3b3e6b;
-	--mintcream: #f7fbf8;
-	--mistyrose: #ffe3e0;
-	--moccasin: #ffe4b5;
-	--navajowhite: #ffddab;
-	--navy: #3a4077;
-	--oldlace: #fff5e6;
-	--olive: #828249;
-	--olivedrab: #6f8f51;
-	--orange: #fda63a;
-	--orangered: #f24f41;
-	--orchid: #bd77b3;
-	--palegoldenrod: #efe7a6;
-	--palegreen: #a5d38f;
-	--paleturquoise: #b5e2e6;
-	--palevioletred: #dc6e92;
-	--papayawhip: #ffefd5;
-	--peachpuff: #ffd9b8;
-	--peru: #ce8645;
-	--pink: #fcbfc9;
-	--plum: #d4a0cb;
-	--powderblue: #b2e0e4;
-	--purple: #7c4e82;
-	--rebeccapurple: #6d5596;
-	--red: #f24942;
-	--rosybrown: #bc8e8d;
-	--royalblue: #5e76b9;
-	--saddlebrown: #854e38;
-	--salmon: #f87f71;
-	--sandybrown: #f6a45d;
-	--seagreen: #348b57;
-	--seashell: #fff4ed;
-	--sienna: #9f563f;
-	--silver: #c2c0bf;
-	--skyblue: #8acdeb;
-	--slateblue: #726db2;
-	--slategray: #727f8f;
-	--snow: #fff9f9;
-	--springgreen: #66bf6e;
-	--steelblue: #4982b3;
-	--tan: #d4b48b;
-	--teal: #1b8080;
-	--thistle: #dabfd7;
-	--tomato: #f46449;
-	--turquoise: #62c6c3;
-	--violet: #c686bc;
-	--wheat: #f6ddb1;
-	--white: #ffffff;
-	--whitesmoke: #f8f5f4;
-	--yellow: #f8ec2e;
-	--yellowgreen: #9ccc4c;
-}
-
 body {
 	font-family: var(--ff-main);
-	line-height: 1.6;
+	line-height: 1.5;
 	margin: 0;
 
-	--aside-bg: var(--mintcream);
-	--listing-bg: var(--whitesmoke);
-	--link-color: #d84f4c;
+	--red: #d84f4c;
+	--indigo: #57467d;
+	--offwhite: #f8f5f4;
+
+	--listing-bg: var(--offwhite);
+	--link-color: var(--red);
 
 	--ff-main: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
 		sans-serif, Apple Color Emoji, Segoe UI Emoji;
@@ -186,7 +45,7 @@ table {
 }
 
 table tr {
-	border-bottom: 1px solid #000;
+	border-bottom: 1px solid #ccc;
 }
 
 table th,
@@ -205,12 +64,12 @@ article img {
 
 header {
 	padding: 0.25em 0 0;
-	/*background: linear-gradient(to bottom, var(--aside-bg), white);*/
 }
 
 footer .container {
-	border-top: 0.2em solid var(--aside-bg);
-	padding: 2em 0;
+	border-top: 0.2em solid var(--listing-bg);
+	padding-top: 2em;
+	padding-bottom: 2em;
 }
 
 header a {
@@ -241,7 +100,23 @@ nav a {
 }
 
 h1 {
-	font-size: 2.4em;
+	font-size: 3em;
+	margin: 0 0 0.5em;
+	position: relative;
+	width: max-content;
+	letter-spacing: -0.02ch;
+}
+
+@supports (background-clip: text) {
+	h1 {
+		background: linear-gradient(
+			to right,
+			var(--random-1, black),
+			var(--random-2, black)
+		);
+		background-clip: text;
+		color: transparent;
+	}
 }
 
 h2 {
@@ -249,20 +124,17 @@ h2 {
 }
 
 h3 {
-	font-size: 1.5em;
+	font-size: 1.4em;
 }
 
-h4 {
-	font-size: 1.2em;
-}
-
+h4,
 h5,
 h6 {
 	font-size: 1em;
 }
 
 blockquote {
-	background: var(--aside-bg);
+	background: var(--listing-bg);
 	margin: 1em 0;
 	padding: 1em;
 	border-left: 0.25em solid rgba(0, 0, 0, 0.1);
@@ -361,5 +233,5 @@ pre[class*='language-'] {
 .token.number,
 .token.regex,
 .token.boolean {
-	color: var(--indianred);
+	color: var(--red);
 }

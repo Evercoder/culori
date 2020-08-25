@@ -7,6 +7,7 @@
 			 Color Spaces &middot; culori 
 		</title>
 
+		<link rel="icon" type="image/png" href='/favicon.png' />
 		<link rel="stylesheet" href='/css/main.css' />
 	</head>
 	<body>
@@ -44,10 +45,10 @@
 		<div class="container">
 			<article>
 				<h1>Color Spaces</h1>
-				<h2>RGB</h2>
-<blockquote>
-<p>📖 See Jamie Wong's <a href="http://jamie-wong.com/post/color/">excellent deep dive</a> into color.</p>
-</blockquote>
+				<p>This is an overview of the color spaces built into culori, listing their channels and expected ranges.</p>
+<p>For some color spaces (e.g. CIELab or CIELCh) some channels don't have fixed ranges. For these channels, some approximate ranges are obtained by converting all sRGB colors defined by <code>r, g, b ∈ ℕ ⋂ [0, 255]</code> to that specific color space. Whenever that's the case, the range is marked with the approximation symbol ≈.</p>
+<p>In addition to the channels listed below, all color spaces also take an optional <code>alpha</code> channel with the range <code>[0, 1]</code>.</p>
+<h2>RGB</h2>
 <p>All RGB color spaces contain the following channels:</p>
 <table>
 <thead>
@@ -80,18 +81,17 @@
 <h3><code>lrgb</code></h3>
 <p>The linear-light sRGB color space.</p>
 <h3><code>a98</code></h3>
-<p>The A98 RGB color space, which is compatible with, <a href="https://www.adobe.com/digitalimag/adobergb.html">but not the actual</a>, <a href="https://en.wikipedia.org/wiki/Adobe_RGB_color_space">Adobe RGB (1998) color space</a>.</p>
+<p>The A98 RGB color space, compatible with the <a href="https://en.wikipedia.org/wiki/Adobe_RGB_color_space">Adobe RGB (1998) color space</a>. In the CSS Color Level 4 specification, it's called <code>a98-rgb</code>.</p>
 <h3><code>p3</code></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/DCI-P3#Display_P3">Display P3 color space</a>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/DCI-P3#Display_P3">Display P3 color space</a>. In the CSS Color Level 4 specification, it's called <code>display-p3</code>.</p>
 <h3><code>prophoto</code></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space">ProPhoto RGB color space</a>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space">ProPhoto RGB color space</a>. In the CSS Color Level 4 specification, it's called <code>prophoto-rgb</code>.</p>
 <h3><code>rec2020</code></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Rec._2020">Rec. 2020 color space</a>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Rec._2020">Rec. 2020 color space</a>. In the CSS Color Level 4 specification, it's called <code>display-p3</code>.</p>
 <h2>HSL / HSV / HSI</h2>
 <p><a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSL, HSV, and HSI</a> are a family of representations of the RGB color space, created in 1970 to provide color spaces more closely aligned to how humans perceive colors.</p>
-<blockquote>
-<p>💡 In this family of color spaces, the <em>hue</em> is undefined for achromatic colors (i.e. shades of gray).</p>
-</blockquote>
+<p>The <em>hue</em> is identical across all color spaces in this family. However, the <em>saturaton</em> is computed differently in each color space. The saturation in HSL is <strong>not interchangeable</strong> with the <em>saturation</em> from HSV, nor HSI.</p>
+<p>Achromatic colors (shades of gray) will have an <code>undefined</code> hue.</p>
 <h3><code>hsl</code></h3>
 <table>
 <thead>
@@ -119,8 +119,6 @@
 </tr>
 </tbody>
 </table>
-<p>The figure below shows a slice of the HSL color space for a particular hue:</p>
-<p><img src="/img/hsl-spectrum.png" alt="HSL Spectrum"></p>
 <h3><code>hsv</code></h3>
 <table>
 <thead>
@@ -148,8 +146,6 @@
 </tr>
 </tbody>
 </table>
-<p>The figure below shows a slice of the HSV color space for a particular hue:</p>
-<p><img src="/img/hsv-spectrum.png" alt="HSV Spectrum"></p>
 <h3><code>hsi</code></h3>
 <table>
 <thead>
@@ -177,22 +173,16 @@
 </tr>
 </tbody>
 </table>
-<p>The figure below shows a slice of the HSI color space for a particular hue:</p>
-<p><img src="/img/hsi-spectrum.png" alt="HSI Spectrum"></p>
-<blockquote>
-<p>💡 While the <em>hue</em> in this family of color spaces retains its value in all of them, the <em>saturation</em> in HSL is <strong>not interchangeable</strong> with the <em>saturation</em> from HSV, nor HSI — they're computed differently, depending on the color space.</p>
-</blockquote>
 <h2>HWB</h2>
 <p><a href="https://en.wikipedia.org/wiki/HWB_color_model">The HWB color space</a> was developed by Alvy Ray Smith, who also created the HSV color space. It's meant to be more intuitive for humans to use and faster to compute.</p>
-<p><strong>References:</strong></p>
-<ul>
-<li>Smith, Alvy Ray (1996) — <a href="http://alvyray.com/Papers/CG/HWB_JGTv208.pdf">&quot;HWB — A More Intuitive Hue-Based Color Model&quot;</a>, Journal of Graphics, GPU and Game tools.</li>
-</ul>
-<h2>Lab / LCh (CIE)</h2>
+<p>See:</p>
 <blockquote>
-<p>As defined in the <a href="https://drafts.csswg.org/css-color/#lab-colors">CSS Color Module Level 4 spec</a>, we use the <a href="https://en.wikipedia.org/wiki/Standard_illuminant">D50 illuminant</a> as a reference white for these color spaces.</p>
+<p>Smith, Alvy Ray (1996) — <a href="http://alvyray.com/Papers/CG/HWB_JGTv208.pdf">&quot;HWB — A More Intuitive Hue-Based Color Model&quot;</a>, Journal of Graphics, GPU and Game tools.</p>
 </blockquote>
+<h2>CIELab</h2>
+<p>The <a href="https://en.wikipedia.org/wiki/CIELAB_color_space">CIELab color space</a> in cartesian (Lab) and polar (LCh) forms.</p>
 <h3><code>lab</code></h3>
+<p>The CIELab color space using the <a href="https://en.wikipedia.org/wiki/Standard_illuminant">D50 standard illuminant</a> as the reference white, following the <a href="https://drafts.csswg.org/css-color/#lab-colors">CSS Color Module Level 4 specification</a>.</p>
 <table>
 <thead>
 <tr>
@@ -209,17 +199,18 @@
 </tr>
 <tr>
 <td><code>a</code></td>
-<td><code>[-79.167, 93.408]</code></td>
+<td><code>[-79.167, 93.408]</code>≈</td>
 <td>Green–red component</td>
 </tr>
 <tr>
 <td><code>b</code></td>
-<td><code>[-111.859, 93.246]</code></td>
+<td><code>[-111.859, 93.246]</code>≈</td>
 <td>Blue–yellow component</td>
 </tr>
 </tbody>
 </table>
 <h3><code>lch</code></h3>
+<p>The CIELCh color space using the D50 standard illuminant.</p>
 <table>
 <thead>
 <tr>
@@ -236,7 +227,7 @@
 </tr>
 <tr>
 <td><code>c</code></td>
-<td><code>[0, 131.008]</code></td>
+<td><code>[0, 131.008]</code>≈</td>
 <td>Chroma</td>
 </tr>
 <tr>
@@ -246,11 +237,8 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>💡 The range for the <code>a</code> and <code>b</code> channels in Lab, and the <code>c</code> channel in LCh, depend on the specific implementation. I've obtained the ranges from the tables above by converting all sRGB colors defined by <code>r, g, b ∈ ℕ ⋂ [0, 255]</code> into Lab and LCh respectively.</p>
-</blockquote>
 <h3><code>lab65</code></h3>
-<p>CIELab relative to the D65 illuminant.</p>
+<p>CIELab relative to the D65 standard illuminant.</p>
 <table>
 <thead>
 <tr>
@@ -267,18 +255,18 @@
 </tr>
 <tr>
 <td><code>a</code></td>
-<td><code>[-86.183, 98.234]</code></td>
+<td><code>[-86.183, 98.234]</code>≈</td>
 <td>Green–red component</td>
 </tr>
 <tr>
 <td><code>b</code></td>
-<td><code>[-107.86, 94.478]</code></td>
+<td><code>[-107.86, 94.478]</code>≈</td>
 <td>Blue–yellow component</td>
 </tr>
 </tbody>
 </table>
 <h3><code>lch65</code></h3>
-<p>CIELCh relative to the D65 illuminant.</p>
+<p>CIELCh relative to the D65 standard illuminant.</p>
 <table>
 <thead>
 <tr>
@@ -295,7 +283,7 @@
 </tr>
 <tr>
 <td><code>c</code></td>
-<td><code>[0, 133.807]</code></td>
+<td><code>[0, 133.807]</code>≈</td>
 <td>Chroma</td>
 </tr>
 <tr>
@@ -324,12 +312,12 @@
 </tr>
 <tr>
 <td><code>u</code></td>
-<td><code>[-84.86, 174.87]</code></td>
+<td><code>[-84.86, 174.87]</code>≈</td>
 <td>Green–red component</td>
 </tr>
 <tr>
 <td><code>v</code></td>
-<td><code>[-125.744, 87.165]</code></td>
+<td><code>[-125.744, 87.165]</code>≈</td>
 <td>Blue–yellow component</td>
 </tr>
 </tbody>
@@ -351,7 +339,7 @@
 </tr>
 <tr>
 <td><code>c</code></td>
-<td><code>[0, 176.609]</code></td>
+<td><code>[0, 176.609]</code>≈</td>
 <td>Chroma</td>
 </tr>
 <tr>
@@ -364,7 +352,11 @@
 <p>CIELuv supports an Euclidean color difference function:</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">let</span> deltaE_uv <span class="token operator">=</span> culori<span class="token punctuation">.</span><span class="token function">colorDifferenceEuclidean</span><span class="token punctuation">(</span><span class="token string">'luv'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h2>DIN99 Lab / LCh</h2>
-<p>The <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99</a> color space &quot;squishes&quot; the CIE Lab color space to obtain an <a href="#culoriDifferenceDin99o">effective color difference</a> metric that can be expressed as a simple Euclidean distance. We implement the latest iteration of the the standard, DIN99o.</p>
+<p>The <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99</a> color space &quot;squishes&quot; the CIELab color space to obtain an <a href="#culoriDifferenceDin99o">effective color difference</a> metric that can be expressed as a simple Euclidean distance. We implement the latest iteration of the the standard, DIN99o, in cartesian (<code>dlab</code>) and plar (<code>dlch</code>) form.</p>
+<p>See:</p>
+<blockquote>
+<p><a href="https://www.springer.com/us/book/9781441911964">&quot;Industrial Color Physics&quot;</a>, Georg A. Klein, Springer (2010)</p>
+</blockquote>
 <h3><code>dlab</code></h3>
 <table>
 <thead>
@@ -382,12 +374,12 @@
 </tr>
 <tr>
 <td><code>a</code></td>
-<td><code>[-40.09, 45.5]</code></td>
+<td><code>[-40.09, 45.5]</code>≈</td>
 <td></td>
 </tr>
 <tr>
 <td><code>b</code></td>
-<td><code>[-40.47, 44.344]</code></td>
+<td><code>[-40.47, 44.344]</code>≈</td>
 <td></td>
 </tr>
 </tbody>
@@ -409,7 +401,7 @@
 </tr>
 <tr>
 <td><code>c</code></td>
-<td><code>[0, 51.484]</code></td>
+<td><code>[0, 51.484]</code>≈</td>
 <td>Chroma</td>
 </tr>
 <tr>
@@ -419,10 +411,6 @@
 </tr>
 </tbody>
 </table>
-<p><strong>References:</strong></p>
-<ul>
-<li><a href="https://www.springer.com/us/book/9781441911964">&quot;Industrial Color Physics&quot;</a>, Georg A. Klein, Springer (2010)</li>
-</ul>
 <h3>JzAzBz</h3>
 <p>The JzAzBz color space, as defined by:</p>
 <blockquote>
@@ -441,17 +429,17 @@
 <tbody>
 <tr>
 <td><code>l</code></td>
-<td><code>[0, 0.221]</code></td>
+<td><code>[0, 0.221]</code>≈</td>
 <td>Lightness</td>
 </tr>
 <tr>
 <td><code>a</code></td>
-<td><code>[-0.108, 0.129]</code></td>
+<td><code>[-0.108, 0.129]</code>≈</td>
 <td>Green–red component</td>
 </tr>
 <tr>
 <td><code>b</code></td>
-<td><code>[-0.185, 0.134]</code></td>
+<td><code>[-0.185, 0.134]</code>≈</td>
 <td>Blue–yellow component</td>
 </tr>
 </tbody>
@@ -469,12 +457,12 @@
 <tbody>
 <tr>
 <td><code>l</code></td>
-<td><code>[0, 0.221]</code></td>
+<td><code>[0, 0.221]</code>≈</td>
 <td>Lightness</td>
 </tr>
 <tr>
 <td><code>c</code></td>
-<td><code>[0, 0.190]</code></td>
+<td><code>[0, 0.190]</code>≈</td>
 <td>Chroma</td>
 </tr>
 <tr>
@@ -502,12 +490,12 @@
 </tr>
 <tr>
 <td>I</td>
-<td><code>[-0.593, 0.593]</code></td>
+<td><code>[-0.593, 0.593]</code>≈</td>
 <td>In-phase (orange-blue axis)</td>
 </tr>
 <tr>
 <td>Q</td>
-<td><code>[-0.520, 0.520]</code></td>
+<td><code>[-0.520, 0.520]</code>≈</td>
 <td>Quadrature (green-purple axis)</td>
 </tr>
 </tbody>
@@ -516,7 +504,6 @@
 <p>The <a href="https://en.wikipedia.org/wiki/CIE_1931_color_space">CIEXYZ color space</a>.</p>
 <h3><code>xyz</code></h3>
 <p>The D50 XYZ color space.</p>
-<p>It contains the following channels:</p>
 <table>
 <thead>
 <tr>
@@ -528,24 +515,23 @@
 <tbody>
 <tr>
 <td>X</td>
-<td><code>[0, 0.962]</code></td>
+<td><code>[0, 0.962]</code>≈</td>
 <td>?</td>
 </tr>
 <tr>
 <td>Y</td>
-<td><code>[0, 0.997]</code></td>
+<td><code>[0, 0.997]</code>≈</td>
 <td>?</td>
 </tr>
 <tr>
 <td>Z</td>
-<td><code>[0, 0.823]</code></td>
+<td><code>[0, 0.823]</code>≈</td>
 <td>?</td>
 </tr>
 </tbody>
 </table>
 <h3><code>xyz65</code></h3>
 <p>The D65 XYZ color space.</p>
-<p>It contains the following channels:</p>
 <table>
 <thead>
 <tr>
@@ -557,17 +543,17 @@
 <tbody>
 <tr>
 <td>X</td>
-<td><code>[0, 0.946]</code></td>
+<td><code>[0, 0.946]</code>≈</td>
 <td>?</td>
 </tr>
 <tr>
 <td>Y</td>
-<td><code>[0, 0.995]</code></td>
+<td><code>[0, 0.995]</code>≈</td>
 <td>?</td>
 </tr>
 <tr>
 <td>Z</td>
-<td><code>[0, 1.083]</code></td>
+<td><code>[0, 1.083]</code>≈</td>
 <td>?</td>
 </tr>
 </tbody>
@@ -629,5 +615,15 @@
 
 
 		<script src="https://unpkg.com/culori"></script>
+		<script type="text/javascript">
+			document.body.style.setProperty(
+				'--random-1',
+				culori.formatHex(culori.random('lch', { l: [10, 50] }))
+			);
+			document.body.style.setProperty(
+				'--random-2',
+				culori.formatHex(culori.random('lch', { l: [10, 50] }))
+			);
+		</script>
 	</body>
 </html>

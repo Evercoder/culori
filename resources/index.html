@@ -7,6 +7,7 @@
 			 Resources &middot; culori 
 		</title>
 
+		<link rel="icon" type="image/png" href='/favicon.png' />
 		<link rel="stylesheet" href='/css/main.css' />
 	</head>
 	<body>
@@ -80,6 +81,10 @@
 <li>David Briggs's <a href="http://www.huevaluechroma.com/">The Dimensions of Color</a></li>
 <li>Bruce Lindbloom's <a href="http://www.brucelindbloom.com/index.html?Math.html">Useful Color Math</a></li>
 </ul>
+<h3>Articles</h3>
+<ul>
+<li><a href="http://jamie-wong.com/post/color/">Color: From Hexcodes to Eyeballs</a> by Jamie Wong</li>
+</ul>
 <h3>Books</h3>
 <ul>
 <li><a href="http://markfairchild.org/">Fairchild, Charles D.</a> — <em>Color Appearance Models</em>, 3rd Edition, Wiley-IS&amp;T, Chichester, UK (2013); ISBN 978-1-119-96703-3</li>
@@ -108,5 +113,15 @@
 
 
 		<script src="https://unpkg.com/culori"></script>
+		<script type="text/javascript">
+			document.body.style.setProperty(
+				'--random-1',
+				culori.formatHex(culori.random('lch', { l: [10, 50] }))
+			);
+			document.body.style.setProperty(
+				'--random-2',
+				culori.formatHex(culori.random('lch', { l: [10, 50] }))
+			);
+		</script>
 	</body>
 </html>
