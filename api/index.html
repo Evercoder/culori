@@ -18,7 +18,7 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.16.0 alpha (<a
+				>v0.17.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,7 +48,7 @@
 				<h2>Colors are plain objects</h2>
 <p>Culori does not have a <em>Color</em> class. Instead, it uses plain objects to represent colors:</p>
 <pre class="language-js"><code class="language-js"><span class="token comment">/* A RGB color */</span><br><span class="token punctuation">{</span><br>  mode<span class="token operator">:</span> <span class="token string">'rgb'</span><span class="token punctuation">,</span><br>  r<span class="token operator">:</span> <span class="token number">0.1</span><span class="token punctuation">,</span><br>  g<span class="token operator">:</span> <span class="token number">0.2</span><span class="token punctuation">,</span><br>  b<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><br>  alpha<span class="token operator">:</span> <span class="token number">1</span><br><span class="token punctuation">}</span></code></pre>
-<p>The object needs to have a <code>mode</code> property that identifies the color space, and values for each channel in that particular color space (see the <a href="./color-spaces">Color Spaces</a> page for the channels and ranges expected for each color space). Optionally, the <code>alpha</code> property is used for the color's alpha channel.</p>
+<p>The object needs to have a <code>mode</code> property that identifies the color space, and values for each channel in that particular color space (see the <a href="/color-spaces">Color Spaces</a> page for the channels and ranges expected for each color space). Optionally, the <code>alpha</code> property is used for the color's alpha channel.</p>
 <h2>Parsing and conversion</h2>
 <p><a name="parse" href="#parse">#</a> culori.<strong>parse</strong>(<em>string</em>) → <em>color</em> or <em>undefined</em> · <a href="https://github.com/evercoder/culori/blob/master/src/parse.js">Source</a></p>
 <p>Parses a string and returns the corresponding <em>color</em>. The color will be in the matching color space, e.g. RGB for hex strings, HSL for <code>hsl(…, …, …)</code> strings, et cetera. If no built-in parsers can match the string, the function will return <em>undefined</em>.</p>
@@ -110,32 +110,32 @@
 </tr>
 <tr>
 <td><code>jab</code></td>
-<td>JzAzBz color space</td>
+<td>J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space</td>
 <td>culori.<strong>jab</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>jch</code></td>
-<td>JzAzBz in polar form</td>
+<td>J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> in cylindrical form</td>
 <td>culori.<strong>jch</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>lab</code></td>
-<td>Lab color space (D50 Illuminant)</td>
+<td>CIELAB color space (D50 Illuminant)</td>
 <td>culori.<strong>lab</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>lab65</code></td>
-<td>Lab color space (D65 Illuminant)</td>
+<td>CIELAB color space (D65 Illuminant)</td>
 <td>culori.<strong>lab65</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>lch</code></td>
-<td>LCh color space (D50 Illuminant)</td>
+<td>CIELCh color space (D50 Illuminant)</td>
 <td>culori.<strong>lch</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>lch65</code></td>
-<td>LCh color space (D65 Illuminant)</td>
+<td>CIELCh color space (D65 Illuminant)</td>
 <td>culori.<strong>lch65</strong>(<em>color</em>)</td>
 </tr>
 <tr>
@@ -150,7 +150,7 @@
 </tr>
 <tr>
 <td><code>luv</code></td>
-<td>CIELuv color space (D50 Illuminant)</td>
+<td>CIELUV color space (D50 Illuminant)</td>
 <td>culori.<strong>luv</strong>(<em>color</em>)</td>
 </tr>
 <tr>
@@ -380,37 +380,37 @@
 <p><a name="interpolateWithPremultipliedAlpha" href="#interpolateWithPremultipliedAlpha">#</a> culori.<strong>interpolateWithPremultipliedAlpha</strong>(<em>colors</em>, <em>mode = &quot;rgb&quot;</em>, <em>overrides</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/interpolate.js">Source</a></p>
 <p>Takes the same arguments as <a href="#interpolate"><code>culori.interpolate()</code></a>, but applies <a href="https://drafts.csswg.org/css-images-4/#premultiplied">alpha premultiplication</a>.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">let</span> colors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'transparent'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">]</span><span class="token punctuation">;</span><br><br><span class="token comment">// alpha ignored for the R/G/B channels:</span><br>culori<span class="token punctuation">.</span><span class="token function">interpolate</span><span class="token punctuation">(</span>colors<span class="token punctuation">,</span> <span class="token string">'rgb'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// alpha premultiplied into the R/G/B channels:</span><br>culori<span class="token punctuation">.</span><span class="token function">interpolateWithPremultipliedAlpha</span><span class="token punctuation">(</span>colors<span class="token punctuation">,</span> <span class="token string">'rgb'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h2>Difference</h2>
+<h2>Color Difference</h2>
 <p>These methods are concerned to finding the <a href="https://en.wikipedia.org/wiki/Color_difference">distance between two colors</a> based on various formulas. Each of these formulas will return a <em>function (colorA, colorB)</em> that lets you measure the distance between two colors.</p>
-<blockquote>
-<p><strong>Note:</strong> These methods are also available as a separate <a href="https://github.com/evercoder/d3-color-difference">D3 plugin</a>.</p>
-</blockquote>
+<h3>Euclidean distance</h3>
 <p><a name="differenceEuclidean" href="#differenceEuclidean">#</a> culori.<strong>differenceEuclidean</strong>(<em>mode = 'rgb'</em>, <em>weights = [1, 1, 1, 0]</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
 <p>Returns a <a href="https://en.wikipedia.org/wiki/Color_difference#Euclidean">Euclidean distance</a> function in a certain color space.</p>
 <p>You can optionally assign different weights to the channels in the color space. See, for example, the <a href="#differenceKotsarenkoRamos">Kotsarenko/Ramos distance</a>.</p>
 <p>The default weights <code>[1, 1, 1, 0]</code> mean that the <em>alpha</em>, which is the fourth channel in all the color spaces culori defines, is not taken into account. Send <code>[1, 1, 1, 1]</code> as the weights to include it in the computation.</p>
-<p><a name="differenceCie76" href="#differenceCie76">#</a> culori.<strong>differenceCie76</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
-<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIE76">CIE76</a> ΔE*<sub>ab</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the Lab color space and is identical to <a href="#differenceEuclidean"><code>culori.differenceEuclidean('lab')</code></a>.</p>
-<p><a name="differenceCie94" href="#differenceCie94">#</a> culori.<strong>differenceCie94</strong>(<em>kL = 1</em>, <em>K1 = 0.045</em>, <em>K2 = 0.015</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
-<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIE94">CIE94</a> ΔE*<sub>94</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the Lab color space.</p>
-<p><a name="differenceCiede2000" href="#differenceCiede2000">#</a> culori.<strong>differenceCiede2000</strong>(<em>Kl = 1</em>, <em>Kc = 1</em>, <em>Kh = 1</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
-<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIEDE2000">CIEDE2000</a> ΔE*<sub>00</sub> color difference between the colors <em>a</em> and <em>b</em> as implemented by <a href="http://www2.ece.rochester.edu/~gsharma/ciede2000/">G. Sharma</a>. The computation is done in the Lab color space.</p>
-<p>Returns a <a href="https://en.wikipedia.org/wiki/Color_difference#CIEDE2000">CIEDE2000</a> Delta E* function.</p>
-<p><a name="differenceCmc" href="#differenceCmc">#</a> culori.<strong>differenceCmc</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
-<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)">CMC l:c (1984)</a> ΔE*<sub>CMC</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the Lab color space.</p>
-<p>ΔE*<sub>CMC</sub> is not considered a metric since it's not symmetrical, that is the distance from <em>a</em> to <em>b</em> is not always equal to the distance from <em>b</em> to <em>a</em>. Therefore it cannot be reliably used with <a href="#nearest"><code>culori.nearest()</code></a>.</p>
-<p><a name="differenceDin99o" href="#differenceDin99o">#</a> culori.<strong>differenceDin99o</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
-<p>Computes the <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel">DIN99o</a> ΔE*<sub>99o</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99o</a> color space.</p>
-<p><a name="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> culori.<strong>differenceKotsarenkoRamos</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
-<p>Computes the <a href="http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf">Kotsarenko/Ramos</a> color difference between the colors <em>a</em> and <em>b</em>. This is a weighted Euclidean distance in the <a href="https://en.wikipedia.org/wiki/YIQ">YIQ</a> color space.</p>
-<h3>Handling hue</h3>
-<p>Euclidean distances are tricky in cylindrical spaces, containing a hue. Depending on the color space, hue is treated in a variety of ways. The functions below are used internally:</p>
+<p>In cylindrical spaces, the hue is factored into the Euclidean distance in a variety of ways. The functions below are used internally:</p>
 <p><a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.<strong>differenceHueChroma</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
-<p>This is the handling of hue in CIE-derived cylindrical spaces (<code>lch</code>, <code>lchuv</code>, <code>dlch</code>) and the polar version of JzAzBz (<code>jch</code>).</p>
+<p>This is the handling of hue in cylindrical forms of CIE-based color spaces (<code>lch</code>, <code>lchuv</code>, <code>dlch</code>) and J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> (<code>jch</code>).</p>
 <p><a name="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.<strong>differenceHueSaturation</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
 <p>This is a handling of hue in the HSL / HSV / HSI family of color spaces. It's a (possibly wrong!) extrapolation of <code>differenceHueChroma</code>.</p>
 <p><a name="differenceHueNaive" href="#differenceHueNaive">#</a> culori.<strong>differenceHueNaive</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
 <p>For remaining color spaces (HWB), we consider hues numbers, but apply a <em>shortest path around the hue circle</em> (analogous to <a href="#fixupHueShorter"><code>culori.fixupHueShorter</code></a>). If you insist on using Euclidean distances on these spaces, you can use the <code>weights</code> to control the contribution of the hue difference towards the total difference.</p>
+<h3>CIE color difference formulas</h3>
+<p>All these color difference functions operate on the <code>lab65</code> color space.</p>
+<p><a name="differenceCie76" href="#differenceCie76">#</a> culori.<strong>differenceCie76</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
+<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIE76">CIE76</a> ΔE*<sub>ab</sub> color difference between the colors <em>a</em> and <em>b</em>. The function is identical to <a href="#differenceEuclidean"><code>culori.differenceEuclidean('lab65')</code></a>.</p>
+<p><a name="differenceCie94" href="#differenceCie94">#</a> culori.<strong>differenceCie94</strong>(<em>kL = 1</em>, <em>K1 = 0.045</em>, <em>K2 = 0.015</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
+<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIE94">CIE94</a> ΔE*<sub>94</sub> color difference between the colors <em>a</em> and <em>b</em>.</p>
+<p><a name="differenceCiede2000" href="#differenceCiede2000">#</a> culori.<strong>differenceCiede2000</strong>(<em>Kl = 1</em>, <em>Kc = 1</em>, <em>Kh = 1</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
+<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CIEDE2000">CIEDE2000</a> ΔE*<sub>00</sub> color difference between the colors <em>a</em> and <em>b</em> as implemented by <a href="http://www2.ece.rochester.edu/~gsharma/ciede2000/">G. Sharma</a>.</p>
+<p>Returns a <a href="https://en.wikipedia.org/wiki/Color_difference#CIEDE2000">CIEDE2000</a> Delta E* function.</p>
+<p><a name="differenceCmc" href="#differenceCmc">#</a> culori.<strong>differenceCmc</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
+<p>Computes the <a href="https://en.wikipedia.org/wiki/Color_difference#CMC_l:c_(1984)">CMC l:c (1984)</a> ΔE*<sub>CMC</sub> color difference between the colors <em>a</em> and <em>b</em>.</p>
+<p>ΔE*<sub>CMC</sub> is not considered a metric since it's not symmetrical, that is the distance from <em>a</em> to <em>b</em> is not always equal to the distance from <em>b</em> to <em>a</em>. Therefore it cannot be reliably used with <a href="#nearest"><code>culori.nearest()</code></a>.</p>
+<h3>Other difference formulas</h3>
+<p><a name="differenceDin99o" href="#differenceDin99o">#</a> culori.<strong>differenceDin99o</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
+<p>Computes the <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel">DIN99o</a> ΔE*<sub>99o</sub> color difference between the colors <em>a</em> and <em>b</em>. The computation is done in the <code>dlab</code> color space.</p>
+<p><a name="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> culori.<strong>differenceKotsarenkoRamos</strong>() · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
+<p>Computes the <a href="http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf">Kotsarenko/Ramos</a> color difference between the colors <em>a</em> and <em>b</em>. This is a weighted Euclidean distance in the <code>yiq</code> color space.</p>
 <h3>Nearest color(s)</h3>
 <p><a name="nearest" href="#nearest">#</a> culori.<strong>nearest</strong>(<em>colors</em>, <em>metric = differenceEuclidean()</em>, <em>accessor = identity</em>) → <em>function(color, n = 1, τ = Infinity)</em> · <a href="https://github.com/evercoder/culori/blob/master/src/nearest.js">Source</a></p>
 <p>For a given <em>metric</em> color difference formula, and an array of <em>colors</em>, returns a function with which you can find <em>n</em> colors nearest to <em>color</em>, with a maximum distance of <em>τ</em>.</p>
@@ -441,13 +441,13 @@
 <p>Basic usage:</p>
 <pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ { mode: 'rgb', r: 0.75, g: 0.12, b: 0.99 }</span></code></pre>
 <h3>Specifying constraints</h3>
-<p>Random colors are, by definition, all over the color space and not all of them will look particularly nice. Some color spaces, such as HSL or HSV, are also biased towards colors close to black and/or white, because of the way these color spaces stretch the RGB cube into cyllinders.</p>
+<p>Random colors are, by definition, all over the color space and not all of them will look particularly nice. Some color spaces, such as HSL or HSV, are also biased towards colors close to black and/or white, because of the way these color spaces stretch the RGB cube into cylinders.</p>
 <p>For more control on how the colors are generated, you can specify constraints for each individual channel in the color space. Constraints can be either a <em>constant number</em> or an <em>interval</em> from where to pick the channel value:</p>
 <pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token string">'hsv'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><br>	h<span class="token operator">:</span> <span class="token number">120</span><span class="token punctuation">,</span> <span class="token comment">// number</span><br>	s<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0.25</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span> <span class="token comment">// interval</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ { mode: 'hsv', h: 120, s: 0.51…, v: 0.89… }</span></code></pre>
 <p>The <em>alpha</em> channel is excluded by default. To obtain colors with random alpha values, include a constraint for <code>alpha</code>:</p>
 <pre class="language-js"><code class="language-js">culori<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token string">'lrgb'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ { mode: 'lrgb', r: 0.74…, g: 0.15…, b: 0.34… }</span><br><br>culori<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token string">'lrgb'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> alpha<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ { mode: 'lrgb', r: 0.33…, g: 0.72…, b: 0.04…, alpha: 0.12… }</span></code></pre>
 <h3>Displayable random colors</h3>
-<p>The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as LAB or LCH, don't have explicit ranges for certain channels; for these, some approximate ranges <a href="https://github.com/evercoder/culori/blob/master/tools/ranges.js">have been pre-computed</a> as the limits of the displayable sRGB gamut.</p>
+<p>The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as CIELAB or CIELCH, don't have explicit ranges for certain channels; for these, some approximate ranges <a href="https://github.com/evercoder/culori/blob/master/tools/ranges.js">have been pre-computed</a> as the limits of the displayable sRGB gamut.</p>
 <p>Even with these ranges in place, a combination of channel values may not be displayable. Check if that's the case with <a href="#displayable"><code>culori.displayable()</code></a>, and pass the color through a <a href="#clampRgb"><code>culori.clamp*</code></a> function to obtain a displayable version.</p>
 <h2>WCAG utilities</h2>
 <p>A couple of utility functions based on the <a href="https://www.w3.org/TR/WCAG20/">Web Content Acccessibility Guidelines 2.0 specification</a>.</p>

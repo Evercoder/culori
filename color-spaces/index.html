@@ -18,7 +18,7 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.16.0 alpha (<a
+				>v0.17.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -46,10 +46,14 @@
 			<article>
 				<h1>Color Spaces</h1>
 				<p>This is an overview of the color spaces built into culori, listing their channels and expected ranges.</p>
-<p>For some color spaces (e.g. CIELab or CIELCh) some channels don't have fixed ranges. For these channels, some approximate ranges are obtained by converting all sRGB colors defined by <code>r, g, b ∈ ℕ ⋂ [0, 255]</code> to that specific color space. Whenever that's the case, the range is marked with the approximation symbol ≈.</p>
+<h2>A note on terminology</h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Color_model">color model</a> is a way to describe colors along certain dimensions. RGB, for example, is a color model: color is expressed as a combination of red, green and blue.</p>
+<p>A color model, along with a precise description of how colors in the model are to be interpreted, makes a color <em>space</em>. sRGB, Display P3 and ProPhoto RGB are all color spaces that employ the RGB model: they describe colors as combination of red, green, and blue primaries; however, they have different notions of how these red, green, and blue primary colors look.</p>
+<p>In some color spaces, such as CIELAB or CIELCh, some channels don't have fixed ranges. For these channels, approximate ranges are obtained by converting all sRGB colors defined by <code>r, g, b ∈ ℕ ⋂ [0, 255]</code> to that specific color space. Whenever that's the case, the range is marked with the approximation symbol <code>≈</code>.</p>
 <p>In addition to the channels listed below, all color spaces also take an optional <code>alpha</code> channel with the range <code>[0, 1]</code>.</p>
-<h2>RGB</h2>
-<p>All RGB color spaces contain the following channels:</p>
+<h2>Built-in color spaces</h2>
+<h3>The RGB model</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB color model</a> describes colors as mixtures of red, green, and blue primaries. Culori implements several RGB color spaces, all sharing these channels:</p>
 <table>
 <thead>
 <tr>
@@ -76,23 +80,24 @@
 </tr>
 </tbody>
 </table>
-<h3><code>rgb</code></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/SRGB">sRGB color space</a>.</p>
-<h3><code>lrgb</code></h3>
-<p>The linear-light sRGB color space.</p>
-<h3><code>a98</code></h3>
-<p>The A98 RGB color space, compatible with the <a href="https://en.wikipedia.org/wiki/Adobe_RGB_color_space">Adobe RGB (1998) color space</a>. In the CSS Color Level 4 specification, it's called <code>a98-rgb</code>.</p>
-<h3><code>p3</code></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/DCI-P3#Display_P3">Display P3 color space</a>. In the CSS Color Level 4 specification, it's called <code>display-p3</code>.</p>
-<h3><code>prophoto</code></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space">ProPhoto RGB color space</a>. In the CSS Color Level 4 specification, it's called <code>prophoto-rgb</code>.</p>
-<h3><code>rec2020</code></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Rec._2020">Rec. 2020 color space</a>. In the CSS Color Level 4 specification, it's called <code>display-p3</code>.</p>
-<h2>HSL / HSV / HSI</h2>
-<p><a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSL, HSV, and HSI</a> are a family of representations of the RGB color space, created in 1970 to provide color spaces more closely aligned to how humans perceive colors.</p>
-<p>The <em>hue</em> is identical across all color spaces in this family. However, the <em>saturaton</em> is computed differently in each color space. The saturation in HSL is <strong>not interchangeable</strong> with the <em>saturation</em> from HSV, nor HSI.</p>
-<p>Achromatic colors (shades of gray) will have an <code>undefined</code> hue.</p>
-<h3><code>hsl</code></h3>
+<h4><code>rgb</code></h4>
+<p>The <a href="https://en.wikipedia.org/wiki/SRGB">sRGB color space</a>, which most people refer to when talking about RGB colors.</p>
+<h4><code>lrgb</code></h4>
+<p>The linear-light form of the sRGB color space.</p>
+<h4><code>a98</code></h4>
+<p>The A98 RGB color space, compatible with the <a href="https://en.wikipedia.org/wiki/Adobe_RGB_color_space">Adobe RGB (1998) color space</a>. It's called <code>a98-rgb</code> in the CSS Color Level 4 specification.</p>
+<h4><code>p3</code></h4>
+<p>The <a href="https://en.wikipedia.org/wiki/DCI-P3#Display_P3">Display P3 color space</a>. It's called <code>display-p3</code> in the CSS Color Level 4 specification.</p>
+<h4><code>prophoto</code></h4>
+<p>The <a href="https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space">ProPhoto RGB color space</a>. It's called <code>prophoto-rgb</code> in the CSS Color Level 4 specification.</p>
+<h4><code>rec2020</code></h4>
+<p>The <a href="https://en.wikipedia.org/wiki/Rec._2020">Rec. 2020 color space</a>. It's called <code>display-p3</code> in the CSS Color Level 4 specification.</p>
+<h3>The HSL/HSV/HSI family</h3>
+<p><a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSL, HSV, and HSI</a> are alternative representations of the RGB color model, created in an attempt to provide a more intuitive way to specify colors.</p>
+<p>The <em>hue</em> is identical across all color models in this family; however, the <em>saturaton</em> is computed differently in each. The saturation in HSL is <strong>not interchangeable</strong> with the saturation from HSV, nor HSI. Achromatic colors (shades of gray) will have an <code>undefined</code> hue.</p>
+<p>As color spaces, they relate to the <a href="#rgb"><code>sRGB</code> color space</a>.</p>
+<h4><code>hsl</code></h4>
+<p>The HSL color space.</p>
 <table>
 <thead>
 <tr>
@@ -119,7 +124,8 @@
 </tr>
 </tbody>
 </table>
-<h3><code>hsv</code></h3>
+<h4><code>hsv</code></h4>
+<p>The HSV color space.</p>
 <table>
 <thead>
 <tr>
@@ -146,7 +152,8 @@
 </tr>
 </tbody>
 </table>
-<h3><code>hsi</code></h3>
+<h4><code>hsi</code></h4>
+<p>The HSI color space.</p>
 <table>
 <thead>
 <tr>
@@ -173,16 +180,41 @@
 </tr>
 </tbody>
 </table>
-<h2>HWB</h2>
-<p><a href="https://en.wikipedia.org/wiki/HWB_color_model">The HWB color space</a> was developed by Alvy Ray Smith, who also created the HSV color space. It's meant to be more intuitive for humans to use and faster to compute.</p>
-<p>See:</p>
+<h3>HWB</h3>
+<p><a href="https://en.wikipedia.org/wiki/HWB_color_model">The HWB color model</a> was developed by Alvy Ray Smith, who also created the HSV color model. It's meant to be more intuitive for humans to use and faster to compute.</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td><code>[0, 1]</code></td>
+<td>Whiteness</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><code>[0, 1]</code></td>
+<td>Blackness</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>Smith, Alvy Ray (1996) — <a href="http://alvyray.com/Papers/CG/HWB_JGTv208.pdf">&quot;HWB — A More Intuitive Hue-Based Color Model&quot;</a>, Journal of Graphics, GPU and Game tools.</p>
 </blockquote>
-<h2>CIELab</h2>
-<p>The <a href="https://en.wikipedia.org/wiki/CIELAB_color_space">CIELab color space</a> in cartesian (Lab) and polar (LCh) forms.</p>
-<h3><code>lab</code></h3>
-<p>The CIELab color space using the <a href="https://en.wikipedia.org/wiki/Standard_illuminant">D50 standard illuminant</a> as the reference white, following the <a href="https://drafts.csswg.org/css-color/#lab-colors">CSS Color Module Level 4 specification</a>.</p>
+<h3>CIELAB</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/CIELAB_color_space">CIELAB color space</a>, also known as CIE 1976 L*a*b*, in Cartesian (Lab) and cylindrical (LCh) forms.</p>
+<h4><code>lab</code></h4>
+<p>The CIELAB color space using the <a href="https://en.wikipedia.org/wiki/Standard_illuminant">D50 standard illuminant</a> as the reference white, following the <a href="https://drafts.csswg.org/css-color/#lab-colors">CSS Color Module Level 4 specification</a>.</p>
 <table>
 <thead>
 <tr>
@@ -209,7 +241,7 @@
 </tr>
 </tbody>
 </table>
-<h3><code>lch</code></h3>
+<h4><code>lch</code></h4>
 <p>The CIELCh color space using the D50 standard illuminant.</p>
 <table>
 <thead>
@@ -237,8 +269,8 @@
 </tr>
 </tbody>
 </table>
-<h3><code>lab65</code></h3>
-<p>CIELab relative to the D65 standard illuminant.</p>
+<h4><code>lab65</code></h4>
+<p>CIELAB relative to the D65 standard illuminant.</p>
 <table>
 <thead>
 <tr>
@@ -265,7 +297,7 @@
 </tr>
 </tbody>
 </table>
-<h3><code>lch65</code></h3>
+<h4><code>lch65</code></h4>
 <p>CIELCh relative to the D65 standard illuminant.</p>
 <table>
 <thead>
@@ -293,9 +325,11 @@
 </tr>
 </tbody>
 </table>
-<h2>Luv / LCHuv (CIE)</h2>
-<p><a href="https://en.wikipedia.org/wiki/CIELUV">CIELuv color space</a> in cartesian and polar forms, using the D50 standard illuminant.</p>
-<h3><code>luv</code></h3>
+<h3>CIELUV</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/CIELUV">CIELUV color space</a> in Cartesian (Luv) and cylindrical (LCh) forms, using the D50 standard illuminant.</p>
+<p>CIELuv has an effective Euclidean color difference function:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">let</span> deltaE_uv <span class="token operator">=</span> culori<span class="token punctuation">.</span><span class="token function">colorDifferenceEuclidean</span><span class="token punctuation">(</span><span class="token string">'luv'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h4><code>luv</code></h4>
 <table>
 <thead>
 <tr>
@@ -322,7 +356,7 @@
 </tr>
 </tbody>
 </table>
-<h3><code>lchuv</code></h3>
+<h4><code>lchuv</code></h4>
 <table>
 <thead>
 <tr>
@@ -349,15 +383,13 @@
 </tr>
 </tbody>
 </table>
-<p>CIELuv supports an Euclidean color difference function:</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">let</span> deltaE_uv <span class="token operator">=</span> culori<span class="token punctuation">.</span><span class="token function">colorDifferenceEuclidean</span><span class="token punctuation">(</span><span class="token string">'luv'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h2>DIN99 Lab / LCh</h2>
-<p>The <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99</a> color space &quot;squishes&quot; the CIELab color space to obtain an <a href="#culoriDifferenceDin99o">effective color difference</a> metric that can be expressed as a simple Euclidean distance. We implement the latest iteration of the the standard, DIN99o, in cartesian (<code>dlab</code>) and plar (<code>dlch</code>) form.</p>
-<p>See:</p>
+<h3>DIN99 Lab / LCh</h3>
+<p>The <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99</a> color space &quot;squishes&quot; the CIELAB D65 color space to obtain an <a href="#culoriDifferenceDin99o">effective color difference</a> metric that can be expressed as a simple Euclidean distance. The latest iteration of the the standard, DIN99o, is available in Cartesian (<code>dlab</code>) and plar (<code>dlch</code>) form.</p>
 <blockquote>
 <p><a href="https://www.springer.com/us/book/9781441911964">&quot;Industrial Color Physics&quot;</a>, Georg A. Klein, Springer (2010)</p>
 </blockquote>
-<h3><code>dlab</code></h3>
+<h4><code>dlab</code></h4>
+<p>The DIN99o color space in Cartesian form.</p>
 <table>
 <thead>
 <tr>
@@ -384,7 +416,8 @@
 </tr>
 </tbody>
 </table>
-<h3><code>dlch</code></h3>
+<h4><code>dlch</code></h4>
+<p>The DIN99o color space in cylindrical form.</p>
 <table>
 <thead>
 <tr>
@@ -411,13 +444,13 @@
 </tr>
 </tbody>
 </table>
-<h3>JzAzBz</h3>
-<p>The JzAzBz color space, as defined by:</p>
+<h3>J<sub>z</sub>a<sub>z</sub>b<sub>z</sub></h3>
+<p>The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space, as defined by:</p>
 <blockquote>
-<p>Muhammad Safdar, Guihua Cui, Youn Jin Kim, and Ming Ronnier Luo, <em>&quot;Perceptually uniform color space for image signals including high dynamic range and wide gamut&quot;</em>, Opt. Express 25, 15131-15151 (2017) https://doi.org/10.1364/OE.25.015131</p>
+<p>Muhammad Safdar, Guihua Cui, Youn Jin Kim, and Ming Ronnier Luo, <a href="https://doi.org/10.1364/OE.25.015131"><em>&quot;Perceptually uniform color space for image signals including high dynamic range and wide gamut&quot;</em></a>, Opt. Express 25, 15131-15151 (2017)</p>
 </blockquote>
 <h4><code>jab</code></h4>
-<p>The cartesian representation of the JzAzBz color space.</p>
+<p>The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in Cartesian form.</p>
 <table>
 <thead>
 <tr>
@@ -445,7 +478,7 @@
 </tbody>
 </table>
 <h4><code>jch</code></h4>
-<p>The polar representation of the JzAzBz color space.</p>
+<p>The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.</p>
 <table>
 <thead>
 <tr>
@@ -472,8 +505,8 @@
 </tr>
 </tbody>
 </table>
-<h2>YIQ</h2>
-<p><a href="yiq">YIQ</a> is the color space used by the NTSC color TV system. It contains the following channels:</p>
+<h3>YIQ</h3>
+<p><a href="https://en.wikipedia.org/wiki/YIQ">YIQ</a> is the color space used by the NTSC color TV system. It contains the following channels:</p>
 <table>
 <thead>
 <tr>
@@ -500,10 +533,10 @@
 </tr>
 </tbody>
 </table>
-<h2>XYZ</h2>
-<p>The <a href="https://en.wikipedia.org/wiki/CIE_1931_color_space">CIEXYZ color space</a>.</p>
-<h3><code>xyz</code></h3>
-<p>The D50 XYZ color space.</p>
+<h3>CIE XYZ</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/CIE_1931_color_space">CIE XYZ color space</a>, also known as the CIE 1931 color space.</p>
+<h4><code>xyz</code></h4>
+<p>The CIE XYZ color space in respect to the D50 standard illuminant.</p>
 <table>
 <thead>
 <tr>
@@ -530,8 +563,8 @@
 </tr>
 </tbody>
 </table>
-<h3><code>xyz65</code></h3>
-<p>The D65 XYZ color space.</p>
+<h4><code>xyz65</code></h4>
+<p>The CIE XYZ color space in respect to the D65 standard illuminant.</p>
 <table>
 <thead>
 <tr>
@@ -558,13 +591,13 @@
 </tr>
 </tbody>
 </table>
-<h2>Cubehelix</h2>
+<h3>Cubehelix</h3>
 <p><a href="https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/">The Cubehelix color scheme</a> was described by Dave Green in this paper:</p>
 <blockquote>
 <p>Green, D. A., 2011, <a href="http://astron-soc.in/bulletin/11June/289392011.pdf"><em>&quot;A colour scheme for the display of astronomical intensity images&quot;</em></a>, Bulletin of the Astronomical Society of India, 39, 289. (<a href="https://ui.adsabs.harvard.edu/#abs/2011BASI...39..289G">2011BASI...39..289G</a> at <a href="https://ui.adsabs.harvard.edu/">ADS</a>)</p>
 </blockquote>
-<p>It was expanded into a color space by <a href="https://en.wikipedia.org/wiki/Mike_Bostock">Mike Bostock</a> and <a href="https://www.jasondavies.com/">Jason Davies</a> in <a href="https://github.com/d3/d3-color">D3</a>.</p>
-<h3><code>cubehelix</code></h3>
+<p>It was expanded into a cylindrical color space by <a href="https://en.wikipedia.org/wiki/Mike_Bostock">Mike Bostock</a> and <a href="https://www.jasondavies.com/">Jason Davies</a> in <a href="https://github.com/d3/d3-color">D3</a>.</p>
+<h4><code>cubehelix</code></h4>
 <p>The channels in the <code>cubehelix</code> color space maintain the conventions from D3, namely:</p>
 <table>
 <thead>
