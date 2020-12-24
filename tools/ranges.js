@@ -31,4 +31,4 @@ let ranges = (mode, step = 0.01) => {
 	return res;
 };
 
-console.log(ranges('lch65', 0.0025));
+console.log(ranges('oklch', 0.0025));

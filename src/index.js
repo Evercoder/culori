@@ -22,6 +22,8 @@ import dlchDef from './dlch/definition';
 import xyzDef from './xyz/definition';
 import xyz65Def from './xyz65/definition';
 import yiqDef from './yiq/definition';
+import oklabDef from './oklab/definition';
+import oklchDef from './oklch/definition';
 
 import { defineMode } from './modes';
 import converter from './converter';
@@ -50,6 +52,8 @@ defineMode(rgbDef);
 defineMode(xyz65Def);
 defineMode(xyzDef);
 defineMode(yiqDef);
+defineMode(oklabDef);
+defineMode(oklchDef);
 
 let a98 = converter('a98');
 let cubehelix = converter('cubehelix');
@@ -75,6 +79,8 @@ let rgb = converter('rgb');
 let xyz = converter('xyz');
 let xyz65 = converter('xyz65');
 let yiq = converter('yiq');
+let oklab = converter('oklab');
+let oklch = converter('oklch');
 
 export {
 	a98,
@@ -102,7 +108,9 @@ export {
 	rgb,
 	xyz,
 	xyz65,
-	yiq
+	yiq,
+	oklab,
+	oklch
 };
 
 export { formatter, formatHex, formatHex8, formatRgb } from './formatter';
