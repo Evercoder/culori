@@ -198,6 +198,30 @@ The DIN99o color space in cylindrical form.
 | `c`     | `[0, 51.484]`≈ | Chroma      |
 | `h`     | `[0, 360)`     | Hue         |
 
+### Oklab
+
+The [Oklab color space](https://bottosson.github.io/posts/oklab/), in Cartesian (Lab) and cylindrical (LCh) forms. It uses the D65 standard illuminant.
+
+#### `oklab`
+
+The Oklab color space in Cartesian form.
+
+| Channel | Range              | Description           |
+| ------- | ------------------ | --------------------- |
+| `l`     | `[0, 1]`           | Lightness             |
+| `a`     | `[-0.233, 0.276]`≈ | Green–red component   |
+| `b`     | `[-0.311, 0.198]`≈ | Blue–yellow component |
+
+#### `oklch`
+
+The Oklab color space in cylindrical form.
+
+| Channel | Range       | Description |
+| ------- | ----------- | ----------- |
+| `l`     | `[0, 1]`    | Lightness   |
+| `c`     | `[0, 322]`≈ | Chroma      |
+| `h`     | `[0, 360)`  | Hue         |
+
 ### J<sub>z</sub>a<sub>z</sub>b<sub>z</sub>
 
 The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space, as defined by:

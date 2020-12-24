@@ -23,7 +23,7 @@ export default {
 		rgb: convertRgbToOklab
 	},
 	ranges: {
-		l: [0, 100],
+		l: [0, 1],
 		a: [-0.233, 0.276],
 		b: [-0.311, 0.198]
 	},
