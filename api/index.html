@@ -18,7 +18,7 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.17.0 alpha (<a
+				>v0.18.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -152,6 +152,16 @@
 <td><code>luv</code></td>
 <td>CIELUV color space (D50 Illuminant)</td>
 <td>culori.<strong>luv</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>oklab</code></td>
+<td>Oklab color space</td>
+<td>culori.<strong>oklab</strong>(<em>color</em>)</td>
+</tr>
+<tr>
+<td><code>oklch</code></td>
+<td>Oklab color space, cylindrical form</td>
+<td>culori.<strong>oklch</strong>(<em>color</em>)</td>
 </tr>
 <tr>
 <td><code>p3</code></td>
@@ -389,7 +399,7 @@
 <p>The default weights <code>[1, 1, 1, 0]</code> mean that the <em>alpha</em>, which is the fourth channel in all the color spaces culori defines, is not taken into account. Send <code>[1, 1, 1, 1]</code> as the weights to include it in the computation.</p>
 <p>In cylindrical spaces, the hue is factored into the Euclidean distance in a variety of ways. The functions below are used internally:</p>
 <p><a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.<strong>differenceHueChroma</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
-<p>This is the handling of hue in cylindrical forms of CIE-based color spaces (<code>lch</code>, <code>lchuv</code>, <code>dlch</code>) and J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> (<code>jch</code>).</p>
+<p>This is the handling of hue in cylindrical forms of CIE-based color spaces (<code>lch</code>, <code>lchuv</code>, <code>dlch</code>, <code>oklch</code>) and J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> (<code>jch</code>).</p>
 <p><a name="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.<strong>differenceHueSaturation</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
 <p>This is a handling of hue in the HSL / HSV / HSI family of color spaces. It's a (possibly wrong!) extrapolation of <code>differenceHueChroma</code>.</p>
 <p><a name="differenceHueNaive" href="#differenceHueNaive">#</a> culori.<strong>differenceHueNaive</strong>(<em>colorA</em>, <em>colorB</em>) · <a href="https://github.com/evercoder/culori/blob/master/src/difference.js">Source</a></p>
