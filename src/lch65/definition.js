@@ -9,12 +9,12 @@ export default {
 	mode: 'lch65',
 	alias: ['lch-d65'],
 	output: {
-		lab65: convertLchToLab,
+		lab65: c => convertLchToLab(c, 'lab65'),
 		rgb: c => convertLab65ToRgb(convertLchToLab(c, 'lab65'))
 	},
 	input: {
 		rgb: c => convertLabToLch(convertRgbToLab65(c), 'lch65'),
-		lab65: convertLabToLch
+		lab65: c => convertLabToLch(c, 'lch65')
 	},
 	parsers: [],
 	ranges: {

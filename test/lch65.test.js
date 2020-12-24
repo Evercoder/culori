@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lch65 } from '../src/index';
+import { lch65, lab65 } from '../src/index';
 
 tape('lch65', t => {
 	t.deepEqual(
@@ -22,6 +22,28 @@ tape('lch65', t => {
 			h: 39.99901061253291
 		},
 		'red'
+	);
+	t.end();
+});
+
+tape('lab65 <-> lch65', t => {
+	t.deepEqual(lch65(lab65({ l: 100, a: 0.2, b: 0.2 })), {
+		mode: 'lch65',
+		l: 100,
+		c: 0.28284271247461906,
+		h: 45
+	});
+
+	t.deepEqual(
+		lab65(
+			lch65({
+				mode: 'lch65',
+				l: 100,
+				c: 0.28284271247461906,
+				h: 45
+			})
+		),
+		{ mode: 'lab65', l: 100, a: 0.20000000000000004, b: 0.2 }
 	);
 	t.end();
 });
