@@ -85,6 +85,8 @@ The available modes (color spaces) are listed below. For convenience, each color
 | `lchuv`     | CIELCHuv color space (D50 Illuminant)                       | culori.**lchuv**(_color_)     |
 | `lrgb`      | Linear-light sRGB color space                               | culori.**lrgb**(_color_)      |
 | `luv`       | CIELUV color space (D50 Illuminant)                         | culori.**luv**(_color_)       |
+| `oklab`     | Oklab color space                                           | culori.**oklab**(_color_)     |
+| `oklch`     | Oklab color space, cylindrical form                         | culori.**oklch**(_color_)     |
 | `p3`        | Display P3 color space                                      | culori.**p3**(_color_)        |
 | `prophoto`  | ProPhoto RGB color space                                    | culori.**prophoto**(_color_)  |
 | `rec2020`   | Rec. 2020 RGB color space                                   | culori.**rec2020**(_color_)   |
@@ -645,7 +647,7 @@ In cylindrical spaces, the hue is factored into the Euclidean distance in a vari
 
 <a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.**differenceHueChroma**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
-This is the handling of hue in cylindrical forms of CIE-based color spaces (`lch`, `lchuv`, `dlch`) and J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> (`jch`).
+This is the handling of hue in cylindrical forms of CIE-based color spaces (`lch`, `lchuv`, `dlch`, `oklch`) and J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> (`jch`).
 
 <a name="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.**differenceHueSaturation**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
