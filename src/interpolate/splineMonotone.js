@@ -71,7 +71,7 @@ const interpolatorSplineMonotone = arr => {
 		return interpolatorLinear(arr);
 	}
 	let n = arr.length - 1;
-	let [s, p, yp] = mono(arr);
+	let [s, , yp] = mono(arr);
 	yp[0] = s[0];
 	yp[n] = s[n - 1];
 	return interpolator(arr, yp, s);
