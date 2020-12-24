@@ -50,15 +50,15 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
-		"test": "tape -r esm test/*.js | tap-spec",
+		"test": "tape -r esm 'test/*.js' | tap-spec",
 		"benchmark": "node benchmark/index.js",
-		"prepublishOnly": "yarn build && yarn test",
+		"prepublishOnly": "npm run build && npm run test",
 		"coverage:report": "nyc report --reporter=lcov",
-		"coverage:test": "nyc --produce-source-map tape -r esm test/*.js | tap-spec",
+		"coverage:test": "nyc --produce-source-map tape -r esm 'test/*.js' | tap-spec",
 		"docs:start": "eleventy --serve",
 		"docs:build": "rm -rf www && eleventy",
-		"docs:deploy": "yarn docs:build && gh-pages -d www --dotfiles",
-		"lint": "yarn eslint {src,test}/**/*.js"
+		"docs:deploy": "npm run docs:build && gh-pages -d www --dotfiles",
+		"lint": "eslint {src,test}/**/*.js"
 	},
 	"husky": {
 		"hooks": {

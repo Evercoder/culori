@@ -20,14 +20,10 @@ culori = require('culori@{{pkg.version}}');
 
 <a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat-square&labelColor=d84f4c&color=black" alt="npm version"></a> <a href="https://bundlephobia.com/result?p=culori"><img src="https://img.shields.io/bundlephobia/minzip/culori?style=flat-square&labelColor=d84f4c&color=black" alt="npm version"></a>
 
-culori is bundled as both UMD and ES [on npm](https://npmjs.com/package/culori). Install it using `npm` or `yarn`:
+culori is bundled as both UMD and ES [on npm](https://npmjs.com/package/culori). Install it using `npm`:
 
 ```bash
-# using npm
 npm install culori
-
-# using yarn
-yarn add culori
 ```
 
 You can then import culori in your project:
