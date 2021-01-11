@@ -216,11 +216,11 @@ The Oklab color space in Cartesian form.
 
 The Oklab color space in cylindrical form.
 
-| Channel | Range       | Description |
-| ------- | ----------- | ----------- |
-| `l`     | `[0, 1]`    | Lightness   |
-| `c`     | `[0, 322]`≈ | Chroma      |
-| `h`     | `[0, 360)`  | Hue         |
+| Channel | Range         | Description |
+| ------- | ------------- | ----------- |
+| `l`     | `[0, 1]`      | Lightness   |
+| `c`     | `[0, 0.322]`≈ | Chroma      |
+| `h`     | `[0, 360)`    | Hue         |
 
 ### J<sub>z</sub>a<sub>z</sub>b<sub>z</sub>
 
