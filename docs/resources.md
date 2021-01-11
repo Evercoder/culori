@@ -25,6 +25,7 @@ JavaScript libraries:
 
 -   [d3-color](https://github.com/d3/d3-color) by [Mike Bostock](https://bost.ocks.org/mike/)
 -   [chroma.js](https://github.com/gka/chroma.js) by [Gregor Aisch](https://driven-by-data.net/)
+-   [colorjs.io](https://github.com/LeaVerou/color.js) by [Lea Verou](http://lea.verou.me/) and [Chris Lilley](https://svgees.us/)
 -   [TinyColor](https://github.com/bgrins/TinyColor) by [Brian Grinstead](http://briangrinstead.com)
 -   [color](https://github.com/Qix-/color) by Heather Arthur
 -   [color.js](https://github.com/brehaut/color-js) by [Andrew Brehaut](https://brehaut.net/) et al
@@ -52,5 +53,5 @@ In other languages:
 
 ### Books
 
--   [Fairchild, Charles D.](http://markfairchild.org/) — _Color Appearance Models_, 3rd Edition, Wiley-IS&T, Chichester, UK (2013); ISBN 978-1-119-96703-3
+-   [Fairchild, Mark D.](http://markfairchild.org/) — _Color Appearance Models_, 3rd Edition, Wiley-IS&T, Chichester, UK (2013); ISBN 978-1-119-96703-3
 -   [Poynton, Charles](http://poynton.ca/) — _Digital Video and HD Algorithms and Interfaces_, Second edition (Burlington, Mass.: Morgan Kaufmann/Elsevier, 2012)
