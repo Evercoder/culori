@@ -647,11 +647,11 @@ In cylindrical spaces, the hue is factored into the Euclidean distance in a vari
 
 <a name="differenceHueChroma" href="#differenceHueChroma">#</a> culori.**differenceHueChroma**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
-This is the handling of hue in cylindrical forms of CIE-based color spaces (`lch`, `lchuv`, `dlch`, `oklch`) and J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> (`jch`).
+Computes the hue contribution as the geometric mean of chord lengths belonging to the chromas of the two colors. This is the handling of hue in cylindrical forms of CIE-related color spaces: `lch`, `lchuv`, `dlch`, `oklch`, `jch`.
 
 <a name="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.**differenceHueSaturation**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
-This is a handling of hue in the HSL / HSV / HSI family of color spaces. It's a (possibly wrong!) extrapolation of `differenceHueChroma`.
+Computes the hue contribution as the geometric mean of chord lengths belonging to the saturations of the two colors. This is the handling of hue in the HSL / HSV / HSI family of color spaces.
 
 <a name="differenceHueNaive" href="#differenceHueNaive">#</a> culori.**differenceHueNaive**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
