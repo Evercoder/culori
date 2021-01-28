@@ -730,7 +730,7 @@ let names = Object.keys(palette);
 let nearestColors = culori.nearest(
 	names,
 	culori.differenceEuclidean(),
-	name => colors[name]
+	name => palette[name]
 );
 
 nearestColors('red', 1);
