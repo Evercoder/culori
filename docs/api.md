@@ -695,13 +695,11 @@ Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the c
 
 <a name="nearest" href="#nearest">#</a> culori.**nearest**(_colors_, _metric = differenceEuclidean()_, _accessor = identity_) → _function(color, n = 1, τ = Infinity)_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/nearest.js)
 
-For a given _metric_ color difference formula, and an array of _colors_, returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_.
-
-Pass _n = Infinity_ to get all colors in the array with a maximum distance of _τ_.
+Takes a _colors_ array and a _metric_ color difference formula, and returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_. Use _n = Infinity_ to get all colors in the array with a maximum distance of _τ_.
 
 ```js
 /*
-	Get the three closest CSS named colors
+	Example: get three CSS named colors closest to any color
  */
 
 let colors = Object.keys(culori.colorsNamed);
@@ -709,6 +707,34 @@ let nearestNamedColors = culori.nearest(colors, culori.differenceCiede2000());
 
 nearestNamedColors('lch(50% 70 60)', 3);
 // => ["chocolate", "sienna", "peru"]
+```
+
+By default, _colors_ needs to be an array of color values. If your array contains something other than a simple color value, you can provide the `accessor` argument to point to the color value associated with each item in the array.
+
+The example below shows a common data structure for a color palette: an object whose keys are the names and whose values are their associated color representations.
+
+```js
+/*
+	Example: get the closest color from a palette
+ */
+let palette = {
+	Burgundy: '#914e72',
+	Blue: '#0078bf',
+	Green: '#00a95c',
+	'Medium Blue': '#3255a4',
+	'Bright Red': '#f15060'
+};
+
+let names = Object.keys(palette);
+
+let nearestColors = culori.nearest(
+	names,
+	culori.differenceEuclidean(),
+	name => colors[name]
+);
+
+nearestColors('red', 1);
+// => ["Bright Red"]
 ```
 
 ## Blending
