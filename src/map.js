@@ -54,7 +54,7 @@ const mapTransferGamma = (amplitude = 1, exponent = 1, offset = 0) => (
 	ch
 ) => {
 	if (ch !== 'alpha') {
-		return amplitude * pow(v, exponent) + offset;
+		return amplitude * Math.pow(v, exponent) + offset;
 	}
 	return v;
 };
