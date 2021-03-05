@@ -2,8 +2,6 @@ import { getModeDefinition } from './modes';
 import converter from './converter';
 import normalizeHue from './util/normalizeHue';
 
-const isfn = o => typeof o === 'function';
-
 const differenceHueSaturation = (std, smp) => {
 	if (std.h === undefined || smp.h === undefined || !std.s || !smp.s) {
 		return 0;

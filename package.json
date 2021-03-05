@@ -37,6 +37,7 @@
 		"@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
 		"@rollup/plugin-buble": "^0.21.3",
 		"eslint": "^7.4.0",
+		"eslint-plugin-import": "^2.22.1",
 		"esm": "^3.2.25",
 		"gh-pages": "^3.1.0",
 		"husky": "^4.2.5",
@@ -52,13 +53,13 @@
 		"build": "rollup -c",
 		"test": "tape -r esm 'test/*.js' | tap-spec",
 		"benchmark": "node benchmark/index.js",
-		"prepublishOnly": "npm run build && npm run test",
+		"prepublishOnly": "npm run lint && npm run build && npm run test",
 		"coverage:report": "nyc report --reporter=lcov",
 		"coverage:test": "nyc --produce-source-map tape -r esm 'test/*.js' | tap-spec",
 		"docs:start": "eleventy --serve",
 		"docs:build": "rm -rf www && eleventy",
 		"docs:deploy": "npm run docs:build && gh-pages -d www --dotfiles",
-		"lint": "eslint {src,test}/**/*.js"
+		"lint": "eslint '{src,test}/**/*.js'"
 	},
 	"husky": {
 		"hooks": {
