@@ -10,22 +10,28 @@ import lab from '../lab/definition';
 	Reference: https://bottosson.github.io/posts/oklab/
  */
 
-export default {
+const definition = {
 	...lab,
 	mode: 'oklab',
 	alias: [],
+
 	output: {
 		lrgb: convertOklabToLrgb,
 		rgb: convertOklabToRgb
 	},
+
 	input: {
 		lrgb: convertLrgbToOklab,
 		rgb: convertRgbToOklab
 	},
+
 	ranges: {
 		l: [0, 1],
 		a: [-0.233, 0.276],
 		b: [-0.311, 0.198]
 	},
+
 	parsers: []
 };
+
+export default definition;

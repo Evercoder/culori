@@ -1,4 +1,6 @@
 import convertLuvToXyz from './convertLuvToXyz';
 import convertXyzToRgb from '../xyz/convertXyzToRgb';
 
-export default luv => convertXyzToRgb(convertLuvToXyz(luv));
+const convertLuvToRgb = luv => convertXyzToRgb(convertLuvToXyz(luv));
+
+export default convertLuvToRgb;

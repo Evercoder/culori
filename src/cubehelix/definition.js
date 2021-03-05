@@ -39,19 +39,23 @@ import convertCubehelixToRgb from './convertCubehelixToRgb';
 import { differenceHueSaturation } from '../difference';
 import { averageAngle } from '../average';
 
-export default {
+const definition = {
 	mode: 'cubehelix',
 	channels: ['h', 's', 'l', 'alpha'],
+
 	ranges: {
 		h: [0, 360],
 		s: [0, 4.6143]
 	},
+
 	input: {
 		rgb: convertRgbToCubehelix
 	},
+
 	output: {
 		rgb: convertCubehelixToRgb
 	},
+
 	interpolate: {
 		h: {
 			use: interpolatorLinear,
@@ -64,10 +68,14 @@ export default {
 			fixup: fixupAlpha
 		}
 	},
+
 	difference: {
 		h: differenceHueSaturation
 	},
+
 	average: {
 		h: averageAngle
 	}
 };
+
+export default definition;

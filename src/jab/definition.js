@@ -19,22 +19,26 @@ import convertJabToRgb from './convertJabToRgb';
 import { interpolatorLinear } from '../interpolate/linear';
 import { fixupAlpha } from '../fixup/alpha';
 
-export default {
+const definition = {
 	mode: 'jab',
 	channels: ['j', 'a', 'b', 'alpha'],
+
 	input: {
 		rgb: convertRgbToJab,
 		xyz65: convertXyz65ToJab
 	},
+
 	output: {
 		rgb: convertJabToRgb,
 		xyz65: convertJabToXyz65
 	},
+
 	ranges: {
 		j: [0, 0.221],
 		a: [-0.108, 0.129],
 		b: [-0.185, 0.134]
 	},
+
 	interpolate: {
 		j: interpolatorLinear,
 		a: interpolatorLinear,
@@ -42,3 +46,5 @@ export default {
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };
+
+export default definition;

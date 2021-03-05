@@ -1,6 +1,6 @@
 import normalizeHue from '../util/normalizeHue';
 
-export default ({ l, a, b, alpha }) => {
+const convertDlabToDlch = ({ l, a, b, alpha }) => {
 	let c = Math.sqrt(a * a + b * b);
 	let res = {
 		mode: 'dlch',
@@ -11,3 +11,5 @@ export default ({ l, a, b, alpha }) => {
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
+
+export default convertDlabToDlch;

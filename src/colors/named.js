@@ -1,4 +1,4 @@
-export default {
+const named = {
 	aliceblue: 0xf0f8ff,
 	antiquewhite: 0xfaebd7,
 	aqua: 0x00ffff,
@@ -118,9 +118,11 @@ export default {
 	plum: 0xdda0dd,
 	powderblue: 0xb0e0e6,
 	purple: 0x800080,
+
 	// Added in CSS Colors Level 4:
 	// https://drafts.csswg.org/css-color/#changes-from-3
 	rebeccapurple: 0x663399,
+
 	red: 0xff0000,
 	rosybrown: 0xbc8f8f,
 	royalblue: 0x4169e1,
@@ -150,3 +152,5 @@ export default {
 	yellow: 0xffff00,
 	yellowgreen: 0x9acd32
 };
+
+export default named;

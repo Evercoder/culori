@@ -9,11 +9,12 @@ import { fixupAlpha } from '../fixup/alpha';
 	sRGB color space
  */
 
-export default {
+const definition = {
 	mode: 'rgb',
 	channels: ['r', 'g', 'b', 'alpha'],
 	alias: ['srgb'],
 	parsers: [parseHex, parseRgb, parseNamed, parseTransparent],
+
 	interpolate: {
 		r: interpolatorLinear,
 		g: interpolatorLinear,
@@ -21,3 +22,5 @@ export default {
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };
+
+export default definition;

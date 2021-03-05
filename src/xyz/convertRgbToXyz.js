@@ -9,7 +9,7 @@
 
 import convertRgbToLrgb from '../lrgb/convertRgbToLrgb';
 
-export default rgb => {
+const convertRgbToXyz = rgb => {
 	let { r, g, b, alpha } = convertRgbToLrgb(rgb);
 	let res = {
 		mode: 'xyz',
@@ -22,3 +22,5 @@ export default rgb => {
 	}
 	return res;
 };
+
+export default convertRgbToXyz;

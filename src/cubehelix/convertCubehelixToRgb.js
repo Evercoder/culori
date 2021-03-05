@@ -1,6 +1,6 @@
 import { degToRad, M } from './constants';
 
-export default ({ h, s, l, alpha }) => {
+const convertCubehelixToRgb = ({ h, s, l, alpha }) => {
 	let res = { mode: 'rgb' };
 
 	h = (h === undefined ? 0 : h + 120) * degToRad;
@@ -17,3 +17,5 @@ export default ({ h, s, l, alpha }) => {
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
+
+export default convertCubehelixToRgb;

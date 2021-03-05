@@ -8,7 +8,7 @@
 
 import convertRgbToLrgb from '../lrgb/convertRgbToLrgb';
 
-export default rgb => {
+const convertRgbToXyz65 = rgb => {
 	let { r, g, b, alpha } = convertRgbToLrgb(rgb);
 	let res = {
 		mode: 'xyz65',
@@ -21,3 +21,5 @@ export default rgb => {
 	}
 	return res;
 };
+
+export default convertRgbToXyz65;

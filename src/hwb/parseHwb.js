@@ -1,7 +1,7 @@
 import { hwb } from '../util/regex';
 import { hue } from '../util/hue';
 
-export default color => {
+const parseHwb = color => {
 	if (typeof color !== 'string') return undefined;
 	let match = color.match(hwb);
 	if (!match) return undefined;
@@ -26,3 +26,5 @@ export default color => {
 	}
 	return res;
 };
+
+export default parseHwb;

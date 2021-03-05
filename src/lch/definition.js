@@ -9,34 +9,44 @@ import { interpolatorLinear } from '../interpolate/linear';
 import { differenceHueChroma } from '../difference';
 import { averageAngle } from '../average';
 
-export default {
+const definition = {
 	mode: 'lch',
 	alias: ['lch-d50'],
+
 	output: {
 		lab: convertLchToLab,
 		rgb: c => convertLabToRgb(convertLchToLab(c))
 	},
+
 	input: {
 		rgb: c => convertLabToLch(convertRgbToLab(c)),
 		lab: convertLabToLch
 	},
+
 	channels: ['l', 'c', 'h', 'alpha'],
+
 	ranges: {
 		l: [0, 100],
 		c: [0, 131.008],
 		h: [0, 360]
 	},
+
 	parsers: [parseLch],
+
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },
 		c: interpolatorLinear,
 		l: interpolatorLinear,
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	},
+
 	difference: {
 		h: differenceHueChroma
 	},
+
 	average: {
 		h: averageAngle
 	}
 };
+
+export default definition;

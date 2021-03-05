@@ -10,7 +10,7 @@
 
 import convertHsvToRgb from '../hsv/convertHsvToRgb';
 
-export default function ({ h, w, b, alpha }) {
+export default function convertHwbToRgb({ h, w, b, alpha }) {
 	// normalize w + b to 1
 	if (w + b > 1) {
 		let s = w + b;

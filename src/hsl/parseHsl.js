@@ -1,7 +1,7 @@
 import { hsl_old, hsl_new } from '../util/regex';
 import { hue } from '../util/hue';
 
-export default color => {
+const parseHsl = color => {
 	if (typeof color !== 'string') return;
 	let match = color.match(hsl_old) || color.match(hsl_new);
 	if (!match) return;
@@ -18,3 +18,5 @@ export default color => {
 	}
 	return res;
 };
+
+export default parseHsl;

@@ -10,7 +10,7 @@
 
 import convertRgbToHsv from '../hsv/convertRgbToHsv';
 
-export default function (rgba) {
+export default function convertRgbToHwb(rgba) {
 	let hsv = convertRgbToHsv(rgba);
 	if (hsv === undefined) return undefined;
 	let res = {

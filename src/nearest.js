@@ -8,7 +8,7 @@ import { differenceEuclidean } from './difference';
 	* http://pnylab.com/papers/vptree/main.html
  */
 
-export default (colors, metric = differenceEuclidean(), accessor = d => d) => {
+const nearest = (colors, metric = differenceEuclidean(), accessor = d => d) => {
 	let arr = colors.map((c, idx) => ({ color: accessor(c), i: idx }));
 	return (color, n = 1, τ = Infinity) => {
 		if (isFinite(n)) {
@@ -26,3 +26,5 @@ export default (colors, metric = differenceEuclidean(), accessor = d => d) => {
 			.map(c => colors[c.i]);
 	};
 };
+
+export default nearest;

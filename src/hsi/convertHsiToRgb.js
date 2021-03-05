@@ -2,7 +2,7 @@ import normalizeHue from '../util/normalizeHue';
 
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 
-export default function ({ h, s, i, alpha }) {
+export default function convertHsiToRgb({ h, s, i, alpha }) {
 	h = normalizeHue(h);
 	let f = Math.abs(((h / 60) % 2) - 1);
 	let res;

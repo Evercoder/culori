@@ -5,7 +5,7 @@ import {
 	rgb_per_new
 } from '../util/regex';
 
-export default color => {
+const parseRgb = color => {
 	let match, res;
 
 	if ((match = color.match(rgb_num_old) || color.match(rgb_num_new))) {
@@ -34,3 +34,5 @@ export default color => {
 
 	return res;
 };
+
+export default parseRgb;

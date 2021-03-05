@@ -5,22 +5,27 @@ import convertRgbToLab65 from '../lab65/convertRgbToLab65';
 import { interpolatorLinear } from '../interpolate/linear';
 import { fixupAlpha } from '../fixup/alpha';
 
-export default {
+const definition = {
 	mode: 'dlab',
+
 	output: {
 		lab65: convertDlabToLab65,
 		rgb: c => convertLab65ToRgb(convertDlabToLab65(c))
 	},
+
 	input: {
 		lab65: convertLab65ToDlab,
 		rgb: c => convertLab65ToDlab(convertRgbToLab65(c))
 	},
+
 	channels: ['l', 'a', 'b', 'alpha'],
+
 	ranges: {
 		l: [0, 100],
 		a: [-40.09, 45.5],
 		b: [-40.47, 44.344]
 	},
+
 	interpolate: {
 		l: interpolatorLinear,
 		a: interpolatorLinear,
@@ -31,3 +36,5 @@ export default {
 		}
 	}
 };
+
+export default definition;

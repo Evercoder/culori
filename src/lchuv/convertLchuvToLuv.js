@@ -1,4 +1,4 @@
-export default ({ l, c, h, alpha }) => {
+const convertLchuvToLuv = ({ l, c, h, alpha }) => {
 	let res = {
 		mode: 'luv',
 		l: l,
@@ -10,3 +10,5 @@ export default ({ l, c, h, alpha }) => {
 	}
 	return res;
 };
+
+export default convertLchuvToLuv;

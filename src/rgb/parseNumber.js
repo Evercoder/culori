@@ -1,4 +1,4 @@
-export default (color, len) => {
+const parseNumber = (color, len) => {
 	if (typeof color !== 'number') return;
 
 	// hex3: #c93 -> #cc9933
@@ -43,3 +43,5 @@ export default (color, len) => {
 		};
 	}
 };
+
+export default parseNumber;

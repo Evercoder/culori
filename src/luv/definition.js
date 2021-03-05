@@ -14,22 +14,27 @@ import convertLuvToRgb from './convertLuvToRgb';
 import { interpolatorLinear } from '../interpolate/linear';
 import { fixupAlpha } from '../fixup/alpha';
 
-export default {
+const definition = {
 	mode: 'luv',
+
 	output: {
 		xyz: convertLuvToXyz,
 		rgb: convertLuvToRgb
 	},
+
 	input: {
 		xyz: convertXyzToLuv,
 		rgb: convertRgbToLuv
 	},
+
 	channels: ['l', 'u', 'v', 'alpha'],
+
 	ranges: {
 		l: [0, 100],
 		u: [-84.86, 174.87],
 		v: [-125.744, 87.165]
 	},
+
 	interpolate: {
 		l: interpolatorLinear,
 		u: interpolatorLinear,
@@ -37,3 +42,5 @@ export default {
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };
+
+export default definition;

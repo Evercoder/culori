@@ -1,4 +1,6 @@
 import parseNumber from './parseNumber';
 
-export default c =>
+const parseTransparent = c =>
 	c === 'transparent' ? parseNumber(0x00000000, 8) : undefined;
+
+export default parseTransparent;

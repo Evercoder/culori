@@ -1,7 +1,7 @@
 import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65';
 import convertXyz65ToLab65 from './convertXyz65ToLab65';
 
-export default rgb => {
+const convertRgbToLab65 = rgb => {
 	let res = convertXyz65ToLab65(convertRgbToXyz65(rgb));
 
 	// Fixes achromatic RGB colors having a _slight_ chroma due to floating-point errors
@@ -12,3 +12,5 @@ export default rgb => {
 	}
 	return res;
 };
+
+export default convertRgbToLab65;

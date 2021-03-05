@@ -12,7 +12,7 @@ const pq_inv = v => {
 
 const rel = v => v / 203;
 
-export default ({ j, a, b, alpha }) => {
+const convertJabToXyz65 = ({ j, a, b, alpha }) => {
 	let i = (j + d0) / (0.44 + 0.56 * (j + d0));
 
 	let l = pq_inv(i + 0.13860504 * a + 0.058047316 * b);
@@ -40,3 +40,5 @@ export default ({ j, a, b, alpha }) => {
 
 	return res;
 };
+
+export default convertJabToXyz65;

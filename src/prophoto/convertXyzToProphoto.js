@@ -8,7 +8,7 @@
 
 const gamma = v => (v >= 1 / 512 ? Math.pow(v, 1 / 1.8) : 16 * v);
 
-export default ({ x, y, z, alpha }) => {
+const convertXyzToProphoto = ({ x, y, z, alpha }) => {
 	let res = {
 		mode: 'prophoto',
 		r: gamma(
@@ -28,3 +28,5 @@ export default ({ x, y, z, alpha }) => {
 	}
 	return res;
 };
+
+export default convertXyzToProphoto;

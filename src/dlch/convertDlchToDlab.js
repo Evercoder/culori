@@ -1,4 +1,4 @@
-export default ({ l, c, h, alpha }) => {
+const convertDlchToDlab = ({ l, c, h, alpha }) => {
 	let res = {
 		mode: 'dlab',
 		l: l,
@@ -8,3 +8,5 @@ export default ({ l, c, h, alpha }) => {
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
+
+export default convertDlchToDlab;

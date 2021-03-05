@@ -1,6 +1,6 @@
 import { lab } from '../util/regex';
 
-export default color => {
+const parseLab = color => {
 	if (typeof color !== 'string') {
 		return undefined;
 	}
@@ -25,3 +25,5 @@ export default color => {
 
 	return res;
 };
+
+export default parseLab;

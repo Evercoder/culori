@@ -8,7 +8,7 @@ export const vn = v_fn(Xn, Yn, Zn);
 
 const l_fn = value => (value <= e ? k * value : 116 * Math.cbrt(value) - 16);
 
-export default ({ x, y, z, alpha }) => {
+const convertXyzToLuv = ({ x, y, z, alpha }) => {
 	let l = l_fn(y / Yn);
 	let u = u_fn(x, y, z);
 	let v = v_fn(x, y, z);
@@ -34,3 +34,5 @@ export default ({ x, y, z, alpha }) => {
 
 	return res;
 };
+
+export default convertXyzToLuv;

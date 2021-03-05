@@ -34,7 +34,7 @@ const BLENDS = {
 	exclusion: (b, s) => b + s - 2 * b * s
 };
 
-export default (colors, type = 'normal', mode = 'rgb') => {
+const blend = (colors, type = 'normal', mode = 'rgb') => {
 	let fn = typeof type === 'function' ? type : BLENDS[type];
 
 	let conv = converter(mode);
@@ -77,3 +77,5 @@ export default (colors, type = 'normal', mode = 'rgb') => {
 		);
 	});
 };
+
+export default blend;

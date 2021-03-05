@@ -8,7 +8,7 @@
 
 import convertLrgbToRgb from '../lrgb/convertLrgbToRgb';
 
-export default ({ x, y, z, alpha }) => {
+const convertXyz65ToP3 = ({ x, y, z, alpha }) => {
 	let res = convertLrgbToRgb(
 		{
 			r: x * 2.4934969 - y * 0.9313836 - 0.4027107 * z,
@@ -22,3 +22,5 @@ export default ({ x, y, z, alpha }) => {
 	}
 	return res;
 };
+
+export default convertXyz65ToP3;

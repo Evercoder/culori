@@ -1,6 +1,6 @@
 import parse from './parse';
 
-export default (color, mode) =>
+const prepare = (color, mode) =>
 	color === undefined
 		? undefined
 		: typeof color !== 'object'
@@ -10,3 +10,5 @@ export default (color, mode) =>
 		: mode
 		? { ...color, mode }
 		: undefined;
+
+export default prepare;

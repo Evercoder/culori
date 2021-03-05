@@ -3,7 +3,7 @@
 		* https://drafts.csswg.org/css-color/#lch-to-lab
 		* https://drafts.csswg.org/css-color/#color-conversion-code
 */
-export default ({ l, c, h, alpha }, mode = 'lab') => {
+const convertLchToLab = ({ l, c, h, alpha }, mode = 'lab') => {
 	let res = {
 		mode,
 		l,
@@ -13,3 +13,5 @@ export default ({ l, c, h, alpha }, mode = 'lab') => {
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
+
+export default convertLchToLab;

@@ -17,7 +17,7 @@ let DE = M[3] * M[4];
 let BE = M[1] * M[4];
 let BCAD = M[1] * M[2] - M[0] * M[3];
 
-export default ({ r, g, b, alpha }) => {
+const convertRgbToCubehelix = ({ r, g, b, alpha }) => {
 	let l = (BCAD * b + r * DE - g * BE) / (BCAD + DE - BE);
 	let x = b - l;
 	let y = (M[4] * (g - l) - M[2] * x) / M[3];
@@ -36,3 +36,5 @@ export default ({ r, g, b, alpha }) => {
 
 	return res;
 };
+
+export default convertRgbToCubehelix;

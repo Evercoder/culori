@@ -23,19 +23,24 @@ import { fixupAlpha } from '../fixup/alpha';
 		http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf
  */
 
-export default {
+const definition = {
 	mode: 'yiq',
+
 	output: {
 		rgb: convertYiqToRgb
 	},
+
 	input: {
 		rgb: convertRgbToYiq
 	},
+
 	channels: ['y', 'i', 'q', 'alpha'],
+
 	ranges: {
 		i: [-0.593, 0.593],
 		q: [-0.52, 0.52]
 	},
+
 	interpolate: {
 		y: interpolatorLinear,
 		i: interpolatorLinear,
@@ -43,3 +48,5 @@ export default {
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };
+
+export default definition;

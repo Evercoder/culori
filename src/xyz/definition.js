@@ -10,23 +10,28 @@ import convertLabToXyz from '../lab/convertLabToXyz';
 import { interpolatorLinear } from '../interpolate/linear';
 import { fixupAlpha } from '../fixup/alpha';
 
-export default {
+const definition = {
 	mode: 'xyz',
 	alias: ['xyz-d50'],
+
 	output: {
 		rgb: convertXyzToRgb,
 		lab: convertXyzToLab
 	},
+
 	input: {
 		rgb: convertRgbToXyz,
 		lab: convertLabToXyz
 	},
+
 	channels: ['x', 'y', 'z', 'alpha'],
+
 	ranges: {
 		x: [0, 0.962],
 		y: [0, 0.997],
 		z: [0, 0.823]
 	},
+
 	interpolate: {
 		x: interpolatorLinear,
 		y: interpolatorLinear,
@@ -34,3 +39,5 @@ export default {
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };
+
+export default definition;

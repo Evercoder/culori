@@ -1,6 +1,6 @@
 import gamma from './easing/gamma';
 
-export default (n = 2, γ = 1) => {
+const samples = (n = 2, γ = 1) => {
 	let ease = gamma(γ);
 	if (n < 2) {
 		return n < 1 ? [] : [ease(0.5)];
@@ -11,3 +11,5 @@ export default (n = 2, γ = 1) => {
 	}
 	return res;
 };
+
+export default samples;

@@ -1,4 +1,6 @@
 import convertLrgbToRgb from '../lrgb/convertLrgbToRgb';
 import convertOklabToLrgb from './convertOklabToLrgb';
 
-export default c => convertLrgbToRgb(convertOklabToLrgb(c));
+const convertOklabToRgb = c => convertLrgbToRgb(convertOklabToLrgb(c));
+
+export default convertOklabToRgb;

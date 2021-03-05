@@ -1,6 +1,6 @@
 import normalizeHue from '../util/normalizeHue';
 
-export default ({ l, u, v, alpha }) => {
+const convertLuvToLchuv = ({ l, u, v, alpha }) => {
 	let c = Math.sqrt(u * u + v * v);
 	let res = {
 		mode: 'lchuv',
@@ -15,3 +15,5 @@ export default ({ l, u, v, alpha }) => {
 	}
 	return res;
 };
+
+export default convertLuvToLchuv;

@@ -1,4 +1,4 @@
-export default ({ r, g, b, alpha }) => {
+const convertLrgbToOklab = ({ r, g, b, alpha }) => {
 	let L = Math.cbrt(0.412165612 * r + 0.536275208 * g + 0.0514575653 * b);
 	let M = Math.cbrt(0.211859107 * r + 0.6807189584 * g + 0.107406579 * b);
 	let S = Math.cbrt(0.0883097947 * r + 0.2818474174 * g + 0.6302613616 * b);
@@ -16,3 +16,5 @@ export default ({ r, g, b, alpha }) => {
 
 	return res;
 };
+
+export default convertLrgbToOklab;

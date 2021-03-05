@@ -11,7 +11,7 @@ const α = 1.09929682680944;
 const β = 0.018053968510807;
 const gamma = v => (v > β ? α * Math.pow(v, 1 / 2.4) - (α - 1) : 4.5 * v);
 
-export default ({ x, y, z, alpha }) => {
+const convertXyz65ToRec2020 = ({ x, y, z, alpha }) => {
 	let res = {
 		mode: 'rec2020',
 		r: gamma(
@@ -35,3 +35,5 @@ export default ({ x, y, z, alpha }) => {
 	}
 	return res;
 };
+
+export default convertXyz65ToRec2020;

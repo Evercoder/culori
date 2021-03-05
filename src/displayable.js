@@ -2,7 +2,7 @@ import converter from './converter';
 
 let rgb = converter('rgb');
 
-export default color => {
+const displayable = color => {
 	let c = rgb(color);
 	return (
 		c !== undefined &&
@@ -14,3 +14,5 @@ export default color => {
 		c.b <= 1
 	);
 };
+
+export default displayable;

@@ -7,7 +7,7 @@
 		* http://www.brucelindbloom.com/index.html?Eqn_ChromAdapt.html	
 */
 
-export default xyz => {
+const convertXyzToXyz65 = xyz => {
 	let { x, y, z, alpha } = xyz;
 	let res = {
 		mode: 'xyz65',
@@ -20,3 +20,5 @@ export default xyz => {
 	}
 	return res;
 };
+
+export default convertXyzToXyz65;
