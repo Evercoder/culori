@@ -8,7 +8,7 @@
 
 const gamma = v => Math.pow(Math.abs(v), 256 / 563) * Math.sign(v);
 
-export default ({ x, y, z, alpha }) => {
+const convertXyz65ToA98 = ({ x, y, z, alpha }) => {
 	let res = {
 		mode: 'a98',
 		r: gamma(
@@ -32,3 +32,5 @@ export default ({ x, y, z, alpha }) => {
 	}
 	return res;
 };
+
+export default convertXyz65ToA98;

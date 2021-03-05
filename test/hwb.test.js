@@ -1,7 +1,7 @@
 import tape from 'tape';
 import { hwb } from '../src/index';
 
-tape('hwb() parses hwb CSS strings', function(test) {
+tape('hwb() parses hwb CSS strings', function (test) {
 	test.deepEqual(
 		hwb('hwb(100 0% 0%)'),
 		{ h: 100, w: 0, b: 0, mode: 'hwb' },

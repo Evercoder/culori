@@ -18,7 +18,7 @@ const to_intervals = constraints =>
 /*
 	Generate a random color.
  */
-export default (mode = 'rgb', constraints = {}) => {
+const random = (mode = 'rgb', constraints = {}) => {
 	let def = getModeDefinition(mode);
 	let limits = to_intervals(constraints);
 	return def.channels.reduce(
@@ -32,3 +32,5 @@ export default (mode = 'rgb', constraints = {}) => {
 		{ mode }
 	);
 };
+
+export default random;

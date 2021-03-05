@@ -13,7 +13,7 @@ const pq = v => {
 // Convert to Absolute XYZ
 const abs = v => Math.max(v * 203, 0);
 
-export default ({ x, y, z, alpha }) => {
+const convertXyz65ToJab = ({ x, y, z, alpha }) => {
 	x = abs(x);
 	y = abs(y);
 	z = abs(z);
@@ -40,3 +40,5 @@ export default ({ x, y, z, alpha }) => {
 
 	return res;
 };
+
+export default convertXyz65ToJab;

@@ -8,7 +8,7 @@
 
 const linearize = v => (v >= 16 / 512 ? Math.pow(v, 1.8) : v / 16);
 
-export default prophoto => {
+const convertProphotoToXyz = prophoto => {
 	let r = linearize(prophoto.r);
 	let g = linearize(prophoto.g);
 	let b = linearize(prophoto.b);
@@ -29,3 +29,5 @@ export default prophoto => {
 	}
 	return res;
 };
+
+export default convertProphotoToXyz;

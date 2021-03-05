@@ -8,8 +8,8 @@ function endBench() {
 	return end[0] + 's ' + end[1] / 1000000 + 'ms';
 }
 
-module.exports = function(name, fn) {
+module.exports = function (name, fn) {
 	startBench();
 	fn();
 	console.log(name, endBench());
-}
+};

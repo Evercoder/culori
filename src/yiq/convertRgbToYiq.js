@@ -1,6 +1,6 @@
 import convertRgbToLrgb from '../lrgb/convertRgbToLrgb';
 
-export default rgb => {
+const convertRgbToYiq = rgb => {
 	let { r, g, b, alpha } = convertRgbToLrgb(rgb);
 	let res = {
 		mode: 'yiq',
@@ -11,3 +11,5 @@ export default rgb => {
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
+
+export default convertRgbToYiq;

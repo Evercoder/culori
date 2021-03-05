@@ -1,6 +1,6 @@
 import normalizeHue from '../util/normalizeHue';
 
-export default ({ j, a, b, alpha }) => {
+const convertJabToJch = ({ j, a, b, alpha }) => {
 	let c = Math.sqrt(a * a + b * b);
 	let res = {
 		mode: 'jch',
@@ -15,3 +15,5 @@ export default ({ j, a, b, alpha }) => {
 	}
 	return res;
 };
+
+export default convertJabToJch;

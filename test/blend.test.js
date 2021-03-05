@@ -1,7 +1,7 @@
 import tape from 'tape';
 import { blend } from '../src/index';
 
-tape('blendNormal', function(test) {
+tape('blendNormal', function (test) {
 	test.deepEqual(blend(['white', 'rgba(0, 0, 0, 0.5)']), {
 		mode: 'rgb',
 		r: 0.5,

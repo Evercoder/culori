@@ -11,7 +11,7 @@
 	Note: this method does not make a defensive copy of the array
 	it receives as argument. Instead, it adjusts the values in-place.
  */
-export default arr => {
+const normalizePositions = arr => {
 	// 1. fix up first/last position if missing
 	if (arr[0] === undefined) {
 		arr[0] = 0;
@@ -49,3 +49,5 @@ export default arr => {
 	}
 	return arr;
 };
+
+export default normalizePositions;

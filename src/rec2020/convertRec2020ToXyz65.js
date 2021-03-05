@@ -12,7 +12,7 @@ const β = 0.018053968510807;
 
 const linearize = v => (v < β * 4.5 ? v / 4.5 : Math.pow((v + α - 1) / α, 2.4));
 
-export default rec2020 => {
+const convertRec2020ToXyz65 = rec2020 => {
 	let r = linearize(rec2020.r);
 	let g = linearize(rec2020.g);
 	let b = linearize(rec2020.b);
@@ -33,3 +33,5 @@ export default rec2020 => {
 	}
 	return res;
 };
+
+export default convertRec2020ToXyz65;

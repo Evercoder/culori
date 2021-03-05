@@ -6,24 +6,30 @@ import parseLab from './parseLab';
 import { interpolatorLinear } from '../interpolate/linear';
 import { fixupAlpha } from '../fixup/alpha';
 
-export default {
+const definition = {
 	mode: 'lab',
 	alias: ['lab-d50'],
+
 	output: {
 		xyz: convertLabToXyz,
 		rgb: convertLabToRgb
 	},
+
 	input: {
 		xyz: convertXyzToLab,
 		rgb: convertRgbToLab
 	},
+
 	channels: ['l', 'a', 'b', 'alpha'],
+
 	ranges: {
 		l: [0, 100],
 		a: [-79.167, 93.408],
 		b: [-111.859, 93.246]
 	},
+
 	parsers: [parseLab],
+
 	interpolate: {
 		l: interpolatorLinear,
 		a: interpolatorLinear,
@@ -31,3 +37,5 @@ export default {
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	}
 };
+
+export default definition;

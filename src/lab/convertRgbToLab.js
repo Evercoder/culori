@@ -1,7 +1,7 @@
 import convertRgbToXyz from '../xyz/convertRgbToXyz';
 import convertXyzToLab from './convertXyzToLab';
 
-export default rgb => {
+const convertRgbToLab = rgb => {
 	let res = convertXyzToLab(convertRgbToXyz(rgb));
 
 	// Fixes achromatic RGB colors having a _slight_ chroma due to floating-point errors
@@ -12,3 +12,5 @@ export default rgb => {
 	}
 	return res;
 };
+
+export default convertRgbToLab;

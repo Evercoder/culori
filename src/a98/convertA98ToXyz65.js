@@ -9,7 +9,7 @@
 
 const linearize = v => Math.pow(Math.abs(v), 563 / 256) * Math.sign(v);
 
-export default a98 => {
+const convertA98ToXyz65 = a98 => {
 	let r = linearize(a98.r);
 	let g = linearize(a98.g);
 	let b = linearize(a98.b);
@@ -33,3 +33,5 @@ export default a98 => {
 	}
 	return res;
 };
+
+export default convertA98ToXyz65;

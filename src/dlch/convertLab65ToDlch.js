@@ -6,7 +6,7 @@ import normalizeHue from '../util/normalizeHue';
 	================================
  */
 
-export default ({ l, a, b, alpha }) => {
+const convertLab65ToDlch = ({ l, a, b, alpha }) => {
 	let e = a * cosθ + b * sinθ;
 	let f = 0.83 * (b * cosθ - a * sinθ);
 	let G = Math.sqrt(e * e + f * f);
@@ -23,3 +23,5 @@ export default ({ l, a, b, alpha }) => {
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
+
+export default convertLab65ToDlch;

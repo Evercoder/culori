@@ -1,12 +1,11 @@
 import { lch } from '../util/regex';
 import { hue } from '../util/hue';
 
-export default color => {
-
+const parseLch = color => {
 	if (typeof color !== 'string') return undefined;
-	
+
 	let match = color.match(lch);
-	
+
 	if (!match) {
 		return undefined;
 	}
@@ -23,6 +22,8 @@ export default color => {
 	} else if (match[7] !== undefined) {
 		res.alpha = +match[7];
 	}
-	
+
 	return res;
 };
+
+export default parseLch;

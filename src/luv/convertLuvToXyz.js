@@ -6,7 +6,7 @@ export const v_fn = (x, y, z) => (9 * y) / (x + 15 * y + 3 * z);
 export const un = u_fn(Xn, Yn, Zn);
 export const vn = v_fn(Xn, Yn, Zn);
 
-export default ({ l, u, v, alpha }) => {
+const convertLuvToXyz = ({ l, u, v, alpha }) => {
 	let up = u / (13 * l) + un;
 	let vp = v / (13 * l) + vn;
 	let y = Yn * (l <= 8 ? l / k : Math.pow((l + 16) / 116, 3));
@@ -20,3 +20,5 @@ export default ({ l, u, v, alpha }) => {
 
 	return res;
 };
+
+export default convertLuvToXyz;

@@ -1,4 +1,4 @@
-export default ({ j, c, h, alpha }) => {
+const convertJchToJab = ({ j, c, h, alpha }) => {
 	let res = {
 		mode: 'jab',
 		j,
@@ -8,3 +8,5 @@ export default ({ j, c, h, alpha }) => {
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
+
+export default convertJchToJab;

@@ -1,6 +1,6 @@
 import tape from 'tape';
 
-tape('RGB -> Cubehelix', function(test) {
+tape('RGB -> Cubehelix', function (test) {
 	// test.deepEqual(
 	// 	cubehelix('red'),
 	// 	{},

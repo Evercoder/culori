@@ -13,17 +13,21 @@ import convertRgbToXyz from '../xyz/convertRgbToXyz';
 		* https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space
  */
 
-export default {
+const definition = {
 	...rgb,
 	mode: 'prophoto',
 	alias: ['prophoto-rgb'],
 	parsers: [],
+
 	input: {
 		xyz: convertXyzToProphoto,
 		rgb: color => convertXyzToProphoto(convertRgbToXyz(color))
 	},
+
 	output: {
 		xyz: convertProphotoToXyz,
 		rgb: color => convertXyzToRgb(convertProphotoToXyz(color))
 	}
 };
+
+export default definition;

@@ -5,7 +5,7 @@ import { kCH, kE, sinθ, cosθ, θ, factor } from './constants';
 	--------------------------------
  */
 
-export default ({ l, c, h, alpha }) => {
+const convertDlchToLab65 = ({ l, c, h, alpha }) => {
 	let res = {
 		mode: 'lab65',
 		l: (Math.exp((l * kE) / factor) - 1) / 0.0039
@@ -24,3 +24,5 @@ export default ({ l, c, h, alpha }) => {
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
+
+export default convertDlchToLab65;

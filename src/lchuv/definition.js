@@ -17,32 +17,41 @@ import { interpolatorLinear } from '../interpolate/linear';
 import { differenceHueChroma } from '../difference';
 import { averageAngle } from '../average';
 
-export default {
+const definition = {
 	mode: 'lchuv',
+
 	output: {
 		luv: convertLchuvToLuv,
 		rgb: convertLchuvToRgb
 	},
+
 	input: {
 		rgb: convertRgbToLchuv,
 		luv: convertLuvToLchuv
 	},
+
 	channels: ['l', 'c', 'h', 'alpha'],
+
 	ranges: {
 		l: [0, 100],
 		c: [0, 131.008],
 		h: [0, 360]
 	},
+
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },
 		c: interpolatorLinear,
 		l: interpolatorLinear,
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	},
+
 	difference: {
 		h: differenceHueChroma
 	},
+
 	average: {
 		h: averageAngle
 	}
 };
+
+export default definition;

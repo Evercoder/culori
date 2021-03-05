@@ -2,7 +2,7 @@ import { Xn, Yn, Zn, k, e } from '../xyz/constants';
 
 let fn = v => (Math.pow(v, 3) > e ? Math.pow(v, 3) : (116 * v - 16) / k);
 
-export default ({ l, a, b, alpha }) => {
+const convertLabToXyz = ({ l, a, b, alpha }) => {
 	let fy = (l + 16) / 116;
 	let fx = a / 500 + fy;
 	let fz = fy - b / 200;
@@ -20,3 +20,5 @@ export default ({ l, a, b, alpha }) => {
 
 	return res;
 };
+
+export default convertLabToXyz;
