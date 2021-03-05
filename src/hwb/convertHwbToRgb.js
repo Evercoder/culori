@@ -14,13 +14,13 @@ export default function ({ h, w, b, alpha }) {
 	// normalize w + b to 1
 	if (w + b > 1) {
 		let s = w + b;
-		w /= s; 
+		w /= s;
 		b /= s;
 	}
-	return convertHsvToRgb({ 
-		h: h, 
-		s: b === 1 ? 1 : 1 - w / (1 - b), 
+	return convertHsvToRgb({
+		h: h,
+		s: b === 1 ? 1 : 1 - w / (1 - b),
 		v: 1 - b,
 		alpha: alpha
-	}); 
-};
+	});
+}

@@ -1,7 +1,7 @@
 import tape from 'tape';
 import { hsl, rgb } from '../src/index';
 
-tape('rgb() converts from HSL to RGB', function(test) {
+tape('rgb() converts from HSL to RGB', function (test) {
 	test.deepEqual(
 		rgb(hsl({ h: 0, s: 0, l: 0 })),
 		{ r: 0, g: 0, b: 0, mode: 'rgb' },
@@ -35,7 +35,7 @@ tape('rgb() converts from HSL to RGB', function(test) {
 	test.end();
 });
 
-tape('hsl() converts RGB to HSL', function(test) {
+tape('hsl() converts RGB to HSL', function (test) {
 	test.deepEqual(
 		hsl(rgb({ r: 0, g: 0, b: 0 })),
 		{ s: 0, l: 0, mode: 'hsl' },
@@ -93,7 +93,7 @@ tape('hsl() converts RGB to HSL', function(test) {
 	test.end();
 });
 
-tape('hsl() parses hsl / hsla CSS strings', function(test) {
+tape('hsl() parses hsl / hsla CSS strings', function (test) {
 	test.deepEqual(
 		hsl('hsl(0, 100%, 0%)'),
 		{ s: 1, l: 0, h: 0, mode: 'hsl' },

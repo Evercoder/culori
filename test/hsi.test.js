@@ -1,7 +1,7 @@
 import tape from 'tape';
 import { hsi, rgb } from '../src/index';
 
-tape('rgb() converts from HSI to RGB', function(test) {
+tape('rgb() converts from HSI to RGB', function (test) {
 	test.deepEqual(
 		rgb(hsi({ h: 0, s: 0, i: 0 })),
 		{ r: 0, g: 0, b: 0, mode: 'rgb' },
@@ -35,7 +35,7 @@ tape('rgb() converts from HSI to RGB', function(test) {
 	test.end();
 });
 
-tape('hsi() converts RGB to HSI', function(test) {
+tape('hsi() converts RGB to HSI', function (test) {
 	test.deepEqual(
 		hsi(rgb({ r: 0, g: 0, b: 0 })),
 		{ s: 0, i: 0, mode: 'hsi' },

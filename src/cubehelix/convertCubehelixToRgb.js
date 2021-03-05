@@ -4,7 +4,7 @@ export default ({ h, s, l, alpha }) => {
 	let res = { mode: 'rgb' };
 
 	h = (h === undefined ? 0 : h + 120) * degToRad;
-	
+
 	let amp = s === undefined ? 0 : s * l * (1 - l);
 
 	let cosh = Math.cos(h);

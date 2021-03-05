@@ -11,11 +11,11 @@ export default color => {
 		w: match[4] / 100,
 		b: match[5] / 100
 	};
-	
+
 	// normalize w + b to at most 1
 	if (res.w + res.b > 1) {
 		let s = res.w + res.b;
-		res.w /= s; 
+		res.w /= s;
 		res.b /= s;
 	}
 
@@ -25,4 +25,4 @@ export default color => {
 		res.alpha = match[7] / 255;
 	}
 	return res;
-}
+};

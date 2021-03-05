@@ -1,7 +1,7 @@
 import tape from 'tape';
 import { hsv, rgb } from '../src/index';
 
-tape('rgb() converts from HSV to RGB', function(test) {
+tape('rgb() converts from HSV to RGB', function (test) {
 	test.deepEqual(
 		rgb(hsv({ h: 0, s: 0, v: 0 })),
 		{ r: 0, g: 0, b: 0, mode: 'rgb' },
@@ -35,7 +35,7 @@ tape('rgb() converts from HSV to RGB', function(test) {
 	test.end();
 });
 
-tape('hsv() converts RGB to HSV', function(test) {
+tape('hsv() converts RGB to HSV', function (test) {
 	test.deepEqual(
 		hsv(rgb({ r: 0, g: 0, b: 0 })),
 		{ s: 0, v: 0, mode: 'hsv' },
@@ -93,7 +93,7 @@ tape('hsv() converts RGB to HSV', function(test) {
 	test.end();
 });
 
-tape('hsv(str)', function(test) {
+tape('hsv(str)', function (test) {
 	test.deepEqual(hsv('white'), { mode: 'hsv', s: 0, v: 1 });
 	test.end();
 });

@@ -17,4 +17,4 @@ export default color => {
 		res.alpha = match[7] / 255;
 	}
 	return res;
-}
+};

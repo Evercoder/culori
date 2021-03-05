@@ -1,7 +1,7 @@
 import tape from 'tape';
 import { displayable } from '../src/index';
 
-tape('RGB', function(test) {
+tape('RGB', function (test) {
 	test.equal(displayable({ mode: 'rgb', r: 0, g: 0, b: 0 }), true);
 
 	test.equal(
@@ -17,7 +17,7 @@ tape('RGB', function(test) {
 	test.end();
 });
 
-tape('LCh', function(test) {
+tape('LCh', function (test) {
 	test.equal(displayable('lch(50 0 0)'), true);
 
 	test.equal(displayable('lch(50 -100 0)'), true);

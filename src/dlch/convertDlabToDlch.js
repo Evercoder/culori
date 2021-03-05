@@ -6,8 +6,8 @@ export default ({ l, a, b, alpha }) => {
 		mode: 'dlch',
 		l: l,
 		c: c
-	}
-	if (c) res.h = normalizeHue(Math.atan2(b, a) * 180 / Math.PI);
+	};
+	if (c) res.h = normalizeHue((Math.atan2(b, a) * 180) / Math.PI);
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
 };
