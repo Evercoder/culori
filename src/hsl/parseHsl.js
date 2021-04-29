@@ -14,7 +14,7 @@ const parseHsl = color => {
 	if (match[6] !== undefined) {
 		res.alpha = match[6] / 100;
 	} else if (match[7] !== undefined) {
-		res.alpha = match[7] / 255;
+		res.alpha = +match[7];
 	}
 	return res;
 };

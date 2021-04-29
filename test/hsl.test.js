@@ -112,5 +112,17 @@ tape('hsl() parses hsl / hsla CSS strings', function (test) {
 		'red'
 	);
 
+	test.deepEqual(
+		hsl('hsla(219, 34%, 46%, 1)'),
+		{ mode: 'hsl', h: 219, s: 0.34, l: 0.46, alpha: 1 },
+		'alpha [0-1]'
+	);
+
+	test.deepEqual(
+		hsl('hsla(219, 34%, 46%, 25%)'),
+		{ mode: 'hsl', h: 219, s: 0.34, l: 0.46, alpha: 0.25 },
+		'alpha percentage'
+	);
+
 	test.end();
 });
