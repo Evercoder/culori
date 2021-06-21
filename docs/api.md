@@ -673,13 +673,19 @@ Computes the [CIE94][cie94] ΔE\*<sub>94</sub> color difference between the colo
 
 Computes the [CIEDE2000][ciede2000] ΔE\*<sub>00</sub> color difference between the colors _a_ and _b_ as implemented by [G. Sharma](http://www2.ece.rochester.edu/~gsharma/ciede2000/).
 
-Returns a [CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000) Delta E\* function.
-
 <a name="differenceCmc" href="#differenceCmc">#</a> culori.**differenceCmc**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
 
 Computes the [CMC l:c (1984)][cmc] ΔE\*<sub>CMC</sub> color difference between the colors _a_ and _b_.
 
 ΔE\*<sub>CMC</sub> is not considered a metric since it's not symmetrical, that is the distance from _a_ to _b_ is not always equal to the distance from _b_ to _a_. Therefore it cannot be reliably used with [`culori.nearest()`](#nearest).
+
+<a name="differenceHyab" href="#differenceHyab">#</a> culori.**differenceHyab**() &middot; [Source](https://github.com/evercoder/culori/blob/master/src/difference.js)
+
+Computes the HyAB color difference between the colors _a_ and _b_, as proposed in:
+
+> Abasi S, Amani Tehran M, Fairchild MD. _Distance metrics for very large color differences._ Color Res Appl. 2019; 1–16. https://doi.org/10.1002/col.22451 ([PDF](http://markfairchild.org/PDFs/PAP40.pdf))
+
+The HyAB formula combines the Euclidean and [city block](https://en.wikipedia.org/wiki/Taxicab_geometry) distance and has been experimentally shown to work better for large color differences than CIEDE2000, while still holding up well for smaller color differences, making it a _"good candidate formula for image processing and computer vision applications"_.
 
 ### Other difference formulas
 

@@ -253,6 +253,31 @@ const differenceCmc = (l = 1, c = 1) => {
 	};
 };
 
+/*
+
+	HyAB color difference formula, introduced in:
+
+		Abasi S, Amani Tehran M, Fairchild MD. 
+		"Distance metrics for very large color differences."
+		Color Res Appl. 2019; 1–16. 
+		https://doi.org/10.1002/col.22451
+
+	PDF available at:
+	
+		http://markfairchild.org/PDFs/PAP40.pdf
+ */
+const differenceHyab = () => {
+	let lab = converter('lab65');
+	return (std, smp) => {
+		let LabStd = lab(std);
+		let LabSmp = lab(smp);
+		let dL = LabStd.l - LabSmp.l;
+		let dA = LabStd.a - LabSmp.a;
+		let dB = LabStd.b - LabSmp.b;
+		return Math.abs(dL) + Math.sqrt(dA * dA + dB * dB);
+	};
+};
+
 const differenceDin99o = () => differenceEuclidean('dlab');
 
 /*
@@ -278,6 +303,7 @@ export {
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
+	differenceHyab,
 	differenceDin99o,
 	differenceKotsarenkoRamos
 };

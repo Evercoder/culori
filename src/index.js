@@ -163,6 +163,7 @@ export {
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
+	differenceHyab,
 	differenceDin99o,
 	differenceKotsarenkoRamos,
 	differenceHueSaturation,

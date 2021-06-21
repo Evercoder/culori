@@ -5,6 +5,7 @@ import {
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
+	differenceHyab,
 	differenceKotsarenkoRamos,
 	rgb,
 	lab65,
@@ -179,5 +180,10 @@ tape('differenceKotsarenkoRamos', function (test) {
 
 tape('difference in LCh space', t => {
 	t.equal(differenceEuclidean('lch')('red', 'green'), 130.3764124621912);
+	t.end();
+});
+
+tape('differenceHyab', t => {
+	t.equal(differenceHyab()('red', 'green'), 139.93576718451553);
 	t.end();
 });
