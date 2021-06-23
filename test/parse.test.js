@@ -295,3 +295,8 @@ tape('lch()', function (test) {
 
 	test.end();
 });
+
+tape('undefined', function (test) {
+	test.equal(parse(undefined), undefined);
+	test.end();
+});
