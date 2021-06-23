@@ -1,7 +1,7 @@
 import { parsers } from './modes';
 
 const parse = color => {
-	if (!color) {
+	if (typeof color !== 'string') {
 		return undefined;
 	}
 	let result;

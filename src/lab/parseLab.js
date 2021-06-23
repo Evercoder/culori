@@ -1,10 +1,6 @@
 import { lab } from '../util/regex';
 
 const parseLab = color => {
-	if (typeof color !== 'string') {
-		return undefined;
-	}
-
 	let match = color.match(lab);
 	if (!match) {
 		return undefined;
