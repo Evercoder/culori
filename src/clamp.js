@@ -48,20 +48,24 @@ const clampChroma = color => {
 
 	// By this time we know chroma = 0 is displayable and our current chroma is not.
 	// Find the displayable chroma through the bisection method.
-	let start = 0,
-		end = color.c,
-		delta = 0.01;
+	let start = 0;
+	let end = color.c;
+	let delta = 0.01;
+	let _last_good_c;
 
 	while (end - start > delta) {
 		clamped.c = start + (end - start) * 0.5;
 		if (displayable(clamped)) {
+			_last_good_c = clamped.c;
 			start = clamped.c;
 		} else {
 			end = clamped.c;
 		}
 	}
 
-	return conv(clamped);
+	return conv(
+		displayable(clamped) ? clamped : { ...clamped, c: _last_good_c }
+	);
 };
 
 // Deprecated / no longer documented
