@@ -113,7 +113,13 @@ export {
 	oklch
 };
 
-export { formatter, formatHex, formatHex8, formatRgb } from './formatter';
+export {
+	formatter,
+	formatHex,
+	formatHex8,
+	formatRgb,
+	formatHsl
+} from './formatter';
 export { default as round } from './round';
 export {
 	interpolate,
