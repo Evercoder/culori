@@ -25,7 +25,7 @@ const clampRgb = color => {
 	return conv(fixup_rgb(color));
 };
 
-const clampChroma = color => {
+const clampChroma = (color, mode = 'lch') => {
 	color = prepare(color);
 
 	// if the color is undefined or displayable, return it directly
@@ -34,8 +34,8 @@ const clampChroma = color => {
 	// keep track of color's original mode
 	let conv = converter(color.mode);
 
-	// convert to LCh for clamping
-	color = lch(color);
+	// convert to the provided `mode` for clamping
+	color = converter(mode)(color);
 
 	// try with chroma = 0
 	let clamped = { ...color, c: 0 };

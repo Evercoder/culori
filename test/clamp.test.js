@@ -35,5 +35,10 @@ tape('Issue #129', function (test) {
 		displayable(clampChroma({ mode: 'oklch', l: 0.5, c: 0.161, h: 180 })),
 		true
 	);
+
+	test.deepEqual(
+		clampChroma({ mode: 'oklch', l: 0.5, c: 0.16, h: 180 }, 'oklch'),
+		true
+	);
 	test.end();
 });
