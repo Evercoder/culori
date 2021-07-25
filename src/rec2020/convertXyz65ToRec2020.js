@@ -9,7 +9,13 @@
 
 const α = 1.09929682680944;
 const β = 0.018053968510807;
-const gamma = v => (v > β ? α * Math.pow(v, 1 / 2.4) - (α - 1) : 4.5 * v);
+const gamma = v => {
+	const abs = Math.abs(v);
+	if (abs > β) {
+		return (Math.sign(v) || 1) * (α * Math.pow(abs, 0.45) - (α - 1));
+	}
+	return 4.5 * v;
+};
 
 const convertXyz65ToRec2020 = ({ x, y, z, alpha }) => {
 	let res = {

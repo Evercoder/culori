@@ -10,7 +10,13 @@
 const α = 1.09929682680944;
 const β = 0.018053968510807;
 
-const linearize = v => (v < β * 4.5 ? v / 4.5 : Math.pow((v + α - 1) / α, 2.4));
+const linearize = v => {
+	let abs = Math.abs(v);
+	if (abs < β * 4.5) {
+		return v / 4.5;
+	}
+	return (Math.sign(v) || 1) * Math.pow((abs + α - 1) / α, 1 / 0.45);
+};
 
 const convertRec2020ToXyz65 = rec2020 => {
 	let r = linearize(rec2020.r);
