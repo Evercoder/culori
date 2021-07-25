@@ -1,4 +1,10 @@
-const fn = c => (c < 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+const fn = c => {
+	const abs = Math.abs(c);
+	if (abs < 0.04045) {
+		return c / 12.92;
+	}
+	return (Math.sign(c) || 1) * Math.pow((abs + 0.055) / 1.055, 2.4);
+};
 
 const convertRgbToLrgb = ({ r, g, b, alpha }) => {
 	let res = {
