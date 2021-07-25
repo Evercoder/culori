@@ -6,7 +6,13 @@
 		* http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
 */
 
-const linearize = v => (v >= 16 / 512 ? Math.pow(v, 1.8) : v / 16);
+const linearize = v => {
+	let abs = Math.abs(v);
+	if (abs >= 16 / 512) {
+		return Math.sign(v) * Math.pow(abs, 1.8);
+	}
+	return v / 16;
+};
 
 const convertProphotoToXyz = prophoto => {
 	let r = linearize(prophoto.r);
