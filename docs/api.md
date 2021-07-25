@@ -126,6 +126,15 @@ culori.formatRgb('lab(50 0 0 / 25%)');
 // ⇒ "rgba(119, 119, 119, 0.25)"
 ```
 
+<a name="formatHsl" href="#formatHsl">#</a> culori.**formatHsl**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/formatter.js)
+
+Returns the `hsl(…)` / `hsla(…)` string for a color. Fully opaque colors will be serialized as `hsl()`, and semi-transparent colors as `hsla()`. All values are rounded to a precision of two digits. The Saturation and Lightness are clamped to the interval `[0%, 100%]`.
+
+```js
+culori.formatHsl('lab(50 0 0 / 25%)');
+// ⇒ 'hsla(194.33, 0%, 46.63%, 0.25)'
+```
+
 ## Clamping
 
 Some color spaces (Lab and LCh in particular) allow you to express colors that can't be displayed on-screen. The methods below allow you to identify when that's the case and to produce displayable versions of the colors.
