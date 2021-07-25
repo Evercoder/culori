@@ -156,19 +156,25 @@ culori.clampRgb('lab(50% 100 100)');
 // ⇒ { mode: "lab", l: 54.29…, a: 80.81…, b: 69.88… }
 ```
 
-<a name="clampChroma" href="#clampChroma">#</a> culori.**clampChroma**(_color_ or _string_) → _color_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/clamp.js)
+<a name="clampChroma" href="#clampChroma">#</a> culori.**clampChroma**(_color_ or _string_, _mode = 'lch'_) → _color_ &middot; [Source](https://github.com/evercoder/culori/blob/master/src/clamp.js)
 
-Obtains a displayable version of the color by converting it to the `lch` color space, and trying to find the largest Chroma value that's displayable for the given Lightness and Hue. Compared to `clampRgb`, the function has the advantage of preserving the hue of the original color. The returned color is converted back to the original color space.
+Obtains a displayable version of the color by converting it to a temporary color space containing a Chroma channel, then looking for the closest Chroma value that's displayable for the given Lightness and Hue. Compared to `clampRgb`, the function has the advantage of preserving the hue of the original color. The displayable color returned by this function will be converted back to the original color space.
+
+```js
+culori.clampChroma('lab(50% 100 100)');
+// ⇒ { mode: 'lab', l:50.00…, a: 63.11…, b: 63.11… }
+```
+
+By default, the color is converted to `lch` to perform the clamping, but any color space that contains a Chroma dimension can be used by sending an explicit `mode` argument.
+
+```js
+culori.clampChroma({ mode: 'oklch', l: 0.5, c: 0.16, h: 180 }, 'oklch');
+// => { mode: 'oklch', l: 0.5, c: 0.09, h: 180 }
+```
 
 If the chroma-finding algorithm fails to find a displayable color (which can happen when not even the achromatic version, with `Chroma = 0`, is displayable), the method falls back to the `clampRgb` method, as a last resort.
 
 The function uses [the bisection method](https://en.wikipedia.org/wiki/Bisection_method) to speed up the search for the largest Chroma value. However, due to discontinuities in the CIELCh color space, the function is not guaranteed to return the optimal result. [See this discussion](https://github.com/d3/d3-color/issues/33) for details.
-
-```js
-// Chroma clamping:
-culori.clampChroma('lab(50% 100 100)');
-// ⇒ { mode: "lab", l:50.00…, a: 63.11…, b: 63.11… }
-```
 
 ## Interpolation
 
