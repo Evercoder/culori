@@ -208,7 +208,7 @@ The Oklab color space in Cartesian form.
 
 | Channel | Range              | Description           |
 | ------- | ------------------ | --------------------- |
-| `l`     | `[0, 1]`           | Lightness             |
+| `l`     | `[0, 0.999]`≈      | Lightness             |
 | `a`     | `[-0.233, 0.276]`≈ | Green–red component   |
 | `b`     | `[-0.311, 0.198]`≈ | Blue–yellow component |
 
@@ -218,7 +218,7 @@ The Oklab color space in cylindrical form.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| `l`     | `[0, 1]`      | Lightness   |
+| `l`     | `[0, 0.999]`≈ | Lightness   |
 | `c`     | `[0, 0.322]`≈ | Chroma      |
 | `h`     | `[0, 360)`    | Hue         |
 
