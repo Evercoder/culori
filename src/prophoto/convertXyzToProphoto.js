@@ -6,7 +6,13 @@
 		* http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
 */
 
-const gamma = v => (v >= 1 / 512 ? Math.pow(v, 1 / 1.8) : 16 * v);
+const gamma = v => {
+	let abs = Math.abs(v);
+	if (abs >= 1 / 512) {
+		return Math.sign(v) * Math.pow(abs, 1 / 1.8);
+	}
+	return 16 * v;
+};
 
 const convertXyzToProphoto = ({ x, y, z, alpha }) => {
 	let res = {
