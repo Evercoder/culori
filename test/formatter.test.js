@@ -31,7 +31,7 @@ tape('formatHsl', function (test) {
 			l: 0.48321,
 			alpha: -0.2
 		}),
-		'hsla(30, 24%, 48%, 0)'
+		'hsla(30.21, 23.61%, 48.32%, 0)'
 	);
 	test.equal(
 		formatHsl({ mode: 'hsl', h: 405, s: 1.2, l: -1 }),
