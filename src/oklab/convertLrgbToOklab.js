@@ -1,7 +1,7 @@
 const convertLrgbToOklab = ({ r, g, b, alpha }) => {
-	let L = Math.cbrt(0.412165612 * r + 0.536275208 * g + 0.0514575653 * b);
-	let M = Math.cbrt(0.211859107 * r + 0.6807189584 * g + 0.107406579 * b);
-	let S = Math.cbrt(0.0883097947 * r + 0.2818474174 * g + 0.6302613616 * b);
+	let L = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+	let M = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+	let S = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
 
 	let res = {
 		mode: 'oklab',
