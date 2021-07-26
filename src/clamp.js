@@ -43,7 +43,7 @@ const clampChroma = (color, mode = 'lch') => {
 	// if not even chroma = 0 is displayable
 	// fall back to RGB clamping
 	if (!displayable(clamped)) {
-		return conv(fixup_rgb(color));
+		return conv(fixup_rgb(clamped));
 	}
 
 	// By this time we know chroma = 0 is displayable and our current chroma is not.
