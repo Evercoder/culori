@@ -1,6 +1,7 @@
 import converter from './converter';
 import displayable from './displayable';
 import prepare from './_prepare';
+import { getModeDefinition } from './modes';
 
 let rgb = converter('rgb');
 
@@ -49,10 +50,11 @@ const clampChroma = (color, mode = 'lch') => {
 	// Find the displayable chroma through the bisection method.
 	let start = 0;
 	let end = color.c;
-	let delta = 0.01;
+	let range = getModeDefinition(mode).ranges.c;
+	let resolution = (range[1] - range[0]) / Math.pow(2, 13);
 	let _last_good_c;
 
-	while (end - start > delta) {
+	while (end - start > resolution) {
 		clamped.c = start + (end - start) * 0.5;
 		if (displayable(clamped)) {
 			_last_good_c = clamped.c;

@@ -22,7 +22,7 @@ const definition = {
 	parsers: [],
 
 	ranges: {
-		l: [0, 1],
+		l: [0, 0.999],
 		c: [0, 0.322],
 		h: [0, 360]
 	}
