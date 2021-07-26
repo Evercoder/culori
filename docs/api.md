@@ -181,6 +181,12 @@ culori.clampChroma({ mode: 'oklch', l: 0.5, c: 0.16, h: 180 }, 'oklch');
 // => { mode: 'oklch', l: 0.5, c: 0.09, h: 180 }
 ```
 
+In general, chroma clamping is more accurate and computationally simpler when performed in the color's original space, where possible. Here's some sample code that uses the color's own `mode` for color spaces containing a Chroma dimension, and `lch` otherwise:
+
+```js
+culori.clampChroma(color, color.c !== undefined ? color.mode : 'lch');
+```
+
 If the chroma-finding algorithm fails to find a displayable color (which can happen when not even the achromatic version, with `Chroma = 0`, is displayable), the method falls back to the `clampRgb` method, as a last resort.
 
 The function uses [the bisection method](https://en.wikipedia.org/wiki/Bisection_method) to speed up the search for the largest Chroma value. However, due to discontinuities in the CIELCh color space, the function is not guaranteed to return the optimal result. [See this discussion](https://github.com/d3/d3-color/issues/33) for details.

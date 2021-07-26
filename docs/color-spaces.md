@@ -234,7 +234,7 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in Cartesian form.
 
 | Channel | Range              | Description           |
 | ------- | ------------------ | --------------------- |
-| `l`     | `[0, 0.221]`≈      | Lightness             |
+| `j`     | `[0, 0.221]`≈      | Lightness             |
 | `a`     | `[-0.108, 0.129]`≈ | Green–red component   |
 | `b`     | `[-0.185, 0.134]`≈ | Blue–yellow component |
 
@@ -244,7 +244,7 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| `l`     | `[0, 0.221]`≈ | Lightness   |
+| `j`     | `[0, 0.221]`≈ | Lightness   |
 | `c`     | `[0, 0.190]`≈ | Chroma      |
 | `h`     | `[0, 360)`    | Hue         |
 
