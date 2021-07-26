@@ -12,17 +12,18 @@ let ranges = (mode, step = 0.01) => {
 		(acc, ch) => ((acc[ch] = [Infinity, -Infinity]), acc),
 		{}
 	);
-	let r, g, b, c;
+	let r, g, b, c, v;
 	for (r = 0; r <= 1; r += step) {
 		for (g = 0; g <= 1; g += step) {
 			for (b = 0; b <= 1; b += step) {
 				c = conv({ mode: 'rgb', r, g, b });
 				chs.forEach(ch => {
-					if (c[ch] < res[ch][0]) {
-						res[ch][0] = c[ch];
+					v = c[ch];
+					if (v < res[ch][0]) {
+						res[ch][0] = v;
 					}
-					if (c[ch] > res[ch][1]) {
-						res[ch][1] = c[ch];
+					if (v > res[ch][1]) {
+						res[ch][1] = v;
 					}
 				});
 			}
@@ -31,4 +32,4 @@ let ranges = (mode, step = 0.01) => {
 	return res;
 };
 
-console.log(ranges('oklch', 0.0025));
+console.log(ranges(process.argv[2], 0.0025));

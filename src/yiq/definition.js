@@ -37,8 +37,8 @@ const definition = {
 	channels: ['y', 'i', 'q', 'alpha'],
 
 	ranges: {
-		i: [-0.593, 0.593],
-		q: [-0.52, 0.52]
+		i: [-0.595, 0.595],
+		q: [-0.522, 0.522]
 	},
 
 	interpolate: {

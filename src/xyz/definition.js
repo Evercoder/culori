@@ -27,9 +27,9 @@ const definition = {
 	channels: ['x', 'y', 'z', 'alpha'],
 
 	ranges: {
-		x: [0, 0.962],
-		y: [0, 0.997],
-		z: [0, 0.823]
+		x: [0, 0.964],
+		y: [0, 0.999],
+		z: [0, 0.825]
 	},
 
 	interpolate: {

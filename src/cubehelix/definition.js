@@ -45,7 +45,8 @@ const definition = {
 
 	ranges: {
 		h: [0, 360],
-		s: [0, 4.6143]
+		s: [0, 4.614],
+		l: [0, 1]
 	},
 
 	input: {

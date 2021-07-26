@@ -113,8 +113,8 @@ The CIELAB color space using the [D50 standard illuminant](https://en.wikipedia.
 | Channel | Range                 | Description           |
 | ------- | --------------------- | --------------------- |
 | `l`     | `[0, 100]`            | Lightness             |
-| `a`     | `[-79.167, 93.408]`≈  | Green–red component   |
-| `b`     | `[-111.859, 93.246]`≈ | Blue–yellow component |
+| `a`     | `[-79.287, 93.55]`≈   | Green–red component   |
+| `b`     | `[-112.029, 93.388]`≈ | Blue–yellow component |
 
 #### `lch`
 
@@ -123,7 +123,7 @@ The CIELCh color space using the D50 standard illuminant.
 | Channel | Range           | Description |
 | ------- | --------------- | ----------- |
 | `l`     | `[0, 100]`      | Lightness   |
-| `c`     | `[0, 131.008]`≈ | Chroma      |
+| `c`     | `[0, 131.207]`≈ | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
 #### `lab65`
@@ -161,15 +161,15 @@ let deltaE_uv = culori.colorDifferenceEuclidean('luv');
 | Channel | Range                 | Description           |
 | ------- | --------------------- | --------------------- |
 | `l`     | `[0, 100]`            | Lightness             |
-| `u`     | `[-84.86, 174.87]`≈   | Green–red component   |
-| `v`     | `[-125.744, 87.165]`≈ | Blue–yellow component |
+| `u`     | `[-84.936, 175.042]`≈ | Green–red component   |
+| `v`     | `[-125.882, 87.243]`≈ | Blue–yellow component |
 
 #### `lchuv`
 
 | Channel | Range           | Description |
 | ------- | --------------- | ----------- |
 | `l`     | `[0, 100]`      | Lightness   |
-| `c`     | `[0, 176.609]`≈ | Chroma      |
+| `c`     | `[0, 176.956]`≈ | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
 ### DIN99 Lab / LCh
@@ -182,11 +182,11 @@ The [DIN99][din99o] color space "squishes" the CIELAB D65 color space to obtain 
 
 The DIN99o color space in Cartesian form.
 
-| Channel | Range               | Description |
-| ------- | ------------------- | ----------- |
-| `l`     | `[0, 100]`          | Lightness   |
-| `a`     | `[-40.09, 45.5]`≈   |
-| `b`     | `[-40.47, 44.344]`≈ |
+| Channel | Range                | Description |
+| ------- | -------------------- | ----------- |
+| `l`     | `[0, 100]`           | Lightness   |
+| `a`     | `[-40.09, 45.501]`≈  |
+| `b`     | `[-40.469, 44.344]`≈ |
 
 #### `dlch`
 
@@ -234,8 +234,8 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in Cartesian form.
 
 | Channel | Range              | Description           |
 | ------- | ------------------ | --------------------- |
-| `j`     | `[0, 0.221]`≈      | Lightness             |
-| `a`     | `[-0.108, 0.129]`≈ | Green–red component   |
+| `j`     | `[0, 0.222]`≈      | Lightness             |
+| `a`     | `[-0.109, 0.129]`≈ | Green–red component   |
 | `b`     | `[-0.185, 0.134]`≈ | Blue–yellow component |
 
 #### `jch`
@@ -244,7 +244,7 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| `j`     | `[0, 0.221]`≈ | Lightness   |
+| `j`     | `[0, 0.222]`≈ | Lightness   |
 | `c`     | `[0, 0.190]`≈ | Chroma      |
 | `h`     | `[0, 360)`    | Hue         |
 
@@ -255,8 +255,8 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.
 | Channel | Range              | Description                    |
 | ------- | ------------------ | ------------------------------ |
 | Y       | `[0, 1]`           | Luma                           |
-| I       | `[-0.593, 0.593]`≈ | In-phase (orange-blue axis)    |
-| Q       | `[-0.520, 0.520]`≈ | Quadrature (green-purple axis) |
+| I       | `[-0.595, 0.595]`≈ | In-phase (orange-blue axis)    |
+| Q       | `[-0.522, 0.522]`≈ | Quadrature (green-purple axis) |
 
 ### CIE XYZ
 
@@ -268,9 +268,9 @@ The CIE XYZ color space in respect to the D50 standard illuminant.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| X       | `[0, 0.962]`≈ | ?           |
-| Y       | `[0, 0.997]`≈ | ?           |
-| Z       | `[0, 0.823]`≈ | ?           |
+| X       | `[0, 0.964]`≈ | ?           |
+| Y       | `[0, 0.999]`≈ | ?           |
+| Z       | `[0, 0.825]`≈ | ?           |
 
 #### `xyz65`
 
@@ -278,9 +278,9 @@ The CIE XYZ color space in respect to the D65 standard illuminant.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| X       | `[0, 0.946]`≈ | ?           |
-| Y       | `[0, 0.995]`≈ | ?           |
-| Z       | `[0, 1.083]`≈ | ?           |
+| X       | `[0, 0.950]`≈ | ?           |
+| Y       | `[0, 1]`≈     | ?           |
+| Z       | `[0, 1.088]`≈ | ?           |
 
 ### Cubehelix
 
@@ -294,11 +294,11 @@ It was expanded into a cylindrical color space by [Mike Bostock](https://en.wiki
 
 The channels in the `cubehelix` color space maintain the conventions from D3, namely:
 
-| Channel | Range         | Description                                                              |
-| ------- | ------------- | ------------------------------------------------------------------------ |
-| `h`     | `[0, 360)`    | Hue (Based on _start color_ and _rotations_ as defined in Green's paper) |
-| `s`     | `[0, 4.6143]` | Saturation (Called _hue_ in op. cit.)                                    |
-| `l`     | `[0, 1]`      | Lightness                                                                |
+| Channel | Range        | Description                                                              |
+| ------- | ------------ | ------------------------------------------------------------------------ |
+| `h`     | `[0, 360)`   | Hue (Based on _start color_ and _rotations_ as defined in Green's paper) |
+| `s`     | `[0, 4.614]` | Saturation (Called _hue_ in op. cit.)                                    |
+| `l`     | `[0, 1]`     | Lightness                                                                |
 
 [din99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
 [yiq]: https://en.wikipedia.org/wiki/YIQ
