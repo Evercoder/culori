@@ -1043,6 +1043,10 @@ All built-in color spaces follow these conventions in regards to the `channels` 
 
 This makes sure [`culori.differenceEuclidean()`](#differenceEuclidean) works as expected, but there may be more hidden assumptions in the codebase.
 
+<a name="getModeDefinition" href="#getModeDefinition">#</a> culori.**getModeDefinition**(_mode_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/modes.js)
+
+Returns the definition object for the _mode_ color space. As with all methods in this section, the definition object may change before the first stable release, so keep an eye on the [release notes](https://github.com/evercoder/culori/releases) for any breaking changes.
+
 [css-images-4]: https://drafts.csswg.org/css-images-4/#color-stop-syntax
 [css-easing-1]: http://drafts.csswg.org/css-easing-1
 [smoothstep]: https://en.wikipedia.org/wiki/Smoothstep
