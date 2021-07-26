@@ -2,7 +2,6 @@ import converter from './converter';
 import displayable from './displayable';
 import prepare from './_prepare';
 
-let lch = converter('lch');
 let rgb = converter('rgb');
 
 const fixup_rgb = color => {
