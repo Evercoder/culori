@@ -6,6 +6,9 @@ const c3 = 18.6875; // = 2392 / Math.pow(2, 7);
 const d0 = 1.6295499532821566e-11;
 
 const pq_inv = v => {
+	if (v < 0) {
+		return -1 * pq_inv(-v);
+	}
 	let vp = Math.pow(v, 1 / p);
 	return 10000 * Math.pow((c1 - vp) / (c3 * vp - c2), 1 / n);
 };

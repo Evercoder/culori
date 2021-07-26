@@ -13,13 +13,13 @@ const definition = {
 	mode: 'jch',
 
 	output: {
-		lab: convertJchToJab,
+		jab: convertJchToJab,
 		rgb: c => convertJabToRgb(convertJchToJab(c))
 	},
 
 	input: {
 		rgb: c => convertJabToJch(convertRgbToJab(c)),
-		lab: convertJabToJch
+		jab: convertJabToJch
 	},
 
 	channels: ['j', 'c', 'h', 'alpha'],
