@@ -126,3 +126,17 @@ tape('hsl() parses hsl / hsla CSS strings', function (test) {
 
 	test.end();
 });
+
+tape('CSS <number> in `hsl()` syntax', test => {
+	test.deepEqual(
+		hsl('hsl(3e1, 1e2%, 0.5e2%)'),
+		{ mode: 'hsl', h: 30, s: 1, l: 0.5 },
+		'exponential notation'
+	);
+	test.deepEqual(
+		hsl('hsl(30.5, 90.6%, 48.3%)'),
+		{ mode: 'hsl', h: 30.5, s: 0.9059999999999999, l: 0.483 },
+		'float values'
+	);
+	test.end();
+});
