@@ -5,12 +5,10 @@ const c2 = 18.8515625; // = 2413 / Math.pow(2, 7);
 const c3 = 18.6875; // = 2392 / Math.pow(2, 7);
 const d0 = 1.6295499532821566e-11;
 
+/* `v` may be negative, in which case return 0 instead of NaN */
 const pq = v => {
-	if (v < 0) {
-		return -1 * pq(-v);
-	}
 	let vn = Math.pow(v / 10000, n);
-	return Math.pow((c1 + c2 * vn) / (1 + c3 * vn), p);
+	return Math.pow((c1 + c2 * vn) / (1 + c3 * vn), p) || 0;
 };
 
 // Convert to Absolute XYZ
