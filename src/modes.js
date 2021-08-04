@@ -1,6 +1,9 @@
 const converters = {};
 const modes = {};
+
 const parsers = [];
+const colorProfiles = {};
+
 const identity = v => v;
 
 const defineMode = definition => {
@@ -46,9 +49,15 @@ const defineMode = definition => {
 	});
 
 	modes[definition.mode] = definition;
-	(definition.parsers || []).forEach(parser => parsers.push(parser));
+	(definition.parsers || []).forEach(parser => {
+		if (typeof parser === 'function') {
+			parsers.push(parser);
+		} else if (typeof parser === 'string') {
+			colorProfiles[parser] = definition.mode;
+		}
+	});
 };
 
 const getModeDefinition = mode => modes[mode];
 
-export { defineMode, getModeDefinition, converters, parsers };
+export { defineMode, getModeDefinition, converters, parsers, colorProfiles };

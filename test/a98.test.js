@@ -17,3 +17,21 @@ tape('a98', t => {
 	});
 	t.end();
 });
+
+tape('color(a98-rgb)', t => {
+	t.deepEqual(a98('color(a98-rgb 1 0 0 / 0.25)'), {
+		r: 1,
+		g: 0,
+		b: 0,
+		alpha: 0.25,
+		mode: 'a98'
+	});
+	t.deepEqual(a98('color(a98-rgb 0% 50% 0.5 / 25%)'), {
+		r: 0,
+		g: 0.5,
+		b: 0.5,
+		alpha: 0.25,
+		mode: 'a98'
+	});
+	t.end();
+});

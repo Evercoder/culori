@@ -8,8 +8,7 @@ import convertXyz65ToRgb from '../xyz65/convertXyz65ToRgb';
 const definition = {
 	...rgb,
 	mode: 'a98',
-	alias: ['a98-rgb'],
-	parsers: [],
+	parsers: ['a98-rgb'],
 
 	input: {
 		rgb: color => convertXyz65ToA98(convertRgbToXyz65(color)),

@@ -29,3 +29,21 @@ tape('prophoto', t => {
 	);
 	t.end();
 });
+
+tape('color(prophoto-rgb)', t => {
+	t.deepEqual(prophoto('color(prophoto-rgb 1 0 0 / 0.25)'), {
+		r: 1,
+		g: 0,
+		b: 0,
+		alpha: 0.25,
+		mode: 'prophoto'
+	});
+	t.deepEqual(prophoto('color(prophoto-rgb 0% 50% 0.5 / 25%)'), {
+		r: 0,
+		g: 0.5,
+		b: 0.5,
+		alpha: 0.25,
+		mode: 'prophoto'
+	});
+	t.end();
+});

@@ -6,12 +6,12 @@
 	to be interpolated in the color regexes.
  */
 
-const num = (/([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)/ + '').replace(/^\/|\/$/g, ''); // number
-const per = `${num}%`; // percentage
-const per_or_num = `${num}%?`; // percentage or number
-const alpha = `(?:${num}%|${num})`; // alpha-value
+const num = (/([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)/ + '').replace(/^\/|\/$/g, ''); // <number>
+const per = `${num}%`; // <percentage>
+const num_per = `(?:${num}%|${num})`; // <alpha-value> and <number-percentage>
 const hue = `(?:${num}(deg|grad|rad|turn)|${num})`; // hue
 const c = `\\s*,\\s*`; // comma
+const so = '\\s*'; // optional space
 const s = `\\s+`; // space
 
 /*
@@ -19,16 +19,16 @@ const s = `\\s+`; // space
 	Reference: https://drafts.csswg.org/css-color/#rgb-functions
  */
 const rgb_num_old = new RegExp(
-	`^rgba?\\(\\s*${num}${c}${num}${c}${num}\\s*(?:,\\s*${alpha}\\s*)?\\)$`
+	`^rgba?\\(\\s*${num}${c}${num}${c}${num}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
 );
 const rgb_per_old = new RegExp(
-	`^rgba?\\(\\s*${per}${c}${per}${c}${per}\\s*(?:,\\s*${alpha}\\s*)?\\)$`
+	`^rgba?\\(\\s*${per}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
 );
 const rgb_num_new = new RegExp(
-	`^rgba?\\(\\s*${num}${s}${num}${s}${num}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`
+	`^rgba?\\(\\s*${num}${s}${num}${s}${num}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
 );
 const rgb_per_new = new RegExp(
-	`^rgba?\\(\\s*${per}${s}${per}${s}${per}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`
+	`^rgba?\\(\\s*${per}${s}${per}${s}${per}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
 );
 
 /*
@@ -36,10 +36,10 @@ const rgb_per_new = new RegExp(
 	Reference: https://drafts.csswg.org/css-color/#the-hsl-notation
  */
 const hsl_old = new RegExp(
-	`^hsla?\\(\\s*${hue}${c}${per}${c}${per}\\s*(?:,\\s*${alpha}\\s*)?\\)$`
+	`^hsla?\\(\\s*${hue}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
 );
 const hsl_new = new RegExp(
-	`^hsla?\\(\\s*${hue}${s}${per}${s}${per}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`
+	`^hsla?\\(\\s*${hue}${s}${per}${s}${per}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
 );
 
 /*
@@ -52,7 +52,7 @@ const hex = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i;
 	Reference: https://drafts.csswg.org/css-color/#the-hwb-notation
  */
 const hwb = new RegExp(
-	`^hwb\\(\\s*${hue}${s}${per}${s}${per}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`
+	`^hwb\\(\\s*${hue}${s}${per}${s}${per}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
 );
 
 /*
@@ -60,10 +60,14 @@ const hwb = new RegExp(
 	Reference: https://drafts.csswg.org/css-color/#lab-colors
  */
 const lab = new RegExp(
-	`^lab\\(\\s*${per_or_num}${s}${num}${s}${num}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`
+	`^lab\\(\\s*${num}%?${s}${num}${s}${num}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
 );
 const lch = new RegExp(
-	`^lch\\(\\s*${per_or_num}${s}${num}${s}${hue}\\s*(?:\\/\\s*${alpha}\\s*)?\\)$`
+	`^lch\\(\\s*${num}%?${s}${num}${s}${hue}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
+);
+
+const profiled = new RegExp(
+	`^color\\(${so}([a-z][a-z0-9\\-]*)${s}${num_per}${s}${num_per}${s}${num_per}${so}(?:\\/${so}${num_per}${so})?\\)$`
 );
 
 export {
@@ -76,5 +80,6 @@ export {
 	hex,
 	hwb,
 	lab,
-	lch
+	lch,
+	profiled
 };

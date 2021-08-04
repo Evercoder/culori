@@ -17,3 +17,21 @@ tape('rec2020', t => {
 	});
 	t.end();
 });
+
+tape('color(rec2020)', t => {
+	t.deepEqual(rec2020('color(rec2020 1 0 0 / 0.25)'), {
+		r: 1,
+		g: 0,
+		b: 0,
+		alpha: 0.25,
+		mode: 'rec2020'
+	});
+	t.deepEqual(rec2020('color(rec2020 0% 50% 0.5 / 25%)'), {
+		r: 0,
+		g: 0.5,
+		b: 0.5,
+		alpha: 0.25,
+		mode: 'rec2020'
+	});
+	t.end();
+});

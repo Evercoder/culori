@@ -52,3 +52,21 @@ tape('rgb(Object)', function (test) {
 
 	test.end();
 });
+
+tape('color(srgb)', t => {
+	t.deepEqual(rgb('color(srgb 1 0 0 / 0.25)'), {
+		r: 1,
+		g: 0,
+		b: 0,
+		alpha: 0.25,
+		mode: 'rgb'
+	});
+	t.deepEqual(rgb('color(srgb 0% 50% 0.5 / 25%)'), {
+		r: 0,
+		g: 0.5,
+		b: 0.5,
+		alpha: 0.25,
+		mode: 'rgb'
+	});
+	t.end();
+});

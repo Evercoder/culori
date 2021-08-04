@@ -17,3 +17,21 @@ tape('p3', t => {
 	});
 	t.end();
 });
+
+tape('color(display-p3)', t => {
+	t.deepEqual(p3('color(display-p3 1 0 0 / 0.25)'), {
+		r: 1,
+		g: 0,
+		b: 0,
+		alpha: 0.25,
+		mode: 'p3'
+	});
+	t.deepEqual(p3('color(display-p3 0% 50% 0.5 / 25%)'), {
+		r: 0,
+		g: 0.5,
+		b: 0.5,
+		alpha: 0.25,
+		mode: 'p3'
+	});
+	t.end();
+});
