@@ -13,6 +13,7 @@ const definition = {
 	mode: 'rgb',
 	channels: ['r', 'g', 'b', 'alpha'],
 	parsers: [parseHex, parseRgb, parseNamed, parseTransparent, 'srgb'],
+	serialize: 'rgb(',
 
 	interpolate: {
 		r: interpolatorLinear,

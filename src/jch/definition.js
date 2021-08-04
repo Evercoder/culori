@@ -13,6 +13,7 @@ const definition = {
 	mode: 'jch',
 
 	parsers: ['--jzczhz'],
+	serialize: 'color(--jzczhz ',
 
 	output: {
 		jab: convertJchToJab,

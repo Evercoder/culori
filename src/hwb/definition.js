@@ -25,6 +25,7 @@ const definition = {
 	},
 
 	parsers: [parseHwb],
+	serialize: 'hwb(',
 
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },

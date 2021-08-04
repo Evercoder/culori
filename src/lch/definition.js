@@ -31,6 +31,7 @@ const definition = {
 	},
 
 	parsers: [parseLch],
+	serialize: 'lch(',
 
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },

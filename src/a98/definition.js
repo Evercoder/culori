@@ -9,6 +9,7 @@ const definition = {
 	...rgb,
 	mode: 'a98',
 	parsers: ['a98-rgb'],
+	serialize: 'color(a98-rgb ',
 
 	input: {
 		rgb: color => convertXyz65ToA98(convertRgbToXyz65(color)),

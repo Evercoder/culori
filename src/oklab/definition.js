@@ -30,7 +30,8 @@ const definition = {
 		b: [-0.311, 0.198]
 	},
 
-	parsers: ['--oklab']
+	parsers: ['--oklab'],
+	serialize: 'color(--oklab '
 };
 
 export default definition;

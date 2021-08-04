@@ -9,6 +9,7 @@ const definition = {
 	mode: 'lch65',
 
 	parsers: ['--lch-d65'],
+	serialize: 'color(--lch-d65 ',
 
 	output: {
 		lab65: c => convertLchToLab(c, 'lab65'),

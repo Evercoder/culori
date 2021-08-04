@@ -20,7 +20,8 @@ const definition = {
 		rgb: color => convertXyz65ToRgb(convertRec2020ToXyz65(color))
 	},
 
-	parsers: ['rec2020']
+	parsers: ['rec2020'],
+	serialize: 'color(rec2020 '
 };
 
 export default definition;

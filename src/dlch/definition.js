@@ -15,6 +15,7 @@ const definition = {
 	mode: 'dlch',
 
 	parsers: ['--din99o-lch'],
+	serialize: 'color(--din99o-lch ',
 
 	output: {
 		lab65: convertDlchToLab65,

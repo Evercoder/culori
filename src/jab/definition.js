@@ -24,6 +24,7 @@ const definition = {
 	channels: ['j', 'a', 'b', 'alpha'],
 
 	parsers: ['--jzazbz'],
+	serialize: 'color(--jzazbz ',
 
 	input: {
 		rgb: convertRgbToJab,

@@ -13,6 +13,7 @@ import { fixupAlpha } from '../fixup/alpha';
 const definition = {
 	mode: 'xyz',
 	parsers: ['xyz'],
+	serialize: 'color(xyz ',
 
 	output: {
 		rgb: convertXyzToRgb,

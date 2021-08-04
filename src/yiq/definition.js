@@ -37,6 +37,7 @@ const definition = {
 	channels: ['y', 'i', 'q', 'alpha'],
 
 	parsers: ['--yiq'],
+	serialize: 'color(--yiq ',
 
 	ranges: {
 		i: [-0.595, 0.595],

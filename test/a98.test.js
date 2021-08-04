@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { a98 } from '../src/index';
+import { a98, formatCss } from '../src/index';
 
 tape('a98', t => {
 	t.deepEqual(a98('white'), {
@@ -33,5 +33,13 @@ tape('color(a98-rgb)', t => {
 		alpha: 0.25,
 		mode: 'a98'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(a98-rgb 0% 50% 0.5 / 25%)'),
+		'color(a98-rgb 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

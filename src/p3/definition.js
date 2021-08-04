@@ -8,6 +8,7 @@ const definition = {
 	...rgb,
 	mode: 'p3',
 	parsers: ['display-p3'],
+	serialize: 'color(display-p3 ',
 
 	input: {
 		rgb: color => convertXyz65ToP3(convertRgbToXyz65(color)),

@@ -25,6 +25,7 @@ const definition = {
 	},
 
 	parsers: [parseHsl],
+	serialize: 'hsl(',
 
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },

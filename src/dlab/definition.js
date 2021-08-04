@@ -9,6 +9,7 @@ const definition = {
 	mode: 'dlab',
 
 	parsers: ['--din99o-lab'],
+	serialize: 'color(--din99o-lab ',
 
 	output: {
 		lab65: convertDlabToLab65,

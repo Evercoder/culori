@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { cubehelix } from '../src/index';
+import { cubehelix, formatCss } from '../src/index';
 
 tape('color(--cubehelix)', t => {
 	t.deepEqual(cubehelix('color(--cubehelix 30 0.5 1 / 0.25)'), {
@@ -16,5 +16,13 @@ tape('color(--cubehelix)', t => {
 		alpha: 0.25,
 		mode: 'cubehelix'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--cubehelix 0 50% 0.5 / 25%)'),
+		'color(--cubehelix 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

@@ -9,6 +9,7 @@ const definition = {
 	mode: 'lab65',
 
 	parsers: ['--lab-d65'],
+	serialize: 'color(--lab-d65 ',
 
 	output: {
 		xyz65: convertLab65ToXyz65,

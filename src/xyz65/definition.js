@@ -14,6 +14,7 @@ import { fixupAlpha } from '../fixup/alpha';
 
 const definition = {
 	mode: 'xyz65',
+	serialize: 'color(--xyz-d65 ',
 
 	output: {
 		rgb: convertXyz65ToRgb,

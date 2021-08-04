@@ -28,6 +28,7 @@ const definition = {
 	},
 
 	parsers: [parseLab],
+	serialize: 'lab(',
 
 	interpolate: {
 		l: interpolatorLinear,

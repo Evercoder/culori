@@ -17,6 +17,7 @@ const definition = {
 	...rgb,
 	mode: 'prophoto',
 	parsers: ['prophoto-rgb'],
+	serialize: 'color(prophoto-rgb ',
 
 	input: {
 		xyz: convertXyzToProphoto,

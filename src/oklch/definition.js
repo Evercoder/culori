@@ -19,6 +19,7 @@ const definition = {
 	},
 
 	parsers: ['--oklch'],
+	serialize: 'color(--oklch ',
 
 	ranges: {
 		l: [0, 0.999],

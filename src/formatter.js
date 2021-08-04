@@ -1,5 +1,7 @@
 import converter from './converter';
 import round from './round';
+import prepare from './_prepare';
+import { getModeDefinition } from './modes';
 
 let rgb = converter('rgb');
 let hsl = converter('hsl');
@@ -74,6 +76,30 @@ const formatHsl = c => {
 	}
 };
 
+const formatCss = c => {
+	const color = prepare(c);
+	if (!color) {
+		return undefined;
+	}
+	const def = getModeDefinition(color.mode);
+	if (typeof def.serialize === 'string') {
+		let res = def.serialize;
+		def.channels.forEach((ch, i) => {
+			if (ch !== 'alpha') {
+				res += (i ? ' ' : '') + (color[ch] || 0);
+			}
+		});
+		if (color.alpha !== undefined) {
+			res += ` / ${color.alpha}`;
+		}
+		return res + ')';
+	}
+	if (typeof def.serialize === 'function') {
+		return def.serialize(color);
+	}
+	return undefined;
+};
+
 // Deprecated / no longer documented
 const formatter = (format = 'rgb') => {
 	switch (format) {
@@ -85,4 +111,4 @@ const formatter = (format = 'rgb') => {
 	return undefined;
 };
 
-export { formatHex, formatHex8, formatRgb, formatHsl, formatter };
+export { formatHex, formatHex8, formatRgb, formatHsl, formatCss, formatter };

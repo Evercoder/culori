@@ -14,6 +14,7 @@ const definition = {
 	},
 
 	parsers: ['--hsv'],
+	serialize: 'color(--hsv ',
 
 	input: {
 		rgb: convertRgbToHsv

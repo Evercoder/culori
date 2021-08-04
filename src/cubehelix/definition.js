@@ -43,6 +43,7 @@ const definition = {
 	mode: 'cubehelix',
 	channels: ['h', 's', 'l', 'alpha'],
 	parsers: ['--cubehelix'],
+	serialize: 'color(--cubehelix ',
 
 	ranges: {
 		h: [0, 360],

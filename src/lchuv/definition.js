@@ -33,6 +33,7 @@ const definition = {
 	channels: ['l', 'c', 'h', 'alpha'],
 
 	parsers: ['--lchuv'],
+	serialize: 'color(--lchuv ',
 
 	ranges: {
 		l: [0, 100],
