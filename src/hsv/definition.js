@@ -13,6 +13,8 @@ const definition = {
 		rgb: convertHsvToRgb
 	},
 
+	parsers: ['--hsv'],
+
 	input: {
 		rgb: convertRgbToHsv
 	},

@@ -11,7 +11,6 @@ import { averageAngle } from '../average';
 
 const definition = {
 	mode: 'lch',
-	alias: ['lch-d50'],
 
 	output: {
 		lab: convertLchToLab,

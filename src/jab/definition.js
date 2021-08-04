@@ -23,6 +23,8 @@ const definition = {
 	mode: 'jab',
 	channels: ['j', 'a', 'b', 'alpha'],
 
+	parsers: ['--jzazbz'],
+
 	input: {
 		rgb: convertRgbToJab,
 		xyz65: convertXyz65ToJab

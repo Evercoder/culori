@@ -47,3 +47,14 @@ tape('lab65 <-> lch65', t => {
 	);
 	t.end();
 });
+
+tape('color(--lch-d65)', t => {
+	t.deepEqual(lch65('color(--lch-d65 30 0.5 1 / 0.25)'), {
+		l: 30,
+		c: 0.5,
+		h: 1,
+		alpha: 0.25,
+		mode: 'lch65'
+	});
+	t.end();
+});

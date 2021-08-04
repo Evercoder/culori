@@ -19,3 +19,14 @@ tape('luv', t => {
 	});
 	t.end();
 });
+
+tape('color(--luv)', t => {
+	t.deepEqual(luv('color(--luv 30 0.5 1 / 0.25)'), {
+		l: 30,
+		u: 0.5,
+		v: 1,
+		alpha: 0.25,
+		mode: 'luv'
+	});
+	t.end();
+});

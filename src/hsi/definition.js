@@ -13,6 +13,8 @@ const definition = {
 		rgb: convertHsiToRgb
 	},
 
+	parsers: ['--hsi'],
+
 	input: {
 		rgb: convertRgbToHsi
 	},

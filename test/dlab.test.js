@@ -28,3 +28,21 @@ tape('dlab', t => {
 	);
 	t.end();
 });
+
+tape('color(--din99o-lab)', t => {
+	t.deepEqual(dlab('color(--din99o-lab 30 0.5 1 / 0.25)'), {
+		l: 30,
+		a: 0.5,
+		b: 1,
+		alpha: 0.25,
+		mode: 'dlab'
+	});
+	t.deepEqual(dlab('color(--din99o-lab 0 50% 0.5 / 25%)'), {
+		l: 0,
+		a: 0.5,
+		b: 0.5,
+		alpha: 0.25,
+		mode: 'dlab'
+	});
+	t.end();
+});

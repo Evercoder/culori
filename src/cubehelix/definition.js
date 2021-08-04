@@ -42,6 +42,7 @@ import { averageAngle } from '../average';
 const definition = {
 	mode: 'cubehelix',
 	channels: ['h', 's', 'l', 'alpha'],
+	parsers: ['--cubehelix'],
 
 	ranges: {
 		h: [0, 360],

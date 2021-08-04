@@ -12,6 +12,8 @@ import { averageAngle } from '../average';
 const definition = {
 	mode: 'jch',
 
+	parsers: ['--jzczhz'],
+
 	output: {
 		jab: convertJchToJab,
 		rgb: c => convertJabToRgb(convertJchToJab(c))

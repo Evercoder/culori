@@ -36,6 +36,8 @@ const definition = {
 
 	channels: ['y', 'i', 'q', 'alpha'],
 
+	parsers: ['--yiq'],
+
 	ranges: {
 		i: [-0.595, 0.595],
 		q: [-0.522, 0.522]

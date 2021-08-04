@@ -14,7 +14,6 @@ import { fixupAlpha } from '../fixup/alpha';
 
 const definition = {
 	mode: 'xyz65',
-	alias: ['xyz-d65'],
 
 	output: {
 		rgb: convertXyz65ToRgb,
@@ -33,6 +32,8 @@ const definition = {
 	},
 
 	channels: ['x', 'y', 'z', 'alpha'],
+
+	parsers: ['--xyz-d65'],
 
 	interpolate: {
 		x: interpolatorLinear,

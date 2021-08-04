@@ -25,3 +25,21 @@ tape('dlch', t => {
 	);
 	t.end();
 });
+
+tape('color(--din99o-lch)', t => {
+	t.deepEqual(dlch('color(--din99o-lch 30 0.5 1 / 0.25)'), {
+		l: 30,
+		c: 0.5,
+		h: 1,
+		alpha: 0.25,
+		mode: 'dlch'
+	});
+	t.deepEqual(dlch('color(--din99o-lch 0 50% 0.5 / 25%)'), {
+		l: 0,
+		c: 0.5,
+		h: 0.5,
+		alpha: 0.25,
+		mode: 'dlch'
+	});
+	t.end();
+});

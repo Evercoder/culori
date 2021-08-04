@@ -19,3 +19,14 @@ tape('lchuv', t => {
 	});
 	t.end();
 });
+
+tape('color(--lchuv)', t => {
+	t.deepEqual(lchuv('color(--lchuv 30 0.5 1 / 0.25)'), {
+		l: 30,
+		c: 0.5,
+		h: 1,
+		alpha: 0.25,
+		mode: 'lchuv'
+	});
+	t.end();
+});

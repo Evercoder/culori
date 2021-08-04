@@ -18,3 +18,21 @@ tape('rgb to yiq and back', function (test) {
 
 	test.end();
 });
+
+tape('color(--yiq)', t => {
+	t.deepEqual(yiq('color(--yiq 1 0 0 / 0.25)'), {
+		y: 1,
+		i: 0,
+		q: 0,
+		alpha: 0.25,
+		mode: 'yiq'
+	});
+	t.deepEqual(yiq('color(--yiq 0% 50% 0.5 / 25%)'), {
+		y: 0,
+		i: 0.5,
+		q: 0.5,
+		alpha: 0.25,
+		mode: 'yiq'
+	});
+	t.end();
+});

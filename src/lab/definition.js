@@ -8,7 +8,6 @@ import { fixupAlpha } from '../fixup/alpha';
 
 const definition = {
 	mode: 'lab',
-	alias: ['lab-d50'],
 
 	output: {
 		xyz: convertLabToXyz,

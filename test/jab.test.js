@@ -31,3 +31,14 @@ tape('rgb -> jab -> rgb', t => {
 	t.equal(formatHex(jab('#cc3302')), '#cc3302', '#cc3302');
 	t.end();
 });
+
+tape('color(--jzazbz)', t => {
+	t.deepEqual(jab('color(--jzazbz 30 -10 +15 / 0.25)'), {
+		j: 30,
+		a: -10,
+		b: +15,
+		alpha: 0.25,
+		mode: 'jab'
+	});
+	t.end();
+});

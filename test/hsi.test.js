@@ -92,3 +92,21 @@ tape('hsi() converts RGB to HSI', function (test) {
 
 	test.end();
 });
+
+tape('color(--hsi)', t => {
+	t.deepEqual(hsi('color(--hsi 30 0.5 1 / 0.25)'), {
+		h: 30,
+		s: 0.5,
+		i: 1,
+		alpha: 0.25,
+		mode: 'hsi'
+	});
+	t.deepEqual(hsi('color(--hsi 0 50% 0.5 / 25%)'), {
+		h: 0,
+		s: 0.5,
+		i: 0.5,
+		alpha: 0.25,
+		mode: 'hsi'
+	});
+	t.end();
+});

@@ -32,6 +32,8 @@ const definition = {
 
 	channels: ['l', 'c', 'h', 'alpha'],
 
+	parsers: ['--lchuv'],
+
 	ranges: {
 		l: [0, 100],
 		c: [0, 176.956],

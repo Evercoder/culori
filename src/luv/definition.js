@@ -29,6 +29,8 @@ const definition = {
 
 	channels: ['l', 'u', 'v', 'alpha'],
 
+	parsers: ['--luv'],
+
 	ranges: {
 		l: [0, 100],
 		u: [-84.936, 175.042],

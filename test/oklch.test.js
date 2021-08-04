@@ -25,3 +25,14 @@ tape('oklch', t => {
 	);
 	t.end();
 });
+
+tape('color(--oklch)', t => {
+	t.deepEqual(oklch('color(--oklch 30 0.5 1 / 0.25)'), {
+		l: 30,
+		c: 0.5,
+		h: 1,
+		alpha: 0.25,
+		mode: 'oklch'
+	});
+	t.end();
+});

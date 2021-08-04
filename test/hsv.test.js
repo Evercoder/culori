@@ -97,3 +97,21 @@ tape('hsv(str)', function (test) {
 	test.deepEqual(hsv('white'), { mode: 'hsv', s: 0, v: 1 });
 	test.end();
 });
+
+tape('color(--hsv)', t => {
+	t.deepEqual(hsv('color(--hsv 30 0.5 1 / 0.25)'), {
+		h: 30,
+		s: 0.5,
+		v: 1,
+		alpha: 0.25,
+		mode: 'hsv'
+	});
+	t.deepEqual(hsv('color(--hsv 0 50% 0.5 / 25%)'), {
+		h: 0,
+		s: 0.5,
+		v: 0.5,
+		alpha: 0.25,
+		mode: 'hsv'
+	});
+	t.end();
+});

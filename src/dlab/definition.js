@@ -8,6 +8,8 @@ import { fixupAlpha } from '../fixup/alpha';
 const definition = {
 	mode: 'dlab',
 
+	parsers: ['--din99o-lab'],
+
 	output: {
 		lab65: convertDlabToLab65,
 		rgb: c => convertLab65ToRgb(convertDlabToLab65(c))

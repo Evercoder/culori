@@ -28,3 +28,14 @@ tape('lab65', t => {
 	);
 	t.end();
 });
+
+tape('color(--lab-d65)', t => {
+	t.deepEqual(lab65('color(--lab-d65 30 0.5 1 / 0.25)'), {
+		l: 30,
+		a: 0.5,
+		b: 1,
+		alpha: 0.25,
+		mode: 'lab65'
+	});
+	t.end();
+});

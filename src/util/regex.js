@@ -67,7 +67,7 @@ const lch = new RegExp(
 );
 
 const profiled = new RegExp(
-	`^color\\(${so}([a-z][a-z0-9\\-]*)${s}${num_per}${s}${num_per}${s}${num_per}${so}(?:\\/${so}${num_per}${so})?\\)$`
+	`^color\\(${so}([a-z0-9\\-]+)${s}${num_per}${s}${num_per}${s}${num_per}${so}(?:\\/${so}${num_per}${so})?\\)$`
 );
 
 export {
