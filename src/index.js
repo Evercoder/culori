@@ -114,7 +114,6 @@ export {
 };
 
 export {
-	formatter,
 	formatHex,
 	formatHex8,
 	formatRgb,
@@ -128,30 +127,21 @@ export {
 	interpolateWithPremultipliedAlpha
 } from './interpolate/interpolate';
 
-export {
-	interpolateLinear, // @deprecated
-	interpolatorLinear
-} from './interpolate/linear';
+export { interpolatorLinear } from './interpolate/linear';
 
 export { interpolatorPiecewise } from './interpolate/piecewise';
 
-// @deprecated
-export { default as interpolateCosine } from './interpolate/cosine';
-
 export {
-	interpolateSplineBasis, // @deprecated
 	interpolatorSplineBasis,
 	interpolatorSplineBasisClosed
 } from './interpolate/splineBasis';
 
 export {
-	interpolateSplineNatural, // @deprecated
 	interpolatorSplineNatural,
 	interpolatorSplineNaturalClosed
 } from './interpolate/splineNatural';
 
 export {
-	interpolateSplineMonotone, // @deprecated
 	interpolatorSplineMonotone,
 	interpolatorSplineMonotone2,
 	interpolatorSplineMonotoneClosed
@@ -160,7 +150,7 @@ export {
 export { default as lerp } from './interpolate/lerp';
 export { default as samples } from './samples';
 export { default as displayable } from './displayable';
-export { clamp, clampRgb, clampChroma } from './clamp';
+export { clampRgb, clampChroma } from './clamp';
 export { default as nearest } from './nearest';
 export { getModeDefinition } from './modes';
 export { default as parse } from './parse';
@@ -191,27 +181,19 @@ export { default as easingGamma } from './easing/gamma';
 export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
 
 export {
-	deficiencyProt as filterDeficiencyProt,
-	deficiencyDeuter as filterDeficiencyDeuter,
-	deficiencyTrit as filterDeficiencyTrit,
-	// @deprecated
-	deficiencyProt,
-	deficiencyDeuter,
-	deficiencyTrit
+	filterDeficiencyProt,
+	filterDeficiencyDeuter,
+	filterDeficiencyTrit
 } from './deficiency';
 
 export {
-	fixupHueShorter as interpolateHue, // @deprecated
 	fixupHueShorter,
 	fixupHueLonger,
 	fixupHueIncreasing,
 	fixupHueDecreasing
 } from './fixup/hue';
 
-export {
-	fixupAlpha,
-	fixupAlpha as interpolateAlpha // @deprecated
-} from './fixup/alpha';
+export { fixupAlpha } from './fixup/alpha';
 
 export {
 	mapper,

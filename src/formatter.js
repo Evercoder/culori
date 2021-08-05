@@ -10,7 +10,7 @@ let twoDecimals = round(2);
 const clamp = value => Math.max(0, Math.min(1, value));
 const fixup = value => Math.round(clamp(value) * 255);
 
-const formatHex = c => {
+export const formatHex = c => {
 	let color = rgb(c);
 
 	if (color === undefined) {
@@ -24,7 +24,7 @@ const formatHex = c => {
 	return '#' + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
 };
 
-const formatHex8 = c => {
+export const formatHex8 = c => {
 	let color = rgb(c);
 
 	if (color === undefined) {
@@ -36,7 +36,7 @@ const formatHex8 = c => {
 	return formatHex(color) + ((1 << 8) | a).toString(16).slice(1);
 };
 
-const formatRgb = c => {
+export const formatRgb = c => {
 	let color = rgb(c);
 
 	if (color === undefined) {
@@ -56,7 +56,7 @@ const formatRgb = c => {
 	}
 };
 
-const formatHsl = c => {
+export const formatHsl = c => {
 	let color = hsl(c);
 
 	if (color === undefined) {
@@ -76,7 +76,7 @@ const formatHsl = c => {
 	}
 };
 
-const formatCss = c => {
+export const formatCss = c => {
 	const color = prepare(c);
 	if (!color) {
 		return undefined;
@@ -99,16 +99,3 @@ const formatCss = c => {
 	}
 	return undefined;
 };
-
-// Deprecated / no longer documented
-const formatter = (format = 'rgb') => {
-	switch (format) {
-		case 'rgb':
-			return formatRgb;
-		case 'hex':
-			return formatHex;
-	}
-	return undefined;
-};
-
-export { formatHex, formatHex8, formatRgb, formatHsl, formatCss, formatter };

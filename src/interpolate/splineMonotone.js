@@ -1,4 +1,3 @@
-import gamma from '../easing/gamma';
 import { interpolatorLinear } from './linear';
 
 /* 
@@ -65,7 +64,7 @@ const interpolator = (arr, yp, s) => {
 	A monotone spline which uses one-sided finite differences
 	at the boundaries.
  */
-const interpolatorSplineMonotone = arr => {
+export const interpolatorSplineMonotone = arr => {
 	if (arr.length < 3) {
 		return interpolatorLinear(arr);
 	}
@@ -85,7 +84,7 @@ const interpolatorSplineMonotone = arr => {
 	linear interpolation.
  */
 
-const interpolatorSplineMonotone2 = arr => {
+export const interpolatorSplineMonotone2 = arr => {
 	if (arr.length < 3) {
 		return interpolatorLinear(arr);
 	}
@@ -112,7 +111,7 @@ const interpolatorSplineMonotone2 = arr => {
 
 	...and so on.
  */
-const interpolatorSplineMonotoneClosed = arr => {
+export const interpolatorSplineMonotoneClosed = arr => {
 	let n = arr.length - 1;
 	let [s, p, yp] = mono(arr);
 	// boundary conditions
@@ -126,26 +125,4 @@ const interpolatorSplineMonotoneClosed = arr => {
 		(sgn(s[n - 1]) + sgn(s_n)) *
 		min(abs(s[n - 1]), abs(s_n), 0.5 * abs(p[n]));
 	return interpolator(arr, yp, s);
-};
-
-const interpolateSplineMonotone =
-	(fixup, type = 'default', γ = 1) =>
-	arr => {
-		let ease = gamma(γ);
-		if (type === 'closed') {
-			return t =>
-				interpolatorSplineMonotoneClosed((fixup || (v => v))(arr))(
-					ease(t)
-				);
-		} else if (type === 'default') {
-			return t =>
-				interpolatorSplineMonotone((fixup || (v => v))(arr))(ease(t));
-		}
-	};
-
-export {
-	interpolateSplineMonotone,
-	interpolatorSplineMonotone,
-	interpolatorSplineMonotone2,
-	interpolatorSplineMonotoneClosed
 };

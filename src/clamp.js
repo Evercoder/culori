@@ -13,7 +13,7 @@ const fixup_rgb = color => {
 	return c;
 };
 
-const clampRgb = color => {
+export const clampRgb = color => {
 	color = prepare(color);
 
 	// if the color is undefined or displayable, return it directly
@@ -25,7 +25,7 @@ const clampRgb = color => {
 	return conv(fixup_rgb(color));
 };
 
-const clampChroma = (color, mode = 'lch') => {
+export const clampChroma = (color, mode = 'lch') => {
 	color = prepare(color);
 
 	// if the color is undefined or displayable, return it directly
@@ -68,15 +68,3 @@ const clampChroma = (color, mode = 'lch') => {
 		displayable(clamped) ? clamped : { ...clamped, c: _last_good_c }
 	);
 };
-
-// Deprecated / no longer documented
-const clamp = (method = 'rgb') => {
-	switch (method) {
-		case 'rgb':
-			return clampRgb;
-		case 'lch':
-			return clampChroma;
-	}
-};
-
-export { clampRgb, clampChroma, clamp };
