@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-	max-width: 50rem;
+	max-width: 60rem;
 	margin: 0 auto;
 	padding: 0 1rem;
 }
@@ -164,6 +164,12 @@ samp {
 	padding: 1ch 2ch;
 	text-decoration: none;
 	display: inline-block;
+}
+
+.api-toc {
+	list-style: none;
+	padding: 0;
+	columns: 15em;
 }
 
 /* syntax highlighting */
