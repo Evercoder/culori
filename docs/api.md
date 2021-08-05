@@ -681,7 +681,7 @@ Creates a mapping that applies _fn_ on each channel of the color in the _mode_ c
 
 The resulting function accepts a single argument (a color object or a string), which it converts to the _mode_ color space if not already there.
 
-The _mode_ parameter can be omitted, in which case the mappe will iterate through all the channels in the color's original color space.
+The _mode_ parameter can be set to `null`, in which case the mapper will iterate through all the channels in the color's original color space.
 
 The _fn_ callback has the following signature:
 

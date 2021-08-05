@@ -13,6 +13,9 @@ body {
 	--ff-main: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
 		sans-serif, Apple Color Emoji, Segoe UI Emoji;
 	--ff-code: 'Consolas', monospace;
+
+	text-size-adjust: none;
+	-webkit-text-size-adjust: none;
 }
 
 .container {
