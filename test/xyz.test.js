@@ -37,3 +37,21 @@ tape('color(xyz)', t => {
 	});
 	t.end();
 });
+
+tape('color(--xyz-d50)', t => {
+	t.deepEqual(xyz('color(--xyz-d50 1 0 0 / 0.25)'), {
+		x: 1,
+		y: 0,
+		z: 0,
+		alpha: 0.25,
+		mode: 'xyz'
+	});
+	t.deepEqual(xyz('color(--xyz-d50 0% 50% 0.5 / 25%)'), {
+		x: 0,
+		y: 0.5,
+		z: 0.5,
+		alpha: 0.25,
+		mode: 'xyz'
+	});
+	t.end();
+});

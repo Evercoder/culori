@@ -1046,7 +1046,7 @@ The properties a definition needs are the following:
 -   `channels`: a list of channels for the color space.
 -   `ranges`: the ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
 -   `parsers`: any parsers for the color space that can transform strings into colors. These can be either functions, or strings — the latter is used as the color space's identifier to parse the `color(<ident>)` CSS syntax.
--       `serialize`: when a string is provided, it's used as the prefix when producing a string with `culori.formatCss`.
+-   `serialize`: when a string is provided, it's used as the prefix when producing a string with `culori.formatCss`.
 -   `interpolate`: the default interpolations for the color space, one for each channel. Each interpolation is defined by its interpolator (the `use` key) and its fixup function (the `fixup` key). When defined as a function, a channel interpolation is meant to define its interpolator, with the fixup being a no-op.
 -   `difference`: the default Euclidean distance method for each channel in the color space; mostly used for the `h` channel in cylindrical color spaces.
 -   `average`: the default average function for each channel in the color space; when left unspecified, defaults to [`averageNumber`](#averageNumber).

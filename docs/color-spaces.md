@@ -318,7 +318,7 @@ The CIE XYZ color space in respect to the D50 standard illuminant.
 | Y       | `[0, 0.999]`≈ | ?           |
 | Z       | `[0, 0.825]`≈ | ?           |
 
-Serialized as `color(xyz x y z / alpha)`.
+Serialized as `color(--xyz-d50 x y z / alpha)`.
 
 #### `xyz65`
 
