@@ -25,7 +25,10 @@ const definition = {
 	},
 
 	parsers: [parseHsl],
-	serialize: 'hsl(',
+	serialize: c =>
+		`hsl(${c.h} ${c.s * 100}% ${c.l * 100}%${
+			c.alpha < 1 ? ` / ${c.alpha}` : ''
+		})`,
 
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },

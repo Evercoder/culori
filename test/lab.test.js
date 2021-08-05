@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lab } from '../src/index';
+import { lab, formatCss } from '../src/index';
 
 tape('lab', t => {
 	t.deepEqual(lab('white'), { mode: 'lab', l: 100, a: 0, b: 0 }, 'white');
@@ -22,5 +22,12 @@ tape('lab', t => {
 		},
 		'red'
 	);
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(formatCss('lab(40 10 30 / 50%)'), 'lab(40% 10 30 / 0.5)');
+	t.equal(formatCss('lab(40 10 30 / 100%)'), 'lab(40% 10 30)');
+	t.equal(formatCss('lab(40 10 30)'), 'lab(40% 10 30)');
 	t.end();
 });
