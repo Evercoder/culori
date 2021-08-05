@@ -111,8 +111,8 @@ h1 {
 	h1 {
 		background: linear-gradient(
 			to right,
-			var(--random-1, black),
-			var(--random-2, black)
+			var(--random-1, #999),
+			var(--random-2, #999)
 		);
 		background-clip: text;
 		color: transparent;

@@ -18,7 +18,7 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.19.1 alpha (<a
+				>v0.20.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -82,16 +82,22 @@
 </table>
 <h4><code>rgb</code></h4>
 <p>The <a href="https://en.wikipedia.org/wiki/SRGB">sRGB color space</a>, which most people refer to when talking about RGB colors.</p>
+<p>Serialized as <code>color(srgb r g b / alpha)</code>.</p>
 <h4><code>lrgb</code></h4>
 <p>The linear-light form of the sRGB color space.</p>
+<p>Serialized as <code>color(--srgb-linear r g b / alpha)</code>.</p>
 <h4><code>a98</code></h4>
-<p>The A98 RGB color space, compatible with the <a href="https://en.wikipedia.org/wiki/Adobe_RGB_color_space">Adobe RGB (1998) color space</a>. It's called <code>a98-rgb</code> in the CSS Color Level 4 specification.</p>
+<p>The A98 RGB color space, compatible with the <a href="https://en.wikipedia.org/wiki/Adobe_RGB_color_space">Adobe RGB (1998) color space</a>.</p>
+<p>Serialized as <code>color(a98-rgb r g b / alpha)</code>.</p>
 <h4><code>p3</code></h4>
-<p>The <a href="https://en.wikipedia.org/wiki/DCI-P3#Display_P3">Display P3 color space</a>. It's called <code>display-p3</code> in the CSS Color Level 4 specification.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/DCI-P3#Display_P3">Display P3 color space</a>.</p>
+<p>Serialized as <code>color(display-p3 r g b / alpha)</code>.</p>
 <h4><code>prophoto</code></h4>
-<p>The <a href="https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space">ProPhoto RGB color space</a>. It's called <code>prophoto-rgb</code> in the CSS Color Level 4 specification.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space">ProPhoto RGB color space</a>.</p>
+<p>Serialized as <code>color(prophoto-rgb r g b / alpha)</code>.</p>
 <h4><code>rec2020</code></h4>
-<p>The <a href="https://en.wikipedia.org/wiki/Rec._2020">Rec. 2020 color space</a>. It's called <code>display-p3</code> in the CSS Color Level 4 specification.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Rec._2020">Rec. 2020 color space</a>.</p>
+<p>Serialized as <code>color(rec2020 r g b / alpha)</code>.</p>
 <h3>The HSL/HSV/HSI family</h3>
 <p><a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSL, HSV, and HSI</a> are alternative representations of the RGB color model, created in an attempt to provide a more intuitive way to specify colors.</p>
 <p>The <em>hue</em> is identical across all color models in this family; however, the <em>saturaton</em> is computed differently in each. The saturation in HSL is <strong>not interchangeable</strong> with the saturation from HSV, nor HSI. Achromatic colors (shades of gray) will have an <code>undefined</code> hue.</p>
@@ -124,6 +130,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>hsl(h s% l% / alpha)</code>.</p>
 <h4><code>hsv</code></h4>
 <p>The HSV color space.</p>
 <table>
@@ -152,6 +159,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--hsv h s v / alpha)</code>.</p>
 <h4><code>hsi</code></h4>
 <p>The HSI color space.</p>
 <table>
@@ -180,6 +188,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--hsi h s i / alpha)</code>.</p>
 <h3>HWB</h3>
 <p><a href="https://en.wikipedia.org/wiki/HWB_color_model">The HWB color model</a> was developed by Alvy Ray Smith, who also created the HSV color model. It's meant to be more intuitive for humans to use and faster to compute.</p>
 <table>
@@ -208,6 +217,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>hwb(h w% b% / alpha)</code>.</p>
 <blockquote>
 <p>Smith, Alvy Ray (1996) — <a href="http://alvyray.com/Papers/CG/HWB_JGTv208.pdf">&quot;HWB — A More Intuitive Hue-Based Color Model&quot;</a>, Journal of Graphics, GPU and Game tools.</p>
 </blockquote>
@@ -241,6 +251,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>lab(l% a b / alpha)</code>.</p>
 <h4><code>lch</code></h4>
 <p>The CIELCh color space using the D50 standard illuminant.</p>
 <table>
@@ -269,6 +280,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>lch(l% c h / alpha)</code>.</p>
 <h4><code>lab65</code></h4>
 <p>CIELAB relative to the D65 standard illuminant.</p>
 <table>
@@ -297,6 +309,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--lab-d65 l a b / alpha)</code>.</p>
 <h4><code>lch65</code></h4>
 <p>CIELCh relative to the D65 standard illuminant.</p>
 <table>
@@ -325,6 +338,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--lch-d65 l c h / alpha)</code>.</p>
 <h3>CIELUV</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/CIELUV">CIELUV color space</a> in Cartesian (Luv) and cylindrical (LCh) forms, using the D50 standard illuminant.</p>
 <p>CIELuv has an effective Euclidean color difference function:</p>
@@ -356,6 +370,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--luv l u v / alpha)</code>.</p>
 <h4><code>lchuv</code></h4>
 <table>
 <thead>
@@ -383,6 +398,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--lchuv l c h / alpha)</code>.</p>
 <h3>DIN99 Lab / LCh</h3>
 <p>The <a href="https://de.wikipedia.org/wiki/DIN99-Farbraum">DIN99</a> color space &quot;squishes&quot; the CIELAB D65 color space to obtain an <a href="#culoriDifferenceDin99o">effective color difference</a> metric that can be expressed as a simple Euclidean distance. The latest iteration of the the standard, DIN99o, is available in Cartesian (<code>dlab</code>) and plar (<code>dlch</code>) form.</p>
 <blockquote>
@@ -416,6 +432,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--din99o-lab l a b / alpha)</code>.</p>
 <h4><code>dlch</code></h4>
 <p>The DIN99o color space in cylindrical form.</p>
 <table>
@@ -444,6 +461,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--din99o-lch l c h / alpha)</code>.</p>
 <h3>Oklab</h3>
 <p>The <a href="https://bottosson.github.io/posts/oklab/">Oklab color space</a>, in Cartesian (Lab) and cylindrical (LCh) forms. It uses the D65 standard illuminant.</p>
 <h4><code>oklab</code></h4>
@@ -474,6 +492,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--oklab l a b / alpha)</code>.</p>
 <h4><code>oklch</code></h4>
 <p>The Oklab color space in cylindrical form.</p>
 <table>
@@ -502,6 +521,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--oklch l c h / alpha)</code>.</p>
 <h3>J<sub>z</sub>a<sub>z</sub>b<sub>z</sub></h3>
 <p>The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space, as defined by:</p>
 <blockquote>
@@ -535,6 +555,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--jzazbz j a b / alpha)</code>.</p>
 <h4><code>jch</code></h4>
 <p>The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.</p>
 <table>
@@ -563,6 +584,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--jzczhz j c h / alpha)</code>.</p>
 <h3>YIQ</h3>
 <p><a href="https://en.wikipedia.org/wiki/YIQ">YIQ</a> is the color space used by the NTSC color TV system. It contains the following channels:</p>
 <table>
@@ -591,6 +613,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--yiq y i q / alpha)</code>.</p>
 <h3>CIE XYZ</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/CIE_1931_color_space">CIE XYZ color space</a>, also known as the CIE 1931 color space.</p>
 <h4><code>xyz</code></h4>
@@ -621,6 +644,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--xyz-d50 x y z / alpha)</code>.</p>
 <h4><code>xyz65</code></h4>
 <p>The CIE XYZ color space in respect to the D65 standard illuminant.</p>
 <table>
@@ -649,6 +673,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--xyz-d65 x y z / alpha)</code>.</p>
 <h3>Cubehelix</h3>
 <p><a href="https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/">The Cubehelix color scheme</a> was described by Dave Green in this paper:</p>
 <blockquote>
@@ -683,6 +708,7 @@
 </tr>
 </tbody>
 </table>
+<p>Serialized as <code>color(--cubehelix h s l / alpha)</code>.</p>
 
 			</article>
 		</div>
@@ -709,11 +735,11 @@
 		<script type="text/javascript">
 			document.body.style.setProperty(
 				'--random-1',
-				culori.formatHex(culori.random('lch', { l: [10, 50] }))
+				culori.formatHex(culori.random('lch', { l: [30, 70] }))
 			);
 			document.body.style.setProperty(
 				'--random-2',
-				culori.formatHex(culori.random('lch', { l: [10, 50] }))
+				culori.formatHex(culori.random('lch', { l: [30, 70] }))
 			);
 		</script>
 	</body>
