@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lab65 } from '../src/index';
+import { lab65, formatCss } from '../src/index';
 
 tape('lab65', t => {
 	t.deepEqual(
@@ -37,5 +37,13 @@ tape('color(--lab-d65)', t => {
 		alpha: 0.25,
 		mode: 'lab65'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--lab-d65 30 0.5 1 / 0.25)'),
+		'color(--lab-d65 30 0.5 1 / 0.25)'
+	);
 	t.end();
 });

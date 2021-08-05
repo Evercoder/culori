@@ -82,8 +82,8 @@ const formatCss = c => {
 		return undefined;
 	}
 	const def = getModeDefinition(color.mode);
-	if (typeof def.serialize === 'string') {
-		let res = def.serialize;
+	if (!def.serialize || typeof def.serialize === 'string') {
+		let res = def.serialize || `color(--${color.mode} `;
 		def.channels.forEach((ch, i) => {
 			if (ch !== 'alpha') {
 				res += (i ? ' ' : '') + (color[ch] || 0);

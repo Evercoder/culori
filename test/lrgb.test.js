@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { rgb, lrgb } from '../src/index';
+import { rgb, lrgb, formatCss } from '../src/index';
 
 tape('round-trip', t => {
 	let in_gamut = {
@@ -55,5 +55,13 @@ tape('color(--srgb-linear)', t => {
 		alpha: 0.25,
 		mode: 'lrgb'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--srgb-linear 0% 50% 0.5 / 25%)'),
+		'color(--srgb-linear 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

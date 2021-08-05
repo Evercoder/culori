@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { formatRgb, jch } from '../src/index';
+import { formatRgb, formatCss, jch } from '../src/index';
 
 tape('PQ_inv negative value', t => {
 	t.equal(
@@ -17,5 +17,13 @@ tape('color(--jzczhz)', t => {
 		alpha: 0.25,
 		mode: 'jch'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--jzczhz 30 1e1 +15 / 0.25)'),
+		'color(--jzczhz 30 10 15 / 0.25)'
+	);
 	t.end();
 });

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { jab, formatHex } from '../src/index';
+import { jab, formatHex, formatCss } from '../src/index';
 
 tape('jab', t => {
 	t.deepEqual(
@@ -40,5 +40,13 @@ tape('color(--jzazbz)', t => {
 		alpha: 0.25,
 		mode: 'jab'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--jzazbz 30 -1e1 +15 / 0.25)'),
+		'color(--jzazbz 30 -10 15 / 0.25)'
+	);
 	t.end();
 });

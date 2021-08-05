@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { yiq, formatRgb } from '../src/index';
+import { yiq, formatRgb, formatCss } from '../src/index';
 
 tape('rgb to yiq and back', function (test) {
 	test.deepEqual(
@@ -34,5 +34,13 @@ tape('color(--yiq)', t => {
 		alpha: 0.25,
 		mode: 'yiq'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--yiq 0% 50% 0.5 / 25%)'),
+		'color(--yiq 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

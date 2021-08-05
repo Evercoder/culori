@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { oklch } from '../src/index';
+import { oklch, formatCss } from '../src/index';
 
 tape('oklch', t => {
 	t.deepEqual(
@@ -34,5 +34,13 @@ tape('color(--oklch)', t => {
 		alpha: 0.25,
 		mode: 'oklch'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--oklch 30 0.5 1 / 0.25)'),
+		'color(--oklch 30 0.5 1 / 0.25)'
+	);
 	t.end();
 });

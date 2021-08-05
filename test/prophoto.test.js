@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { prophoto } from '../src/index';
+import { prophoto, formatCss } from '../src/index';
 
 tape('prophoto', t => {
 	t.deepEqual(
@@ -45,5 +45,13 @@ tape('color(prophoto-rgb)', t => {
 		alpha: 0.25,
 		mode: 'prophoto'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(prophoto-rgb 0% 50% 0.5 / 25%)'),
+		'color(prophoto-rgb 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { xyz65 } from '../src/index';
+import { xyz65, formatCss } from '../src/index';
 
 tape('xyz65', t => {
 	/*
@@ -45,5 +45,13 @@ tape('color(--xyz-d65)', t => {
 		alpha: 0.25,
 		mode: 'xyz65'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--xyz-d65 0% 50% 0.5 / 25%)'),
+		'color(--xyz-d65 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

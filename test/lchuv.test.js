@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lchuv } from '../src/index';
+import { lchuv, formatCss } from '../src/index';
 
 tape('lchuv', t => {
 	t.deepEqual(lchuv('white'), { mode: 'lchuv', l: 100, c: 0 });
@@ -28,5 +28,13 @@ tape('color(--lchuv)', t => {
 		alpha: 0.25,
 		mode: 'lchuv'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--lchuv 30 0.5 1 / 0.25)'),
+		'color(--lchuv 30 0.5 1 / 0.25)'
+	);
 	t.end();
 });

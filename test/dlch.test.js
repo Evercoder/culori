@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { dlch } from '../src/index';
+import { dlch, formatCss } from '../src/index';
 
 tape('dlch', t => {
 	t.deepEqual(
@@ -41,5 +41,13 @@ tape('color(--din99o-lch)', t => {
 		alpha: 0.25,
 		mode: 'dlch'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--din99o-lch 0 50% 0.5 / 25%)'),
+		'color(--din99o-lch 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

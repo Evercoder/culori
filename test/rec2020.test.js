@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { rec2020 } from '../src/index';
+import { rec2020, formatCss } from '../src/index';
 
 tape('rec2020', t => {
 	t.deepEqual(rec2020('white'), {
@@ -33,5 +33,13 @@ tape('color(rec2020)', t => {
 		alpha: 0.25,
 		mode: 'rec2020'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(rec2020 0% 50% 0.5 / 25%)'),
+		'color(rec2020 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

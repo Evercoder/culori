@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { hsi, rgb } from '../src/index';
+import { hsi, rgb, formatCss } from '../src/index';
 
 tape('rgb() converts from HSI to RGB', function (test) {
 	test.deepEqual(
@@ -108,5 +108,13 @@ tape('color(--hsi)', t => {
 		alpha: 0.25,
 		mode: 'hsi'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--hsi 0 50% 0.5 / 25%)'),
+		'color(--hsi 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

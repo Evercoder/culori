@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { p3 } from '../src/index';
+import { p3, formatCss } from '../src/index';
 
 tape('p3', t => {
 	t.deepEqual(p3('white'), {
@@ -33,5 +33,13 @@ tape('color(display-p3)', t => {
 		alpha: 0.25,
 		mode: 'p3'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(display-p3 0% 50% 0.5 / 25%)'),
+		'color(display-p3 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

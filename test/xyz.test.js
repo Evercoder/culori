@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { xyz } from '../src/index';
+import { xyz, formatCss } from '../src/index';
 
 tape('xyz', t => {
 	t.deepEqual(xyz('white'), { mode: 'xyz', x: 0.96422, y: 1, z: 0.82521 });
@@ -53,5 +53,13 @@ tape('color(--xyz-d50)', t => {
 		alpha: 0.25,
 		mode: 'xyz'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(xyz 0% 50% 0.5 / 25%)'),
+		'color(--xyz-d50 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

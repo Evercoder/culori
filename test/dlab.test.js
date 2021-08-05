@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { dlab } from '../src/index';
+import { dlab, formatCss } from '../src/index';
 
 tape('dlab', t => {
 	t.deepEqual(
@@ -44,5 +44,13 @@ tape('color(--din99o-lab)', t => {
 		alpha: 0.25,
 		mode: 'dlab'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--din99o-lab 0 50% 0.5 / 25%)'),
+		'color(--din99o-lab 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });
