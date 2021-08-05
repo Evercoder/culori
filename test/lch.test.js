@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lch } from '../src/index';
+import { lch, formatCss } from '../src/index';
 
 tape('lch', t => {
 	t.deepEqual(lch('white'), { mode: 'lch', l: 100, c: 0 }, 'white');
@@ -19,5 +19,12 @@ tape('lch', t => {
 		},
 		'red'
 	);
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(formatCss('lch(40 10 30 / 50%)'), 'lch(40% 10 30 / 0.5)');
+	t.equal(formatCss('lch(40 10 30 / 100%)'), 'lch(40% 10 30)');
+	t.equal(formatCss('lch(40 10 30)'), 'lch(40% 10 30)');
 	t.end();
 });

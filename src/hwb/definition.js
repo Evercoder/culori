@@ -25,6 +25,10 @@ const definition = {
 	},
 
 	parsers: [parseHwb],
+	serialize: c =>
+		`hwb(${c.h} ${c.w * 100}% ${c.b * 100}%${
+			c.alpha < 1 ? ` / ${c.alpha}` : ''
+		})`,
 
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { hwb } from '../src/index';
+import { hwb, formatCss } from '../src/index';
 
 tape('hwb() parses hwb CSS strings', function (test) {
 	test.deepEqual(
@@ -27,4 +27,11 @@ tape('hwb() parses hwb CSS strings', function (test) {
 	);
 
 	test.end();
+});
+
+tape('formatCss', t => {
+	t.equal(formatCss('hwb(200 150% 150% / .5)'), 'hwb(200 50% 50% / 0.5)');
+	t.equal(formatCss('hwb(200 150% 150% / 100%)'), 'hwb(200 50% 50%)');
+	t.equal(formatCss('hwb(200 150% 150%)'), 'hwb(200 50% 50%)');
+	t.end();
 });

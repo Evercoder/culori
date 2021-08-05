@@ -7,7 +7,9 @@ import lab from '../lab/definition';
 const definition = {
 	...lab,
 	mode: 'lab65',
-	alias: ['lab-d65'],
+
+	parsers: ['--lab-d65'],
+	serialize: 'color(--lab-d65 ',
 
 	output: {
 		xyz65: convertLab65ToXyz65,
@@ -23,9 +25,7 @@ const definition = {
 		l: [0, 100],
 		a: [-86.182, 98.234],
 		b: [-107.86, 94.477]
-	},
-
-	parsers: []
+	}
 };
 
 export default definition;

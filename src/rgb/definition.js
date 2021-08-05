@@ -12,8 +12,8 @@ import { fixupAlpha } from '../fixup/alpha';
 const definition = {
 	mode: 'rgb',
 	channels: ['r', 'g', 'b', 'alpha'],
-	alias: ['srgb'],
-	parsers: [parseHex, parseRgb, parseNamed, parseTransparent],
+	parsers: [parseHex, parseRgb, parseNamed, parseTransparent, 'srgb'],
+	serialize: 'color(srgb ',
 
 	interpolate: {
 		r: interpolatorLinear,

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { yiq, formatRgb } from '../src/index';
+import { yiq, formatRgb, formatCss } from '../src/index';
 
 tape('rgb to yiq and back', function (test) {
 	test.deepEqual(
@@ -17,4 +17,30 @@ tape('rgb to yiq and back', function (test) {
 	test.deepEqual(formatRgb(yiq('rgb(0, 0, 89)')), 'rgb(0, 0, 89)', 'green');
 
 	test.end();
+});
+
+tape('color(--yiq)', t => {
+	t.deepEqual(yiq('color(--yiq 1 0 0 / 0.25)'), {
+		y: 1,
+		i: 0,
+		q: 0,
+		alpha: 0.25,
+		mode: 'yiq'
+	});
+	t.deepEqual(yiq('color(--yiq 0% 50% 0.5 / 25%)'), {
+		y: 0,
+		i: 0.5,
+		q: 0.5,
+		alpha: 0.25,
+		mode: 'yiq'
+	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--yiq 0% 50% 0.5 / 25%)'),
+		'color(--yiq 0 0.5 0.5 / 0.25)'
+	);
+	t.end();
 });

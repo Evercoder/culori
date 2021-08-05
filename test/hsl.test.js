@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { hsl, rgb } from '../src/index';
+import { hsl, rgb, formatCss } from '../src/index';
 
 tape('rgb() converts from HSL to RGB', function (test) {
 	test.deepEqual(
@@ -139,4 +139,11 @@ tape('CSS <number> in `hsl()` syntax', test => {
 		'float values'
 	);
 	test.end();
+});
+
+tape('formatCss', t => {
+	t.equal(formatCss('hsl(.5turn 40% 20% / 50%)'), 'hsl(180 40% 20% / 0.5)');
+	t.equal(formatCss('hsl(.5turn 40% 20%)'), 'hsl(180 40% 20%)');
+	t.equal(formatCss('hsl(.5turn 40% 20% / 100%)'), 'hsl(180 40% 20%)');
+	t.end();
 });

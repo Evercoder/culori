@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lchuv } from '../src/index';
+import { lchuv, formatCss } from '../src/index';
 
 tape('lchuv', t => {
 	t.deepEqual(lchuv('white'), { mode: 'lchuv', l: 100, c: 0 });
@@ -17,5 +17,24 @@ tape('lchuv', t => {
 		h: 134.23232917955536,
 		alpha: 0.5019607843137255
 	});
+	t.end();
+});
+
+tape('color(--lchuv)', t => {
+	t.deepEqual(lchuv('color(--lchuv 30 0.5 1 / 0.25)'), {
+		l: 30,
+		c: 0.5,
+		h: 1,
+		alpha: 0.25,
+		mode: 'lchuv'
+	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--lchuv 30 0.5 1 / 0.25)'),
+		'color(--lchuv 30 0.5 1 / 0.25)'
+	);
 	t.end();
 });

@@ -1,41 +1,28 @@
 import tape from 'tape';
+import { cubehelix, formatCss } from '../src/index';
 
-tape('RGB -> Cubehelix', function (test) {
-	// test.deepEqual(
-	// 	cubehelix('red'),
-	// 	{},
-	// 	'red'
-	// );
+tape('color(--cubehelix)', t => {
+	t.deepEqual(cubehelix('color(--cubehelix 30 0.5 1 / 0.25)'), {
+		h: 30,
+		s: 0.5,
+		l: 1,
+		alpha: 0.25,
+		mode: 'cubehelix'
+	});
+	t.deepEqual(cubehelix('color(--cubehelix 0 50% 0.5 / 25%)'), {
+		h: 0,
+		s: 0.5,
+		l: 0.5,
+		alpha: 0.25,
+		mode: 'cubehelix'
+	});
+	t.end();
+});
 
-	// test.deepEqual(
-	// 	cubehelix('yellow'),
-	// 	{},
-	// 	'yellow'
-	// );
-
-	// test.deepEqual(
-	// 	cubehelix('green'),
-	// 	{},
-	// 	'green'
-	// );
-
-	// test.deepEqual(
-	// 	cubehelix('cyan'),
-	// 	{},
-	// 	'cyan'
-	// );
-
-	// test.deepEqual(
-	// 	cubehelix('blue'),
-	// 	{},
-	// 	'blue'
-	// );
-
-	// test.deepEqual(
-	// 	cubehelix('fuchsia'),
-	// 	{},
-	// 	'fuchsia'
-	// );
-
-	test.end();
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--cubehelix 0 50% 0.5 / 25%)'),
+		'color(--cubehelix 0 0.5 0.5 / 0.25)'
+	);
+	t.end();
 });

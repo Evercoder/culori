@@ -8,7 +8,6 @@ import { fixupAlpha } from '../fixup/alpha';
 
 const definition = {
 	mode: 'lab',
-	alias: ['lab-d50'],
 
 	output: {
 		xyz: convertLabToXyz,
@@ -29,6 +28,8 @@ const definition = {
 	},
 
 	parsers: [parseLab],
+	serialize: c =>
+		`lab(${c.l}% ${c.a} ${c.b}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
 
 	interpolate: {
 		l: interpolatorLinear,

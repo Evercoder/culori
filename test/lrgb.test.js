@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { rgb, lrgb } from '../src/index';
+import { rgb, lrgb, formatCss } from '../src/index';
 
 tape('round-trip', t => {
 	let in_gamut = {
@@ -37,5 +37,31 @@ tape('round-trip', t => {
 		'out of gamut'
 	);
 	t.deepEqual(rgb(lrgb(out_of_gamut)), out_of_gamut, 'out of gamut');
+	t.end();
+});
+
+tape('color(--srgb-linear)', t => {
+	t.deepEqual(lrgb('color(--srgb-linear 1 0 0 / 0.25)'), {
+		r: 1,
+		g: 0,
+		b: 0,
+		alpha: 0.25,
+		mode: 'lrgb'
+	});
+	t.deepEqual(lrgb('color(--srgb-linear 0% 50% 0.5 / 25%)'), {
+		r: 0,
+		g: 0.5,
+		b: 0.5,
+		alpha: 0.25,
+		mode: 'lrgb'
+	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--srgb-linear 0% 50% 0.5 / 25%)'),
+		'color(--srgb-linear 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

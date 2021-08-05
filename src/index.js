@@ -118,7 +118,8 @@ export {
 	formatHex,
 	formatHex8,
 	formatRgb,
-	formatHsl
+	formatHsl,
+	formatCss
 } from './formatter';
 export { default as round } from './round';
 export {

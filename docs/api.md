@@ -101,7 +101,7 @@ These methods serialize colors to strings, in various formats.
 
 <a name="formatHex" href="#formatHex">#</a> culori.**formatHex**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
-Returns the hex string for a color. The color's `alpha` channel is omitted, and the red, green, and blue channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
+Returns the hex string for the given color. The color's `alpha` channel is omitted, and the red, green, and blue channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
 
 ```js
 culori.formatHex('red');
@@ -110,7 +110,7 @@ culori.formatHex('red');
 
 <a name="formatHex8" href="#formatHex8">#</a> culori.**formatHex8**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
-Returns the 8-character hex string for a color. The red, green, blue, and alpha channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
+Returns the 8-character hex string for the given color. The red, green, blue, and alpha channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
 
 ```js
 culori.formatHex8({ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 });
@@ -119,7 +119,7 @@ culori.formatHex8({ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 });
 
 <a name="formatRgb" href="#formatRgb">#</a> culori.**formatRgb**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
-Returns the `rgb(…)` / `rgba(…)` string for a color. Fully opaque colors will be serialized as `rgb()`, and semi-transparent colors as `rgba()`, in accordance with the [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value). Like in the case of `formatHex`, the red, green, and blue channels are clamped to the interval `[0, 255]`.
+Returns the `rgb(…)` / `rgba(…)` string for the given color. Fully opaque colors will be serialized as `rgb()`, and semi-transparent colors as `rgba()`, in accordance with the [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value). Like in the case of `formatHex`, the red, green, and blue channels are clamped to the interval `[0, 255]`.
 
 ```js
 culori.formatRgb('lab(50 0 0 / 25%)');
@@ -128,11 +128,49 @@ culori.formatRgb('lab(50 0 0 / 25%)');
 
 <a name="formatHsl" href="#formatHsl">#</a> culori.**formatHsl**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
-Returns the `hsl(…)` / `hsla(…)` string for a color. Fully opaque colors will be serialized as `hsl()`, and semi-transparent colors as `hsla()`. All values are rounded to a precision of two digits. The Saturation and Lightness are clamped to the interval `[0%, 100%]`.
+Returns the `hsl(…)` / `hsla(…)` string for the given color. Fully opaque colors will be serialized as `hsl()`, and semi-transparent colors as `hsla()`. All values are rounded to a precision of two digits. The Saturation and Lightness are clamped to the interval `[0%, 100%]`.
 
 ```js
 culori.formatHsl('lab(50 0 0 / 25%)');
 // ⇒ 'hsla(194.33, 0%, 46.63%, 0.25)'
+```
+
+<a name="formatCss" href="#formatCss">#</a> culori.**formatCss**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+
+Returns a CSS string for the given color, based on the CSS Color Level 4 specification. A few color spaces, such as `hsl` or `lab`, have their own functional representation in CSS. We use that whenever possible; the `hsl` color space is represented as `hsl(h% s l / alpha)`. Predefined color spaces are represented using the `color()` notation with the appropriate identifier for the color space, e.g. `color(display-p3 r g b / alpha)`. All other colors paces use the `color()` notation with a dashed identifier. For example, `jab` is represented as `color(--jzazbz j a b / alpha)`.
+
+You can find the exact string produced for each color space under the _Serialized as_ entry on the [Color Spaces](/color-spaces) page.
+
+Channel values are serialized as-is, with no change in the precision. To avoid compatibility issues, sRGB colors are represented as `color(srgb r g b / alpha)` rather than `rgb(r, g, b, alpha)`. For the latter, use the [`formatRgb()`](#formatRgb) method instead.
+
+An alpha of exactly `1` is omitted from the representation.
+
+**Note:** The strings returned by these methods are not widely supported in current browsers and should not be used in CSS as-is.
+
+```js
+/* 
+	A mode with its own function notation.
+*/
+culori.formatCss({ mode: 'hsl', h: 30, s: 1, l: 0.5, alpha: 0.5 });
+// ⇒ 'hsl(30 100% 50% / 0.5)'
+
+/*
+	A predefined color space.
+ */
+culori.formatCss({ mode: 'p3', r: 0.5, s: 0.25, b: 1, alpha: 1 });
+// ⇒ 'color(display-p3 0.5 0.25 1)'
+
+/*
+	sRGB colors.
+ */
+culori.formatCss({ mode: 'rgb', r: 0.5, s: 0.25, b: 1, alpha: 0.25 });
+// ⇒ 'color(srgb 0.5 0.25 1 / 0.25)'
+
+/*
+	A custom color space.
+ */
+culori.formatCss({ mode: 'lrgb', r: 0.5, s: 0.25, b: 1, alpha: 0.25 });
+// ⇒ 'color(--srgb-linear 0.5 0.25 1 / 0.25)'
 ```
 
 ## Clamping
@@ -1003,6 +1041,10 @@ Defines a new color space through a _definition_ object. Here's the full definit
 		h: [0, 360]
 	},
 	parsers: [parseHsl],
+  serialize: c =>
+    `hsl(${c.h} ${c.s * 100}% ${c.l * 100}%${
+      c.alpha < 1 ? ` / ${c.alpha}` : ''
+    })`,
 	interpolate: {
 		h: {
 			use: interpolatorLinear,
@@ -1031,7 +1073,8 @@ The properties a definition needs are the following:
 -   `input`: opposite of `output`; a set of function to convert from various color spaces to the color space we're defining. At least `rgb` needs to be included.
 -   `channels`: a list of channels for the color space.
 -   `ranges`: the ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
--   `parsers`: any parsers for the color space that can transform strings into colors
+-   `parsers`: any parsers for the color space that can transform strings into colors. These can be either functions, or strings — the latter is used as the color space's identifier to parse the `color(<ident>)` CSS syntax.
+-   `serialize`: when a string is provided, it's used as the prefix when producing a string with `culori.formatCss`; when missing, it defaults to `color(--${color.mode} `.
 -   `interpolate`: the default interpolations for the color space, one for each channel. Each interpolation is defined by its interpolator (the `use` key) and its fixup function (the `fixup` key). When defined as a function, a channel interpolation is meant to define its interpolator, with the fixup being a no-op.
 -   `difference`: the default Euclidean distance method for each channel in the color space; mostly used for the `h` channel in cylindrical color spaces.
 -   `average`: the default average function for each channel in the color space; when left unspecified, defaults to [`averageNumber`](#averageNumber).

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { xyz65 } from '../src/index';
+import { xyz65, formatCss } from '../src/index';
 
 tape('xyz65', t => {
 	/*
@@ -27,5 +27,31 @@ tape('xyz65', t => {
 		z: 0.07197138817284543,
 		alpha: 0.5019607843137255
 	});
+	t.end();
+});
+
+tape('color(--xyz-d65)', t => {
+	t.deepEqual(xyz65('color(--xyz-d65 1 0 0 / 0.25)'), {
+		x: 1,
+		y: 0,
+		z: 0,
+		alpha: 0.25,
+		mode: 'xyz65'
+	});
+	t.deepEqual(xyz65('color(--xyz-d65 0% 50% 0.5 / 25%)'), {
+		x: 0,
+		y: 0.5,
+		z: 0.5,
+		alpha: 0.25,
+		mode: 'xyz65'
+	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--xyz-d65 0% 50% 0.5 / 25%)'),
+		'color(--xyz-d65 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

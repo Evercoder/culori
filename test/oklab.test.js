@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { oklab } from '../src/index';
+import { oklab, formatCss } from '../src/index';
 
 tape('oklab', t => {
 	t.deepEqual(
@@ -25,6 +25,25 @@ tape('oklab', t => {
 			b: 0.1258462985307351
 		},
 		'red'
+	);
+	t.end();
+});
+
+tape('color(--oklab)', t => {
+	t.deepEqual(oklab('color(--oklab 30 0.5 1 / 0.25)'), {
+		l: 30,
+		a: 0.5,
+		b: 1,
+		alpha: 0.25,
+		mode: 'oklab'
+	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(--oklab 30 0.5 1 / 0.25)'),
+		'color(--oklab 30 0.5 1 / 0.25)'
 	);
 	t.end();
 });

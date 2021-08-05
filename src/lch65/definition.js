@@ -7,7 +7,9 @@ import lch from '../lch/definition';
 const definition = {
 	...lch,
 	mode: 'lch65',
-	alias: ['lch-d65'],
+
+	parsers: ['--lch-d65'],
+	serialize: 'color(--lch-d65 ',
 
 	output: {
 		lab65: c => convertLchToLab(c, 'lab65'),
@@ -18,8 +20,6 @@ const definition = {
 		rgb: c => convertLabToLch(convertRgbToLab65(c), 'lch65'),
 		lab65: c => convertLabToLch(c, 'lch65')
 	},
-
-	parsers: [],
 
 	ranges: {
 		l: [0, 100],

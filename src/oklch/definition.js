@@ -7,7 +7,6 @@ import convertRgbToOklab from '../oklab/convertRgbToOklab';
 const definition = {
 	...lch,
 	mode: 'oklch',
-	alias: [],
 
 	output: {
 		oklab: c => convertLchToLab(c, 'oklab'),
@@ -19,7 +18,8 @@ const definition = {
 		oklab: c => convertLabToLch(c, 'oklch')
 	},
 
-	parsers: [],
+	parsers: ['--oklch'],
+	serialize: 'color(--oklch ',
 
 	ranges: {
 		l: [0, 0.999],

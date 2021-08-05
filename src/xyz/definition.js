@@ -12,7 +12,8 @@ import { fixupAlpha } from '../fixup/alpha';
 
 const definition = {
 	mode: 'xyz',
-	alias: ['xyz-d50'],
+	parsers: ['xyz', '--xyz-d50'],
+	serialize: 'color(--xyz-d50 ',
 
 	output: {
 		rgb: convertXyzToRgb,

@@ -11,7 +11,6 @@ import { averageAngle } from '../average';
 
 const definition = {
 	mode: 'lch',
-	alias: ['lch-d50'],
 
 	output: {
 		lab: convertLchToLab,
@@ -32,6 +31,8 @@ const definition = {
 	},
 
 	parsers: [parseLch],
+	serialize: c =>
+		`lch(${c.l}% ${c.c} ${c.h}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
 
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },

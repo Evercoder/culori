@@ -13,6 +13,9 @@ const definition = {
 		rgb: convertHsiToRgb
 	},
 
+	parsers: ['--hsi'],
+	serialize: 'color(--hsi ',
+
 	input: {
 		rgb: convertRgbToHsi
 	},

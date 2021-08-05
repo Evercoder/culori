@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { rec2020 } from '../src/index';
+import { rec2020, formatCss } from '../src/index';
 
 tape('rec2020', t => {
 	t.deepEqual(rec2020('white'), {
@@ -15,5 +15,31 @@ tape('rec2020', t => {
 		g: 0.23099956503092,
 		b: 0.0737732217498481
 	});
+	t.end();
+});
+
+tape('color(rec2020)', t => {
+	t.deepEqual(rec2020('color(rec2020 1 0 0 / 0.25)'), {
+		r: 1,
+		g: 0,
+		b: 0,
+		alpha: 0.25,
+		mode: 'rec2020'
+	});
+	t.deepEqual(rec2020('color(rec2020 0% 50% 0.5 / 25%)'), {
+		r: 0,
+		g: 0.5,
+		b: 0.5,
+		alpha: 0.25,
+		mode: 'rec2020'
+	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(
+		formatCss('color(rec2020 0% 50% 0.5 / 25%)'),
+		'color(rec2020 0 0.5 0.5 / 0.25)'
+	);
 	t.end();
 });

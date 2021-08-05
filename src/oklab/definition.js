@@ -13,7 +13,6 @@ import lab from '../lab/definition';
 const definition = {
 	...lab,
 	mode: 'oklab',
-	alias: [],
 
 	output: {
 		lrgb: convertOklabToLrgb,
@@ -31,7 +30,8 @@ const definition = {
 		b: [-0.311, 0.198]
 	},
 
-	parsers: []
+	parsers: ['--oklab'],
+	serialize: 'color(--oklab '
 };
 
 export default definition;
