@@ -1041,6 +1041,10 @@ Defines a new color space through a _definition_ object. Here's the full definit
 		h: [0, 360]
 	},
 	parsers: [parseHsl],
+  serialize: c =>
+    `hsl(${c.h} ${c.s * 100}% ${c.l * 100}%${
+      c.alpha < 1 ? ` / ${c.alpha}` : ''
+    })`,
 	interpolate: {
 		h: {
 			use: interpolatorLinear,
