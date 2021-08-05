@@ -89,7 +89,7 @@ const formatCss = c => {
 				res += (i ? ' ' : '') + (color[ch] || 0);
 			}
 		});
-		if (color.alpha !== undefined) {
+		if (color.alpha !== undefined && color.alpha < 1) {
 			res += ` / ${color.alpha}`;
 		}
 		return res + ')';

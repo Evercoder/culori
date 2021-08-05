@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { rgb, formatHex } from '../src/index';
+import { rgb, formatHex, formatCss } from '../src/index';
 
 tape('rgb(Specifier)', function (test) {
 	test.deepEqual(formatHex(rgb('#ffffff')), '#ffffff');
@@ -68,5 +68,10 @@ tape('color(srgb)', t => {
 		alpha: 0.25,
 		mode: 'rgb'
 	});
+	t.end();
+});
+
+tape('formatCss', t => {
+	t.equal(formatCss(rgb('color(srgb 1 0 0.5/1)')), 'color(srgb 1 0 0.5)');
 	t.end();
 });
