@@ -145,5 +145,6 @@ tape('formatCss', t => {
 	t.equal(formatCss('hsl(.5turn 40% 20% / 50%)'), 'hsl(180 40% 20% / 0.5)');
 	t.equal(formatCss('hsl(.5turn 40% 20%)'), 'hsl(180 40% 20%)');
 	t.equal(formatCss('hsl(.5turn 40% 20% / 100%)'), 'hsl(180 40% 20%)');
+	t.equal(formatCss(hsl('#ffffff00')), 'hsl(0 0% 100% / 0)');
 	t.end();
 });

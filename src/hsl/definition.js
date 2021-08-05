@@ -26,7 +26,7 @@ const definition = {
 
 	parsers: [parseHsl],
 	serialize: c =>
-		`hsl(${c.h} ${c.s * 100}% ${c.l * 100}%${
+		`hsl(${c.h || 0} ${c.s * 100}% ${c.l * 100}%${
 			c.alpha < 1 ? ` / ${c.alpha}` : ''
 		})`,
 
