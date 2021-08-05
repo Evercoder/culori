@@ -137,7 +137,7 @@ culori.formatHsl('lab(50 0 0 / 25%)');
 
 <a name="formatCss" href="#formatCss">#</a> culori.**formatCss**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
-Returns a CSS string for the given color, based on the CSS Color Level 4 specification. A few color spaces, such as `hsl` or `lab`, have their own functional representation in CSS. We use that whenever possible; the `hsl` color space is represented as `hsl(h s l / alpha)`. Predefined color spaces are represented using the `color()` notation with the appropriate identifier for the color space, e.g. `color(display-p3 r g b / alpha)`. All other colors paces use the `color()` notation with a dashed identifier. For example, `jab` is represented as `color(--jzazbz j a b / alpha)`.
+Returns a CSS string for the given color, based on the CSS Color Level 4 specification. A few color spaces, such as `hsl` or `lab`, have their own functional representation in CSS. We use that whenever possible; the `hsl` color space is represented as `hsl(h% s l / alpha)`. Predefined color spaces are represented using the `color()` notation with the appropriate identifier for the color space, e.g. `color(display-p3 r g b / alpha)`. All other colors paces use the `color()` notation with a dashed identifier. For example, `jab` is represented as `color(--jzazbz j a b / alpha)`.
 
 You can find the exact string produced for each color space under the _Serialized as_ entry on the [Color Spaces](/color-spaces) page.
 
@@ -152,7 +152,7 @@ An alpha of exactly `1` is omitted from the representation.
 	A mode with its own function notation.
 */
 culori.formatCss({ mode: 'hsl', h: 30, s: 1, l: 0.5, alpha: 0.5 });
-// ⇒ 'hsl(30 1 0.5 / 0.5)'
+// ⇒ 'hsl(30 100% 50% / 0.5)'
 
 /*
 	A predefined color space.

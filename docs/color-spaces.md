@@ -82,7 +82,7 @@ The HSL color space.
 | `s`     | `[0, 1]`   | Saturation in HSL |
 | `l`     | `[0, 1]`   | Lightness         |
 
-Serialized as `hsl(h s l / alpha)`.
+Serialized as `hsl(h s% l% / alpha)`.
 
 #### `hsv`
 
@@ -118,7 +118,7 @@ Serialized as `color(--hsi h s i / alpha)`.
 | `w`     | `[0, 1]`   | Whiteness   |
 | `b`     | `[0, 1]`   | Blackness   |
 
-Serialized as `hwb(h w b / alpha)`.
+Serialized as `hwb(h w% b% / alpha)`.
 
 > Smith, Alvy Ray (1996) — ["HWB — A More Intuitive Hue-Based Color Model"](http://alvyray.com/Papers/CG/HWB_JGTv208.pdf), Journal of Graphics, GPU and Game tools.
 
@@ -136,7 +136,7 @@ The CIELAB color space using the [D50 standard illuminant](https://en.wikipedia.
 | `a`     | `[-79.287, 93.55]`≈   | Green–red component   |
 | `b`     | `[-112.029, 93.388]`≈ | Blue–yellow component |
 
-Serialized as `lab(l a b / alpha)`.
+Serialized as `lab(l% a b / alpha)`.
 
 #### `lch`
 
@@ -148,7 +148,7 @@ The CIELCh color space using the D50 standard illuminant.
 | `c`     | `[0, 131.207]`≈ | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
-Serialized as `lch(l c h / alpha)`.
+Serialized as `lch(l% c h / alpha)`.
 
 #### `lab65`
 
