@@ -233,7 +233,7 @@ tape('hwb', function (test) {
 
 	test.deepEqual(
 		parse('hwb(200 150% 150%)'),
-		{ h: 200, w: 0.5, b: 0.5, mode: 'hwb' },
+		{ h: 200, w: 1.5, b: 1.5, mode: 'hwb' },
 		'grey'
 	);
 

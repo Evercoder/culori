@@ -11,13 +11,6 @@ const parseHwb = color => {
 		b: match[5] / 100
 	};
 
-	// normalize w + b to at most 1
-	if (res.w + res.b > 1) {
-		let s = res.w + res.b;
-		res.w /= s;
-		res.b /= s;
-	}
-
 	if (match[6] !== undefined) {
 		res.alpha = match[6] / 100;
 	} else if (match[7] !== undefined) {
