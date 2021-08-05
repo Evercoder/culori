@@ -32,7 +32,7 @@ The [RGB color model](https://en.wikipedia.org/wiki/RGB_color_model) describes c
 
 The [sRGB color space](https://en.wikipedia.org/wiki/SRGB), which most people refer to when talking about RGB colors.
 
-Serialized as `rgb(r g b / alpha)`.
+Serialized as `color(srgb r g b / alpha)`.
 
 #### `lrgb`
 
