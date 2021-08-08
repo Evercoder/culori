@@ -18,7 +18,7 @@ const interpolatorPiecewise = interpolator => arr => {
 	let classes = get_classes(arr);
 	return t => {
 		let cls = t * classes.length;
-		let idx = t === 1 ? classes.length - 1 : Math.floor(cls);
+		let idx = t >= 1 ? classes.length - 1 : Math.max(Math.floor(cls), 0);
 		let pair = classes[idx];
 		return pair === undefined
 			? undefined
