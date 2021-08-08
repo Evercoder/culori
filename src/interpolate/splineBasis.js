@@ -21,6 +21,7 @@ import gamma from '../easing/gamma';
 		B(t) = (1-t)^3 * P0 + 3 * (1-t)^2 * t * P1 + (1-t) * t^2 * P2 + t^3 * P3 
 
  */
+const mod = (v, l) => (v + l) % l;
 
 const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 	let t2 = t * t;
@@ -36,7 +37,7 @@ const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 
 const interpolatorSplineBasis = arr => t => {
 	let classes = arr.length - 1;
-	let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+	let i = t >= 1 ? classes - 1 : Math.max(0, Math.floor(t * classes));
 	return bspline(
 		i > 0 ? arr[i - 1] : 2 * arr[i] - arr[i + 1],
 		arr[i],
@@ -47,26 +48,31 @@ const interpolatorSplineBasis = arr => t => {
 };
 
 const interpolatorSplineBasisClosed = arr => t => {
-	let classes = arr.length - 1;
-	let i = t === 1 ? classes - 1 : Math.floor(t * classes);
+	const classes = arr.length - 1;
+	const i = Math.floor(t * classes);
 	return bspline(
-		arr[(i - 1 + arr.length) % arr.length],
-		arr[i],
-		arr[(i + 1) % arr.length],
-		arr[(i + 2) % arr.length],
+		arr[mod(i - 1, arr.length)],
+		arr[mod(i, arr.length)],
+		arr[mod(i + 1, arr.length)],
+		arr[mod(i + 2, arr.length)],
 		(t - i / classes) * classes
 	);
 };
 
-const interpolateSplineBasis = (fixup, type = 'default', γ = 1) => arr => {
-	let ease = gamma(γ);
-	if (type === 'default') {
-		return t => interpolatorSplineBasis((fixup || (v => v))(arr))(ease(t));
-	} else if (type === 'closed') {
-		return t =>
-			interpolatorSplineBasisClosed((fixup || (v => v))(arr))(ease(t));
-	}
-};
+const interpolateSplineBasis =
+	(fixup, type = 'default', γ = 1) =>
+	arr => {
+		let ease = gamma(γ);
+		if (type === 'default') {
+			return t =>
+				interpolatorSplineBasis((fixup || (v => v))(arr))(ease(t));
+		} else if (type === 'closed') {
+			return t =>
+				interpolatorSplineBasisClosed((fixup || (v => v))(arr))(
+					ease(t)
+				);
+		}
+	};
 
 export {
 	interpolateSplineBasis,

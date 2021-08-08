@@ -44,11 +44,10 @@ const interpolator = (arr, yp, s) => {
 	let n2 = n * n;
 	return t => {
 		let i;
-		if (t === 1) {
+		if (t >= 1) {
 			i = n - 1;
-			t = 1;
 		} else {
-			i = Math.floor(t * n);
+			i = Math.max(0, Math.floor(t * n));
 		}
 		let t1 = t - i / n;
 		let t2 = t1 * t1;
@@ -129,16 +128,20 @@ const interpolatorSplineMonotoneClosed = arr => {
 	return interpolator(arr, yp, s);
 };
 
-const interpolateSplineMonotone = (fixup, type = 'default', γ = 1) => arr => {
-	let ease = gamma(γ);
-	if (type === 'closed') {
-		return t =>
-			interpolatorSplineMonotoneClosed((fixup || (v => v))(arr))(ease(t));
-	} else if (type === 'default') {
-		return t =>
-			interpolatorSplineMonotone((fixup || (v => v))(arr))(ease(t));
-	}
-};
+const interpolateSplineMonotone =
+	(fixup, type = 'default', γ = 1) =>
+	arr => {
+		let ease = gamma(γ);
+		if (type === 'closed') {
+			return t =>
+				interpolatorSplineMonotoneClosed((fixup || (v => v))(arr))(
+					ease(t)
+				);
+		} else if (type === 'default') {
+			return t =>
+				interpolatorSplineMonotone((fixup || (v => v))(arr))(ease(t));
+		}
+	};
 
 export {
 	interpolateSplineMonotone,
