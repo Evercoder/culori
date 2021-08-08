@@ -244,3 +244,19 @@ pre[class*='language-'] {
 .token.boolean {
 	color: var(--red);
 }
+
+.api-figure-grid {
+	font-size: 0.9em;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	grid-gap: 2em 1em;
+}
+
+.api-figure-grid figure {
+	padding: 0;
+	margin: 0;
+}
+
+.api-figure-grid figure img {
+	border: 1px solid #ccc;
+}

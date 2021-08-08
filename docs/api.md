@@ -493,9 +493,78 @@ culori.samples(5).map(culori.easingGamma(2));
 
 ### Interpolation methods
 
+<div class='api-figure-grid'>
+<figure>
+  <img src='/img/interpolator-linear.svg' width='400' height='80'/>
+  <figcaption>
+    <a href='#interpolatorLinear'>
+      <code>culori.<strong>interpolatorLinear</strong></code>
+    </a>
+  </figcaption>
+</figure>
+<figure>
+  <img src='/img/interpolator-basis.svg' width='400' height='80'/>
+  <figcaption>
+    <a href='#interpolatorSplineBasis'>
+      <code>culori.<strong>interpolatorSplineBasis</strong></code>
+    </a>
+  </figcaption>
+</figure>
+<figure>
+  <img src='/img/interpolator-basis-closed.svg' width='400' height='80'/>
+  <figcaption>
+    <a href='#interpolatorSplineBasisClosed'>
+      <code>culori.<strong>interpolatorSplineBasisClosed</strong></code>
+    </a>
+  </figcaption>
+</figure>
+<figure>
+  <img src='/img/interpolator-natural.svg' width='400' height='80'/>
+  <figcaption>
+    <a href='#interpolatorSplineNatural'>
+      <code>culori.<strong>interpolatorSplineNatural</strong></code>
+    </a>
+  </figcaption>
+</figure>
+<figure>
+  <img src='/img/interpolator-natural-closed.svg' width='400' height='80'/>
+  <figcaption>
+    <a href='#interpolatorSplineNaturalClosed'>
+      <code>culori.<strong>interpolatorSplineNaturalClosed</strong></code>
+    </a>
+  </figcaption>
+</figure>
+<figure>
+  <img src='/img/interpolator-monotone.svg' width='400' height='80'/>
+  <figcaption>
+    <a href='#interpolatorSplineMonotone'>
+      <code>culori.<strong>interpolatorSplineMonotone</strong></code>
+    </a>
+  </figcaption>
+</figure>
+<figure>
+  <img src='/img/interpolator-monotone-2.svg' width='400' height='80'/>
+  <figcaption>
+    <a href='#interpolatorSplineMonotone2'>
+      <code>culori.<strong>interpolatorSplineMonotone2</strong></code>
+    </a>
+  </figcaption>
+</figure>
+<figure>
+  <img src='/img/interpolator-monotone-closed.svg' width='400' height='80'/>
+  <figcaption>
+    <a href='#interpolatorSplineMonotoneClosed'>
+      <code>culori.<strong>interpolatorSplineMonotoneClosed</strong></code>
+    </a>
+  </figcaption>
+</figure>
+</div>
+
 You'll use these methods when you want to override how colors get interpolated in a specific color space, or when defining the default interpolation for custom color spaces.
 
 <a id="interpolatorLinear" href="#interpolatorLinear">#</a> culori.**interpolatorLinear**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/linear.js)
+
+<img src='/img/interpolator-linear.svg' width='400' height='80'/>
 
 A linear interpolator for values in a channel.
 
@@ -505,9 +574,13 @@ A linear interpolator for values in a channel.
 
 <a id="interpolatorSplineBasis" href="#interpolatorSplineBasis">#</a> culori.**interpolatorSplineBasis**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineBasis.js)
 
+<img src='/img/interpolator-basis.svg' width='400' height='80'/>
+
 A basis spline which uses one-sided finite differences for the slopes at the boundaries.
 
 <a id="interpolatorSplineBasisClosed" href="#interpolatorSplineBasisClosed">#</a> culori.**interpolatorSplineBasisClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineBasis.js)
+
+<img src='/img/interpolator-basis-closed.svg' width='400' height='80'/>
 
 A basis spline which considers the _values_ array to be periodic.
 
@@ -517,9 +590,13 @@ A basis spline which considers the _values_ array to be periodic.
 
 <a id="interpolatorSplineNatural" href="#interpolatorSplineNatural">#</a> culori.**interpolatorSplineNatural**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineNatural.js)
 
+<img src='/img/interpolator-natural.svg' width='400' height='80'/>
+
 A natural spline which uses one-sided finite differences for the slopes at the boundaries.
 
 <a id="interpolatorSplineNaturalClosed" href="#interpolatorSplineNaturalClosed">#</a> culori.**interpolatorSplineNaturalClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineNatural.js)
+
+<img src='/img/interpolator-natural-closed.svg' width='400' height='80'/>
 
 A natural spline which considers the _values_ array to be periodic.
 
@@ -533,13 +610,19 @@ The following variants are available:
 
 <a id="interpolatorSplineMonotone" href="#interpolatorSplineMonotone">#</a> culori.**interpolatorSplineMonotone**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
 
+<img src='/img/interpolator-monotone.svg' width='400' height='80'/>
+
 A monotone spline that uses one-sided finite differences to find the slopes at the boundaries.
 
 <a id="interpolatorSplineMonotone2" href="#interpolatorSplineMonotone2">#</a> culori.**interpolatorSplineMonotone2**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
 
+<img src='/img/interpolator-monotone-2.svg' width='400' height='80'/>
+
 A monotone spline for which we derive the slopes at the boundaries by tracing a parabola through the first/last three values.
 
 <a id="interpolatorSplineMonotoneClosed" href="#interpolatorSplineMonotoneClosed">#</a> culori.**interpolatorSplineMonotoneClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
+
+<img src='/img/interpolator-monotone-closed.svg' width='400' height='80'/>
 
 A monotone spline which considers the _values_ array to be periodic.
 
