@@ -50,6 +50,7 @@
 		"tape": "^5.2.2"
 	},
 	"scripts": {
+		"start": "rollup -cw",
 		"build": "rollup -c",
 		"test": "tape -r esm 'test/*.js' | tap-spec",
 		"benchmark": "node benchmark/index.js",
