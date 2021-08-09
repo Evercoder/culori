@@ -149,8 +149,8 @@ a {
 
 a:hover,
 a:focus {
-	outline: 2px dotted black;
-	outline-offset: 2px;
+	background: #fc0;
+	color: #000;
 }
 
 pre,
@@ -259,4 +259,14 @@ pre[class*='language-'] {
 
 .api-figure-grid figure img {
 	border: 1px solid #ccc;
+}
+
+details summary {
+	font-weight: bold;
+	cursor: pointer;
+}
+
+span[aria-label] {
+	font-size: 1.5em;
+	line-height: 1;
 }

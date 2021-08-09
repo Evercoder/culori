@@ -127,9 +127,11 @@ The object needs to have a `mode` property that identifies the color space, and 
 
 ## Parsing and conversion
 
-<a id="parse" href="#parse">#</a> culori.**parse**(_string_) → _color_ or _undefined_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/parse.js)
+<a id="parse" href="#parse">#</a> culori.**parse**(_string_) → _color_ or _undefined_
 
-Parses a string and returns the corresponding _color_. The color will be in the matching color space, e.g. RGB for hex strings, HSL for `hsl(…, …, …)` strings, et cetera. If no built-in parsers can match the string, the function will return _undefined_.
+<span aria-label='Source:'>☞</span> [src/parse.js](https://github.com/evercoder/culori/blob/main/src/parse.js)
+
+Parses a string and returns the corresponding _color_. The color will be in the matching color space, e.g. RGB for hex strings, HSL for `hsl(…, …, …)` strings, et cetera. If no built-in parsers can match the string, the function will return `undefined`.
 
 ```js
 /* A named color */
@@ -151,7 +153,9 @@ culori.parse('lab(100% -50 50)');
 
 In most cases, instead of using `parse()` directly (which only operates on strings), you'll want to use a [`converter()`](#converter), which accepts strings and color objects and returns objects in a predictable color space.
 
-<a id="converter" href="#converter">#</a> culori.**converter**(_mode = "rgb"_) → _function (color or String)_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/converter.js)
+<a id="converter" href="#converter">#</a> culori.**converter**(_mode = "rgb"_) → _function (color or String)_
+
+<span aria-label='Source:'>☞</span> [src/converter.js](https://github.com/evercoder/culori/blob/main/src/converter.js)
 
 Returns a _converter_: a function that can convert any color to the _mode_ color space.
 
@@ -168,7 +172,7 @@ lab('#f0f0f0');
 
 Converters accept either strings (which will be parsed with `culori.parse` under the hood) or color objects. If the `mode` key is absent from the color object passed to a converter, it's assumed to be in the converter's color space.
 
-The available modes (color spaces) are listed below. For convenience, each color space built into culori has a shortcut to its converter. For example, instead of `culori.converter('hsl')`, you can use `culori.hsl`.
+The available modes (color spaces) are listed below. For convenience, each color space built into Culori has a shortcut to its converter. For example, instead of `culori.converter('hsl')`, you can use `culori.hsl`.
 
 | Mode        | Color space                                                 | Shortcut                      |
 | ----------- | ----------------------------------------------------------- | ----------------------------- |
@@ -203,7 +207,9 @@ The available modes (color spaces) are listed below. For convenience, each color
 
 These methods serialize colors to strings, in various formats.
 
-<a id="formatHex" href="#formatHex">#</a> culori.**formatHex**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<a id="formatHex" href="#formatHex">#</a> culori.**formatHex**(_color_ or _string_) → _string_
+
+<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
 Returns the hex string for the given color. The color's `alpha` channel is omitted, and the red, green, and blue channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
 
@@ -212,7 +218,9 @@ culori.formatHex('red');
 // ⇒ "#ff0000"
 ```
 
-<a id="formatHex8" href="#formatHex8">#</a> culori.**formatHex8**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<a id="formatHex8" href="#formatHex8">#</a> culori.**formatHex8**(_color_ or _string_) → _string_
+
+<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
 Returns the 8-character hex string for the given color. The red, green, blue, and alpha channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
 
@@ -221,7 +229,9 @@ culori.formatHex8({ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 });
 // ⇒ "#ff000080"
 ```
 
-<a id="formatRgb" href="#formatRgb">#</a> culori.**formatRgb**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<a id="formatRgb" href="#formatRgb">#</a> culori.**formatRgb**(_color_ or _string_) → _string_
+
+<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
 Returns the `rgb(…)` / `rgba(…)` string for the given color. Fully opaque colors will be serialized as `rgb()`, and semi-transparent colors as `rgba()`, in accordance with the [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value). Like in the case of `formatHex`, the red, green, and blue channels are clamped to the interval `[0, 255]`.
 
@@ -230,7 +240,9 @@ culori.formatRgb('lab(50 0 0 / 25%)');
 // ⇒ "rgba(119, 119, 119, 0.25)"
 ```
 
-<a id="formatHsl" href="#formatHsl">#</a> culori.**formatHsl**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<a id="formatHsl" href="#formatHsl">#</a> culori.**formatHsl**(_color_ or _string_) → _string_
+
+<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
 Returns the `hsl(…)` / `hsla(…)` string for the given color. Fully opaque colors will be serialized as `hsl()`, and semi-transparent colors as `hsla()`. All values are rounded to a precision of two digits. The Saturation and Lightness are clamped to the interval `[0%, 100%]`.
 
@@ -239,7 +251,9 @@ culori.formatHsl('lab(50 0 0 / 25%)');
 // ⇒ 'hsla(194.33, 0%, 46.63%, 0.25)'
 ```
 
-<a id="formatCss" href="#formatCss">#</a> culori.**formatCss**(_color_ or _string_) → _string_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<a id="formatCss" href="#formatCss">#</a> culori.**formatCss**(_color_ or _string_) → _string_
+
+<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
 
 Returns a CSS string for the given color, based on the CSS Color Level 4 specification. A few color spaces, such as `hsl` or `lab`, have their own functional representation in CSS. We use that whenever possible; the `hsl` color space is represented as `hsl(h% s l / alpha)`. Predefined color spaces are represented using the `color()` notation with the appropriate identifier for the color space, e.g. `color(display-p3 r g b / alpha)`. All other colors paces use the `color()` notation with a dashed identifier. For example, `jab` is represented as `color(--jzazbz j a b / alpha)`.
 
@@ -281,7 +295,9 @@ culori.formatCss({ mode: 'lrgb', r: 0.5, s: 0.25, b: 1, alpha: 0.25 });
 
 Some color spaces (Lab and LCh in particular) allow you to express colors that can't be displayed on-screen. The methods below allow you to identify when that's the case and to produce displayable versions of the colors.
 
-<a id="displayable" href="#displayable">#</a> culori.**displayable**(_color_ or _string_) → _boolean_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/displayable.js)
+<a id="displayable" href="#displayable">#</a> culori.**displayable**(_color_ or _string_) → _boolean_
+
+<span aria-label='Source:'>☞</span> [src/displayable.js](https://github.com/evercoder/culori/blob/main/src/displayable.js)
 
 Checks whether a particular color fits inside the sRGB gamut, by verifying that the `r`, `g`, and `b` channels are all in the interval `[0, 1]`.
 
@@ -293,7 +309,9 @@ culori.displayable('rgb(300 255 255)');
 // ⇒ false
 ```
 
-<a id="clampRgb" href="#clampRgb">#</a> culori.**clampRgb**(_color_ or _string_) → _color_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/clamp.js)
+<a id="clampRgb" href="#clampRgb">#</a> culori.**clampRgb**(_color_ or _string_) → _color_
+
+<span aria-label='Source:'>☞</span> [src/clamp.js](https://github.com/evercoder/culori/blob/main/src/clamp.js)
 
 Obtains a displayable version of the color by clamping the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`. The returned color is in the same color space as the original color.
 
@@ -307,7 +325,9 @@ culori.clampRgb('lab(50% 100 100)');
 // ⇒ { mode: "lab", l: 54.29…, a: 80.81…, b: 69.88… }
 ```
 
-<a id="clampChroma" href="#clampChroma">#</a> culori.**clampChroma**(_color_ or _string_, _mode = 'lch'_) → _color_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/clamp.js)
+<a id="clampChroma" href="#clampChroma">#</a> culori.**clampChroma**(_color_ or _string_, _mode = 'lch'_) → _color_
+
+<span aria-label='Source:'>☞</span> [src/clamp.js](https://github.com/evercoder/culori/blob/main/src/clamp.js)
 
 Obtains a displayable version of the color by converting it to a temporary color space containing a Chroma channel, then looking for the closest Chroma value that's displayable for the given Lightness and Hue. Compared to `clampRgb`, the function has the advantage of preserving the hue of the original color. The displayable color returned by this function will be converted back to the original color space.
 
@@ -341,7 +361,9 @@ In any color space, colors occupy positions given by their values for each chann
 
 Above is the path between red and blue in the RGB color space. Going from left to right, we start at red and steadily blend in more and more blue as we progress, until the color is fully blue at destination. This is a _linear interpolation_ between two colors.
 
-<a id="interpolate" href="#interpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_, _overrides_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/interpolate.js)
+<a id="interpolate" href="#interpolate">#</a> culori.**interpolate**(_colors_, _mode = "rgb"_, _overrides_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate/interpolate.js](https://github.com/evercoder/culori/blob/main/src/interpolate/interpolate.js)
 
 Returns an _interpolator_ in the _mode_ color space for an array of _colors_. The interpolator is a function that accepts a value _t_ in the interval `[0, 1]` and returns the interpolated color in the _mode_ color space.
 
@@ -448,13 +470,13 @@ Any number in he _colors_ array will be interpreted as an [interpolation hint](h
 culori.interpolate(['red', 0.25, 'green']);
 ```
 
-As opposed to how current browsers implement the CSS spec ([see discussion](https://github.com/w3c/csswg-drafts/issues/3931)), interpolation hints _do not_ affect color stop positions in culori.
+As opposed to how current browsers implement the CSS spec ([see discussion](https://github.com/w3c/csswg-drafts/issues/3931)), interpolation hints _do not_ affect color stop positions in Culori.
 
 ### Built-in easing functions
 
-A few easing functions that come with culori:
+<a id="easingMidpoint" href="#easingMidpoint">#</a> culori.**easingMidpoint**(_H = 0.5_)
 
-<a id="easingMidpoint" href="#easingMidpoint">#</a> culori.**easingMidpoint**(_H = 0.5_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/easing/midpoint.js)
+<span aria-label='Source:'>☞</span> [src/easing/midpoint.js](https://github.com/evercoder/culori/blob/main/src/easing/midpoint.js)
 
 [Proposed here][midpoint], the `midpoint` easing function lets you shift the midpoint of a gradient like in tools such as Adobe Photoshop. You can use it with [`culori.interpolate()`](#interpolate) as an alternative to interpolation hints:
 
@@ -466,15 +488,21 @@ culori.interpolate(['red', culori.easingMidpoint(0.25), 'blue']);
 culori.interpolate(['red', 0.25, 'blue']);
 ```
 
-<a id="easingSmoothstep" href="#easingSmoothstep">#</a> culori.**easingSmoothstep** &middot; [Source](https://github.com/evercoder/culori/blob/main/src/easing/smoothstep.js)
+<a id="easingSmoothstep" href="#easingSmoothstep">#</a> culori.**easingSmoothstep**
+
+<span aria-label='Source:'>☞</span> [src/easing/smoothstep.js](https://github.com/evercoder/culori/blob/main/src/easing/smoothstep.js)
 
 The [Smoothstep][smoothstep] easing function.
 
-<a id="easingSmootherstep" href="#easingSmootherstep">#</a> culori.**easingSmootherstep** &middot; [Source](https://github.com/evercoder/culori/blob/main/src/easing/smootherstep.js)
+<a id="easingSmootherstep" href="#easingSmootherstep">#</a> culori.**easingSmootherstep**
+
+<span aria-label='Source:'>☞</span> [src/easing/smootherstep.js](https://github.com/evercoder/culori/blob/main/src/easing/smootherstep.js)
 
 Smootherstep is a variant of the [Smoothstep][smoothstep] easing function.
 
-<a id="easingInOutSine" href="#easingInOutSine">#</a> culori.**easingInOutSine** &middot; [Source](https://github.com/evercoder/culori/blob/main/src/easing/inOutSine.js)
+<a id="easingInOutSine" href="#easingInOutSine">#</a> culori.**easingInOutSine**
+
+<span aria-label='Source:'>☞</span> [src/easing/inOutSine.js](https://github.com/evercoder/culori/blob/main/src/easing/inOutSine.js)
 
 Sinusoidal in-out easing. Can be used to create, for example, a cosine interpolation [as described by Paul Bourke](paulbourke.net/miscellaneous/interpolation/):
 
@@ -482,7 +510,9 @@ Sinusoidal in-out easing. Can be used to create, for example, a cosine interpola
 culori.interpolate([culori.easingInOutSine, 'red', 'green', 'blue']);
 ```
 
-<a id="easingGamma" href="#easingGamma">#</a> culori.**easingGamma**(_γ = 1_) → _function(t)_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/easing/gamma.js)
+<a id="easingGamma" href="#easingGamma">#</a> culori.**easingGamma**(_γ = 1_) → _function(t)_
+
+<span aria-label='Source:'>☞</span> [src/easing/gamma.js](https://github.com/evercoder/culori/blob/main/src/easing/gamma.js)
 
 The [gamma](https://en.wikipedia.org/wiki/Gamma_correction) easing.
 
@@ -562,7 +592,9 @@ culori.samples(5).map(culori.easingGamma(2));
 
 You'll use these methods when you want to override how colors get interpolated in a specific color space, or when defining the default interpolation for custom color spaces.
 
-<a id="interpolatorLinear" href="#interpolatorLinear">#</a> culori.**interpolatorLinear**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/linear.js)
+<a id="interpolatorLinear" href="#interpolatorLinear">#</a> culori.**interpolatorLinear**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate/linear.js](https://github.com/evercoder/culori/blob/main/src/interpolate/linear.js)
 
 <img src='/img/interpolator-linear.svg' width='400' height='80'/>
 
@@ -572,13 +604,17 @@ A linear interpolator for values in a channel.
 
 [Basis splines](https://en.wikipedia.org/wiki/B-spline) (also called _B-splines_) are available in the following variants:
 
-<a id="interpolatorSplineBasis" href="#interpolatorSplineBasis">#</a> culori.**interpolatorSplineBasis**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineBasis.js)
+<a id="interpolatorSplineBasis" href="#interpolatorSplineBasis">#</a> culori.**interpolatorSplineBasis**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate/splineBasis.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineBasis.js)
 
 <img src='/img/interpolator-basis.svg' width='400' height='80'/>
 
 A basis spline which uses one-sided finite differences for the slopes at the boundaries.
 
-<a id="interpolatorSplineBasisClosed" href="#interpolatorSplineBasisClosed">#</a> culori.**interpolatorSplineBasisClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineBasis.js)
+<a id="interpolatorSplineBasisClosed" href="#interpolatorSplineBasisClosed">#</a> culori.**interpolatorSplineBasisClosed**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate/splineBasis.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineBasis.js)
 
 <img src='/img/interpolator-basis-closed.svg' width='400' height='80'/>
 
@@ -588,13 +624,17 @@ A basis spline which considers the _values_ array to be periodic.
 
 [Natural splines](https://en.wikipedia.org/wiki/Spline_interpolation) are available in the following variants:
 
-<a id="interpolatorSplineNatural" href="#interpolatorSplineNatural">#</a> culori.**interpolatorSplineNatural**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineNatural.js)
+<a id="interpolatorSplineNatural" href="#interpolatorSplineNatural">#</a> culori.**interpolatorSplineNatural**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate/splineNatural.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineNatural.js)
 
 <img src='/img/interpolator-natural.svg' width='400' height='80'/>
 
 A natural spline which uses one-sided finite differences for the slopes at the boundaries.
 
-<a id="interpolatorSplineNaturalClosed" href="#interpolatorSplineNaturalClosed">#</a> culori.**interpolatorSplineNaturalClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineNatural.js)
+<a id="interpolatorSplineNaturalClosed" href="#interpolatorSplineNaturalClosed">#</a> culori.**interpolatorSplineNaturalClosed**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate/splineNatural.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineNatural.js)
 
 <img src='/img/interpolator-natural-closed.svg' width='400' height='80'/>
 
@@ -608,19 +648,25 @@ The monotone splines are based on the following paper (via [d3-shape](https://gi
 
 The following variants are available:
 
-<a id="interpolatorSplineMonotone" href="#interpolatorSplineMonotone">#</a> culori.**interpolatorSplineMonotone**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
+<a id="interpolatorSplineMonotone" href="#interpolatorSplineMonotone">#</a> culori.**interpolatorSplineMonotone**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate/splineMonotone.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
 
 <img src='/img/interpolator-monotone.svg' width='400' height='80'/>
 
 A monotone spline that uses one-sided finite differences to find the slopes at the boundaries.
 
-<a id="interpolatorSplineMonotone2" href="#interpolatorSplineMonotone2">#</a> culori.**interpolatorSplineMonotone2**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
+<a id="interpolatorSplineMonotone2" href="#interpolatorSplineMonotone2">#</a> culori.**interpolatorSplineMonotone2**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate/splineMonotone.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
 
 <img src='/img/interpolator-monotone-2.svg' width='400' height='80'/>
 
 A monotone spline for which we derive the slopes at the boundaries by tracing a parabola through the first/last three values.
 
-<a id="interpolatorSplineMonotoneClosed" href="#interpolatorSplineMonotoneClosed">#</a> culori.**interpolatorSplineMonotoneClosed**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
+<a id="interpolatorSplineMonotoneClosed" href="#interpolatorSplineMonotoneClosed">#</a> culori.**interpolatorSplineMonotoneClosed**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate/splineMonotone.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
 
 <img src='/img/interpolator-monotone-closed.svg' width='400' height='80'/>
 
@@ -628,7 +674,7 @@ A monotone spline which considers the _values_ array to be periodic.
 
 #### Custom piecewise interpolation
 
-<a id='interpolatorPiecewise' href='#interpolatorPiecewise'>#</a> culori.**interpolatorPiecewise**(_interpolator_) [Source](https://github.com/evercoder/culori/blob/main/src/interpolate/piecewise.js)
+<a id='interpolatorPiecewise' href='#interpolatorPiecewise'>#</a> culori.**interpolatorPiecewise**(_interpolator_) [src/interpolate/piecewise.js](https://github.com/evercoder/culori/blob/main/src/interpolate/piecewise.js)
 
 Use a custom piecewise interpolator function in the form `function (a, b, t) => value`:
 
@@ -651,7 +697,9 @@ Hue is a circular value, so there are two directions in which to interpolate bet
 
 Adjusted hues will not necessarily be in the `[0, 360)` interval. All fixup methods leave undefined values, and the values immediately following them, unaltered. The names of the methods come from [this discussion](https://github.com/w3c/csswg-drafts/issues/4735).
 
-<a id="fixupHueShorter" href="#fixupHueShorter">#</a> culori.**fixupHueShorter**(_values_) → _Array_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
+<a id="fixupHueShorter" href="#fixupHueShorter">#</a> culori.**fixupHueShorter**(_values_) → _Array_
+
+<span aria-label='Source:'>☞</span> [src/fixup/hue.js](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
 
 Adjusts the hues so that values are interpolated along the _shortest path around the hue circle_.
 
@@ -689,21 +737,29 @@ let hsl_long = culori.interpolate(['blue', 'red', 'green'], 'hsl', {
 
 Treating the hues array as-is (with an _identity function_) corresponds to the `specified` fixup method [in the CSSWG issue](https://github.com/w3c/csswg-drafts/issues/4735) mentioned earlier.
 
-<a id="fixupHueLonger" href="#fixupHueLonger">#</a> culori.**fixupHueLonger**(_values_) → _Array_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
+<a id="fixupHueLonger" href="#fixupHueLonger">#</a> culori.**fixupHueLonger**(_values_) → _Array_
+
+<span aria-label='Source:'>☞</span> [src/fixup/hue.js](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
 
 Adjusts the hues so that they are interpolated along the _longest path around the hue circle_.
 
-<a id="fixupHueIncreasing" href="#fixupHueIncreasing">#</a> culori.**fixupHueIncreasing**(_values_) → _Array_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
+<a id="fixupHueIncreasing" href="#fixupHueIncreasing">#</a> culori.**fixupHueIncreasing**(_values_) → _Array_
+
+<span aria-label='Source:'>☞</span> [src/fixup/hue.js](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
 
 Adjusts the hues so that every hue is larger than the previous.
 
-<a id="fixupHueDecreasing" href="#fixupHueDecreasing">#</a> culori.**fixupHueDecreasing**(_values_) → _Array_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
+<a id="fixupHueDecreasing" href="#fixupHueDecreasing">#</a> culori.**fixupHueDecreasing**(_values_) → _Array_
+
+<span aria-label='Source:'>☞</span> [src/fixup/hue.js](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
 
 Adjusts the hues so that every hue is smaller than the previous.
 
 #### Alpha fixup
 
-<a id="fixupAlpha" href="#fixupAlpha">#</a> culori.**fixupAlpha**(_values_) → _Array_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/fixup/alpha.js)
+<a id="fixupAlpha" href="#fixupAlpha">#</a> culori.**fixupAlpha**(_values_) → _Array_
+
+<span aria-label='Source:'>☞</span> [src/fixup/alpha.js](https://github.com/evercoder/culori/blob/main/src/fixup/alpha.js)
 
 Turns all `undefined` values in the array to `1` (full opacity), unless _all_ values in the array are `undefined`, in which case it leaves the values unaltered.
 
@@ -711,7 +767,9 @@ This is the default method for the alpha channel in all built-in color spaces.
 
 ### Evenly-spaced samples
 
-<a id="samples" href="#samples">#</a> culori.**samples**(_n = 2_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/samples.js)
+<a id="samples" href="#samples">#</a> culori.**samples**(_n = 2_)
+
+<span aria-label='Source:'>☞</span> [src/samples.js](https://github.com/evercoder/culori/blob/main/src/samples.js)
 
 Returns an array of _n_ equally-spaced samples in the `[0, 1]` range, with `0` and `1` at the ends.
 
@@ -747,7 +805,9 @@ culori.samples(10).map(t => t * t);
 
 ### Lerp
 
-<a id="lerp" href="#lerp">#</a> culori.**lerp**(_a_, _b_, _t_) → _value_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/samples.js)
+<a id="lerp" href="#lerp">#</a> culori.**lerp**(_a_, _b_, _t_) → _value_
+
+<span aria-label='Source:'>☞</span> [src/samples.js](https://github.com/evercoder/culori/blob/main/src/samples.js)
 
 Interpolates between the values `a` and `b` at the point `t ∈ [0, 1]`.
 
@@ -758,7 +818,9 @@ culori.lerp(5, 10, 0.5);
 
 ### Mappings
 
-<a id="mapper" href="#mapper">#</a> culori.**mapper**(_fn_, _mode = "rgb"_) → _function (color | string)_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/map.js)
+<a id="mapper" href="#mapper">#</a> culori.**mapper**(_fn_, _mode = "rgb"_) → _function (color | string)_
+
+<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
 
 Creates a mapping that applies _fn_ on each channel of the color in the _mode_ color space.
 
@@ -797,7 +859,9 @@ Returning `undefined` or `NaN` from the function will omit that channel from the
 
 #### Built-in mappings
 
-<a id="mapAlphaMultiply" href="#mapAlphaMultiply">#</a> culori.**mapAlphaMultiply** &middot; [Source](https://github.com/evercoder/culori/blob/main/src/map.js)
+<a id="mapAlphaMultiply" href="#mapAlphaMultiply">#</a> culori.**mapAlphaMultiply**
+
+<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
 
 Multiplies the color's alpha value into all its other channels:
 
@@ -809,7 +873,9 @@ multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 });
 
 Any `undefined` channel value will be considered to be `0` (zero), to enable alpha-premultiplied interpolation with achromatic colors in hue-based color spaces (HSL, LCh, etc.).
 
-<a id="mapAlphaDivide" href="#mapAlphaDivide">#</a> culori.**mapAlphaDivide** &middot; [Source](https://github.com/evercoder/culori/blob/main/src/map.js)
+<a id="mapAlphaDivide" href="#mapAlphaDivide">#</a> culori.**mapAlphaDivide**
+
+<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
 
 Divides a color's other channels by its alpha value. It's the opposite of `culori.mapAlphaMultiply`, and is used in interpolation with alpha premultiplication:
 
@@ -823,13 +889,19 @@ divideAlpha(multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 }));
 
 Any `undefined` channel value will be considered to be `0` (zero), to enable alpha-premultiplied interpolation with achromatic colors in hue-based color spaces (HSL, LCh, etc.).
 
-<a id="mapTransferLinear" href="#mapTransferLinear">#</a> culori.**mapTransferLinear**(_slope = 1_, _intercept = 0_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/map.js)
+<a id="mapTransferLinear" href="#mapTransferLinear">#</a> culori.**mapTransferLinear**(_slope = 1_, _intercept = 0_)
 
-<a id="mapTransferGamma" href="#mapTransferGamma">#</a> culori.**mapTransferGamma**(_amplitude = 1_, _exponent = 1_, _offset = 0_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/map.js)
+<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
+
+<a id="mapTransferGamma" href="#mapTransferGamma">#</a> culori.**mapTransferGamma**(_amplitude = 1_, _exponent = 1_, _offset = 0_)
+
+<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
 
 #### Interpolating with mappings
 
-<a id="interpolateWith" href="#interpolateWith">#</a> culori.**interpolateWith**(_premap_, _postmap_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate.js)
+<a id="interpolateWith" href="#interpolateWith">#</a> culori.**interpolateWith**(_premap_, _postmap_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate.js](https://github.com/evercoder/culori/blob/main/src/interpolate.js)
 
 Adds a _pre-mapping_ and a _post-mapping_ to an interpolation, to enable things like alpha premultiplication:
 
@@ -861,7 +933,9 @@ let interpolateWithAlphaChromaPremult = culori.interpolateWith(
 interpolateWithAlphaPremult(['red', 'transparent', 'blue'])(0.25);
 ```
 
-<a id="interpolateWithPremultipliedAlpha" href="#interpolateWithPremultipliedAlpha">#</a> culori.**interpolateWithPremultipliedAlpha**(_colors_, _mode = "rgb"_, _overrides_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/interpolate.js)
+<a id="interpolateWithPremultipliedAlpha" href="#interpolateWithPremultipliedAlpha">#</a> culori.**interpolateWithPremultipliedAlpha**(_colors_, _mode = "rgb"_, _overrides_)
+
+<span aria-label='Source:'>☞</span> [src/interpolate.js](https://github.com/evercoder/culori/blob/main/src/interpolate.js)
 
 Takes the same arguments as [`culori.interpolate()`](#interpolate), but applies [alpha premultiplication](https://drafts.csswg.org/css-images-4/#premultiplied).
 
@@ -881,25 +955,33 @@ These methods are concerned to finding the [distance between two colors](https:/
 
 ### Euclidean distance
 
-<a id="differenceEuclidean" href="#differenceEuclidean">#</a> culori.**differenceEuclidean**(_mode = 'rgb'_, _weights = [1, 1, 1, 0]_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceEuclidean" href="#differenceEuclidean">#</a> culori.**differenceEuclidean**(_mode = 'rgb'_, _weights = [1, 1, 1, 0]_)
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
 
 You can optionally assign different weights to the channels in the color space. See, for example, the [Kotsarenko/Ramos distance](#differenceKotsarenkoRamos).
 
-The default weights `[1, 1, 1, 0]` mean that the _alpha_, which is the fourth channel in all the color spaces culori defines, is not taken into account. Send `[1, 1, 1, 1]` as the weights to include it in the computation.
+The default weights `[1, 1, 1, 0]` mean that the _alpha_, which is the fourth channel in all the color spaces Culori defines, is not taken into account. Send `[1, 1, 1, 1]` as the weights to include it in the computation.
 
 In cylindrical spaces, the hue is factored into the Euclidean distance in a variety of ways. The functions below are used internally:
 
-<a id="differenceHueChroma" href="#differenceHueChroma">#</a> culori.**differenceHueChroma**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceHueChroma" href="#differenceHueChroma">#</a> culori.**differenceHueChroma**(_colorA_, _colorB_)
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Computes the hue contribution as the geometric mean of chord lengths belonging to the chromas of the two colors. This is the handling of hue in cylindrical forms of CIE-related color spaces: `lch`, `lchuv`, `dlch`, `oklch`, `jch`.
 
-<a id="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.**differenceHueSaturation**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceHueSaturation" href="#differenceHueSaturation">#</a> culori.**differenceHueSaturation**(_colorA_, _colorB_)
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Computes the hue contribution as the geometric mean of chord lengths belonging to the saturations of the two colors. This is the handling of hue in the HSL / HSV / HSI family of color spaces.
 
-<a id="differenceHueNaive" href="#differenceHueNaive">#</a> culori.**differenceHueNaive**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceHueNaive" href="#differenceHueNaive">#</a> culori.**differenceHueNaive**(_colorA_, _colorB_)
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 For remaining color spaces (HWB), we consider hues numbers, but apply a _shortest path around the hue circle_ (analogous to [`culori.fixupHueShorter`](#fixupHueShorter)). If you insist on using Euclidean distances on these spaces, you can use the `weights` to control the contribution of the hue difference towards the total difference.
 
@@ -907,25 +989,35 @@ For remaining color spaces (HWB), we consider hues numbers, but apply a _shortes
 
 All these color difference functions operate on the `lab65` color space.
 
-<a id="differenceCie76" href="#differenceCie76">#</a> culori.**differenceCie76**() &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceCie76" href="#differenceCie76">#</a> culori.**differenceCie76**()
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Computes the [CIE76][cie76] ΔE\*<sub>ab</sub> color difference between the colors _a_ and _b_. The function is identical to [`culori.differenceEuclidean('lab65')`](#differenceEuclidean).
 
-<a id="differenceCie94" href="#differenceCie94">#</a> culori.**differenceCie94**(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceCie94" href="#differenceCie94">#</a> culori.**differenceCie94**(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_)
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Computes the [CIE94][cie94] ΔE\*<sub>94</sub> color difference between the colors _a_ and _b_.
 
-<a id="differenceCiede2000" href="#differenceCiede2000">#</a> culori.**differenceCiede2000**(_Kl = 1_, _Kc = 1_, _Kh = 1_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceCiede2000" href="#differenceCiede2000">#</a> culori.**differenceCiede2000**(_Kl = 1_, _Kc = 1_, _Kh = 1_)
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Computes the [CIEDE2000][ciede2000] ΔE\*<sub>00</sub> color difference between the colors _a_ and _b_ as implemented by [G. Sharma](http://www2.ece.rochester.edu/~gsharma/ciede2000/).
 
-<a id="differenceCmc" href="#differenceCmc">#</a> culori.**differenceCmc**() &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceCmc" href="#differenceCmc">#</a> culori.**differenceCmc**()
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Computes the [CMC l:c (1984)][cmc] ΔE\*<sub>CMC</sub> color difference between the colors _a_ and _b_.
 
 ΔE\*<sub>CMC</sub> is not considered a metric since it's not symmetrical, that is the distance from _a_ to _b_ is not always equal to the distance from _b_ to _a_. Therefore it cannot be reliably used with [`culori.nearest()`](#nearest).
 
-<a id="differenceHyab" href="#differenceHyab">#</a> culori.**differenceHyab**() &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceHyab" href="#differenceHyab">#</a> culori.**differenceHyab**()
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Computes the HyAB color difference between the colors _a_ and _b_, as proposed in:
 
@@ -935,17 +1027,23 @@ The HyAB formula combines the Euclidean and [city block](https://en.wikipedia.or
 
 ### Other difference formulas
 
-<a id="differenceDin99o" href="#differenceDin99o">#</a> culori.**differenceDin99o**() &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceDin99o" href="#differenceDin99o">#</a> culori.**differenceDin99o**()
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Computes the [DIN99o][din99ode] ΔE\*<sub>99o</sub> color difference between the colors _a_ and _b_. The computation is done in the `dlab` color space.
 
-<a id="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> culori.**differenceKotsarenkoRamos**() &middot; [Source](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<a id="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> culori.**differenceKotsarenkoRamos**()
+
+<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
 
 Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the colors _a_ and _b_. This is a weighted Euclidean distance in the `yiq` color space.
 
 ### Nearest color(s)
 
-<a id="nearest" href="#nearest">#</a> culori.**nearest**(_colors_, _metric = differenceEuclidean()_, _accessor = identity_) → _function(color, n = 1, τ = Infinity)_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/nearest.js)
+<a id="nearest" href="#nearest">#</a> culori.**nearest**(_colors_, _metric = differenceEuclidean()_, _accessor = identity_) → _function(color, n = 1, τ = Infinity)_
+
+<span aria-label='Source:'>☞</span> [src/nearest.js](https://github.com/evercoder/culori/blob/main/src/nearest.js)
 
 Takes a _colors_ array and a _metric_ color difference formula, and returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_. Use _n = Infinity_ to get all colors in the array with a maximum distance of _τ_.
 
@@ -993,7 +1091,9 @@ nearestColors('red', 1);
 
 Culori makes available the separable blend modes defined in the W3C [Compositing and Blending Level 2](https://drafts.fxtf.org/compositing-2/) specification.
 
-<a id="blend" href="#blend">#</a> culori.**blend**(_colors_, _type = 'normal'_, _mode = 'rgb'_) → _color_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/blend.js)
+<a id="blend" href="#blend">#</a> culori.**blend**(_colors_, _type = 'normal'_, _mode = 'rgb'_) → _color_
+
+<span aria-label='Source:'>☞</span> [src/blend.js](https://github.com/evercoder/culori/blob/main/src/blend.js)
 
 A separable blend mode is a simple formula that gets applied to each channel in the color space independently. The available blend modes are `color-burn`, `color-dodge`, `darken`, `difference`, `exclusion`, `hard-light`, `lighten`, `multiply`, `normal`, `overlay`, `screen`
 , and `soft-light`. They are designed to work on RGB colors, so _mode_ is expected to be `rgb` or `lrgb`.
@@ -1020,7 +1120,9 @@ The non-separable blend modes — `color`, `hue`, `saturation`, and `lightness` 
 
 ## Average color
 
-<a id="average" href="#average">#</a> culori.**average**(_colors_, _mode = 'rgb'_, _overrides_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/average.js)
+<a id="average" href="#average">#</a> culori.**average**(_colors_, _mode = 'rgb'_, _overrides_)
+
+<span aria-label='Source:'>☞</span> [src/average.js](https://github.com/evercoder/culori/blob/main/src/average.js)
 
 Returns the average color of the _colors_ array, in the color space specified by the _mode_ argument. The color is obtained by the arithmetic average of values on each individual channel.
 
@@ -1031,17 +1133,23 @@ culori.average(['salmon', 'tomato'], 'lab');
 // ⇒ { 'mode': 'lab', l: 65.41…, a: 53.00…, b: 39.01… }
 ```
 
-<a id="averageNumber" href="#averageNumber">#</a> culori.**averageNumber**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/average.js)
+<a id="averageNumber" href="#averageNumber">#</a> culori.**averageNumber**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/average.js](https://github.com/evercoder/culori/blob/main/src/average.js)
 
 The arithmetic mean of values in the _values_ array.
 
-<a id="averageAngle" href="#averageAngle">#</a> culori.**averageAngle**(_values_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/average.js)
+<a id="averageAngle" href="#averageAngle">#</a> culori.**averageAngle**(_values_)
+
+<span aria-label='Source:'>☞</span> [src/average.js](https://github.com/evercoder/culori/blob/main/src/average.js)
 
 The function used by default to average hue values in all built-in color spaces, using the formula for [the mean of circular quantities](https://en.wikipedia.org/wiki/Mean_of_circular_quantities).
 
 ## Random colors
 
-<a id="random" href="#random">#</a> culori.**random**(_mode = 'rgb'_, _constraints = {}_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/random.js)
+<a id="random" href="#random">#</a> culori.**random**(_mode = 'rgb'_, _constraints = {}_)
+
+<span aria-label='Source:'>☞</span> [src/random.js](https://github.com/evercoder/culori/blob/main/src/random.js)
 
 Obtain a random color from a particular color space, with optional constraints. The resulting color will be in the color space from where it has been picked.
 
@@ -1086,7 +1194,9 @@ Even with these ranges in place, a combination of channel values may not be disp
 
 A couple of utility functions based on the [Web Content Acccessibility Guidelines 2.0 specification](https://www.w3.org/TR/WCAG20/).
 
-<a id="wcagLuminance" href="#wcagLuminance">#</a> culori.**wcagLuminance**(_color_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/wcag.js)
+<a id="wcagLuminance" href="#wcagLuminance">#</a> culori.**wcagLuminance**(_color_)
+
+<span aria-label='Source:'>☞</span> [src/wcag.js](https://github.com/evercoder/culori/blob/main/src/wcag.js)
 
 Computes the [relative luminance](https://www.w3.org/TR/WCAG20/#relativeluminancedef) of a color.
 
@@ -1095,7 +1205,9 @@ culori.wcagLuminance('red');
 // ⇒ 0.2126
 ```
 
-<a id="wcagContrast" href="#wcagContrast">#</a> culori.**wcagContrast**(_colorA_, _colorB_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/wcag.js)
+<a id="wcagContrast" href="#wcagContrast">#</a> culori.**wcagContrast**(_colorA_, _colorB_)
+
+<span aria-label='Source:'>☞</span> [src/wcag.js](https://github.com/evercoder/culori/blob/main/src/wcag.js)
 
 Computes the [contrast ratio](https://www.w3.org/TR/WCAG20/#contrast-ratiodef) between two colors.
 
@@ -1116,7 +1228,9 @@ The _amount_ parameter is usually in the `[0, 1]` interval, but may go above `1`
 
 The resulting color is returned in the color space of the original color.
 
-<a id="filterBrightness" href="#filterBrightness">#</a> culori.**filterBrightness**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<a id="filterBrightness" href="#filterBrightness">#</a> culori.**filterBrightness**(_amount = 1_, _mode = 'rgb'_)
+
+<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
 
 The [`brightness()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness) CSS filter. An _amount_ of `1` leaves the color unchanged. Smaller values darken the color (with `0` being fully black), while larger values brighten it.
 
@@ -1126,27 +1240,39 @@ brighten('salmon');
 // ⇒ { mode: 'rgb', r: 1.32…, g: 0.68…, b: 0.61… }
 ```
 
-<a id="filterContrast" href="#filterContrast">#</a> culori.**filterContrast**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<a id="filterContrast" href="#filterContrast">#</a> culori.**filterContrast**(_amount = 1_, _mode = 'rgb'_)
+
+<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
 
 The [`contrast()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast) filter. An _amount_ of `1` leaves the color unchanged. Smaller values decrease the contrast (with `0` being fully gray), while larger values increase it.
 
-<a id="filterSepia" href="#filterSepia">#</a> culori.**filterSepia**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<a id="filterSepia" href="#filterSepia">#</a> culori.**filterSepia**(_amount = 1_, _mode = 'rgb'_)
+
+<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
 
 The [`sepia()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia) filter. An _amount_ of `0` leaves the color unchanged, and `1` applies the sepia effect fully.
 
-<a id="filterGrayscale" href="#filterGrayscale">#</a> culori.**filterGrayscale**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<a id="filterGrayscale" href="#filterGrayscale">#</a> culori.**filterGrayscale**(_amount = 1_, _mode = 'rgb'_)
+
+<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
 
 The [`grayscale()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale) filter. An _amount_ of `0` leaves the color unchanged, and `1` makes the color fully achromatic.
 
-<a id="filterSaturate" href="#filterSaturate">#</a> culori.**filterSaturate**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<a id="filterSaturate" href="#filterSaturate">#</a> culori.**filterSaturate**(_amount = 1_, _mode = 'rgb'_)
+
+<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
 
 The [`saturate()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate) filter. An _amount_ of `1` leaves the color unchanged. Smaller values desaturate the color (with `0` being fully achromatic), while larger values saturate it.
 
-<a id="filterInvert" href="#filterInvert">#</a> culori.**filterInvert**(_amount = 1_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<a id="filterInvert" href="#filterInvert">#</a> culori.**filterInvert**(_amount = 1_, _mode = 'rgb'_)
+
+<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
 
 The [`invert()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert) filter. An _amount_ of `0` leaves the color unchanged, and `1` makes the color fully inverted.
 
-<a id="filterHueRotate" href="#filterHueRotate">#</a> culori.**filterHueRotate**(_degrees = 0_, _mode = 'rgb'_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<a id="filterHueRotate" href="#filterHueRotate">#</a> culori.**filterHueRotate**(_degrees = 0_, _mode = 'rgb'_)
+
+<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
 
 The [`hue-rotate()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate) filter.
 
@@ -1166,15 +1292,21 @@ Some of the effects may be obtained more straightforwardly with simple calculati
 
 Simulate how a color may be perceived by people with color vision deficiencies (CVD).
 
-<a id="filterDeficiencyProt" href="#filterDeficiencyProt">#</a> culori.**filterDeficiencyProt**(_severity = 1_) → _function (color)_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/deficiency.js)
+<a id="filterDeficiencyProt" href="#filterDeficiencyProt">#</a> culori.**filterDeficiencyProt**(_severity = 1_) → _function (color)_
+
+<span aria-label='Source:'>☞</span> [src/deficiency.js](https://github.com/evercoder/culori/blob/main/src/deficiency.js)
 
 Simulate protanomaly and protanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to protanopia.
 
-<a id="filterDeficiencyDeuter" href="#filterDeficiencyDeuter">#</a> culori.**filterDeficiencyDeuter**(_severity = 1_) → _function (color)_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/deficiency.js)
+<a id="filterDeficiencyDeuter" href="#filterDeficiencyDeuter">#</a> culori.**filterDeficiencyDeuter**(_severity = 1_) → _function (color)_
+
+<span aria-label='Source:'>☞</span> [src/deficiency.js](https://github.com/evercoder/culori/blob/main/src/deficiency.js)
 
 Simulate deuteranomaly and deuteranopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to deuteranopia.
 
-<a id="filterDeficiencyTrit" href="#filterDeficiencyTrit">#</a> culori.**filterDeficiencyTrit**(_severity = 1_) → _function (color)_ &middot; [Source](https://github.com/evercoder/culori/blob/main/src/deficiency.js)
+<a id="filterDeficiencyTrit" href="#filterDeficiencyTrit">#</a> culori.**filterDeficiencyTrit**(_severity = 1_) → _function (color)_
+
+<span aria-label='Source:'>☞</span> [src/deficiency.js](https://github.com/evercoder/culori/blob/main/src/deficiency.js)
 
 Simuate tritanomaly and tritanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to tritanopia.
 
@@ -1196,11 +1328,15 @@ Based on the work of Machado, Oliveira and Fernandes (2009), using [precomputed 
 
 ## Miscellaneous
 
-<a id="colorsNamed" href="#colorsNamed">#</a> culori.**colorsNamed** &middot; [Source](https://github.com/evercoder/culori/blob/main/src/colors/named.js)
+<a id="colorsNamed" href="#colorsNamed">#</a> culori.**colorsNamed**
+
+<span aria-label='Source:'>☞</span> [src/colors/named.js](https://github.com/evercoder/culori/blob/main/src/colors/named.js)
 
 An object whose keys are all the CSS named colors.
 
-<a id="round" href="#round">#</a> culori.**round**(_n = 8_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/round.js)
+<a id="round" href="#round">#</a> culori.**round**(_n = 8_)
+
+<span aria-label='Source:'>☞</span> [src/round.js](https://github.com/evercoder/culori/blob/main/src/round.js)
 
 Returns a _rounder_: a function with which to round numbers to at most _n_ digits of precision.
 
@@ -1214,7 +1350,9 @@ approx(0.38393993);
 
 > **Warning:** This part of the API is not yet finalized and may change.
 
-<a id="defineMode" href="#defineMode">#</a> culori.**defineMode**(_definition_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/modes.js)
+<a id="defineMode" href="#defineMode">#</a> culori.**defineMode**(_definition_)
+
+<span aria-label='Source:'>☞</span> [src/modes.js](https://github.com/evercoder/culori/blob/main/src/modes.js)
 
 Defines a new color space through a _definition_ object. Here's the full definition of the HSL color space:
 
@@ -1274,7 +1412,9 @@ All built-in color spaces follow these conventions in regards to the `channels` 
 
 This makes sure [`culori.differenceEuclidean()`](#differenceEuclidean) works as expected, but there may be more hidden assumptions in the codebase.
 
-<a id="getModeDefinition" href="#getModeDefinition">#</a> culori.**getModeDefinition**(_mode_) &middot; [Source](https://github.com/evercoder/culori/blob/main/src/modes.js)
+<a id="getModeDefinition" href="#getModeDefinition">#</a> culori.**getModeDefinition**(_mode_)
+
+<span aria-label='Source:'>☞</span> [src/modes.js](https://github.com/evercoder/culori/blob/main/src/modes.js)
 
 Returns the definition object for the _mode_ color space. As with all methods in this section, the definition object may change before the first stable release, so keep an eye on the [release notes](https://github.com/evercoder/culori/releases) for any breaking changes.
 

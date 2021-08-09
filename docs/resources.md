@@ -4,20 +4,19 @@ title: Resources
 menu-order: 4
 ---
 
-## culori extras
+## Culori extras
 
-These projects add more functionality to culori, but they're separate as to keep the core bundle small:
+These projects add more functionality to Culori, but they're separate as to keep the core bundle small:
 
 -   [culori-scales](https://github.com/evercoder/culori-scales) — color scales (ColorBrewer, matplotlib, etc).
 -   [culori-names](https://github.com/evercoder/culori-names) — More named colors, from a variety of sources.
 -   [d3-color-difference](https://github.com/evercoder/d3-color-difference) — a separate D3.js plugin to compute color differences
 
-## Products using culori
+## Products using Culori
 
--   [Moqups](https://moqups.com) — all our color-manipulation functions are handled by culori.
--   [Dainty](https://dainty-vs.now.sh) — Dainty is a configurable refined and balanced color theme for Visual Studio using culori’s CIELAB capabilities for generating and processing colors.
+-   [Moqups](https://moqups.com) — all our color-manipulation functions are handled by Culori.
 
-_Does your product/project use culori? Create a PR and add yourself to this list!_
+_Does your product/project use Culori? Create a PR and add yourself to this list!_
 
 ## Similar projects
 
