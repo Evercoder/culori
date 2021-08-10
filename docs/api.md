@@ -622,7 +622,7 @@ A basis spline which considers the _values_ array to be periodic.
 
 #### Natural splines
 
-[Natural splines](https://en.wikipedia.org/wiki/Spline_interpolation) are available in the following variants:
+[Natural interpolating splines](https://en.wikipedia.org/wiki/Spline_interpolation) are related to basis splines, as explained in [this handout](https://www.math.ucla.edu/~baker/149.1.02w/handouts/dd_splines.pdf) by Kirby A. Baker (sections 4 and 5).
 
 <a id="interpolatorSplineNatural" href="#interpolatorSplineNatural">#</a> culori.**interpolatorSplineNatural**(_values_)
 
