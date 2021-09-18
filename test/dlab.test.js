@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { dlab, formatCss } from '../src/index';
+import { dlab, formatCss } from '../src/index.js';
 
 tape('dlab', t => {
 	t.deepEqual(

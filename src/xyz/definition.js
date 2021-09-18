@@ -3,12 +3,12 @@
 	-----------------------
  */
 
-import convertXyzToRgb from './convertXyzToRgb';
-import convertXyzToLab from '../lab/convertXyzToLab';
-import convertRgbToXyz from './convertRgbToXyz';
-import convertLabToXyz from '../lab/convertLabToXyz';
-import { interpolatorLinear } from '../interpolate/linear';
-import { fixupAlpha } from '../fixup/alpha';
+import convertXyzToRgb from './convertXyzToRgb.js';
+import convertXyzToLab from '../lab/convertXyzToLab.js';
+import convertRgbToXyz from './convertRgbToXyz.js';
+import convertLabToXyz from '../lab/convertLabToXyz.js';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
 	mode: 'xyz',

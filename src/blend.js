@@ -8,8 +8,8 @@
 	https://keithp.com/~keithp/porterduff/p253-porter.pdf
  */
 
-import converter from './converter';
-import { getModeDefinition } from './modes';
+import converter from './converter.js';
+import { getModeDefinition } from './modes.js';
 
 const BLENDS = {
 	normal: (b, s) => s,

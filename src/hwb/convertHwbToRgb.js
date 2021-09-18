@@ -8,7 +8,7 @@
 		* http://alvyray.com/Papers/CG/HWB_JGTv208.pdf
  */
 
-import convertHsvToRgb from '../hsv/convertHsvToRgb';
+import convertHsvToRgb from '../hsv/convertHsvToRgb.js';
 
 export default function convertHwbToRgb({ h, w, b, alpha }) {
 	// normalize w + b to 1

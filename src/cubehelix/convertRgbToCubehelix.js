@@ -11,7 +11,7 @@
 	https://github.com/d3/d3-color/blob/master/src/cubehelix.js
  */
 
-import { radToDeg, M } from './constants';
+import { radToDeg, M } from './constants.js';
 
 let DE = M[3] * M[4];
 let BE = M[1] * M[4];

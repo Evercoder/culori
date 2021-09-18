@@ -1,5 +1,5 @@
-import converter from './converter';
-import { getModeDefinition } from './modes';
+import converter from './converter.js';
+import { getModeDefinition } from './modes.js';
 
 const averageAngle = val => {
 	// See: https://en.wikipedia.org/wiki/Mean_of_circular_quantities

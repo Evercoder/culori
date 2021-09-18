@@ -1,4 +1,4 @@
-import { kCH, kE, sinθ, cosθ, θ, factor } from './constants';
+import { kCH, kE, sinθ, cosθ, θ, factor } from './constants.js';
 
 /*
 	Convert DIN99o LCh to CIELab D65

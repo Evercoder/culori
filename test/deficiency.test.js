@@ -4,7 +4,7 @@ import {
 	filterDeficiencyDeuter,
 	filterDeficiencyTrit,
 	formatHex
-} from '../src/index';
+} from '../src/index.js';
 
 tape('0 severity', t => {
 	t.equal(formatHex(filterDeficiencyProt(0)('red')), '#ff0000');

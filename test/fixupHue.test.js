@@ -4,7 +4,7 @@ import {
 	fixupHueLonger,
 	fixupHueIncreasing,
 	fixupHueDecreasing
-} from '../src/index';
+} from '../src/index.js';
 
 tape('fixupHueShorter', t => {
 	t.deepEqual(fixupHueShorter([0, 340, 30, 0, 170]), [0, -20, 30, 0, 170]);

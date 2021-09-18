@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { average, formatHex } from '../src/index';
+import { average, formatHex } from '../src/index.js';
 
 tape('average', t => {
 	t.equal(formatHex(average(['#ff0000', '#0000ff'])), '#800080');

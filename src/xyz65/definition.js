@@ -3,14 +3,14 @@
 	-----------------------
  */
 
-import convertXyz65ToRgb from './convertXyz65ToRgb';
-import convertRgbToXyz65 from './convertRgbToXyz65';
+import convertXyz65ToRgb from './convertXyz65ToRgb.js';
+import convertRgbToXyz65 from './convertRgbToXyz65.js';
 
-import convertXyz65ToXyz from './convertXyz65ToXyz';
-import convertXyzToXyz65 from './convertXyzToXyz65';
+import convertXyz65ToXyz from './convertXyz65ToXyz.js';
+import convertXyzToXyz65 from './convertXyzToXyz65.js';
 
-import { interpolatorLinear } from '../interpolate/linear';
-import { fixupAlpha } from '../fixup/alpha';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
 	mode: 'xyz65',

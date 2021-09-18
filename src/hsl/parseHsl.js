@@ -1,5 +1,5 @@
-import { hsl_old, hsl_new } from '../util/regex';
-import { hue } from '../util/hue';
+import { hsl_old, hsl_new } from '../util/regex.js';
+import { hue } from '../util/hue.js';
 
 const parseHsl = color => {
 	let match = color.match(hsl_old) || color.match(hsl_new);

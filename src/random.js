@@ -1,4 +1,4 @@
-import { getModeDefinition } from './modes';
+import { getModeDefinition } from './modes.js';
 
 /*
 	Generate a random number between `min` and `max`

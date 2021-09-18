@@ -1,4 +1,4 @@
-import normalizeHue from '../util/normalizeHue';
+import normalizeHue from '../util/normalizeHue.js';
 
 const convertLuvToLchuv = ({ l, u, v, alpha }) => {
 	let c = Math.sqrt(u * u + v * v);

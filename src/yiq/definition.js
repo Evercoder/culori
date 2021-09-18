@@ -1,7 +1,7 @@
-import convertRgbToYiq from './convertRgbToYiq';
-import convertYiqToRgb from './convertYiqToRgb';
-import { interpolatorLinear } from '../interpolate/linear';
-import { fixupAlpha } from '../fixup/alpha';
+import convertRgbToYiq from './convertRgbToYiq.js';
+import convertYiqToRgb from './convertYiqToRgb.js';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import { fixupAlpha } from '../fixup/alpha.js';
 
 /*
 	YIQ Color Space

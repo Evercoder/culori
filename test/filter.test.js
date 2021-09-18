@@ -8,7 +8,7 @@ import {
 	filterGrayscale,
 	filterInvert,
 	filterHueRotate
-} from '../src/index';
+} from '../src/index.js';
 
 tape('filterBrightness', t => {
 	t.deepEqual(

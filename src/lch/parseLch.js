@@ -1,5 +1,5 @@
-import { lch } from '../util/regex';
-import { hue } from '../util/hue';
+import { lch } from '../util/regex.js';
+import { hue } from '../util/hue.js';
 
 const parseLch = color => {
 	let match = color.match(lch);

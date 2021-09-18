@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { formatRgb, formatCss, jch } from '../src/index';
+import { formatRgb, formatCss, jch } from '../src/index.js';
 
 tape('PQ_inv negative value', t => {
 	t.equal(

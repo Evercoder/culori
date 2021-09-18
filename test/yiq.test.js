@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { yiq, formatRgb, formatCss } from '../src/index';
+import { yiq, formatRgb, formatCss } from '../src/index.js';
 
 tape('rgb to yiq and back', function (test) {
 	test.deepEqual(

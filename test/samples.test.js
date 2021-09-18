@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { interpolate, samples, formatHex } from '../src/index';
+import { interpolate, samples, formatHex } from '../src/index.js';
 
 tape('11 swatches between black and white in RGB', function (test) {
 	test.deepEqual(

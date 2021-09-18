@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { xyz65, formatCss } from '../src/index';
+import { xyz65, formatCss } from '../src/index.js';
 
 tape('xyz65', t => {
 	/*

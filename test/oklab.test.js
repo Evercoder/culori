@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { oklab, formatCss } from '../src/index';
+import { oklab, formatCss } from '../src/index.js';
 
 tape('oklab', t => {
 	t.deepEqual(

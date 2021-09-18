@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { p3, formatCss } from '../src/index';
+import { p3, formatCss } from '../src/index.js';
 
 tape('p3', t => {
 	t.deepEqual(p3('white'), {

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { blend } from '../src/index';
+import { blend } from '../src/index.js';
 
 tape('blendNormal', function (test) {
 	test.deepEqual(blend(['white', 'rgba(0, 0, 0, 0.5)']), {

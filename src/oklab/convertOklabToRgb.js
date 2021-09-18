@@ -1,5 +1,5 @@
-import convertLrgbToRgb from '../lrgb/convertLrgbToRgb';
-import convertOklabToLrgb from './convertOklabToLrgb';
+import convertLrgbToRgb from '../lrgb/convertLrgbToRgb.js';
+import convertOklabToLrgb from './convertOklabToLrgb.js';
 
 const convertOklabToRgb = c => convertLrgbToRgb(convertOklabToLrgb(c));
 

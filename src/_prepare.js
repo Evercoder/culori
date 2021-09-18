@@ -1,4 +1,4 @@
-import parse from './parse';
+import parse from './parse.js';
 
 const prepare = (color, mode) =>
 	color === undefined

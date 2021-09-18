@@ -4,7 +4,7 @@ import {
 	interpolatorSplineMonotone,
 	interpolatorSplineMonotone2,
 	interpolatorSplineMonotoneClosed
-} from '../src/index';
+} from '../src/index.js';
 
 tape('interpolatorSplineMonotone', t => {
 	let data = [3, 2.8, 2.5, 1, 0.95, 0.8, 0.5, 0.1, 0.05];

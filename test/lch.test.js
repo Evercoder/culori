@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lch, formatCss } from '../src/index';
+import { lch, formatCss } from '../src/index.js';
 
 tape('lch', t => {
 	t.deepEqual(lch('white'), { mode: 'lch', l: 100, c: 0 }, 'white');

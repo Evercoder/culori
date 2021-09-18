@@ -7,7 +7,7 @@
 	
 */
 
-import convertRgbToLrgb from '../lrgb/convertRgbToLrgb';
+import convertRgbToLrgb from '../lrgb/convertRgbToLrgb.js';
 
 const convertRgbToXyz = rgb => {
 	let { r, g, b, alpha } = convertRgbToLrgb(rgb);

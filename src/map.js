@@ -1,6 +1,6 @@
-import converter from './converter';
-import prepare from './_prepare';
-import { getModeDefinition } from './modes';
+import converter from './converter.js';
+import prepare from './_prepare.js';
+import { getModeDefinition } from './modes.js';
 
 const mapper = (fn, mode = 'rgb', preserve_mode = false) => {
 	let channels = mode ? getModeDefinition(mode).channels : null;
@@ -42,22 +42,23 @@ const mapAlphaDivide = (v, ch, c) => {
 	return v;
 };
 
-const mapTransferLinear = (slope = 1, intercept = 0) => (v, ch) => {
-	if (ch !== 'alpha') {
-		return v * slope + intercept;
-	}
-	return v;
-};
+const mapTransferLinear =
+	(slope = 1, intercept = 0) =>
+	(v, ch) => {
+		if (ch !== 'alpha') {
+			return v * slope + intercept;
+		}
+		return v;
+	};
 
-const mapTransferGamma = (amplitude = 1, exponent = 1, offset = 0) => (
-	v,
-	ch
-) => {
-	if (ch !== 'alpha') {
-		return amplitude * Math.pow(v, exponent) + offset;
-	}
-	return v;
-};
+const mapTransferGamma =
+	(amplitude = 1, exponent = 1, offset = 0) =>
+	(v, ch) => {
+		if (ch !== 'alpha') {
+			return amplitude * Math.pow(v, exponent) + offset;
+		}
+		return v;
+	};
 
 export {
 	mapper,

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { samples, interpolatorLinear } from '../src/index';
+import { samples, interpolatorLinear } from '../src/index.js';
 
 tape('interpolatorLinear', t => {
 	let data = [3, 2.8, 2.5, 1, 0.95, 0.8, 0.5, 0.1, 0.05];

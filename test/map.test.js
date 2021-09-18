@@ -7,7 +7,7 @@ import {
 	mapTransferGamma,
 	formatHex,
 	formatHex8
-} from '../src/index';
+} from '../src/index.js';
 
 tape('mapping alpha', t => {
 	let multiply = mapper(mapAlphaMultiply);

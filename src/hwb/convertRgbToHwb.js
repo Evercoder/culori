@@ -8,7 +8,7 @@
 		* http://alvyray.com/Papers/CG/HWB_JGTv208.pdf
  */
 
-import convertRgbToHsv from '../hsv/convertRgbToHsv';
+import convertRgbToHsv from '../hsv/convertRgbToHsv.js';
 
 export default function convertRgbToHwb(rgba) {
 	let hsv = convertRgbToHsv(rgba);

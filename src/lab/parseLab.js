@@ -1,4 +1,4 @@
-import { lab } from '../util/regex';
+import { lab } from '../util/regex.js';
 
 const parseLab = color => {
 	let match = color.match(lab);

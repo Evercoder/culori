@@ -1,5 +1,5 @@
-import gamma from '../easing/gamma';
-import { interpolatorLinear } from './linear';
+import gamma from '../easing/gamma.js';
+import { interpolatorLinear } from './linear.js';
 
 /* 
 	Monotone spline

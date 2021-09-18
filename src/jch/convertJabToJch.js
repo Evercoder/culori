@@ -1,4 +1,4 @@
-import normalizeHue from '../util/normalizeHue';
+import normalizeHue from '../util/normalizeHue.js';
 
 const convertJabToJch = ({ j, a, b, alpha }) => {
 	let c = Math.sqrt(a * a + b * b);

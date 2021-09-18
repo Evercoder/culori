@@ -1,5 +1,5 @@
-import parseNumber from './parseNumber';
-import { hex } from '../util/regex';
+import parseNumber from './parseNumber.js';
+import { hex } from '../util/regex.js';
 
 const parseHex = color => {
 	let match;

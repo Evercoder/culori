@@ -1,4 +1,4 @@
-import converter from './converter';
+import converter from './converter.js';
 
 /*
 	WCAG luminance

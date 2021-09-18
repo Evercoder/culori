@@ -1,4 +1,4 @@
-import { Xn, Yn, Zn, k, e } from '../xyz/constants';
+import { Xn, Yn, Zn, k, e } from '../xyz/constants.js';
 
 let fn = v => (Math.pow(v, 3) > e ? Math.pow(v, 3) : (116 * v - 16) / k);
 

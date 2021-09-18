@@ -1,6 +1,6 @@
-import { getModeDefinition } from './modes';
-import converter from './converter';
-import normalizeHue from './util/normalizeHue';
+import { getModeDefinition } from './modes.js';
+import converter from './converter.js';
+import normalizeHue from './util/normalizeHue.js';
 
 const differenceHueSaturation = (std, smp) => {
 	if (std.h === undefined || smp.h === undefined || !std.s || !smp.s) {

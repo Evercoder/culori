@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { rgb, formatHex, formatCss } from '../src/index';
+import { rgb, formatHex, formatCss } from '../src/index.js';
 
 tape('rgb(Specifier)', function (test) {
 	test.deepEqual(formatHex(rgb('#ffffff')), '#ffffff');

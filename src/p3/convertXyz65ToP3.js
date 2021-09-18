@@ -6,7 +6,7 @@
 		* http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
 */
 
-import convertLrgbToRgb from '../lrgb/convertLrgbToRgb';
+import convertLrgbToRgb from '../lrgb/convertLrgbToRgb.js';
 
 const convertXyz65ToP3 = ({ x, y, z, alpha }) => {
 	let res = convertLrgbToRgb(

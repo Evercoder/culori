@@ -1,5 +1,5 @@
-import { hwb } from '../util/regex';
-import { hue } from '../util/hue';
+import { hwb } from '../util/regex.js';
+import { hue } from '../util/hue.js';
 
 const parseHwb = color => {
 	let match = color.match(hwb);

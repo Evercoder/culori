@@ -1,4 +1,4 @@
-import gamma from '../easing/gamma';
+import gamma from '../easing/gamma.js';
 
 /*
 	Basis spline

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { clampChroma, displayable } from '../src/index';
+import { clampChroma, displayable } from '../src/index.js';
 
 tape('RGB', function (test) {
 	test.deepEqual(clampChroma('red'), { mode: 'rgb', r: 1, g: 0, b: 0 });

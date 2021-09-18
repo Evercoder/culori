@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { prophoto, formatCss } from '../src/index';
+import { prophoto, formatCss } from '../src/index.js';
 
 tape('prophoto', t => {
 	t.deepEqual(

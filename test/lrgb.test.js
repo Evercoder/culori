@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { rgb, lrgb, formatCss } from '../src/index';
+import { rgb, lrgb, formatCss } from '../src/index.js';
 
 tape('round-trip', t => {
 	let in_gamut = {

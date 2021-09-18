@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { fixupAlpha } from '../src/index';
+import { fixupAlpha } from '../src/index.js';
 
 tape('fixupAlpha: some defined', t => {
 	t.deepEqual(fixupAlpha([undefined, 0, undefined]), [1, 0, 1]);

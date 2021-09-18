@@ -8,7 +8,7 @@ import {
 	interpolateLinear,
 	interpolateHue,
 	formatHex
-} from '../src/index';
+} from '../src/index.js';
 
 tape('custom interpolators', t => {
 	let interpolator = interpolate(['red', 'green'], 'hsv', {

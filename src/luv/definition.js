@@ -7,12 +7,12 @@
 		https://en.wikipedia.org/wiki/CIELUV
  */
 
-import convertXyzToLuv from './convertXyzToLuv';
-import convertRgbToLuv from './convertRgbToLuv';
-import convertLuvToXyz from './convertLuvToXyz';
-import convertLuvToRgb from './convertLuvToRgb';
-import { interpolatorLinear } from '../interpolate/linear';
-import { fixupAlpha } from '../fixup/alpha';
+import convertXyzToLuv from './convertXyzToLuv.js';
+import convertRgbToLuv from './convertRgbToLuv.js';
+import convertLuvToXyz from './convertLuvToXyz.js';
+import convertLuvToRgb from './convertLuvToRgb.js';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
 	mode: 'luv',

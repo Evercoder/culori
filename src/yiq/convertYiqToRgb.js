@@ -1,4 +1,4 @@
-import convertLrgbToRgb from '../lrgb/convertLrgbToRgb';
+import convertLrgbToRgb from '../lrgb/convertLrgbToRgb.js';
 
 const convertYiqToRgb = ({ y, i, q, alpha }) =>
 	convertLrgbToRgb({

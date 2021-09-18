@@ -7,7 +7,7 @@ import {
 	formatHex8,
 	rgb,
 	samples
-} from '../src/index';
+} from '../src/index.js';
 
 tape('interpolate between black and white in RGB', function (test) {
 	let grays = interpolate(['#fff', '#000']);
