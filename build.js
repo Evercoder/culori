@@ -15,13 +15,13 @@ function task(config) {
 
 task({
 	format: 'cjs',
-	outfile: 'bundled/culori.cjs.js'
+	outfile: 'bundled/culori.cjs'
 });
 
 task({
 	format: 'cjs',
 	minify: true,
-	outfile: 'bundled/culori.cjs.min.js'
+	outfile: 'bundled/culori-min.cjs'
 });
 
 /*
@@ -36,7 +36,7 @@ task({
 task({
 	format: 'esm',
 	minify: true,
-	outfile: 'bundled/culori.min.mjs'
+	outfile: 'bundled/culori-min.mjs'
 });
 
 /*
@@ -51,5 +51,5 @@ task({
 task({
 	format: 'iife',
 	minify: true,
-	outfile: 'bundled/culori.min.js'
+	outfile: 'bundled/culori-min.js'
 });

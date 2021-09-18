@@ -2,11 +2,12 @@
 	"name": "culori",
 	"version": "1.0.0-alpha.0",
 	"type": "module",
-	"main": "bundled/culori.cjs.js",
-	"module": "bundled/culori.min.mjs",
-	"browser": "bundled/culori.min.js",
+	"main": "bundled/culori.cjs",
+	"module": "bundled/culori-min.mjs",
+	"browser": "bundled/culori-min.js",
 	"exports": {
-		".": "./src/index.js"
+		"require": "bundled/culori.cjs",
+		"import": "./src/index.js"
 	},
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <danburzo@gmail.com>",
