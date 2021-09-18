@@ -120,50 +120,50 @@ export {
 	formatRgb,
 	formatHsl,
 	formatCss
-} from './formatter';
-export { default as round } from './round';
+} from './formatter.js';
+export { default as round } from './round.js';
 export {
 	interpolate,
 	interpolateWith,
 	interpolateWithPremultipliedAlpha
-} from './interpolate/interpolate';
+} from './interpolate/interpolate.js';
 
 export {
 	interpolateLinear, // @deprecated
 	interpolatorLinear
-} from './interpolate/linear';
+} from './interpolate/linear.js';
 
-export { interpolatorPiecewise } from './interpolate/piecewise';
+export { interpolatorPiecewise } from './interpolate/piecewise.js';
 
 // @deprecated
-export { default as interpolateCosine } from './interpolate/cosine';
+export { default as interpolateCosine } from './interpolate/cosine.js';
 
 export {
 	interpolateSplineBasis, // @deprecated
 	interpolatorSplineBasis,
 	interpolatorSplineBasisClosed
-} from './interpolate/splineBasis';
+} from './interpolate/splineBasis.js';
 
 export {
 	interpolateSplineNatural, // @deprecated
 	interpolatorSplineNatural,
 	interpolatorSplineNaturalClosed
-} from './interpolate/splineNatural';
+} from './interpolate/splineNatural.js';
 
 export {
 	interpolateSplineMonotone, // @deprecated
 	interpolatorSplineMonotone,
 	interpolatorSplineMonotone2,
 	interpolatorSplineMonotoneClosed
-} from './interpolate/splineMonotone';
+} from './interpolate/splineMonotone.js';
 
-export { default as lerp } from './interpolate/lerp';
-export { default as samples } from './samples';
-export { default as displayable } from './displayable';
-export { clamp, clampRgb, clampChroma } from './clamp';
-export { default as nearest } from './nearest';
-export { getModeDefinition } from './modes';
-export { default as parse } from './parse';
+export { default as lerp } from './interpolate/lerp.js';
+export { default as samples } from './samples.js';
+export { default as displayable } from './displayable.js';
+export { clamp, clampRgb, clampChroma } from './clamp.js';
+export { default as nearest } from './nearest.js';
+export { getModeDefinition } from './modes.js';
+export { default as parse } from './parse.js';
 export {
 	differenceEuclidean,
 	differenceCie76,
@@ -176,19 +176,22 @@ export {
 	differenceHueSaturation,
 	differenceHueChroma,
 	differenceHueNaive
-} from './difference';
-export { default as colorsNamed } from './colors/named';
-export { default as blend } from './blend';
-export { default as random } from './random';
+} from './difference.js';
+export { default as colorsNamed } from './colors/named.js';
+export { default as blend } from './blend.js';
+export { default as random } from './random.js';
 
 // Easings
-export { default as easingMidpoint } from './easing/midpoint';
-export { default as easingSmoothstep } from './easing/smoothstep';
-export { default as easingSmootherstep } from './easing/smootherstep';
-export { default as easingInOutSine } from './easing/inOutSine';
-export { default as easingGamma } from './easing/gamma';
+export { default as easingMidpoint } from './easing/midpoint.js';
+export { default as easingSmoothstep } from './easing/smoothstep.js';
+export { default as easingSmootherstep } from './easing/smootherstep.js';
+export { default as easingInOutSine } from './easing/inOutSine.js';
+export { default as easingGamma } from './easing/gamma.js';
 
-export { luminance as wcagLuminance, contrast as wcagContrast } from './wcag';
+export {
+	luminance as wcagLuminance,
+	contrast as wcagContrast
+} from './wcag.js';
 
 export {
 	deficiencyProt as filterDeficiencyProt,
@@ -198,7 +201,7 @@ export {
 	deficiencyProt,
 	deficiencyDeuter,
 	deficiencyTrit
-} from './deficiency';
+} from './deficiency.js';
 
 export {
 	fixupHueShorter as interpolateHue, // @deprecated
@@ -206,12 +209,12 @@ export {
 	fixupHueLonger,
 	fixupHueIncreasing,
 	fixupHueDecreasing
-} from './fixup/hue';
+} from './fixup/hue.js';
 
 export {
 	fixupAlpha,
 	fixupAlpha as interpolateAlpha // @deprecated
-} from './fixup/alpha';
+} from './fixup/alpha.js';
 
 export {
 	mapper,
@@ -219,7 +222,7 @@ export {
 	mapAlphaDivide,
 	mapTransferLinear,
 	mapTransferGamma
-} from './map';
+} from './map.js';
 
 export {
 	filterBrightness,
@@ -229,6 +232,6 @@ export {
 	filterSaturate,
 	filterGrayscale,
 	filterHueRotate
-} from './filter';
+} from './filter.js';
 
-export { average, averageAngle, averageNumber } from './average';
+export { average, averageAngle, averageNumber } from './average.js';
