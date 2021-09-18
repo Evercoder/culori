@@ -21,7 +21,7 @@ task({
 task({
 	format: 'cjs',
 	minify: true,
-	outfile: 'bundled/culori-min.cjs'
+	outfile: 'bundled/culori.min.cjs'
 });
 
 /*
@@ -36,7 +36,7 @@ task({
 task({
 	format: 'esm',
 	minify: true,
-	outfile: 'bundled/culori-min.mjs'
+	outfile: 'bundled/culori.min.mjs'
 });
 
 /*
@@ -51,5 +51,39 @@ task({
 task({
 	format: 'iife',
 	minify: true,
-	outfile: 'bundled/culori-min.js'
+	outfile: 'bundled/culori.min.js'
+});
+
+/*
+	Packs
+ */
+
+task({
+	format: 'esm',
+	entryPoints: ['src/packs/core.js'],
+	outfile: 'bundled/culori-core.mjs'
+});
+
+task({
+	format: 'esm',
+	entryPoints: ['src/packs/core.js'],
+	minify: true,
+	outfile: 'bundled/culori-core.min.mjs'
+});
+
+/*
+  Bundled IIFE, unminified / minified.
+ */
+
+task({
+	format: 'iife',
+	entryPoints: ['src/packs/core.js'],
+	outfile: 'bundled/culori-core.js'
+});
+
+task({
+	format: 'iife',
+	entryPoints: ['src/packs/core.js'],
+	minify: true,
+	outfile: 'bundled/culori-core.min.js'
 });

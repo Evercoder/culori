@@ -7,7 +7,10 @@
 	"browser": "bundled/culori-min.js",
 	"exports": {
 		"require": "./bundled/culori.cjs",
-		"import": "./src/index.js"
+		"core": "./src/entry-points/core.js",
+		"fns": "./src/entry-points/fns.js",
+		"extra-spaces": "./src/entry-points/extra-spaces.js",
+		"default": "./src/index.js"
 	},
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <danburzo@gmail.com>",
