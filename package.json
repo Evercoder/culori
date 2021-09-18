@@ -6,9 +6,10 @@
 	"module": "bundled/culori-min.mjs",
 	"browser": "bundled/culori-min.js",
 	"exports": {
-		"core": "./src/packs/core.js",
-		"fns": "./src/packs/fns.js",
-		"extra-spaces": "./src/packs/extra-spaces.js"
+		"./require": "./bundled/culori.cjs",
+		"./core": "./src/packs/core.js",
+		"./fns": "./src/packs/fns.js",
+		"./extra-spaces": "./src/packs/extra-spaces.js"
 	},
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <danburzo@gmail.com>",
