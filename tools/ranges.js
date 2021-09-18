@@ -1,4 +1,4 @@
-let culori = require('..');
+let culori = require('../src/index.js');
 
 /*
 	Find the channel value ranges (minimum & maximum)

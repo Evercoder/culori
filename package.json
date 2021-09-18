@@ -1,9 +1,13 @@
 {
 	"name": "culori",
 	"version": "0.20.1",
-	"main": "build/culori.js",
 	"type": "module",
-	"exports": "./index.js",
+	"main": "bundled/culori.cjs.js",
+	"module": "bundled/culori.min.mjs",
+	"browser": "bundled/culori.min.js",
+	"exports": {
+		".": "./src/index.js"
+	},
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <danburzo@gmail.com>",
 	"description": "A general-purpose color library for JavaScript",
@@ -30,7 +34,8 @@
 	],
 	"license": "MIT",
 	"files": [
-		"build"
+		"bundled",
+		"src"
 	],
 	"devDependencies": {
 		"@11ty/eleventy": "^0.12.1",
@@ -47,10 +52,7 @@
 	},
 	"scripts": {
 		"test": "tape 'test/*.js' | tap-spec",
-		"build": "npm run build:esm && npm run build:cjs && npm run build:iife",
-		"build:esm": "esbuild --bundle --minify --format=esm src/index.js --outfile=build/culori.js",
-		"build:cjs": "esbuild --bundle --format=cjs src/index.js --outfile=build/culori.cjs.js",
-		"build:iife": "esbuild --bundle --minify --format=iife src/index.js --outfile=build/culori.iife.js",
+		"build": "node build.js",
 		"benchmark": "node benchmark/index.js",
 		"prepublishOnly": "npm run lint && npm run build && npm run test",
 		"docs:start": "eleventy --serve",
