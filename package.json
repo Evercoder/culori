@@ -3,6 +3,7 @@
 	"version": "0.20.1",
 	"main": "build/culori.js",
 	"type": "module",
+	"exports": "./index.js",
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <danburzo@gmail.com>",
 	"description": "A general-purpose color library for JavaScript",
@@ -72,5 +73,8 @@
 		"arrowParens": "avoid",
 		"printWidth": 80
 	},
-	"sideEffects": false
+	"sideEffects": false,
+	"engines": {
+		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+	}
 }

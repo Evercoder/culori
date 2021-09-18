@@ -1,6 +1,6 @@
-import highlight from '@11ty/eleventy-plugin-syntaxhighlight';
+const highlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 
-export default function (env) {
+module.exports = function (env) {
 	env.addPassthroughCopy('docs/img');
 	env.addPassthroughCopy('docs/css');
 	env.addPassthroughCopy({ 'docs/static': '.' });
@@ -25,4 +25,4 @@ export default function (env) {
 		},
 		htmlTemplateEngine: 'njk'
 	};
-}
+};
