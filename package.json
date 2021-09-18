@@ -6,7 +6,7 @@
 	"module": "bundled/culori-min.mjs",
 	"browser": "bundled/culori-min.js",
 	"exports": {
-		"require": "bundled/culori.cjs",
+		"require": "./bundled/culori.cjs",
 		"import": "./src/index.js"
 	},
 	"repository": "git@github.com:Evercoder/culori.git",
