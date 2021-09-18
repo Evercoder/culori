@@ -9,7 +9,6 @@
 		"./require": "./bundled/culori.cjs",
 		".": "./src/index.js",
 		"./core": "./src/packs/core.js",
-		"./fns": "./src/packs/fns.js",
 		"./extra-spaces": "./src/packs/extra-spaces.js"
 	},
 	"repository": "git@github.com:Evercoder/culori.git",
