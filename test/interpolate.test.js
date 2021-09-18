@@ -243,10 +243,9 @@ tape('Easing fn returning outside [0,1], issue #140', t => {
 	// From: https://github.com/mattdesl/eases/blob/master/back-in-out.js
 	function backInOut(t) {
 		var s = 1.70158 * 1.525;
-		return (t *=
-			2 < 1
-				? 0.5 * (t * t * ((s + 1) * t - s))
-				: 0.5 * ((t -= 2) * t * ((s + 1) * t + s) + 2));
+		return (t *= 2) < 1
+			? 0.5 * (t * t * ((s + 1) * t - s))
+			: 0.5 * ((t -= 2) * t * ((s + 1) * t + s) + 2);
 	}
 	const it = interpolate([backInOut, '#ff0000', '#cc8833', '#3344cc']);
 	t.equal(isNaN(it(0.05).r), false);

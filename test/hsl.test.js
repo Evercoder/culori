@@ -108,7 +108,7 @@ tape('hsl() parses hsl / hsla CSS strings', function (test) {
 
 	test.deepEqual(
 		hsl('hsl(0, 100%, 50%)'),
-		{ h: 0, s: 1, l: 0.5, h: 0, mode: 'hsl' },
+		{ h: 0, s: 1, l: 0.5, mode: 'hsl' },
 		'red'
 	);
 

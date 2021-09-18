@@ -1,4 +1,6 @@
-module.exports = function (env) {
+import highlight from '@11ty/eleventy-plugin-syntaxhighlight';
+
+export default function (env) {
 	env.addPassthroughCopy('docs/img');
 	env.addPassthroughCopy('docs/css');
 	env.addPassthroughCopy({ 'docs/static': '.' });
@@ -14,7 +16,7 @@ module.exports = function (env) {
 			return 0;
 		});
 	});
-	env.addPlugin(require('@11ty/eleventy-plugin-syntaxhighlight'));
+	env.addPlugin(highlight);
 	return {
 		pathPrefix: '/',
 		dir: {
@@ -23,4 +25,4 @@ module.exports = function (env) {
 		},
 		htmlTemplateEngine: 'njk'
 	};
-};
+}
