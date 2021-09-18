@@ -7,15 +7,15 @@
 		https://en.wikipedia.org/wiki/CIELUV
  */
 
-import convertLuvToLchuv from './convertLuvToLchuv';
-import convertLchuvToLuv from './convertLchuvToLuv';
-import convertLchuvToRgb from './convertLchuvToRgb';
-import convertRgbToLchuv from './convertRgbToLchuv';
-import { fixupHueShorter } from '../fixup/hue';
-import { fixupAlpha } from '../fixup/alpha';
-import { interpolatorLinear } from '../interpolate/linear';
-import { differenceHueChroma } from '../difference';
-import { averageAngle } from '../average';
+import convertLuvToLchuv from './convertLuvToLchuv.js';
+import convertLchuvToLuv from './convertLchuvToLuv.js';
+import convertLchuvToRgb from './convertLchuvToRgb.js';
+import convertRgbToLchuv from './convertRgbToLchuv.js';
+import { fixupHueShorter } from '../fixup/hue.js';
+import { fixupAlpha } from '../fixup/alpha.js';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import { differenceHueChroma } from '../difference.js';
+import { averageAngle } from '../average.js';
 
 const definition = {
 	mode: 'lchuv',

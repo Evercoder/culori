@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lab65, formatCss } from '../src/index';
+import { lab65, formatCss } from '../src/index.js';
 
 tape('lab65', t => {
 	t.deepEqual(

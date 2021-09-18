@@ -1,8 +1,8 @@
-import convertLabToLch from '../lch/convertLabToLch';
-import convertLchToLab from '../lch/convertLchToLab';
-import convertLab65ToRgb from '../lab65/convertLab65ToRgb';
-import convertRgbToLab65 from '../lab65/convertRgbToLab65';
-import lch from '../lch/definition';
+import convertLabToLch from '../lch/convertLabToLch.js';
+import convertLchToLab from '../lch/convertLchToLab.js';
+import convertLab65ToRgb from '../lab65/convertLab65ToRgb.js';
+import convertRgbToLab65 from '../lab65/convertRgbToLab65.js';
+import lch from '../lch/definition.js';
 
 const definition = {
 	...lch,

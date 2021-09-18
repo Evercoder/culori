@@ -1,9 +1,9 @@
-import parseNamed from './parseNamed';
-import parseHex from './parseHex';
-import parseRgb from './parseRgb';
-import parseTransparent from './parseTransparent';
-import { interpolatorLinear } from '../interpolate/linear';
-import { fixupAlpha } from '../fixup/alpha';
+import parseNamed from './parseNamed.js';
+import parseHex from './parseHex.js';
+import parseRgb from './parseRgb.js';
+import parseTransparent from './parseTransparent.js';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import { fixupAlpha } from '../fixup/alpha.js';
 
 /*
 	sRGB color space

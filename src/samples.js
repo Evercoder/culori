@@ -1,4 +1,4 @@
-import gamma from './easing/gamma';
+import gamma from './easing/gamma.js';
 
 const samples = (n = 2, γ = 1) => {
 	let ease = gamma(γ);

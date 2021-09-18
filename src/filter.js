@@ -1,8 +1,8 @@
-import { mapper, mapTransferLinear } from './map';
-import converter from './converter';
-import prepare from './_prepare';
-import lerp from './util/lerp';
-import { getModeDefinition } from './modes';
+import { mapper, mapTransferLinear } from './map.js';
+import converter from './converter.js';
+import prepare from './_prepare.js';
+import lerp from './util/lerp.js';
+import { getModeDefinition } from './modes.js';
 
 const minzero = v => Math.max(v, 0);
 const clamp = v => Math.max(Math.min(v, 1), 0);

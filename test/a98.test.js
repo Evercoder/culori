@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { a98, formatCss } from '../src/index';
+import { a98, formatCss } from '../src/index.js';
 
 tape('a98', t => {
 	t.deepEqual(a98('white'), {

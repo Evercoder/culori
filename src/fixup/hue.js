@@ -1,4 +1,4 @@
-import normalizeHue from '../util/normalizeHue';
+import normalizeHue from '../util/normalizeHue.js';
 
 const hue = (hues, fn) => {
 	return hues

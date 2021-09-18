@@ -3,7 +3,7 @@ import {
 	rgb_num_new,
 	rgb_per_old,
 	rgb_per_new
-} from '../util/regex';
+} from '../util/regex.js';
 
 const parseRgb = color => {
 	let match, res;

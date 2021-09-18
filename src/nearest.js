@@ -1,4 +1,4 @@
-import { differenceEuclidean } from './difference';
+import { differenceEuclidean } from './difference.js';
 
 /*
 	This works linearly right now, but we might get better performance

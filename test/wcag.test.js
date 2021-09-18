@@ -1,4 +1,4 @@
-import { luminance, contrast } from '../src/wcag';
+import { luminance, contrast } from '../src/wcag.js';
 import tape from 'tape';
 
 tape('luminance', t => {

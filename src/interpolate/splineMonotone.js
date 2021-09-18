@@ -1,4 +1,4 @@
-import { interpolatorLinear } from './linear';
+import { interpolatorLinear } from './linear.js';
 
 /* 
 	Monotone spline

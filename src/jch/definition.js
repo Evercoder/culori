@@ -1,13 +1,13 @@
-import convertJabToJch from './convertJabToJch';
-import convertJchToJab from './convertJchToJab';
-import convertJabToRgb from '../jab/convertJabToRgb';
-import convertRgbToJab from '../jab/convertRgbToJab';
+import convertJabToJch from './convertJabToJch.js';
+import convertJchToJab from './convertJchToJab.js';
+import convertJabToRgb from '../jab/convertJabToRgb.js';
+import convertRgbToJab from '../jab/convertRgbToJab.js';
 
-import { fixupHueShorter } from '../fixup/hue';
-import { fixupAlpha } from '../fixup/alpha';
-import { interpolatorLinear } from '../interpolate/linear';
-import { differenceHueChroma } from '../difference';
-import { averageAngle } from '../average';
+import { fixupHueShorter } from '../fixup/hue.js';
+import { fixupAlpha } from '../fixup/alpha.js';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import { differenceHueChroma } from '../difference.js';
+import { averageAngle } from '../average.js';
 
 const definition = {
 	mode: 'jch',

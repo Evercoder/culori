@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { rec2020, formatCss } from '../src/index';
+import { rec2020, formatCss } from '../src/index.js';
 
 tape('rec2020', t => {
 	t.deepEqual(rec2020('white'), {

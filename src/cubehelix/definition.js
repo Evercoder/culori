@@ -31,13 +31,13 @@
 	with a variable Saturation and a Lightness interval other than the fixed 0 -> 1.
 */
 
-import { fixupHueShorter } from '../fixup/hue';
-import { fixupAlpha } from '../fixup/alpha';
-import { interpolatorLinear } from '../interpolate/linear';
-import convertRgbToCubehelix from './convertRgbToCubehelix';
-import convertCubehelixToRgb from './convertCubehelixToRgb';
-import { differenceHueSaturation } from '../difference';
-import { averageAngle } from '../average';
+import { fixupHueShorter } from '../fixup/hue.js';
+import { fixupAlpha } from '../fixup/alpha.js';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import convertRgbToCubehelix from './convertRgbToCubehelix.js';
+import convertCubehelixToRgb from './convertCubehelixToRgb.js';
+import { differenceHueSaturation } from '../difference.js';
+import { averageAngle } from '../average.js';
 
 const definition = {
 	mode: 'cubehelix',

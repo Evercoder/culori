@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { random } from '../src/index';
+import { random } from '../src/index.js';
 
 tape('random (rgb)', test => {
 	let c1 = random();

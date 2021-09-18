@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { oklch, formatCss } from '../src/index';
+import { oklch, formatCss } from '../src/index.js';
 
 tape('oklch', t => {
 	t.deepEqual(

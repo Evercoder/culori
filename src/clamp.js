@@ -1,7 +1,7 @@
-import converter from './converter';
-import displayable from './displayable';
-import prepare from './_prepare';
-import { getModeDefinition } from './modes';
+import converter from './converter.js';
+import displayable from './displayable.js';
+import prepare from './_prepare.js';
+import { getModeDefinition } from './modes.js';
 
 let rgb = converter('rgb');
 

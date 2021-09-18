@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { hsv, rgb, formatCss } from '../src/index';
+import { hsv, rgb, formatCss } from '../src/index.js';
 
 tape('rgb() converts from HSV to RGB', function (test) {
 	test.deepEqual(

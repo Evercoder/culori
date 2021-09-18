@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { luv } from '../src/index';
+import { luv } from '../src/index.js';
 
 tape('luv', t => {
 	t.deepEqual(luv('white'), { mode: 'luv', l: 100, u: 0, v: 0 });

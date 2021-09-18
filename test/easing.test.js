@@ -1,8 +1,8 @@
 import tape from 'tape';
 
-import midpoint from '../src/easing/midpoint';
-import smoothstep from '../src/easing/smoothstep';
-import smootherstep from '../src/easing/smootherstep';
+import midpoint from '../src/easing/midpoint.js';
+import smoothstep from '../src/easing/smoothstep.js';
+import smootherstep from '../src/easing/smootherstep.js';
 
 tape('easingMidpoint', t => {
 	let noop = midpoint(0.5);

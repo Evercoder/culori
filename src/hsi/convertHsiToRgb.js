@@ -1,4 +1,4 @@
-import normalizeHue from '../util/normalizeHue';
+import normalizeHue from '../util/normalizeHue.js';
 
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 

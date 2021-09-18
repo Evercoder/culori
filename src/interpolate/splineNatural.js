@@ -1,7 +1,7 @@
 import {
 	interpolatorSplineBasisClosed,
 	interpolatorSplineBasis
-} from './splineBasis';
+} from './splineBasis.js';
 
 const solve = v => {
 	let i;

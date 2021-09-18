@@ -1,7 +1,7 @@
-import converter from './converter';
-import round from './round';
-import prepare from './_prepare';
-import { getModeDefinition } from './modes';
+import converter from './converter.js';
+import round from './round.js';
+import prepare from './_prepare.js';
+import { getModeDefinition } from './modes.js';
 
 let rgb = converter('rgb');
 let hsl = converter('hsl');

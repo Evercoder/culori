@@ -1,4 +1,4 @@
-import { Xn, Yn, Zn, k } from '../xyz/constants';
+import { Xn, Yn, Zn, k } from '../xyz/constants.js';
 
 export const u_fn = (x, y, z) => (4 * x) / (x + 15 * y + 3 * z);
 export const v_fn = (x, y, z) => (9 * y) / (x + 15 * y + 3 * z);

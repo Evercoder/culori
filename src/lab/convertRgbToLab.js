@@ -1,5 +1,5 @@
-import convertRgbToXyz from '../xyz/convertRgbToXyz';
-import convertXyzToLab from './convertXyzToLab';
+import convertRgbToXyz from '../xyz/convertRgbToXyz.js';
+import convertXyzToLab from './convertXyzToLab.js';
 
 const convertRgbToLab = rgb => {
 	let res = convertXyzToLab(convertRgbToXyz(rgb));

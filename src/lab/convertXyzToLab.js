@@ -1,4 +1,4 @@
-import { Xn, Yn, Zn, k, e } from '../xyz/constants';
+import { Xn, Yn, Zn, k, e } from '../xyz/constants.js';
 
 const f = value => (value > e ? Math.cbrt(value) : (k * value + 16) / 116);
 

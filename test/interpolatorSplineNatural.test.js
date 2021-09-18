@@ -3,7 +3,7 @@ import {
 	samples,
 	interpolatorSplineNatural,
 	interpolatorSplineNaturalClosed
-} from '../src/index';
+} from '../src/index.js';
 
 tape('interpolatorSplineNatural', t => {
 	let arr = [10, 20, 0, 40, 70];

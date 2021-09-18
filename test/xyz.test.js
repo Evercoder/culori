@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { xyz, formatCss } from '../src/index';
+import { xyz, formatCss } from '../src/index.js';
 
 tape('xyz', t => {
 	t.deepEqual(xyz('white'), { mode: 'xyz', x: 0.96422, y: 1, z: 0.82521 });

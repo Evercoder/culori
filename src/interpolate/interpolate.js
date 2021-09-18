@@ -1,8 +1,8 @@
-import converter from '../converter';
-import { getModeDefinition } from '../modes';
-import normalizePositions from '../util/normalizePositions';
-import easingMidpoint from '../easing/midpoint';
-import { mapper, mapAlphaMultiply, mapAlphaDivide } from '../map';
+import converter from '../converter.js';
+import { getModeDefinition } from '../modes.js';
+import normalizePositions from '../util/normalizePositions.js';
+import easingMidpoint from '../easing/midpoint.js';
+import { mapper, mapAlphaMultiply, mapAlphaDivide } from '../map.js';
 
 const isfn = o => typeof o === 'function';
 const isobj = o => o && typeof o === 'object';
@@ -139,15 +139,13 @@ const interpolate_fn = (colors, mode = 'rgb', overrides, premap) => {
 const interpolate = (colors, mode = 'rgb', overrides) =>
 	interpolate_fn(colors, mode, overrides);
 
-const interpolateWith = (premap, postmap) => (
-	colors,
-	mode = 'rgb',
-	overrides
-) => {
-	let post = postmap ? mapper(postmap, mode) : undefined;
-	let it = interpolate_fn(colors, mode, overrides, premap);
-	return post ? t => post(it(t)) : it;
-};
+const interpolateWith =
+	(premap, postmap) =>
+	(colors, mode = 'rgb', overrides) => {
+		let post = postmap ? mapper(postmap, mode) : undefined;
+		let it = interpolate_fn(colors, mode, overrides, premap);
+		return post ? t => post(it(t)) : it;
+	};
 
 const interpolateWithPremultipliedAlpha = interpolateWith(
 	mapAlphaMultiply,

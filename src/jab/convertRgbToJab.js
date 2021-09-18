@@ -5,8 +5,8 @@
 	to be achromatic as well, insteading of having a very slight chroma.
  */
 
-import convertXyz65ToJab from './convertXyz65ToJab';
-import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65';
+import convertXyz65ToJab from './convertXyz65ToJab.js';
+import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65.js';
 
 const convertRgbToJab = rgb => {
 	let res = convertXyz65ToJab(convertRgbToXyz65(rgb));

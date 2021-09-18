@@ -1,10 +1,10 @@
-import rgb from '../rgb/definition';
+import rgb from '../rgb/definition.js';
 
-import convertXyzToProphoto from './convertXyzToProphoto';
-import convertProphotoToXyz from './convertProphotoToXyz';
+import convertXyzToProphoto from './convertXyzToProphoto.js';
+import convertProphotoToXyz from './convertProphotoToXyz.js';
 
-import convertXyzToRgb from '../xyz/convertXyzToRgb';
-import convertRgbToXyz from '../xyz/convertRgbToXyz';
+import convertXyzToRgb from '../xyz/convertXyzToRgb.js';
+import convertRgbToXyz from '../xyz/convertRgbToXyz.js';
 
 /*
 	ProPhoto RGB Color space

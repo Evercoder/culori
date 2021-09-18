@@ -1,5 +1,5 @@
-import { parsers, colorProfiles, getModeDefinition } from './modes';
-import { profiled } from './util/regex';
+import { parsers, colorProfiles, getModeDefinition } from './modes.js';
+import { profiled } from './util/regex.js';
 
 const parseColorSyntax = color => {
 	const m = color.match(profiled);

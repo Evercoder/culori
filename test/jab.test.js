@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { jab, formatHex, formatCss } from '../src/index';
+import { jab, formatHex, formatCss } from '../src/index.js';
 
 tape('jab', t => {
 	t.deepEqual(

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { hwb, formatCss } from '../src/index';
+import { hwb, formatCss } from '../src/index.js';
 
 tape('hwb() parses hwb CSS strings', function (test) {
 	test.deepEqual(

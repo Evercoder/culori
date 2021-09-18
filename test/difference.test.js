@@ -11,7 +11,7 @@ import {
 	lab65,
 	round,
 	hsl
-} from '../src/index';
+} from '../src/index.js';
 
 tape('euclidean distance in RGB', function (test) {
 	let delta = differenceEuclidean();

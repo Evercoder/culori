@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { nearest, colorsNamed } from '../src/index';
+import { nearest, colorsNamed } from '../src/index.js';
 
 let nearestNamedColor = nearest(Object.keys(colorsNamed));
 

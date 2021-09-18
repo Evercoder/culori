@@ -1,11 +1,11 @@
-import convertHwbToRgb from './convertHwbToRgb';
-import convertRgbToHwb from './convertRgbToHwb';
-import parseHwb from './parseHwb';
-import { fixupHueShorter } from '../fixup/hue';
-import { fixupAlpha } from '../fixup/alpha';
-import { interpolatorLinear } from '../interpolate/linear';
-import { differenceHueNaive } from '../difference';
-import { averageAngle } from '../average';
+import convertHwbToRgb from './convertHwbToRgb.js';
+import convertRgbToHwb from './convertRgbToHwb.js';
+import parseHwb from './parseHwb.js';
+import { fixupHueShorter } from '../fixup/hue.js';
+import { fixupAlpha } from '../fixup/alpha.js';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import { differenceHueNaive } from '../difference.js';
+import { averageAngle } from '../average.js';
 
 const definition = {
 	mode: 'hwb',

@@ -1,10 +1,10 @@
-import rgb from '../rgb/definition';
+import rgb from '../rgb/definition.js';
 
-import convertXyz65ToRec2020 from './convertXyz65ToRec2020';
-import convertRec2020ToXyz65 from './convertRec2020ToXyz65';
+import convertXyz65ToRec2020 from './convertXyz65ToRec2020.js';
+import convertRec2020ToXyz65 from './convertRec2020ToXyz65.js';
 
-import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65';
-import convertXyz65ToRgb from '../xyz65/convertXyz65ToRgb';
+import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65.js';
+import convertXyz65ToRgb from '../xyz65/convertXyz65ToRgb.js';
 
 const definition = {
 	...rgb,

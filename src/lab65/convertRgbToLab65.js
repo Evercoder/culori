@@ -1,5 +1,5 @@
-import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65';
-import convertXyz65ToLab65 from './convertXyz65ToLab65';
+import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65.js';
+import convertXyz65ToLab65 from './convertXyz65ToLab65.js';
 
 const convertRgbToLab65 = rgb => {
 	let res = convertXyz65ToLab65(convertRgbToXyz65(rgb));

@@ -1,4 +1,4 @@
-import { degToRad, M } from './constants';
+import { degToRad, M } from './constants.js';
 
 const convertCubehelixToRgb = ({ h, s, l, alpha }) => {
 	let res = { mode: 'rgb' };

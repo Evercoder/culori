@@ -1,5 +1,11 @@
 import tape from 'tape';
-import { formatHex, formatHex8, formatRgb, formatHsl, rgb } from '../src/index';
+import {
+	formatHex,
+	formatHex8,
+	formatRgb,
+	formatHsl,
+	rgb
+} from '../src/index.js';
 
 tape('formatHex', function (test) {
 	test.equal(formatHex('tomato'), '#ff6347');

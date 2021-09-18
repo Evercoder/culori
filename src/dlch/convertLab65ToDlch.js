@@ -1,5 +1,5 @@
-import { kCH, kE, sinθ, cosθ, θ, factor } from './constants';
-import normalizeHue from '../util/normalizeHue';
+import { kCH, kE, sinθ, cosθ, θ, factor } from './constants.js';
+import normalizeHue from '../util/normalizeHue.js';
 
 /*
 	Convert CIELab D65 to DIN99o LCh

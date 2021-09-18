@@ -1,10 +1,10 @@
-import convertLabToRgb from './convertLabToRgb';
-import convertLabToXyz from './convertLabToXyz';
-import convertRgbToLab from './convertRgbToLab';
-import convertXyzToLab from './convertXyzToLab';
-import parseLab from './parseLab';
-import { interpolatorLinear } from '../interpolate/linear';
-import { fixupAlpha } from '../fixup/alpha';
+import convertLabToRgb from './convertLabToRgb.js';
+import convertLabToXyz from './convertLabToXyz.js';
+import convertRgbToLab from './convertRgbToLab.js';
+import convertXyzToLab from './convertXyzToLab.js';
+import parseLab from './parseLab.js';
+import { interpolatorLinear } from '../interpolate/linear.js';
+import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
 	mode: 'lab',
