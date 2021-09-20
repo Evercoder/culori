@@ -58,8 +58,8 @@
 		"build": "node build.js",
 		"benchmark": "node benchmark/index.js",
 		"prepublishOnly": "npm run lint && npm run build && npm run test",
-		"docs:start": "eleventy --serve",
-		"docs:build": "rm -rf www && eleventy",
+		"docs:start": "eleventy --config=eleventy.config.cjs --serve",
+		"docs:build": "rm -rf www && eleventy --config=eleventy.config.cjs",
 		"docs:deploy": "npm run docs:build && gh-pages -d www --dotfiles",
 		"lint": "eslint '{src,test}/**/*.js'"
 	},
