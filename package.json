@@ -61,7 +61,7 @@
 		"docs:build": "rm -rf www && eleventy --config=eleventy.config.cjs",
 		"docs:deploy": "npm run docs:build && gh-pages -d www --dotfiles",
 		"lint": "eslint '{src,test}/**/*.js'",
-		"prepare": "git config --local --add core.hooksPath .hooks"
+		"prepare": "git config --replace-all core.hooksPath .hooks"
 	},
 	"prettier": {
 		"bracketSpacing": true,
