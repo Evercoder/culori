@@ -3,8 +3,8 @@
 	"version": "1.0.0-alpha.9",
 	"type": "module",
 	"main": "bundled/culori.cjs",
-	"module": "bundled/culori-min.mjs",
-	"browser": "bundled/culori-min.js",
+	"module": "bundled/culori.min.mjs",
+	"browser": "bundled/culori.min.js",
 	"exports": {
 		"./require": "./bundled/culori.cjs",
 		".": "./src/index.js",
