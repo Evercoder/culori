@@ -8,18 +8,18 @@ const definition = {
 	...lch,
 	mode: 'oklch',
 
-	output: {
+	toMode: {
 		oklab: c => convertLchToLab(c, 'oklab'),
 		rgb: c => convertOklabToRgb(convertLchToLab(c, 'oklab'))
 	},
 
-	input: {
+	fromMode: {
 		rgb: c => convertLabToLch(convertRgbToOklab(c), 'oklch'),
 		oklab: c => convertLabToLch(c, 'oklch')
 	},
 
-	parsers: ['--oklch'],
-	serialize: 'color(--oklch ',
+	parse: ['--oklch'],
+	serialize: '--oklch',
 
 	ranges: {
 		l: [0, 0.999],

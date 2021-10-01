@@ -9,14 +9,14 @@ import { averageAngle } from '../average.js';
 const definition = {
 	mode: 'hsv',
 
-	output: {
+	toMode: {
 		rgb: convertHsvToRgb
 	},
 
-	parsers: ['--hsv'],
-	serialize: 'color(--hsv ',
+	parse: ['--hsv'],
+	serialize: '--hsv',
 
-	input: {
+	fromMode: {
 		rgb: convertRgbToHsv
 	},
 

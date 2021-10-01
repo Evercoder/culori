@@ -1,7 +1,7 @@
 import converter from './converter.js';
 import displayable from './displayable.js';
 import prepare from './_prepare.js';
-import { getModeDefinition } from './modes.js';
+import { getMode } from './modes.js';
 
 let rgb = converter('rgb');
 
@@ -13,7 +13,7 @@ const fixup_rgb = color => {
 	return c;
 };
 
-const clampRgb = color => {
+export const clampRgb = color => {
 	color = prepare(color);
 
 	// if the color is undefined or displayable, return it directly
@@ -25,7 +25,7 @@ const clampRgb = color => {
 	return conv(fixup_rgb(color));
 };
 
-const clampChroma = (color, mode = 'lch') => {
+export const clampChroma = (color, mode = 'lch') => {
 	color = prepare(color);
 
 	// if the color is undefined or displayable, return it directly
@@ -50,7 +50,7 @@ const clampChroma = (color, mode = 'lch') => {
 	// Find the displayable chroma through the bisection method.
 	let start = 0;
 	let end = color.c;
-	let range = getModeDefinition(mode).ranges.c;
+	let range = getMode(mode).ranges.c;
 	let resolution = (range[1] - range[0]) / Math.pow(2, 13);
 	let _last_good_c;
 
@@ -68,15 +68,3 @@ const clampChroma = (color, mode = 'lch') => {
 		displayable(clamped) ? clamped : { ...clamped, c: _last_good_c }
 	);
 };
-
-// Deprecated / no longer documented
-const clamp = (method = 'rgb') => {
-	switch (method) {
-		case 'rgb':
-			return clampRgb;
-		case 'lch':
-			return clampChroma;
-	}
-};
-
-export { clampRgb, clampChroma, clamp };

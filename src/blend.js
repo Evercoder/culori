@@ -9,7 +9,7 @@
  */
 
 import converter from './converter.js';
-import { getModeDefinition } from './modes.js';
+import { getMode } from './modes.js';
 
 const BLENDS = {
 	normal: (b, s) => s,
@@ -40,7 +40,7 @@ const blend = (colors, type = 'normal', mode = 'rgb') => {
 	let conv = converter(mode);
 
 	// get mode channels
-	let channels = getModeDefinition(mode).channels;
+	let channels = getMode(mode).channels;
 
 	// convert all colors to the mode
 	// and assume undefined alphas are 1

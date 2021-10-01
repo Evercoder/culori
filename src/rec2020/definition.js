@@ -10,18 +10,18 @@ const definition = {
 	...rgb,
 	mode: 'rec2020',
 
-	input: {
+	fromMode: {
 		xyz: convertXyz65ToRec2020,
 		rgb: color => convertXyz65ToRec2020(convertRgbToXyz65(color))
 	},
 
-	output: {
+	toMode: {
 		xyz: convertRec2020ToXyz65,
 		rgb: color => convertXyz65ToRgb(convertRec2020ToXyz65(color))
 	},
 
-	parsers: ['rec2020'],
-	serialize: 'color(rec2020 '
+	parse: ['rec2020'],
+	serialize: 'rec2020'
 };
 
 export default definition;

@@ -26,18 +26,18 @@ import { fixupAlpha } from '../fixup/alpha.js';
 const definition = {
 	mode: 'yiq',
 
-	output: {
+	toMode: {
 		rgb: convertYiqToRgb
 	},
 
-	input: {
+	fromMode: {
 		rgb: convertRgbToYiq
 	},
 
 	channels: ['y', 'i', 'q', 'alpha'],
 
-	parsers: ['--yiq'],
-	serialize: 'color(--yiq ',
+	parse: ['--yiq'],
+	serialize: '--yiq',
 
 	ranges: {
 		i: [-0.595, 0.595],

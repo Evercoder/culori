@@ -182,8 +182,9 @@ const deficiency = (lut, t) => {
 	};
 };
 
-const deficiencyProt = (severity = 1) => deficiency(PROT, severity);
-const deficiencyDeuter = (severity = 1) => deficiency(DEUTER, severity);
-const deficiencyTrit = (severity = 1) => deficiency(TRIT, severity);
-
-export { deficiencyProt, deficiencyDeuter, deficiencyTrit };
+export const filterDeficiencyProt = (severity = 1) =>
+	deficiency(PROT, severity);
+export const filterDeficiencyDeuter = (severity = 1) =>
+	deficiency(DEUTER, severity);
+export const filterDeficiencyTrit = (severity = 1) =>
+	deficiency(TRIT, severity);

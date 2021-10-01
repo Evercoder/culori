@@ -13,11 +13,17 @@
 		</div>
 		<nav>
 			<ul>
-				{%- for post in (collections.all | sortby('menu-order')) -%}
+				{%- for post in (collections.all | sortby('menu-order')) -%} {%
+				if post.data['menu-order'] %}
 				<li class="{% if page.url == post.url %}active {% endif %}">
 					<a href="{{ post.url }}">{{ post.data.title }}</a>
 				</li>
-				{%- endfor -%}
+				{% endif %} {%- endfor -%}
+				<li>
+					<a href="https://github.com/Evercoder/culori"
+						>GitHub <span aria-hidden="true">↗</span></a
+					>
+				</li>
 			</ul>
 		</nav>
 	</div>

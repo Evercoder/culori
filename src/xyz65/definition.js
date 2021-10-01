@@ -14,14 +14,13 @@ import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
 	mode: 'xyz65',
-	serialize: 'color(--xyz-d65 ',
 
-	output: {
+	toMode: {
 		rgb: convertXyz65ToRgb,
 		xyz: convertXyz65ToXyz
 	},
 
-	input: {
+	fromMode: {
 		rgb: convertRgbToXyz65,
 		xyz: convertXyzToXyz65
 	},
@@ -34,7 +33,8 @@ const definition = {
 
 	channels: ['x', 'y', 'z', 'alpha'],
 
-	parsers: ['--xyz-d65'],
+	parse: ['--xyz-d65'],
+	serialize: '--xyz-d65',
 
 	interpolate: {
 		x: interpolatorLinear,

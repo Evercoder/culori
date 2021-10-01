@@ -1,7 +1,7 @@
 ---
 layout: layouts/default
 title: Resources
-menu-order: 4
+menu-order: 5
 ---
 
 ## Culori extras
@@ -16,7 +16,7 @@ These projects add more functionality to Culori, but they're separate as to keep
 
 -   [Moqups](https://moqups.com) — all our color-manipulation functions are handled by Culori.
 
-_Does your product/project use Culori? Create a PR and add yourself to this list!_
+Does your product/project use Culori? Create a PR and add yourself to this list.
 
 ## Similar projects
 

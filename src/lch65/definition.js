@@ -8,15 +8,15 @@ const definition = {
 	...lch,
 	mode: 'lch65',
 
-	parsers: ['--lch-d65'],
-	serialize: 'color(--lch-d65 ',
+	parse: ['--lch-d65'],
+	serialize: '--lch-d65',
 
-	output: {
+	toMode: {
 		lab65: c => convertLchToLab(c, 'lab65'),
 		rgb: c => convertLab65ToRgb(convertLchToLab(c, 'lab65'))
 	},
 
-	input: {
+	fromMode: {
 		rgb: c => convertLabToLch(convertRgbToLab65(c), 'lch65'),
 		lab65: c => convertLabToLch(c, 'lch65')
 	},

@@ -8,15 +8,15 @@ import convertXyz65ToRgb from '../xyz65/convertXyz65ToRgb.js';
 const definition = {
 	...rgb,
 	mode: 'a98',
-	parsers: ['a98-rgb'],
-	serialize: 'color(a98-rgb ',
+	parse: ['a98-rgb'],
+	serialize: 'a98-rgb',
 
-	input: {
+	fromMode: {
 		rgb: color => convertXyz65ToA98(convertRgbToXyz65(color)),
 		xyz65: convertXyz65ToA98
 	},
 
-	output: {
+	toMode: {
 		rgb: color => convertXyz65ToRgb(convertA98ToXyz65(color)),
 		xyz65: convertA98ToXyz65
 	}

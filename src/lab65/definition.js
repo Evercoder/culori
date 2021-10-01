@@ -8,15 +8,15 @@ const definition = {
 	...lab,
 	mode: 'lab65',
 
-	parsers: ['--lab-d65'],
-	serialize: 'color(--lab-d65 ',
+	parse: ['--lab-d65'],
+	serialize: '--lab-d65',
 
-	output: {
+	toMode: {
 		xyz65: convertLab65ToXyz65,
 		rgb: convertLab65ToRgb
 	},
 
-	input: {
+	fromMode: {
 		xyz65: convertXyz65ToLab65,
 		rgb: convertRgbToLab65
 	},

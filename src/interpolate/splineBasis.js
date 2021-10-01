@@ -1,5 +1,3 @@
-import gamma from '../easing/gamma.js';
-
 /*
 	Basis spline
 	------------
@@ -35,7 +33,7 @@ const bspline = (Vim2, Vim1, Vi, Vip1, t) => {
 	);
 };
 
-const interpolatorSplineBasis = arr => t => {
+export const interpolatorSplineBasis = arr => t => {
 	let classes = arr.length - 1;
 	let i = t >= 1 ? classes - 1 : Math.max(0, Math.floor(t * classes));
 	return bspline(
@@ -47,7 +45,7 @@ const interpolatorSplineBasis = arr => t => {
 	);
 };
 
-const interpolatorSplineBasisClosed = arr => t => {
+export const interpolatorSplineBasisClosed = arr => t => {
 	const classes = arr.length - 1;
 	const i = Math.floor(t * classes);
 	return bspline(
@@ -57,25 +55,4 @@ const interpolatorSplineBasisClosed = arr => t => {
 		arr[mod(i + 2, arr.length)],
 		(t - i / classes) * classes
 	);
-};
-
-const interpolateSplineBasis =
-	(fixup, type = 'default', γ = 1) =>
-	arr => {
-		let ease = gamma(γ);
-		if (type === 'default') {
-			return t =>
-				interpolatorSplineBasis((fixup || (v => v))(arr))(ease(t));
-		} else if (type === 'closed') {
-			return t =>
-				interpolatorSplineBasisClosed((fixup || (v => v))(arr))(
-					ease(t)
-				);
-		}
-	};
-
-export {
-	interpolateSplineBasis,
-	interpolatorSplineBasis,
-	interpolatorSplineBasisClosed
 };

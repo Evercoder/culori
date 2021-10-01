@@ -10,11 +10,11 @@ import { averageAngle } from '../average.js';
 const definition = {
 	mode: 'hsl',
 
-	output: {
+	toMode: {
 		rgb: convertHslToRgb
 	},
 
-	input: {
+	fromMode: {
 		rgb: convertRgbToHsl
 	},
 
@@ -24,7 +24,7 @@ const definition = {
 		h: [0, 360]
 	},
 
-	parsers: [parseHsl],
+	parse: [parseHsl],
 	serialize: c =>
 		`hsl(${c.h || 0} ${c.s * 100}% ${c.l * 100}%${
 			c.alpha < 1 ? ` / ${c.alpha}` : ''

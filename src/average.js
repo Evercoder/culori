@@ -1,5 +1,5 @@
 import converter from './converter.js';
-import { getModeDefinition } from './modes.js';
+import { getMode } from './modes.js';
 
 const averageAngle = val => {
 	// See: https://en.wikipedia.org/wiki/Mean_of_circular_quantities
@@ -25,7 +25,7 @@ const averageNumber = val => {
 const isfn = o => typeof o === 'function';
 
 function average(colors, mode = 'rgb', overrides) {
-	let def = getModeDefinition(mode);
+	let def = getMode(mode);
 	let cc = colors.map(converter(mode));
 	return def.channels.reduce(
 		(res, ch) => {

@@ -12,12 +12,12 @@ import { averageAngle } from '../average.js';
 const definition = {
 	mode: 'lch',
 
-	output: {
+	toMode: {
 		lab: convertLchToLab,
 		rgb: c => convertLabToRgb(convertLchToLab(c))
 	},
 
-	input: {
+	fromMode: {
 		rgb: c => convertLabToLch(convertRgbToLab(c)),
 		lab: convertLabToLch
 	},
@@ -30,7 +30,7 @@ const definition = {
 		h: [0, 360]
 	},
 
-	parsers: [parseLch],
+	parse: [parseLch],
 	serialize: c =>
 		`lch(${c.l}% ${c.c} ${c.h || 0}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
 

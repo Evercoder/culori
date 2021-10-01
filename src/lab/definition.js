@@ -9,12 +9,12 @@ import { fixupAlpha } from '../fixup/alpha.js';
 const definition = {
 	mode: 'lab',
 
-	output: {
+	toMode: {
 		xyz: convertLabToXyz,
 		rgb: convertLabToRgb
 	},
 
-	input: {
+	fromMode: {
 		xyz: convertXyzToLab,
 		rgb: convertRgbToLab
 	},
@@ -27,7 +27,7 @@ const definition = {
 		b: [-112.029, 93.388]
 	},
 
-	parsers: [parseLab],
+	parse: [parseLab],
 	serialize: c =>
 		`lab(${c.l}% ${c.a} ${c.b}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
 

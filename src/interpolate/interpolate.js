@@ -1,5 +1,5 @@
 import converter from '../converter.js';
-import { getModeDefinition } from '../modes.js';
+import { getMode } from '../modes.js';
 import normalizePositions from '../util/normalizePositions.js';
 import easingMidpoint from '../easing/midpoint.js';
 import { mapper, mapAlphaMultiply, mapAlphaDivide } from '../map.js';
@@ -9,7 +9,7 @@ const isobj = o => o && typeof o === 'object';
 const isnum = o => typeof o === 'number';
 
 const interpolate_fn = (colors, mode = 'rgb', overrides, premap) => {
-	let def = getModeDefinition(mode);
+	let def = getMode(mode);
 	let conv = converter(mode);
 
 	let conv_colors = [];

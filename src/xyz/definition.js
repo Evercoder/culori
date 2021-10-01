@@ -12,15 +12,15 @@ import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
 	mode: 'xyz',
-	parsers: ['xyz', '--xyz-d50'],
-	serialize: 'color(--xyz-d50 ',
+	parse: ['xyz', '--xyz-d50'],
+	serialize: '--xyz-d50',
 
-	output: {
+	toMode: {
 		rgb: convertXyzToRgb,
 		lab: convertXyzToLab
 	},
 
-	input: {
+	fromMode: {
 		rgb: convertRgbToXyz,
 		lab: convertLabToXyz
 	},

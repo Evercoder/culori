@@ -1,4 +1,4 @@
-import { getModeDefinition } from './modes.js';
+import { getMode } from './modes.js';
 import converter from './converter.js';
 import normalizeHue from './util/normalizeHue.js';
 
@@ -36,7 +36,7 @@ const differenceHueChroma = (std, smp) => {
 };
 
 const differenceEuclidean = (mode = 'rgb', weights = [1, 1, 1, 0]) => {
-	let def = getModeDefinition(mode);
+	let def = getMode(mode);
 	let channels = def.channels;
 	let diffs = def.difference;
 	let conv = converter(mode);
@@ -278,8 +278,6 @@ const differenceHyab = () => {
 	};
 };
 
-const differenceDin99o = () => differenceEuclidean('dlab');
-
 /*
 	"Measuring perceived color difference using YIQ NTSC
 	transmission color space in mobile applications"
@@ -304,6 +302,5 @@ export {
 	differenceCiede2000,
 	differenceCmc,
 	differenceHyab,
-	differenceDin99o,
 	differenceKotsarenkoRamos
 };

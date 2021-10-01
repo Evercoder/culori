@@ -1,13 +1,13 @@
 import converter from './converter.js';
 import prepare from './_prepare.js';
-import { getModeDefinition } from './modes.js';
+import { getMode } from './modes.js';
 
 const mapper = (fn, mode = 'rgb', preserve_mode = false) => {
-	let channels = mode ? getModeDefinition(mode).channels : null;
+	let channels = mode ? getMode(mode).channels : null;
 	let conv = mode ? converter(mode) : prepare;
 	return color => {
 		let conv_color = conv(color);
-		let res = (channels || getModeDefinition(color.mode).channels).reduce(
+		let res = (channels || getMode(color.mode).channels).reduce(
 			(res, ch) => {
 				let v = fn(conv_color[ch], ch, conv_color, mode);
 				if (v !== undefined && !isNaN(v)) {

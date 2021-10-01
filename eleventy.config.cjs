@@ -1,3 +1,5 @@
+const highlight = require('@11ty/eleventy-plugin-syntaxhighlight');
+
 module.exports = function (env) {
 	env.addPassthroughCopy('docs/img');
 	env.addPassthroughCopy('docs/css');
@@ -14,7 +16,7 @@ module.exports = function (env) {
 			return 0;
 		});
 	});
-	env.addPlugin(require('@11ty/eleventy-plugin-syntaxhighlight'));
+	env.addPlugin(highlight);
 	return {
 		pathPrefix: '/',
 		dir: {

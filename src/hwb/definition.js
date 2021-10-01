@@ -10,11 +10,11 @@ import { averageAngle } from '../average.js';
 const definition = {
 	mode: 'hwb',
 
-	output: {
+	toMode: {
 		rgb: convertHwbToRgb
 	},
 
-	input: {
+	fromMode: {
 		rgb: convertRgbToHwb
 	},
 
@@ -24,7 +24,7 @@ const definition = {
 		h: [0, 360]
 	},
 
-	parsers: [parseHwb],
+	parse: [parseHwb],
 	serialize: c =>
 		`hwb(${c.h || 0} ${c.w * 100}% ${c.b * 100}%${
 			c.alpha < 1 ? ` / ${c.alpha}` : ''

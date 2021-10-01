@@ -14,12 +14,12 @@ const definition = {
 	...lab,
 	mode: 'oklab',
 
-	output: {
+	toMode: {
 		lrgb: convertOklabToLrgb,
 		rgb: convertOklabToRgb
 	},
 
-	input: {
+	fromMode: {
 		lrgb: convertLrgbToOklab,
 		rgb: convertRgbToOklab
 	},
@@ -30,8 +30,8 @@ const definition = {
 		b: [-0.311, 0.198]
 	},
 
-	parsers: ['--oklab'],
-	serialize: 'color(--oklab '
+	parse: ['--oklab'],
+	serialize: '--oklab'
 };
 
 export default definition;

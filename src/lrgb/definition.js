@@ -6,16 +6,16 @@ const definition = {
 	...rgb,
 	mode: 'lrgb',
 
-	output: {
+	toMode: {
 		rgb: convertLrgbToRgb
 	},
 
-	input: {
+	fromMode: {
 		rgb: convertRgbToLrgb
 	},
 
-	parsers: ['--srgb-linear'],
-	serialize: 'color(--srgb-linear '
+	parse: ['--srgb-linear'],
+	serialize: '--srgb-linear'
 };
 
 export default definition;
