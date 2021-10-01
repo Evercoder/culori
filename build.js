@@ -45,11 +45,13 @@ task({
 
 task({
 	format: 'iife',
+	globalName: 'culori',
 	outfile: 'bundled/culori.js'
 });
 
 task({
 	format: 'iife',
+	globalName: 'culori',
 	minify: true,
 	outfile: 'bundled/culori.min.js'
 });
@@ -77,12 +79,14 @@ task({
 
 task({
 	format: 'iife',
+	globalName: 'culori',
 	entryPoints: ['src/index-fn.js'],
 	outfile: 'bundled/culori-fn.js'
 });
 
 task({
 	format: 'iife',
+	globalName: 'culori',
 	entryPoints: ['src/index-fn.js'],
 	minify: true,
 	outfile: 'bundled/culori-fn.min.js'
