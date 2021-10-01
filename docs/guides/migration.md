@@ -6,15 +6,17 @@ title: 'Migration guide'
 
 ### Using the library
 
-Starting with version 1.0, Culori will be published to npm as an ES Module (ESM) package. That means that if you use the library via npm (with `npm install culori`), you will need to be running **Node.js version 12 or later**.
+Starting with version 1.0, Culori will be published to npm as an ES Module (ESM) package, with `type: module` and a set of `exports` in its `package.json` file.
 
-If you've switched your own project to ESM (by using `type: module` in your `package.json` file), you can import the library as usual:
+If you're using Node.js 10, you should be able to continue using Culori as before. 
+
+If you're on Node.js 12 or later, and you've switched to native ES modules (by adding `type: module` to your `package.json`), you need to use `import`:
 
 ```js
 import * as culori from 'culori';
 ```
 
-If you're not ready to switch to native ESM, we also provide a CommonJS export that can be used with `require()`:
+If you're on Node.js 12 or later, and you're still using CommonJS modules, there's a separate export that can be used with `require()` calls:
 
 ```js
 const culori = require('culori/require');

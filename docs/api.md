@@ -7,7 +7,7 @@ menu-order: 2
 <details>
 <summary>API table of contents</summary>
 <ul class='api-toc'>
-<li><a href='#converter'>a98</a></li>
+<li><a href='#color-spaces'>a98</a></li>
 <li><a href='#average'>average</a></li>
 <li><a href='#averageAngle'>averageAngle</a></li>
 <li><a href='#averageNumber'>averageNumber</a></li>
@@ -16,7 +16,7 @@ menu-order: 2
 <li><a href='#clampRgb'>clampRgb</a></li>
 <li><a href='#colorsNamed'>colorsNamed</a></li>
 <li><a href='#converter'>converter</a></li>
-<li><a href='#converter'>cubehelix</a></li>
+<li><a href='#color-spaces'>cubehelix</a></li>
 <li><a href='#differenceCie76'>differenceCie76</a></li>
 <li><a href='#differenceCie94'>differenceCie94</a></li>
 <li><a href='#differenceCiede2000'>differenceCiede2000</a></li>
@@ -29,8 +29,8 @@ menu-order: 2
 <li><a href='#differenceHyab'>differenceHyab</a></li>
 <li><a href='#differenceKotsarenkoRamos'>differenceKotsarenkoRamos</a></li>
 <li><a href='#displayable'>displayable</a></li>
-<li><a href='#converter'>dlab</a></li>
-<li><a href='#converter'>dlch</a></li>
+<li><a href='#color-spaces'>dlab</a></li>
+<li><a href='#color-spaces'>dlch</a></li>
 <li><a href='#easingGamma'>easingGamma</a></li>
 <li><a href='#easingInOutSine'>easingInOutSine</a></li>
 <li><a href='#easingMidpoint'>easingMidpoint</a></li>
@@ -57,10 +57,10 @@ menu-order: 2
 <li><a href='#formatHsl'>formatHsl</a></li>
 <li><a href='#formatRgb'>formatRgb</a></li>
 <li><a href='#getMode'>getMode</a></li>
-<li><a href='#converter'>hsi</a></li>
-<li><a href='#converter'>hsl</a></li>
-<li><a href='#converter'>hsv</a></li>
-<li><a href='#converter'>hwb</a></li>
+<li><a href='#color-spaces'>hsi</a></li>
+<li><a href='#color-spaces'>hsl</a></li>
+<li><a href='#color-spaces'>hsv</a></li>
+<li><a href='#color-spaces'>hwb</a></li>
 <li><a href='#interpolate'>interpolate</a></li>
 <li><a href='#interpolateWith'>interpolateWith</a></li>
 <li><a href='#interpolateWithPremultipliedAlpha'>interpolateWithPremultipliedAlpha</a></li>
@@ -73,38 +73,38 @@ menu-order: 2
 <li><a href='#interpolatorSplineMonotoneClosed'>interpolatorSplineMonotoneClosed</a></li>
 <li><a href='#interpolatorSplineNatural'>interpolatorSplineNatural</a></li>
 <li><a href='#interpolatorSplineNaturalClosed'>interpolatorSplineNaturalClosed</a></li>
-<li><a href='#converter'>jab</a></li>
-<li><a href='#converter'>jch</a></li>
-<li><a href='#converter'>lab</a></li>
-<li><a href='#converter'>lab65</a></li>
-<li><a href='#converter'>lch</a></li>
-<li><a href='#converter'>lch65</a></li>
-<li><a href='#converter'>lchuv</a></li>
+<li><a href='#color-spaces'>jab</a></li>
+<li><a href='#color-spaces'>jch</a></li>
+<li><a href='#color-spaces'>lab65</a></li>
+<li><a href='#color-spaces'>lab</a></li>
+<li><a href='#color-spaces'>lch65</a></li>
+<li><a href='#color-spaces'>lch</a></li>
+<li><a href='#color-spaces'>lchuv</a></li>
 <li><a href='#lerp'>lerp</a></li>
-<li><a href='#converter'>lrgb</a></li>
-<li><a href='#converter'>luv</a></li>
+<li><a href='#color-spaces'>lrgb</a></li>
+<li><a href='#color-spaces'>luv</a></li>
 <li><a href='#mapAlphaDivide'>mapAlphaDivide</a></li>
 <li><a href='#mapAlphaMultiply'>mapAlphaMultiply</a></li>
 <li><a href='#mapTransferGamma'>mapTransferGamma</a></li>
 <li><a href='#mapTransferLinear'>mapTransferLinear</a></li>
 <li><a href='#mapper'>mapper</a></li>
 <li><a href='#nearest'>nearest</a></li>
-<li><a href='#converter'>oklab</a></li>
-<li><a href='#converter'>oklch</a></li>
-<li><a href='#converter'>p3</a></li>
+<li><a href='#color-spaces'>oklab</a></li>
+<li><a href='#color-spaces'>oklch</a></li>
 <li><a href='#parse'>parse</a></li>
-<li><a href='#converter'>prophoto</a></li>
+<li><a href='#color-spaces'>p3</a></li>
+<li><a href='#color-spaces'>prophoto</a></li>
 <li><a href='#random'>random</a></li>
-<li><a href='#converter'>rec2020</a></li>
-<li><a href='#converter'>rgb</a></li>
+<li><a href='#color-spaces'>rec2020</a></li>
+<li><a href='#color-spaces'>rgb</a></li>
 <li><a href='#round'>round</a></li>
 <li><a href='#samples'>samples</a></li>
 <li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
 <li><a href='#wcagLuminance'>wcagLuminance</a></li>
-<li><a href='#converter'>xyz</a></li>
-<li><a href='#converter'>xyz65</a></li>
-<li><a href='#converter'>yiq</a></li>
+<li><a href='#color-spaces'>xyz65</a></li>
+<li><a href='#color-spaces'>xyz</a></li>
+<li><a href='#color-spaces'>yiq</a></li>
 </ul>
 </details>
 
@@ -175,37 +175,6 @@ lab('#f0f0f0');
 ```
 
 Converters accept either strings (which will be parsed with `parse()` under the hood) or color objects. If the `mode` key is absent from the color object passed to a converter, it's assumed to be in the converter's color space.
-
-The available modes (color spaces) are listed below. For convenience, each color space built into Culori has a shortcut to its converter. For example, instead of `converter('hsl')`, you can use `hsl`.
-
-| Mode        | Color space                                                 | Shortcut               |
-| ----------- | ----------------------------------------------------------- | ---------------------- |
-| `a98`       | A98 RGB color space, compatible with Adobe RGB (1998)       | **a98**(_color_)       |
-| `cubehelix` | Cubehelix color space                                       | **cubehelix**(_color_) |
-| `dlab`      | DIN99o Lab color space                                      | **dlab**(_color_)      |
-| `dlch`      | DIN99o LCh color space                                      | **dlch**(_color_)      |
-| `hsi`       | HSI color space                                             | **hsi**(_color_)       |
-| `hsl`       | HSL color space                                             | **hsl**(_color_)       |
-| `hsv`       | HSV color space                                             | **hsv**(_color_)       |
-| `hwb`       | HWB color space                                             | **hwb**(_color_)       |
-| `jab`       | J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space         | **jab**(_color_)       |
-| `jch`       | J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> in cylindrical form | **jch**(_color_)       |
-| `lab`       | CIELAB color space (D50 Illuminant)                         | **lab**(_color_)       |
-| `lab65`     | CIELAB color space (D65 Illuminant)                         | **lab65**(_color_)     |
-| `lch`       | CIELCh color space (D50 Illuminant)                         | **lch**(_color_)       |
-| `lch65`     | CIELCh color space (D65 Illuminant)                         | **lch65**(_color_)     |
-| `lchuv`     | CIELCHuv color space (D50 Illuminant)                       | **lchuv**(_color_)     |
-| `lrgb`      | Linear-light sRGB color space                               | **lrgb**(_color_)      |
-| `luv`       | CIELUV color space (D50 Illuminant)                         | **luv**(_color_)       |
-| `oklab`     | Oklab color space                                           | **oklab**(_color_)     |
-| `oklch`     | Oklab color space, cylindrical form                         | **oklch**(_color_)     |
-| `p3`        | Display P3 color space                                      | **p3**(_color_)        |
-| `prophoto`  | ProPhoto RGB color space                                    | **prophoto**(_color_)  |
-| `rec2020`   | Rec. 2020 RGB color space                                   | **rec2020**(_color_)   |
-| `rgb`       | sRGB color space                                            | **rgb**(_color_)       |
-| `xyz65`     | XYZ D65 color space                                         | **xyz65**(_color_)     |
-| `xyz`       | XYZ D50 color space                                         | **xyz**(_color_)       |
-| `yiq`       | YIQ color space                                             | **yiq**(_color_)       |
 
 ## Formatting
 
@@ -1432,6 +1401,65 @@ let approx = round(4);
 approx(0.38393993);
 // ⇒ 0.3839
 ```
+
+<h2 id='color-spaces'>
+  <a href='#color-spaces'>#</a>
+  Available color spaces
+</h2>
+
+The default import (`culori`) comes with all the color spaces pre-registered into the library. For convenience, you can also import directly `mode` as a shortcut to [`converter(mode)`](#converter). For example, instead of [`converter('hsl')`](#converter), you can import `hsl`:
+
+```js
+// Instead of this:
+import { converter } from 'culori';
+const hsl = converter('hsl');
+
+// You can do this:
+import { hsl } from 'culori';
+```
+
+On the other hand, when importing the [tree-shaken version](/guides/tree-shaking) (`culori/fn`), color spaces need to be registered manually with [`useMode()`](#useMode) based on their __definition object__: 
+
+```js
+import { useMode, modeHsl } from 'culori/fn';
+const hsl = useMode(modeHsl);
+```
+
+The table below summarizes two pieces of information:
+
+* What the `mode` is for a specific color space built into Culori, which is also the name of the shortcut to the converter for that color space.
+* What the definition object for a color space is called.
+
+The available color spaces are discussed into more detail on the [Color Spaces](/color-spaces) page.
+
+Mode | Color space | Definition object
+---- | ----------- | -----------------
+`a98` | A98 RGB color space, compatible with Adobe RGB (1998) | `modeA98`
+`cubehelix` | Cubehelix color space | `modeCubehelix`
+`dlab` | DIN99o Lab color space | `modeDlab`
+`dlch` | DIN99o LCh color space | `modeDlch`
+`hsi` | HSI color space | `modeHsi`
+`hsl` | HSL color space | `modeHsl`
+`hsv` | HSV color space | `modeHsv`
+`hwb` | HWB color space | `modeHwb`
+`jab` | J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space | `modeJab`
+`jch` | J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> in cylindrical form | `modeJch`
+`lab` | CIELAB color space (D50 Illuminant) | `modeLab`
+`lab65` | CIELAB color space (D65 Illuminant) | `modeLab65`
+`lch` | CIELCh color space (D50 Illuminant) | `modeLch`
+`lch65` | CIELCh color space (D65 Illuminant) | `modeLch65`
+`lchuv` | CIELCHuv color space (D50 Illuminant) | `modeLchuv`
+`lrgb` | Linear-light sRGB color space | `modeLrgb`
+`luv` | CIELUV color space (D50 Illuminant) | `modeLuv`
+`oklab` | Oklab color space | `modeOklab`
+`oklch` | Oklab color space, cylindrical form | `modeOklch`
+`p3` | Display P3 color space | `modeP3`
+`prophoto` | ProPhoto RGB color space | `modeProphoto`
+`rec2020` | Rec. 2020 RGB color space | `modeRec2020`
+`rgb` | sRGB color space | `modeRgb`
+`xyz65` | XYZ D65 color space | `modeXyz65`
+`xyz` | XYZ D50 color space | `modeXyz`
+`yiq` | YIQ color space | `modeYiq`
 
 ## Extending culori
 
