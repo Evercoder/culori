@@ -9,8 +9,8 @@
 	"exports": {
 		"./require": "./bundled/culori.cjs",
 		".": "./src/index.js",
-		"./css": "./src/index-css.js",
-		"./all": "./src/index-all.js",
+		"./css": "./src/bootstrap/css.js",
+		"./all": "./src/bootstrap/all.js",
 		"./fn": "./src/index-fn.js"
 	},
 	"repository": "git@github.com:Evercoder/culori.git",

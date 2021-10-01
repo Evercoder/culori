@@ -4,8 +4,8 @@
 import tape from 'tape';
 
 import * as full from '../src/index.js';
-import * as css from '../src/index-css.js';
-import * as all from '../src/index-all.js';
+import * as css from '../src/bootstrap/css.js';
+import * as all from '../src/bootstrap/all.js';
 import * as fn from '../src/index-fn.js';
 
 const API_FULL = [
