@@ -1,7 +1,7 @@
 ---
 layout: layouts/default
 title: Colophon
-menu-order: 5
+menu-order: 6
 ---
 
 Authored by [Dan Burzo](http://danburzo.ro), and released under the MIT license.
