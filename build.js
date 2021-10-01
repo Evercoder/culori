@@ -1,93 +1,84 @@
 import { build } from 'esbuild';
 
-function task(config) {
-	return build({
-		entryPoints: ['./src/index.js'],
-		logLevel: 'info',
-		bundle: true,
-		...config
-	});
-}
-
-/*
-  Bundled CJS, unminified / minified.
- */
-
-task({
+// Bundled CJS
+build({
+	entryPoints: ['./src/index.js'],
+	logLevel: 'info',
+	bundle: true,
 	format: 'cjs',
 	outfile: 'bundled/culori.cjs'
 });
 
-task({
-	format: 'cjs',
+// Bundled CJS, minified
+build({
+	entryPoints: ['./src/index.js'],
+	logLevel: 'info',
+	bundle: true,
 	minify: true,
+	format: 'cjs',
 	outfile: 'bundled/culori.min.cjs'
 });
 
-/*
-  Bundled ESM, unminified / minified.
- */
-
-task({
+// Bundled ESM
+build({
+	entryPoints: ['./src/index.js'],
+	logLevel: 'info',
+	bundle: true,
 	format: 'esm',
 	outfile: 'bundled/culori.mjs'
 });
 
-task({
-	format: 'esm',
+// Bundled ESM, minified
+build({
+	entryPoints: ['./src/index.js'],
+	logLevel: 'info',
+	bundle: true,
 	minify: true,
+	format: 'esm',
 	outfile: 'bundled/culori.min.mjs'
 });
 
-/*
-  Bundled IIFE, unminified / minified.
- */
-
-task({
+// Bundled IIFE
+build({
+	entryPoints: ['./src/index.js'],
+	logLevel: 'info',
+	bundle: true,
 	format: 'iife',
 	globalName: 'culori',
 	outfile: 'bundled/culori.js'
 });
 
-task({
+// Bundled IIFE, minified
+build({
+	entryPoints: ['./src/index.js'],
+	logLevel: 'info',
+	bundle: true,
+	minify: true,
 	format: 'iife',
 	globalName: 'culori',
-	minify: true,
 	outfile: 'bundled/culori.min.js'
 });
 
-/*
-	Packs
- */
-
-task({
-	format: 'esm',
-	entryPoints: ['src/index-css.js'],
-	outfile: 'bundled/culori-css.mjs'
-});
-
-task({
-	format: 'esm',
-	entryPoints: ['src/index-css.js'],
-	minify: true,
-	outfile: 'bundled/culori-css.min.mjs'
-});
-
-/*
-  Bundled IIFE, unminified / minified.
- */
-
-task({
+// Bundled UMD
+// Adapted from: https://github.com/umdjs/umd/blob/master/templates/returnExports.js
+build({
+	entryPoints: ['./src/index.js'],
+	logLevel: 'info',
+	bundle: true,
 	format: 'iife',
 	globalName: 'culori',
-	entryPoints: ['src/index-fn.js'],
-	outfile: 'bundled/culori-fn.js'
-});
-
-task({
-	format: 'iife',
-	globalName: 'culori',
-	entryPoints: ['src/index-fn.js'],
-	minify: true,
-	outfile: 'bundled/culori-fn.min.js'
+	banner: {
+		js: `(function(root, factory) {
+			if (typeof define === 'function' && define.amd) {
+				define([], factory);
+			} else if (typeof module === 'object' && module.exports) {
+				module.exports = factory();
+			} else {
+				root.culori = factory();
+			}
+		}
+		(typeof self !== 'undefined' ? self : this, function() {`
+	},
+	footer: { js: `return culori; }));` },
+	outfile: 'bundled/culori.umd.js'
 });
