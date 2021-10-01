@@ -11,7 +11,7 @@ The library is added to every page of this website, so you can try the API in yo
 If you prefer to see the results visually, [Observable](https://beta.observablehq.com) is a great place to tinker with the library. Add this cell and you're good to go:
 
 ```
-culori = require('culori@{{pkg.version}}');
+culori = import('culori@{{pkg.version}}');
 ```
 
 (You can omit the version but it's useful to be specific while the API is still unstable, so that your old notebooks don't crash when something changes.)
@@ -30,7 +30,7 @@ You can then import Culori in your project:
 
 ```js
 // CJS style: import the whole library
-let culori = require('culori');
+let culori = require('culori/require');
 
 // ES style: import individual methods
 import { rgb } from 'culori';
