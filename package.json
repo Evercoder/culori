@@ -8,8 +8,8 @@
 	"exports": {
 		"./require": "./bundled/culori.cjs",
 		".": "./src/index.js",
-		"./core": "./src/packs/core.js",
-		"./extra-spaces": "./src/packs/extra-spaces.js"
+		"./css": "./src/index-css.js",
+		"./fn": "./src/index-fn.js"
 	},
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <danburzo@gmail.com>",

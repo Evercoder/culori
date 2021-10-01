@@ -6,7 +6,7 @@
 	to be interpolated in the color regexes.
  */
 
-const num = (/([+-]?\d*\.?\d+(?:[eE][+-]?\d+)?)/ + '').replace(/^\/|\/$/g, ''); // <number>
+const num = '([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)'; // <number>
 const per = `${num}%`; // <percentage>
 const num_per = `(?:${num}%|${num})`; // <alpha-value> and <number-percentage>
 const hue = `(?:${num}(deg|grad|rad|turn)|${num})`; // hue

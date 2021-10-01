@@ -278,6 +278,20 @@ const differenceHyab = () => {
 	};
 };
 
+/*
+	"Measuring perceived color difference using YIQ NTSC
+	transmission color space in mobile applications"
+		
+		by Yuriy Kotsarenko, Fernando Ramos in:
+		Programación Matemática y Software (2010) 
+
+	Available at:
+		
+		http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf
+ */
+const differenceKotsarenkoRamos = () =>
+	differenceEuclidean('yiq', [0.5053, 0.299, 0.1957]);
+
 export {
 	differenceHueChroma,
 	differenceHueSaturation,
@@ -287,5 +301,6 @@ export {
 	differenceCie94,
 	differenceCiede2000,
 	differenceCmc,
-	differenceHyab
+	differenceHyab,
+	differenceKotsarenkoRamos
 };
