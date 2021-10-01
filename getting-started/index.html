@@ -18,26 +18,43 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.20.1 alpha (<a
+				>v1.0.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
 			>
 		</div>
 		<nav>
-			<ul><li class="">
-					<a href="/">Home</a>
-				</li><li class="active ">
+			<ul>
+				<li class="active ">
 					<a href="/getting-started/">Getting Started</a>
-				</li><li class="">
+				</li>
+				
+				<li class="">
 					<a href="/api/">API Reference</a>
-				</li><li class="">
+				</li>
+				
+				<li class="">
 					<a href="/color-spaces/">Color Spaces</a>
-				</li><li class="">
-					<a href="/resources/">Resources</a>
-				</li><li class="">
+				</li>
+				
+				<li class="">
+					<a href="/guides/">Guides</a>
+				</li>
+				
+				<li class="">
 					<a href="/colophon/">Colophon</a>
-				</li></ul>
+				</li>
+				
+				<li class="">
+					<a href="/resources/">Resources</a>
+				</li>
+				<li>
+					<a href="https://github.com/Evercoder/culori"
+						>GitHub <span aria-hidden="true">↗</span></a
+					>
+				</li>
+			</ul>
 		</nav>
 	</div>
 </header>
@@ -45,34 +62,57 @@
 		<div class="container">
 			<article>
 				<h1>Getting Started</h1>
-				<h2>Try it online</h2>
-<p>The library is added to every page of this website, so you can try the API in your browser's console as you read through the examples. You can also use Culori in the Runkit npm playground (<a href="https://npm.runkit.com/culori">npm.runkit.com/culori</a>) to test the API without installing anything.</p>
-<p>If you prefer to see the results visually, <a href="https://beta.observablehq.com">Observable</a> is a great place to tinker with the library. Add this cell and you're good to go:</p>
-<pre><code>culori = require('culori@0.20.1');
-</code></pre>
-<p>(You can omit the version but it's useful to be specific while the API is still unstable, so that your old notebooks don't crash when something changes.)</p>
-<h2>Install it as an npm package</h2>
-<p><a href="https://www.npmjs.org/package/culori"><img src="https://img.shields.io/npm/v/culori.svg?style=flat-square&labelColor=d84f4c&color=black" alt="npm version"></a> <a href="https://bundlephobia.com/result?p=culori"><img src="https://img.shields.io/bundlephobia/minzip/culori?style=flat-square&labelColor=d84f4c&color=black" alt="npm version"></a></p>
-<p>Culori is bundled as both UMD and ES <a href="https://npmjs.com/package/culori">on npm</a>. Install it using <code>npm</code>:</p>
+				<h2>Install Culori from npm</h2>
+<p>Add Culori as a dependency to your project:</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> culori</code></pre>
-<p>You can then import Culori in your project:</p>
-<pre class="language-js"><code class="language-js"><span class="token comment">// CJS style: import the whole library</span><br><span class="token keyword">let</span> culori <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'culori'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// ES style: import individual methods</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span></code></pre>
-<h2>Add it via the <code>&lt;script&gt;</code> tag</h2>
-<p>To import Culori as a <code>&lt;script&gt;</code> tag to use in a web page, you can load it from <a href="https://unpkg.com">unpkg</a>. The library will be made available under the <code>culori</code> global variable.</p>
+<p>Then start using it:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }</span></code></pre>
+<h2>Fetch Culori from a CDN</h2>
+<p>You can use Culori from your favorite Content Delivery Network to create quick prototypes in HTML. Here are a few popular choices:</p>
+<table>
+<thead>
+<tr>
+<th>CDN</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://unpkg.com/">unpkg</a></td>
+<td><code>https://unpkg.com/culori</code></td>
+</tr>
+<tr>
+<td><a href="https://www.jsdelivr.com/">jsDelivr</a></td>
+<td><code>https://cdn.jsdelivr.net/npm/culori</code></td>
+</tr>
+<tr>
+<td><a href="https://www.skypack.dev/">skypack</a></td>
+<td><code>https://cdn.skypack.dev/culori</code></td>
+</tr>
+</tbody>
+</table>
+<p>Use it as an ES module:</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>module<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>	<span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'https://cdn.skypack.dev/culori'</span><span class="token punctuation">;</span><br>	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'salmon'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<p>...or using a traditional <code>&lt;script&gt;</code> tag. The library will be made available under the <code>culori</code> global variable:</p>
 <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/culori<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>culori<span class="token punctuation">.</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'salmon'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<h2>Use it online</h2>
+<h3>In your browser's console</h3>
+<p>The library is added to every page of this website, so you can try the API in your browser's console as you read through the examples.</p>
+<h3>Runkit</h3>
+<p>You can also use Culori in the Runkit npm playground (<a href="https://npm.runkit.com/culori">npm.runkit.com/culori</a>) to test the API without installing anything.</p>
+<h3>Observable</h3>
+<p>If you prefer to see the results visually, <a href="https://beta.observablehq.com">Observable</a> is a great place to tinker with the library.</p>
+<p>Add this cell and you're good to go:</p>
+<pre class="language-js"><code class="language-js">culori <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'culori@1.0.0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>It's often useful to pin the library to a specific version, to make sure your old notebooks don't break if the API changes in a new major version of the library.</p>
 
 			</article>
 		</div>
 		<footer>
 	<div class="container">
 		<p>
-			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Source
-			code available on
-			<a href="https://github.com/evercoder/culori">GitHub</a>.
-		</p>
-
-		<p>
-			Can this page be improved?
+			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
+			page be improved?
 			<a
 				href="https://github.com/Evercoder/culori/blob/main/./docs/getting-started.md"
 				>Edit it on GitHub</a
@@ -82,7 +122,7 @@
 </footer>
 
 
-		<script src="https://unpkg.com/culori"></script>
+		<script src="https://unpkg.com/culori@1.0.0"></script>
 		<script type="text/javascript">
 			document.body.style.setProperty(
 				'--random-1',

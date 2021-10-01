@@ -18,26 +18,43 @@
 				<img src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
-				>v0.20.1 alpha (<a
+				>v1.0.0 alpha (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
 			>
 		</div>
 		<nav>
-			<ul><li class="active ">
-					<a href="/">Home</a>
-				</li><li class="">
+			<ul>
+				<li class="">
 					<a href="/getting-started/">Getting Started</a>
-				</li><li class="">
+				</li>
+				
+				<li class="">
 					<a href="/api/">API Reference</a>
-				</li><li class="">
+				</li>
+				
+				<li class="">
 					<a href="/color-spaces/">Color Spaces</a>
-				</li><li class="">
-					<a href="/resources/">Resources</a>
-				</li><li class="">
+				</li>
+				
+				<li class="">
+					<a href="/guides/">Guides</a>
+				</li>
+				
+				<li class="">
 					<a href="/colophon/">Colophon</a>
-				</li></ul>
+				</li>
+				
+				<li class="">
+					<a href="/resources/">Resources</a>
+				</li>
+				<li>
+					<a href="https://github.com/Evercoder/culori"
+						>GitHub <span aria-hidden="true">↗</span></a
+					>
+				</li>
+			</ul>
 		</nav>
 	</div>
 </header>
@@ -45,29 +62,23 @@
 		<div class="container">
 			<article>
 				<h1>Home</h1>
-				<p>Culori is a color library for JavaScript that supports most color spaces and formats defined in the <a href="https://drafts.csswg.org/css-color/">CSS Colors Level 4</a> spec (<a href="https://drafts.csswg.org/css-color/#named-colors">named colors</a>, <a href="hex-colors">hex colors</a> with 3 to 8 digits, <a href="rgb-colors">RGB</a>, <a href="hsl-colors">HSL</a>, <a href="hwb-colors">HWB</a>, <a href="lab-colors">Lab and LCh</a>), plus <a href="./color-spaces">additional color spaces</a>.</p>
+				<p>Culori is a color library for JavaScript that supports most color spaces and formats defined in the <a href="https://drafts.csswg.org/css-color/">CSS Colors Level 4</a> specification (<a href="https://drafts.csswg.org/css-color/#named-colors">named colors</a>, <a href="https://drafts.csswg.org/css-color/#hex-notation">hex colors</a> with 3 to 8 digits, <a href="https://drafts.csswg.org/css-color/#rgb-functions">RGB</a>, <a href="https://drafts.csswg.org/css-color/#the-hsl-notation">HSL</a>, <a href="https://drafts.csswg.org/css-color/#the-hwb-notation">HWB</a>, <a href="https://drafts.csswg.org/css-color/#lab-colors">Lab and LCh</a>), plus <a href="./color-spaces">additional color spaces</a>.</p>
 <p>It handles <a href="https://en.wikipedia.org/wiki/Color_difference">color differences</a>, interpolation, gradients, blend modes <a href="./api">and more</a>.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> culori</code></pre>
 <p><a class='btn-link' href='./getting-started'>Get started</a></p>
-<h2>Another JS color library?</h2>
-<p>Mike Bostock's <a href="https://github.com/d3/d3-color">d3-color</a>, and Gregor Aisch's <a href="https://github.com/gka/chroma.js">chroma.js</a> are two excellent, robust libraries that provide most of what you need for working with colors on the web. The <a href="./resources">Resources</a> section for even more libraries you can try.</p>
-<p>Culori does a few things differently:</p>
-<ul>
-<li>The API is function-oriented rather than <a href="https://en.wikipedia.org/wiki/Fluent_interface">fluent</a>. Colors are represented as plain JavaScript objects you pass through a series of <a href="./api">functions</a>.</li>
-<li>On the <code>alpha</code> channel, the library doesn't equate an <code>undefined</code> value with an opaque color, but rather with a color for which we don't care about the opacity. This gives you the opportunity to interpret <code>undefined</code> as you see fit. The hex string <kbd>#ff0000</kbd> <em>should</em> probably be rendered as fully opaque red, but for running functions on colors it's useful to discern <kbd>#ff0000</kbd> from <kbd>#ff0000ff</kbd> — the former has an implicit alpha of 1, while for the latter it's explicit.</li>
-</ul>
+<h2>What sets Culori apart?</h2>
+<p><strong>A function-oriented API.</strong> Colors are represented as plain JavaScript objects you pass through a series of <a href="./api">functions</a>, which makes it super easy to extend.</p>
+<p><strong>Accurate alpha.</strong> On the <code>alpha</code> channel, the library doesn't equate an <code>undefined</code> value with an opaque color, but rather with a color for which we don't care about the opacity. This gives you the opportunity to interpret <code>undefined</code> as you see fit. The hex string <kbd>#ff0000</kbd> <em>should</em> probably be rendered as fully opaque red, but for running functions on colors it's useful to discern <kbd>#ff0000</kbd> from <kbd>#ff0000ff</kbd> — the former has an implicit alpha of 1, while for the latter it's explicit.</p>
+<p><strong>Comprehensive functionality.</strong> Build advanced color tools with Culori's rich collection of color spaces and functions.</p>
+<p><strong>Tree-shakeable version available.</strong> When you're ready to optimize for bundle size, switch to <a href="./guides/tree-shaking">a tree-shakeable version of the library</a>.</p>
 
 			</article>
 		</div>
 		<footer>
 	<div class="container">
 		<p>
-			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Source
-			code available on
-			<a href="https://github.com/evercoder/culori">GitHub</a>.
-		</p>
-
-		<p>
-			Can this page be improved?
+			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
+			page be improved?
 			<a
 				href="https://github.com/Evercoder/culori/blob/main/./docs/index.md"
 				>Edit it on GitHub</a
@@ -77,7 +88,7 @@
 </footer>
 
 
-		<script src="https://unpkg.com/culori"></script>
+		<script src="https://unpkg.com/culori@1.0.0"></script>
 		<script type="text/javascript">
 			document.body.style.setProperty(
 				'--random-1',

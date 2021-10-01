@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>
+			 Optimize bundle size with tree-shaking &middot; culori 
+		</title>
+
+		<link rel="icon" type="image/png" href='/favicon.png' />
+		<link rel="stylesheet" href='/css/main.css' />
+	</head>
+	<body>
+		<header>
+	<div class="container">
+		<div class="logo">
+			<a href='/'>
+				<img src='/img/culori.svg' alt="culori" />
+			</a>
+			<span
+				>v1.0.0 alpha (<a
+					href="https://github.com/evercoder/culori/releases"
+					>changelog</a
+				>)</span
+			>
+		</div>
+		<nav>
+			<ul>
+				<li class="">
+					<a href="/getting-started/">Getting Started</a>
+				</li>
+				
+				<li class="">
+					<a href="/api/">API Reference</a>
+				</li>
+				
+				<li class="">
+					<a href="/color-spaces/">Color Spaces</a>
+				</li>
+				
+				<li class="">
+					<a href="/guides/">Guides</a>
+				</li>
+				
+				<li class="">
+					<a href="/colophon/">Colophon</a>
+				</li>
+				
+				<li class="">
+					<a href="/resources/">Resources</a>
+				</li>
+				<li>
+					<a href="https://github.com/Evercoder/culori"
+						>GitHub <span aria-hidden="true">↗</span></a
+					>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+		<div class="container">
+			<article>
+				<h1>Optimize bundle size with tree-shaking</h1>
+				<p>The default <code>culori</code> import comes with the full set of color spaces and functions to let you prototype quickly and with fewer errors.</p>
+<p>However, the way color spaces are initialized prevents the library from being tree-shaken, so when you use a bundler such as Webpack or Parcel, the entire Culori library is bundled regardless of what you're actually using.</p>
+<p>To optimize the bundle size, you can opt into the tree-shakeable version by importing from <code>culori/fn</code> instead of <code>culori</code>:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> …<span class="token punctuation">,</span> …<span class="token punctuation">,</span> … <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span></code></pre>
+<p>It works like the default import, with one key difference: <strong>none of the color spaces are pre-registered into the library</strong>. In fact, if you'd try to <code>parse()</code> a valid CSS color without having registered any color space, you'd get back <code>undefined</code>:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> parse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ undefined</span></code></pre>
+<p>Instead, you need to import the definitions of the color spaces you want to support and register them manually with the <code>useMode()</code> method.</p>
+<p>Since none of the color spaces are pre-registered the shortcuts to <code>converter(mode)</code>, such as <code>culori.rgb</code> or <code>culori.hsl</code>, are also missing. They are, however, helpfully returned by <code>useMode()</code>:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> useMode<span class="token punctuation">,</span> modeRgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token keyword">const</span> rgb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRgb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }</span></code></pre>
+<p>To recreate a subset of Culori that only deals with valid CSS colors, you would use this:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span><br>	useMode<span class="token punctuation">,</span><br>	modeA98<span class="token punctuation">,</span><br>	modeHsl<span class="token punctuation">,</span><br>	modeHwb<span class="token punctuation">,</span><br>	modeLab<span class="token punctuation">,</span><br>	modeLch<span class="token punctuation">,</span><br>	modeP3<span class="token punctuation">,</span><br>	modeProphoto<span class="token punctuation">,</span><br>	modeRec2020<span class="token punctuation">,</span><br>	modeRgb<span class="token punctuation">,</span><br>	modeXyz<br><span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token keyword">const</span> a98 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeA98<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> hsl <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeHsl<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> hwb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeHwb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> lab <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeLab<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> lch <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeLch<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> p3 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeP3<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> prophoto <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeProphoto<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> rec2020 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRec2020<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> rgb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRgb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> xyz <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeXyz<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<blockquote>
+<p><strong>Note:</strong> It's essential to register all the color spaces available in CSS with <code>useMode()</code> to make each color space's parsers available to functions such as <code>parse()</code> and <code>converter()</code>.</p>
+</blockquote>
+
+			</article>
+		</div>
+		<footer>
+	<div class="container">
+		<p>
+			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
+			page be improved?
+			<a
+				href="https://github.com/Evercoder/culori/blob/main/./docs/guides/tree-shaking.md"
+				>Edit it on GitHub</a
+			>.
+		</p>
+	</div>
+</footer>
+
+
+		<script src="https://unpkg.com/culori@1.0.0"></script>
+		<script type="text/javascript">
+			document.body.style.setProperty(
+				'--random-1',
+				culori.formatHex(culori.random('lch', { l: [30, 70] }))
+			);
+			document.body.style.setProperty(
+				'--random-2',
+				culori.formatHex(culori.random('lch', { l: [30, 70] }))
+			);
+		</script>
+	</body>
+</html>

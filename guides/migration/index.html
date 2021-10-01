@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>
+			 Migration guide &middot; culori 
+		</title>
+
+		<link rel="icon" type="image/png" href='/favicon.png' />
+		<link rel="stylesheet" href='/css/main.css' />
+	</head>
+	<body>
+		<header>
+	<div class="container">
+		<div class="logo">
+			<a href='/'>
+				<img src='/img/culori.svg' alt="culori" />
+			</a>
+			<span
+				>v1.0.0 alpha (<a
+					href="https://github.com/evercoder/culori/releases"
+					>changelog</a
+				>)</span
+			>
+		</div>
+		<nav>
+			<ul>
+				<li class="">
+					<a href="/getting-started/">Getting Started</a>
+				</li>
+				
+				<li class="">
+					<a href="/api/">API Reference</a>
+				</li>
+				
+				<li class="">
+					<a href="/color-spaces/">Color Spaces</a>
+				</li>
+				
+				<li class="">
+					<a href="/guides/">Guides</a>
+				</li>
+				
+				<li class="">
+					<a href="/colophon/">Colophon</a>
+				</li>
+				
+				<li class="">
+					<a href="/resources/">Resources</a>
+				</li>
+				<li>
+					<a href="https://github.com/Evercoder/culori"
+						>GitHub <span aria-hidden="true">↗</span></a
+					>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+		<div class="container">
+			<article>
+				<h1>Migration guide</h1>
+				<h2>Migrating from version 0.x to 1.0</h2>
+<h3>Using the library</h3>
+<p>Starting with version 1.0, Culori will be published to npm as an ES Module (ESM) package, with <code>type: module</code> and a set of <code>exports</code> in its <code>package.json</code> file.</p>
+<p>If you're using Node.js 10, you should be able to continue using Culori as before.</p>
+<p>If you're on Node.js 12 or later, and you've switched to native ES modules (by adding <code>type: module</code> to your <code>package.json</code>), you need to use <code>import</code>:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> culori <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span></code></pre>
+<p>If you're on Node.js 12 or later, and you're still using CommonJS modules, there's a separate export that can be used with <code>require()</code> calls:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> culori <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'culori/require'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3>Removed methods</h3>
+<p>The <code>clamp(method)</code> function has been removed. Use <code>clampRgb()</code> and <code>clampChroma()</code> instead.</p>
+<p>The <code>formatter(method)</code> function has been removed. Use <code>formatHex()</code>, <code>formatRgb()</code> etc. instead.</p>
+<p>The following undocumented interpolation functions have been removed (note the <code>interpolate</code> prefix):</p>
+<ul>
+<li><code>interpolateLinear()</code></li>
+<li><code>interpolateCosine()</code></li>
+<li><code>interpolateSplineBasis()</code></li>
+<li><code>interpolateSplineNatural()</code></li>
+<li><code>interpolateSplineMonotone()</code></li>
+</ul>
+<p>The <code>differenceDino99()</code> color difference function has been removed. Use <code>differenceEuclidean('dlab')</code> instead.</p>
+<p>The methods <code>deficiencyProt</code>, <code>deficiencyDeuter</code>, and <code>deficiencyTrit</code> have been removed. Use <code>filterDeficiencyProt</code>, <code>filterDeficiencyDeuter</code>, and <code>filterDeficiencyTrit</code> instead.</p>
+<h3>Renamed methods</h3>
+<p>The following methods have been renamed:</p>
+<ul>
+<li><code>defineMode()</code> → <code>useMode()</code>;</li>
+<li><code>getModeDefinition()</code> → <code>getMode()</code>.</li>
+</ul>
+<h3>Color space definitions</h3>
+<p>A few properties on the <a href="/api#color-space-def">color space definition object</a> have been changed for better clarity.</p>
+<ul>
+<li><code>input</code> → <code>fromMode</code></li>
+<li><code>output</code> → <code>toMode</code></li>
+<li><code>parsers</code> → <code>parse</code></li>
+<li><code>serialize</code> as string now only includes the color profile identifier, without the <code>color(</code> prefix, eg. from <code>serialize: &quot;color(--hsv &quot;</code> to <code>serialize: &quot;--hsv&quot;</code>.</li>
+</ul>
+
+			</article>
+		</div>
+		<footer>
+	<div class="container">
+		<p>
+			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
+			page be improved?
+			<a
+				href="https://github.com/Evercoder/culori/blob/main/./docs/guides/migration.md"
+				>Edit it on GitHub</a
+			>.
+		</p>
+	</div>
+</footer>
+
+
+		<script src="https://unpkg.com/culori@1.0.0"></script>
+		<script type="text/javascript">
+			document.body.style.setProperty(
+				'--random-1',
+				culori.formatHex(culori.random('lch', { l: [30, 70] }))
+			);
+			document.body.style.setProperty(
+				'--random-2',
+				culori.formatHex(culori.random('lch', { l: [30, 70] }))
+			);
+		</script>
+	</body>
+</html>
