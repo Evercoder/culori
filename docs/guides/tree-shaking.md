@@ -63,4 +63,32 @@ const rgb = useMode(modeRgb);
 const xyz = useMode(modeXyz);
 ```
 
-> __Note:__ It's essential to register all the color spaces available in CSS with `useMode()` to make each color space's parsers available to functions such as `parse()` and `converter()`.
+## Bootstrap packages
+
+For convenience, a couple of bootstrap packages are available.
+
+### `culori/css` 
+
+Bootstrap all the color spaces available in CSS, plus a handful of  related ones we get for free, since they are used under the hood. 
+
+It provides the following named exports: `a98`, `hsl`, `hsv`, `hwb`, `lab`, `lab65`, `lch`, `lch65`, `lrgb`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz`, and `xyz65`.
+
+```js
+import 'culori/css';
+import { interpolate } from 'culori/fn';
+
+interpolate(['red', 'green'], 'lch');
+```
+
+### `culori/all` 
+
+Bootstrap all the color spaces available in Culori.
+
+It provides the following named exports: `a98`, `cubehelix`, `dlab`, `dlch`, `hsi`, `hsl`, `hsv`, `hwb`, `jab`, `jch`, `lab`, `lab65`, `lch`, `lch65`, `lchuv`, `lrgb`, `luv`, `oklab`, `oklch`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz`, `xyz65`, and `yiq`.
+
+```js
+import 'culori/all';
+import { interpolate } from 'culori/fn';
+
+interpolate(['red', 'green'], 'oklab');
+```

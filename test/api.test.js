@@ -5,6 +5,7 @@ import tape from 'tape';
 
 import * as full from '../src/index.js';
 import * as css from '../src/index-css.js';
+import * as all from '../src/index-all.js';
 import * as fn from '../src/index-fn.js';
 
 const API_FULL = [
@@ -134,107 +135,51 @@ const API_FULL = [
 ];
 const API_CSS = [
 	'a98',
-	'average',
-	'averageAngle',
-	'averageNumber',
-	'blend',
-	'clampChroma',
-	'clampRgb',
-	'colorsNamed',
-	'converter',
-	'differenceCie76',
-	'differenceCie94',
-	'differenceCiede2000',
-	'differenceCmc',
-	'differenceEuclidean',
-	'differenceHueChroma',
-	'differenceHueNaive',
-	'differenceHueSaturation',
-	'differenceHyab',
-	'differenceKotsarenkoRamos',
-	'displayable',
-	'easingGamma',
-	'easingInOutSine',
-	'easingMidpoint',
-	'easingSmootherstep',
-	'easingSmoothstep',
-	'filterBrightness',
-	'filterContrast',
-	'filterDeficiencyDeuter',
-	'filterDeficiencyProt',
-	'filterDeficiencyTrit',
-	'filterGrayscale',
-	'filterHueRotate',
-	'filterInvert',
-	'filterSaturate',
-	'filterSepia',
-	'fixupAlpha',
-	'fixupHueDecreasing',
-	'fixupHueIncreasing',
-	'fixupHueLonger',
-	'fixupHueShorter',
-	'formatCss',
-	'formatHex',
-	'formatHex8',
-	'formatHsl',
-	'formatRgb',
-	'getMode',
 	'hsl',
 	'hsv',
 	'hwb',
-	'interpolate',
-	'interpolateWith',
-	'interpolateWithPremultipliedAlpha',
-	'interpolatorLinear',
-	'interpolatorPiecewise',
-	'interpolatorSplineBasis',
-	'interpolatorSplineBasisClosed',
-	'interpolatorSplineMonotone',
-	'interpolatorSplineMonotone2',
-	'interpolatorSplineMonotoneClosed',
-	'interpolatorSplineNatural',
-	'interpolatorSplineNaturalClosed',
 	'lab',
 	'lab65',
 	'lch',
 	'lch65',
-	'lerp',
 	'lrgb',
-	'mapAlphaDivide',
-	'mapAlphaMultiply',
-	'mapTransferGamma',
-	'mapTransferLinear',
-	'mapper',
-	'modeA98',
-	'modeHsl',
-	'modeHsv',
-	'modeHwb',
-	'modeLab',
-	'modeLab65',
-	'modeLch',
-	'modeLch65',
-	'modeLrgb',
-	'modeP3',
-	'modeProphoto',
-	'modeRec2020',
-	'modeRgb',
-	'modeXyz',
-	'modeXyz65',
-	'nearest',
 	'p3',
-	'parse',
 	'prophoto',
-	'random',
 	'rec2020',
 	'rgb',
-	'round',
-	'samples',
-	'useMode',
-	'wcagContrast',
-	'wcagLuminance',
 	'xyz',
 	'xyz65'
 ];
+
+const API_ALL = [
+	'a98',
+	'cubehelix',
+	'dlab',
+	'dlch',
+	'hsi',
+	'hsl',
+	'hsv',
+	'hwb',
+	'jab',
+	'jch',
+	'lab',
+	'lab65',
+	'lch',
+	'lch65',
+	'lchuv',
+	'lrgb',
+	'luv',
+	'oklab',
+	'oklch',
+	'p3',
+	'prophoto',
+	'rec2020',
+	'rgb',
+	'xyz',
+	'xyz65',
+	'yiq'
+];
+
 const API_FN = [
 	'average',
 	'averageAngle',
@@ -342,6 +287,11 @@ tape('culori', t => {
 
 tape('culori/css', t => {
 	t.deepEqual(Object.keys(css).sort(), API_CSS);
+	t.end();
+});
+
+tape('culori/all', t => {
+	t.deepEqual(Object.keys(all).sort(), API_ALL);
 	t.end();
 });
 
