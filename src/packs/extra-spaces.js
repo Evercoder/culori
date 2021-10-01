@@ -10,21 +10,21 @@ import oklabDef from '../oklab/definition.js';
 import oklchDef from '../oklch/definition.js';
 import hsiDef from '../hsi/definition.js';
 
-import { defineMode } from '../modes.js';
+import { useMode } from '../modes.js';
 import converter from '../converter.js';
 import { differenceEuclidean } from '../difference.js';
 
-defineMode(jabDef);
-defineMode(jchDef);
-defineMode(cubehelixDef);
-defineMode(dlabDef);
-defineMode(dlchDef);
-defineMode(hsiDef);
-defineMode(luvDef);
-defineMode(lchuvDef);
-defineMode(yiqDef);
-defineMode(oklabDef);
-defineMode(oklchDef);
+useMode(jabDef);
+useMode(jchDef);
+useMode(cubehelixDef);
+useMode(dlabDef);
+useMode(dlchDef);
+useMode(hsiDef);
+useMode(luvDef);
+useMode(lchuvDef);
+useMode(yiqDef);
+useMode(oklabDef);
+useMode(oklchDef);
 
 let jab = converter('jab');
 let jch = converter('jch');

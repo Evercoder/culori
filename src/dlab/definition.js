@@ -8,15 +8,15 @@ import { fixupAlpha } from '../fixup/alpha.js';
 const definition = {
 	mode: 'dlab',
 
-	parsers: ['--din99o-lab'],
-	serialize: 'color(--din99o-lab ',
+	parse: ['--din99o-lab'],
+	serialize: '--din99o-lab',
 
-	output: {
+	toMode: {
 		lab65: convertDlabToLab65,
 		rgb: c => convertLab65ToRgb(convertDlabToLab65(c))
 	},
 
-	input: {
+	fromMode: {
 		lab65: convertLab65ToDlab,
 		rgb: c => convertLab65ToDlab(convertRgbToLab65(c))
 	},

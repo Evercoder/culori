@@ -7,7 +7,7 @@ let culori = require('../src/index.js');
  */
 let ranges = (mode, step = 0.01) => {
 	let conv = culori.converter(mode);
-	let chs = culori.getModeDefinition(mode).channels;
+	let chs = culori.getMode(mode).channels;
 	let res = chs.reduce(
 		(acc, ch) => ((acc[ch] = [Infinity, -Infinity]), acc),
 		{}

@@ -42,8 +42,8 @@ import { averageAngle } from '../average.js';
 const definition = {
 	mode: 'cubehelix',
 	channels: ['h', 's', 'l', 'alpha'],
-	parsers: ['--cubehelix'],
-	serialize: 'color(--cubehelix ',
+	parse: ['--cubehelix'],
+	serialize: '--cubehelix',
 
 	ranges: {
 		h: [0, 360],
@@ -51,11 +51,11 @@ const definition = {
 		l: [0, 1]
 	},
 
-	input: {
+	fromMode: {
 		rgb: convertRgbToCubehelix
 	},
 
-	output: {
+	toMode: {
 		rgb: convertCubehelixToRgb
 	},
 

@@ -16,15 +16,15 @@ import convertRgbToXyz from '../xyz/convertRgbToXyz.js';
 const definition = {
 	...rgb,
 	mode: 'prophoto',
-	parsers: ['prophoto-rgb'],
-	serialize: 'color(prophoto-rgb ',
+	parse: ['prophoto-rgb'],
+	serialize: 'prophoto-rgb',
 
-	input: {
+	fromMode: {
 		xyz: convertXyzToProphoto,
 		rgb: color => convertXyzToProphoto(convertRgbToXyz(color))
 	},
 
-	output: {
+	toMode: {
 		xyz: convertProphotoToXyz,
 		rgb: color => convertXyzToRgb(convertProphotoToXyz(color))
 	}

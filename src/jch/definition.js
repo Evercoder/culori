@@ -12,15 +12,15 @@ import { averageAngle } from '../average.js';
 const definition = {
 	mode: 'jch',
 
-	parsers: ['--jzczhz'],
-	serialize: 'color(--jzczhz ',
+	parse: ['--jzczhz'],
+	serialize: '--jzczhz',
 
-	output: {
+	toMode: {
 		jab: convertJchToJab,
 		rgb: c => convertJabToRgb(convertJchToJab(c))
 	},
 
-	input: {
+	fromMode: {
 		rgb: c => convertJabToJch(convertRgbToJab(c)),
 		jab: convertJabToJch
 	},

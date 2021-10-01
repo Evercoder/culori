@@ -2,7 +2,7 @@ import { mapper, mapTransferLinear } from './map.js';
 import converter from './converter.js';
 import prepare from './_prepare.js';
 import lerp from './util/lerp.js';
-import { getModeDefinition } from './modes.js';
+import { getMode } from './modes.js';
 
 const minzero = v => Math.max(v, 0);
 const clamp = v => Math.max(Math.min(v, 1), 0);
@@ -99,7 +99,7 @@ const matrixHueRotate = degrees => {
 
 const matrix = (values, mode, preserve_mode = false) => {
 	let conv = converter(mode);
-	let channels = getModeDefinition(mode).channels;
+	let channels = getMode(mode).channels;
 	return color => {
 		let c = conv(color);
 		if (!c) {

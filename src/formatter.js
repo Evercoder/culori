@@ -1,7 +1,7 @@
 import converter from './converter.js';
 import round from './round.js';
 import prepare from './_prepare.js';
-import { getModeDefinition } from './modes.js';
+import { getMode } from './modes.js';
 
 let rgb = converter('rgb');
 let hsl = converter('hsl');
@@ -81,9 +81,9 @@ export const formatCss = c => {
 	if (!color) {
 		return undefined;
 	}
-	const def = getModeDefinition(color.mode);
+	const def = getMode(color.mode);
 	if (!def.serialize || typeof def.serialize === 'string') {
-		let res = def.serialize || `color(--${color.mode} `;
+		let res = `color(${def.serialize || `--${color.mode}`} `;
 		def.channels.forEach((ch, i) => {
 			if (ch !== 'alpha') {
 				res += (i ? ' ' : '') + (color[ch] || 0);

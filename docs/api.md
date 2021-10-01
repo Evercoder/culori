@@ -17,7 +17,6 @@ menu-order: 2
 <li><a href='#colorsNamed'>colorsNamed</a></li>
 <li><a href='#converter'>converter</a></li>
 <li><a href='#converter'>cubehelix</a></li>
-<li><a href='#defineMode'>defineMode</a></li>
 <li><a href='#differenceCie76'>differenceCie76</a></li>
 <li><a href='#differenceCie94'>differenceCie94</a></li>
 <li><a href='#differenceCiede2000'>differenceCiede2000</a></li>
@@ -57,7 +56,7 @@ menu-order: 2
 <li><a href='#formatHex8'>formatHex8</a></li>
 <li><a href='#formatHsl'>formatHsl</a></li>
 <li><a href='#formatRgb'>formatRgb</a></li>
-<li><a href='#getModeDefinition'>getModeDefinition</a></li>
+<li><a href='#getMode'>getMode</a></li>
 <li><a href='#converter'>hsi</a></li>
 <li><a href='#converter'>hsl</a></li>
 <li><a href='#converter'>hsv</a></li>
@@ -100,6 +99,7 @@ menu-order: 2
 <li><a href='#converter'>rgb</a></li>
 <li><a href='#round'>round</a></li>
 <li><a href='#samples'>samples</a></li>
+<li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
 <li><a href='#wcagLuminance'>wcagLuminance</a></li>
 <li><a href='#converter'>xyz</a></li>
@@ -1348,62 +1348,79 @@ approx(0.38393993);
 
 ## Extending culori
 
-> **Warning:** This part of the API is not yet finalized and may change.
-
-<a id="defineMode" href="#defineMode">#</a> culori.**defineMode**(_definition_)
+<a id="useMode" href="#useMode">#</a> culori.**useMode**(_definition_) → _function_.
 
 <span aria-label='Source:'>☞</span> [src/modes.js](https://github.com/evercoder/culori/blob/main/src/modes.js)
 
-Defines a new color space through a _definition_ object. Here's the full definition of the HSL color space:
+Defines a new color space based on its _definition_. See [Color mode definition](#color-mode-def) for the expected object shape.
+
+Returns a converter function for the newly defined mode.
 
 ```js
-{
-	mode: 'hsl',
-	output: {
-		rgb: convertHslToRgb
-	},
-	input: {
-		rgb: convertRgbToHsl
-	},
-	channels: ['h', 's', 'l', 'alpha'],
-	ranges: {
-		h: [0, 360]
-	},
-	parsers: [parseHsl],
-  serialize: serializeHsl,
-	interpolate: {
-		h: {
-			use: interpolatorLinear,
-			fixup: fixupHueShorter
-		},
-		s: interpolatorLinear,
-		l: interpolatorLinear,
-		alpha: {
-			use: interpolatorLinear,
-			fixup: fixupAlpha
-		}
-	},
-	difference: {
-		h: differenceHueSaturation
-	},
-	average: {
-		h: averageAngle
-	}
-};
+import { useMode } from 'culori';
+
+const hsl = useMode({
+	mode: 'hsl'
+	// ...
+});
+
+hsl('hsl(50 100% 100% / 100)');
 ```
+
+<a id="getMode" href="#getMode">#</a> culori.**getMode**(_mode_)
+
+<span aria-label='Source:'>☞</span> [src/modes.js](https://github.com/evercoder/culori/blob/main/src/modes.js)
+
+Returns the definition object for the _mode_ color space.
+
+<h3 id='color-mode-def'>
+  <a href='#color-mode-def'>#</a>
+  Color mode definition
+</h3>
 
 The properties a definition needs are the following:
 
--   `mode`: the string identifier for the color space
--   `output`: a set of functions to convert from the color space we're defining to other color spaces. At least `rgb` needs to be included; in case a specific conversion pair between two color spaces is missing, RGB is used as the "buffer" for the conversion.
--   `input`: opposite of `output`; a set of function to convert from various color spaces to the color space we're defining. At least `rgb` needs to be included.
--   `channels`: a list of channels for the color space.
--   `ranges`: the ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
--   `parsers`: any parsers for the color space that can transform strings into colors. These can be either functions, or strings — the latter is used as the color space's identifier to parse the `color(<ident>)` CSS syntax.
--   `serialize`: when a string is provided, it's used as the prefix when producing a string with `culori.formatCss`; when missing, it defaults to `color(--${color.mode} `.
--   `interpolate`: the default interpolations for the color space, one for each channel. Each interpolation is defined by its interpolator (the `use` key) and its fixup function (the `fixup` key). When defined as a function, a channel interpolation is meant to define its interpolator, with the fixup being a no-op.
--   `difference`: the default Euclidean distance method for each channel in the color space; mostly used for the `h` channel in cylindrical color spaces.
--   `average`: the default average function for each channel in the color space; when left unspecified, defaults to [`averageNumber`](#averageNumber).
+#### `mode` (_string_)
+
+The string identifier for the color space.
+
+#### `channels` (_array_)
+
+A list of channels for the color space.
+
+#### `toMode` (_object_)
+
+A set of functions to convert from the color space we're defining to other color spaces. At least `rgb` needs to be included; in case a specific conversion pair between two color spaces is missing, RGB is used as the "buffer" for the conversion.
+
+#### `fromMode` (_object_)
+
+The opposite of `toMode`. A set of function to convert from various color spaces to the color space we're defining. At least `rgb` needs to be included.
+
+#### `ranges` (_object_, optional)
+
+The ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
+
+#### `parse` (_array_, optional)
+
+Any parsers for the color space that can transform strings into colors. These can be either functions, or strings — the latter is used as the color space's identifier to parse the `color(<ident>)` CSS syntax.
+
+#### `serialize` (_function_ or _string_, optional)
+
+Defines how to serialize the color space to a CSS string with [`formatCss()`](#formatCss).
+
+If you pass in a function, it receives a color object as its only argument, and should return a string that can be used in CSS. If you pass in a string, it's used as a color profile identifier, and the color is serialized using the `color()` CSS syntax. When omitted altogether, the default color profile identifier is `--${mode}`.
+
+#### `interpolate`
+
+The default interpolations for the color space, one for each channel. Each interpolation is defined by its interpolator (the `use` key) and its fixup function (the `fixup` key). When defined as a function, a channel interpolation is meant to define its interpolator, with the fixup being a no-op.
+
+#### `difference`
+
+The default Euclidean distance method for each channel in the color space; mostly used for the `h` channel in cylindrical color spaces.
+
+#### `average`
+
+The default average function for each channel in the color space; when left unspecified, defaults to [`averageNumber`](#averageNumber).
 
 All built-in color spaces follow these conventions in regards to the `channels` array follows:
 
@@ -1412,11 +1429,43 @@ All built-in color spaces follow these conventions in regards to the `channels` 
 
 This makes sure [`culori.differenceEuclidean()`](#differenceEuclidean) works as expected, but there may be more hidden assumptions in the codebase.
 
-<a id="getModeDefinition" href="#getModeDefinition">#</a> culori.**getModeDefinition**(_mode_)
+Here's a sample definition for the HSL color space:
 
-<span aria-label='Source:'>☞</span> [src/modes.js](https://github.com/evercoder/culori/blob/main/src/modes.js)
-
-Returns the definition object for the _mode_ color space. As with all methods in this section, the definition object may change before the first stable release, so keep an eye on the [release notes](https://github.com/evercoder/culori/releases) for any breaking changes.
+```js
+{
+  mode: 'hsl',
+  fromMode: {
+    rgb: convertRgbToHsl
+  },
+  toMode: {
+    rgb: convertHslToRgb
+  },
+  channels: ['h', 's', 'l', 'alpha'],
+  ranges: {
+    h: [0, 360]
+  },
+  parse: [parseHsl],
+  serialize: serializeHsl,
+  interpolate: {
+    h: {
+      use: interpolatorLinear,
+      fixup: fixupHueShorter
+    },
+    s: interpolatorLinear,
+    l: interpolatorLinear,
+    alpha: {
+      use: interpolatorLinear,
+      fixup: fixupAlpha
+    }
+  },
+  difference: {
+    h: differenceHueSaturation
+  },
+  average: {
+    h: averageAngle
+  }
+};
+```
 
 [css-images-4]: https://drafts.csswg.org/css-images-4/#color-stop-syntax
 [css-easing-1]: http://drafts.csswg.org/css-easing-1

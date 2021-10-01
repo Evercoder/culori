@@ -17,20 +17,20 @@ import { fixupAlpha } from '../fixup/alpha.js';
 const definition = {
 	mode: 'luv',
 
-	output: {
+	toMode: {
 		xyz: convertLuvToXyz,
 		rgb: convertLuvToRgb
 	},
 
-	input: {
+	fromMode: {
 		xyz: convertXyzToLuv,
 		rgb: convertRgbToLuv
 	},
 
 	channels: ['l', 'u', 'v', 'alpha'],
 
-	parsers: ['--luv'],
-	serialize: 'color(--luv ',
+	parse: ['--luv'],
+	serialize: '--luv',
 
 	ranges: {
 		l: [0, 100],

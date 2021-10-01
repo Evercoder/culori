@@ -14,16 +14,16 @@ import { averageAngle } from '../average.js';
 const definition = {
 	mode: 'dlch',
 
-	parsers: ['--din99o-lch'],
-	serialize: 'color(--din99o-lch ',
+	parse: ['--din99o-lch'],
+	serialize: '--din99o-lch',
 
-	output: {
+	toMode: {
 		lab65: convertDlchToLab65,
 		dlab: convertDlchToDlab,
 		rgb: c => convertLab65ToRgb(convertDlchToLab65(c))
 	},
 
-	input: {
+	fromMode: {
 		lab65: convertLab65ToDlch,
 		dlab: convertDlabToDlch,
 		rgb: c => convertLab65ToDlch(convertRgbToLab65(c))

@@ -1,4 +1,4 @@
-import { getModeDefinition } from './modes.js';
+import { getMode } from './modes.js';
 
 /*
 	Generate a random number between `min` and `max`
@@ -19,7 +19,7 @@ const to_intervals = constraints =>
 	Generate a random color.
  */
 const random = (mode = 'rgb', constraints = {}) => {
-	let def = getModeDefinition(mode);
+	let def = getMode(mode);
 	let limits = to_intervals(constraints);
 	return def.channels.reduce(
 		(res, ch) => {

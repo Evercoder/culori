@@ -16,25 +16,25 @@ import lab65Def from '../lab65/definition.js';
 import lch65Def from '../lch65/definition.js';
 import xyz65Def from '../xyz65/definition.js';
 
-import { defineMode } from '../modes.js';
+import { useMode } from '../modes.js';
 import converter from '../converter.js';
 
-defineMode(a98Def);
-defineMode(hslDef);
-defineMode(hsvDef);
-defineMode(hwbDef);
-defineMode(labDef);
-defineMode(lchDef);
-defineMode(lrgbDef);
-defineMode(p3Def);
-defineMode(prophotoDef);
-defineMode(rec2020Def);
-defineMode(rgbDef);
-defineMode(xyzDef);
+useMode(a98Def);
+useMode(hslDef);
+useMode(hsvDef);
+useMode(hwbDef);
+useMode(labDef);
+useMode(lchDef);
+useMode(lrgbDef);
+useMode(p3Def);
+useMode(prophotoDef);
+useMode(rec2020Def);
+useMode(rgbDef);
+useMode(xyzDef);
 
-defineMode(lab65Def);
-defineMode(lch65Def);
-defineMode(xyz65Def);
+useMode(lab65Def);
+useMode(lch65Def);
+useMode(xyz65Def);
 
 let lab65 = converter('lab65');
 let lch65 = converter('lch65');
@@ -56,7 +56,7 @@ let xyz = converter('xyz');
 export {
 	a98,
 	converter,
-	defineMode,
+	useMode,
 	hsl,
 	hsv,
 	hwb,
@@ -136,7 +136,7 @@ export { default as samples } from '../samples.js';
 export { default as displayable } from '../displayable.js';
 export { clampRgb, clampChroma } from '../clamp.js';
 export { default as nearest } from '../nearest.js';
-export { getModeDefinition } from '../modes.js';
+export { getMode } from '../modes.js';
 export { default as parse } from '../parse.js';
 
 export {

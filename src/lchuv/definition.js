@@ -20,20 +20,20 @@ import { averageAngle } from '../average.js';
 const definition = {
 	mode: 'lchuv',
 
-	output: {
+	toMode: {
 		luv: convertLchuvToLuv,
 		rgb: convertLchuvToRgb
 	},
 
-	input: {
+	fromMode: {
 		rgb: convertRgbToLchuv,
 		luv: convertLuvToLchuv
 	},
 
 	channels: ['l', 'c', 'h', 'alpha'],
 
-	parsers: ['--lchuv'],
-	serialize: 'color(--lchuv ',
+	parse: ['--lchuv'],
+	serialize: '--lchuv',
 
 	ranges: {
 		l: [0, 100],

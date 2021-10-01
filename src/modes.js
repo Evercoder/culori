@@ -1,3 +1,5 @@
+import converter from './converter.js';
+
 const converters = {};
 const modes = {};
 
@@ -6,16 +8,17 @@ const colorProfiles = {};
 
 const identity = v => v;
 
-const defineMode = definition => {
-	converters[definition.mode] = Object.assign(
-		converters[definition.mode] || {},
-		definition.output
-	);
-	Object.keys(definition.input || {}).forEach(k => {
+const useMode = definition => {
+	converters[definition.mode] = {
+		...converters[definition.mode],
+		...definition.toMode
+	};
+
+	Object.keys(definition.fromMode || {}).forEach(k => {
 		if (!converters[k]) {
 			converters[k] = {};
 		}
-		converters[k][definition.mode] = definition.input[k];
+		converters[k][definition.mode] = definition.fromMode[k];
 	});
 
 	// Color space channel ranges
@@ -49,15 +52,17 @@ const defineMode = definition => {
 	});
 
 	modes[definition.mode] = definition;
-	(definition.parsers || []).forEach(parser => {
+	(definition.parse || []).forEach(parser => {
 		if (typeof parser === 'function') {
 			parsers.push(parser);
 		} else if (typeof parser === 'string') {
 			colorProfiles[parser] = definition.mode;
 		}
 	});
+
+	return converter(definition.mode);
 };
 
-const getModeDefinition = mode => modes[mode];
+const getMode = mode => modes[mode];
 
-export { defineMode, getModeDefinition, converters, parsers, colorProfiles };
+export { useMode, getMode, converters, parsers, colorProfiles };

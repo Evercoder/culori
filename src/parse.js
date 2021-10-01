@@ -1,4 +1,4 @@
-import { parsers, colorProfiles, getModeDefinition } from './modes.js';
+import { parsers, colorProfiles, getMode } from './modes.js';
 import { profiled } from './util/regex.js';
 
 const parseColorSyntax = color => {
@@ -12,7 +12,7 @@ const parseColorSyntax = color => {
 	}
 	const res = { mode };
 	let i = 2;
-	getModeDefinition(mode).channels.forEach(ch => {
+	getMode(mode).channels.forEach(ch => {
 		if (m[i] !== undefined || m[i + 1] !== undefined) {
 			res[ch] = m[i] !== undefined ? m[i] / 100 : +m[i + 1];
 		}
