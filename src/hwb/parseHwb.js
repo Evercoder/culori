@@ -1,4 +1,4 @@
-import { hue, per, num_per, s } from '../util/regex.js';
+import { hue, per_none, num_per_none, s } from '../util/regex.js';
 import hueToDeg from '../util/hue.js';
 
 /*
@@ -6,7 +6,7 @@ import hueToDeg from '../util/hue.js';
 	Reference: https://drafts.csswg.org/css-color/#the-hwb-notation
  */
 const hwb = new RegExp(
-	`^hwb\\(\\s*${hue}${s}${per}${s}${per}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
+	`^hwb\\(\\s*${hue}${s}${per_none}${s}${per_none}\\s*(?:\\/\\s*${num_per_none}\\s*)?\\)$`
 );
 
 const parseHwb = color => {
@@ -14,10 +14,15 @@ const parseHwb = color => {
 	if (!match) return undefined;
 	let res = {
 		mode: 'hwb',
-		h: match[3] === undefined ? hueToDeg(match[1], match[2]) : +match[3],
-		w: match[4] / 100,
-		b: match[5] / 100
+		w: match[4] !== undefined ? match[4] / 100 : 0,
+		b: match[5] !== undefined ? match[5] / 100 : 0
 	};
+
+	if (match[3] !== undefined) {
+		res.h = +match[3];
+	} else if (match[1] !== undefined && match[2] !== undefined) {
+		res.h = hueToDeg(match[1], match[2]);
+	}
 
 	if (match[6] !== undefined) {
 		res.alpha = match[6] / 100;

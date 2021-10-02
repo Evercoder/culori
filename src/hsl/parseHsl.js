@@ -1,5 +1,14 @@
 import hueToDeg from '../util/hue.js';
-import { hue, per, num_per, c, s } from '../util/regex.js';
+import {
+	hue,
+	per,
+	num_per,
+	hue_none,
+	per_none,
+	num_per_none,
+	c,
+	s
+} from '../util/regex.js';
 
 /*
 	hsl() regular expressions.
@@ -9,7 +18,7 @@ const hsl_old = new RegExp(
 	`^hsla?\\(\\s*${hue}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
 );
 const hsl_new = new RegExp(
-	`^hsla?\\(\\s*${hue}${s}${per}${s}${per}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
+	`^hsl\\(\\s*${hue_none}${s}${per_none}${s}${per_none}\\s*(?:\\/\\s*${num_per_none}\\s*)?\\)$`
 );
 
 const parseHsl = color => {
@@ -17,10 +26,19 @@ const parseHsl = color => {
 	if (!match) return;
 	let res = {
 		mode: 'hsl',
-		h: match[3] === undefined ? hueToDeg(match[1], match[2]) : +match[3],
-		s: Math.min(Math.max(0, match[4] / 100), 1),
-		l: Math.min(Math.max(0, match[5] / 100), 1)
+		s:
+			match[4] !== undefined
+				? Math.min(Math.max(0, match[4] / 100), 1)
+				: 0,
+		l: match[5] !== undefined ? Math.min(Math.max(0, match[5] / 100), 1) : 0
 	};
+
+	if (match[3] !== undefined) {
+		res.h = +match[3];
+	} else if (match[1] !== undefined && match[2] !== undefined) {
+		res.h = hueToDeg(match[1], match[2]);
+	}
+
 	if (match[6] !== undefined) {
 		res.alpha = match[6] / 100;
 	} else if (match[7] !== undefined) {
