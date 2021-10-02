@@ -8,9 +8,10 @@
  */
 
 import convertXyzToLuv from './convertXyzToLuv.js';
-import convertRgbToLuv from './convertRgbToLuv.js';
 import convertLuvToXyz from './convertLuvToXyz.js';
-import convertLuvToRgb from './convertLuvToRgb.js';
+import convertXyzToRgb from '../xyz/convertXyzToRgb.js';
+import convertRgbToXyz from '../xyz/convertRgbToXyz.js';
+
 import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
 
@@ -19,12 +20,12 @@ const definition = {
 
 	toMode: {
 		xyz: convertLuvToXyz,
-		rgb: convertLuvToRgb
+		rgb: luv => convertXyzToRgb(convertLuvToXyz(luv))
 	},
 
 	fromMode: {
 		xyz: convertXyzToLuv,
-		rgb: convertRgbToLuv
+		rgb: rgb => convertXyzToLuv(convertRgbToXyz(rgb))
 	},
 
 	channels: ['l', 'u', 'v', 'alpha'],

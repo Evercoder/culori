@@ -1,9 +1,14 @@
-import convertDlabToLab65 from './convertDlabToLab65.js';
-import convertLab65ToDlab from './convertLab65ToDlab.js';
+import convertLabToLch from '../lch/convertLabToLch.js';
+import convertLchToLab from '../lch/convertLchToLab.js';
 import convertLab65ToRgb from '../lab65/convertLab65ToRgb.js';
 import convertRgbToLab65 from '../lab65/convertRgbToLab65.js';
+import convertDlchToLab65 from '../dlch/convertDlchToLab65.js';
+import convertLab65ToDlch from '../dlch/convertLab65ToDlch.js';
 import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
+
+const convertDlabToLab65 = c => convertDlchToLab65(convertLabToLch(c, 'dlch'));
+const convertLab65ToDlab = c => convertLchToLab(convertLab65ToDlch(c), 'dlab');
 
 const definition = {
 	mode: 'dlab',

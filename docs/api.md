@@ -1582,6 +1582,101 @@ Here's a sample definition for the HSL color space:
 };
 ```
 
+## Low-level API
+
+### Parsing functions
+
+__parseHex__(_string_)
+
+`#abc`, `#abcd`, `#abcdef`, `#abcdef12`
+
+__parseHsl__(_string_)
+
+`hsl(h, s, l, alpha)`, `hsl(h s l / alpha)`.
+
+__parseHwb__(_string_)
+
+`hwb(h w b / alpha)`
+
+__parseLab__(_string_)
+
+`lab(l a b / alpha)`
+
+__parseLch__(_string_)
+
+`lch(l c h / alpha)`
+
+__parseNamed__(_string_)
+`tomato`
+
+__parseRgb__(_color_)
+
+`rgb(r, g, b, alpha)`, `rgb(r g b / alpha)`
+
+__parseTransparent__(_string_)
+
+Matches the `transparent` string.
+
+### Conversion functions
+
+Function | Conversion
+-------- | ----------
+`convertA98ToXyz65` | `a98` → `xyz65`
+`convertCubehelixToRgb` |  `cubehelix` → `rgb`
+`convertDlchToLab65` | `dlch` → `lab65`
+`convertHsiToRgb` | `hsi` → `rgb`
+`convertHslToRgb` | `hsl` → `rgb`
+`convertHsvToRgb` | `hsv` → `rgb`
+`convertHwbToRgb` | `hwb` → `rgb`
+`convertJabToJch` | `jab` → `jch`
+`convertJabToRgb` | `jab` → `rgb`
+`convertJabToXyz65` | `jab` → `xyz65`
+`convertJchToJab` | `jch` → `jab`
+`convertLab65ToDlch` | `lab65` → `dlch`
+`convertLab65ToRgb` | `lab65` → `rgb`
+`convertLab65ToXyz65` | `lab65` → `xyz65`
+`convertLabToLch` | `lab` → `lch`
+`convertLabToRgb` | `lab` → `rgb`
+`convertLabToXyz` | `lab` → `xyz`
+`convertLchToLab` | `lch` → `lab`
+`convertLchuvToLuv` | `lchuv` → `luv`
+`convertLrgbToOklab` | `lrgb` → `oklab`
+`convertLrgbToRgb` | `lrgb` → `rgb`
+`convertLuvToLchuv` | `luv` → `lchuv`
+`convertLuvToXyz` | `luv` → `xyz`
+`convertOklabToLrgb` | `oklab` → `lrgb`
+`convertOklabToRgb` | `oklab` → `rgb`
+`convertP3ToXyz65` | `p3` → `xyz65`
+`convertProphotoToXyz` | `prophoto` → `xyz`
+`convertRec2020ToXyz65` | `rec2020` → `xyz65`
+`convertRgbToCubehelix` | `rgb` → `cubehelix`
+`convertRgbToHsi` | `rgb` → `hsi`
+`convertRgbToHsl` | `rgb` → `hsl`
+`convertRgbToHsv` | `rgb` → `hsv`
+`convertRgbToHwb` | `rgb` → `hwb`
+`convertRgbToJab` | `rgb` → `jab`
+`convertRgbToLab` | `rgb` → `lab`
+`convertRgbToLab65` | `rgb` → `lab65`
+`convertRgbToLrgb` | `rgb` → `lrgb`
+`convertRgbToOklab` | `rgb` → `oklab`
+`convertRgbToXyz` | `rgb` → `xyz`
+`convertRgbToXyz65` | `rgb` → `xyz65`
+`convertRgbToYiq` | `rgb` → `yiq`
+`convertXyz65ToA98` | `xyz65` → `a98`
+`convertXyz65ToJab` | `xyz65` → `jab`
+`convertXyz65ToLab65` | `xyz65` → `lab65`
+`convertXyz65ToP3` | `xyz65` → `p3`
+`convertXyz65ToRec2020` | `xyz65` → `rec2020`
+`convertXyz65ToRgb` | `xyz65` → `rgb`
+`convertXyz65ToXyz` | `xyz65` → `xyz`
+`convertXyzToLab` | `xyz` → `lab`
+`convertXyzToLuv` | `xyz` → `luv`
+`convertXyzToProphoto` | `xyz` → `prophoto`
+`convertXyzToRgb` | `xyz` → `rgb`
+`convertXyzToXyz65` | `xyz` → `xyz65`
+`convertYiqToRgb` | `yiq` → `rgb`
+
+
 [css-images-4]: https://drafts.csswg.org/css-images-4/#color-stop-syntax
 [css-easing-1]: http://drafts.csswg.org/css-easing-1
 [smoothstep]: https://en.wikipedia.org/wiki/Smoothstep

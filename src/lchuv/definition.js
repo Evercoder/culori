@@ -9,13 +9,21 @@
 
 import convertLuvToLchuv from './convertLuvToLchuv.js';
 import convertLchuvToLuv from './convertLchuvToLuv.js';
-import convertLchuvToRgb from './convertLchuvToRgb.js';
-import convertRgbToLchuv from './convertRgbToLchuv.js';
+import convertXyzToLuv from '../luv/convertXyzToLuv.js';
+import convertLuvToXyz from '../luv/convertLuvToXyz.js';
+import convertXyzToRgb from '../xyz/convertXyzToRgb.js';
+import convertRgbToXyz from '../xyz/convertRgbToXyz.js';
+
 import { fixupHueShorter } from '../fixup/hue.js';
 import { fixupAlpha } from '../fixup/alpha.js';
 import { interpolatorLinear } from '../interpolate/linear.js';
 import { differenceHueChroma } from '../difference.js';
 import { averageAngle } from '../average.js';
+
+const convertRgbToLchuv = rgb =>
+	convertLuvToLchuv(convertXyzToLuv(convertRgbToXyz(rgb)));
+const convertLchuvToRgb = lchuv =>
+	convertXyzToRgb(convertLuvToXyz(convertLchuvToLuv(lchuv)));
 
 const definition = {
 	mode: 'lchuv',
