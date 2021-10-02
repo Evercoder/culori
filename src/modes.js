@@ -54,7 +54,7 @@ const useMode = definition => {
 	modes[definition.mode] = definition;
 	(definition.parse || []).forEach(parser => {
 		if (typeof parser === 'function') {
-			parsers.push(parser);
+			useParser(parser);
 		} else if (typeof parser === 'string') {
 			colorProfiles[parser] = definition.mode;
 		}
@@ -65,4 +65,26 @@ const useMode = definition => {
 
 const getMode = mode => modes[mode];
 
-export { useMode, getMode, converters, parsers, colorProfiles };
+const useParser = parser => {
+	const idx = parsers.indexOf(parser);
+	if (idx < 0) {
+		parsers.push(parser);
+	}
+};
+
+const removeParser = parser => {
+	const idx = parsers.indexOf(parser);
+	if (idx > 0) {
+		parsers.splice(idx, 1);
+	}
+};
+
+export {
+	useMode,
+	getMode,
+	useParser,
+	removeParser,
+	converters,
+	parsers,
+	colorProfiles
+};

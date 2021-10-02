@@ -2,6 +2,7 @@
 layout: layouts/default
 title: API Reference
 menu-order: 2
+codebase: 'https://github.com/evercoder/culori/blob/main'
 ---
 
 <details>
@@ -129,7 +130,7 @@ The object needs to have a `mode` property that identifies the color space, and 
 
 <a id="parse" href="#parse">#</a> **parse**(_string_) → _color_ or _undefined_
 
-<span aria-label='Source:'>☞</span> [src/parse.js](https://github.com/evercoder/culori/blob/main/src/parse.js)
+<span aria-label='Source:'>☞</span> [src/parse.js]({{codebase}}/src/parse.js)
 
 Parses a string and returns the corresponding _color_. The color will be in the matching color space, e.g. RGB for hex strings, HSL for `hsl(…, …, …)` strings, et cetera. If no built-in parsers can match the string, the function will return `undefined`.
 
@@ -157,7 +158,7 @@ In most cases, instead of using `parse()` directly (which only operates on strin
 
 <a id="converter" href="#converter">#</a> **converter**(_mode = "rgb"_) → _function (color or String)_
 
-<span aria-label='Source:'>☞</span> [src/converter.js](https://github.com/evercoder/culori/blob/main/src/converter.js)
+<span aria-label='Source:'>☞</span> [src/converter.js]({{codebase}}/src/converter.js)
 
 Returns a _converter_: a function that can convert any color to the _mode_ color space.
 
@@ -182,7 +183,7 @@ These methods serialize colors to strings, in various formats.
 
 <a id="formatHex" href="#formatHex">#</a> **formatHex**(_color_ or _string_) → _string_
 
-<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
 
 Returns the hex string for the given color. The color's `alpha` channel is omitted, and the red, green, and blue channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
 
@@ -195,7 +196,7 @@ formatHex('red');
 
 <a id="formatHex8" href="#formatHex8">#</a> **formatHex8**(_color_ or _string_) → _string_
 
-<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
 
 Returns the 8-character hex string for the given color. The red, green, blue, and alpha channels are clamped to the the interval `[0, 255]`, i.e. colors that are not displayable are serialized as if they'd been passed through the `clampRgb` method.
 
@@ -208,7 +209,7 @@ formatHex8({ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 });
 
 <a id="formatRgb" href="#formatRgb">#</a> **formatRgb**(_color_ or _string_) → _string_
 
-<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
 
 Returns the `rgb(…)` / `rgba(…)` string for the given color. Fully opaque colors will be serialized as `rgb()`, and semi-transparent colors as `rgba()`, in accordance with the [CSSOM standard serialization](https://drafts.csswg.org/cssom/#serialize-a-css-component-value). Like in the case of `formatHex`, the red, green, and blue channels are clamped to the interval `[0, 255]`.
 
@@ -221,7 +222,7 @@ formatRgb('lab(50 0 0 / 25%)');
 
 <a id="formatHsl" href="#formatHsl">#</a> **formatHsl**(_color_ or _string_) → _string_
 
-<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
 
 Returns the `hsl(…)` / `hsla(…)` string for the given color. Fully opaque colors will be serialized as `hsl()`, and semi-transparent colors as `hsla()`. All values are rounded to a precision of two digits. The Saturation and Lightness are clamped to the interval `[0%, 100%]`.
 
@@ -234,7 +235,7 @@ formatHsl('lab(50 0 0 / 25%)');
 
 <a id="formatCss" href="#formatCss">#</a> **formatCss**(_color_ or _string_) → _string_
 
-<span aria-label='Source:'>☞</span> [src/formatter.js](https://github.com/evercoder/culori/blob/main/src/formatter.js)
+<span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
 
 Returns a CSS string for the given color, based on the CSS Color Level 4 specification. A few color spaces, such as `hsl` or `lab`, have their own functional representation in CSS. We use that whenever possible; the `hsl` color space is represented as `hsl(h% s l / alpha)`. Predefined color spaces are represented using the `color()` notation with the appropriate identifier for the color space, e.g. `color(display-p3 r g b / alpha)`. All other colors paces use the `color()` notation with a dashed identifier. For example, `jab` is represented as `color(--jzazbz j a b / alpha)`.
 
@@ -280,7 +281,7 @@ Some color spaces (Lab and LCh in particular) allow you to express colors that c
 
 <a id="displayable" href="#displayable">#</a> **displayable**(_color_ or _string_) → _boolean_
 
-<span aria-label='Source:'>☞</span> [src/displayable.js](https://github.com/evercoder/culori/blob/main/src/displayable.js)
+<span aria-label='Source:'>☞</span> [src/displayable.js]({{codebase}}/src/displayable.js)
 
 Checks whether a particular color fits inside the sRGB gamut, by verifying that the `r`, `g`, and `b` channels are all in the interval `[0, 1]`.
 
@@ -296,7 +297,7 @@ displayable('rgb(300 255 255)');
 
 <a id="clampRgb" href="#clampRgb">#</a> **clampRgb**(_color_ or _string_) → _color_
 
-<span aria-label='Source:'>☞</span> [src/clamp.js](https://github.com/evercoder/culori/blob/main/src/clamp.js)
+<span aria-label='Source:'>☞</span> [src/clamp.js]({{codebase}}/src/clamp.js)
 
 Obtains a displayable version of the color by clamping the `r`, `g`, `b` channel values of the color's RGB representation to the interval `[0, 1]`. The returned color is in the same color space as the original color.
 
@@ -314,7 +315,7 @@ clampRgb('lab(50% 100 100)');
 
 <a id="clampChroma" href="#clampChroma">#</a> **clampChroma**(_color_ or _string_, _mode = 'lch'_) → _color_
 
-<span aria-label='Source:'>☞</span> [src/clamp.js](https://github.com/evercoder/culori/blob/main/src/clamp.js)
+<span aria-label='Source:'>☞</span> [src/clamp.js]({{codebase}}/src/clamp.js)
 
 Obtains a displayable version of the color by converting it to a temporary color space containing a Chroma channel, then looking for the closest Chroma value that's displayable for the given Lightness and Hue. Compared to `clampRgb`, the function has the advantage of preserving the hue of the original color. The displayable color returned by this function will be converted back to the original color space.
 
@@ -356,7 +357,7 @@ Above is the path between red and blue in the RGB color space. Going from left t
 
 <a id="interpolate" href="#interpolate">#</a> **interpolate**(_colors_, _mode = "rgb"_, _overrides_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate/interpolate.js](https://github.com/evercoder/culori/blob/main/src/interpolate/interpolate.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/interpolate.js]({{codebase}}/src/interpolate/interpolate.js)
 
 Returns an _interpolator_ in the _mode_ color space for an array of _colors_. The interpolator is a function that accepts a value _t_ in the interval `[0, 1]` and returns the interpolated color in the _mode_ color space.
 
@@ -484,7 +485,7 @@ As opposed to how current browsers implement the CSS spec ([see discussion](http
 
 <a id="easingMidpoint" href="#easingMidpoint">#</a> **easingMidpoint**(_H = 0.5_)
 
-<span aria-label='Source:'>☞</span> [src/easing/midpoint.js](https://github.com/evercoder/culori/blob/main/src/easing/midpoint.js)
+<span aria-label='Source:'>☞</span> [src/easing/midpoint.js]({{codebase}}/src/easing/midpoint.js)
 
 [Proposed here][midpoint], the `midpoint` easing function lets you shift the midpoint of a gradient like in tools such as Adobe Photoshop. You can use it with [`interpolate()`](#interpolate) as an alternative to interpolation hints:
 
@@ -499,19 +500,19 @@ interpolate(['red', 0.25, 'blue']);
 
 <a id="easingSmoothstep" href="#easingSmoothstep">#</a> **easingSmoothstep**
 
-<span aria-label='Source:'>☞</span> [src/easing/smoothstep.js](https://github.com/evercoder/culori/blob/main/src/easing/smoothstep.js)
+<span aria-label='Source:'>☞</span> [src/easing/smoothstep.js]({{codebase}}/src/easing/smoothstep.js)
 
 The [Smoothstep][smoothstep] easing function.
 
 <a id="easingSmootherstep" href="#easingSmootherstep">#</a> **easingSmootherstep**
 
-<span aria-label='Source:'>☞</span> [src/easing/smootherstep.js](https://github.com/evercoder/culori/blob/main/src/easing/smootherstep.js)
+<span aria-label='Source:'>☞</span> [src/easing/smootherstep.js]({{codebase}}/src/easing/smootherstep.js)
 
 Smootherstep is a variant of the [Smoothstep][smoothstep] easing function.
 
 <a id="easingInOutSine" href="#easingInOutSine">#</a> **easingInOutSine**
 
-<span aria-label='Source:'>☞</span> [src/easing/inOutSine.js](https://github.com/evercoder/culori/blob/main/src/easing/inOutSine.js)
+<span aria-label='Source:'>☞</span> [src/easing/inOutSine.js]({{codebase}}/src/easing/inOutSine.js)
 
 Sinusoidal in-out easing. Can be used to create, for example, a cosine interpolation [as described by Paul Bourke](paulbourke.net/miscellaneous/interpolation/):
 
@@ -522,7 +523,7 @@ interpolate([easingInOutSine, 'red', 'green', 'blue']);
 
 <a id="easingGamma" href="#easingGamma">#</a> **easingGamma**(_γ = 1_) → _function(t)_
 
-<span aria-label='Source:'>☞</span> [src/easing/gamma.js](https://github.com/evercoder/culori/blob/main/src/easing/gamma.js)
+<span aria-label='Source:'>☞</span> [src/easing/gamma.js]({{codebase}}/src/easing/gamma.js)
 
 The [gamma](https://en.wikipedia.org/wiki/Gamma_correction) easing.
 
@@ -605,7 +606,7 @@ You'll use these methods when you want to override how colors get interpolated i
 
 <a id="interpolatorLinear" href="#interpolatorLinear">#</a> **interpolatorLinear**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate/linear.js](https://github.com/evercoder/culori/blob/main/src/interpolate/linear.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/linear.js]({{codebase}}/src/interpolate/linear.js)
 
 <img src='/img/interpolator-linear.svg' width='400' height='80'/>
 
@@ -617,7 +618,7 @@ A linear interpolator for values in a channel.
 
 <a id="interpolatorSplineBasis" href="#interpolatorSplineBasis">#</a> **interpolatorSplineBasis**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate/splineBasis.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineBasis.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/splineBasis.js]({{codebase}}/src/interpolate/splineBasis.js)
 
 <img src='/img/interpolator-basis.svg' width='400' height='80'/>
 
@@ -625,7 +626,7 @@ A basis spline which uses one-sided finite differences for the slopes at the bou
 
 <a id="interpolatorSplineBasisClosed" href="#interpolatorSplineBasisClosed">#</a> **interpolatorSplineBasisClosed**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate/splineBasis.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineBasis.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/splineBasis.js]({{codebase}}/src/interpolate/splineBasis.js)
 
 <img src='/img/interpolator-basis-closed.svg' width='400' height='80'/>
 
@@ -637,7 +638,7 @@ A basis spline which considers the _values_ array to be periodic.
 
 <a id="interpolatorSplineNatural" href="#interpolatorSplineNatural">#</a> **interpolatorSplineNatural**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate/splineNatural.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineNatural.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/splineNatural.js]({{codebase}}/src/interpolate/splineNatural.js)
 
 <img src='/img/interpolator-natural.svg' width='400' height='80'/>
 
@@ -645,7 +646,7 @@ A natural spline which uses one-sided finite differences for the slopes at the b
 
 <a id="interpolatorSplineNaturalClosed" href="#interpolatorSplineNaturalClosed">#</a> **interpolatorSplineNaturalClosed**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate/splineNatural.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineNatural.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/splineNatural.js]({{codebase}}/src/interpolate/splineNatural.js)
 
 <img src='/img/interpolator-natural-closed.svg' width='400' height='80'/>
 
@@ -661,7 +662,7 @@ The following variants are available:
 
 <a id="interpolatorSplineMonotone" href="#interpolatorSplineMonotone">#</a> **interpolatorSplineMonotone**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate/splineMonotone.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/splineMonotone.js]({{codebase}}/src/interpolate/splineMonotone.js)
 
 <img src='/img/interpolator-monotone.svg' width='400' height='80'/>
 
@@ -669,7 +670,7 @@ A monotone spline that uses one-sided finite differences to find the slopes at t
 
 <a id="interpolatorSplineMonotone2" href="#interpolatorSplineMonotone2">#</a> **interpolatorSplineMonotone2**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate/splineMonotone.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/splineMonotone.js]({{codebase}}/src/interpolate/splineMonotone.js)
 
 <img src='/img/interpolator-monotone-2.svg' width='400' height='80'/>
 
@@ -677,7 +678,7 @@ A monotone spline for which we derive the slopes at the boundaries by tracing a 
 
 <a id="interpolatorSplineMonotoneClosed" href="#interpolatorSplineMonotoneClosed">#</a> **interpolatorSplineMonotoneClosed**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate/splineMonotone.js](https://github.com/evercoder/culori/blob/main/src/interpolate/splineMonotone.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/splineMonotone.js]({{codebase}}/src/interpolate/splineMonotone.js)
 
 <img src='/img/interpolator-monotone-closed.svg' width='400' height='80'/>
 
@@ -685,7 +686,7 @@ A monotone spline which considers the _values_ array to be periodic.
 
 #### Custom piecewise interpolation
 
-<a id='interpolatorPiecewise' href='#interpolatorPiecewise'>#</a> **interpolatorPiecewise**(_interpolator_) [src/interpolate/piecewise.js](https://github.com/evercoder/culori/blob/main/src/interpolate/piecewise.js)
+<a id='interpolatorPiecewise' href='#interpolatorPiecewise'>#</a> **interpolatorPiecewise**(_interpolator_) [src/interpolate/piecewise.js]({{codebase}}/src/interpolate/piecewise.js)
 
 Use a custom piecewise interpolator function in the form `function (a, b, t) => value`:
 
@@ -712,7 +713,7 @@ Adjusted hues will not necessarily be in the `[0, 360)` interval. All fixup meth
 
 <a id="fixupHueShorter" href="#fixupHueShorter">#</a> **fixupHueShorter**(_values_) → _Array_
 
-<span aria-label='Source:'>☞</span> [src/fixup/hue.js](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
+<span aria-label='Source:'>☞</span> [src/fixup/hue.js]({{codebase}}/src/fixup/hue.js)
 
 Adjusts the hues so that values are interpolated along the _shortest path around the hue circle_.
 
@@ -754,19 +755,19 @@ Treating the hues array as-is (with an _identity function_) corresponds to the `
 
 <a id="fixupHueLonger" href="#fixupHueLonger">#</a> **fixupHueLonger**(_values_) → _Array_
 
-<span aria-label='Source:'>☞</span> [src/fixup/hue.js](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
+<span aria-label='Source:'>☞</span> [src/fixup/hue.js]({{codebase}}/src/fixup/hue.js)
 
 Adjusts the hues so that they are interpolated along the _longest path around the hue circle_.
 
 <a id="fixupHueIncreasing" href="#fixupHueIncreasing">#</a> **fixupHueIncreasing**(_values_) → _Array_
 
-<span aria-label='Source:'>☞</span> [src/fixup/hue.js](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
+<span aria-label='Source:'>☞</span> [src/fixup/hue.js]({{codebase}}/src/fixup/hue.js)
 
 Adjusts the hues so that every hue is larger than the previous.
 
 <a id="fixupHueDecreasing" href="#fixupHueDecreasing">#</a> **fixupHueDecreasing**(_values_) → _Array_
 
-<span aria-label='Source:'>☞</span> [src/fixup/hue.js](https://github.com/evercoder/culori/blob/main/src/fixup/hue.js)
+<span aria-label='Source:'>☞</span> [src/fixup/hue.js]({{codebase}}/src/fixup/hue.js)
 
 Adjusts the hues so that every hue is smaller than the previous.
 
@@ -774,7 +775,7 @@ Adjusts the hues so that every hue is smaller than the previous.
 
 <a id="fixupAlpha" href="#fixupAlpha">#</a> **fixupAlpha**(_values_) → _Array_
 
-<span aria-label='Source:'>☞</span> [src/fixup/alpha.js](https://github.com/evercoder/culori/blob/main/src/fixup/alpha.js)
+<span aria-label='Source:'>☞</span> [src/fixup/alpha.js]({{codebase}}/src/fixup/alpha.js)
 
 Turns all `undefined` values in the array to `1` (full opacity), unless _all_ values in the array are `undefined`, in which case it leaves the values unaltered.
 
@@ -784,7 +785,7 @@ This is the default method for the alpha channel in all built-in color spaces.
 
 <a id="samples" href="#samples">#</a> **samples**(_n = 2_)
 
-<span aria-label='Source:'>☞</span> [src/samples.js](https://github.com/evercoder/culori/blob/main/src/samples.js)
+<span aria-label='Source:'>☞</span> [src/samples.js]({{codebase}}/src/samples.js)
 
 Returns an array of _n_ equally-spaced samples in the `[0, 1]` range, with `0` and `1` at the ends.
 
@@ -826,7 +827,7 @@ samples(10).map(t => t * t);
 
 <a id="lerp" href="#lerp">#</a> **lerp**(_a_, _b_, _t_) → _value_
 
-<span aria-label='Source:'>☞</span> [src/samples.js](https://github.com/evercoder/culori/blob/main/src/samples.js)
+<span aria-label='Source:'>☞</span> [src/samples.js]({{codebase}}/src/samples.js)
 
 Interpolates between the values `a` and `b` at the point `t ∈ [0, 1]`.
 
@@ -840,7 +841,7 @@ lerp(5, 10, 0.5);
 
 <a id="mapper" href="#mapper">#</a> **mapper**(_fn_, _mode = "rgb"_) → _function (color | string)_
 
-<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
+<span aria-label='Source:'>☞</span> [src/map.js]({{codebase}}/src/map.js)
 
 Creates a mapping that applies _fn_ on each channel of the color in the _mode_ color space.
 
@@ -883,7 +884,7 @@ Returning `undefined` or `NaN` from the function will omit that channel from the
 
 <a id="mapAlphaMultiply" href="#mapAlphaMultiply">#</a> **mapAlphaMultiply**
 
-<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
+<span aria-label='Source:'>☞</span> [src/map.js]({{codebase}}/src/map.js)
 
 Multiplies the color's alpha value into all its other channels:
 
@@ -899,7 +900,7 @@ Any `undefined` channel value will be considered to be `0` (zero), to enable alp
 
 <a id="mapAlphaDivide" href="#mapAlphaDivide">#</a> **mapAlphaDivide**
 
-<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
+<span aria-label='Source:'>☞</span> [src/map.js]({{codebase}}/src/map.js)
 
 Divides a color's other channels by its alpha value. It's the opposite of `mapAlphaMultiply`, and is used in interpolation with alpha premultiplication:
 
@@ -917,17 +918,17 @@ Any `undefined` channel value will be considered to be `0` (zero), to enable alp
 
 <a id="mapTransferLinear" href="#mapTransferLinear">#</a> **mapTransferLinear**(_slope = 1_, _intercept = 0_)
 
-<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
+<span aria-label='Source:'>☞</span> [src/map.js]({{codebase}}/src/map.js)
 
 <a id="mapTransferGamma" href="#mapTransferGamma">#</a> **mapTransferGamma**(_amplitude = 1_, _exponent = 1_, _offset = 0_)
 
-<span aria-label='Source:'>☞</span> [src/map.js](https://github.com/evercoder/culori/blob/main/src/map.js)
+<span aria-label='Source:'>☞</span> [src/map.js]({{codebase}}/src/map.js)
 
 #### Interpolating with mappings
 
 <a id="interpolateWith" href="#interpolateWith">#</a> **interpolateWith**(_premap_, _postmap_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate.js](https://github.com/evercoder/culori/blob/main/src/interpolate.js)
+<span aria-label='Source:'>☞</span> [src/interpolate.js]({{codebase}}/src/interpolate.js)
 
 Adds a _pre-mapping_ and a _post-mapping_ to an interpolation, to enable things like alpha premultiplication:
 
@@ -965,7 +966,7 @@ interpolateWithAlphaPremult(['red', 'transparent', 'blue'])(0.25);
 
 <a id="interpolateWithPremultipliedAlpha" href="#interpolateWithPremultipliedAlpha">#</a> **interpolateWithPremultipliedAlpha**(_colors_, _mode = "rgb"_, _overrides_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate.js](https://github.com/evercoder/culori/blob/main/src/interpolate.js)
+<span aria-label='Source:'>☞</span> [src/interpolate.js]({{codebase}}/src/interpolate.js)
 
 Takes the same arguments as [`interpolate()`](#interpolate), but applies [alpha premultiplication](https://drafts.csswg.org/css-images-4/#premultiplied).
 
@@ -988,7 +989,7 @@ These methods are concerned to finding the [distance between two colors](https:/
 
 <a id="differenceEuclidean" href="#differenceEuclidean">#</a> **differenceEuclidean**(_mode = 'rgb'_, _weights = [1, 1, 1, 0]_)
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
 
@@ -1000,19 +1001,19 @@ In cylindrical spaces, the hue is factored into the Euclidean distance in a vari
 
 <a id="differenceHueChroma" href="#differenceHueChroma">#</a> **differenceHueChroma**(_colorA_, _colorB_)
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the hue contribution as the geometric mean of chord lengths belonging to the chromas of the two colors. This is the handling of hue in cylindrical forms of CIE-related color spaces: `lch`, `lchuv`, `dlch`, `oklch`, `jch`.
 
 <a id="differenceHueSaturation" href="#differenceHueSaturation">#</a> **differenceHueSaturation**(_colorA_, _colorB_)
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the hue contribution as the geometric mean of chord lengths belonging to the saturations of the two colors. This is the handling of hue in the HSL / HSV / HSI family of color spaces.
 
 <a id="differenceHueNaive" href="#differenceHueNaive">#</a> **differenceHueNaive**(_colorA_, _colorB_)
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 For remaining color spaces (HWB), we consider hues numbers, but apply a _shortest path around the hue circle_ (analogous to [`fixupHueShorter`](#fixupHueShorter)). If you insist on using Euclidean distances on these spaces, you can use the `weights` to control the contribution of the hue difference towards the total difference.
 
@@ -1022,25 +1023,25 @@ All these color difference functions operate on the `lab65` color space.
 
 <a id="differenceCie76" href="#differenceCie76">#</a> **differenceCie76**()
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the [CIE76][cie76] ΔE\*<sub>ab</sub> color difference between the colors _a_ and _b_. The function is identical to [`differenceEuclidean('lab65')`](#differenceEuclidean).
 
 <a id="differenceCie94" href="#differenceCie94">#</a> **differenceCie94**(_kL = 1_, _K1 = 0.045_, _K2 = 0.015_)
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the [CIE94][cie94] ΔE\*<sub>94</sub> color difference between the colors _a_ and _b_.
 
 <a id="differenceCiede2000" href="#differenceCiede2000">#</a> **differenceCiede2000**(_Kl = 1_, _Kc = 1_, _Kh = 1_)
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the [CIEDE2000][ciede2000] ΔE\*<sub>00</sub> color difference between the colors _a_ and _b_ as implemented by [G. Sharma](http://www2.ece.rochester.edu/~gsharma/ciede2000/).
 
 <a id="differenceCmc" href="#differenceCmc">#</a> **differenceCmc**()
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the [CMC l:c (1984)][cmc] ΔE\*<sub>CMC</sub> color difference between the colors _a_ and _b_.
 
@@ -1048,7 +1049,7 @@ Computes the [CMC l:c (1984)][cmc] ΔE\*<sub>CMC</sub> color difference between 
 
 <a id="differenceHyab" href="#differenceHyab">#</a> **differenceHyab**()
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the HyAB color difference between the colors _a_ and _b_, as proposed in:
 
@@ -1060,13 +1061,13 @@ The HyAB formula combines the Euclidean and [city block](https://en.wikipedia.or
 
 <a id="differenceDin99o" href="#differenceDin99o">#</a> **differenceDin99o**()
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the [DIN99o][din99ode] ΔE\*<sub>99o</sub> color difference between the colors _a_ and _b_. The computation is done in the `dlab` color space.
 
 <a id="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> **differenceKotsarenkoRamos**()
 
-<span aria-label='Source:'>☞</span> [src/difference.js](https://github.com/evercoder/culori/blob/main/src/difference.js)
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the colors _a_ and _b_. This is a weighted Euclidean distance in the `yiq` color space.
 
@@ -1074,7 +1075,7 @@ Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the c
 
 <a id="nearest" href="#nearest">#</a> **nearest**(_colors_, _metric = differenceEuclidean()_, _accessor = identity_) → _function(color, n = 1, τ = Infinity)_
 
-<span aria-label='Source:'>☞</span> [src/nearest.js](https://github.com/evercoder/culori/blob/main/src/nearest.js)
+<span aria-label='Source:'>☞</span> [src/nearest.js]({{codebase}}/src/nearest.js)
 
 Takes a _colors_ array and a _metric_ color difference formula, and returns a function with which you can find _n_ colors nearest to _color_, with a maximum distance of _τ_. Use _n = Infinity_ to get all colors in the array with a maximum distance of _τ_.
 
@@ -1127,7 +1128,7 @@ Culori makes available the separable blend modes defined in the W3C [Compositing
 
 <a id="blend" href="#blend">#</a> **blend**(_colors_, _type = 'normal'_, _mode = 'rgb'_) → _color_
 
-<span aria-label='Source:'>☞</span> [src/blend.js](https://github.com/evercoder/culori/blob/main/src/blend.js)
+<span aria-label='Source:'>☞</span> [src/blend.js]({{codebase}}/src/blend.js)
 
 A separable blend mode is a simple formula that gets applied to each channel in the color space independently. The available blend modes are `color-burn`, `color-dodge`, `darken`, `difference`, `exclusion`, `hard-light`, `lighten`, `multiply`, `normal`, `overlay`, `screen`
 , and `soft-light`. They are designed to work on RGB colors, so _mode_ is expected to be `rgb` or `lrgb`.
@@ -1160,7 +1161,7 @@ The non-separable blend modes — `color`, `hue`, `saturation`, and `lightness` 
 
 <a id="average" href="#average">#</a> **average**(_colors_, _mode = 'rgb'_, _overrides_)
 
-<span aria-label='Source:'>☞</span> [src/average.js](https://github.com/evercoder/culori/blob/main/src/average.js)
+<span aria-label='Source:'>☞</span> [src/average.js]({{codebase}}/src/average.js)
 
 Returns the average color of the _colors_ array, in the color space specified by the _mode_ argument. The color is obtained by the arithmetic average of values on each individual channel.
 
@@ -1175,13 +1176,13 @@ average(['salmon', 'tomato'], 'lab');
 
 <a id="averageNumber" href="#averageNumber">#</a> **averageNumber**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/average.js](https://github.com/evercoder/culori/blob/main/src/average.js)
+<span aria-label='Source:'>☞</span> [src/average.js]({{codebase}}/src/average.js)
 
 The arithmetic mean of values in the _values_ array.
 
 <a id="averageAngle" href="#averageAngle">#</a> **averageAngle**(_values_)
 
-<span aria-label='Source:'>☞</span> [src/average.js](https://github.com/evercoder/culori/blob/main/src/average.js)
+<span aria-label='Source:'>☞</span> [src/average.js]({{codebase}}/src/average.js)
 
 The function used by default to average hue values in all built-in color spaces, using the formula for [the mean of circular quantities](https://en.wikipedia.org/wiki/Mean_of_circular_quantities).
 
@@ -1189,7 +1190,7 @@ The function used by default to average hue values in all built-in color spaces,
 
 <a id="random" href="#random">#</a> **random**(_mode = 'rgb'_, _constraints = {}_)
 
-<span aria-label='Source:'>☞</span> [src/random.js](https://github.com/evercoder/culori/blob/main/src/random.js)
+<span aria-label='Source:'>☞</span> [src/random.js]({{codebase}}/src/random.js)
 
 Obtain a random color from a particular color space, with optional constraints. The resulting color will be in the color space from where it has been picked.
 
@@ -1232,7 +1233,7 @@ random('lrgb', { alpha: [0, 1] });
 
 ### Displayable random colors
 
-The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as CIELAB or CIELCH, don't have explicit ranges for certain channels; for these, some approximate ranges [have been pre-computed](https://github.com/evercoder/culori/blob/main/tools/ranges.js) as the limits of the displayable sRGB gamut.
+The value for any channel in the color space for which there are no constraints will be picked from the entire range of that channel. However, some color spaces, such as CIELAB or CIELCH, don't have explicit ranges for certain channels; for these, some approximate ranges [have been pre-computed]({{codebase}}/tools/ranges.js) as the limits of the displayable sRGB gamut.
 
 Even with these ranges in place, a combination of channel values may not be displayable. Check if that's the case with [`displayable()`](#displayable), and pass the color through a [`clamp*`](#clampRgb) function to obtain a displayable version.
 
@@ -1242,7 +1243,7 @@ A couple of utility functions based on the [Web Content Acccessibility Guideline
 
 <a id="wcagLuminance" href="#wcagLuminance">#</a> **wcagLuminance**(_color_)
 
-<span aria-label='Source:'>☞</span> [src/wcag.js](https://github.com/evercoder/culori/blob/main/src/wcag.js)
+<span aria-label='Source:'>☞</span> [src/wcag.js]({{codebase}}/src/wcag.js)
 
 Computes the [relative luminance](https://www.w3.org/TR/WCAG20/#relativeluminancedef) of a color.
 
@@ -1255,7 +1256,7 @@ wcagLuminance('red');
 
 <a id="wcagContrast" href="#wcagContrast">#</a> **wcagContrast**(_colorA_, _colorB_)
 
-<span aria-label='Source:'>☞</span> [src/wcag.js](https://github.com/evercoder/culori/blob/main/src/wcag.js)
+<span aria-label='Source:'>☞</span> [src/wcag.js]({{codebase}}/src/wcag.js)
 
 Computes the [contrast ratio](https://www.w3.org/TR/WCAG20/#contrast-ratiodef) between two colors.
 
@@ -1280,7 +1281,7 @@ The resulting color is returned in the color space of the original color.
 
 <a id="filterBrightness" href="#filterBrightness">#</a> **filterBrightness**(_amount = 1_, _mode = 'rgb'_)
 
-<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<span aria-label='Source:'>☞</span> [src/filter.js]({{codebase}}/src/filter.js)
 
 The [`brightness()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness) CSS filter. An _amount_ of `1` leaves the color unchanged. Smaller values darken the color (with `0` being fully black), while larger values brighten it.
 
@@ -1294,37 +1295,37 @@ brighten('salmon');
 
 <a id="filterContrast" href="#filterContrast">#</a> **filterContrast**(_amount = 1_, _mode = 'rgb'_)
 
-<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<span aria-label='Source:'>☞</span> [src/filter.js]({{codebase}}/src/filter.js)
 
 The [`contrast()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast) filter. An _amount_ of `1` leaves the color unchanged. Smaller values decrease the contrast (with `0` being fully gray), while larger values increase it.
 
 <a id="filterSepia" href="#filterSepia">#</a> **filterSepia**(_amount = 1_, _mode = 'rgb'_)
 
-<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<span aria-label='Source:'>☞</span> [src/filter.js]({{codebase}}/src/filter.js)
 
 The [`sepia()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia) filter. An _amount_ of `0` leaves the color unchanged, and `1` applies the sepia effect fully.
 
 <a id="filterGrayscale" href="#filterGrayscale">#</a> **filterGrayscale**(_amount = 1_, _mode = 'rgb'_)
 
-<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<span aria-label='Source:'>☞</span> [src/filter.js]({{codebase}}/src/filter.js)
 
 The [`grayscale()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale) filter. An _amount_ of `0` leaves the color unchanged, and `1` makes the color fully achromatic.
 
 <a id="filterSaturate" href="#filterSaturate">#</a> **filterSaturate**(_amount = 1_, _mode = 'rgb'_)
 
-<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<span aria-label='Source:'>☞</span> [src/filter.js]({{codebase}}/src/filter.js)
 
 The [`saturate()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate) filter. An _amount_ of `1` leaves the color unchanged. Smaller values desaturate the color (with `0` being fully achromatic), while larger values saturate it.
 
 <a id="filterInvert" href="#filterInvert">#</a> **filterInvert**(_amount = 1_, _mode = 'rgb'_)
 
-<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<span aria-label='Source:'>☞</span> [src/filter.js]({{codebase}}/src/filter.js)
 
 The [`invert()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert) filter. An _amount_ of `0` leaves the color unchanged, and `1` makes the color fully inverted.
 
 <a id="filterHueRotate" href="#filterHueRotate">#</a> **filterHueRotate**(_degrees = 0_, _mode = 'rgb'_)
 
-<span aria-label='Source:'>☞</span> [src/filter.js](https://github.com/evercoder/culori/blob/main/src/filter.js)
+<span aria-label='Source:'>☞</span> [src/filter.js]({{codebase}}/src/filter.js)
 
 The [`hue-rotate()`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate) filter.
 
@@ -1347,19 +1348,19 @@ Simulate how a color may be perceived by people with color vision deficiencies (
 
 <a id="filterDeficiencyProt" href="#filterDeficiencyProt">#</a> **filterDeficiencyProt**(_severity = 1_) → _function (color)_
 
-<span aria-label='Source:'>☞</span> [src/deficiency.js](https://github.com/evercoder/culori/blob/main/src/deficiency.js)
+<span aria-label='Source:'>☞</span> [src/deficiency.js]({{codebase}}/src/deficiency.js)
 
 Simulate protanomaly and protanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to protanopia.
 
 <a id="filterDeficiencyDeuter" href="#filterDeficiencyDeuter">#</a> **filterDeficiencyDeuter**(_severity = 1_) → _function (color)_
 
-<span aria-label='Source:'>☞</span> [src/deficiency.js](https://github.com/evercoder/culori/blob/main/src/deficiency.js)
+<span aria-label='Source:'>☞</span> [src/deficiency.js]({{codebase}}/src/deficiency.js)
 
 Simulate deuteranomaly and deuteranopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to deuteranopia.
 
 <a id="filterDeficiencyTrit" href="#filterDeficiencyTrit">#</a> **filterDeficiencyTrit**(_severity = 1_) → _function (color)_
 
-<span aria-label='Source:'>☞</span> [src/deficiency.js](https://github.com/evercoder/culori/blob/main/src/deficiency.js)
+<span aria-label='Source:'>☞</span> [src/deficiency.js]({{codebase}}/src/deficiency.js)
 
 Simuate tritanomaly and tritanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to tritanopia.
 
@@ -1384,13 +1385,13 @@ Based on the work of Machado, Oliveira and Fernandes (2009), using [precomputed 
 
 <a id="colorsNamed" href="#colorsNamed">#</a> **colorsNamed**
 
-<span aria-label='Source:'>☞</span> [src/colors/named.js](https://github.com/evercoder/culori/blob/main/src/colors/named.js)
+<span aria-label='Source:'>☞</span> [src/colors/named.js]({{codebase}}/src/colors/named.js)
 
 An object whose keys are all the CSS named colors.
 
 <a id="round" href="#round">#</a> **round**(_n = 8_)
 
-<span aria-label='Source:'>☞</span> [src/round.js](https://github.com/evercoder/culori/blob/main/src/round.js)
+<span aria-label='Source:'>☞</span> [src/round.js]({{codebase}}/src/round.js)
 
 Returns a _rounder_: a function with which to round numbers to at most _n_ digits of precision.
 
@@ -1465,7 +1466,7 @@ Mode | Color space | Definition object
 
 <a id="useMode" href="#useMode">#</a> **useMode**(_definition_) → _function_.
 
-<span aria-label='Source:'>☞</span> [src/modes.js](https://github.com/evercoder/culori/blob/main/src/modes.js)
+<span aria-label='Source:'>☞</span> [src/modes.js]({{codebase}}/src/modes.js)
 
 Defines a new color space based on its _definition_. See [Color mode definition](#color-mode-def) for the expected object shape.
 
@@ -1484,7 +1485,7 @@ hsl('hsl(50 100% 100% / 100)');
 
 <a id="getMode" href="#getMode">#</a> **getMode**(_mode_)
 
-<span aria-label='Source:'>☞</span> [src/modes.js](https://github.com/evercoder/culori/blob/main/src/modes.js)
+<span aria-label='Source:'>☞</span> [src/modes.js]({{codebase}}/src/modes.js)
 
 Returns the definition object for the _mode_ color space.
 
@@ -1582,99 +1583,138 @@ Here's a sample definition for the HSL color space:
 };
 ```
 
+<a id="useParser" href="#useParser">#</a> **useParser**(_parser_)
+
+<span aria-label='Source:'>☞</span> [src/modes.js]({{codebase}}/src/modes.js)
+
+Register a new parser function.
+
+The function will receive a color string as its only argument, and should return a color object.
+
+<a id="removeParser" href="#removeParser">#</a> **removeParser**(_parser_)
+
+<span aria-label='Source:'>☞</span> [src/modes.js]({{codebase}}/src/modes.js)
+
+Remove a previously registered parser function.
+
+```js
+import { parse, parseNamed, removeParser } from 'culori';
+
+parse('tomato');
+// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }
+
+removeParser(parseNamed);
+parse('tomato');
+// ⇒ undefined
+```
+
 ## Low-level API
 
-### Parsing functions
+<h3 id='parsing-functions'>
+  <a id="parsing-functions" href="#parsing-functions">#</a>
+  Parsing functions
+</h3>
 
-__parseHex__(_string_)
+<a id="parseHex" href="#parseHex">#</a> __parseHex__(_string_) → _color_
 
-`#abc`, `#abcd`, `#abcdef`, `#abcdef12`
+Parses hex strings of 3, 4, 6, or 8 characters, with or without the `#` prefix, and returns `rgb` color objects.
 
-__parseHsl__(_string_)
+```js
+import { parseHex } from 'culori';
 
-`hsl(h, s, l, alpha)`, `hsl(h s l / alpha)`.
+parseHex('#abc');
+parseHex('#abcd');
+parseHex('#abcdef');
+parseHex('#abcdef12');
+```
 
-__parseHwb__(_string_)
 
-`hwb(h w b / alpha)`
+<a id="parseHsl" href="#parseHsl">#</a> __parseHsl__(_string_) → _color_
 
-__parseLab__(_string_)
+Parses `hsl(…)` / `hsla(…)` strings and returns `hsl` color objects.
 
-`lab(l a b / alpha)`
+<a id="parseHwb" href="#parseHwb">#</a> __parseHwb__(_string_) → _color_
 
-__parseLch__(_string_)
+Parses `hwb(…)` strings and returns `hwb` color objects.
 
-`lch(l c h / alpha)`
+<a id="parseLab" href="#parseLab">#</a> __parseLab__(_string_) → _color_
 
-__parseNamed__(_string_)
-`tomato`
+Parses `lab(…)` strings and returns `lab` color objects.
 
-__parseRgb__(_color_)
+<a id="parseLch" href="#parseLch">#</a> __parseLch__(_string_) → _color_
 
-`rgb(r, g, b, alpha)`, `rgb(r g b / alpha)`
+Parses `lch(…)` strings and returns `lch` color objects.
 
-__parseTransparent__(_string_)
+<a id="parseNamed" href="#parseNamed">#</a> __parseNamed__(_string_) → _color_
 
-Matches the `transparent` string.
+Parses named CSS colors (eg. `tomato`) and returns `rgb` color objects.
+
+<a id="parseRgb" href="#parseRgb">#</a> __parseRgb__(_color_) → _color_
+
+Parses `rgb(…)` / `rgba(…)` strings and returns `rgb` color objects.
+
+<a id="parseTransparent" href="#parseTransparent">#</a>__parseTransparent__(_string_) → _color_
+
+Parses the `transparent` string and returns a transparent black `rgb` color object.
 
 ### Conversion functions
 
 Function | Conversion
 -------- | ----------
-`convertA98ToXyz65` | `a98` → `xyz65`
-`convertCubehelixToRgb` |  `cubehelix` → `rgb`
-`convertDlchToLab65` | `dlch` → `lab65`
-`convertHsiToRgb` | `hsi` → `rgb`
-`convertHslToRgb` | `hsl` → `rgb`
-`convertHsvToRgb` | `hsv` → `rgb`
-`convertHwbToRgb` | `hwb` → `rgb`
-`convertJabToJch` | `jab` → `jch`
-`convertJabToRgb` | `jab` → `rgb`
-`convertJabToXyz65` | `jab` → `xyz65`
-`convertJchToJab` | `jch` → `jab`
-`convertLab65ToDlch` | `lab65` → `dlch`
-`convertLab65ToRgb` | `lab65` → `rgb`
-`convertLab65ToXyz65` | `lab65` → `xyz65`
-`convertLabToLch` | `lab` → `lch`
-`convertLabToRgb` | `lab` → `rgb`
-`convertLabToXyz` | `lab` → `xyz`
-`convertLchToLab` | `lch` → `lab`
-`convertLchuvToLuv` | `lchuv` → `luv`
-`convertLrgbToOklab` | `lrgb` → `oklab`
-`convertLrgbToRgb` | `lrgb` → `rgb`
-`convertLuvToLchuv` | `luv` → `lchuv`
-`convertLuvToXyz` | `luv` → `xyz`
-`convertOklabToLrgb` | `oklab` → `lrgb`
-`convertOklabToRgb` | `oklab` → `rgb`
-`convertP3ToXyz65` | `p3` → `xyz65`
-`convertProphotoToXyz` | `prophoto` → `xyz`
-`convertRec2020ToXyz65` | `rec2020` → `xyz65`
-`convertRgbToCubehelix` | `rgb` → `cubehelix`
-`convertRgbToHsi` | `rgb` → `hsi`
-`convertRgbToHsl` | `rgb` → `hsl`
-`convertRgbToHsv` | `rgb` → `hsv`
-`convertRgbToHwb` | `rgb` → `hwb`
-`convertRgbToJab` | `rgb` → `jab`
-`convertRgbToLab` | `rgb` → `lab`
-`convertRgbToLab65` | `rgb` → `lab65`
-`convertRgbToLrgb` | `rgb` → `lrgb`
-`convertRgbToOklab` | `rgb` → `oklab`
-`convertRgbToXyz` | `rgb` → `xyz`
-`convertRgbToXyz65` | `rgb` → `xyz65`
-`convertRgbToYiq` | `rgb` → `yiq`
-`convertXyz65ToA98` | `xyz65` → `a98`
-`convertXyz65ToJab` | `xyz65` → `jab`
-`convertXyz65ToLab65` | `xyz65` → `lab65`
-`convertXyz65ToP3` | `xyz65` → `p3`
-`convertXyz65ToRec2020` | `xyz65` → `rec2020`
-`convertXyz65ToRgb` | `xyz65` → `rgb`
-`convertXyz65ToXyz` | `xyz65` → `xyz`
-`convertXyzToLab` | `xyz` → `lab`
-`convertXyzToLuv` | `xyz` → `luv`
-`convertXyzToProphoto` | `xyz` → `prophoto`
-`convertXyzToRgb` | `xyz` → `rgb`
-`convertXyzToXyz65` | `xyz` → `xyz65`
-`convertYiqToRgb` | `yiq` → `rgb`
+__convertA98ToXyz65__(_color_) → _color_ | `a98` → `xyz65`
+__convertCubehelixToRgb__(_color_) → _color_ |  `cubehelix` → `rgb`
+__convertDlchToLab65__(_color_) → _color_ | `dlch` → `lab65`
+__convertHsiToRgb__(_color_) → _color_ | `hsi` → `rgb`
+__convertHslToRgb__(_color_) → _color_ | `hsl` → `rgb`
+__convertHsvToRgb__(_color_) → _color_ | `hsv` → `rgb`
+__convertHwbToRgb__(_color_) → _color_ | `hwb` → `rgb`
+__convertJabToJch__(_color_) → _color_ | `jab` → `jch`
+__convertJabToRgb__(_color_) → _color_ | `jab` → `rgb`
+__convertJabToXyz65__(_color_) → _color_ | `jab` → `xyz65`
+__convertJchToJab__(_color_) → _color_ | `jch` → `jab`
+__convertLab65ToDlch__(_color_) → _color_ | `lab65` → `dlch`
+__convertLab65ToRgb__(_color_) → _color_ | `lab65` → `rgb`
+__convertLab65ToXyz65__(_color_) → _color_ | `lab65` → `xyz65`
+__convertLabToLch__(_color_) → _color_ | `lab` → `lch`
+__convertLabToRgb__(_color_) → _color_ | `lab` → `rgb`
+__convertLabToXyz__(_color_) → _color_ | `lab` → `xyz`
+__convertLchToLab__(_color_) → _color_ | `lch` → `lab`
+__convertLchuvToLuv__(_color_) → _color_ | `lchuv` → `luv`
+__convertLrgbToOklab__(_color_) → _color_ | `lrgb` → `oklab`
+__convertLrgbToRgb__(_color_) → _color_ | `lrgb` → `rgb`
+__convertLuvToLchuv__(_color_) → _color_ | `luv` → `lchuv`
+__convertLuvToXyz__(_color_) → _color_ | `luv` → `xyz`
+__convertOklabToLrgb__(_color_) → _color_ | `oklab` → `lrgb`
+__convertOklabToRgb__(_color_) → _color_ | `oklab` → `rgb`
+__convertP3ToXyz65__(_color_) → _color_ | `p3` → `xyz65`
+__convertProphotoToXyz__(_color_) → _color_ | `prophoto` → `xyz`
+__convertRec2020ToXyz65__(_color_) → _color_ | `rec2020` → `xyz65`
+__convertRgbToCubehelix__(_color_) → _color_ | `rgb` → `cubehelix`
+__convertRgbToHsi__(_color_) → _color_ | `rgb` → `hsi`
+__convertRgbToHsl__(_color_) → _color_ | `rgb` → `hsl`
+__convertRgbToHsv__(_color_) → _color_ | `rgb` → `hsv`
+__convertRgbToHwb__(_color_) → _color_ | `rgb` → `hwb`
+__convertRgbToJab__(_color_) → _color_ | `rgb` → `jab`
+__convertRgbToLab__(_color_) → _color_ | `rgb` → `lab`
+__convertRgbToLab65__(_color_) → _color_ | `rgb` → `lab65`
+__convertRgbToLrgb__(_color_) → _color_ | `rgb` → `lrgb`
+__convertRgbToOklab__(_color_) → _color_ | `rgb` → `oklab`
+__convertRgbToXyz__(_color_) → _color_ | `rgb` → `xyz`
+__convertRgbToXyz65__(_color_) → _color_ | `rgb` → `xyz65`
+__convertRgbToYiq__(_color_) → _color_ | `rgb` → `yiq`
+__convertXyz65ToA98__(_color_) → _color_ | `xyz65` → `a98`
+__convertXyz65ToJab__(_color_) → _color_ | `xyz65` → `jab`
+__convertXyz65ToLab65__(_color_) → _color_ | `xyz65` → `lab65`
+__convertXyz65ToP3__(_color_) → _color_ | `xyz65` → `p3`
+__convertXyz65ToRec2020__(_color_) → _color_ | `xyz65` → `rec2020`
+__convertXyz65ToRgb__(_color_) → _color_ | `xyz65` → `rgb`
+__convertXyz65ToXyz__(_color_) → _color_ | `xyz65` → `xyz`
+__convertXyzToLab__(_color_) → _color_ | `xyz` → `lab`
+__convertXyzToLuv__(_color_) → _color_ | `xyz` → `luv`
+__convertXyzToProphoto__(_color_) → _color_ | `xyz` → `prophoto`
+__convertXyzToRgb__(_color_) → _color_ | `xyz` → `rgb`
+__convertXyzToXyz65__(_color_) → _color_ | `xyz` → `xyz65`
+__convertYiqToRgb__(_color_) → _color_ | `yiq` → `rgb`
 
 
 [css-images-4]: https://drafts.csswg.org/css-images-4/#color-stop-syntax

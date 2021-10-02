@@ -29,9 +29,11 @@ const parse = color => {
 	let i = 0;
 	let len = parsers.length;
 	while (i < len) {
-		if ((result = parsers[i++](color)) !== undefined) break;
+		if ((result = parsers[i++](color)) !== undefined) {
+			return result;
+		}
 	}
-	return result || parseColorSyntax(color);
+	return parseColorSyntax(color);
 };
 
 export default parse;
