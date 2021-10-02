@@ -1,10 +1,14 @@
-let culori = require('../../build/culori.umd');
-let benchmark = require('../util/benchmark');
+import {
+	nearest,
+	differenceCiede2000,
+	differenceDin99o
+} from '../../src/index.js';
+import benchmark from '../util/benchmark.js';
 
 let colors = Object.keys(culori.colorsNamed);
 
-let ciede2000 = culori.nearest(colors, culori.differenceCiede2000());
-let din99o = culori.nearest(colors, culori.differenceDin99o());
+let ciede2000 = nearest(colors, differenceCiede2000());
+let din99o = nearest(colors, differenceDin99o());
 
 benchmark('ciede2000', () => {
 	for (var k = 0; k < 100; k++) {

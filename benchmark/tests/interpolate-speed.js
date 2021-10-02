@@ -1,9 +1,9 @@
-let chroma = require('chroma-js');
-let { color } = require('d3-color');
-let d3i = require('d3-interpolate');
-let tinycolor = require('tinycolor2');
-let culori = require('../../build/culori.umd');
-let benchmark = require('../util/benchmark');
+import chroma from 'chroma-js';
+import { color } from 'd3-color';
+import d3i from 'd3-interpolate';
+import tinycolor from 'tinycolor2';
+import { samples, interpolate, formatHex } from '../../src/index.js';
+import benchmark from '../util/benchmark.js';
 
 console.log(`
 Benchmark: interpolate speed
@@ -15,25 +15,24 @@ let iterations = 1000;
 
 benchmark('culori: #fff -> #000 in RGB', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori
-			.samples(count)
-			.map(culori.interpolate(['#fff', '#000']))
-			.map(culori.formatHex);
+		samples(count)
+			.map(interpolate(['#fff', '#000']))
+			.map(formatHex);
 	}
 });
 
-let interpolator = culori.interpolate(['#fff', '#000']);
-let hex = culori.formatHex;
+let interpolator = interpolate(['#fff', '#000']);
+let hex = formatHex;
 
 benchmark('culori: #fff -> #000 in RGB (cached)', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori.samples(count).map(interpolator).map(hex);
+		samples(count).map(interpolator).map(hex);
 	}
 });
 
 benchmark('culori: #fff -> #000 in RGB (cached, single map)', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori.samples(count).map(c => hex(interpolator(c)));
+		samples(count).map(c => hex(interpolator(c)));
 	}
 });
 
@@ -67,14 +66,14 @@ let colors = ['red', 'white', 'green', 'blue', 'black', 'fuchsia', 'cyan'];
 
 benchmark('culori: multiple colors in RGB', () => {
 	for (var i = 0; i < iterations; i++) {
-		culori.samples(count).map(culori.interpolate(colors)).map(hex);
+		samples(count).map(interpolate(colors)).map(hex);
 	}
 });
 
 benchmark('culori: multiple colors in RGB (cached)', () => {
-	let it = culori.interpolate(colors);
+	let it = interpolate(colors);
 	for (var i = 0; i < iterations; i++) {
-		culori.samples(count).map(it).map(hex);
+		samples(count).map(it).map(hex);
 	}
 });
 
