@@ -1,9 +1,21 @@
-import {
-	rgb_num_old,
-	rgb_num_new,
-	rgb_per_old,
-	rgb_per_new
-} from '../util/regex.js';
+import { num, per, num_per, c, s } from '../util/regex.js';
+
+/*
+	rgb() regular expressions.
+	Reference: https://drafts.csswg.org/css-color/#rgb-functions
+ */
+const rgb_num_old = new RegExp(
+	`^rgba?\\(\\s*${num}${c}${num}${c}${num}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
+);
+const rgb_per_old = new RegExp(
+	`^rgba?\\(\\s*${per}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
+);
+const rgb_num_new = new RegExp(
+	`^rgba?\\(\\s*${num}${s}${num}${s}${num}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
+);
+const rgb_per_new = new RegExp(
+	`^rgba?\\(\\s*${per}${s}${per}${s}${per}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
+);
 
 const parseRgb = color => {
 	let match, res;

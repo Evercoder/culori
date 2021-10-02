@@ -1,4 +1,4 @@
-export const hue = (val, unit) => {
+const hueToDeg = (val, unit) => {
 	switch (unit) {
 		case 'deg':
 			return +val;
@@ -10,3 +10,5 @@ export const hue = (val, unit) => {
 			return val * 360;
 	}
 };
+
+export default hueToDeg;

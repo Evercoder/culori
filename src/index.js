@@ -30,6 +30,10 @@ import { useMode } from './modes.js';
 export { default as converter } from './converter.js';
 
 export {
+	serializeHex,
+	serializeHex8,
+	serializeRgb,
+	serializeHsl,
 	formatHex,
 	formatHex8,
 	formatRgb,

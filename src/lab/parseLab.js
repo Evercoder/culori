@@ -1,4 +1,12 @@
-import { lab } from '../util/regex.js';
+import { num, num_per, s } from '../util/regex.js';
+
+/*
+	lab() and lch() regular expressions.
+	Reference: https://drafts.csswg.org/css-color/#lab-colors
+ */
+const lab = new RegExp(
+	`^lab\\(\\s*${num}%?${s}${num}${s}${num}\\s*(?:\\/\\s*${num_per}\\s*)?\\)$`
+);
 
 const parseLab = color => {
 	let match = color.match(lab);

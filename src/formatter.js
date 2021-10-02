@@ -3,16 +3,12 @@ import round from './round.js';
 import prepare from './_prepare.js';
 import { getMode } from './modes.js';
 
-let rgb = converter('rgb');
-let hsl = converter('hsl');
 let twoDecimals = round(2);
 
 const clamp = value => Math.max(0, Math.min(1, value));
 const fixup = value => Math.round(clamp(value) * 255);
 
-export const formatHex = c => {
-	let color = rgb(c);
-
+export const serializeHex = color => {
 	if (color === undefined) {
 		return undefined;
 	}
@@ -24,21 +20,16 @@ export const formatHex = c => {
 	return '#' + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
 };
 
-export const formatHex8 = c => {
-	let color = rgb(c);
-
+export const serializeHex8 = color => {
 	if (color === undefined) {
 		return undefined;
 	}
 
 	let a = fixup(color.alpha !== undefined ? color.alpha : 1);
-
-	return formatHex(color) + ((1 << 8) | a).toString(16).slice(1);
+	return serializeHex(color) + ((1 << 8) | a).toString(16).slice(1);
 };
 
-export const formatRgb = c => {
-	let color = rgb(c);
-
+export const serializeRgb = color => {
 	if (color === undefined) {
 		return undefined;
 	}
@@ -56,9 +47,7 @@ export const formatRgb = c => {
 	}
 };
 
-export const formatHsl = c => {
-	let color = hsl(c);
-
+export const serializeHsl = color => {
 	if (color === undefined) {
 		return undefined;
 	}
@@ -99,3 +88,8 @@ export const formatCss = c => {
 	}
 	return undefined;
 };
+
+export const formatHex = c => serializeHex(converter('rgb')(c));
+export const formatHex8 = c => serializeHex8(converter('rgb')(c));
+export const formatRgb = c => serializeRgb(converter('rgb')(c));
+export const formatHsl = c => serializeHsl(converter('hsl')(c));

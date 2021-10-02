@@ -1608,7 +1608,10 @@ parse('tomato');
 // ⇒ undefined
 ```
 
-## Low-level API
+<h2 id='low-level-api'>
+  <a href='#low-level-api'>#</a>
+  Low-level API
+</h2>
 
 <h3 id='parsing-functions'>
   <a id="parsing-functions" href="#parsing-functions">#</a>
@@ -1627,7 +1630,6 @@ parseHex('#abcd');
 parseHex('#abcdef');
 parseHex('#abcdef12');
 ```
-
 
 <a id="parseHsl" href="#parseHsl">#</a> __parseHsl__(_string_) → _color_
 
@@ -1656,6 +1658,32 @@ Parses `rgb(…)` / `rgba(…)` strings and returns `rgb` color objects.
 <a id="parseTransparent" href="#parseTransparent">#</a>__parseTransparent__(_string_) → _color_
 
 Parses the `transparent` string and returns a transparent black `rgb` color object.
+
+### Serialization functions
+
+<a id="serializeHex" href="#serializeHex">#</a>__serializeHex__(_color_)
+
+<span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
+
+Serialize a `rgb` _color_ to a 6-character hex code. See [`formatHex()`](#formatHex) for details.
+
+<a id="serializeHex8" href="#serializeHex8">#</a>__serializeHex8__(_color_)
+
+<span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
+
+Serialize a `rgb` _color_ to a 8-character hex code. See [`formatHex8()`](#formatHex8) for details.
+
+<a id="serializeHsl" href="#serializeHsl">#</a>__serializeHsl__(_color_)
+
+<span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
+
+Serialize a `hsl` _color_ to a `hsl(…)` string. See [`formatHsl()`](#formatHsl) for details.
+
+<a id="serializeRgb" href="#serializeRgb">#</a>__serializeRgb__(_color_)
+
+<span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
+
+Serialize a `rgb` _color_ to a `rgb(…)` string. See [`formatRgb()`](#formatRgb) for details.
 
 ### Conversion functions
 

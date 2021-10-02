@@ -1,7 +1,11 @@
 import { parsers, colorProfiles, getMode } from './modes.js';
-import { profiled } from './util/regex.js';
+import { num_per, s, so } from './util/regex.js';
 
-const parseColorSyntax = color => {
+const profiled = new RegExp(
+	`^color\\(${so}([a-z0-9\\-]+)${s}${num_per}${s}${num_per}${s}${num_per}${so}(?:\\/${so}${num_per}${so})?\\)$`
+);
+
+function parseColorSyntax(color) {
 	const m = color.match(profiled);
 	if (!m) {
 		return undefined;
@@ -19,7 +23,7 @@ const parseColorSyntax = color => {
 		i += 2;
 	});
 	return res;
-};
+}
 
 const parse = color => {
 	if (typeof color !== 'string') {
