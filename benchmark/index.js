@@ -1,3 +1,3 @@
-require('./tests/rgb-parse-speed.js');
-require('./tests/namedcolors-parse-speed.js');
-require('./tests/interpolate-speed.js');
+import './tests/rgb-parse-speed.js';
+import './tests/namedcolors-parse-speed.js';
+import './tests/interpolate-speed.js';

@@ -6,6 +6,8 @@ The default `culori` import comes with the full set of color spaces and function
 
 However, the way color spaces are initialized prevents the library from being tree-shaken, so when you use a bundler such as Webpack or Parcel, the entire Culori library is bundled regardless of what you're actually using.
 
+## Using `culori/fn`
+
 To optimize the bundle size, you can opt into the tree-shakeable version by importing from `culori/fn` instead of `culori`:
 
 ```js
@@ -62,6 +64,37 @@ const rec2020 = useMode(modeRec2020);
 const rgb = useMode(modeRgb);
 const xyz = useMode(modeXyz);
 ```
+
+### Using Culori without registering color spaces
+
+You can import and use the [low-level parsing and conversion functions](/api#low-level-api) without registering any color space beforehand:
+
+__hex-to-hsl-string.js__
+```js
+import { parseHex, convertRgbToHsl, serializeHsl } from 'culori/fn';
+
+console.log(
+	serializeHsl(
+		convertRgbToHsl(
+			parseHex('#ffcc00')
+		)
+	)
+);
+// ⇒ hsl(48, 100%, 50%)
+```
+
+When using a bundler such as [esbuild](https://esbuild.github.io/), a minified build fits on the back of a napkin.
+
+<details>
+<summary>Show esbuild output for code above</summary>
+
+```bash
+esbuild --bundle --minify hex-to-hsl-string.js
+```
+
+<code style='word-break: break-all;'>(()=>{var b=(e,o)=>{if(typeof e=="number"){if(o===3)return{mode:"rgb",r:(e>>8&15|e>>4&240)/255,g:(e>>4&15|e&240)/255,b:(e&15|e<<4&240)/255};if(o===4)return{mode:"rgb",r:(e>>12&15|e>>8&240)/255,g:(e>>8&15|e>>4&240)/255,b:(e>>4&15|e&240)/255,alpha:(e&15|e<<4&240)/255};if(o===6)return{mode:"rgb",r:(e>>16&255)/255,g:(e>>8&255)/255,b:(e&255)/255};if(o===8)return{mode:"rgb",r:(e>>24&255)/255,g:(e>>16&255)/255,b:(e>>8&255)/255,alpha:(e&255)/255}}},u=b;var c=/^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i,x=e=>{let o;return(o=e.match(c))?u(parseInt(o[1],16),o[1].length):void 0},l=x;function f({r:e,g:o,b:t,alpha:s}){let r=Math.max(e,o,t),a=Math.min(e,o,t),i={mode:"hsl",s:r===a?0:(r-a)/(1-Math.abs(r+a-1)),l:.5*(r+a)};return r-a!=0&&(i.h=(r===e?(o-t)/(r-a)+(o<t)*6:r===o?(t-e)/(r-a)+2:(e-o)/(r-a)+4)*60),s!==void 0&&(i.alpha=s),i}function p(e=4){return o=>typeof o=="number"?Math.round(o*(e=Math.pow(10,e)))/e:o}var n=p(2),d=e=>Math.max(0,Math.min(1,e));var m=e=>{if(e===void 0)return;let o=n(e.h||0),t=n(d(e.s)*100),s=n(d(e.l)*100);return e.alpha===void 0||e.alpha===1?`hsl(${o}, ${t}%, ${s}%)`:`hsla(${o}, ${t}%, ${s}%, ${n(d(e.alpha))})`};console.log(m(f(l("#ffcc00"))));})();
+</code>
+</details>
 
 ## Bootstrap packages
 

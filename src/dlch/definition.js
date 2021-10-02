@@ -1,5 +1,5 @@
-import convertDlabToDlch from './convertDlabToDlch.js';
-import convertDlchToDlab from './convertDlchToDlab.js';
+import convertLabToLch from '../lch/convertLabToLch.js';
+import convertLchToLab from '../lch/convertLchToLab.js';
 import convertDlchToLab65 from './convertDlchToLab65.js';
 import convertLab65ToDlch from './convertLab65ToDlch.js';
 import convertLab65ToRgb from '../lab65/convertLab65ToRgb.js';
@@ -19,13 +19,13 @@ const definition = {
 
 	toMode: {
 		lab65: convertDlchToLab65,
-		dlab: convertDlchToDlab,
+		dlab: c => convertLchToLab(c, 'dlab'),
 		rgb: c => convertLab65ToRgb(convertDlchToLab65(c))
 	},
 
 	fromMode: {
 		lab65: convertLab65ToDlch,
-		dlab: convertDlabToDlch,
+		dlab: c => convertLabToLch(c, 'dlch'),
 		rgb: c => convertLab65ToDlch(convertRgbToLab65(c))
 	},
 

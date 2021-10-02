@@ -1,15 +1,15 @@
-let chroma = require('chroma-js');
-let { color } = require('d3-color');
-let tinycolor = require('tinycolor2');
-let culori = require('../../build/culori.umd');
-let benchmark = require('../util/benchmark');
+import chroma from 'chroma-js';
+import { color } from 'd3-color';
+import tinycolor from 'tinycolor2';
+import { rgb, colorsNamed } from '../../src/index.js';
+import benchmark from '../util/benchmark.js';
 
 console.log(`
 Benchmark: named colors parse speed
 ===================================
 `);
 
-let colors = Object.keys(culori.colorsNamed);
+let colors = Object.keys(colorsNamed);
 let iterations = 10000;
 
 benchmark('chroma: chroma("colorname")', () => {
@@ -39,7 +39,7 @@ benchmark('tinycolor: tinycolor("colorname")', () => {
 benchmark('culori: culori("colorname")', () => {
 	for (var it = 0; it < iterations; it++) {
 		for (var i = 0; i < colors.length; i++) {
-			culori.rgb(colors[i]);
+			rgb(colors[i]);
 		}
 	}
 });

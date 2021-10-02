@@ -1,8 +1,8 @@
-let chroma = require('chroma-js');
-let { color } = require('d3-color');
-let tinycolor = require('tinycolor2');
-let culori = require('../../build/culori.umd');
-let benchmark = require('../util/benchmark');
+import chroma from 'chroma-js';
+import { color } from 'd3-color';
+import tinycolor from 'tinycolor2';
+import { rgb } from '../../src/index.js';
+import benchmark from '../util/benchmark.js';
 
 console.log(`
 Benchmark: RGB parse speed
@@ -45,7 +45,7 @@ benchmark('culori: culori("rgb(r,g,b)")', () => {
 	for (var r = 0; r <= 255; r += increment) {
 		for (var g = 0; g <= 255; g += increment) {
 			for (var b = 0; b <= 255; b += increment) {
-				culori.rgb(`rgb(${r},${g},${b})`);
+				rgb(`rgb(${r},${g},${b})`);
 			}
 		}
 	}

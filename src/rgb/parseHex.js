@@ -1,5 +1,6 @@
 import parseNumber from './parseNumber.js';
-import { hex } from '../util/regex.js';
+
+const hex = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i;
 
 const parseHex = color => {
 	let match;
