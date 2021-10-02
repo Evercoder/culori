@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="logo">
 			<a href='/'>
-				<img src='/img/culori.svg' alt="culori" />
+				<img width='132' height='30' src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
 				>v1.1.1 (<a
@@ -88,16 +88,20 @@
 </footer>
 
 
-		<script src="https://unpkg.com/culori@1.1.1"></script>
+		<script type='text/javascript' src="https://unpkg.com/culori@1.1.1"></script>
 		<script type="text/javascript">
-			document.body.style.setProperty(
-				'--random-1',
-				culori.formatHex(culori.random('lch', { l: [30, 70] }))
-			);
-			document.body.style.setProperty(
-				'--random-2',
-				culori.formatHex(culori.random('lch', { l: [30, 70] }))
-			);
+			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
+			let r1 = r();
+			let r2 = r();
+			if (CSS.supports('color: color(display-p3)')) {
+				r1 = culori.formatCss(culori.p3(r1));
+				r2 = culori.formatCss(culori.p3(r2));
+			} else {
+				r1 = culori.formatHex(r1);
+				r2 = culori.formatHex(r2);
+			}
+			document.body.style.setProperty('--random-1', r1);
+			document.body.style.setProperty('--random-2', r2);
 		</script>
 	</body>
 </html>

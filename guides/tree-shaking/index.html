@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="logo">
 			<a href='/'>
-				<img src='/img/culori.svg' alt="culori" />
+				<img width='132' height='30' src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
 				>v1.1.1 (<a
@@ -64,6 +64,7 @@
 				<h1>Optimize bundle size with tree-shaking</h1>
 				<p>The default <code>culori</code> import comes with the full set of color spaces and functions to let you prototype quickly and with fewer errors.</p>
 <p>However, the way color spaces are initialized prevents the library from being tree-shaken, so when you use a bundler such as Webpack or Parcel, the entire Culori library is bundled regardless of what you're actually using.</p>
+<h2>Using <code>culori/fn</code></h2>
 <p>To optimize the bundle size, you can opt into the tree-shakeable version by importing from <code>culori/fn</code> instead of <code>culori</code>:</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> …<span class="token punctuation">,</span> …<span class="token punctuation">,</span> … <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span></code></pre>
 <p>It works like the default import, with one key difference: <strong>none of the color spaces are pre-registered into the library</strong>. In fact, if you'd try to <code>parse()</code> a valid CSS color without having registered any color space, you'd get back <code>undefined</code>:</p>
@@ -73,6 +74,17 @@
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> useMode<span class="token punctuation">,</span> modeRgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token keyword">const</span> rgb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRgb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }</span></code></pre>
 <p>To recreate a subset of Culori that only deals with valid CSS colors, you would use this:</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span><br>	useMode<span class="token punctuation">,</span><br>	modeA98<span class="token punctuation">,</span><br>	modeHsl<span class="token punctuation">,</span><br>	modeHwb<span class="token punctuation">,</span><br>	modeLab<span class="token punctuation">,</span><br>	modeLch<span class="token punctuation">,</span><br>	modeP3<span class="token punctuation">,</span><br>	modeProphoto<span class="token punctuation">,</span><br>	modeRec2020<span class="token punctuation">,</span><br>	modeRgb<span class="token punctuation">,</span><br>	modeXyz<br><span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token keyword">const</span> a98 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeA98<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> hsl <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeHsl<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> hwb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeHwb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> lab <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeLab<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> lch <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeLch<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> p3 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeP3<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> prophoto <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeProphoto<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> rec2020 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRec2020<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> rgb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRgb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> xyz <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeXyz<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3>Using Culori without registering color spaces</h3>
+<p>You can import and use the <a href="/api#low-level-api">low-level parsing and conversion functions</a> without registering any color space beforehand:</p>
+<p><strong>hex-to-hsl-string.js</strong></p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> parseHex<span class="token punctuation">,</span> convertRgbToHsl<span class="token punctuation">,</span> serializeHsl <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><br>	<span class="token function">serializeHsl</span><span class="token punctuation">(</span><br>		<span class="token function">convertRgbToHsl</span><span class="token punctuation">(</span><br>			<span class="token function">parseHex</span><span class="token punctuation">(</span><span class="token string">'#ffcc00'</span><span class="token punctuation">)</span><br>		<span class="token punctuation">)</span><br>	<span class="token punctuation">)</span><br><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ hsl(48, 100%, 50%)</span></code></pre>
+<p>When using a bundler such as <a href="https://esbuild.github.io/">esbuild</a>, a minified build fits on the back of a napkin.</p>
+<details>
+<summary>Show esbuild output for code above</summary>
+<pre class="language-bash"><code class="language-bash">esbuild --bundle --minify hex-to-hsl-string.js</code></pre>
+<p><code style='word-break: break-all;'>(()=&gt;{var b=(e,o)=&gt;{if(typeof e==&quot;number&quot;){if(o===3)return{mode:&quot;rgb&quot;,r:(e&gt;&gt;8&amp;15|e&gt;&gt;4&amp;240)/255,g:(e&gt;&gt;4&amp;15|e&amp;240)/255,b:(e&amp;15|e&lt;&lt;4&amp;240)/255};if(o===4)return{mode:&quot;rgb&quot;,r:(e&gt;&gt;12&amp;15|e&gt;&gt;8&amp;240)/255,g:(e&gt;&gt;8&amp;15|e&gt;&gt;4&amp;240)/255,b:(e&gt;&gt;4&amp;15|e&amp;240)/255,alpha:(e&amp;15|e&lt;&lt;4&amp;240)/255};if(o===6)return{mode:&quot;rgb&quot;,r:(e&gt;&gt;16&amp;255)/255,g:(e&gt;&gt;8&amp;255)/255,b:(e&amp;255)/255};if(o===8)return{mode:&quot;rgb&quot;,r:(e&gt;&gt;24&amp;255)/255,g:(e&gt;&gt;16&amp;255)/255,b:(e&gt;&gt;8&amp;255)/255,alpha:(e&amp;255)/255}}},u=b;var c=/^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i,x=e=&gt;{let o;return(o=e.match(c))?u(parseInt(o[1],16),o[1].length):void 0},l=x;function f({r:e,g:o,b:t,alpha:s}){let r=Math.max(e,o,t),a=Math.min(e,o,t),i={mode:&quot;hsl&quot;,s:r===a?0:(r-a)/(1-Math.abs(r+a-1)),l:.5*(r+a)};return r-a!=0&amp;&amp;(i.h=(r===e?(o-t)/(r-a)+(o&lt;t)*6:r===o?(t-e)/(r-a)+2:(e-o)/(r-a)+4)<em>60),s!==void 0&amp;&amp;(i.alpha=s),i}function p(e=4){return o=&gt;typeof o==&quot;number&quot;?Math.round(o</em>(e=Math.pow(10,e)))/e:o}var n=p(2),d=e=&gt;Math.max(0,Math.min(1,e));var m=e=&gt;{if(e===void 0)return;let o=n(e.h||0),t=n(d(e.s)*100),s=n(d(e.l)*100);return e.alpha===void 0||e.alpha===1?<code>hsl(${o}, ${t}%, ${s}%)</code>:<code>hsla(${o}, ${t}%, ${s}%, ${n(d(e.alpha))})</code>};console.log(m(f(l(&quot;#ffcc00&quot;))));})();
+</code></p>
+</details>
 <h2>Bootstrap packages</h2>
 <p>For convenience, a couple of bootstrap packages are available.</p>
 <h3><code>culori/css</code></h3>
@@ -100,16 +112,20 @@
 </footer>
 
 
-		<script src="https://unpkg.com/culori@1.1.1"></script>
+		<script type='text/javascript' src="https://unpkg.com/culori@1.1.1"></script>
 		<script type="text/javascript">
-			document.body.style.setProperty(
-				'--random-1',
-				culori.formatHex(culori.random('lch', { l: [30, 70] }))
-			);
-			document.body.style.setProperty(
-				'--random-2',
-				culori.formatHex(culori.random('lch', { l: [30, 70] }))
-			);
+			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
+			let r1 = r();
+			let r2 = r();
+			if (CSS.supports('color: color(display-p3)')) {
+				r1 = culori.formatCss(culori.p3(r1));
+				r2 = culori.formatCss(culori.p3(r2));
+			} else {
+				r1 = culori.formatHex(r1);
+				r2 = culori.formatHex(r2);
+			}
+			document.body.style.setProperty('--random-1', r1);
+			document.body.style.setProperty('--random-2', r2);
 		</script>
 	</body>
 </html>

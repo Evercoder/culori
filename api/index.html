@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="logo">
 			<a href='/'>
-				<img src='/img/culori.svg' alt="culori" />
+				<img width='132' height='30' src='/img/culori.svg' alt="culori" />
 			</a>
 			<span
 				>v1.1.1 (<a
@@ -849,6 +849,279 @@
 <p>This makes sure <a href="#differenceEuclidean"><code>differenceEuclidean()</code></a> works as expected, but there may be more hidden assumptions in the codebase.</p>
 <p>Here's a sample definition for the HSL color space:</p>
 <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span><br>  mode<span class="token operator">:</span> <span class="token string">'hsl'</span><span class="token punctuation">,</span><br>  fromMode<span class="token operator">:</span> <span class="token punctuation">{</span><br>    rgb<span class="token operator">:</span> convertRgbToHsl<br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  toMode<span class="token operator">:</span> <span class="token punctuation">{</span><br>    rgb<span class="token operator">:</span> convertHslToRgb<br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  channels<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'h'</span><span class="token punctuation">,</span> <span class="token string">'s'</span><span class="token punctuation">,</span> <span class="token string">'l'</span><span class="token punctuation">,</span> <span class="token string">'alpha'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>  ranges<span class="token operator">:</span> <span class="token punctuation">{</span><br>    h<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">360</span><span class="token punctuation">]</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  parse<span class="token operator">:</span> <span class="token punctuation">[</span>parseHsl<span class="token punctuation">]</span><span class="token punctuation">,</span><br>  serialize<span class="token operator">:</span> serializeHsl<span class="token punctuation">,</span><br>  interpolate<span class="token operator">:</span> <span class="token punctuation">{</span><br>    h<span class="token operator">:</span> <span class="token punctuation">{</span><br>      use<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>      fixup<span class="token operator">:</span> fixupHueShorter<br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    s<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>    l<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>    alpha<span class="token operator">:</span> <span class="token punctuation">{</span><br>      use<span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>      fixup<span class="token operator">:</span> fixupAlpha<br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  difference<span class="token operator">:</span> <span class="token punctuation">{</span><br>    h<span class="token operator">:</span> differenceHueSaturation<br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  average<span class="token operator">:</span> <span class="token punctuation">{</span><br>    h<span class="token operator">:</span> averageAngle<br>  <span class="token punctuation">}</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p><a id="useParser" href="#useParser">#</a> <strong>useParser</strong>(<em>parser</em>)</p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/modes.js">src/modes.js</a></p>
+<p>Register a new parser function.</p>
+<p>The function will receive a color string as its only argument, and should return a color object.</p>
+<p><a id="removeParser" href="#removeParser">#</a> <strong>removeParser</strong>(<em>parser</em>)</p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/modes.js">src/modes.js</a></p>
+<p>Remove a previously registered parser function.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> parse<span class="token punctuation">,</span> parseNamed<span class="token punctuation">,</span> removeParser <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }</span><br><br><span class="token function">removeParser</span><span class="token punctuation">(</span>parseNamed<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ undefined</span></code></pre>
+<h2 id='low-level-api'>
+  <a href='#low-level-api'>#</a>
+  Low-level API
+</h2>
+<h3 id='parsing-functions'>
+  <a id="parsing-functions" href="#parsing-functions">#</a>
+  Parsing functions
+</h3>
+<p><a id="parseHex" href="#parseHex">#</a> <strong>parseHex</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses hex strings of 3, 4, 6, or 8 characters, with or without the <code>#</code> prefix, and returns <code>rgb</code> color objects.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> parseHex <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token function">parseHex</span><span class="token punctuation">(</span><span class="token string">'#abc'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">parseHex</span><span class="token punctuation">(</span><span class="token string">'#abcd'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">parseHex</span><span class="token punctuation">(</span><span class="token string">'#abcdef'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">parseHex</span><span class="token punctuation">(</span><span class="token string">'#abcdef12'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><a id="parseHsl" href="#parseHsl">#</a> <strong>parseHsl</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses <code>hsl(…)</code> / <code>hsla(…)</code> strings and returns <code>hsl</code> color objects.</p>
+<p><a id="parseHwb" href="#parseHwb">#</a> <strong>parseHwb</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses <code>hwb(…)</code> strings and returns <code>hwb</code> color objects.</p>
+<p><a id="parseLab" href="#parseLab">#</a> <strong>parseLab</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses <code>lab(…)</code> strings and returns <code>lab</code> color objects.</p>
+<p><a id="parseLch" href="#parseLch">#</a> <strong>parseLch</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses <code>lch(…)</code> strings and returns <code>lch</code> color objects.</p>
+<p><a id="parseNamed" href="#parseNamed">#</a> <strong>parseNamed</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses named CSS colors (eg. <code>tomato</code>) and returns <code>rgb</code> color objects.</p>
+<p><a id="parseRgb" href="#parseRgb">#</a> <strong>parseRgb</strong>(<em>color</em>) → <em>color</em></p>
+<p>Parses <code>rgb(…)</code> / <code>rgba(…)</code> strings and returns <code>rgb</code> color objects.</p>
+<p><a id="parseTransparent" href="#parseTransparent">#</a><strong>parseTransparent</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses the <code>transparent</code> string and returns a transparent black <code>rgb</code> color object.</p>
+<h3>Serialization functions</h3>
+<p><a id="serializeHex" href="#serializeHex">#</a><strong>serializeHex</strong>(<em>color</em>)</p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/formatter.js">src/formatter.js</a></p>
+<p>Serialize a <code>rgb</code> <em>color</em> to a 6-character hex code. See <a href="#formatHex"><code>formatHex()</code></a> for details.</p>
+<p><a id="serializeHex8" href="#serializeHex8">#</a><strong>serializeHex8</strong>(<em>color</em>)</p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/formatter.js">src/formatter.js</a></p>
+<p>Serialize a <code>rgb</code> <em>color</em> to a 8-character hex code. See <a href="#formatHex8"><code>formatHex8()</code></a> for details.</p>
+<p><a id="serializeHsl" href="#serializeHsl">#</a><strong>serializeHsl</strong>(<em>color</em>)</p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/formatter.js">src/formatter.js</a></p>
+<p>Serialize a <code>hsl</code> <em>color</em> to a <code>hsl(…)</code> string. See <a href="#formatHsl"><code>formatHsl()</code></a> for details.</p>
+<p><a id="serializeRgb" href="#serializeRgb">#</a><strong>serializeRgb</strong>(<em>color</em>)</p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/formatter.js">src/formatter.js</a></p>
+<p>Serialize a <code>rgb</code> <em>color</em> to a <code>rgb(…)</code> string. See <a href="#formatRgb"><code>formatRgb()</code></a> for details.</p>
+<h3>Conversion functions</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Conversion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>convertA98ToXyz65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>a98</code> → <code>xyz65</code></td>
+</tr>
+<tr>
+<td><strong>convertCubehelixToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>cubehelix</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertDlchToLab65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>dlch</code> → <code>lab65</code></td>
+</tr>
+<tr>
+<td><strong>convertHsiToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>hsi</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertHslToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>hsl</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertHsvToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>hsv</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertHwbToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>hwb</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertJabToJch</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>jab</code> → <code>jch</code></td>
+</tr>
+<tr>
+<td><strong>convertJabToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>jab</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertJabToXyz65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>jab</code> → <code>xyz65</code></td>
+</tr>
+<tr>
+<td><strong>convertJchToJab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>jch</code> → <code>jab</code></td>
+</tr>
+<tr>
+<td><strong>convertLab65ToDlch</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lab65</code> → <code>dlch</code></td>
+</tr>
+<tr>
+<td><strong>convertLab65ToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lab65</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertLab65ToXyz65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lab65</code> → <code>xyz65</code></td>
+</tr>
+<tr>
+<td><strong>convertLabToLch</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lab</code> → <code>lch</code></td>
+</tr>
+<tr>
+<td><strong>convertLabToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lab</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertLabToXyz</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lab</code> → <code>xyz</code></td>
+</tr>
+<tr>
+<td><strong>convertLchToLab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lch</code> → <code>lab</code></td>
+</tr>
+<tr>
+<td><strong>convertLchuvToLuv</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lchuv</code> → <code>luv</code></td>
+</tr>
+<tr>
+<td><strong>convertLrgbToOklab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lrgb</code> → <code>oklab</code></td>
+</tr>
+<tr>
+<td><strong>convertLrgbToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lrgb</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertLuvToLchuv</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>luv</code> → <code>lchuv</code></td>
+</tr>
+<tr>
+<td><strong>convertLuvToXyz</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>luv</code> → <code>xyz</code></td>
+</tr>
+<tr>
+<td><strong>convertOklabToLrgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>oklab</code> → <code>lrgb</code></td>
+</tr>
+<tr>
+<td><strong>convertOklabToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>oklab</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertP3ToXyz65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>p3</code> → <code>xyz65</code></td>
+</tr>
+<tr>
+<td><strong>convertProphotoToXyz</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>prophoto</code> → <code>xyz</code></td>
+</tr>
+<tr>
+<td><strong>convertRec2020ToXyz65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rec2020</code> → <code>xyz65</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToCubehelix</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>cubehelix</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToHsi</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>hsi</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToHsl</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>hsl</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToHsv</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>hsv</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToHwb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>hwb</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToJab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>jab</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToLab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>lab</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToLab65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>lab65</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToLrgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>lrgb</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToOklab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>oklab</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToXyz</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>xyz</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToXyz65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>xyz65</code></td>
+</tr>
+<tr>
+<td><strong>convertRgbToYiq</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>yiq</code></td>
+</tr>
+<tr>
+<td><strong>convertXyz65ToA98</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz65</code> → <code>a98</code></td>
+</tr>
+<tr>
+<td><strong>convertXyz65ToJab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz65</code> → <code>jab</code></td>
+</tr>
+<tr>
+<td><strong>convertXyz65ToLab65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz65</code> → <code>lab65</code></td>
+</tr>
+<tr>
+<td><strong>convertXyz65ToP3</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz65</code> → <code>p3</code></td>
+</tr>
+<tr>
+<td><strong>convertXyz65ToRec2020</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz65</code> → <code>rec2020</code></td>
+</tr>
+<tr>
+<td><strong>convertXyz65ToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz65</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertXyz65ToXyz</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz65</code> → <code>xyz</code></td>
+</tr>
+<tr>
+<td><strong>convertXyzToLab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz</code> → <code>lab</code></td>
+</tr>
+<tr>
+<td><strong>convertXyzToLuv</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz</code> → <code>luv</code></td>
+</tr>
+<tr>
+<td><strong>convertXyzToProphoto</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz</code> → <code>prophoto</code></td>
+</tr>
+<tr>
+<td><strong>convertXyzToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz</code> → <code>rgb</code></td>
+</tr>
+<tr>
+<td><strong>convertXyzToXyz65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz</code> → <code>xyz65</code></td>
+</tr>
+<tr>
+<td><strong>convertYiqToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>yiq</code> → <code>rgb</code></td>
+</tr>
+</tbody>
+</table>
 
 			</article>
 		</div>
@@ -866,16 +1139,20 @@
 </footer>
 
 
-		<script src="https://unpkg.com/culori@1.1.1"></script>
+		<script type='text/javascript' src="https://unpkg.com/culori@1.1.1"></script>
 		<script type="text/javascript">
-			document.body.style.setProperty(
-				'--random-1',
-				culori.formatHex(culori.random('lch', { l: [30, 70] }))
-			);
-			document.body.style.setProperty(
-				'--random-2',
-				culori.formatHex(culori.random('lch', { l: [30, 70] }))
-			);
+			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
+			let r1 = r();
+			let r2 = r();
+			if (CSS.supports('color: color(display-p3)')) {
+				r1 = culori.formatCss(culori.p3(r1));
+				r2 = culori.formatCss(culori.p3(r2));
+			} else {
+				r1 = culori.formatHex(r1);
+				r2 = culori.formatHex(r2);
+			}
+			document.body.style.setProperty('--random-1', r1);
+			document.body.style.setProperty('--random-2', r2);
 		</script>
 	</body>
 </html>
