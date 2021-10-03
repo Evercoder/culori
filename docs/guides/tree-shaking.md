@@ -117,7 +117,7 @@ interpolate(['red', 'green'], 'lch');
 
 Bootstrap all the color spaces available in Culori.
 
-It provides the following named exports: `a98`, `cubehelix`, `dlab`, `dlch`, `hsi`, `hsl`, `hsv`, `hwb`, `jab`, `jch`, `lab`, `lab65`, `lch`, `lch65`, `lchuv`, `lrgb`, `luv`, `oklab`, `oklch`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz`, `xyz65`, and `yiq`.
+It provides the following named exports: `a98`, `cubehelix`, `dlab`, `dlch`, `hsi`, `hsl`, `hsv`, `hwb`, `jab`, `jch`, `lab`, `lab65`, `lch`, `lch65`, `lchuv`, `lrgb`, `luv`, `okhsl`, `okhsv`, `oklab`, `oklch`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz`, `xyz65`, and `yiq`.
 
 ```js
 import 'culori/all';

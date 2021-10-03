@@ -16,6 +16,8 @@ import modeLch65 from './lch65/definition.js';
 import modeLchuv from './lchuv/definition.js';
 import modeLrgb from './lrgb/definition.js';
 import modeLuv from './luv/definition.js';
+import modeOkhsl from './okhsl/modeOkhsl.js';
+import modeOkhsv from './okhsv/modeOkhsv.js';
 import modeOklab from './oklab/definition.js';
 import modeOklch from './oklch/definition.js';
 import modeP3 from './p3/definition.js';
@@ -172,7 +174,11 @@ export { default as convertLrgbToOklab } from './oklab/convertLrgbToOklab.js';
 export { default as convertLrgbToRgb } from './lrgb/convertLrgbToRgb.js';
 export { default as convertLuvToLchuv } from './lchuv/convertLuvToLchuv.js';
 export { default as convertLuvToXyz } from './luv/convertLuvToXyz.js';
+export { default as convertOkhslToOklab } from './okhsl/convertOkhslToOklab.js';
+export { default as convertOkhsvToOklab } from './okhsv/convertOkhsvToOklab.js';
 export { default as convertOklabToLrgb } from './oklab/convertOklabToLrgb.js';
+export { default as convertOklabToOkhsl } from './okhsl/convertOklabToOkhsl.js';
+export { default as convertOklabToOkhsv } from './okhsv/convertOklabToOkhsv.js';
 export { default as convertOklabToRgb } from './oklab/convertOklabToRgb.js';
 export { default as convertP3ToXyz65 } from './p3/convertP3ToXyz65.js';
 export { default as convertProphotoToXyz } from './prophoto/convertProphotoToXyz.js';
@@ -222,6 +228,8 @@ export {
 	modeLchuv,
 	modeLrgb,
 	modeLuv,
+	modeOkhsl,
+	modeOkhsv,
 	modeOklab,
 	modeOklch,
 	modeP3,
@@ -250,6 +258,8 @@ export const lch65 = useMode(modeLch65);
 export const lchuv = useMode(modeLchuv);
 export const lrgb = useMode(modeLrgb);
 export const luv = useMode(modeLuv);
+export const okhsl = useMode(modeOkhsl);
+export const okhsv = useMode(modeOkhsv);
 export const oklab = useMode(modeOklab);
 export const oklch = useMode(modeOklch);
 export const p3 = useMode(modeP3);
