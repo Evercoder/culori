@@ -1,12 +1,8 @@
 import { parsers, colorProfiles, getMode } from './modes.js';
-import { num_per, s, so } from './util/regex.js';
-
-const profiled = new RegExp(
-	`^color\\(${so}([a-z0-9\\-]+)${s}${num_per}${s}${num_per}${s}${num_per}${so}(?:\\/${so}${num_per}${so})?\\)$`
-);
+import { rx_num_per } from './util/regex.js';
 
 function parseColorSyntax(color) {
-	const m = color.match(profiled);
+	const m = color.match(/^color\(\s*([a-z0-9\-]+)\s*(.*?)\s*\)$/);
 	if (!m) {
 		return undefined;
 	}
@@ -15,13 +11,31 @@ function parseColorSyntax(color) {
 		return undefined;
 	}
 	const res = { mode };
-	let i = 2;
-	getMode(mode).channels.forEach(ch => {
-		if (m[i] !== undefined || m[i + 1] !== undefined) {
-			res[ch] = m[i] !== undefined ? m[i] / 100 : +m[i + 1];
+	const [cmp_string, alpha] = m[2].split(/\s*\/\s*/);
+	let cm;
+	if (alpha !== undefined) {
+		cm = alpha.match(rx_num_per);
+		if (!cm) {
+			return undefined;
 		}
-		i += 2;
-	});
+		res.alpha = cm[1] !== undefined ? cm[1] / 100 : +cm[2];
+	}
+	const components = cmp_string.split(/\s+/);
+	let channels = getMode(mode).channels;
+	for (let i = 0, ch; i < channels.length; i++) {
+		ch = channels[i];
+		if (ch === 'alpha') {
+			continue;
+		}
+		if (i >= components.length || !components[i]) {
+			res[ch] = 0;
+			continue;
+		}
+		if (!(cm = components[i].match(rx_num_per))) {
+			return undefined;
+		}
+		res[ch] = cm[1] !== undefined ? cm[1] / 100 : +cm[2];
+	}
 	return res;
 }
 

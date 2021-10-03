@@ -13,3 +13,5 @@ export const hue = `(?:${num}(deg|grad|rad|turn)|${num})`; // hue
 export const c = `\\s*,\\s*`; // comma
 export const so = '\\s*'; // optional space
 export const s = `\\s+`; // space
+
+export const rx_num_per = new RegExp('^' + num_per + '$');
