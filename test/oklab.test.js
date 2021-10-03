@@ -1,7 +1,7 @@
 import tape from 'tape';
 import { oklab, formatCss } from '../src/index.js';
 
-tape('oklab', t => {
+tape('rgb → oklab', t => {
 	t.deepEqual(
 		oklab('white'),
 		{ mode: 'oklab', l: 0.9999999934735462, a: 0, b: 0 },

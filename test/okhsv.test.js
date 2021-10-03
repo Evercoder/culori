@@ -40,6 +40,16 @@ tape('okhsv → rgb', t => {
 		'#333333',
 		'#333'
 	);
+	t.equal(
+		formatHex('color(--okhsv 0 1 1)'),
+		'#ff0088',
+		'color(--okhsv 0 1 1)'
+	);
+	t.equal(
+		formatHex('color(--okhsv 0 1 0)'),
+		'#000000',
+		'color(--okhsv 0 1 0)'
+	);
 	t.end();
 });
 

@@ -34,7 +34,7 @@ export default function convertOkhslToOklab(hsl) {
 		ret.alpha = hsl.alpha;
 	}
 
-	if (!hsl.s) {
+	if (!hsl.s || hsl.l === 1) {
 		ret.a = ret.b = 0;
 		return ret;
 	}
@@ -55,7 +55,6 @@ export default function convertOkhslToOklab(hsl) {
 		k_2 = 1 - k_1 / (C_max - C_mid);
 	}
 	let C = k_0 + (t * k_1) / (1 - k_2 * t);
-
 	ret.a = C * a_;
 	ret.b = C * b_;
 
