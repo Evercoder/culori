@@ -27,13 +27,37 @@ body {
 .logo {
 	font-size: 2.4em;
 	line-height: 1;
-	padding: 1em 0 0.5em;
 	font-weight: bold;
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+	background: linear-gradient(
+		to right,
+		var(--random-1, #888),
+		var(--random-2, #aaa)
+	);
+	transition: 1s background-image;
+	margin: 1em 0;
 }
 
 .logo span {
 	font-size: 0.5em;
-	margin-left: 0.5em;
+}
+
+.logo > * {
+	background: #fff;
+}
+
+.logo > :not(:last-child) {
+	padding-right: 0.5em;
+}
+
+.logo > :not(:first-child) {
+	padding-left: 0.75em;
+}
+
+.logo > :last-child {
+	padding-top: 0.5em;
 }
 
 nav .active a {
@@ -63,10 +87,6 @@ article {
 
 article img {
 	max-width: 100%;
-}
-
-header {
-	padding: 0.25em 0 0;
 }
 
 footer .container {
@@ -102,23 +122,8 @@ nav a {
 }
 
 h1 {
-	font-size: 3em;
+	font-size: 2.4em;
 	margin: 0 0 0.5em;
-	position: relative;
-	width: max-content;
-	letter-spacing: -0.02ch;
-}
-
-@supports (background-clip: text) {
-	h1 {
-		background: linear-gradient(
-			to right,
-			var(--random-1, #999),
-			var(--random-2, #999)
-		);
-		background-clip: text;
-		color: transparent;
-	}
 }
 
 h2 {

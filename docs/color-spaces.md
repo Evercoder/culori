@@ -6,6 +6,9 @@ menu-order: 3
 
 This is an overview of the color spaces built into culori, listing their channels and expected ranges.
 
+<details>
+<summary>A note on terminology</summary>
+
 ## A note on terminology
 
 A [color model](https://en.wikipedia.org/wiki/Color_model) is a way to describe colors along certain dimensions. RGB, for example, is a color model: color is expressed as a combination of red, green and blue.
@@ -15,6 +18,8 @@ A color model, along with a precise description of how colors in the model are t
 In some color spaces, such as CIELAB or CIELCh, some channels don't have fixed ranges. For these channels, approximate ranges are obtained by converting all sRGB colors defined by `r, g, b ∈ ℕ ⋂ [0, 255]` to that specific color space. Whenever that's the case, the range is marked with the approximation symbol `≈`.
 
 In addition to the channels listed below, all color spaces also take an optional `alpha` channel with the range `[0, 1]`.
+
+</details>
 
 ## Built-in color spaces
 
@@ -261,6 +266,12 @@ The Oklab color space in cylindrical form.
 | `h`     | `[0, 360)`    | Hue         |
 
 Serialized as `color(--oklch l c h / alpha)`.
+
+#### Further reading
+
+* [An interactive review of Oklab](https://raphlinus.github.io/color/2021/01/18/oklab-critique.html) by Raph Levien
+* [Notes on Oklab](https://github.com/svgeesus/svgeesus.github.io/blob/master/Color/OKLab-notes.md) and [Better than Lab? Gamut reduction CIE Lab & OKLab](https://www.w3.org/Graphics/Color/Workshop/slides/talk/lilley) by Chris Lilley
+* [[css-color] Add OKLab, OKLCH (#6642)](https://github.com/w3c/csswg-drafts/issues/6642)
 
 ### J<sub>z</sub>a<sub>z</sub>b<sub>z</sub>
 

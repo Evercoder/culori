@@ -4,25 +4,15 @@
 
 Culori is a comprehensive color library for JavaScript that works across many color spaces to offer conversion, interpolation, color difference formulas, blending functions, and more. It provides up-to-date support for the color spaces defined in [CSS Color Module Level 4](https://drafts.csswg.org/css-color/) specification.
 
+```bash
+npm install culori
+```
+
 The full documentation is published on [culorijs.org](https://culorijs.org). Some quick entry points:
 
 -   [Getting started](https://culorijs.org/getting-started)
 -   [API References](https://culorijs.org/api/)
 -   [Supported color spaces](https://culorijs.org/color-spaces/)
-
-## Development
-
-The 0.x branch:
-
-```bash
-npm install culori
-```
-
-[The 1.x branch](https://github.com/Evercoder/culori/pull/139), currently in development, uses the `next` tag:
-
-```bash
-npm install culori@next
-```
 
 ## Contributing
 
