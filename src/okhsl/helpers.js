@@ -249,7 +249,6 @@ export function get_ST_max(a_, b_, cusp = null) {
 	if (!cusp) {
 		cusp = find_cusp(a_, b_);
 	}
-
 	let L = cusp[0];
 	let C = cusp[1];
 	return [C / L, C / (1 - L)];

@@ -26,16 +26,22 @@
 import { toe_inv, get_Cs } from './helpers.js';
 
 export default function convertOkhslToOklab(hsl) {
-	// TODO achromatic (h missing or s = 0)
-	let a_ = Math.cos((hsl.h / 180) * Math.PI);
-	let b_ = Math.sin((hsl.h / 180) * Math.PI);
 	let l = toe_inv(hsl.l);
 
-	let Cs = get_Cs(l, a_, b_);
-	let C_0 = Cs[0];
-	let C_mid = Cs[1];
-	let C_max = Cs[2];
+	const ret = { mode: 'oklab', l };
 
+	if (hsl.alpha !== undefined) {
+		ret.alpha = hsl.alpha;
+	}
+
+	if (!hsl.s) {
+		ret.a = ret.b = 0;
+		return ret;
+	}
+
+	let a_ = Math.cos((hsl.h / 180) * Math.PI);
+	let b_ = Math.sin((hsl.h / 180) * Math.PI);
+	let [C_0, C_mid, C_max] = get_Cs(l, a_, b_);
 	let t, k_0, k_1, k_2;
 	if (hsl.s < 0.8) {
 		t = 1.25 * hsl.s;
@@ -48,12 +54,10 @@ export default function convertOkhslToOklab(hsl) {
 		k_1 = (0.2 * C_mid * C_mid * 1.25 * 1.25) / C_0;
 		k_2 = 1 - k_1 / (C_max - C_mid);
 	}
-
 	let C = k_0 + (t * k_1) / (1 - k_2 * t);
 
-	const ret = { mode: 'oklab', l, a: C * a_, b: C * b_ };
-	if (hsl.alpha !== undefined) {
-		ret.alpha = hsl.alpha;
-	}
+	ret.a = C * a_;
+	ret.b = C * b_;
+
 	return ret;
 }

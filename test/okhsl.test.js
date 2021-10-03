@@ -42,3 +42,11 @@ tape('okhsl → rgb', t => {
 	);
 	t.end();
 });
+
+tape('rgb → okhsl → rgb', t => {
+	t.equal(formatHex(okhsl('red')), '#ff0000', 'red');
+	t.equal(formatHex(okhsl('white')), '#ffffff', 'white');
+	t.equal(formatHex(okhsl('black')), '#000000', 'black');
+	t.equal(formatHex(okhsl('#3333')), '#333333', '#333');
+	t.end();
+});

@@ -55,11 +55,12 @@ export default function convertOklabToOkhsv(lab) {
 	c = ((c / scale_L) * toe(l)) / l;
 	l = toe(l);
 
-	let v = l / L_v;
-	let s = ((S_0 + T) * C_v) / (T * S_0 + T * k * C_v);
-
-	const ret = { mode: 'okhsv', s, v };
-	if (s) {
+	const ret = {
+		mode: 'okhsv',
+		s: ((S_0 + T) * C_v) / (T * S_0 + T * k * C_v),
+		v: l / L_v
+	};
+	if (ret.s) {
 		ret.h = normalizeHue((Math.atan2(lab.b, lab.a) * 180) / Math.PI);
 	}
 	if (lab.alpha !== undefined) {
