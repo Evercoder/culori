@@ -1712,7 +1712,11 @@ __convertLrgbToOklab__(_color_) → _color_ | `lrgb` → `oklab`
 __convertLrgbToRgb__(_color_) → _color_ | `lrgb` → `rgb`
 __convertLuvToLchuv__(_color_) → _color_ | `luv` → `lchuv`
 __convertLuvToXyz__(_color_) → _color_ | `luv` → `xyz`
+__convertOkhslToOklab__(_color_) → _color_ | `okhsl` → `oklab`
+__convertOkhsvToOklab__(_color_) → _color_ | `okhsv` → `oklab`
 __convertOklabToLrgb__(_color_) → _color_ | `oklab` → `lrgb`
+__convertOklabToOkhsl__(_color_) → _color_ | `oklab` → `okhsl`
+__convertOklabToOkhsv__(_color_) → _color_ | `oklab` → `okhsv`
 __convertOklabToRgb__(_color_) → _color_ | `oklab` → `rgb`
 __convertP3ToXyz65__(_color_) → _color_ | `p3` → `xyz65`
 __convertProphotoToXyz__(_color_) → _color_ | `prophoto` → `xyz`

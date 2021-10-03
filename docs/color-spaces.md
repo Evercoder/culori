@@ -239,9 +239,11 @@ The DIN99o color space in cylindrical form.
 
 Serialized as `color(--din99o-lch l c h / alpha)`.
 
-### Oklab
+### Oklab, Oklch, Okhsl, Okhsv
 
-The [Oklab color space](https://bottosson.github.io/posts/oklab/), in Cartesian (Lab) and cylindrical (LCh) forms. It uses the D65 standard illuminant.
+The [Oklab color space](https://bottosson.github.io/posts/oklab/), in Cartesian (Lab) and cylindrical (LCh) forms. It uses the D65 standard illuminant. 
+
+See also: [Okhsl and Okhsv, two new color spaces for color picking](https://bottosson.github.io/posts/colorpicker/).
 
 #### `oklab`
 
@@ -266,6 +268,26 @@ The Oklab color space in cylindrical form.
 | `h`     | `[0, 360)`    | Hue         |
 
 Serialized as `color(--oklch l c h / alpha)`.
+
+### `okhsl`
+
+| Channel | Range      | Description       |
+| ------- | ---------- | ----------------- |
+| `h`     | `[0, 360)` | Hue               |
+| `s`     | `[0, 1]`   | Saturation (Okhsl) |
+| `l`     | `[0, 1]`   | Lightness         |
+
+Serialized as `color(--okhsl h s l / alpha)`.
+
+### `okhsv`
+
+| Channel | Range      | Description       |
+| ------- | ---------- | ----------------- |
+| `h`     | `[0, 360)` | Hue               |
+| `s`     | `[0, 1]`   | Saturation (Okhsv) |
+| `v`     | `[0, 1]`   | Value         |
+
+Serialized as `color(--okhsv h s v / alpha)`.
 
 #### Further reading
 
