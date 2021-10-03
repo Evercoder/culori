@@ -15,10 +15,15 @@
 	<div class="container">
 		<div class="logo">
 			<a href='/'>
-				<img width='132' height='30' src='/img/culori.svg' alt="culori" />
+				<img
+					width="132"
+					height="30"
+					src='/img/culori.svg'
+					alt="culori"
+				/>
 			</a>
 			<span
-				>v1.1.1 (<a
+				>v1.2.0 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -997,8 +1002,24 @@
 <td><code>luv</code> → <code>xyz</code></td>
 </tr>
 <tr>
+<td><strong>convertOkhslToOklab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>okhsl</code> → <code>oklab</code></td>
+</tr>
+<tr>
+<td><strong>convertOkhsvToOklab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>okhsv</code> → <code>oklab</code></td>
+</tr>
+<tr>
 <td><strong>convertOklabToLrgb</strong>(<em>color</em>) → <em>color</em></td>
 <td><code>oklab</code> → <code>lrgb</code></td>
+</tr>
+<tr>
+<td><strong>convertOklabToOkhsl</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>oklab</code> → <code>okhsl</code></td>
+</tr>
+<tr>
+<td><strong>convertOklabToOkhsv</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>oklab</code> → <code>okhsv</code></td>
 </tr>
 <tr>
 <td><strong>convertOklabToRgb</strong>(<em>color</em>) → <em>color</em></td>
@@ -1139,7 +1160,10 @@
 </footer>
 
 
-		<script type='text/javascript' src="https://unpkg.com/culori@1.1.1"></script>
+		<script
+			type="text/javascript"
+			src="https://unpkg.com/culori@1.2.0"
+		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
 			let r1 = r();

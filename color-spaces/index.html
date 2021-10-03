@@ -15,10 +15,15 @@
 	<div class="container">
 		<div class="logo">
 			<a href='/'>
-				<img width='132' height='30' src='/img/culori.svg' alt="culori" />
+				<img
+					width="132"
+					height="30"
+					src='/img/culori.svg'
+					alt="culori"
+				/>
 			</a>
 			<span
-				>v1.1.1 (<a
+				>v1.2.0 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -63,11 +68,14 @@
 			<article>
 				<h1>Color Spaces</h1>
 				<p>This is an overview of the color spaces built into culori, listing their channels and expected ranges.</p>
+<details>
+<summary>A note on terminology</summary>
 <h2>A note on terminology</h2>
 <p>A <a href="https://en.wikipedia.org/wiki/Color_model">color model</a> is a way to describe colors along certain dimensions. RGB, for example, is a color model: color is expressed as a combination of red, green and blue.</p>
 <p>A color model, along with a precise description of how colors in the model are to be interpreted, makes a color <em>space</em>. sRGB, Display P3 and ProPhoto RGB are all color spaces that employ the RGB model: they describe colors as combination of red, green, and blue primaries; however, they have different notions of how these red, green, and blue primary colors look.</p>
 <p>In some color spaces, such as CIELAB or CIELCh, some channels don't have fixed ranges. For these channels, approximate ranges are obtained by converting all sRGB colors defined by <code>r, g, b ∈ ℕ ⋂ [0, 255]</code> to that specific color space. Whenever that's the case, the range is marked with the approximation symbol <code>≈</code>.</p>
 <p>In addition to the channels listed below, all color spaces also take an optional <code>alpha</code> channel with the range <code>[0, 1]</code>.</p>
+</details>
 <h2>Built-in color spaces</h2>
 <h3>The RGB model</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB color model</a> describes colors as mixtures of red, green, and blue primaries. Culori implements several RGB color spaces, all sharing these channels:</p>
@@ -479,8 +487,9 @@
 </tbody>
 </table>
 <p>Serialized as <code>color(--din99o-lch l c h / alpha)</code>.</p>
-<h3>Oklab</h3>
+<h3>Oklab, Oklch, Okhsl, Okhsv</h3>
 <p>The <a href="https://bottosson.github.io/posts/oklab/">Oklab color space</a>, in Cartesian (Lab) and cylindrical (LCh) forms. It uses the D65 standard illuminant.</p>
+<p>See also: <a href="https://bottosson.github.io/posts/colorpicker/">Okhsl and Okhsv, two new color spaces for color picking</a>.</p>
 <h4><code>oklab</code></h4>
 <p>The Oklab color space in Cartesian form.</p>
 <table>
@@ -539,6 +548,68 @@
 </tbody>
 </table>
 <p>Serialized as <code>color(--oklch l c h / alpha)</code>.</p>
+<h3><code>okhsl</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td><code>[0, 1]</code></td>
+<td>Saturation (Okhsl)</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td><code>[0, 1]</code></td>
+<td>Lightness</td>
+</tr>
+</tbody>
+</table>
+<p>Serialized as <code>color(--okhsl h s l / alpha)</code>.</p>
+<h3><code>okhsv</code></h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h</code></td>
+<td><code>[0, 360)</code></td>
+<td>Hue</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td><code>[0, 1]</code></td>
+<td>Saturation (Okhsv)</td>
+</tr>
+<tr>
+<td><code>v</code></td>
+<td><code>[0, 1]</code></td>
+<td>Value</td>
+</tr>
+</tbody>
+</table>
+<p>Serialized as <code>color(--okhsv h s v / alpha)</code>.</p>
+<h4>Further reading</h4>
+<ul>
+<li><a href="https://raphlinus.github.io/color/2021/01/18/oklab-critique.html">An interactive review of Oklab</a> by Raph Levien</li>
+<li><a href="https://github.com/svgeesus/svgeesus.github.io/blob/master/Color/OKLab-notes.md">Notes on Oklab</a> and <a href="https://www.w3.org/Graphics/Color/Workshop/slides/talk/lilley">Better than Lab? Gamut reduction CIE Lab &amp; OKLab</a> by Chris Lilley</li>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/6642">[css-color] Add OKLab, OKLCH (#6642)</a></li>
+</ul>
 <h3>J<sub>z</sub>a<sub>z</sub>b<sub>z</sub></h3>
 <p>The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space, as defined by:</p>
 <blockquote>
@@ -743,7 +814,10 @@
 </footer>
 
 
-		<script type='text/javascript' src="https://unpkg.com/culori@1.1.1"></script>
+		<script
+			type="text/javascript"
+			src="https://unpkg.com/culori@1.2.0"
+		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
 			let r1 = r();
