@@ -20,6 +20,7 @@ const API_FULL = [
 	'convertA98ToXyz65',
 	'convertCubehelixToRgb',
 	'convertDlchToLab65',
+	'converter',
 	'convertHsiToRgb',
 	'convertHslToRgb',
 	'convertHsvToRgb',
@@ -33,13 +34,13 @@ const API_FULL = [
 	'convertLab65ToXyz65',
 	'convertLabToLch',
 	'convertLabToRgb',
-	'convertLabToXyz',
+	'convertLabToXyz50',
 	'convertLchToLab',
 	'convertLchuvToLuv',
 	'convertLrgbToOklab',
 	'convertLrgbToRgb',
 	'convertLuvToLchuv',
-	'convertLuvToXyz',
+	'convertLuvToXyz50',
 	'convertOkhslToOklab',
 	'convertOkhsvToOklab',
 	'convertOklabToLrgb',
@@ -47,7 +48,7 @@ const API_FULL = [
 	'convertOklabToOkhsv',
 	'convertOklabToRgb',
 	'convertP3ToXyz65',
-	'convertProphotoToXyz',
+	'convertProphotoToXyz50',
 	'convertRec2020ToXyz65',
 	'convertRgbToCubehelix',
 	'convertRgbToHsi',
@@ -59,23 +60,22 @@ const API_FULL = [
 	'convertRgbToLab65',
 	'convertRgbToLrgb',
 	'convertRgbToOklab',
-	'convertRgbToXyz',
+	'convertRgbToXyz50',
 	'convertRgbToXyz65',
 	'convertRgbToYiq',
+	'convertXyz50ToLab',
+	'convertXyz50ToLuv',
+	'convertXyz50ToProphoto',
+	'convertXyz50ToRgb',
+	'convertXyz50ToXyz65',
 	'convertXyz65ToA98',
 	'convertXyz65ToJab',
 	'convertXyz65ToLab65',
 	'convertXyz65ToP3',
 	'convertXyz65ToRec2020',
 	'convertXyz65ToRgb',
-	'convertXyz65ToXyz',
-	'convertXyzToLab',
-	'convertXyzToLuv',
-	'convertXyzToProphoto',
-	'convertXyzToRgb',
-	'convertXyzToXyz65',
+	'convertXyz65ToXyz50',
 	'convertYiqToRgb',
-	'converter',
 	'cubehelix',
 	'differenceCie76',
 	'differenceCie94',
@@ -144,9 +144,9 @@ const API_FULL = [
 	'luv',
 	'mapAlphaDivide',
 	'mapAlphaMultiply',
+	'mapper',
 	'mapTransferGamma',
 	'mapTransferLinear',
-	'mapper',
 	'modeA98',
 	'modeCubehelix',
 	'modeDlab',
@@ -173,6 +173,7 @@ const API_FULL = [
 	'modeRec2020',
 	'modeRgb',
 	'modeXyz',
+	'modeXyz50',
 	'modeXyz65',
 	'modeYiq',
 	'nearest',
@@ -206,6 +207,7 @@ const API_FULL = [
 	'wcagContrast',
 	'wcagLuminance',
 	'xyz',
+	'xyz50',
 	'xyz65',
 	'yiq'
 ];
@@ -224,6 +226,7 @@ const API_CSS = [
 	'rec2020',
 	'rgb',
 	'xyz',
+	'xyz50',
 	'xyz65'
 ];
 
@@ -254,6 +257,7 @@ const API_ALL = [
 	'rec2020',
 	'rgb',
 	'xyz',
+	'xyz50',
 	'xyz65',
 	'yiq'
 ];
@@ -269,6 +273,7 @@ const API_FN = [
 	'convertA98ToXyz65',
 	'convertCubehelixToRgb',
 	'convertDlchToLab65',
+	'converter',
 	'convertHsiToRgb',
 	'convertHslToRgb',
 	'convertHsvToRgb',
@@ -282,13 +287,13 @@ const API_FN = [
 	'convertLab65ToXyz65',
 	'convertLabToLch',
 	'convertLabToRgb',
-	'convertLabToXyz',
+	'convertLabToXyz50',
 	'convertLchToLab',
 	'convertLchuvToLuv',
 	'convertLrgbToOklab',
 	'convertLrgbToRgb',
 	'convertLuvToLchuv',
-	'convertLuvToXyz',
+	'convertLuvToXyz50',
 	'convertOkhslToOklab',
 	'convertOkhsvToOklab',
 	'convertOklabToLrgb',
@@ -296,7 +301,7 @@ const API_FN = [
 	'convertOklabToOkhsv',
 	'convertOklabToRgb',
 	'convertP3ToXyz65',
-	'convertProphotoToXyz',
+	'convertProphotoToXyz50',
 	'convertRec2020ToXyz65',
 	'convertRgbToCubehelix',
 	'convertRgbToHsi',
@@ -308,23 +313,22 @@ const API_FN = [
 	'convertRgbToLab65',
 	'convertRgbToLrgb',
 	'convertRgbToOklab',
-	'convertRgbToXyz',
+	'convertRgbToXyz50',
 	'convertRgbToXyz65',
 	'convertRgbToYiq',
+	'convertXyz50ToLab',
+	'convertXyz50ToLuv',
+	'convertXyz50ToProphoto',
+	'convertXyz50ToRgb',
+	'convertXyz50ToXyz65',
 	'convertXyz65ToA98',
 	'convertXyz65ToJab',
 	'convertXyz65ToLab65',
 	'convertXyz65ToP3',
 	'convertXyz65ToRec2020',
 	'convertXyz65ToRgb',
-	'convertXyz65ToXyz',
-	'convertXyzToLab',
-	'convertXyzToLuv',
-	'convertXyzToProphoto',
-	'convertXyzToRgb',
-	'convertXyzToXyz65',
+	'convertXyz65ToXyz50',
 	'convertYiqToRgb',
-	'converter',
 	'differenceCie76',
 	'differenceCie94',
 	'differenceCiede2000',
@@ -377,9 +381,9 @@ const API_FN = [
 	'lerp',
 	'mapAlphaDivide',
 	'mapAlphaMultiply',
+	'mapper',
 	'mapTransferGamma',
 	'mapTransferLinear',
-	'mapper',
 	'modeA98',
 	'modeCubehelix',
 	'modeDlab',
@@ -406,6 +410,7 @@ const API_FN = [
 	'modeRec2020',
 	'modeRgb',
 	'modeXyz',
+	'modeXyz50',
 	'modeXyz65',
 	'modeYiq',
 	'nearest',
@@ -433,21 +438,21 @@ const API_FN = [
 ];
 
 tape('culori', t => {
-	t.deepEqual(Object.keys(full).sort(), API_FULL);
+	t.deepEqual(Object.keys(full).sort(), API_FULL.sort());
 	t.end();
 });
 
 tape('culori/css', t => {
-	t.deepEqual(Object.keys(css).sort(), API_CSS);
+	t.deepEqual(Object.keys(css).sort(), API_CSS.sort());
 	t.end();
 });
 
 tape('culori/all', t => {
-	t.deepEqual(Object.keys(all).sort(), API_ALL);
+	t.deepEqual(Object.keys(all).sort(), API_ALL.sort());
 	t.end();
 });
 
 tape('culori/fn', t => {
-	t.deepEqual(Object.keys(fn).sort(), API_FN);
+	t.deepEqual(Object.keys(fn).sort(), API_FN.sort());
 	t.end();
 });

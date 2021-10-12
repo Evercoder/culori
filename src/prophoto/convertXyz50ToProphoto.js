@@ -14,7 +14,7 @@ const gamma = v => {
 	return 16 * v;
 };
 
-const convertXyzToProphoto = ({ x, y, z, alpha }) => {
+const convertXyz50ToProphoto = ({ x, y, z, alpha }) => {
 	let res = {
 		mode: 'prophoto',
 		r: gamma(
@@ -35,4 +35,4 @@ const convertXyzToProphoto = ({ x, y, z, alpha }) => {
 	return res;
 };
 
-export default convertXyzToProphoto;
+export default convertXyz50ToProphoto;

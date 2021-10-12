@@ -3,26 +3,26 @@
 	-----------------------
  */
 
-import convertXyzToRgb from './convertXyzToRgb.js';
-import convertXyzToLab from '../lab/convertXyzToLab.js';
-import convertRgbToXyz from './convertRgbToXyz.js';
-import convertLabToXyz from '../lab/convertLabToXyz.js';
+import convertXyz50ToRgb from './convertXyz50ToRgb.js';
+import convertXyz50ToLab from '../lab/convertXyz50ToLab.js';
+import convertRgbToXyz50 from './convertRgbToXyz50.js';
+import convertLabToXyz50 from '../lab/convertLabToXyz50.js';
 import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
-	mode: 'xyz',
-	parse: ['xyz', '--xyz-d50'],
-	serialize: '--xyz-d50',
+	mode: 'xyz50',
+	parse: ['xyz-d50', '--xyz-d50'],
+	serialize: 'xyz-d50',
 
 	toMode: {
-		rgb: convertXyzToRgb,
-		lab: convertXyzToLab
+		rgb: convertXyz50ToRgb,
+		lab: convertXyz50ToLab
 	},
 
 	fromMode: {
-		rgb: convertRgbToXyz,
-		lab: convertLabToXyz
+		rgb: convertRgbToXyz50,
+		lab: convertLabToXyz50
 	},
 
 	channels: ['x', 'y', 'z', 'alpha'],

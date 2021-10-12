@@ -23,7 +23,7 @@ const convertRec2020ToXyz65 = rec2020 => {
 	let g = linearize(rec2020.g);
 	let b = linearize(rec2020.b);
 	let res = {
-		mode: 'xyz65',
+		mode: 'xyz',
 		x:
 			0.6369580483012914 * r +
 			0.14461690358620832 * g +

@@ -6,23 +6,23 @@
 import convertXyz65ToRgb from './convertXyz65ToRgb.js';
 import convertRgbToXyz65 from './convertRgbToXyz65.js';
 
-import convertXyz65ToXyz from './convertXyz65ToXyz.js';
-import convertXyzToXyz65 from './convertXyzToXyz65.js';
+import convertXyz65ToXyz50 from './convertXyz65ToXyz50.js';
+import convertXyz50ToXyz65 from './convertXyz50ToXyz65.js';
 
 import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
-	mode: 'xyz65',
+	mode: 'xyz',
 
 	toMode: {
 		rgb: convertXyz65ToRgb,
-		xyz: convertXyz65ToXyz
+		xyz50: convertXyz65ToXyz50
 	},
 
 	fromMode: {
 		rgb: convertRgbToXyz65,
-		xyz: convertXyzToXyz65
+		xyz50: convertXyz50ToXyz65
 	},
 
 	ranges: {
@@ -33,8 +33,8 @@ const definition = {
 
 	channels: ['x', 'y', 'z', 'alpha'],
 
-	parse: ['--xyz-d65'],
-	serialize: '--xyz-d65',
+	parse: ['xyz', 'xyz-d65', '--xyz-d65'],
+	serialize: 'xyz',
 
 	interpolate: {
 		x: interpolatorLinear,

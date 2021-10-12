@@ -9,10 +9,10 @@
 
 import convertRgbToLrgb from '../lrgb/convertRgbToLrgb.js';
 
-const convertRgbToXyz = rgb => {
+const convertRgbToXyz50 = rgb => {
 	let { r, g, b, alpha } = convertRgbToLrgb(rgb);
 	let res = {
-		mode: 'xyz',
+		mode: 'xyz50',
 		x: 0.4360747 * r + 0.3850649 * g + 0.1430804 * b,
 		y: 0.2225045 * r + 0.7168786 * g + 0.0606169 * b,
 		z: 0.0139322 * r + 0.0971045 * g + 0.7141733 * b
@@ -23,4 +23,4 @@ const convertRgbToXyz = rgb => {
 	return res;
 };
 
-export default convertRgbToXyz;
+export default convertRgbToXyz50;

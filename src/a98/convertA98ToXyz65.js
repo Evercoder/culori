@@ -14,7 +14,7 @@ const convertA98ToXyz65 = a98 => {
 	let g = linearize(a98.g);
 	let b = linearize(a98.b);
 	let res = {
-		mode: 'xyz65',
+		mode: 'xyz',
 		x:
 			0.5766690429101305 * r +
 			0.1855582379065463 * g +

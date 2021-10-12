@@ -24,7 +24,8 @@ import modeP3 from './p3/definition.js';
 import modeProphoto from './prophoto/definition.js';
 import modeRec2020 from './rec2020/definition.js';
 import modeRgb from './rgb/definition.js';
-import modeXyz from './xyz/definition.js';
+import modeXyz from './xyz65/definition.js';
+import modeXyz50 from './xyz50/definition.js';
 import modeXyz65 from './xyz65/definition.js';
 import modeYiq from './yiq/definition.js';
 import { useMode } from './modes.js';
@@ -167,13 +168,13 @@ export { default as convertLab65ToRgb } from './lab65/convertLab65ToRgb.js';
 export { default as convertLab65ToXyz65 } from './lab65/convertLab65ToXyz65.js';
 export { default as convertLabToLch } from './lch/convertLabToLch.js';
 export { default as convertLabToRgb } from './lab/convertLabToRgb.js';
-export { default as convertLabToXyz } from './lab/convertLabToXyz.js';
+export { default as convertLabToXyz50 } from './lab/convertLabToXyz50.js';
 export { default as convertLchToLab } from './lch/convertLchToLab.js';
 export { default as convertLchuvToLuv } from './lchuv/convertLchuvToLuv.js';
 export { default as convertLrgbToOklab } from './oklab/convertLrgbToOklab.js';
 export { default as convertLrgbToRgb } from './lrgb/convertLrgbToRgb.js';
 export { default as convertLuvToLchuv } from './lchuv/convertLuvToLchuv.js';
-export { default as convertLuvToXyz } from './luv/convertLuvToXyz.js';
+export { default as convertLuvToXyz50 } from './luv/convertLuvToXyz50.js';
 export { default as convertOkhslToOklab } from './okhsl/convertOkhslToOklab.js';
 export { default as convertOkhsvToOklab } from './okhsv/convertOkhsvToOklab.js';
 export { default as convertOklabToLrgb } from './oklab/convertOklabToLrgb.js';
@@ -181,7 +182,7 @@ export { default as convertOklabToOkhsl } from './okhsl/convertOklabToOkhsl.js';
 export { default as convertOklabToOkhsv } from './okhsv/convertOklabToOkhsv.js';
 export { default as convertOklabToRgb } from './oklab/convertOklabToRgb.js';
 export { default as convertP3ToXyz65 } from './p3/convertP3ToXyz65.js';
-export { default as convertProphotoToXyz } from './prophoto/convertProphotoToXyz.js';
+export { default as convertProphotoToXyz50 } from './prophoto/convertProphotoToXyz50.js';
 export { default as convertRec2020ToXyz65 } from './rec2020/convertRec2020ToXyz65.js';
 export { default as convertRgbToCubehelix } from './cubehelix/convertRgbToCubehelix.js';
 export { default as convertRgbToHsi } from './hsi/convertRgbToHsi.js';
@@ -193,7 +194,7 @@ export { default as convertRgbToLab } from './lab/convertRgbToLab.js';
 export { default as convertRgbToLab65 } from './lab65/convertRgbToLab65.js';
 export { default as convertRgbToLrgb } from './lrgb/convertRgbToLrgb.js';
 export { default as convertRgbToOklab } from './oklab/convertRgbToOklab.js';
-export { default as convertRgbToXyz } from './xyz/convertRgbToXyz.js';
+export { default as convertRgbToXyz50 } from './xyz50/convertRgbToXyz50.js';
 export { default as convertRgbToXyz65 } from './xyz65/convertRgbToXyz65.js';
 export { default as convertRgbToYiq } from './yiq/convertRgbToYiq.js';
 export { default as convertXyz65ToA98 } from './a98/convertXyz65ToA98.js';
@@ -202,12 +203,12 @@ export { default as convertXyz65ToLab65 } from './lab65/convertXyz65ToLab65.js';
 export { default as convertXyz65ToP3 } from './p3/convertXyz65ToP3.js';
 export { default as convertXyz65ToRec2020 } from './rec2020/convertXyz65ToRec2020.js';
 export { default as convertXyz65ToRgb } from './xyz65/convertXyz65ToRgb.js';
-export { default as convertXyz65ToXyz } from './xyz65/convertXyz65ToXyz.js';
-export { default as convertXyzToLab } from './lab/convertXyzToLab.js';
-export { default as convertXyzToLuv } from './luv/convertXyzToLuv.js';
-export { default as convertXyzToProphoto } from './prophoto/convertXyzToProphoto.js';
-export { default as convertXyzToRgb } from './xyz/convertXyzToRgb.js';
-export { default as convertXyzToXyz65 } from './xyz65/convertXyzToXyz65.js';
+export { default as convertXyz65ToXyz50 } from './xyz65/convertXyz65ToXyz50.js';
+export { default as convertXyz50ToLab } from './lab/convertXyz50ToLab.js';
+export { default as convertXyz50ToLuv } from './luv/convertXyz50ToLuv.js';
+export { default as convertXyz50ToProphoto } from './prophoto/convertXyz50ToProphoto.js';
+export { default as convertXyz50ToRgb } from './xyz50/convertXyz50ToRgb.js';
+export { default as convertXyz50ToXyz65 } from './xyz65/convertXyz50ToXyz65.js';
 export { default as convertYiqToRgb } from './yiq/convertYiqToRgb.js';
 
 export {
@@ -237,6 +238,7 @@ export {
 	modeRec2020,
 	modeRgb,
 	modeXyz,
+	modeXyz50,
 	modeXyz65,
 	modeYiq
 };
@@ -266,6 +268,8 @@ export const p3 = useMode(modeP3);
 export const prophoto = useMode(modeProphoto);
 export const rec2020 = useMode(modeRec2020);
 export const rgb = useMode(modeRgb);
-export const xyz = useMode(modeXyz);
+export const xyz50 = useMode(modeXyz50);
 export const xyz65 = useMode(modeXyz65);
 export const yiq = useMode(modeYiq);
+
+export const xyz = xyz65;

@@ -7,10 +7,10 @@
 		* http://www.brucelindbloom.com/index.html?Eqn_ChromAdapt.html	
 */
 
-const convertXyz65ToXyz = xyz65 => {
+const convertXyz65ToXyz50 = xyz65 => {
 	let { x, y, z, alpha } = xyz65;
 	let res = {
-		mode: 'xyz',
+		mode: 'xyz50',
 		x: 1.0478112 * x + 0.0228866 * y - 0.050127 * z,
 		y: 0.0295424 * x + 0.9904844 * y - 0.0170491 * z,
 		z: -0.0092345 * x + 0.0150436 * y + 0.7521316 * z
@@ -21,4 +21,4 @@ const convertXyz65ToXyz = xyz65 => {
 	return res;
 };
 
-export default convertXyz65ToXyz;
+export default convertXyz65ToXyz50;

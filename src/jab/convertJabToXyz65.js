@@ -21,7 +21,7 @@ const convertJabToXyz65 = ({ j, a, b, alpha }) => {
 	let s = pq_inv(i - 0.096019242 * a - 0.8118919 * b);
 
 	let res = {
-		mode: 'xyz65',
+		mode: 'xyz',
 		x: rel(
 			1.661373024652174 * l -
 				0.914523081304348 * m +
