@@ -4,7 +4,7 @@ import { xyz65, formatCss } from '../src/index.js';
 tape('xyz65', t => {
 	/*
 		These should theoretically be equal to the Xn, Yn, and Zn values
-		from xyz/constants.js, but there's a small rounding error for `y`.
+		from xyz65/constants.js, but there's a small rounding error for `y`.
 	 */
 	t.deepEqual(xyz65('white'), {
 		mode: 'xyz65',

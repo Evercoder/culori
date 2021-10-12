@@ -37,37 +37,38 @@ The [RGB color model](https://en.wikipedia.org/wiki/RGB_color_model) describes c
 
 The [sRGB color space](https://en.wikipedia.org/wiki/SRGB), which most people refer to when talking about RGB colors.
 
-Serialized as `color(srgb r g b / alpha)`.
+Serialized as `color(srgb r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `lrgb`
 
 The linear-light form of the sRGB color space.
 
-Serialized as `color(--srgb-linear r g b / alpha)`.
+Serialized as `color(--srgb-linear r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `a98`
 
 The A98 RGB color space, compatible with the [Adobe RGB (1998) color space](https://en.wikipedia.org/wiki/Adobe_RGB_color_space).
 
-Serialized as `color(a98-rgb r g b / alpha)`.
+Serialized as `color(a98-rgb r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `p3`
 
 The [Display P3 color space](https://en.wikipedia.org/wiki/DCI-P3#Display_P3).
 
-Serialized as `color(display-p3 r g b / alpha)`.
+Serialized as `color(display-p3 r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
 
 #### `prophoto`
 
 The [ProPhoto RGB color space](https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space).
 
-Serialized as `color(prophoto-rgb r g b / alpha)`.
+Serialized as `color(prophoto-rgb r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `rec2020`
 
 The [Rec. 2020 color space](https://en.wikipedia.org/wiki/Rec._2020).
 
-Serialized as `color(rec2020 r g b / alpha)`.
+Serialized as `color(rec2020 r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### The HSL/HSV/HSI family
 
@@ -87,7 +88,7 @@ The HSL color space.
 | `s`     | `[0, 1]`   | Saturation in HSL |
 | `l`     | `[0, 1]`   | Lightness         |
 
-Serialized as `hsl(h s% l% / alpha)`.
+Serialized as `hsl(h s% l%)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `hsv`
 
@@ -99,7 +100,7 @@ The HSV color space.
 | `s`     | `[0, 1]`   | Saturation in HSV |
 | `v`     | `[0, 1]`   | Value             |
 
-Serialized as `color(--hsv h s v / alpha)`.
+Serialized as `color(--hsv h s v)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `hsi`
 
@@ -111,7 +112,7 @@ The HSI color space.
 | `s`     | `[0, 1]`   | Saturation in HSI |
 | `i`     | `[0, 1]`   | Intensity         |
 
-Serialized as `color(--hsi h s i / alpha)`.
+Serialized as `color(--hsi h s i)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### HWB
 
@@ -123,7 +124,9 @@ Serialized as `color(--hsi h s i / alpha)`.
 | `w`     | `[0, 1]`   | Whiteness   |
 | `b`     | `[0, 1]`   | Blackness   |
 
-Serialized as `hwb(h w% b% / alpha)`.
+Serialized as `hwb(h w% b%)`.
+
+Serialized as `hwb(h w% b%)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 > Smith, Alvy Ray (1996) — ["HWB — A More Intuitive Hue-Based Color Model"](http://alvyray.com/Papers/CG/HWB_JGTv208.pdf), Journal of Graphics, GPU and Game tools.
 
@@ -141,7 +144,7 @@ The CIELAB color space using the [D50 standard illuminant](https://en.wikipedia.
 | `a`     | `[-79.287, 93.55]`≈   | Green–red component   |
 | `b`     | `[-112.029, 93.388]`≈ | Blue–yellow component |
 
-Serialized as `lab(l% a b / alpha)`.
+Serialized as `lab(l% a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `lch`
 
@@ -153,7 +156,7 @@ The CIELCh color space using the D50 standard illuminant.
 | `c`     | `[0, 131.207]`≈ | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
-Serialized as `lch(l% c h / alpha)`.
+Serialized as `lch(l% c h)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `lab65`
 
@@ -165,7 +168,7 @@ CIELAB relative to the D65 standard illuminant.
 | `a`     | `[-86.183, 98.234]`≈ | Green–red component   |
 | `b`     | `[-107.86, 94.478]`≈ | Blue–yellow component |
 
-Serialized as `color(--lab-d65 l a b / alpha)`.
+Serialized as `color(--lab-d65 l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `lch65`
 
@@ -177,7 +180,7 @@ CIELCh relative to the D65 standard illuminant.
 | `c`     | `[0, 133.807]`≈ | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
-Serialized as `color(--lch-d65 l c h / alpha)`.
+Serialized as `color(--lch-d65 l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### CIELUV
 
@@ -197,7 +200,7 @@ let deltaE_uv = culori.colorDifferenceEuclidean('luv');
 | `u`     | `[-84.936, 175.042]`≈ | Green–red component   |
 | `v`     | `[-125.882, 87.243]`≈ | Blue–yellow component |
 
-Serialized as `color(--luv l u v / alpha)`.
+Serialized as `color(--luv l u v)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `lchuv`
 
@@ -207,11 +210,11 @@ Serialized as `color(--luv l u v / alpha)`.
 | `c`     | `[0, 176.956]`≈ | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
-Serialized as `color(--lchuv l c h / alpha)`.
+Serialized as `color(--lchuv l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### DIN99 Lab / LCh
 
-The [DIN99][din99o] color space "squishes" the CIELAB D65 color space to obtain an [effective color difference](#culoriDifferenceDin99o) metric that can be expressed as a simple Euclidean distance. The latest iteration of the the standard, DIN99o, is available in Cartesian (`dlab`) and plar (`dlch`) form.
+The [DIN99](https://de.wikipedia.org/wiki/DIN99-Farbraum) color space "squishes" the CIELAB D65 color space to obtain an [effective color difference](#culoriDifferenceDin99o) metric that can be expressed as a simple Euclidean distance. The latest iteration of the the standard, DIN99o, is available in Cartesian (`dlab`) and plar (`dlch`) form.
 
 > ["Industrial Color Physics"](https://www.springer.com/us/book/9781441911964), Georg A. Klein, Springer (2010)
 
@@ -225,7 +228,7 @@ The DIN99o color space in Cartesian form.
 | `a`     | `[-40.09, 45.501]`≈  |
 | `b`     | `[-40.469, 44.344]`≈ |
 
-Serialized as `color(--din99o-lab l a b / alpha)`.
+Serialized as `color(--din99o-lab l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `dlch`
 
@@ -237,7 +240,7 @@ The DIN99o color space in cylindrical form.
 | `c`     | `[0, 51.484]`≈ | Chroma      |
 | `h`     | `[0, 360)`     | Hue         |
 
-Serialized as `color(--din99o-lch l c h / alpha)`.
+Serialized as `color(--din99o-lch l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### Oklab, Oklch, Okhsl, Okhsv
 
@@ -255,7 +258,7 @@ The Oklab color space in Cartesian form.
 | `a`     | `[-0.233, 0.276]`≈ | Green–red component   |
 | `b`     | `[-0.311, 0.198]`≈ | Blue–yellow component |
 
-Serialized as `color(--oklab l a b / alpha)`.
+Serialized as `color(--oklab l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `oklch`
 
@@ -267,7 +270,7 @@ The Oklab color space in cylindrical form.
 | `c`     | `[0, 0.322]`≈ | Chroma      |
 | `h`     | `[0, 360)`    | Hue         |
 
-Serialized as `color(--oklch l c h / alpha)`.
+Serialized as `color(--oklch l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### `okhsl`
 
@@ -277,7 +280,7 @@ Serialized as `color(--oklch l c h / alpha)`.
 | `s`     | `[0, 1]`   | Saturation (Okhsl) |
 | `l`     | `[0, 1]`   | Lightness         |
 
-Serialized as `color(--okhsl h s l / alpha)`.
+Serialized as `color(--okhsl h s l)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### `okhsv`
 
@@ -287,7 +290,7 @@ Serialized as `color(--okhsl h s l / alpha)`.
 | `s`     | `[0, 1]`   | Saturation (Okhsv) |
 | `v`     | `[0, 1]`   | Value         |
 
-Serialized as `color(--okhsv h s v / alpha)`.
+Serialized as `color(--okhsv h s v)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### Further reading
 
@@ -311,7 +314,7 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in Cartesian form.
 | `a`     | `[-0.109, 0.129]`≈ | Green–red component   |
 | `b`     | `[-0.185, 0.134]`≈ | Blue–yellow component |
 
-Serialized as `color(--jzazbz j a b / alpha)`.
+Serialized as `color(--jzazbz j a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `jch`
 
@@ -323,11 +326,11 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.
 | `c`     | `[0, 0.190]`≈ | Chroma      |
 | `h`     | `[0, 360)`    | Hue         |
 
-Serialized as `color(--jzczhz j c h / alpha)`.
+Serialized as `color(--jzczhz j c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### YIQ
 
-[YIQ][yiq] is the color space used by the NTSC color TV system. It contains the following channels:
+[YIQ](https://en.wikipedia.org/wiki/YIQ) is the color space used by the NTSC color TV system. It contains the following channels:
 
 | Channel | Range              | Description                    |
 | ------- | ------------------ | ------------------------------ |
@@ -335,7 +338,7 @@ Serialized as `color(--jzczhz j c h / alpha)`.
 | I       | `[-0.595, 0.595]`≈ | In-phase (orange-blue axis)    |
 | Q       | `[-0.522, 0.522]`≈ | Quadrature (green-purple axis) |
 
-Serialized as `color(--yiq y i q / alpha)`.
+Serialized as `color(--yiq y i q)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### CIE XYZ
 
@@ -351,7 +354,7 @@ The CIE XYZ color space in respect to the D50 standard illuminant.
 | Y       | `[0, 0.999]`≈ | ?           |
 | Z       | `[0, 0.825]`≈ | ?           |
 
-Serialized as `color(xyz-d50 x y z / alpha)`.
+Serialized as `color(xyz-d50 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `xyz65`
 
@@ -363,7 +366,7 @@ The CIE XYZ color space in respect to the D65 standard illuminant.
 | Y       | `[0, 1]`≈     | ?           |
 | Z       | `[0, 1.088]`≈ | ?           |
 
-Serialized as `color(xyz-d65 x y z / alpha)`.
+Serialized as `color(xyz-d65 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### Cubehelix
 
@@ -383,7 +386,5 @@ The channels in the `cubehelix` color space maintain the conventions from D3, na
 | `s`     | `[0, 4.614]` | Saturation (Called _hue_ in op. cit.)                                    |
 | `l`     | `[0, 1]`     | Lightness                                                                |
 
-Serialized as `color(--cubehelix h s l / alpha)`.
+Serialized as `color(--cubehelix h s l)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
-[din99o]: https://de.wikipedia.org/wiki/DIN99-Farbraum
-[yiq]: https://en.wikipedia.org/wiki/YIQ
