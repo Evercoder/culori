@@ -18,11 +18,11 @@ tape('RGB', function (test) {
 });
 
 tape('LCh', function (test) {
-	test.equal(displayable('lch(50 0 0)'), true);
+	test.equal(displayable('lch(50% 0 0)'), true);
 
-	test.equal(displayable('lch(50 -100 0)'), true);
+	test.equal(displayable('lch(50% -100 0)'), true);
 
-	test.equal(displayable('lch(120 -100 0)'), false);
+	test.equal(displayable('lch(120% -100 0)'), false);
 
 	test.end();
 });

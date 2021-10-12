@@ -26,8 +26,8 @@ tape('lab', t => {
 });
 
 tape('formatCss', t => {
-	t.equal(formatCss('lab(40 10 30 / 50%)'), 'lab(40% 10 30 / 0.5)');
-	t.equal(formatCss('lab(40 10 30 / 100%)'), 'lab(40% 10 30)');
-	t.equal(formatCss('lab(40 10 30)'), 'lab(40% 10 30)');
+	t.equal(formatCss('lab(40% 10 30 / 50%)'), 'lab(40% 10 30 / 0.5)');
+	t.equal(formatCss('lab(40% 10 30 / 100%)'), 'lab(40% 10 30)');
+	t.equal(formatCss('lab(40% 10 30)'), 'lab(40% 10 30)');
 	t.end();
 });

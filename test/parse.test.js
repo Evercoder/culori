@@ -260,7 +260,7 @@ tape('transparent', function (test) {
 
 tape('lab()', function (test) {
 	test.deepEqual(
-		parse('lab(50 -5 10 / 50%)'),
+		parse('lab(50% -5 10 / 50%)'),
 		{ l: 50, a: -5, b: 10, alpha: 0.5, mode: 'lab' },
 		'lab + alpha'
 	);
@@ -276,13 +276,13 @@ tape('lab()', function (test) {
 
 tape('lch()', function (test) {
 	test.deepEqual(
-		parse('lch(50 3 240 / 50%)'),
+		parse('lch(50% 3 240 / 50%)'),
 		{ l: 50, c: 3, h: 240, alpha: 0.5, mode: 'lch' },
 		'lch + alpha'
 	);
 
 	test.deepEqual(
-		parse('lch(50 -3 240deg / 50%)'),
+		parse('lch(50% -3 240deg / 50%)'),
 		{ l: 50, c: 0, h: 240, alpha: 0.5, mode: 'lch' },
 		'lch negative c'
 	);

@@ -13,13 +13,13 @@ tape('RGB', function (test) {
 });
 
 tape('LCh', function (test) {
-	test.deepEqual(clampChroma('lch(50 120 5)'), {
+	test.deepEqual(clampChroma('lch(50% 120 5)'), {
 		mode: 'lch',
 		l: 50,
 		c: 77.4755859375,
 		h: 5
 	});
-	test.equal(displayable(clampChroma('lch(50 120 5)')), true);
+	test.equal(displayable(clampChroma('lch(50% 120 5)')), true);
 	test.end();
 });
 
