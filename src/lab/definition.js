@@ -1,7 +1,7 @@
 import convertLabToRgb from './convertLabToRgb.js';
-import convertLabToXyz from './convertLabToXyz.js';
+import convertLabToXyz50 from './convertLabToXyz50.js';
 import convertRgbToLab from './convertRgbToLab.js';
-import convertXyzToLab from './convertXyzToLab.js';
+import convertXyz50ToLab from './convertXyz50ToLab.js';
 import parseLab from './parseLab.js';
 import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
@@ -10,12 +10,12 @@ const definition = {
 	mode: 'lab',
 
 	toMode: {
-		xyz: convertLabToXyz,
+		xyz50: convertLabToXyz50,
 		rgb: convertLabToRgb
 	},
 
 	fromMode: {
-		xyz: convertXyzToLab,
+		xyz50: convertXyz50ToLab,
 		rgb: convertRgbToLab
 	},
 

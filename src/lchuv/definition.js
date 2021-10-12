@@ -9,10 +9,10 @@
 
 import convertLuvToLchuv from './convertLuvToLchuv.js';
 import convertLchuvToLuv from './convertLchuvToLuv.js';
-import convertXyzToLuv from '../luv/convertXyzToLuv.js';
-import convertLuvToXyz from '../luv/convertLuvToXyz.js';
-import convertXyzToRgb from '../xyz/convertXyzToRgb.js';
-import convertRgbToXyz from '../xyz/convertRgbToXyz.js';
+import convertXyz50ToLuv from '../luv/convertXyz50ToLuv.js';
+import convertLuvToXyz50 from '../luv/convertLuvToXyz50.js';
+import convertXyz50ToRgb from '../xyz50/convertXyz50ToRgb.js';
+import convertRgbToXyz50 from '../xyz50/convertRgbToXyz50.js';
 
 import { fixupHueShorter } from '../fixup/hue.js';
 import { fixupAlpha } from '../fixup/alpha.js';
@@ -21,9 +21,9 @@ import { differenceHueChroma } from '../difference.js';
 import { averageAngle } from '../average.js';
 
 const convertRgbToLchuv = rgb =>
-	convertLuvToLchuv(convertXyzToLuv(convertRgbToXyz(rgb)));
+	convertLuvToLchuv(convertXyz50ToLuv(convertRgbToXyz50(rgb)));
 const convertLchuvToRgb = lchuv =>
-	convertXyzToRgb(convertLuvToXyz(convertLchuvToLuv(lchuv)));
+	convertXyz50ToRgb(convertLuvToXyz50(convertLchuvToLuv(lchuv)));
 
 const definition = {
 	mode: 'lchuv',

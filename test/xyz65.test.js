@@ -4,7 +4,7 @@ import { xyz65, formatCss } from '../src/index.js';
 tape('xyz65', t => {
 	/*
 		These should theoretically be equal to the Xn, Yn, and Zn values
-		from xyz65/constants.js, but there's a small rounding error for `y`.
+		from xyz/constants.js, but there's a small rounding error for `y`.
 	 */
 	t.deepEqual(xyz65('white'), {
 		mode: 'xyz65',
@@ -30,6 +30,42 @@ tape('xyz65', t => {
 	t.end();
 });
 
+tape('color(xyz)', t => {
+	t.deepEqual(xyz65('color(xyz 1 0 0 / 0.25)'), {
+		x: 1,
+		y: 0,
+		z: 0,
+		alpha: 0.25,
+		mode: 'xyz65'
+	});
+	t.deepEqual(xyz65('color(xyz 0% 50% 0.5 / 25%)'), {
+		x: 0,
+		y: 0.5,
+		z: 0.5,
+		alpha: 0.25,
+		mode: 'xyz65'
+	});
+	t.end();
+});
+
+tape('color(xyz-d65)', t => {
+	t.deepEqual(xyz65('color(xyz-d65 1 0 0 / 0.25)'), {
+		x: 1,
+		y: 0,
+		z: 0,
+		alpha: 0.25,
+		mode: 'xyz65'
+	});
+	t.deepEqual(xyz65('color(xyz-d65 0% 50% 0.5 / 25%)'), {
+		x: 0,
+		y: 0.5,
+		z: 0.5,
+		alpha: 0.25,
+		mode: 'xyz65'
+	});
+	t.end();
+});
+
 tape('color(--xyz-d65)', t => {
 	t.deepEqual(xyz65('color(--xyz-d65 1 0 0 / 0.25)'), {
 		x: 1,
@@ -50,8 +86,8 @@ tape('color(--xyz-d65)', t => {
 
 tape('formatCss', t => {
 	t.equal(
-		formatCss('color(--xyz-d65 0% 50% 0.5 / 25%)'),
-		'color(--xyz-d65 0 0.5 0.5 / 0.25)'
+		formatCss('color(xyz 0% 50% 0.5 / 25%)'),
+		'color(xyz-d65 0 0.5 0.5 / 0.25)'
 	);
 	t.end();
 });

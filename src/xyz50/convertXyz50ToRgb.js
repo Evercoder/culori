@@ -8,7 +8,7 @@
 
 import convertLrgbToRgb from '../lrgb/convertLrgbToRgb.js';
 
-const convertXyzToRgb = ({ x, y, z, alpha }) => {
+const convertXyz50ToRgb = ({ x, y, z, alpha }) => {
 	let res = convertLrgbToRgb({
 		r: x * 3.1338561 - y * 1.6168667 - 0.4906146 * z,
 		g: x * -0.9787684 + y * 1.9161415 + 0.033454 * z,
@@ -20,4 +20,4 @@ const convertXyzToRgb = ({ x, y, z, alpha }) => {
 	return res;
 };
 
-export default convertXyzToRgb;
+export default convertXyz50ToRgb;

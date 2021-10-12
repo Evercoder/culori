@@ -1,4 +1,4 @@
-import { Xn, Yn, Zn, k, e } from '../xyz/constants.js';
+import { Xn, Yn, Zn, k, e } from '../xyz50/constants.js';
 
 export const u_fn = (x, y, z) => (4 * x) / (x + 15 * y + 3 * z);
 export const v_fn = (x, y, z) => (9 * y) / (x + 15 * y + 3 * z);
@@ -8,7 +8,7 @@ export const vn = v_fn(Xn, Yn, Zn);
 
 const l_fn = value => (value <= e ? k * value : 116 * Math.cbrt(value) - 16);
 
-const convertXyzToLuv = ({ x, y, z, alpha }) => {
+const convertXyz50ToLuv = ({ x, y, z, alpha }) => {
 	let l = l_fn(y / Yn);
 	let u = u_fn(x, y, z);
 	let v = v_fn(x, y, z);
@@ -35,4 +35,4 @@ const convertXyzToLuv = ({ x, y, z, alpha }) => {
 	return res;
 };
 
-export default convertXyzToLuv;
+export default convertXyz50ToLuv;

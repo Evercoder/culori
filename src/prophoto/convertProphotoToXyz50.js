@@ -14,12 +14,12 @@ const linearize = v => {
 	return v / 16;
 };
 
-const convertProphotoToXyz = prophoto => {
+const convertProphotoToXyz50 = prophoto => {
 	let r = linearize(prophoto.r);
 	let g = linearize(prophoto.g);
 	let b = linearize(prophoto.b);
 	let res = {
-		mode: 'xyz65',
+		mode: 'xyz50',
 		x:
 			0.7977604896723027 * r +
 			0.13518583717574031 * g +
@@ -36,4 +36,4 @@ const convertProphotoToXyz = prophoto => {
 	return res;
 };
 
-export default convertProphotoToXyz;
+export default convertProphotoToXyz50;
