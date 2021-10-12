@@ -24,7 +24,6 @@ import modeP3 from './p3/definition.js';
 import modeProphoto from './prophoto/definition.js';
 import modeRec2020 from './rec2020/definition.js';
 import modeRgb from './rgb/definition.js';
-import modeXyz from './xyz65/definition.js';
 import modeXyz50 from './xyz50/definition.js';
 import modeXyz65 from './xyz65/definition.js';
 import modeYiq from './yiq/definition.js';
@@ -237,7 +236,6 @@ export {
 	modeProphoto,
 	modeRec2020,
 	modeRgb,
-	modeXyz,
 	modeXyz50,
 	modeXyz65,
 	modeYiq
@@ -271,5 +269,3 @@ export const rgb = useMode(modeRgb);
 export const xyz50 = useMode(modeXyz50);
 export const xyz65 = useMode(modeXyz65);
 export const yiq = useMode(modeYiq);
-
-export const xyz = xyz65;

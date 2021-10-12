@@ -24,7 +24,6 @@ export { default as modeP3 } from './p3/definition.js';
 export { default as modeProphoto } from './prophoto/definition.js';
 export { default as modeRec2020 } from './rec2020/definition.js';
 export { default as modeRgb } from './rgb/definition.js';
-export { default as modeXyz } from './xyz65/definition.js';
 export { default as modeXyz50 } from './xyz50/definition.js';
 export { default as modeXyz65 } from './xyz65/definition.js';
 export { default as modeYiq } from './yiq/definition.js';

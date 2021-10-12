@@ -172,7 +172,6 @@ const API_FULL = [
 	'modeProphoto',
 	'modeRec2020',
 	'modeRgb',
-	'modeXyz',
 	'modeXyz50',
 	'modeXyz65',
 	'modeYiq',
@@ -206,7 +205,6 @@ const API_FULL = [
 	'useParser',
 	'wcagContrast',
 	'wcagLuminance',
-	'xyz',
 	'xyz50',
 	'xyz65',
 	'yiq'
@@ -225,7 +223,6 @@ const API_CSS = [
 	'prophoto',
 	'rec2020',
 	'rgb',
-	'xyz',
 	'xyz50',
 	'xyz65'
 ];
@@ -256,7 +253,6 @@ const API_ALL = [
 	'prophoto',
 	'rec2020',
 	'rgb',
-	'xyz',
 	'xyz50',
 	'xyz65',
 	'yiq'
@@ -409,7 +405,6 @@ const API_FN = [
 	'modeProphoto',
 	'modeRec2020',
 	'modeRgb',
-	'modeXyz',
 	'modeXyz50',
 	'modeXyz65',
 	'modeYiq',

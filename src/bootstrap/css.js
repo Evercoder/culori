@@ -31,5 +31,3 @@ export const rec2020 = useMode(modeRec2020);
 export const rgb = useMode(modeRgb);
 export const xyz50 = useMode(modeXyz50);
 export const xyz65 = useMode(modeXyz65);
-
-export const xyz = xyz65;

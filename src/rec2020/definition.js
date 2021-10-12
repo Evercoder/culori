@@ -11,12 +11,12 @@ const definition = {
 	mode: 'rec2020',
 
 	fromMode: {
-		xyz: convertXyz65ToRec2020,
+		xyz65: convertXyz65ToRec2020,
 		rgb: color => convertXyz65ToRec2020(convertRgbToXyz65(color))
 	},
 
 	toMode: {
-		xyz: convertRec2020ToXyz65,
+		xyz65: convertRec2020ToXyz65,
 		rgb: color => convertXyz65ToRgb(convertRec2020ToXyz65(color))
 	},
 

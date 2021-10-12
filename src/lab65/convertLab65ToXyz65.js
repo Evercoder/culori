@@ -8,7 +8,7 @@ const convertLab65ToXyz65 = ({ l, a, b, alpha }) => {
 	let fz = fy - b / 200;
 
 	let res = {
-		mode: 'xyz',
+		mode: 'xyz65',
 		x: fn(fx) * Xn,
 		y: fn(fy) * Yn,
 		z: fn(fz) * Zn

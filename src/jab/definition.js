@@ -28,12 +28,12 @@ const definition = {
 
 	fromMode: {
 		rgb: convertRgbToJab,
-		xyz: convertXyz65ToJab
+		xyz65: convertXyz65ToJab
 	},
 
 	toMode: {
 		rgb: convertJabToRgb,
-		xyz: convertJabToXyz65
+		xyz65: convertJabToXyz65
 	},
 
 	ranges: {

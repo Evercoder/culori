@@ -341,7 +341,7 @@ Serialized as `color(--yiq y i q / alpha)`.
 
 The [CIE XYZ color space](https://en.wikipedia.org/wiki/CIE_1931_color_space), also known as the CIE 1931 color space.
 
-#### `xyz`
+#### `xyz50`
 
 The CIE XYZ color space in respect to the D50 standard illuminant.
 
@@ -351,7 +351,7 @@ The CIE XYZ color space in respect to the D50 standard illuminant.
 | Y       | `[0, 0.999]`≈ | ?           |
 | Z       | `[0, 0.825]`≈ | ?           |
 
-Serialized as `color(--xyz-d50 x y z / alpha)`.
+Serialized as `color(xyz-d50 x y z / alpha)`.
 
 #### `xyz65`
 
@@ -363,7 +363,7 @@ The CIE XYZ color space in respect to the D65 standard illuminant.
 | Y       | `[0, 1]`≈     | ?           |
 | Z       | `[0, 1.088]`≈ | ?           |
 
-Serialized as `color(--xyz-d65 x y z / alpha)`.
+Serialized as `color(xyz-d65 x y z / alpha)`.
 
 ### Cubehelix
 

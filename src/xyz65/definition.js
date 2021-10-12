@@ -13,7 +13,7 @@ import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
-	mode: 'xyz',
+	mode: 'xyz65',
 
 	toMode: {
 		rgb: convertXyz65ToRgb,
@@ -34,7 +34,7 @@ const definition = {
 	channels: ['x', 'y', 'z', 'alpha'],
 
 	parse: ['xyz', 'xyz-d65', '--xyz-d65'],
-	serialize: 'xyz',
+	serialize: 'xyz-d65',
 
 	interpolate: {
 		x: interpolatorLinear,

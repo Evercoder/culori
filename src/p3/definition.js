@@ -12,12 +12,12 @@ const definition = {
 
 	fromMode: {
 		rgb: color => convertXyz65ToP3(convertRgbToXyz65(color)),
-		xyz: convertXyz65ToP3
+		xyz65: convertXyz65ToP3
 	},
 
 	toMode: {
 		rgb: color => convertXyz65ToRgb(convertP3ToXyz65(color)),
-		xyz: convertP3ToXyz65
+		xyz65: convertP3ToXyz65
 	}
 };
 

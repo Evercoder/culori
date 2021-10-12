@@ -57,5 +57,3 @@ export const rgb = useMode(modeRgb);
 export const xyz50 = useMode(modeXyz50);
 export const xyz65 = useMode(modeXyz65);
 export const yiq = useMode(modeYiq);
-
-export const xyz = xyz65;

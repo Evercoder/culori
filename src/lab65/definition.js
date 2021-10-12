@@ -12,12 +12,12 @@ const definition = {
 	serialize: '--lab-d65',
 
 	toMode: {
-		xyz: convertLab65ToXyz65,
+		xyz65: convertLab65ToXyz65,
 		rgb: convertLab65ToRgb
 	},
 
 	fromMode: {
-		xyz: convertXyz65ToLab65,
+		xyz65: convertXyz65ToLab65,
 		rgb: convertRgbToLab65
 	},
 
