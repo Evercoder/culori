@@ -34,4 +34,4 @@ export const c = `\\s*,\\s*`; // comma
 export const so = '\\s*'; // space, optional
 export const s = `\\s+`; // space
 
-export const rx_num_per = new RegExp('^' + num_per + '$');
+export const rx_num_per_none = new RegExp('^' + num_per_none + '$');

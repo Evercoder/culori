@@ -1,5 +1,5 @@
 import { parsers, colorProfiles, getMode } from './modes.js';
-import { rx_num_per } from './util/regex.js';
+import { rx_num_per_none } from './util/regex.js';
 
 function parseColorSyntax(color) {
 	const m = color.match(/^color\(\s*([a-z0-9\-]+)\s*(.*?)\s*\)$/);
@@ -14,11 +14,15 @@ function parseColorSyntax(color) {
 	const [cmp_string, alpha] = m[2].split(/\s*\/\s*/);
 	let cm;
 	if (alpha !== undefined) {
-		cm = alpha.match(rx_num_per);
+		cm = alpha.match(rx_num_per_none);
 		if (!cm) {
 			return undefined;
 		}
-		res.alpha = cm[1] !== undefined ? cm[1] / 100 : +cm[2];
+		if (cm[1] !== undefined) {
+			res.alpha = cm[1] / 100;
+		} else if (cm[2] !== undefined) {
+			res.alpha = +cm[2];
+		}
 	}
 	const components = cmp_string.split(/\s+/);
 	let channels = getMode(mode).channels;
@@ -31,10 +35,14 @@ function parseColorSyntax(color) {
 			res[ch] = 0;
 			continue;
 		}
-		if (!(cm = components[i].match(rx_num_per))) {
+		if (!(cm = components[i].match(rx_num_per_none))) {
 			return undefined;
 		}
-		res[ch] = cm[1] !== undefined ? cm[1] / 100 : +cm[2];
+		if (cm[1] !== undefined) {
+			res[ch] = cm[1] / 100;
+		} else if (cm[2] !== undefined) {
+			res[ch] = +cm[2];
+		}
 	}
 	return res;
 }

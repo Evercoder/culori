@@ -12,16 +12,17 @@ const parseLch = color => {
 		return undefined;
 	}
 
-	let res = {
-		mode: 'lch',
-		l:
-			match[1] !== undefined
-				? +match[1]
-				: match[2] !== undefined
-				? +match[2]
-				: 0,
-		c: match[3] !== undefined ? Math.max(0, +match[3]) : 0
-	};
+	let res = { mode: 'lch' };
+
+	if (match[1] !== undefined) {
+		res.l = +match[1];
+	} else if (match[2] !== undefined) {
+		res.l = +match[2];
+	}
+
+	if (match[3] !== undefined) {
+		res.c = Math.max(0, +match[3]);
+	}
 
 	if (match[6] !== undefined) {
 		res.h = +match[6];

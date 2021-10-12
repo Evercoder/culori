@@ -22,30 +22,36 @@ const rgb_per_old = new RegExp(
 );
 
 const rgb_num_new = new RegExp(
-	`^rgb\\(\\s*${num_none}${s}${num_none}${s}${num_none}\\s*(?:\\/\\s*${num_per_none}\\s*)?\\)$`
+	`^rgba?\\(\\s*${num_none}${s}${num_none}${s}${num_none}\\s*(?:\\/\\s*${num_per_none}\\s*)?\\)$`
 );
 
 const rgb_per_new = new RegExp(
-	`^rgb\\(\\s*${per_none}${s}${per_none}${s}${per_none}\\s*(?:\\/\\s*${num_per_none}\\s*)?\\)$`
+	`^rgba?\\(\\s*${per_none}${s}${per_none}${s}${per_none}\\s*(?:\\/\\s*${num_per_none}\\s*)?\\)$`
 );
 
 const parseRgb = color => {
-	let match, res;
-
+	let res = { mode: 'rgb' };
+	let match;
 	if ((match = color.match(rgb_num_old) || color.match(rgb_num_new))) {
-		res = {
-			mode: 'rgb',
-			r: match[1] !== undefined ? match[1] / 255 : 0,
-			g: match[2] !== undefined ? match[2] / 255 : 0,
-			b: match[3] !== undefined ? match[3] / 255 : 0
-		};
+		if (match[1] !== undefined) {
+			res.r = match[1] / 255;
+		}
+		if (match[2] !== undefined) {
+			res.g = match[2] / 255;
+		}
+		if (match[3] !== undefined) {
+			res.b = match[3] / 255;
+		}
 	} else if ((match = color.match(rgb_per_old) || color.match(rgb_per_new))) {
-		res = {
-			mode: 'rgb',
-			r: match[1] !== undefined ? match[1] / 100 : 0,
-			g: match[2] !== undefined ? match[2] / 100 : 0,
-			b: match[3] !== undefined ? match[3] / 100 : 0
-		};
+		if (match[1] !== undefined) {
+			res.r = match[1] / 100;
+		}
+		if (match[2] !== undefined) {
+			res.g = match[2] / 100;
+		}
+		if (match[3] !== undefined) {
+			res.b = match[3] / 100;
+		}
 	} else {
 		return undefined;
 	}

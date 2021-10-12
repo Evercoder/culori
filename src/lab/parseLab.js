@@ -14,17 +14,21 @@ const parseLab = color => {
 		return undefined;
 	}
 
-	let res = {
-		mode: 'lab',
-		l:
-			match[1] !== undefined
-				? +match[1]
-				: match[2] !== undefined
-				? +match[2]
-				: 0,
-		a: match[3] !== undefined ? +match[3] : 0,
-		b: match[4] !== undefined ? +match[4] : 0
-	};
+	let res = { mode: 'lab' };
+
+	if (match[1] !== undefined) {
+		res.l = +match[1];
+	} else if (match[2] !== undefined) {
+		res.l = +match[2];
+	}
+
+	if (match[3] !== undefined) {
+		res.a = +match[3];
+	}
+
+	if (match[4] !== undefined) {
+		res.b = +match[4];
+	}
 
 	if (match[5] !== undefined) {
 		res.alpha = match[5] / 100;
