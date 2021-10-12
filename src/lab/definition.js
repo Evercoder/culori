@@ -29,7 +29,11 @@ const definition = {
 
 	parse: [parseLab],
 	serialize: c =>
-		`lab(${c.l}% ${c.a} ${c.b}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
+		`lab(${c.l !== undefined ? c.l + '%' : 'none'} ${
+			c.a !== undefined ? c.a : 'none'
+		} ${c.b !== undefined ? c.b : 'none'}${
+			c.alpha < 1 ? ` / ${c.alpha}` : ''
+		})`,
 
 	interpolate: {
 		l: interpolatorLinear,

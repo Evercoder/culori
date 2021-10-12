@@ -34,9 +34,9 @@ export const serializeRgb = color => {
 		return undefined;
 	}
 
-	let r = fixup(color.r);
-	let g = fixup(color.g);
-	let b = fixup(color.b);
+	let r = color.r !== undefined ? fixup(color.r) : 'none';
+	let g = color.g !== undefined ? fixup(color.g) : 'none';
+	let b = color.b !== undefined ? fixup(color.b) : 'none';
 
 	if (color.alpha === undefined || color.alpha === 1) {
 		// opaque color
@@ -53,15 +53,21 @@ export const serializeHsl = color => {
 	}
 
 	const h = twoDecimals(color.h || 0);
-	const s = twoDecimals(clamp(color.s) * 100);
-	const l = twoDecimals(clamp(color.l) * 100);
+	const s =
+		color.s !== undefined
+			? twoDecimals(clamp(color.s) * 100) + '%'
+			: 'none';
+	const l =
+		color.l !== undefined
+			? twoDecimals(clamp(color.l) * 100) + '%'
+			: 'none';
 
 	if (color.alpha === undefined || color.alpha === 1) {
 		// opaque color
-		return `hsl(${h}, ${s}%, ${l}%)`;
+		return `hsl(${h}, ${s}, ${l})`;
 	} else {
 		// transparent color
-		return `hsla(${h}, ${s}%, ${l}%, ${twoDecimals(clamp(color.alpha))})`;
+		return `hsla(${h}, ${s}, ${l}, ${twoDecimals(clamp(color.alpha))})`;
 	}
 };
 
@@ -75,7 +81,9 @@ export const formatCss = c => {
 		let res = `color(${def.serialize || `--${color.mode}`} `;
 		def.channels.forEach((ch, i) => {
 			if (ch !== 'alpha') {
-				res += (i ? ' ' : '') + (color[ch] || 0);
+				res +=
+					(i ? ' ' : '') +
+					(color[ch] !== undefined ? color[ch] : 'none');
 			}
 		});
 		if (color.alpha !== undefined && color.alpha < 1) {

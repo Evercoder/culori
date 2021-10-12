@@ -9,13 +9,13 @@ tape('rgb → okhsv', t => {
 	);
 	t.equal(
 		formatCss(okhsv('white')),
-		'color(--okhsv 0 0 0.9999999923961898)',
+		'color(--okhsv none 0 0.9999999923961898)',
 		'white'
 	);
-	t.equal(formatCss(okhsv('black')), 'color(--okhsv 0 0 0)', 'black');
+	t.equal(formatCss(okhsv('black')), 'color(--okhsv none 0 0)', 'black');
 	t.equal(
 		formatCss(okhsv('#3333')),
-		'color(--okhsv 0 0 0.2209950715093747 / 0.2)',
+		'color(--okhsv none 0 0.2209950715093747 / 0.2)',
 		'#333'
 	);
 	t.end();

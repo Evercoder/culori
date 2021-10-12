@@ -26,9 +26,9 @@ const definition = {
 
 	parse: [parseHsl],
 	serialize: c =>
-		`hsl(${c.h || 0} ${c.s * 100}% ${c.l * 100}%${
-			c.alpha < 1 ? ` / ${c.alpha}` : ''
-		})`,
+		`hsl(${c.h || 0} ${c.s !== undefined ? c.s * 100 + '%' : 'none'} ${
+			c.l !== undefined ? c.l * 100 + '%' : 'none'
+		}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
 
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },
