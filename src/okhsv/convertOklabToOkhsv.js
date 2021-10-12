@@ -57,8 +57,8 @@ export default function convertOklabToOkhsv(lab) {
 
 	const ret = {
 		mode: 'okhsv',
-		s: ((S_0 + T) * C_v) / (T * S_0 + T * k * C_v),
-		v: l / L_v
+		s: c ? ((S_0 + T) * C_v) / (T * S_0 + T * k * C_v) : 0,
+		v: l ? l / L_v : 0
 	};
 	if (ret.s) {
 		ret.h = normalizeHue((Math.atan2(lab.b, lab.a) * 180) / Math.PI);

@@ -32,7 +32,9 @@ const definition = {
 
 	parse: [parseLch],
 	serialize: c =>
-		`lch(${c.l}% ${c.c} ${c.h || 0}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
+		`lch(${c.l !== undefined ? c.l + '%' : 'none'} ${
+			c.c !== undefined ? c.c : 'none'
+		} ${c.h || 0}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
 
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },
