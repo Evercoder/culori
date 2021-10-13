@@ -50,7 +50,8 @@ import {
 	modeProphoto,
 	modeRec2020,
 	modeRgb,
-	modeXyz
+	modeXyz50,
+	modeXyz65
 } from 'culori/fn';
 
 const a98 = useMode(modeA98);
@@ -62,7 +63,8 @@ const p3 = useMode(modeP3);
 const prophoto = useMode(modeProphoto);
 const rec2020 = useMode(modeRec2020);
 const rgb = useMode(modeRgb);
-const xyz = useMode(modeXyz);
+const xyz50 = useMode(modeXyz50);
+const xyz65 = useMode(modeXyz65);
 ```
 
 ### Using Culori without registering color spaces
@@ -104,7 +106,7 @@ For convenience, a couple of bootstrap packages are available.
 
 Bootstrap all the color spaces available in CSS, plus a handful of  related ones we get for free, since they are used under the hood. 
 
-It provides the following named exports: `a98`, `hsl`, `hsv`, `hwb`, `lab`, `lab65`, `lch`, `lch65`, `lrgb`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz`, and `xyz65`.
+It provides the following named exports: `a98`, `hsl`, `hsv`, `hwb`, `lab`, `lab65`, `lch`, `lch65`, `lrgb`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz50`, and `xyz65`.
 
 ```js
 import 'culori/css';
@@ -117,7 +119,7 @@ interpolate(['red', 'green'], 'lch');
 
 Bootstrap all the color spaces available in Culori.
 
-It provides the following named exports: `a98`, `cubehelix`, `dlab`, `dlch`, `hsi`, `hsl`, `hsv`, `hwb`, `jab`, `jch`, `lab`, `lab65`, `lch`, `lch65`, `lchuv`, `lrgb`, `luv`, `okhsl`, `okhsv`, `oklab`, `oklch`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz`, `xyz65`, and `yiq`.
+It provides the following named exports: `a98`, `cubehelix`, `dlab`, `dlch`, `hsi`, `hsl`, `hsv`, `hwb`, `jab`, `jch`, `lab`, `lab65`, `lch`, `lch65`, `lchuv`, `lrgb`, `luv`, `okhsl`, `okhsv`, `oklab`, `oklch`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz50`, `xyz65`, and `yiq`.
 
 ```js
 import 'culori/all';

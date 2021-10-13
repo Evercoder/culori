@@ -2,7 +2,7 @@ import { parsers, colorProfiles, getMode } from './modes.js';
 import { rx_num_per_none } from './util/regex.js';
 
 function parseColorSyntax(color) {
-	const m = color.match(/^color\(\s*([a-z0-9\-]+)\s*(.*?)\s*\)$/);
+	const m = color.match(/^color\(\s*([a-z0-9-]+)\s*(.*?)\s*\)$/);
 	if (!m) {
 		return undefined;
 	}

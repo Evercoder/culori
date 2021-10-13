@@ -8,15 +8,51 @@ title: 'Migration guide'
 
 ### XYZ D50 vs. D65
 
-The CSS Color Module Level 4 specification has been updated so that the `xyz` predefined color profile refers to the D65-relative XYZ color space, rather than the D50-relative XYZ color space. ([w3c/csswg-drafts#6722](https://github.com/w3c/csswg-drafts/issues/6722)). 
+The CSS Color Module Level 4 specification has been updated to include separate predefined color profiles for the XYZ color space for the two most common white points: `xyz-d50` for the D50 illuminant, and `xyz-d65` for the D65 illuminant. The `xyz` predefined color profile is now an alias for the D65-relative XYZ color space. ([w3c/csswg-drafts#6722](https://github.com/w3c/csswg-drafts/issues/6722)). 
 
-In Culori, this has resulted in the D50-relative XYZ color space being changed to use `mode: 'xyz50'` instead of `mode: 'xyz'`. The latter is no longer supported. In addition:
+In Culori, the D50-relative XYZ color space has been changed to use `mode: 'xyz50'` instead of `mode: 'xyz'`. __The latter mode is no longer supported.__ If you store color objects in your application, they will have to have their `mode` property updated accordingly:
 
-* colors in the `xyz50` mode will be serialized as `color(xyz-d50 x y z / alpha)` when using the [`formatCss()`](/api#formatCss) method, instead of `color(--xyz-d50 x y z)`, to reflect the addition of `xyz-d50` to the list of predefined CSS color profiles.
-* colors in the `xyz65` mode will be serialized as `color(xyz-d65 x y z / alpha)` instead of `color(--xyz-d65 x y z / alpha)`, to reflect the addition of `xyz-d65` to the list of predefined CSS color profiles.
-* CSS colors in the `color(xyz x y z / alpha)` format will be parsed as `mode: 'xyz65'` instead of `mode: 'xyz50'`.
+```js
+import { formatHex } from 'culori';
 
-As a result of this rename, the following exports have been renamed in [all applicable entry points](/guides/tree-shaking):
+let color = getFavoriteColor();
+
+if (color.mode === 'xyz') {
+	color.mode = 'xyz50';
+}
+
+formatHex(color);
+```
+
+When parsing strings, CSS colors in the `color(xyz x y z)` format will be parsed as `mode: 'xyz65'` instead of `mode: 'xyz'`:
+
+```js
+import { parse } from 'culori';
+
+// In culori@1.x:
+parse('color(xyz 0.5 0.25 1)');
+// ⇒ { mode: 'xyz', x: 0.5, y: 0.25, z: 1 }
+
+// In culori@2.0:
+parse('color(xyz 0.5 0.25 1)');
+// ⇒ { mode: 'xyz65', x: 0.5, y: 0.25, z: 1 }
+```
+
+When serializing with the [`formatCss()`](/api#formatCss) method, the `xyz50` and `xyz65` modes now use the predefined identifiers `xyz-d50` and `xyz-d65`, as opposed to the custom identifiers `--xyz-d50` and `--xyx-d65` from 1.x:
+
+```js
+import { formatCss } from 'culori';
+
+// In culori@1.x:
+formatCss({ mode: 'xyz65', x: 0.5, y: 0.25, z: 1 });
+// ⇒ color(--xyz-d65 0.5 0.25 1)
+
+// In culori@2.0:
+formatCss({ mode: 'xyz65', x: 0.5, y: 0.25, z: 1 });
+// ⇒ color(xyz-d65 0.5 0.25 1)
+```
+
+The following exports have been renamed in [all applicable entry points](/guides/tree-shaking):
 
 * <code>modeXyz</code> → <code>modeXyz<strong>50</strong></code>
 * <code>xyz</code> → <code>xyz<strong>50</strong></code>
