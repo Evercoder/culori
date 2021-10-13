@@ -1,6 +1,6 @@
 {
 	"name": "culori",
-	"version": "1.2.0",
+	"version": "2.0.0",
 	"type": "module",
 	"main": "./bundled/culori.cjs",
 	"module": "./bundled/culori.min.mjs",
