@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v1.2.0 (<a
+				>v2.0.0 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,11 +48,11 @@
 				</li>
 				
 				<li class="">
-					<a href="/colophon/">Colophon</a>
+					<a href="/resources/">Resources</a>
 				</li>
 				
 				<li class="">
-					<a href="/resources/">Resources</a>
+					<a href="/colophon/">Colophon</a>
 				</li>
 				<li>
 					<a href="https://github.com/Evercoder/culori"
@@ -165,8 +165,8 @@
 <li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
 <li><a href='#wcagLuminance'>wcagLuminance</a></li>
+<li><a href='#color-spaces'>xyz50</a></li>
 <li><a href='#color-spaces'>xyz65</a></li>
-<li><a href='#color-spaces'>xyz</a></li>
 <li><a href='#color-spaces'>yiq</a></li>
 </ul>
 </details>
@@ -795,14 +795,14 @@
 <td><code>modeRgb</code></td>
 </tr>
 <tr>
-<td><code>xyz65</code></td>
-<td>XYZ D65 color space</td>
-<td><code>modeXyz65</code></td>
+<td><code>xyz50</code></td>
+<td>XYZ with D50 white-point</td>
+<td><code>modeXyz50</code></td>
 </tr>
 <tr>
-<td><code>xyz</code></td>
-<td>XYZ D50 color space</td>
-<td><code>modeXyz</code></td>
+<td><code>xyz65</code></td>
+<td>XYZ with D65 white-point</td>
+<td><code>modeXyz65</code></td>
 </tr>
 <tr>
 <td><code>yiq</code></td>
@@ -974,8 +974,8 @@
 <td><code>lab</code> → <code>rgb</code></td>
 </tr>
 <tr>
-<td><strong>convertLabToXyz</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>lab</code> → <code>xyz</code></td>
+<td><strong>convertLabToXyz50</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>lab</code> → <code>xyz50</code></td>
 </tr>
 <tr>
 <td><strong>convertLchToLab</strong>(<em>color</em>) → <em>color</em></td>
@@ -998,8 +998,8 @@
 <td><code>luv</code> → <code>lchuv</code></td>
 </tr>
 <tr>
-<td><strong>convertLuvToXyz</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>luv</code> → <code>xyz</code></td>
+<td><strong>convertLuvToXyz50</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>luv</code> → <code>xyz50</code></td>
 </tr>
 <tr>
 <td><strong>convertOkhslToOklab</strong>(<em>color</em>) → <em>color</em></td>
@@ -1030,8 +1030,8 @@
 <td><code>p3</code> → <code>xyz65</code></td>
 </tr>
 <tr>
-<td><strong>convertProphotoToXyz</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>prophoto</code> → <code>xyz</code></td>
+<td><strong>convertProphotoToXyz50</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>prophoto</code> → <code>xyz50</code></td>
 </tr>
 <tr>
 <td><strong>convertRec2020ToXyz65</strong>(<em>color</em>) → <em>color</em></td>
@@ -1078,8 +1078,8 @@
 <td><code>rgb</code> → <code>oklab</code></td>
 </tr>
 <tr>
-<td><strong>convertRgbToXyz</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>rgb</code> → <code>xyz</code></td>
+<td><strong>convertRgbToXyz50</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>rgb</code> → <code>xyz50</code></td>
 </tr>
 <tr>
 <td><strong>convertRgbToXyz65</strong>(<em>color</em>) → <em>color</em></td>
@@ -1114,28 +1114,28 @@
 <td><code>xyz65</code> → <code>rgb</code></td>
 </tr>
 <tr>
-<td><strong>convertXyz65ToXyz</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>xyz65</code> → <code>xyz</code></td>
+<td><strong>convertXyz65ToXyz50</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz65</code> → <code>xyz50</code></td>
 </tr>
 <tr>
-<td><strong>convertXyzToLab</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>xyz</code> → <code>lab</code></td>
+<td><strong>convertXyz50ToLab</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz50</code> → <code>lab</code></td>
 </tr>
 <tr>
-<td><strong>convertXyzToLuv</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>xyz</code> → <code>luv</code></td>
+<td><strong>convertXyz50ToLuv</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz50</code> → <code>luv</code></td>
 </tr>
 <tr>
-<td><strong>convertXyzToProphoto</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>xyz</code> → <code>prophoto</code></td>
+<td><strong>convertXyz50ToProphoto</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz50</code> → <code>prophoto</code></td>
 </tr>
 <tr>
-<td><strong>convertXyzToRgb</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>xyz</code> → <code>rgb</code></td>
+<td><strong>convertXyz50ToRgb</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz50</code> → <code>rgb</code></td>
 </tr>
 <tr>
-<td><strong>convertXyzToXyz65</strong>(<em>color</em>) → <em>color</em></td>
-<td><code>xyz</code> → <code>xyz65</code></td>
+<td><strong>convertXyz50ToXyz65</strong>(<em>color</em>) → <em>color</em></td>
+<td><code>xyz50</code> → <code>xyz65</code></td>
 </tr>
 <tr>
 <td><strong>convertYiqToRgb</strong>(<em>color</em>) → <em>color</em></td>
@@ -1162,7 +1162,7 @@
 
 		<script
 			type="text/javascript"
-			src="https://unpkg.com/culori@1.2.0"
+			src="https://unpkg.com/culori@2.0.0"
 		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });

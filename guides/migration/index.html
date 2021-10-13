@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v1.2.0 (<a
+				>v2.0.0 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,11 +48,11 @@
 				</li>
 				
 				<li class="">
-					<a href="/colophon/">Colophon</a>
+					<a href="/resources/">Resources</a>
 				</li>
 				
 				<li class="">
-					<a href="/resources/">Resources</a>
+					<a href="/colophon/">Colophon</a>
 				</li>
 				<li>
 					<a href="https://github.com/Evercoder/culori"
@@ -67,7 +67,42 @@
 		<div class="container">
 			<article>
 				<h1>Migration guide</h1>
-				<h2>Migrating from version 0.x to 1.0</h2>
+				<h2>Migrating from version 1.x to 2.0</h2>
+<ul>
+<li>all color components in all CSS color syntaxes now accept the <code>none</code> keyword. (<a href="https://github.com/w3c/csswg-drafts/issues/6107">w3c/csswg-drafts#6107</a>)</li>
+</ul>
+<h3>XYZ D50 vs. D65</h3>
+<p>The CSS Color Module Level 4 specification has been updated to include separate predefined color profiles for the XYZ color space for the two most common white points: <code>xyz-d50</code> for the D50 illuminant, and <code>xyz-d65</code> for the D65 illuminant. The <code>xyz</code> predefined color profile is now an alias for the D65-relative XYZ color space. (<a href="https://github.com/w3c/csswg-drafts/issues/6722">w3c/csswg-drafts#6722</a>).</p>
+<p>In Culori, the D50-relative XYZ color space has been changed to use <code>mode: 'xyz50'</code> instead of <code>mode: 'xyz'</code>. <strong>The latter mode is no longer supported.</strong> If you store color objects in your application, they will have to have their <code>mode</code> property updated accordingly:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> formatHex <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token keyword">let</span> color <span class="token operator">=</span> <span class="token function">getFavoriteColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token keyword">if</span> <span class="token punctuation">(</span>color<span class="token punctuation">.</span>mode <span class="token operator">===</span> <span class="token string">'xyz'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>	color<span class="token punctuation">.</span>mode <span class="token operator">=</span> <span class="token string">'xyz50'</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token function">formatHex</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>When parsing strings, CSS colors in the <code>color(xyz x y z)</code> format will be parsed as <code>mode: 'xyz65'</code> instead of <code>mode: 'xyz'</code>:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> parse <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token comment">// In culori@1.x:</span><br><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">'color(xyz 0.5 0.25 1)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ { mode: 'xyz', x: 0.5, y: 0.25, z: 1 }</span><br><br><span class="token comment">// In culori@2.0:</span><br><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">'color(xyz 0.5 0.25 1)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ { mode: 'xyz65', x: 0.5, y: 0.25, z: 1 }</span></code></pre>
+<p>When serializing with the <a href="/api#formatCss"><code>formatCss()</code></a> method, the <code>xyz50</code> and <code>xyz65</code> modes now use the predefined identifiers <code>xyz-d50</code> and <code>xyz-d65</code>, as opposed to the custom identifiers <code>--xyz-d50</code> and <code>--xyx-d65</code> from 1.x:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> formatCss <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token comment">// In culori@1.x:</span><br><span class="token function">formatCss</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mode<span class="token operator">:</span> <span class="token string">'xyz65'</span><span class="token punctuation">,</span> x<span class="token operator">:</span> <span class="token number">0.5</span><span class="token punctuation">,</span> y<span class="token operator">:</span> <span class="token number">0.25</span><span class="token punctuation">,</span> z<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ color(--xyz-d65 0.5 0.25 1)</span><br><br><span class="token comment">// In culori@2.0:</span><br><span class="token function">formatCss</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mode<span class="token operator">:</span> <span class="token string">'xyz65'</span><span class="token punctuation">,</span> x<span class="token operator">:</span> <span class="token number">0.5</span><span class="token punctuation">,</span> y<span class="token operator">:</span> <span class="token number">0.25</span><span class="token punctuation">,</span> z<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ color(xyz-d65 0.5 0.25 1)</span></code></pre>
+<p>The following exports have been renamed in <a href="/guides/tree-shaking">all applicable entry points</a>:</p>
+<ul>
+<li><code>modeXyz</code> → <code>modeXyz<strong>50</strong></code></li>
+<li><code>xyz</code> → <code>xyz<strong>50</strong></code></li>
+<li><code>convertLabToXyz</code> → <code>convertLabToXyz<strong>50</strong></code></li>
+<li><code>convertLuvToXyz</code> → <code>convertLuvToXyz<strong>50</strong></code></li>
+<li><code>convertProphotoToXyz</code> → <code>convertProphotoToXyz<strong>50</strong></code></li>
+<li><code>convertRgbToXyz</code> → <code>convertRgbToXyz<strong>50</strong></code></li>
+<li><code>convertXyz65ToXyz</code> → <code>convertXyz65ToXyz<strong>50</strong></code></li>
+<li><code>convertXyzToLab</code> → <code>convertXyz<strong>50</strong>ToLab</code></li>
+<li><code>convertXyzToLuv</code> → <code>convertXyz<strong>50</strong>ToLuv</code></li>
+<li><code>convertXyzToProphoto</code> → <code>convertXyz<strong>50</strong>ToProphoto</code></li>
+<li><code>convertXyzToRgb</code> → <code>convertXyz<strong>50</strong>ToRgb</code></li>
+<li><code>convertXyzToXyz65</code> → <code>convertXyz<strong>50</strong>ToXyz65</code></li>
+</ul>
+<h3><code>&lt;number&gt;</code> for L no longer valid in <code>lab()</code> and <code>lch()</code></h3>
+<p>CSS defines the <code>lab</code> syntax as <code>lab(&lt;percentage&gt; &lt;number&gt; &lt;number&gt;)</code>, for example:</p>
+<pre class="language-css"><code class="language-css"><span class="token function">lab</span><span class="token punctuation">(</span>75% 40 30<span class="token punctuation">)</span></code></pre>
+<p>...and the <code>lch</code> syntax as <code>lch(&lt;percentage&gt; &lt;number&gt; &lt;hue&gt;)</code>:</p>
+<pre class="language-css"><code class="language-css"><span class="token function">lch</span><span class="token punctuation">(</span>75% 50 15deg<span class="token punctuation">)</span></code></pre>
+<p>Culori used to support <code>&lt;number&gt;</code> as the L channel, so these colors used to be also valid:</p>
+<pre class="language-css"><code class="language-css"><span class="token function">lab</span><span class="token punctuation">(</span>75 40 30<span class="token punctuation">)</span><br><span class="token function">lch</span><span class="token punctuation">(</span>75 50 15deg<span class="token punctuation">)</span></code></pre>
+<p>In version 2.0, we drop this quirk and bring Culori in line with the specification.</p>
+<h2>Migrating from version 0.x to 1.0</h2>
 <h3>Using the library</h3>
 <p>Starting with version 1.0, Culori will be published to npm as an ES Module (ESM) package, with <code>type: module</code> and a set of <code>exports</code> in its <code>package.json</code> file.</p>
 <p>If you're using Node.js 10, you should be able to continue using Culori as before.</p>
@@ -121,7 +156,7 @@
 
 		<script
 			type="text/javascript"
-			src="https://unpkg.com/culori@1.2.0"
+			src="https://unpkg.com/culori@2.0.0"
 		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
