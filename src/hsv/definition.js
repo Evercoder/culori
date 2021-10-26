@@ -23,7 +23,7 @@ const definition = {
 	channels: ['h', 's', 'v', 'alpha'],
 
 	ranges: {
-		h: [0, 360]
+		h: [0, 360, true]
 	},
 
 	interpolate: {

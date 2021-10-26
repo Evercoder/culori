@@ -22,9 +22,9 @@ const definition = {
 	serialize: '--oklch',
 
 	ranges: {
-		l: [0, 0.999],
+		l: [0, 1, true],
 		c: [0, 0.322],
-		h: [0, 360]
+		h: [0, 360, true]
 	}
 };
 

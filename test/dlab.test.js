@@ -37,9 +37,9 @@ tape('color(--din99o-lab)', t => {
 		alpha: 0.25,
 		mode: 'dlab'
 	});
-	t.deepEqual(dlab('color(--din99o-lab 0 50% 0.5 / 25%)'), {
-		l: 0,
-		a: 0.5,
+	t.deepEqual(dlab('color(--din99o-lab 25% 50% 0.5 / 25%)'), {
+		l: 25,
+		a: 0,
 		b: 0.5,
 		alpha: 0.25,
 		mode: 'dlab'
@@ -49,8 +49,8 @@ tape('color(--din99o-lab)', t => {
 
 tape('formatCss', t => {
 	t.equal(
-		formatCss('color(--din99o-lab 0 50% 0.5 / 25%)'),
-		'color(--din99o-lab 0 0.5 0.5 / 0.25)'
+		formatCss('color(--din99o-lab 25% 50% 0.5 / 25%)'),
+		'color(--din99o-lab 25 0 0.5 / 0.25)'
 	);
 	t.end();
 });

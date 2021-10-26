@@ -25,12 +25,6 @@ const definition = {
 		xyz50: convertXyz50ToXyz65
 	},
 
-	ranges: {
-		x: [0, 0.95],
-		y: [0, 1],
-		z: [0, 1.088]
-	},
-
 	channels: ['x', 'y', 'z', 'alpha'],
 
 	parse: ['xyz', 'xyz-d65', '--xyz-d65'],

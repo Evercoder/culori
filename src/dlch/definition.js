@@ -32,9 +32,9 @@ const definition = {
 	channels: ['l', 'c', 'h', 'alpha'],
 
 	ranges: {
-		l: [0, 100],
+		l: [0, 100, true],
 		c: [0, 51.484],
-		h: [0, 360]
+		h: [0, 360, true]
 	},
 
 	interpolate: {

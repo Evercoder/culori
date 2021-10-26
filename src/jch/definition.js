@@ -30,7 +30,7 @@ const definition = {
 	ranges: {
 		j: [0, 0.221],
 		c: [0, 0.19],
-		h: [0, 360]
+		h: [0, 360, true]
 	},
 
 	interpolate: {

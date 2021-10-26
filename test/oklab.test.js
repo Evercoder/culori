@@ -30,9 +30,16 @@ tape('rgb → oklab', t => {
 });
 
 tape('color(--oklab)', t => {
-	t.deepEqual(oklab('color(--oklab 30 0.5 1 / 0.25)'), {
-		l: 30,
+	t.deepEqual(oklab('color(--oklab 0.5 0.5 1 / 0.25)'), {
+		l: 0.5,
 		a: 0.5,
+		b: 1,
+		alpha: 0.25,
+		mode: 'oklab'
+	});
+	t.deepEqual(oklab('color(--oklab 50% 50% 1 / 0.25)'), {
+		l: 0.5,
+		a: 0,
 		b: 1,
 		alpha: 0.25,
 		mode: 'oklab'
@@ -42,8 +49,8 @@ tape('color(--oklab)', t => {
 
 tape('formatCss', t => {
 	t.equal(
-		formatCss('color(--oklab 30 0.5 1 / 0.25)'),
-		'color(--oklab 30 0.5 1 / 0.25)'
+		formatCss('color(--oklab 50% 50% 1 / 0.25)'),
+		'color(--oklab 0.5 0 1 / 0.25)'
 	);
 	t.end();
 });

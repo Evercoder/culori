@@ -31,9 +31,9 @@ const useMode = definition => {
 	}
 
 	definition.channels.forEach(channel => {
-		// undefined channel ranges default to the [0, 1] interval
+		// undefined channel ranges default to the [0, 1] reference interval
 		if (definition.ranges[channel] === undefined) {
-			definition.ranges[channel] = [0, 1];
+			definition.ranges[channel] = [0, 1, true];
 		}
 
 		if (!definition.interpolate[channel]) {

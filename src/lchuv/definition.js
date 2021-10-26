@@ -44,9 +44,9 @@ const definition = {
 	serialize: '--lchuv',
 
 	ranges: {
-		l: [0, 100],
+		l: [0, 100, true],
 		c: [0, 176.956],
-		h: [0, 360]
+		h: [0, 360, true]
 	},
 
 	interpolate: {

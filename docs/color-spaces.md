@@ -15,9 +15,9 @@ A [color model](https://en.wikipedia.org/wiki/Color_model) is a way to describe 
 
 A color model, along with a precise description of how colors in the model are to be interpreted, makes a color _space_. sRGB, Display P3 and ProPhoto RGB are all color spaces that employ the RGB model: they describe colors as combination of red, green, and blue primaries; however, they have different notions of how these red, green, and blue primary colors look.
 
-In some color spaces, such as CIELAB or CIELCh, some channels don't have fixed ranges. For these channels, approximate ranges are obtained by converting all sRGB colors defined by `r, g, b ∈ ℕ ⋂ [0, 255]` to that specific color space. Whenever that's the case, the range is marked with the approximation symbol `≈`.
+In some color spaces, such as CIELAB or CIELCh, some channels don't have fixed ranges. For these channels, approximate ranges are obtained by converting all sRGB colors defined by `r, g, b ∈ ℕ ⋂ [0, 255]` to that specific color space. Whenever that's the case, the range is marked with the approximation symbol `≈`. Unless marked as approximate, all ranges are considered reference ranges.
 
-In addition to the channels listed below, all color spaces also take an optional `alpha` channel with the range `[0, 1]`.
+In addition to the channels listed below, all color spaces also take an optional `alpha` channel with the reference range `[0, 1]`.
 
 </details>
 
@@ -254,7 +254,7 @@ The Oklab color space in Cartesian form.
 
 | Channel | Range              | Description           |
 | ------- | ------------------ | --------------------- |
-| `l`     | `[0, 0.999]`≈      | Lightness             |
+| `l`     | `[0,1]`      | Lightness             |
 | `a`     | `[-0.233, 0.276]`≈ | Green–red component   |
 | `b`     | `[-0.311, 0.198]`≈ | Blue–yellow component |
 
@@ -266,7 +266,7 @@ The Oklab color space in cylindrical form.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| `l`     | `[0, 0.999]`≈ | Lightness   |
+| `l`     | `[0, 1]` | Lightness   |
 | `c`     | `[0, 0.322]`≈ | Chroma      |
 | `h`     | `[0, 360)`    | Hue         |
 
@@ -350,9 +350,9 @@ The CIE XYZ color space in respect to the D50 standard illuminant.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| X       | `[0, 0.964]`≈ | ?           |
-| Y       | `[0, 0.999]`≈ | ?           |
-| Z       | `[0, 0.825]`≈ | ?           |
+| X       | `[0, 1]` | ?           |
+| Y       | `[0, 1]` | ?           |
+| Z       | `[0, 1]` | ?           |
 
 Serialized as `color(xyz-d50 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
@@ -362,9 +362,9 @@ The CIE XYZ color space in respect to the D65 standard illuminant.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| X       | `[0, 0.950]`≈ | ?           |
-| Y       | `[0, 1]`≈     | ?           |
-| Z       | `[0, 1.088]`≈ | ?           |
+| X       | `[0, 1]` | ?           |
+| Y       | `[0, 1]`     | ?           |
+| Z       | `[0, 1]` | ?           |
 
 Serialized as `color(xyz-d65 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
@@ -383,7 +383,7 @@ The channels in the `cubehelix` color space maintain the conventions from D3, na
 | Channel | Range        | Description                                                              |
 | ------- | ------------ | ------------------------------------------------------------------------ |
 | `h`     | `[0, 360)`   | Hue (Based on _start color_ and _rotations_ as defined in Green's paper) |
-| `s`     | `[0, 4.614]` | Saturation (Called _hue_ in op. cit.)                                    |
+| `s`     | `[0, 4.614]`≈ | Saturation (Called _hue_ in op. cit.)                                    |
 | `l`     | `[0, 1]`     | Lightness                                                                |
 
 Serialized as `color(--cubehelix h s l)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.

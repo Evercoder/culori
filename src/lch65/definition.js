@@ -22,9 +22,9 @@ const definition = {
 	},
 
 	ranges: {
-		l: [0, 100],
+		l: [0, 100, true],
 		c: [0, 133.807],
-		h: [0, 360]
+		h: [0, 360, true]
 	}
 };
 

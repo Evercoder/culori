@@ -25,8 +25,8 @@ function parseColorSyntax(color) {
 		}
 	}
 	const components = cmp_string.split(/\s+/);
-	let channels = getMode(mode).channels;
-	for (let i = 0, ch; i < channels.length; i++) {
+	const { channels, ranges } = getMode(mode);
+	for (let i = 0, ch, v; i < channels.length; i++) {
 		ch = channels[i];
 		if (ch === 'alpha') {
 			continue;
@@ -39,7 +39,19 @@ function parseColorSyntax(color) {
 			return undefined;
 		}
 		if (cm[1] !== undefined) {
-			res[ch] = cm[1] / 100;
+			if (ranges[ch][2]) {
+				// Percentage against reference range
+				v =
+					ranges[ch][0] +
+					(cm[1] / 100) * (ranges[ch][1] - ranges[ch][0]);
+				if (Number.isFinite(v)) {
+					res[ch] = v;
+				}
+			} else {
+				// Percentage against approximate range,
+				// fall back to 0, as if value was omitted
+				res[ch] = 0;
+			}
 		} else if (cm[2] !== undefined) {
 			res[ch] = +cm[2];
 		}

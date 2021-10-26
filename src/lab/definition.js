@@ -22,7 +22,7 @@ const definition = {
 	channels: ['l', 'a', 'b', 'alpha'],
 
 	ranges: {
-		l: [0, 100],
+		l: [0, 100, true],
 		a: [-79.287, 93.55],
 		b: [-112.029, 93.388]
 	},

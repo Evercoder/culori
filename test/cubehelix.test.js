@@ -11,7 +11,7 @@ tape('color(--cubehelix)', t => {
 	});
 	t.deepEqual(cubehelix('color(--cubehelix 0 50% 0.5 / 25%)'), {
 		h: 0,
-		s: 0.5,
+		s: 0,
 		l: 0.5,
 		alpha: 0.25,
 		mode: 'cubehelix'
@@ -22,7 +22,7 @@ tape('color(--cubehelix)', t => {
 tape('formatCss', t => {
 	t.equal(
 		formatCss('color(--cubehelix 0 50% 0.5 / 25%)'),
-		'color(--cubehelix 0 0.5 0.5 / 0.25)'
+		'color(--cubehelix 0 0 0.5 / 0.25)'
 	);
 	t.end();
 });

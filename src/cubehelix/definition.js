@@ -46,9 +46,8 @@ const definition = {
 	serialize: '--cubehelix',
 
 	ranges: {
-		h: [0, 360],
-		s: [0, 4.614],
-		l: [0, 1]
+		h: [0, 360, true],
+		s: [0, 4.614]
 	},
 
 	fromMode: {

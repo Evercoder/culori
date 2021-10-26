@@ -25,9 +25,9 @@ const definition = {
 	channels: ['l', 'c', 'h', 'alpha'],
 
 	ranges: {
-		l: [0, 100],
+		l: [0, 100, true],
 		c: [0, 131.207],
-		h: [0, 360]
+		h: [0, 360, true]
 	},
 
 	parse: [parseLch],

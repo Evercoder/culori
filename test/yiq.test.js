@@ -29,7 +29,7 @@ tape('color(--yiq)', t => {
 	});
 	t.deepEqual(yiq('color(--yiq 0% 50% 0.5 / 25%)'), {
 		y: 0,
-		i: 0.5,
+		i: 0,
 		q: 0.5,
 		alpha: 0.25,
 		mode: 'yiq'
@@ -40,7 +40,7 @@ tape('color(--yiq)', t => {
 tape('formatCss', t => {
 	t.equal(
 		formatCss('color(--yiq 0% 50% 0.5 / 25%)'),
-		'color(--yiq 0 0.5 0.5 / 0.25)'
+		'color(--yiq 0 0 0.5 / 0.25)'
 	);
 	t.end();
 });

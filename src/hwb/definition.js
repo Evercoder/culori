@@ -21,7 +21,7 @@ const definition = {
 	channels: ['h', 'w', 'b', 'alpha'],
 
 	ranges: {
-		h: [0, 360]
+		h: [0, 360, true]
 	},
 
 	parse: [parseHwb],

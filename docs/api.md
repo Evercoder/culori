@@ -1558,7 +1558,7 @@ Here's a sample definition for the HSL color space:
   },
   channels: ['h', 's', 'l', 'alpha'],
   ranges: {
-    h: [0, 360]
+    h: [0, 360, true]
   },
   parse: [parseHsl],
   serialize: serializeHsl,

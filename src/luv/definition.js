@@ -34,7 +34,7 @@ const definition = {
 	serialize: '--luv',
 
 	ranges: {
-		l: [0, 100],
+		l: [0, 100, true],
 		u: [-84.936, 175.042],
 		v: [-125.882, 87.243]
 	},
