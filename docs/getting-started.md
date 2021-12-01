@@ -49,7 +49,7 @@ Use it as an ES module:
 </script>
 ```
 
-## Use it online
+## Use Culori online
 
 ### In your browser's console
 
@@ -71,3 +71,12 @@ culori = import('culori@{{pkg.version}}');
 
 It's often useful to pin the library to a specific version, to make sure your old notebooks don't break if the API changes in a new major version of the library.
 
+## Use Culori in Deno
+
+The library is published to [deno.land/x/culori](https://deno.land/x/culori) for usage in [Deno](https://deno.land/):
+
+```js
+import { rgb } from 'https://deno.land/x/culori@{{pkg.version}}/index.js';
+
+rgb('tomato');
+```
