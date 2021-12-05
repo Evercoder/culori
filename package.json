@@ -11,7 +11,8 @@
 		".": "./src/index.js",
 		"./css": "./src/bootstrap/css.js",
 		"./all": "./src/bootstrap/all.js",
-		"./fn": "./src/index-fn.js"
+		"./fn": "./src/index-fn.js",
+		"./package.json": "./package.json"
 	},
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <danburzo@gmail.com>",
