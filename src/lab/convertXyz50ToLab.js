@@ -1,11 +1,12 @@
-import { Xn, Yn, Zn, k, e } from '../xyz50/constants.js';
+import { k, e } from '../xyz50/constants.js';
+import { D50 } from '../constants.js';
 
 const f = value => (value > e ? Math.cbrt(value) : (k * value + 16) / 116);
 
 const convertXyz50ToLab = ({ x, y, z, alpha }) => {
-	let f0 = f(x / Xn);
-	let f1 = f(y / Yn);
-	let f2 = f(z / Zn);
+	let f0 = f(x / D50.X);
+	let f1 = f(y / D50.Y);
+	let f2 = f(z / D50.Z);
 
 	let res = {
 		mode: 'lab',

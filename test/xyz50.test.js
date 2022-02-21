@@ -2,26 +2,38 @@ import tape from 'tape';
 import { xyz50, formatCss } from '../src/index.js';
 
 tape('xyz50', t => {
-	t.deepEqual(xyz50('white'), {
-		mode: 'xyz50',
-		x: 0.96422,
-		y: 1,
-		z: 0.82521
-	});
+	t.deepEqual(
+		xyz50('white'),
+		{
+			mode: 'xyz50',
+			x: 0.9642956660812442,
+			y: 1.0000000361162846,
+			z: 0.8251045485672053
+		},
+		'white'
+	);
 	t.deepEqual(xyz50('black'), { mode: 'xyz50', x: 0, y: 0, z: 0 });
-	t.deepEqual(xyz50('red'), {
-		mode: 'xyz50',
-		x: 0.4360747,
-		y: 0.2225045,
-		z: 0.0139322
-	});
-	t.deepEqual(xyz50('#00cc0080'), {
-		mode: 'xyz50',
-		x: 0.23251271385359676,
-		y: 0.4328708973203402,
-		z: 0.058634351825878145,
-		alpha: 0.5019607843137255
-	});
+	t.deepEqual(
+		xyz50('red'),
+		{
+			mode: 'xyz50',
+			x: 0.436065742824811,
+			y: 0.22249319175623702,
+			z: 0.013923904500943465
+		},
+		'red'
+	);
+	t.deepEqual(
+		xyz50('#00cc0080'),
+		{
+			mode: 'xyz50',
+			x: 0.23256498648213272,
+			y: 0.43287600197031817,
+			z: 0.05862033437620246,
+			alpha: 0.5019607843137255
+		},
+		'#00cc0080'
+	);
 	t.end();
 });
 

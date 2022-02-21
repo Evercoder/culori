@@ -1,4 +1,5 @@
-import { Xn, Yn, Zn, k, e } from '../xyz65/constants.js';
+import { k, e } from '../xyz65/constants.js';
+import { D65 } from '../constants.js';
 
 let fn = v => (Math.pow(v, 3) > e ? Math.pow(v, 3) : (116 * v - 16) / k);
 
@@ -9,9 +10,9 @@ const convertLab65ToXyz65 = ({ l, a, b, alpha }) => {
 
 	let res = {
 		mode: 'xyz65',
-		x: fn(fx) * Xn,
-		y: fn(fy) * Yn,
-		z: fn(fz) * Zn
+		x: fn(fx) * D65.X,
+		y: fn(fy) * D65.Y,
+		z: fn(fz) * D65.Z
 	};
 
 	if (alpha !== undefined) {

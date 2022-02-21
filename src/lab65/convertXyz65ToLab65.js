@@ -1,11 +1,12 @@
-import { Xn, Yn, Zn, k, e } from '../xyz65/constants.js';
+import { k, e } from '../xyz65/constants.js';
+import { D65 } from '../constants.js';
 
 const f = value => (value > e ? Math.cbrt(value) : (k * value + 16) / 116);
 
 const convertXyz65ToLab65 = ({ x, y, z, alpha }) => {
-	let f0 = f(x / Xn);
-	let f1 = f(y / Yn);
-	let f2 = f(z / Zn);
+	let f0 = f(x / D65.X);
+	let f1 = f(y / D65.Y);
+	let f2 = f(z / D65.Z);
 
 	let res = {
 		mode: 'lab65',

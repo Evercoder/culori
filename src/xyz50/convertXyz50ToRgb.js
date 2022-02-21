@@ -10,9 +10,18 @@ import convertLrgbToRgb from '../lrgb/convertLrgbToRgb.js';
 
 const convertXyz50ToRgb = ({ x, y, z, alpha }) => {
 	let res = convertLrgbToRgb({
-		r: x * 3.1338561 - y * 1.6168667 - 0.4906146 * z,
-		g: x * -0.9787684 + y * 1.9161415 + 0.033454 * z,
-		b: x * 0.0719453 - y * 0.2289914 + 1.4052427 * z
+		r:
+			x * 3.1341359569958707 -
+			y * 1.6173863321612538 -
+			0.4906619460083532 * z,
+		g:
+			x * -0.978795502912089 +
+			y * 1.916254567259524 +
+			0.03344273116131949 * z,
+		b:
+			x * 0.07195537988411677 -
+			y * 0.2289768264158322 +
+			1.405386058324125 * z
 	});
 	if (alpha !== undefined) {
 		res.alpha = alpha;
