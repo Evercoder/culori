@@ -1,15 +1,16 @@
-import { Xn, Yn, Zn, k, e } from '../xyz50/constants.js';
+import { k, e } from '../xyz50/constants.js';
+import { D50 } from '../constants.js';
 
 export const u_fn = (x, y, z) => (4 * x) / (x + 15 * y + 3 * z);
 export const v_fn = (x, y, z) => (9 * y) / (x + 15 * y + 3 * z);
 
-export const un = u_fn(Xn, Yn, Zn);
-export const vn = v_fn(Xn, Yn, Zn);
+export const un = u_fn(D50.X, D50.Y, D50.Z);
+export const vn = v_fn(D50.X, D50.Y, D50.Z);
 
 const l_fn = value => (value <= e ? k * value : 116 * Math.cbrt(value) - 16);
 
 const convertXyz50ToLuv = ({ x, y, z, alpha }) => {
-	let l = l_fn(y / Yn);
+	let l = l_fn(y / D50.Y);
 	let u = u_fn(x, y, z);
 	let v = v_fn(x, y, z);
 

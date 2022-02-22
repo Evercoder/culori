@@ -2,16 +2,12 @@ import tape from 'tape';
 import { dlab, formatCss } from '../src/index.js';
 
 tape('dlab', t => {
-	t.deepEqual(
-		dlab('white'),
-		{ mode: 'dlab', l: 100.00000329450263, a: 0, b: 0 },
-		'white'
-	);
+	t.deepEqual(dlab('white'), { mode: 'dlab', l: 100, a: 0, b: 0 }, 'white');
 
 	// Tests that achromatic RGB colors get a = b = 0
 	t.deepEqual(
 		dlab('#111'),
-		{ mode: 'dlab', l: 5.938148209426481, a: 0, b: 0 },
+		{ mode: 'dlab', l: 5.938147621379976, a: 0, b: 0 },
 		'#111'
 	);
 
@@ -20,9 +16,9 @@ tape('dlab', t => {
 		dlab('red'),
 		{
 			mode: 'dlab',
-			l: 57.292786940734544,
-			a: 39.49865108060835,
-			b: 30.51816478216608
+			l: 57.28917941426675,
+			a: 39.49797800074304,
+			b: 30.518440059252875
 		},
 		'red'
 	);

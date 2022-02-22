@@ -2,19 +2,26 @@ import tape from 'tape';
 import { rec2020, formatCss } from '../src/index.js';
 
 tape('rec2020', t => {
-	t.deepEqual(rec2020('white'), {
-		mode: 'rec2020',
-		r: 1.0000404776308303,
-		g: 0.999993662158724,
-		b: 0.9998939728043594
-	});
-	t.deepEqual(rec2020('black'), { mode: 'rec2020', r: 0, g: 0, b: 0 });
-	t.deepEqual(rec2020('red'), {
-		mode: 'rec2020',
-		r: 0.7920409167961275,
-		g: 0.23099956503092,
-		b: 0.0737732217498481
-	});
+	t.deepEqual(
+		rec2020('white'),
+		{ mode: 'rec2020', r: 1, g: 1, b: 1 },
+		'white'
+	);
+	t.deepEqual(
+		rec2020('black'),
+		{ mode: 'rec2020', r: 0, g: 0, b: 0 },
+		'black'
+	);
+	t.deepEqual(
+		rec2020('red'),
+		{
+			mode: 'rec2020',
+			r: 0.7919771358198009,
+			g: 0.23097568481079728,
+			b: 0.07376147493817597
+		},
+		'red'
+	);
 	t.end();
 });
 

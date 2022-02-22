@@ -2,21 +2,38 @@ import tape from 'tape';
 import { lchuv, formatCss } from '../src/index.js';
 
 tape('lchuv', t => {
-	t.deepEqual(lchuv('white'), { mode: 'lchuv', l: 100, c: 0 });
-	t.deepEqual(lchuv('black'), { mode: 'lchuv', l: 0, c: 0 });
-	t.deepEqual(lchuv('red'), {
-		mode: 'lchuv',
-		l: 54.29173376861782,
-		c: 176.95684328532462,
-		h: 8.435233785129249
-	});
-	t.deepEqual(lchuv('#00cc0080'), {
-		mode: 'lchuv',
-		l: 71.74939254482632,
-		c: 99.48119182204431,
-		h: 134.23232917955536,
-		alpha: 0.5019607843137255
-	});
+	t.deepEqual(
+		lchuv('white'),
+		{
+			mode: 'lchuv',
+			l: 100.00000139649632,
+			c: 0.000013192899605235416,
+			h: 129.3684297210339
+		},
+		'white'
+	);
+	t.deepEqual(lchuv('black'), { mode: 'lchuv', l: 0, c: 0 }, 'black');
+	t.deepEqual(
+		lchuv('red'),
+		{
+			mode: 'lchuv',
+			l: 54.29054294696968,
+			c: 176.94953872495253,
+			h: 8.434231142939021
+		},
+		'red'
+	);
+	t.deepEqual(
+		lchuv('#00cc0080'),
+		{
+			mode: 'lchuv',
+			l: 71.74973747305378,
+			c: 99.4709666171262,
+			h: 134.23124010020916,
+			alpha: 0.5019607843137255
+		},
+		'#00cc0080'
+	);
 	t.end();
 });
 

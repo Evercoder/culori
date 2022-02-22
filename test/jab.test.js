@@ -4,7 +4,7 @@ import { jab, formatHex, formatCss } from '../src/index.js';
 tape('jab', t => {
 	t.deepEqual(
 		jab('white'),
-		{ mode: 'jab', j: 0.22206540994652027, a: 0, b: 0 },
+		{ mode: 'jab', j: 0.222065249535743, a: 0, b: 0 },
 		'white'
 	);
 
@@ -18,9 +18,9 @@ tape('jab', t => {
 		jab('red'),
 		{
 			mode: 'jab',
-			j: 0.13439375302384474,
-			a: 0.11788932317487365,
-			b: 0.11188289876994292
+			j: 0.13438473104350068,
+			a: 0.11788526260797229,
+			b: 0.11187810901317238
 		},
 		'red'
 	);

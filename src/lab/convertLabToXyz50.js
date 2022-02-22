@@ -1,4 +1,5 @@
-import { Xn, Yn, Zn, k, e } from '../xyz50/constants.js';
+import { k, e } from '../xyz50/constants.js';
+import { D50 } from '../constants.js';
 
 let fn = v => (Math.pow(v, 3) > e ? Math.pow(v, 3) : (116 * v - 16) / k);
 
@@ -9,9 +10,9 @@ const convertLabToXyz50 = ({ l, a, b, alpha }) => {
 
 	let res = {
 		mode: 'xyz50',
-		x: fn(fx) * Xn,
-		y: fn(fy) * Yn,
-		z: fn(fz) * Zn
+		x: fn(fx) * D50.X,
+		y: fn(fy) * D50.Y,
+		z: fn(fz) * D50.Z
 	};
 
 	if (alpha !== undefined) {

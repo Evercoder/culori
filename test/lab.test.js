@@ -2,12 +2,16 @@ import tape from 'tape';
 import { lab, formatCss } from '../src/index.js';
 
 tape('lab', t => {
-	t.deepEqual(lab('white'), { mode: 'lab', l: 100, a: 0, b: 0 }, 'white');
+	t.deepEqual(
+		lab('white'),
+		{ mode: 'lab', l: 100.00000139649632, a: 0, b: 0 },
+		'white'
+	);
 
 	// Tests that achromatic RGB colors get a = b = 0 in CIELab
 	t.deepEqual(
 		lab('#111'),
-		{ mode: 'lab', l: 5.063329493432597, a: 0, b: 0 },
+		{ mode: 'lab', l: 5.063329676301251, a: 0, b: 0 },
 		'#111'
 	);
 
@@ -16,9 +20,9 @@ tape('lab', t => {
 		lab('red'),
 		{
 			mode: 'lab',
-			l: 54.29173376861782,
-			a: 80.8124553179771,
-			b: 69.88504032350531
+			l: 54.29054294696968,
+			a: 80.80492033462417,
+			b: 69.89098825896278
 		},
 		'red'
 	);

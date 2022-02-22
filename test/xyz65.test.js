@@ -6,27 +6,39 @@ tape('xyz65', t => {
 		These should theoretically be equal to the Xn, Yn, and Zn values
 		from xyz65/constants.js, but there's a small rounding error for `y`.
 	 */
-	t.deepEqual(xyz65('white'), {
-		mode: 'xyz65',
-		x: 0.95047,
-		y: 1.0000001,
-		z: 1.08883
-	});
+	t.deepEqual(
+		xyz65('white'),
+		{
+			mode: 'xyz65',
+			x: 0.9504559270516715,
+			y: 0.9999999999999999,
+			z: 1.0890577507598784
+		},
+		'white'
+	);
 
 	t.deepEqual(xyz65('black'), { mode: 'xyz65', x: 0, y: 0, z: 0 });
-	t.deepEqual(xyz65('red'), {
-		mode: 'xyz65',
-		x: 0.4124564,
-		y: 0.2126729,
-		z: 0.0193339
-	});
-	t.deepEqual(xyz65('#00cc0080'), {
-		mode: 'xyz65',
-		x: 0.21591422490127016,
-		y: 0.4318284498025403,
-		z: 0.07197138817284543,
-		alpha: 0.5019607843137255
-	});
+	t.deepEqual(
+		xyz65('red'),
+		{
+			mode: 'xyz65',
+			x: 0.4123907992659593,
+			y: 0.2126390058715102,
+			z: 0.0193308187155918
+		},
+		'red'
+	);
+	t.deepEqual(
+		xyz65('#00cc0080'),
+		{
+			mode: 'xyz65',
+			x: 0.21591920006651102,
+			y: 0.43183840013302205,
+			z: 0.071973066688837,
+			alpha: 0.5019607843137255
+		},
+		'#00cc0080'
+	);
 	t.end();
 });
 

@@ -2,14 +2,10 @@ import tape from 'tape';
 import { dlch, formatCss } from '../src/index.js';
 
 tape('dlch', t => {
-	t.deepEqual(
-		dlch('white'),
-		{ mode: 'dlch', l: 100.00000329450263, c: 0 },
-		'white'
-	);
+	t.deepEqual(dlch('white'), { mode: 'dlch', l: 100, c: 0 }, 'white');
 	t.deepEqual(
 		dlch('#111'),
-		{ mode: 'dlch', l: 5.938148209426481, c: 0 },
+		{ mode: 'dlch', l: 5.938147621379976, c: 0 },
 		'#111'
 	);
 	t.deepEqual(dlch('black'), { mode: 'dlch', l: 0, c: 0 }, 'black');
@@ -17,9 +13,9 @@ tape('dlch', t => {
 		dlch('red'),
 		{
 			mode: 'dlch',
-			l: 57.292786940734544,
-			c: 49.91494584650057,
-			h: 37.691043152153014
+			l: 57.28917941426675,
+			c: 49.914581534832,
+			h: 37.691765574369924
 		},
 		'red'
 	);

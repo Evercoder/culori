@@ -153,17 +153,17 @@ tape('differenceCmc', function (test) {
 
 	test.equal(
 		differenceCmc()('rgb(55, 60, 48)', 'rgb(55, 65, 53)'),
-		3.5905910602807696
+		3.590406912120119
 	);
 
 	test.equal(
 		differenceCmc(2, 1)('rgb(55, 60, 48)', 'rgb(55, 65, 53)'),
-		2.8209138816986568
+		2.82061249589761
 	);
 
 	test.equal(
 		differenceCmc()('lab(50% 40 20)', 'lab(60% 20 100)'),
-		53.10787441404076
+		53.10947821085943
 	);
 
 	test.end();
@@ -179,11 +179,11 @@ tape('differenceKotsarenkoRamos', function (test) {
 });
 
 tape('difference in LCh space', t => {
-	t.equal(differenceEuclidean('lch')('red', 'green'), 130.3764124621912);
+	t.equal(differenceEuclidean('lch')('red', 'green'), 130.3598834181675);
 	t.end();
 });
 
 tape('differenceHyab', t => {
-	t.equal(differenceHyab()('red', 'green'), 139.93576718451553);
+	t.equal(differenceHyab()('red', 'green'), 139.92805737622862);
 	t.end();
 });
