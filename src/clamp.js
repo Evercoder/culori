@@ -197,8 +197,8 @@ export function toGamut(
 	const White = { mode: dest };
 	const Black = { mode: dest };
 	gamutDef.channels.forEach(ch => {
-		Black[ch] = gamutDef.ranges[0];
-		White[ch] = gamutDef.ranges[1];
+		Black[ch] = gamutDef.ranges[ch][0];
+		White[ch] = gamutDef.ranges[ch][1];
 	});
 
 	return color => {
@@ -239,13 +239,17 @@ export function toGamut(
 			} else {
 				clipped = clipToGamut(candidate);
 				if (delta(clipped, candidate) < jnd) {
-					return clipped;
+					start = candidate.c;
+					lastGood = null;
 				} else {
 					end = candidate.c;
 				}
 			}
 		}
 		if (!inDestinationGamut(candidate)) {
+			if (!lastGood) {
+				return clipped;
+			}
 			candidate.c = lastGood;
 		}
 		return destConv(candidate);
