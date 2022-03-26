@@ -240,8 +240,8 @@ export function toGamut(
 				end = candidate.c;
 			}
 		}
-		let start = candidate.c;
-		let end = 200;
+		start = candidate.c;
+		end = 200;
 		while (end - start > ε) {
 			candidate.c = (start + end) * 0.5;
 			clipped = clipToGamut(candidate);
