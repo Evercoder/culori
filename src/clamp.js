@@ -228,29 +228,27 @@ export function toGamut(
 
 		let start = 0;
 		let end = candidate.c;
-		let lastGood;
-		let goodClipped;
-		let clipped;
 		/* Corresponds to about a dozen steps */
 		let ε = (ranges.c[1] - ranges.c[0]) / 8000;
+		let bestClipped = clipToGamut(candidate);
+		let bestDelta = delta(candidate, clipped);
+		let clipped, cd;
 		while (end - start > ε) {
 			candidate.c = (start + end) * 0.5;
+			clipped = clipToGamut(candidate);
+			cd = delta(candidate, clipped);
+			if (cd < bestDelta) {
+				bestClipped = clipped;
+				bestDelta = cd;
+			}
 			if (inDestinationGamut(candidate)) {
 				start = candidate.c;
-				lastGood = candidate.c;
 			} else {
-				clipped = clipToGamut(candidate);
-				if (delta(clipped, candidate) < jnd && !goodClipped) {
-					goodClipped = clipped;
-				}
 				end = candidate.c;
 			}
 		}
-		if (
-			goodClipped &&
-			delta(initial, goodClipped) < delta(initial, candidate)
-		) {
-			return goodClipped;
+		if (delta(initial, bestClipped) < delta(initial, candidate)) {
+			return bestClipped;
 		}
 		return destConv(candidate);
 	};
