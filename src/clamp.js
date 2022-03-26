@@ -233,24 +233,22 @@ export function toGamut(
 		let ε = (ranges.c[1] - ranges.c[0]) / 8000;
 		while (end - start > ε) {
 			candidate.c = (start + end) * 0.5;
-			if (inDestinationGamut(candidate)) {
+			clipped = clipToGamut(candidate);
+			if (
+				inDestinationGamut(candidate) ||
+				delta(clipped, candidate) < jnd
+			) {
 				start = candidate.c;
 				lastGood = candidate.c;
 			} else {
-				clipped = clipToGamut(candidate);
-				if (delta(clipped, candidate) < jnd) {
-					start = candidate.c;
-					lastGood = null;
-				} else {
-					end = candidate.c;
-				}
+				end = candidate.c;
 			}
 		}
 		if (!inDestinationGamut(candidate)) {
-			if (!lastGood) {
-				return clipped;
-			}
 			candidate.c = lastGood;
+		}
+		if (!inDestinationGamut(candidate)) {
+			return clipToGamut(candidate);
 		}
 		return destConv(candidate);
 	};
