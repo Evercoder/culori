@@ -235,8 +235,7 @@ export function toGamut(
 		let clipped, cd;
 		while (end - start > ε) {
 			candidate.c = (start + end) * 0.5;
-			clipped = clipToGamut(candidate);
-			cd = delta(candidate, clipped);
+
 			if (cd < bestDelta) {
 				bestClipped = clipped;
 				bestDelta = cd;
@@ -244,6 +243,8 @@ export function toGamut(
 			if (inDestinationGamut(candidate)) {
 				start = candidate.c;
 			} else {
+				clipped = clipToGamut(candidate);
+				cd = delta(candidate, clipped);
 				end = candidate.c;
 			}
 		}
