@@ -237,18 +237,22 @@ export function toGamut(
 				start = candidate.c;
 				lastGood = candidate.c;
 			} else {
-				// clipped = clipToGamut(candidate);
-				// if (delta(clipped, candidate) < jnd) {
-				// return clipped;
-				// } else {
 				end = candidate.c;
-				// }
 			}
 		}
-		clipped = clipToGamut(candidate);
-		if (delta(clipped, candidate) < jnd) {
-			return clipped;
+		let start = candidate.c;
+		let end = 200;
+		while (end - start > ε) {
+			candidate.c = (start + end) * 0.5;
+			clipped = clipToGamut(candidate);
+			if (delta(clipped, candidate) < jnd) {
+				start = candidate.c;
+			} else {
+				end = candidate.c;
+			}
 		}
-		return destConv(candidate);
+		return clipped;
+
+		// return destConv(candidate);
 	};
 }
