@@ -1,7 +1,27 @@
 import tape from 'tape';
-import { clampChroma, displayable } from '../src/index.js';
+import { clampChroma, displayable, toGamut } from '../src/index.js';
 
 tape('RGB', function (test) {
+	test.equal(displayable({ mode: 'rgb', r: 0, g: 0, b: 0 }), true);
+	test.equal(
+		displayable({ mode: 'rgb', r: 1, g: 1, b: 1, alpha: 0.5 }),
+		true
+	);
+	test.equal(
+		displayable({ mode: 'rgb', r: 1.1, g: 1, b: 1, alpha: 0.5 }),
+		false
+	);
+	test.end();
+});
+
+tape('LCh', function (test) {
+	test.equal(displayable('lch(50% 0 0)'), true);
+	test.equal(displayable('lch(50% -100 0)'), true);
+	test.equal(displayable('lch(120% -100 0)'), false);
+	test.end();
+});
+
+tape('clampChroma (rgb)', function (test) {
 	test.deepEqual(clampChroma('red'), { mode: 'rgb', r: 1, g: 0, b: 0 });
 	test.deepEqual(clampChroma('rgb(300, 255, 255)'), {
 		mode: 'rgb',
@@ -12,7 +32,7 @@ tape('RGB', function (test) {
 	test.end();
 });
 
-tape('LCh', function (test) {
+tape('clampChroma (lch)', function (test) {
 	test.deepEqual(clampChroma('lch(50% 120 5)'), {
 		mode: 'lch',
 		l: 50,
@@ -42,3 +62,17 @@ tape('Issue #129', function (test) {
 	);
 	test.end();
 });
+
+// tape('toGamut()', t => {
+// 	let clamp = toGamut('p3', 'lch');
+// 	t.deepEqual(
+// 		clamp('lch(0.1% 95 328)'),
+// 		{
+// 			mode: 'p3',
+// 			r: 0,
+// 			g: 0,
+// 			b: 0
+// 		}
+// 	);
+// 	t.end();
+// });
