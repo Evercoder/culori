@@ -207,7 +207,7 @@ export function toGamut(
 			return undefined;
 		}
 		const candidate = ucs(color);
-		const max_chroma = candidate.c;
+		const initial = { ...candidate };
 		if (candidate.l >= ranges.l[1]) {
 			const res = { ...White };
 			if (color.alpha !== undefined) {
@@ -227,8 +227,9 @@ export function toGamut(
 		}
 
 		let start = 0;
-		let end = max_chroma;
+		let end = candidate.c;
 		let lastGood;
+		let goodClipped;
 		let clipped;
 		/* Corresponds to about a dozen steps */
 		let ε = (ranges.c[1] - ranges.c[0]) / 8000;
@@ -238,22 +239,19 @@ export function toGamut(
 				start = candidate.c;
 				lastGood = candidate.c;
 			} else {
+				clipped = clipToGamut(candidate);
+				if (delta(clipped, candidate) < jnd && !goodClipped) {
+					goodClipped = clipped;
+				}
 				end = candidate.c;
 			}
 		}
-		start = candidate.c;
-		end = max_chroma;
-		while (end - start > ε) {
-			candidate.c = (start + end) * 0.5;
-			clipped = clipToGamut(candidate);
-			if (delta(clipped, candidate) < jnd) {
-				start = candidate.c;
-			} else {
-				end = candidate.c;
-			}
+		if (
+			goodClipped &&
+			delta(initial, goodClipped) < delta(initial, candidate)
+		) {
+			return goodClipped;
 		}
-		return clipped;
-
-		// return destConv(candidate);
+		return destConv(candidate);
 	};
 }
