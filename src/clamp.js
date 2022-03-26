@@ -207,6 +207,7 @@ export function toGamut(
 			return undefined;
 		}
 		const candidate = ucs(color);
+		const max_chroma = candidate.c;
 		if (candidate.l >= ranges.l[1]) {
 			const res = { ...White };
 			if (color.alpha !== undefined) {
@@ -226,7 +227,7 @@ export function toGamut(
 		}
 
 		let start = 0;
-		let end = candidate.c;
+		let end = max_chroma;
 		let lastGood;
 		let clipped;
 		/* Corresponds to about a dozen steps */
@@ -241,7 +242,7 @@ export function toGamut(
 			}
 		}
 		start = candidate.c;
-		end = 200;
+		end = max_chroma;
 		while (end - start > ε) {
 			candidate.c = (start + end) * 0.5;
 			clipped = clipToGamut(candidate);
