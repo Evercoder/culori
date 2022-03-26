@@ -231,7 +231,7 @@ export function toGamut(
 		/* Corresponds to about a dozen steps */
 		let ε = (ranges.c[1] - ranges.c[0]) / 8000;
 		let bestClipped = clipToGamut(candidate);
-		let bestDelta = delta(candidate, clipped);
+		let bestDelta = delta(candidate, bestClipped);
 		let clipped, cd;
 		while (end - start > ε) {
 			candidate.c = (start + end) * 0.5;
