@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { clampChroma, displayable, toGamut } from '../src/index.js';
+import { clampChroma, displayable } from '../src/index.js';
 
 tape('RGB', function (test) {
 	test.equal(displayable({ mode: 'rgb', r: 0, g: 0, b: 0 }), true);

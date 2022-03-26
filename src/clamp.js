@@ -191,7 +191,7 @@ export function toGamut(
 	const destConv = converter(dest);
 
 	const ucs = converter(mode);
-	const rangeL = getMode(mode).ranges.l;
+	const { ranges } = getMode(mode);
 
 	const gamutDef = getMode(dest);
 	const White = { mode: dest };
@@ -207,14 +207,14 @@ export function toGamut(
 			return undefined;
 		}
 		const candidate = ucs(color);
-		if (candidate.l >= rangeL[1]) {
+		if (candidate.l >= ranges.l[1]) {
 			const res = { ...White };
 			if (color.alpha !== undefined) {
 				res.alpha = color.alpha;
 			}
 			return res;
 		}
-		if (candidate.l <= rangeL[0]) {
+		if (candidate.l <= ranges.l[0]) {
 			const res = { ...Black };
 			if (color.alpha !== undefined) {
 				res.alpha = color.alpha;
