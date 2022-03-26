@@ -4,7 +4,17 @@ import { getMode } from './modes.js';
 import { differenceEuclidean } from './difference.js';
 
 const rgb = converter('rgb');
+const fixup_rgb = color => {
+	const c = rgb(color);
+	c.r = Math.max(0, Math.min(c.r, 1));
+	c.g = Math.max(0, Math.min(c.g, 1));
+	c.b = Math.max(0, Math.min(c.b, 1));
+	return c;
+};
 
+/*
+	Returns whether the color is in the sRGB gamut.
+ */
 export function displayable(color) {
 	const c = rgb(color);
 	return (
@@ -18,15 +28,35 @@ export function displayable(color) {
 	);
 }
 
-const fixup_rgb = color => {
-	const c = rgb(color);
-	c.r = Math.max(0, Math.min(c.r, 1));
-	c.g = Math.max(0, Math.min(c.g, 1));
-	c.b = Math.max(0, Math.min(c.b, 1));
-	return c;
-};
+/*
+	Given a color space `mode`, returns a function
+	with which to check whether a color is 
+	in that color space's gamut.
+ */
+export function inGamut(mode = 'rgb') {
+	const conv = converter(mode);
+	const { channels, ranges } = getMode(mode);
+	return color => {
+		const c = conv(color);
+		return (
+			c !== undefined &&
+			channels.every(
+				ch =>
+					ch === 'alpha' ||
+					(c[ch] >= ranges[ch][0] && c[ch] <= ranges[ch][1])
+			)
+		);
+	};
+}
 
-export const clampRgb = color => {
+/*
+	Obtain a color that's in the sRGB gamut
+	by converting it to sRGB and clipping the channel values
+	so that they're within the [0, 1] range.
+
+	The result is returned in the color's original color space.
+ */
+export function clampRgb(color) {
 	color = prepare(color);
 
 	// if the color is undefined or displayable, return it directly
@@ -36,9 +66,58 @@ export const clampRgb = color => {
 	let conv = converter(color.mode);
 
 	return conv(fixup_rgb(color));
-};
+}
 
-export const clampChroma = (color, mode = 'lch') => {
+/*
+	Given the `mode` color space, returns a function
+	with which to obtain a color that's in gamut for
+	the `mode` color space by clipping the channel values
+	so that they fit in their respective ranges.
+
+	It's similar to `clampRgb`, but works for any 
+	bounded color space (RGB or not) for which 
+	any combination of in-range channel values
+	produces an in-gamut color.
+ */
+export function clampGamut(mode = 'rgb') {
+	const gamutConverter = converter(mode);
+	const { channels, ranges } = getMode(mode);
+	return color => {
+		const c = gamutConverter(color);
+		if (c === undefined) {
+			return undefined;
+		}
+		return channels.reduce(
+			(res, ch) => {
+				if (c[ch] !== undefined) {
+					if (ch === 'alpha') {
+						res.alpha = c.alpha;
+					} else {
+						res[ch] = Math.max(
+							Math.min(c[ch], ranges[ch][1]),
+							ranges[ch][0]
+						);
+					}
+				}
+				return res;
+			},
+			{ mode }
+		);
+	};
+}
+
+/*
+	Obtain a color that's in the sRGB gamut
+	by first converting it to `mode` and then
+	finding the the greatest chroma value
+	that fits the gamut.
+
+	By default, the CIELCh color space is used,
+	but any color that has a chroma component will do.
+
+	The result is returned in the color's original color space.
+ */
+export function clampChroma(color, mode = 'lch') {
 	color = prepare(color);
 
 	// if the color is undefined or displayable, return it directly
@@ -80,106 +159,95 @@ export const clampChroma = (color, mode = 'lch') => {
 	return conv(
 		displayable(clamped) ? clamped : { ...clamped, c: _last_good_c }
 	);
-};
-
-export function inGamut(gamut = 'rgb') {
-	const gamutConverter = converter(gamut);
-	const { channels, ranges } = getMode(gamut);
-	return color => {
-		const c = gamutConverter(color);
-		if (c === undefined) {
-			return undefined;
-		}
-		return channels.every(
-			ch =>
-				ch === 'alpha' ||
-				(c[ch] >= ranges[ch][0] && c[ch] <= ranges[ch][1])
-		);
-	};
 }
 
-export function clampGamut(mode = 'rgb') {
-	const gamutConverter = converter(mode);
-	const { channels, ranges } = getMode(mode);
-	return color => {
-		const c = gamutConverter(color);
-		if (c === undefined) {
-			return undefined;
-		}
-		return channels.reduce(
-			(res, ch) => {
-				if (c[ch] !== undefined) {
-					if (ch === 'alpha') {
-						res.alpha = c.alpha;
-					} else {
-						res[ch] = Math.max(
-							Math.min(c[ch], ranges[ch][1]),
-							ranges[ch][0]
-						);
-					}
-				}
-				return res;
-			},
-			{ mode }
-		);
-	};
-}
+/*
+	Obtain a color that's in the `dest` gamut,
+	by first converting it to the `mode` color space
+	and then finding the largest chroma that's in gamut,
+	similar to `clampChroma`. 
 
+	To address the shortcomings of `clampChroma`, which can
+	sometimes produce colors more desaturated than necessary,
+	at every step of the iteration the candidate color 
+	is compared to the clipped version (obtained with `clampGamut`),
+	and if the colors are not to dissimilar (judged by the `delta`
+	color difference function and an associated `jnd` 
+	just-noticeable difference value), returns the clipped version.
+
+	The default arguments for this function correspond to the
+	gamut mapping algorithm defined in CSS Color Level 4:
+
+	https://drafts.csswg.org/css-color/#css-gamut-mapping
+ */
 export function toGamut(
-	gamut = 'rgb',
+	dest = 'rgb',
 	mode = 'oklch',
 	delta = differenceEuclidean('oklch'),
 	jnd = 0.02
 ) {
-	const isInGamut = inGamut(gamut);
-	const clip = clampGamut(gamut);
-	const gamutConverter = converter(gamut);
+	const inDestinationGamut = inGamut(dest);
+	const clipToGamut = clampGamut(dest);
+	const destConv = converter(dest);
+
 	const ucs = converter(mode);
-	const { ranges } = getMode(mode);
+	const rangeL = getMode(mode).ranges.l;
+
+	const gamutDef = getMode(dest);
+	const White = { mode: dest };
+	const Black = { mode: dest };
+	gamutDef.channels.forEach(ch => {
+		Black[ch] = gamutDef.ranges[0];
+		White[ch] = gamutDef.ranges[1];
+	});
 
 	return color => {
 		color = prepare(color);
 		if (color === undefined) {
 			return undefined;
 		}
-		const c = ucs(color);
-		if (c.l >= ranges.l[1]) {
-			const res = { mode: gamut, r: 1, g: 1, b: 1 };
+		const candidate = ucs(color);
+		if (candidate.l >= rangeL[1]) {
+			const res = { ...White };
 			if (color.alpha !== undefined) {
 				res.alpha = color.alpha;
 			}
 			return res;
 		}
-		if (c.l <= ranges.l[0]) {
-			const res = { mode: gamut, r: 0, g: 0, b: 0 };
+		if (candidate.l <= rangeL[0]) {
+			const res = { ...Black };
 			if (color.alpha !== undefined) {
 				res.alpha = color.alpha;
 			}
 			return res;
 		}
-		if (isInGamut(c)) {
-			return gamutConverter(c);
+		if (inDestinationGamut(candidate)) {
+			return destConv(candidate);
 		}
 
-		let min = 0;
-		let max = c.c;
-		let resolution = (ranges.c[1] - ranges.c[0]) / Math.pow(2, 13);
+		let start = 0;
+		let end = candidate.c;
+		let lastGood;
 		let clipped;
-		let _last_good_c;
-		while (max - min > resolution) {
-			c.c = (min + max) * 0.5;
-			if (isInGamut(c)) {
-				min = c.c;
-				_last_good_c = c.c;
+		/* Corresponds to about a dozen steps */
+		let ε = (ranges.c[1] - ranges.c[0]) / 8000;
+		while (end - start > ε) {
+			candidate.c = (start + end) * 0.5;
+			if (inDestinationGamut(candidate)) {
+				start = candidate.c;
+				lastGood = candidate.c;
 			} else {
-				clipped = clip(c);
-				if (delta(clipped, c) < jnd) {
+				clipped = clipToGamut(candidate);
+				if (delta(clipped, candidate) < jnd) {
 					return clipped;
 				} else {
-					max = c.c;
+					end = candidate.c;
 				}
 			}
 		}
-		return gamutConverter(isInGamut(c) ? c : { ...c, c: _last_good_c });
+		if (!inDestinationGamut(candidate)) {
+			candidate.c = lastGood;
+		}
+		return destConv(candidate);
 	};
 }
