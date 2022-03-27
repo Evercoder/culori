@@ -4,7 +4,7 @@ import { oklab, formatCss } from '../src/index.js';
 tape('rgb → oklab', t => {
 	t.deepEqual(
 		oklab('white'),
-		{ mode: 'oklab', l: 0.9999999934735462, a: 0, b: 0 },
+		{ mode: 'oklab', l: 0.999999993473546, a: 0, b: 0 },
 		'white'
 	);
 
@@ -20,9 +20,9 @@ tape('rgb → oklab', t => {
 		oklab('red'),
 		{
 			mode: 'oklab',
-			l: 0.6279553606145516,
-			a: 0.22486306106597398,
-			b: 0.1258462985307351
+			l: 0.6279553606145515,
+			a: 0.22486306106597417,
+			b: 0.12584629853073503
 		},
 		'red'
 	);
