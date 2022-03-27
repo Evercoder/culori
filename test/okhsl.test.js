@@ -4,12 +4,12 @@ import { okhsl, formatHex, formatCss } from '../src/index.js';
 tape('rgb → okhsl', t => {
 	t.equal(
 		formatCss(okhsl('red')),
-		'color(--okhsl 29.233885192342633 1.0000000001433997 0.5680846525040862)',
+		'color(--okhsl 29.2338851923426 1.0000000001434 0.5680846525040861)',
 		'red'
 	);
 	t.equal(
 		formatCss(okhsl('white')),
-		'color(--okhsl none 0 0.9999999923961898)',
+		'color(--okhsl none 0 0.9999999923961895)',
 		'white'
 	);
 	t.equal(formatCss(okhsl('black')), 'color(--okhsl none 0 0)', 'black');
