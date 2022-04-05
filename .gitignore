@@ -2,6 +2,7 @@
 .DS_Store
 build/
 bundled/
+types/
 node_modules
 *.log
 .nyc_output/
