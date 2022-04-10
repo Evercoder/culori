@@ -1,8 +1,15 @@
 import { RgbWithMode } from './rgb/types';
 import { HslWithMode } from './hsl/types';
 import { LabWithMode } from './lab/types';
+import type { LrgbWithMode } from './lrgb/types';
+import type { Xyz50WithMode } from './xyz50/types';
 
-export type Color = RgbWithMode | HslWithMode | LabWithMode;
+export type Color =
+	| RgbWithMode
+	| HslWithMode
+	| LabWithMode
+	| LrgbWithMode
+	| Xyz50WithMode;
 
 export type Mode = Pick<Color, 'mode'>['mode'];
 
