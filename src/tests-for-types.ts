@@ -2,6 +2,7 @@ import random from './random';
 import round from './round';
 import blend from './blend';
 import { average } from './average';
+import converter from './converter';
 
 const _a = random('rgb', {
 	r: 1
@@ -22,3 +23,6 @@ console.log([c.h, c.s, c.l, c.alpha]);
 
 const d = average(['salmon', 'tomato'], 'lab');
 console.log(d);
+
+const e = converter('lab')('#f0f0f0');
+console.log(e);
