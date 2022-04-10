@@ -1,6 +1,7 @@
 import random from './random';
 import round from './round';
 import blend from './blend';
+import { average } from './average';
 
 random('rgb', {
 	r: 1
@@ -17,3 +18,5 @@ const c = blend(
 	'hsl'
 );
 console.log([c.h, c.s, c.l, c.alpha]);
+
+const d = average(['salmon', 'tomato'], 'rgb');

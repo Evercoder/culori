@@ -1,8 +1,6 @@
-import type { Color, Find, Mode } from './common';
+import type { Color, TakeColorChannels, Mode } from './common';
 
 type NumberOrRange = number | [number, number];
-
-type TakeColorChannels<M extends Mode> = Omit<Find<Color, M>, 'mode'>;
 
 type Constraints<M extends Mode> = Partial<{
 	[P in keyof TakeColorChannels<M>]: NumberOrRange;
