@@ -16,9 +16,11 @@ type BlendTypes =
 	| 'difference'
 	| 'exclusion';
 
+type BlendingFunction = (backdrop: number, source: number) => number;
+
 declare function blend<M extends Mode = 'rgb'>(
 	colors: (Color | string)[],
-	type: BlendTypes,
+	type: BlendTypes | BlendingFunction,
 	mode?: M
 ): Find<Color, M>;
 
