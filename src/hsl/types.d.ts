@@ -3,9 +3,9 @@ interface HslMode {
 }
 
 export interface Hsl {
-	r: number;
-	g: number;
-	b: number;
+	h: number;
+	s: number;
+	l: number;
 	alpha?: number;
 }
 
