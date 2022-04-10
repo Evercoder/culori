@@ -3,9 +3,10 @@ import round from './round';
 import blend from './blend';
 import { average } from './average';
 
-random('rgb', {
+const _a = random('rgb', {
 	r: 1
 });
+console.log(_a);
 
 const a = round(2);
 const b: number = 2;
@@ -19,4 +20,5 @@ const c = blend(
 );
 console.log([c.h, c.s, c.l, c.alpha]);
 
-const d = average(['salmon', 'tomato'], 'rgb');
+const d = average(['salmon', 'tomato'], 'lab');
+console.log(d);

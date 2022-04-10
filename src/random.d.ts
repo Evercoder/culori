@@ -1,4 +1,4 @@
-import type { Color, TakeColorChannels, Mode } from './common';
+import type { Color, TakeColorChannels, Mode, Find } from './common';
 
 type NumberOrRange = number | [number, number];
 
@@ -9,4 +9,4 @@ type Constraints<M extends Mode> = Partial<{
 export default function random<M extends Mode>(
 	mode: M,
 	constraints: Constraints<M>
-): Color | undefined;
+): Find<Color, M>;
