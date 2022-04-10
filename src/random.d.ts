@@ -10,5 +10,5 @@ type Constraints<M extends Mode> = {
 
 export default function random<M extends Mode>(
 	mode: M,
-	color: Constraints<M>
+	constraints: Constraints<M>
 ): Color | undefined;
