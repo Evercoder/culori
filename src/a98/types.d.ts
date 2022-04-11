@@ -3,9 +3,9 @@ interface A98Mode {
 }
 
 export interface A98 {
-	x: number;
-	y: number;
-	z: number;
+	r: number;
+	g: number;
+	b: number;
 	alpha?: number;
 }
 
