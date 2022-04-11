@@ -3,9 +3,9 @@ interface YiqMode {
 }
 
 export interface Yiq {
-	x: number;
 	y: number;
-	z: number;
+	i: number;
+	q: number;
 	alpha?: number;
 }
 
