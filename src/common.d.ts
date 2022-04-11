@@ -10,6 +10,13 @@ import type { DlchWithMode } from './dlch/types';
 import type { HsiWithMode } from './hsi/types';
 import type { HsvWithMode } from './hsv/types';
 import type { HwbWithMode } from './hwb/types';
+import type { JabWithMode } from './jab/types';
+import type { JchWithMode } from './jch/types';
+import type { Lab65WithMode } from './lab65/types';
+import type { LchuvWithMode } from './lchuv/types';
+import type { LchWithMode } from './lch/types';
+import { Lch65WithMode } from './lch65/types';
+import type { LuvWithMode } from './luv/types';
 
 export type Color =
 	| A98WithMode
@@ -18,11 +25,18 @@ export type Color =
 	| DlchWithMode
 	| HsiWithMode
 	| HslWithMode
+	| JabWithMode
+	| JchWithMode
+	| LabWithMode
+	| Lab65WithMode
+	| LchWithMode
+	| Lch65WithMode
+	| LchuvWithMode
+	| LrgbWithMode
+	| LuvWithMode
 	| HsvWithMode
 	| HwbWithMode
 	| RgbWithMode
-	| LabWithMode
-	| LrgbWithMode
 	| Xyz50WithMode;
 
 export type Mode = Pick<Color, 'mode'>['mode'];
