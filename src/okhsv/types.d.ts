@@ -5,7 +5,7 @@ interface OkhsvMode {
 export interface Okhsv {
 	h: number;
 	s: number;
-	l: number;
+	v: number;
 	alpha?: number;
 }
 
