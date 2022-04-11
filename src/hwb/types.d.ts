@@ -4,8 +4,8 @@ interface HwbMode {
 
 export interface Hwb {
 	h: number;
-	s: number;
-	v: number;
+	w: number;
+	b: number;
 	alpha?: number;
 }
 
