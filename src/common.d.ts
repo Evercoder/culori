@@ -17,6 +17,7 @@ import type { LchuvWithMode } from './lchuv/types';
 import type { LchWithMode } from './lch/types';
 import { Lch65WithMode } from './lch65/types';
 import type { LuvWithMode } from './luv/types';
+import { OkhslWithMode } from './okhsl/types';
 
 export type Color =
 	| A98WithMode
@@ -34,6 +35,7 @@ export type Color =
 	| LchuvWithMode
 	| LrgbWithMode
 	| LuvWithMode
+	| OkhslWithMode
 	| HsvWithMode
 	| HwbWithMode
 	| RgbWithMode
