@@ -1,12 +1,12 @@
-interface LchuvMode {
-	mode: 'lchuv';
+interface Lch65Mode {
+	mode: 'lch65';
 }
 
-export interface Lchuv {
+export interface Lch65 {
 	l: number;
 	c: number;
 	h: number;
 	alpha?: number;
 }
 
-export interface LchuvWithMode extends Lchuv, LchuvMode {}
+export interface Lch65WithMode extends Lch65, Lch65Mode {}
