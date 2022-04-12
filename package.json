@@ -14,7 +14,7 @@
 		"./fn": "./src/index-fn.js",
 		"./package.json": "./package.json"
 	},
-	"types": "./types/index.d.ts",
+	"types": "./src/index.d.ts",
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <danburzo@gmail.com>",
 	"description": "A general-purpose color library for JavaScript",
@@ -42,7 +42,6 @@
 	"license": "MIT",
 	"files": [
 		"bundled",
-		"types",
 		"src"
 	],
 	"devDependencies": {
@@ -61,7 +60,7 @@
 	"scripts": {
 		"prepare": "git config core.hooksPath .git-hooks",
 		"test": "tape 'test/*.js' | tap-spec",
-		"build": "node build.js && node copy-types.js",
+		"build": "node build.js",
 		"benchmark": "node benchmark/index.js",
 		"prepublishOnly": "npm run lint && npm run build && npm run test",
 		"docs:start": "eleventy --config=eleventy.config.cjs --serve",
