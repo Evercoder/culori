@@ -1,12 +1,7 @@
-interface LrgbMode {
-	mode: 'lrgb';
-}
-
 export interface Lrgb {
+	mode: 'lrgb';
 	r: number;
 	g: number;
 	b: number;
 	alpha?: number;
 }
-
-export interface LrgbWithMode extends Lrgb, LrgbMode {}

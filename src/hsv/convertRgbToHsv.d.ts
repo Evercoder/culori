@@ -1,4 +1,4 @@
 import type { Rgb } from '../rgb/types';
-import type { HsvWithMode } from './types';
+import type { Hsv } from './types';
 
-export default function convertRgbToHsv(color: Rgb): HsvWithMode;
+export default function convertRgbToHsv(color: Omit<Rgb, 'mode'>): Hsv;

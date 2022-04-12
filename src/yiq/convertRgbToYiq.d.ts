@@ -1,6 +1,6 @@
 import type { Rgb } from '../rgb/types';
-import type { YiqWithMode } from './types';
+import type { Yiq } from './types';
 
-declare function convertRgbToYiq(color: Rgb): YiqWithMode;
+declare function convertRgbToYiq(color: Omit<Rgb, 'mode'>): Yiq;
 
 export default convertRgbToYiq;

@@ -1,6 +1,6 @@
 import type { Xyz50 } from './types';
-import type { RgbWithMode } from '../rgb/types';
+import type { Rgb } from '../rgb/types';
 
-declare function convertXyz50ToRgb(color: Xyz50): RgbWithMode;
+declare function convertXyz50ToRgb(color: Omit<Xyz50, 'mode'>): Rgb;
 
 export default convertXyz50ToRgb;

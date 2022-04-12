@@ -1,4 +1,4 @@
 import type { Hsi } from './types';
-import type { RgbWithMode } from '../rgb/types';
+import type { Rgb } from '../rgb/types';
 
-export default function convertHsiToRgb(color: Hsi): RgbWithMode;
+export default function convertHsiToRgb(color: Omit<Hsi, 'mode'>): Rgb;

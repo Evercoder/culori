@@ -1,3 +1,3 @@
-import type { HslWithMode } from './types';
+import type { Hsl } from './types';
 
-export default function parseHsl(color: string): HslWithMode;
+export default function parseHsl(color: string): Hsl;

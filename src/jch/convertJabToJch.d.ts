@@ -1,6 +1,6 @@
 import type { Jab } from '../jab/types';
-import type { JchWithMode } from './types';
+import type { Jch } from './types';
 
-declare function convertJabToJch(color: Jab): JchWithMode;
+declare function convertJabToJch(color: Omit<Jab, 'mode'>): Jch;
 
 export default convertJabToJch;

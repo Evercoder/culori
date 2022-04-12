@@ -1,12 +1,7 @@
-interface CubehelixMode {
-	mode: 'cubehelix';
-}
-
 export interface Cubehelix {
+	mode: 'cubehelix';
 	h: number;
 	s: number;
 	l: number;
 	alpha?: number;
 }
-
-export interface CubehelixWithMode extends Cubehelix, CubehelixMode {}

@@ -1,12 +1,7 @@
-interface DlchMode {
-	mode: 'dlch';
-}
-
 export interface Dlch {
+	mode: 'dlch';
 	l: number;
 	c: number;
 	h: number;
 	alpha?: number;
 }
-
-export interface DlchWithMode extends Dlch, DlchMode {}

@@ -4,12 +4,12 @@ import blend from './blend';
 import { average } from './average';
 import converter from './converter';
 import { clampChroma, clampRgb } from './clamp';
-import type { RgbWithMode } from './rgb/types';
+import type { Rgb } from './rgb/types';
 import type { Color } from './common';
-import type { OklchWithMode } from './oklch/types';
+import type { Oklch } from './oklch/types';
 import { filterBrightness } from './filter';
 import { mapper, mapTransferLinear } from './map';
-import type { HslWithMode } from './hsl/types';
+import type { Hsl } from './hsl/types';
 import parseTransparent from './rgb/parseTransparent';
 import parse from './parse';
 import { Mode } from './common';
@@ -35,7 +35,7 @@ console.log(e);
 
 const f: Color = clampRgb('rgba(255, 0, 0, 0.5)');
 
-const g: RgbWithMode = clampRgb({
+const g: Rgb = clampRgb({
 	mode: 'rgb',
 	r: 0.2549019607843137,
 	g: 0.4117647058823529,
@@ -43,13 +43,13 @@ const g: RgbWithMode = clampRgb({
 });
 
 const h: Color = clampChroma('rgb(300, 255, 255)');
-const k: OklchWithMode = clampChroma({
+const k: Oklch = clampChroma({
 	mode: 'oklch',
 	l: 0.5,
 	c: 0.161,
 	h: 180
 });
-const l: OklchWithMode = clampChroma(
+const l: Oklch = clampChroma(
 	{ mode: 'oklch', l: 0.5, c: 0.16, h: 180 },
 	'oklch'
 );
@@ -62,14 +62,14 @@ const m: Color = filterBrightness(1.2)('hsl(60 100% 50% / 25%)');
 // 	h: 180
 // });
 
-const n: RgbWithMode = mapper(mapTransferLinear(2))({
+const n: Rgb = mapper(mapTransferLinear(2))({
 	mode: 'rgb',
 	r: 0.8,
 	g: 0,
 	b: 0.2
 });
 
-const o: HslWithMode = filterBrightness(1)({
+const o: Hsl = filterBrightness(1)({
 	mode: 'hsl',
 	h: 1,
 	s: 1,
@@ -77,17 +77,17 @@ const o: HslWithMode = filterBrightness(1)({
 });
 
 const p1: undefined = parseTransparent('asd');
-const p2: RgbWithMode = parseTransparent('transparent');
+const p2: Rgb = parseTransparent('transparent');
 
 const pr: undefined = prepare(undefined);
 const pr2: Color | undefined = prepare('red');
-const pr3: RgbWithMode = prepare({
+const pr3: Rgb = prepare({
 	mode: 'rgb',
 	r: 0.2549019607843137,
 	g: 0.4117647058823529,
 	b: 0.8823529411764706
 });
-const pr4: RgbWithMode = prepare(
+const pr4: Rgb = prepare(
 	{
 		r: 0.2549019607843137,
 		g: 0.4117647058823529,

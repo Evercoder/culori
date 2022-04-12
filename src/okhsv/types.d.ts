@@ -1,12 +1,7 @@
-interface OkhsvMode {
-	mode: 'okhsv';
-}
-
 export interface Okhsv {
+	mode: 'okhsv';
 	h: number;
 	s: number;
 	v: number;
 	alpha?: number;
 }
-
-export interface OkhsvWithMode extends Okhsv, OkhsvMode {}

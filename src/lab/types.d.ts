@@ -1,12 +1,7 @@
-interface LabMode {
-	mode: 'lab';
-}
-
 export interface Lab {
+	mode: 'lab';
 	l: number;
 	a: number;
 	b: number;
 	alpha?: number;
 }
-
-export interface LabWithMode extends Lab, LabMode {}

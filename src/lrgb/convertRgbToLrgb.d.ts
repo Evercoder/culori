@@ -1,6 +1,6 @@
 import type { Rgb } from '../rgb/types';
-import type { LrgbWithMode } from './types';
+import type { Lrgb } from './types';
 
-declare function convertRgbToLrgb(color: Rgb): LrgbWithMode;
+declare function convertRgbToLrgb(color: Omit<Rgb, 'mode'>): Lrgb;
 
 export default convertRgbToLrgb;

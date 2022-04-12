@@ -1,5 +1,5 @@
-import type { LabWithMode } from './types';
+import type { Lab } from './types';
 
-declare function parseLab(color: string): LabWithMode;
+declare function parseLab(color: string): Lab;
 
 export default parseLab;

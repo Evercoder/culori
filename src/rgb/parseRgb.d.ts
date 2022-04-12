@@ -1,5 +1,5 @@
-import type { RgbWithMode } from './types';
+import type { Rgb } from './types';
 
-declare function parseRgb(color: string): RgbWithMode;
+declare function parseRgb(color: string): Rgb;
 
 export default parseRgb;

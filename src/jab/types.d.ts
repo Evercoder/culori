@@ -1,12 +1,7 @@
-interface JabMode {
-	mode: 'jab';
-}
-
 export interface Jab {
+	mode: 'jab';
 	j: number;
 	a: number;
 	b: number;
 	alpha?: number;
 }
-
-export interface JabWithMode extends Jab, JabMode {}

@@ -1,12 +1,7 @@
-interface HslMode {
-	mode: 'hsl';
-}
-
 export interface Hsl {
+	mode: 'hsl';
 	h: number;
 	s: number;
 	l: number;
 	alpha?: number;
 }
-
-export interface HslWithMode extends Hsl, HslMode {}

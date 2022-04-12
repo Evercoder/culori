@@ -1,6 +1,6 @@
 import type { Jab } from './types';
-import type { RgbWithMode } from '../rgb/types';
+import type { Rgb } from '../rgb/types';
 
-declare function convertJabToRgb(color: Jab): RgbWithMode;
+declare function convertJabToRgb(color: Omit<Jab, 'mode'>): Rgb;
 
 export default convertJabToRgb;

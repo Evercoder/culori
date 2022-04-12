@@ -1,6 +1,6 @@
 import type { Oklab } from './types';
-import type { LrgbWithMode } from '../lrgb/types';
+import type { Lrgb } from '../lrgb/types';
 
-declare function convertOklabToLrgb(color: Oklab): LrgbWithMode;
+declare function convertOklabToLrgb(color: Omit<Oklab, 'mode'>): Lrgb;
 
 export default convertOklabToLrgb;

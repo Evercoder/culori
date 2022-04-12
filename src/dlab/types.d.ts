@@ -1,12 +1,7 @@
-interface DlabMode {
-	mode: 'dlab';
-}
-
 export interface Dlab {
+	mode: 'dlab';
 	l: number;
 	a: number;
 	b: number;
 	alpha?: number;
 }
-
-export interface DlabWithMode extends Dlab, DlabMode {}

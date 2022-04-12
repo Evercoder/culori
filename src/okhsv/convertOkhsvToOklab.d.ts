@@ -1,6 +1,6 @@
 import type { Okhsv } from './types';
-import type { OklabWithMode } from '../oklab/types';
+import type { Oklab } from '../oklab/types';
 
-declare function convertOkhsvToOklab(color: Okhsv): OklabWithMode;
+declare function convertOkhsvToOklab(color: Omit<Okhsv, 'mode'>): Oklab;
 
 export default convertOkhsvToOklab;

@@ -1,6 +1,6 @@
 import type { Lab } from '../lab/types';
-import type { LchWithMode } from './types';
+import type { Lch } from './types';
 
-declare function convertLabToLch(color: Lab): LchWithMode;
+declare function convertLabToLch(color: Omit<Lab, 'mode'>): Lch;
 
 export default convertLabToLch;

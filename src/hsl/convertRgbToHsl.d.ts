@@ -1,4 +1,4 @@
 import type { Rgb } from '../rgb/types';
-import type { HslWithMode } from './types';
+import type { Hsl } from './types';
 
-export default function convertRgbToHsl(color: Rgb): HslWithMode;
+export default function convertRgbToHsl(color: Omit<Rgb, 'mode'>): Hsl;

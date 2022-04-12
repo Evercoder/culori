@@ -1,12 +1,7 @@
-interface YiqMode {
-	mode: 'yiq';
-}
-
 export interface Yiq {
+	mode: 'yiq';
 	y: number;
 	i: number;
 	q: number;
 	alpha?: number;
 }
-
-export interface YiqWithMode extends Yiq, YiqMode {}

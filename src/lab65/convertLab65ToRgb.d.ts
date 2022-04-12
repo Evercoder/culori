@@ -1,6 +1,6 @@
 import type { Lab65 } from './types';
-import type { RgbWithMode } from '../rgb/types';
+import type { Rgb } from '../rgb/types';
 
-declare function convertLab65ToRgb(color: Lab65): RgbWithMode;
+declare function convertLab65ToRgb(color: Omit<Lab65, 'mode'>): Rgb;
 
 export default convertLab65ToRgb;

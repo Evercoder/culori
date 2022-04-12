@@ -1,5 +1,5 @@
-import type { HwbWithMode } from './types';
+import type { Hwb } from './types';
 
-declare function parseHwb(color: string): HwbWithMode | undefined;
+declare function parseHwb(color: string): Hwb | undefined;
 
 export default parseHwb;

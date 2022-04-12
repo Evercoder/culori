@@ -1,4 +1,4 @@
 import type { Rgb } from '../rgb/types';
-import type { HwbWithMode } from './types';
+import type { Hwb } from './types';
 
-export default function convertRgbToHwb(color: Rgb): HwbWithMode;
+export default function convertRgbToHwb(color: Omit<Rgb, 'mode'>): Hwb;
