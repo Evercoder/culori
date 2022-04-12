@@ -10,6 +10,7 @@ import type { OklchWithMode } from './oklch/types';
 import { filterBrightness } from './filter';
 import { mapper, mapTransferLinear } from './map';
 import type { HslWithMode } from './hsl/types';
+import parseTransparent from './rgb/parseTransparent';
 
 const _a = random('rgb', {
 	r: 1
@@ -71,3 +72,6 @@ const o: HslWithMode = filterBrightness(1)({
 	s: 1,
 	l: 1
 });
+
+const p1: undefined = parseTransparent('asd');
+const p2: RgbWithMode = parseTransparent('transparent');
