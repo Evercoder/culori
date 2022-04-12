@@ -2,7 +2,7 @@ import type { Color, ColorToColor, Find, Mode } from './common';
 
 type Channel = string;
 
-type Fn<ConvertMode> = (
+export type MapFn<ConvertMode extends Mode | null> = (
 	v: number,
 	ch: string,
 	conv_color: ConvertMode extends Mode
@@ -14,12 +14,12 @@ type Fn<ConvertMode> = (
 ) => number;
 
 declare function mapper(
-	fn: Fn<null>,
+	fn: MapFn<null>,
 	mod?: null,
 	preserve_mode?: boolean
 ): ColorToColor;
 declare function mapper<M extends Mode>(
-	fn: Fn<M>,
+	fn: MapFn<M>,
 	mod?: M,
 	preserve_mode?: boolean
 ): ColorToColor;
