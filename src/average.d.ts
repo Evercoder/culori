@@ -8,7 +8,7 @@ import type {
 
 declare function averageAngle(val: number[]): number;
 
-declare function averageNumber(val: Array<number>): number;
+declare function averageNumber(val: number[]): number;
 
 declare function average<M extends Mode>(
 	colors: (Color | string)[],
