@@ -1,5 +1,3 @@
-// TODO: find out should the 'arr' be a tuple [number, number, number, number, number]
-
 declare function fixupHueShorter(arr: number[]): number[];
 declare function fixupHueLonger(arr: number[]): number[];
 declare function fixupHueIncreasing(arr: number[]): number[];
