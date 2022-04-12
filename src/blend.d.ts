@@ -18,7 +18,7 @@ type BlendTypes =
 
 type BlendingFunction = (backdrop: number, source: number) => number;
 
-declare function blend<M extends Mode = 'rgb'>(
+declare function blend<M extends Mode>(
 	colors: (Color | string)[],
 	type: BlendTypes | BlendingFunction,
 	mode?: M

@@ -7,16 +7,14 @@ import { clampChroma, clampRgb } from './clamp';
 import type { RgbWithMode } from './rgb/types';
 import type { Color } from './common';
 import type { OklchWithMode } from './oklch/types';
+import { filterBrightness } from './filter';
+import { mapper, mapTransferLinear } from './map';
+import type { HslWithMode } from './hsl/types';
 
 const _a = random('rgb', {
 	r: 1
 });
 console.log(_a);
-
-const a = round(2);
-const b: number = 2;
-const n = a(b);
-console.log(n);
 
 const c = blend(
 	['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'],
@@ -51,3 +49,25 @@ const l: OklchWithMode = clampChroma(
 	{ mode: 'oklch', l: 0.5, c: 0.16, h: 180 },
 	'oklch'
 );
+
+const m: Color = filterBrightness(1.2)('hsl(60 100% 50% / 25%)');
+// const n: OklchWithMode = filterBrightness(1.2)({
+// 	mode: 'oklch',
+// 	l: 0.5,
+// 	c: 0.161,
+// 	h: 180
+// });
+
+const n: RgbWithMode = mapper(mapTransferLinear(2))({
+	mode: 'rgb',
+	r: 0.8,
+	g: 0,
+	b: 0.2
+});
+
+const o: HslWithMode = filterBrightness(1)({
+	mode: 'hsl',
+	h: 1,
+	s: 1,
+	l: 1
+});

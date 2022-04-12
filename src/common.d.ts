@@ -68,3 +68,11 @@ export type OverridesFunction = (values: number[], channel: string) => number;
 export type OverridesObject<M extends Mode> = Partial<{
 	[P in keyof TakeColorChannels<M>]: OverridesFunction;
 }>;
+
+interface ColorToColor {
+	<M1 extends Mode, M2 extends Mode = M1>(color: Find<Color, M1>): Find<
+		Color,
+		M2
+	>;
+	(color: string): Color;
+}
