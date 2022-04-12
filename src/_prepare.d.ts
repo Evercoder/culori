@@ -1,16 +1,16 @@
 import parse from './parse.js';
-import type { Color, Mode } from './common';
+import type { Color, Find, Mode } from './common';
 
 declare function prepare(color: undefined): undefined;
 declare function prepare(color: string): ReturnType<typeof parse>;
-declare function prepare(color: Color): Color;
+declare function prepare<M extends Mode>(color: Find<Color, M>): Find<Color, M>;
 declare function prepare<M extends Mode>(
-	color: Omit<Color, 'mode'> & { mode?: M },
+	color: Omit<Find<Color, M>, 'mode'>,
 	mode: M
-): Color;
+): Find<Color, M>;
 declare function prepare<M extends Mode>(
-	color: Omit<Color, 'mode'> & { mode?: M },
-	mode: undefined
+	color: unknown,
+	mode?: undefined
 ): undefined;
 
 export default prepare;

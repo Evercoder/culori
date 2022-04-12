@@ -11,6 +11,9 @@ import { filterBrightness } from './filter';
 import { mapper, mapTransferLinear } from './map';
 import type { HslWithMode } from './hsl/types';
 import parseTransparent from './rgb/parseTransparent';
+import parse from './parse';
+import { Mode } from './common';
+import prepare from './_prepare';
 
 const _a = random('rgb', {
 	r: 1
@@ -75,3 +78,34 @@ const o: HslWithMode = filterBrightness(1)({
 
 const p1: undefined = parseTransparent('asd');
 const p2: RgbWithMode = parseTransparent('transparent');
+
+const pr: undefined = prepare(undefined);
+const pr2: Color | undefined = prepare('red');
+const pr3: RgbWithMode = prepare({
+	mode: 'rgb',
+	r: 0.2549019607843137,
+	g: 0.4117647058823529,
+	b: 0.8823529411764706
+});
+const pr4: RgbWithMode = prepare(
+	{
+		r: 0.2549019607843137,
+		g: 0.4117647058823529,
+		b: 0.8823529411764706
+	},
+	'rgb'
+);
+const pr5: undefined = prepare({
+	r: 0.2549019607843137,
+	g: 0.4117647058823529,
+	b: 0.8823529411764706
+});
+
+// declare function prepare<M extends Mode>(
+// 	color: Omit<Color, 'mode'> & { mode?: M },
+// 	mode: M
+// ): Color;
+// declare function prepare<M extends Mode>(
+// 	color: Omit<Color, 'mode'> & { mode?: M },
+// 	mode: undefined
+// ): undefined;
