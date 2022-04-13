@@ -1,5 +1,3 @@
-import random from './random';
-import round from './round';
 import blend from './blend';
 import { average } from './average';
 import converter from './converter';
@@ -11,14 +9,7 @@ import { filterBrightness } from './filter';
 import { mapper, mapTransferLinear } from './map';
 import type { Hsl } from './hsl/types';
 import parseTransparent from './rgb/parseTransparent';
-import parse from './parse';
-import { Mode } from './common';
 import prepare from './_prepare';
-
-const _a = random('rgb', {
-	r: 1
-});
-console.log(_a);
 
 const c = blend(
 	['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'],

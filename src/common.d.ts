@@ -57,7 +57,7 @@ export type Color =
 	| Xyz65
 	| Yiq;
 
-export type Mode = Pick<Color, 'mode'>['mode'];
+export type Mode = Color['mode'];
 
 export type Find<C, M extends Mode> = C extends { mode: M } ? C : never;
 
