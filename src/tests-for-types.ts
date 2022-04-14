@@ -1,6 +1,3 @@
-import blend from './blend';
-import { average } from './average';
-import converter from './converter';
 import { clampChroma, clampRgb } from './clamp';
 import type { Rgb } from './rgb/types';
 import type { Color } from './common';
@@ -13,9 +10,6 @@ import prepare from './_prepare';
 
 const d = average(['salmon', 'tomato'], 'lab');
 console.log(d);
-
-const e = converter('lab')('#f0f0f0');
-console.log(e);
 
 const f: Color = clampRgb('rgba(255, 0, 0, 0.5)');
 
@@ -39,12 +33,12 @@ const l: Oklch = clampChroma(
 );
 
 const m: Color = filterBrightness(1.2)('hsl(60 100% 50% / 25%)');
-// const n: OklchWithMode = filterBrightness(1.2)({
-// 	mode: 'oklch',
-// 	l: 0.5,
-// 	c: 0.161,
-// 	h: 180
-// });
+const m2: Oklch = filterBrightness(1.2)({
+	mode: 'oklch',
+	l: 0.5,
+	c: 0.161,
+	h: 180
+});
 
 const n: Rgb = mapper(mapTransferLinear(2))({
 	mode: 'rgb',
@@ -84,12 +78,3 @@ const pr5: undefined = prepare({
 	g: 0.4117647058823529,
 	b: 0.8823529411764706
 });
-
-// declare function prepare<M extends Mode>(
-// 	color: Omit<Color, 'mode'> & { mode?: M },
-// 	mode: M
-// ): Color;
-// declare function prepare<M extends Mode>(
-// 	color: Omit<Color, 'mode'> & { mode?: M },
-// 	mode: undefined
-// ): undefined;
