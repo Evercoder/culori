@@ -7,15 +7,17 @@ const mapper = (fn, mode = 'rgb', preserve_mode = false) => {
 	let conv = mode ? converter(mode) : prepare;
 	return color => {
 		let conv_color = conv(color);
-		let res = (channels || getMode(color.mode).channels).reduce(
+		let _mode = mode === null ? conv_color.mode : mode;
+		let _channels = channels || getMode(_mode).channels;
+		let res = _channels.reduce(
 			(res, ch) => {
-				let v = fn(conv_color[ch], ch, conv_color, mode);
+				let v = fn(conv_color[ch], ch, conv_color, _mode);
 				if (v !== undefined && !isNaN(v)) {
 					res[ch] = v;
 				}
 				return res;
 			},
-			{ mode }
+			{ mode: _mode }
 		);
 		if (!preserve_mode) {
 			return res;
