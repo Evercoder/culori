@@ -11,13 +11,6 @@ import type { Hsl } from './hsl/types';
 import parseTransparent from './rgb/parseTransparent';
 import prepare from './_prepare';
 
-const c = blend(
-	['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'],
-	'screen',
-	'hsl'
-);
-console.log([c.h, c.s, c.l, c.alpha]);
-
 const d = average(['salmon', 'tomato'], 'lab');
 console.log(d);
 

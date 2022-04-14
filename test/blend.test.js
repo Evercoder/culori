@@ -2,6 +2,10 @@ import tape from 'tape';
 import { blend } from '../src/index.js';
 
 tape('blendNormal', function (test) {
+	test.throws(() => {
+		blend([]);
+	});
+
 	test.deepEqual(blend(['white', 'rgba(0, 0, 0, 0.5)']), {
 		mode: 'rgb',
 		r: 0.5,

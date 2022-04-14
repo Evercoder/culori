@@ -57,6 +57,8 @@ export type Color =
 	| Xyz65
 	| Yiq;
 
+export type NonEmptyArray<T> = [T, ...T[]];
+
 export type Mode = Color['mode'];
 
 export type Find<C, M extends Mode> = C extends { mode: M } ? C : never;
