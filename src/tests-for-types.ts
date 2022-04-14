@@ -8,9 +8,6 @@ import type { Hsl } from './hsl/types';
 import parseTransparent from './rgb/parseTransparent';
 import prepare from './_prepare';
 
-const d = average(['salmon', 'tomato'], 'lab');
-console.log(d);
-
 const f: Color = clampRgb('rgba(255, 0, 0, 0.5)');
 
 const g: Rgb = clampRgb({
