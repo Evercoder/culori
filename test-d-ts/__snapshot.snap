@@ -19,6 +19,10 @@ blend.ts(19,2): error TS2345: Argument of type '"darke"' is not assignable to pa
 blend.ts(33,7): error TS2739: Type 'Jab' is missing the following properties from type 'Rgb': r, g
 common.ts(5,7): error TS2741: Property 'l' is missing in type '{ h: number; s: number; }' but required in type 'TakeColorChannels<"hsl">'.
 common.ts(6,7): error TS2741: Property 'h' is missing in type '{ s: number; l: number; }' but required in type 'TakeColorChannels<"hsl">'.
+converter.ts(6,7): error TS2322: Type 'Rgb | undefined' is not assignable to type 'Rgb'.
+  Type 'undefined' is not assignable to type 'Rgb'.
+converter.ts(10,7): error TS2322: Type 'Lab | undefined' is not assignable to type 'Rgb'.
+  Type 'undefined' is not assignable to type 'Rgb'.
 random.ts(7,36): error TS2769: No overload matches this call.
   Overload 1 of 3, '(mode: "p3" | "rec2020" | "a98" | "cubehelix" | "dlab" | "dlch" | "hsi" | "hsl" | "hsv" | "hwb" | "jab" | "jch" | "lab" | "lab65" | "lch" | "lch65" | "lchuv" | "lrgb" | "luv" | "okhsl" | ... 7 more ... | "yiq", constraints?: Partial<...> | undefined): A98 | ... 26 more ... | Yiq', gave the following error.
     Argument of type '"1"' is not assignable to parameter of type '"p3" | "rec2020" | "a98" | "cubehelix" | "dlab" | "dlch" | "hsi" | "hsl" | "hsv" | "hwb" | "jab" | "jch" | "lab" | "lab65" | "lch" | "lch65" | "lchuv" | "lrgb" | "luv" | "okhsl" | "okhsv" | ... 6 more ... | "yiq"'.
