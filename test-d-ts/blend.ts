@@ -1,6 +1,6 @@
 import blend from '../src/blend';
 import type { Rgb } from '../src/rgb/types';
-import { Jab } from '../src/jab/types';
+import type { Jab } from '../src/jab/types';
 
 const case_1_expect_error = blend([]);
 const case_2_expect_error: Rgb = blend([12312]);
