@@ -1,0 +1,16 @@
+{
+	"include": ["./**/*.ts"],
+	"compilerOptions": {
+		"target": "es2020",
+		"module": "commonjs",
+		"allowJs": false,
+		"declaration": true,
+		"importsNotUsedAsValues": "error",
+		"noEmit": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"skipLibCheck": false
+	}
+}
