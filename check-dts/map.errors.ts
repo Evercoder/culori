@@ -3,9 +3,6 @@ import type { Rgb } from '../src/rgb/types';
 import type { Hsl } from '../src/hsl/types';
 import type { Okhsv } from '../src/okhsv/types';
 
-// ===
-// mode = `undefined`
-
 const doubler = mapper(v => {
 	return v * 2;
 });
@@ -21,9 +18,6 @@ const case_3_expect_error: Hsl = doubler({
 // THROWS Type 'Rgb | undefined' is not assignable to type 'Hsl | undefined'.
 const case_5_expect_error: Hsl | undefined = doubler('hsl(0, 100%, 50%)');
 
-// ===
-// mode = `null`
-
 const increaser = mapper(v => v + 10, null);
 
 // THROWS Type 'Color | undefined' is not assignable to type 'Okhsv | undefined'.
@@ -31,8 +25,6 @@ const case_6_expect_error: Okhsv | undefined = increaser(
 	'color(--okhsv 29.2338851923426 0.9995219692256307 0.9999999999999997)'
 );
 
-// ===
-// mode = `undefined`
 const decreaser = mapper((v, ch, conv_color, mode) => v - 10, undefined);
 
 // THROWS Type 'Rgb | undefined' is not assignable to type 'Okhsv | undefined'.
@@ -48,9 +40,6 @@ const case_10_expect_error: Hsl = decreaser({
 	l: 1
 });
 
-// ===
-// mode = 'hsl'
-
 const tripler = mapper(v => {
 	return v * 3;
 }, 'hsl');
@@ -58,16 +47,10 @@ const tripler = mapper(v => {
 // THROWS Type 'Hsl | undefined' is not assignable to type 'Hsl'.
 const case_13_expect_error: Hsl = tripler('hsla(240, 100%, 50%, 50%)');
 
-//==
-
 // THROWS Type 'Rgb | undefined' is not assignable to type 'Rgb'.
 const case_8_1_expect_error: Rgb = decreaser(
 	'color(--okhsv 29.2338851923426 0.9995219692256307 0.9999999999999997)'
 );
-
-//==
-// mode: undefined,
-// preserve_mode: true
 
 const oner = mapper(
 	(v, ch, conv_color, mode) => {

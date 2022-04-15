@@ -3,9 +3,6 @@ import type { Rgb } from '../src/rgb/types';
 import type { Hsl } from '../src/hsl/types';
 import type { Color } from '../src/common';
 
-// ===
-// mode = `undefined`
-
 const doubler = mapper(v => {
 	return v * 2;
 });
@@ -26,9 +23,6 @@ const case_2_expect_success: Rgb = doubler({
 
 const case_4_expect_success: Rgb | undefined = doubler('hsl(0, 100%, 50%)');
 
-// ===
-// mode = `null`
-
 const increaser = mapper(v => v + 10, null);
 
 const case_5_expect_success: Color | undefined = increaser(
@@ -42,16 +36,11 @@ const case_7_expect_success: Hsl = increaser({
 	l: 0
 });
 
-// ===
-// mode = `undefined`
 const decreaser = mapper((v, ch, conv_color, mode) => v - 10, undefined);
 
 const case_8_expect_success: Rgb | undefined = decreaser(
 	'color(--okhsv 29.2338851923426 0.9995219692256307 0.9999999999999997)'
 );
-
-// ===
-// mode = 'hsl'
 
 const tripler = mapper(v => {
 	return v * 3;
@@ -65,10 +54,6 @@ const case_12_expect_success: Hsl = tripler({
 	mode: 'hsl',
 	alpha: 0.5
 });
-
-//==
-// mode: undefined,
-// preserve_mode: true
 
 const oner = mapper(
 	(v, ch, conv_color, mode) => {

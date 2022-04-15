@@ -99,7 +99,6 @@ export {
 	filterDeficiencyTrit
 } from './deficiency';
 
-// Easings
 export { default as easingMidpoint } from './easing/midpoint';
 export { default as easingSmoothstep } from './easing/smoothstep';
 export { default as easingSmootherstep } from './easing/smootherstep';

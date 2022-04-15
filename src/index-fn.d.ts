@@ -1,4 +1,3 @@
-// Color space definitions
 export { default as modeA98 } from './a98/definition';
 export { default as modeCubehelix } from './cubehelix/definition';
 export { default as modeDlab } from './dlab/definition';
@@ -129,7 +128,6 @@ export {
 	filterDeficiencyTrit
 } from './deficiency';
 
-// Easings
 export { default as easingMidpoint } from './easing/midpoint';
 export { default as easingSmoothstep } from './easing/smoothstep';
 export { default as easingSmootherstep } from './easing/smootherstep';
