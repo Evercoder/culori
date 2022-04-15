@@ -17,8 +17,6 @@ blend.ts(5,35): error TS2345: Argument of type '[]' is not assignable to paramet
 blend.ts(6,41): error TS2322: Type 'number' is not assignable to type 'string | Color'.
 blend.ts(19,2): error TS2345: Argument of type '"darke"' is not assignable to parameter of type 'BlendTypes | BlendingFunction'.
 blend.ts(33,7): error TS2739: Type 'Jab' is missing the following properties from type 'Rgb': r, g
-common.ts(5,7): error TS2741: Property 'l' is missing in type '{ h: number; s: number; }' but required in type 'TakeColorChannels<"hsl">'.
-common.ts(6,7): error TS2741: Property 'h' is missing in type '{ s: number; l: number; }' but required in type 'TakeColorChannels<"hsl">'.
 converter.ts(6,7): error TS2322: Type 'Rgb | undefined' is not assignable to type 'Rgb'.
   Type 'undefined' is not assignable to type 'Rgb'.
 converter.ts(10,7): error TS2322: Type 'Lab | undefined' is not assignable to type 'Rgb'.
