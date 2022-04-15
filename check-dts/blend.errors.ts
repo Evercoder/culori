@@ -1,6 +1,5 @@
 import blend from '../src/blend';
 import type { Rgb } from '../src/rgb/types';
-import type { Jab } from '../src/jab/types';
 
 // THROWS Argument of type '[]' is not assignable to parameter of type 'NonEmptyArray<string | Color>'.
 const c1 = blend([]);

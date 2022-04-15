@@ -1,7 +1,5 @@
 import { average } from '../src/average';
 import type { Rgb } from '../src/rgb/types';
-import type { Lch } from '../src/lch/types';
-import type { Oklab } from '../src/oklab/types';
 
 // THROWS Expected 1-3 arguments, but got 0.
 const c1 = average();
