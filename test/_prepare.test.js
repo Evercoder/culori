@@ -1,5 +1,4 @@
 import tape from 'tape';
-import { a98, formatCss } from '../src/index.js';
 import prepare from '../src/_prepare.js';
 
 tape('prepare', t => {
