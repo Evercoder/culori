@@ -37,15 +37,29 @@ if (process.argv.some(arg => arg === '--updateSnapshot')) {
 			changed = true;
 		}
 		const color = part.added ? 'green' : part.removed ? 'red' : 'gray';
-		process.stderr.write(pico[color](part.value));
+
+		if (process.argv.some(arg => arg === '--show-diff')) {
+			process.stderr.write(pico[color](part.value));
+		}
 	});
 	if (changed) {
+		console.log(
+			`${pico.bgRed(
+				' FAILED '
+			)} The result is not corresponding to the snapshot`
+		);
 		process.exit(1);
 	} else {
+		console.log(
+			`${pico.bgGreen('   OK   ')} The result is the same as the snapshot`
+		);
 		process.exit(0);
 	}
 } else {
 	console.log('Short help:');
 	console.log("	pass '--check' parameter to check types");
 	console.log("	pass '--updateSnapshot' parameter to update snapshots");
+	console.log(
+		"	pass '--show-diff' parameter to show difference between snapshot and actual result"
+	);
 }
