@@ -1,28 +1,61 @@
-import type { Color, ColorToColor, Find, Mode } from './common';
+import type { Color, Find, Mode } from './common';
+import type { Rgb } from './rgb/types';
 
 type Channel = string;
 
-export type MapFn<ConvertMode extends Mode | null> = (
+export type MapFn<M extends Mode | null> = (
 	v: number,
 	ch: string,
-	conv_color: ConvertMode extends Mode
-		? Find<Color, ConvertMode>
-		: ConvertMode extends null
-		? Color
-		: never,
-	mode: ConvertMode
+	conv_color: M extends Mode ? Find<Color, M> : Color,
+	mode: M extends null ? null : M
 ) => number;
 
+interface ColorToRgbMapper {
+	(color: Color): Rgb;
+	(color: string): Rgb | undefined;
+}
+
+interface ColorToSameColorMapper {
+	<M extends Mode>(color: Find<Color, M>): Find<Color, M>;
+	(color: string): Color | undefined;
+}
+
+interface ColorToPredefinedColorMapper<M extends Mode> {
+	(color: Color): Find<Color, M>;
+	(color: string): Find<Color, M> | undefined;
+}
+
+declare function mapper(fn: MapFn<'rgb'>): ColorToRgbMapper;
 declare function mapper(
-	fn: MapFn<null>,
-	mod?: null,
-	preserve_mode?: boolean
-): ColorToColor;
+	fn: MapFn<Mode>,
+	mode: null,
+	preserve_mode?: false
+): ColorToSameColorMapper;
+declare function mapper(
+	fn: MapFn<'rgb'>,
+	mode: undefined,
+	preserve_mode?: false
+): ColorToRgbMapper;
 declare function mapper<M extends Mode>(
 	fn: MapFn<M>,
-	mod?: M,
-	preserve_mode?: boolean
-): ColorToColor;
+	mode: M,
+	preserve_mode?: false
+): ColorToPredefinedColorMapper<M>;
+declare function mapper(
+	fn: MapFn<Mode>,
+	mode: null,
+	preserve_mode: true
+): ColorToSameColorMapper;
+declare function mapper(
+	fn: MapFn<'rgb'>,
+	mode: undefined,
+	preserve_mode: true
+): ColorToSameColorMapper;
+declare function mapper<M extends Mode>(
+	fn: MapFn<M>,
+	mode: M,
+	preserve_mode: true
+): ColorToSameColorMapper;
 
 declare function mapAlphaMultiply(v: number, ch: Channel, c: Color): number;
 

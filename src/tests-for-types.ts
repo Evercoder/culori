@@ -2,9 +2,6 @@ import { clampChroma, clampRgb } from './clamp';
 import type { Rgb } from './rgb/types';
 import type { Color } from './common';
 import type { Oklch } from './oklch/types';
-import { filterBrightness } from './filter';
-import { mapper, mapTransferLinear } from './map';
-import type { Hsl } from './hsl/types';
 import parseTransparent from './rgb/parseTransparent';
 import prepare from './_prepare';
 
@@ -28,28 +25,6 @@ const l: Oklch = clampChroma(
 	{ mode: 'oklch', l: 0.5, c: 0.16, h: 180 },
 	'oklch'
 );
-
-const m: Color = filterBrightness(1.2)('hsl(60 100% 50% / 25%)');
-const m2: Oklch = filterBrightness(1.2)({
-	mode: 'oklch',
-	l: 0.5,
-	c: 0.161,
-	h: 180
-});
-
-const n: Rgb = mapper(mapTransferLinear(2))({
-	mode: 'rgb',
-	r: 0.8,
-	g: 0,
-	b: 0.2
-});
-
-const o: Hsl = filterBrightness(1)({
-	mode: 'hsl',
-	h: 1,
-	s: 1,
-	l: 1
-});
 
 const p1: undefined = parseTransparent('asd');
 const p2: Rgb = parseTransparent('transparent');
