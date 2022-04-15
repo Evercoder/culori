@@ -6,7 +6,7 @@ import type { Hsl } from '../src/hsl/types';
 // THROWS No overload matches this call.
 const c1 = random('1');
 
-// THROWS Type 'Rgb' is missing the following properties from type 'Hsl': h, s, l
+// THROWS Type 'Rgb' is not assignable to type 'Hsl'.
 const c2: Hsl = random();
 
 // THROWS Type 'Hsi' is missing the following properties from type 'Rgb': r, g, b
