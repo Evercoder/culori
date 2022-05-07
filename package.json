@@ -60,7 +60,6 @@
 	},
 	"scripts": {
 		"check:dts": "npx check-dts ./check-dts/**.types.ts ./check-dts/**.errors.ts",
-		"prepare": "git config core.hooksPath .git-hooks",
 		"test": "tape 'test/*.js' | tap-spec",
 		"build": "node build.js",
 		"benchmark": "node benchmark/index.js",
