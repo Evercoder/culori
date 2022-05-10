@@ -1,3 +1,5 @@
+// TODO: add types for color definitions
+
 export { default as converter } from './converter';
 
 export {
