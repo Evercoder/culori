@@ -42,7 +42,8 @@
 	"license": "MIT",
 	"files": [
 		"bundled",
-		"src"
+		"src",
+		"fn.d.ts"
 	],
 	"devDependencies": {
 		"@11ty/eleventy": "^0.12.1",
