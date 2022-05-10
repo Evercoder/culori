@@ -36,7 +36,7 @@ const case_7_expect_success: Hsl = increaser({
 	l: 0
 });
 
-const decreaser = mapper((v, ch, conv_color, mode) => v - 10, undefined);
+const decreaser = mapper(v => v - 10, undefined);
 
 const case_8_expect_success: Rgb | undefined = decreaser(
 	'color(--okhsv 29.2338851923426 0.9995219692256307 0.9999999999999997)'
@@ -56,7 +56,7 @@ const case_12_expect_success: Hsl = tripler({
 });
 
 const oner = mapper(
-	(v, ch, conv_color, mode) => {
+	(_v, _ch, conv_color, mode) => {
 		const check_0_expect_success: Rgb = conv_color;
 		const check_2_expect_success: 'rgb' = mode;
 		return 1;

@@ -1,11 +1,22 @@
-import type { ColorToColor, Mode } from './common';
+import type { Mode } from './common';
+import type { ColorToSameColorMapper } from './map';
 
-type Filter = (amt?: number, mode?: Mode) => ColorToColor;
+type Filter = (amt?: number, mode?: Mode) => ColorToSameColorMapper;
 
-export declare const filterBrightness: Filter;
-export declare const filterContrast: Filter;
-export declare const filterSepia: Filter;
-export declare const filterSaturate: Filter;
-export declare const filterGrayscale: Filter;
-export declare const filterInvert: Filter;
-export declare const filterHueRotate: Filter;
+declare const filterBrightness: Filter;
+declare const filterContrast: Filter;
+declare const filterSepia: Filter;
+declare const filterSaturate: Filter;
+declare const filterGrayscale: Filter;
+declare const filterInvert: Filter;
+declare const filterHueRotate: Filter;
+
+export {
+	filterBrightness,
+	filterContrast,
+	filterSepia,
+	filterSaturate,
+	filterGrayscale,
+	filterInvert,
+	filterHueRotate
+};

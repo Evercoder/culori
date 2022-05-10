@@ -15,7 +15,7 @@ interface ColorToRgbMapper {
 	(color: string): Rgb | undefined;
 }
 
-interface ColorToSameColorMapper {
+export interface ColorToSameColorMapper {
 	<M extends Mode>(color: Find<Color, M>): Find<Color, M>;
 	(color: string): Color | undefined;
 }

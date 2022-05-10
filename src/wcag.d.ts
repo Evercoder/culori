@@ -1,3 +1,5 @@
+import type { Color } from './common';
+
 declare function luminance(color: Color | string): number;
 
 declare function contrast(

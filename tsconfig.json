@@ -1,16 +1,13 @@
 {
-	"include": ["./src/**/*.js"],
+	"extends": "@tsconfig/node16-strictest/tsconfig.json",
+	"include": ["./src/**/*.js", "./**/*.d.ts"],
 	"compilerOptions": {
-		"target": "es2020",
-		"module": "commonjs",
+		"noUnusedLocals": false,
 		"allowJs": true,
+		"checkJs": false,
 		"declaration": false,
 		"noEmit": true,
-		"importsNotUsedAsValues": "error",
 		"isolatedModules": true,
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"strict": true,
 		"skipLibCheck": false
 	}
 }
