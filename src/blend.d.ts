@@ -1,5 +1,5 @@
 import type { Color, Mode, NonEmptyArray } from './common';
-import { Find } from './common';
+import { FindColorByMode } from './common';
 import type { Rgb } from './rgb/types';
 
 // TODO: find out how to import BLENDS dictionary from './blend.js
@@ -28,6 +28,6 @@ declare function blend<M extends Mode>(
 	colors: (Color | string)[],
 	type: BlendTypes | BlendingFunction,
 	mode: M
-): Find<Color, M>;
+): FindColorByMode<M>;
 
 export default blend;

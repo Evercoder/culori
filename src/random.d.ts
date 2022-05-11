@@ -1,4 +1,4 @@
-import type { Color, TakeColorChannels, Mode, Find } from './common';
+import type { Color, TakeColorChannels, Mode, FindColorByMode } from './common';
 import type { Rgb } from './rgb/types';
 
 type NumberOrRange = number | [number, number];
@@ -11,7 +11,7 @@ declare function random(): Rgb;
 declare function random<M extends Mode>(
 	mode: M,
 	constraints?: Constraints<M>
-): Find<Color, M>;
+): FindColorByMode<M>;
 declare function random(mode: undefined, constraints?: Constraints<'rgb'>): Rgb;
 
 export default random;

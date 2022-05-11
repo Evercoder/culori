@@ -1,6 +1,6 @@
 import type {
 	Color,
-	Find,
+	FindColorByMode,
 	Mode,
 	NonEmptyArray,
 	OverridesFunction,
@@ -22,6 +22,6 @@ declare function average<M extends Mode>(
 	colors: NonEmptyArray<Color | string>,
 	mode: M,
 	overrides?: OverridesFunction | OverridesObject<M>
-): Find<Color, M>;
+): FindColorByMode<M>;
 
 export { average, averageAngle, averageNumber };

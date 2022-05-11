@@ -1,4 +1,4 @@
-import type { Color, Find, Mode } from './common';
+import type { Color, FindColorByMode, Mode } from './common';
 import type { Rgb } from './rgb/types';
 
 type Channel = string;
@@ -6,7 +6,7 @@ type Channel = string;
 export type MapFn<M extends Mode | null> = (
 	v: number,
 	ch: string,
-	conv_color: M extends Mode ? Find<Color, M> : Color,
+	conv_color: M extends Mode ? FindColorByMode<M> : Color,
 	mode: M extends null ? null : M
 ) => number;
 
@@ -16,13 +16,13 @@ interface ColorToRgbMapper {
 }
 
 export interface ColorToSameColorMapper {
-	<M extends Mode>(color: Find<Color, M>): Find<Color, M>;
+	<M extends Mode>(color: FindColorByMode<M>): FindColorByMode<M>;
 	(color: string): Color | undefined;
 }
 
 interface ColorToPredefinedColorMapper<M extends Mode> {
-	(color: Color): Find<Color, M>;
-	(color: string): Find<Color, M> | undefined;
+	(color: Color): FindColorByMode<M>;
+	(color: string): FindColorByMode<M> | undefined;
 }
 
 declare function mapper(fn: MapFn<'rgb'>): ColorToRgbMapper;

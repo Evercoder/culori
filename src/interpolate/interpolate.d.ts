@@ -1,4 +1,4 @@
-import type { Color, Find, Mode, OverridesObject } from '../common';
+import type { Color, FindColorByMode, Mode, OverridesObject } from '../common';
 import type { MapFn } from '../map';
 import { TakeColorChannels } from '../common';
 
@@ -9,7 +9,7 @@ type ColorsParameter = Array<
 	Color | string | Position | ColorPosition | PositionFn
 >;
 
-type Interpolator<M extends Mode> = (t: number) => Find<Color, M>;
+type Interpolator<M extends Mode> = (t: number) => FindColorByMode<M>;
 
 type OverridesWithFixupFnsForChannels<M extends Mode> = {
 	[P in keyof TakeColorChannels<M>]: {
