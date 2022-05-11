@@ -6,7 +6,7 @@
 		"target": "es2021",
 		"strict": true,
 		"esModuleInterop": true,
-		"skipLibCheck": true,
+		"skipLibCheck": false,
 		"forceConsistentCasingInFileNames": true,
 		"allowUnusedLabels": false,
 		"allowUnreachableCode": false,
