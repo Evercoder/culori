@@ -203,3 +203,35 @@ export { default as convertXyz50ToProphoto } from './prophoto/convertXyz50ToProp
 export { default as convertXyz50ToRgb } from './xyz50/convertXyz50ToRgb';
 export { default as convertXyz50ToXyz65 } from './xyz65/convertXyz50ToXyz65';
 export { default as convertYiqToRgb } from './yiq/convertYiqToRgb';
+
+/* Types */
+
+export { Color, Mode } from './common';
+export type { A98 } from './a98/types';
+export type { Cubehelix } from './cubehelix/types';
+export type { Dlab } from './dlab/types';
+export type { Dlch } from './dlch/types';
+export type { Hsi } from './hsi/types';
+export type { Hsl } from './hsl/types';
+export type { Hsv } from './hsv/types';
+export type { Hwb } from './hwb/types';
+export type { Jab } from './jab/types';
+export type { Jch } from './jch/types';
+export type { Lab } from './lab/types';
+export type { Lab65 } from './lab65/types';
+export type { Lch } from './lch/types';
+export type { Lch65 } from './lch65/types';
+export type { Lchuv } from './lchuv/types';
+export type { Lrgb } from './lrgb/types';
+export type { Luv } from './luv/types';
+export type { Okhsl } from './okhsl/types';
+export type { Okhsv } from './okhsv/types';
+export type { Oklab } from './oklab/types';
+export type { Oklch } from './oklch/types';
+export type { P3 } from './p3/types';
+export type { Prophoto } from './prophoto/types';
+export type { Rec2020 } from './rec2020/types';
+export type { Rgb } from './rgb/types';
+export type { Xyz50 } from './xyz50/types';
+export type { Xyz65 } from './xyz65/types';
+export type { Yiq } from './yiq/types';
