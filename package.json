@@ -60,7 +60,7 @@
 		"typescript": "^4.6.3"
 	},
 	"scripts": {
-		"check:dts": "npx check-dts ./check-dts/**.types.ts ./check-dts/**.errors.ts",
+		"check:dts": "npx -p typescript tsc --project ./tsconfig.json && npx check-dts ./check-dts/**.types.ts ./check-dts/**.errors.ts",
 		"test": "tape 'test/*.js' | tap-spec",
 		"build": "node build.js",
 		"benchmark": "node benchmark/index.js",
