@@ -1,5 +1,5 @@
 import parse from './parse.js';
-import type { Color, FindColorByMode, Mode } from './common';
+import { Color, FindColorByMode, Mode } from './common';
 
 declare function prepare(color: undefined): undefined;
 declare function prepare(color: string): ReturnType<typeof parse>;

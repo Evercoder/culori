@@ -1,11 +1,11 @@
-import type convertXyz65ToRgb from './convertXyz65ToRgb';
-import type convertRgbToXyz65 from './convertRgbToXyz65';
+import convertXyz65ToRgb from './convertXyz65ToRgb';
+import convertRgbToXyz65 from './convertRgbToXyz65';
 
-import type convertXyz65ToXyz50 from './convertXyz65ToXyz50';
-import type convertXyz50ToXyz65 from './convertXyz50ToXyz65';
+import convertXyz65ToXyz50 from './convertXyz65ToXyz50';
+import convertXyz50ToXyz65 from './convertXyz50ToXyz65';
 
-import type { interpolatorLinear } from '../interpolate/linear';
-import type { fixupAlpha } from '../fixup/alpha';
+import { interpolatorLinear } from '../interpolate/linear';
+import { fixupAlpha } from '../fixup/alpha';
 
 declare const definition: {
 	mode: 'xyz65';

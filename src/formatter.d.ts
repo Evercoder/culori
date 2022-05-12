@@ -1,6 +1,6 @@
-import type { Color } from './common';
-import type { Rgb } from './rgb/types';
-import type { Hsl } from './hsl/types';
+import { Color } from './common';
+import { Rgb } from './rgb/types';
+import { Hsl } from './hsl/types';
 
 export function serializeHex(color: undefined): undefined;
 export function serializeHex(color: Omit<Rgb, 'alpha'>): string;

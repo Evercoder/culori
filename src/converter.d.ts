@@ -1,4 +1,4 @@
-import type { Color, FindColorByMode, Mode } from './common';
+import { Color, FindColorByMode, Mode } from './common';
 
 type ConvertFn<M extends Mode> = (
 	color: Color | string

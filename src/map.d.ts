@@ -1,5 +1,5 @@
-import type { Color, FindColorByMode, Mode } from './common';
-import type { Rgb } from './rgb/types';
+import { Color, FindColorByMode, Mode } from './common';
+import { Rgb } from './rgb/types';
 
 type Channel = string;
 

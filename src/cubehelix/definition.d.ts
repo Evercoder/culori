@@ -1,10 +1,10 @@
-import type { fixupHueShorter } from '../fixup/hue';
-import type { fixupAlpha } from '../fixup/alpha';
-import type { interpolatorLinear } from '../interpolate/linear';
-import type convertRgbToCubehelix from './convertRgbToCubehelix';
-import type convertCubehelixToRgb from './convertCubehelixToRgb';
-import type { differenceHueSaturation } from '../difference';
-import type { averageAngle } from '../average';
+import { fixupHueShorter } from '../fixup/hue';
+import { fixupAlpha } from '../fixup/alpha';
+import { interpolatorLinear } from '../interpolate/linear';
+import convertRgbToCubehelix from './convertRgbToCubehelix';
+import convertCubehelixToRgb from './convertCubehelixToRgb';
+import { differenceHueSaturation } from '../difference';
+import { averageAngle } from '../average';
 
 declare const definition: {
 	mode: 'cubehelix';

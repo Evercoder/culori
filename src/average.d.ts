@@ -1,4 +1,4 @@
-import type {
+import {
 	Color,
 	FindColorByMode,
 	Mode,
@@ -6,7 +6,7 @@ import type {
 	OverridesFunction,
 	OverridesObject
 } from './common';
-import type { Rgb } from './rgb/types';
+import { Rgb } from './rgb/types';
 
 declare function averageAngle(val: number[]): number;
 

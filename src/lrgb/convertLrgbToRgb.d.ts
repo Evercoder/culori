@@ -1,5 +1,5 @@
-import type { Lrgb } from './types';
-import type { Rgb } from '../rgb/types';
+import { Lrgb } from './types';
+import { Rgb } from '../rgb/types';
 
 declare function convertLrgbToRgb(
 	color: Omit<Lrgb, 'mode'>,

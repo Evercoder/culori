@@ -1,5 +1,5 @@
-import type { Xyz50 } from '../xyz50/types';
-import type { Lab } from './types';
+import { Xyz50 } from '../xyz50/types';
+import { Lab } from './types';
 
 declare function convertXyz50ToLab(color: Omit<Xyz50, 'mode'>): Lab;
 

@@ -1,5 +1,5 @@
-import type { Cubehelix } from './types';
-import type { Rgb } from '../rgb/types';
+import { Cubehelix } from './types';
+import { Rgb } from '../rgb/types';
 
 declare function convertCubehelixToRgb(color: Omit<Cubehelix, 'mode'>): Rgb;
 

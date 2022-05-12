@@ -1,5 +1,5 @@
-import type { Color, TakeColorChannels, Mode, FindColorByMode } from './common';
-import type { Rgb } from './rgb/types';
+import { Color, TakeColorChannels, Mode, FindColorByMode } from './common';
+import { Rgb } from './rgb/types';
 
 type NumberOrRange = number | [number, number];
 

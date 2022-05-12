@@ -1,5 +1,5 @@
-import type { Rgb } from '../rgb/types';
-import type { Lab65 } from './types';
+import { Rgb } from '../rgb/types';
+import { Lab65 } from './types';
 
 declare function convertRgbToLab65(color: Omit<Rgb, 'mode'>): Lab65;
 

@@ -1,4 +1,4 @@
-import type { Color } from './common';
+import { Color } from './common';
 
 type FilterDeficiencyFactory = (
 	severity: number

@@ -1,5 +1,5 @@
-import type { Mode } from './common';
-import type { ColorToSameColorMapper } from './map';
+import { Mode } from './common';
+import { ColorToSameColorMapper } from './map';
 
 type Filter = (amt?: number, mode?: Mode) => ColorToSameColorMapper;
 

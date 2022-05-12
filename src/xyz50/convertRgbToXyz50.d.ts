@@ -1,5 +1,5 @@
-import type { Rgb } from '../rgb/types';
-import type { Xyz50 } from './types';
+import { Rgb } from '../rgb/types';
+import { Xyz50 } from './types';
 
 declare function convertRgbToXyz50(rgb: Omit<Rgb, 'mode'>): Xyz50;
 

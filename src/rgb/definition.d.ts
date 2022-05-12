@@ -1,9 +1,9 @@
-import type parseHex from './parseHex';
-import type parseNamed from './parseNamed';
-import type parseRgb from './parseRgb';
-import type parseTransparent from './parseTransparent';
-import type { interpolatorLinear } from '../interpolate/linear';
-import type { fixupAlpha } from '../fixup/alpha';
+import parseHex from './parseHex';
+import parseNamed from './parseNamed';
+import parseRgb from './parseRgb';
+import parseTransparent from './parseTransparent';
+import { interpolatorLinear } from '../interpolate/linear';
+import { fixupAlpha } from '../fixup/alpha';
 
 declare const definition: {
 	mode: 'rgb';

@@ -1,4 +1,4 @@
-import type { Interpolator } from './Interpolator';
+import { Interpolator } from './Interpolator';
 
 export declare const interpolatorSplineMonotone: Interpolator;
 

@@ -1,5 +1,5 @@
-import type { Lch } from './types';
-import type { Lab } from '../lab/types';
+import { Lch } from './types';
+import { Lab } from '../lab/types';
 
 declare function convertLchToLab(color: Omit<Lch, 'mode'>): Lab;
 

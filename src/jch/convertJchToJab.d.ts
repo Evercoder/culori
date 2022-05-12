@@ -1,5 +1,5 @@
-import type { Jch } from './types';
-import type { Jab } from '../jab/types';
+import { Jch } from './types';
+import { Jab } from '../jab/types';
 
 declare function convertJchToJab(color: Omit<Jch, 'mode'>): Jab;
 

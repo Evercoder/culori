@@ -1,4 +1,4 @@
-import type { Rgb } from './types';
+import { Rgb } from './types';
 
 declare function parseRgb(color: string): Rgb;
 

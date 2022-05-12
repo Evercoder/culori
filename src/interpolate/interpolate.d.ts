@@ -1,5 +1,5 @@
-import type { Color, FindColorByMode, Mode, OverridesObject } from '../common';
-import type { MapFn } from '../map';
+import { Color, FindColorByMode, Mode, OverridesObject } from '../common';
+import { MapFn } from '../map';
 import { TakeColorChannels } from '../common';
 
 type ColorPosition = [Color | string, number];

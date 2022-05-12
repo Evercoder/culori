@@ -1,6 +1,6 @@
-import type { Color, Mode, NonEmptyArray } from './common';
+import { Color, Mode, NonEmptyArray } from './common';
 import { FindColorByMode } from './common';
-import type { Rgb } from './rgb/types';
+import { Rgb } from './rgb/types';
 
 // TODO: find out how to import BLENDS dictionary from './blend.js
 type BlendTypes =
