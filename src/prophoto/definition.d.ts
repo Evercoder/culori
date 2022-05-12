@@ -1,10 +1,10 @@
-import rgb from '../rgb/definition';
+import type rgb from '../rgb/definition';
 
-import convertXyz50ToProphoto from './convertXyz50ToProphoto';
-import convertProphotoToXyz50 from './convertProphotoToXyz50';
+import type convertXyz50ToProphoto from './convertXyz50ToProphoto';
+import type convertProphotoToXyz50 from './convertProphotoToXyz50';
 
-import { Rgb } from '../rgb/types';
-import { Prophoto } from './types';
+import type { Rgb } from '../rgb/types';
+import type { Prophoto } from './types';
 
 declare const definition: typeof rgb & {
 	mode: 'prophoto';

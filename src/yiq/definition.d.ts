@@ -1,7 +1,7 @@
-import convertRgbToYiq from './convertRgbToYiq';
-import convertYiqToRgb from './convertYiqToRgb';
-import { interpolatorLinear } from '../interpolate/linear';
-import { fixupAlpha } from '../fixup/alpha';
+import type convertRgbToYiq from './convertRgbToYiq';
+import type convertYiqToRgb from './convertYiqToRgb';
+import type { interpolatorLinear } from '../interpolate/linear';
+import type { fixupAlpha } from '../fixup/alpha';
 
 declare const definition: {
 	mode: 'yiq';

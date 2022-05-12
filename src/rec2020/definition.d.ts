@@ -1,7 +1,7 @@
-import rgb from '../rgb/definition';
+import type rgb from '../rgb/definition';
 
-import convertXyz65ToRec2020 from './convertXyz65ToRec2020';
-import convertRec2020ToXyz65 from './convertRec2020ToXyz65';
+import type convertXyz65ToRec2020 from './convertXyz65ToRec2020';
+import type convertRec2020ToXyz65 from './convertRec2020ToXyz65';
 
 import type { Rec2020 } from './types';
 import type { Rgb } from '../rgb/types';

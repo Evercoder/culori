@@ -1,9 +1,9 @@
-import convertXyz50ToRgb from './convertXyz50ToRgb';
-import convertXyz50ToLab from '../lab/convertXyz50ToLab';
-import convertRgbToXyz50 from './convertRgbToXyz50';
-import convertLabToXyz50 from '../lab/convertLabToXyz50';
-import { interpolatorLinear } from '../interpolate/linear';
-import { fixupAlpha } from '../fixup/alpha';
+import type convertXyz50ToRgb from './convertXyz50ToRgb';
+import type convertXyz50ToLab from '../lab/convertXyz50ToLab';
+import type convertRgbToXyz50 from './convertRgbToXyz50';
+import type convertLabToXyz50 from '../lab/convertLabToXyz50';
+import type { interpolatorLinear } from '../interpolate/linear';
+import type { fixupAlpha } from '../fixup/alpha';
 
 declare const definition: {
 	mode: 'xyz50';

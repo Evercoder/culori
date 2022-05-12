@@ -1,7 +1,6 @@
-import rgb from '../rgb/definition.js';
-
-import convertA98ToXyz65 from './convertA98ToXyz65.js';
-import convertXyz65ToA98 from './convertXyz65ToA98.js';
+import type rgb from '../rgb/definition';
+import type convertA98ToXyz65 from './convertA98ToXyz65';
+import type convertXyz65ToA98 from './convertXyz65ToA98';
 import type { Rgb } from '../rgb/types';
 import type { A98 } from './types';
 

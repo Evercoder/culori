@@ -1,4 +1,4 @@
-import parseHex from './parseHex';
+import type parseHex from './parseHex';
 import type parseNamed from './parseNamed';
 import type parseRgb from './parseRgb';
 import type parseTransparent from './parseTransparent';
