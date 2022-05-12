@@ -2,7 +2,7 @@ import rgb from '../rgb/definition.js';
 import convertRgbToLrgb from './convertRgbToLrgb.js';
 import convertLrgbToRgb from './convertLrgbToRgb.js';
 
-declare const definition: typeof rgb & {
+type LrgbDefinitionMixin = {
 	mode: 'lrgb';
 
 	toMode: {
@@ -16,5 +16,8 @@ declare const definition: typeof rgb & {
 	parse: ['--srgb-linear'];
 	serialize: '--srgb-linear';
 };
+
+declare const definition: Omit<typeof rgb, keyof LrgbDefinitionMixin> &
+	LrgbDefinitionMixin;
 
 export default definition;

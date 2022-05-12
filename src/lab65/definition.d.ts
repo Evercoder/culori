@@ -4,7 +4,7 @@ import convertRgbToLab65 from './convertRgbToLab65.js';
 import convertXyz65ToLab65 from './convertXyz65ToLab65.js';
 import lab from '../lab/definition.js';
 
-declare const definition: typeof lab & {
+type Lab65DefinitionMixin = {
 	mode: 'lab65';
 
 	parse: ['--lab-d65'];
@@ -26,5 +26,8 @@ declare const definition: typeof lab & {
 		b: [-107.86, 94.477];
 	};
 };
+
+declare const definition: Omit<typeof lab, keyof Lab65DefinitionMixin> &
+	Lab65DefinitionMixin;
 
 export default definition;

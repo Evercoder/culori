@@ -4,7 +4,7 @@ import convertXyz65ToA98 from './convertXyz65ToA98';
 import { Rgb } from '../rgb/types';
 import { A98 } from './types';
 
-declare const definition: typeof rgb & {
+type A98DefinitionMixin = {
 	mode: 'a98';
 	parse: ['a98-rgb'];
 	serialize: 'a98-rgb';
@@ -19,5 +19,8 @@ declare const definition: typeof rgb & {
 		xyz65: typeof convertA98ToXyz65;
 	};
 };
+
+declare const definition: Omit<typeof rgb, keyof A98DefinitionMixin> &
+	A98DefinitionMixin;
 
 export default definition;

@@ -6,7 +6,7 @@ import convertProphotoToXyz50 from './convertProphotoToXyz50';
 import { Rgb } from '../rgb/types';
 import { Prophoto } from './types';
 
-declare const definition: typeof rgb & {
+type ProphotoDefinitionMixin = {
 	mode: 'prophoto';
 	parse: ['prophoto-rgb'];
 	serialize: 'prophoto-rgb';
@@ -21,5 +21,8 @@ declare const definition: typeof rgb & {
 		rgb: (rgb: Omit<Prophoto, 'mode'>) => Rgb;
 	};
 };
+
+declare const definition: Omit<typeof rgb, keyof ProphotoDefinitionMixin> &
+	ProphotoDefinitionMixin;
 
 export default definition;
