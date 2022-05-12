@@ -1,11 +1,11 @@
-import convertJabToJch from './convertJabToJch.js';
-import convertJchToJab from './convertJchToJab.js';
+import convertJabToJch from './convertJabToJch';
+import convertJchToJab from './convertJchToJab';
 
-import { fixupHueShorter } from '../fixup/hue.js';
-import { fixupAlpha } from '../fixup/alpha.js';
-import { interpolatorLinear } from '../interpolate/linear.js';
-import { differenceHueChroma } from '../difference.js';
-import { averageAngle } from '../average.js';
+import { fixupHueShorter } from '../fixup/hue';
+import { fixupAlpha } from '../fixup/alpha';
+import { interpolatorLinear } from '../interpolate/linear';
+import { differenceHueChroma } from '../difference';
+import { averageAngle } from '../average';
 import { Rgb } from '../rgb/types';
 import { Jch } from './types';
 

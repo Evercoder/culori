@@ -1,4 +1,4 @@
-import parse from './parse.js';
+import parse from './parse';
 import { Color, FindColorByMode, Mode } from './common';
 
 declare function prepare(color: undefined): undefined;

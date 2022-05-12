@@ -1,7 +1,7 @@
-import convertOklabToOkhsv from './convertOklabToOkhsv.js';
-import convertOkhsvToOklab from './convertOkhsvToOklab.js';
+import convertOklabToOkhsv from './convertOklabToOkhsv';
+import convertOkhsvToOklab from './convertOkhsvToOklab';
 
-import modeHsv from '../hsv/definition.js';
+import modeHsv from '../hsv/definition';
 import { Okhsv } from './types';
 import { Rgb } from '../rgb/types';
 

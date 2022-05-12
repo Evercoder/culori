@@ -1,8 +1,8 @@
-import convertXyz50ToLuv from './convertXyz50ToLuv.js';
-import convertLuvToXyz50 from './convertLuvToXyz50.js';
+import convertXyz50ToLuv from './convertXyz50ToLuv';
+import convertLuvToXyz50 from './convertLuvToXyz50';
 
-import { interpolatorLinear } from '../interpolate/linear.js';
-import { fixupAlpha } from '../fixup/alpha.js';
+import { interpolatorLinear } from '../interpolate/linear';
+import { fixupAlpha } from '../fixup/alpha';
 import { Luv } from './types';
 import { Rgb } from '../rgb/types';
 

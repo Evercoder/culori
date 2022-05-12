@@ -1,10 +1,10 @@
-import convertLabToRgb from './convertLabToRgb.js';
-import convertLabToXyz50 from './convertLabToXyz50.js';
-import convertRgbToLab from './convertRgbToLab.js';
-import convertXyz50ToLab from './convertXyz50ToLab.js';
-import parseLab from './parseLab.js';
-import { interpolatorLinear } from '../interpolate/linear.js';
-import { fixupAlpha } from '../fixup/alpha.js';
+import convertLabToRgb from './convertLabToRgb';
+import convertLabToXyz50 from './convertLabToXyz50';
+import convertRgbToLab from './convertRgbToLab';
+import convertXyz50ToLab from './convertXyz50ToLab';
+import parseLab from './parseLab';
+import { interpolatorLinear } from '../interpolate/linear';
+import { fixupAlpha } from '../fixup/alpha';
 import { Lab } from './types';
 
 declare const definition: {

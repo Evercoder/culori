@@ -1,10 +1,10 @@
-import convertHsiToRgb from './convertHsiToRgb.js';
-import convertRgbToHsi from './convertRgbToHsi.js';
-import { fixupHueShorter } from '../fixup/hue.js';
-import { fixupAlpha } from '../fixup/alpha.js';
-import { interpolatorLinear } from '../interpolate/linear.js';
-import { differenceHueSaturation } from '../difference.js';
-import { averageAngle } from '../average.js';
+import convertHsiToRgb from './convertHsiToRgb';
+import convertRgbToHsi from './convertRgbToHsi';
+import { fixupHueShorter } from '../fixup/hue';
+import { fixupAlpha } from '../fixup/alpha';
+import { interpolatorLinear } from '../interpolate/linear';
+import { differenceHueSaturation } from '../difference';
+import { averageAngle } from '../average';
 
 declare const definition: {
 	mode: 'hsi';
