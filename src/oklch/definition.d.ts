@@ -3,9 +3,9 @@ import convertLabToLch from '../lch/convertLabToLch';
 import convertLchToLab from '../lch/convertLchToLab';
 import convertOklabToRgb from '../oklab/convertOklabToRgb';
 import convertRgbToOklab from '../oklab/convertRgbToOklab';
-import type { Oklch } from './types';
-import type { Oklab } from '../oklab/types';
-import type { Rgb } from '../rgb/types';
+import { Oklch } from './types';
+import { Oklab } from '../oklab/types';
+import { Rgb } from '../rgb/types';
 
 type OklchDefinitionMixin = {
 	mode: 'oklch';

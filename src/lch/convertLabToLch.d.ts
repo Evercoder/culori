@@ -1,5 +1,5 @@
 import { Lab } from '../lab/types';
-import type { FindColorByMode } from '../common';
+import { FindColorByMode } from '../common';
 
 declare function convertLabToLch<
 	M extends 'dlch' | 'lch65' | 'oklch' | 'lch' = 'lch'
