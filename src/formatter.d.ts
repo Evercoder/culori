@@ -16,20 +16,20 @@ export function serializeHsl(color: Partial<Hsl>): string | undefined;
 
 export function formatCss(c: undefined): undefined;
 export function formatCss(c: Color): string;
-export function formatCss(c: undefined | Color | string): string | undefined;
+export function formatCss(c: undefined | string | Color): string | undefined;
 
 export function formatHex(c: undefined): undefined;
 export function formatHex(c: Color): string;
-export function formatHex(c: undefined | Color | string): string | undefined;
+export function formatHex(c: undefined | string | Color): string | undefined;
 
 export function formatHex8(c: undefined): undefined;
 export function formatHex8(c: Color): string;
-export function formatHex8(c: undefined | Color | string): string | undefined;
+export function formatHex8(c: undefined | string | Color): string | undefined;
 
 export function formatRgb(c: undefined): undefined;
 export function formatRgb(c: Color): string;
-export function formatRgb(c: undefined | Color | string): string | undefined;
+export function formatRgb(c: undefined | string | Color): string | undefined;
 
 export function formatHsl(c: undefined): undefined;
 export function formatHsl(c: Color): string;
-export function formatHsl(c: undefined | Color | string): string | undefined;
+export function formatHsl(c: undefined | string | Color): string | undefined;
