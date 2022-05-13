@@ -28,10 +28,8 @@ export function formatHex8(c: undefined | Color | string): string | undefined;
 
 export function formatRgb(c: undefined): undefined;
 export function formatRgb(c: Color): string;
-export function formatRgb(c: string): string | undefined;
 export function formatRgb(c: undefined | Color | string): string | undefined;
 
 export function formatHsl(c: undefined): undefined;
 export function formatHsl(c: Color): string;
-export function formatHsl(c: string): string | undefined;
 export function formatHsl(c: undefined | Color | string): string | undefined;
