@@ -16,25 +16,22 @@ export function serializeHsl(color: Partial<Hsl>): string | undefined;
 
 export function formatCss(c: undefined): undefined;
 export function formatCss(c: Color): string;
-export function formatCss(c: string): string | undefined;
 export function formatCss(c: undefined | Color | string): string | undefined;
 
 export function formatHex(c: undefined): undefined;
-export function formatHex(c: Rgb): string;
-export function formatHex(c: string): string | undefined;
-export function formatHex(c: undefined | Rgb | string): string | undefined;
+export function formatHex(c: Color): string;
+export function formatHex(c: undefined | Color | string): string | undefined;
 
 export function formatHex8(c: undefined): undefined;
-export function formatHex8(c: Rgb): string;
-export function formatHex8(c: string): string | undefined;
-export function formatHex8(c: undefined | Rgb | string): string | undefined;
+export function formatHex8(c: Color): string;
+export function formatHex8(c: undefined | Color | string): string | undefined;
 
 export function formatRgb(c: undefined): undefined;
-export function formatRgb(c: Rgb): string;
+export function formatRgb(c: Color): string;
 export function formatRgb(c: string): string | undefined;
-export function formatRgb(c: undefined | Rgb | string): string | undefined;
+export function formatRgb(c: undefined | Color | string): string | undefined;
 
 export function formatHsl(c: undefined): undefined;
-export function formatHsl(c: Hsl): string;
+export function formatHsl(c: Color): string;
 export function formatHsl(c: string): string | undefined;
-export function formatHsl(c: undefined | Hsl | string): string | undefined;
+export function formatHsl(c: undefined | Color | string): string | undefined;

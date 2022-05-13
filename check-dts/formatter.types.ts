@@ -16,3 +16,6 @@ const tr3 = r3 === undefined ? formatCss(r3) : formatCss(r3);
 declare const color4: string;
 const r4 = p3(color4);
 const tr4 = formatCss(r4);
+
+declare const color5: Color;
+const r5: string = formatRgb(color);
