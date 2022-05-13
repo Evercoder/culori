@@ -1,8 +1,8 @@
-import lch from '../lch/definition.js';
-import convertLabToLch from '../lch/convertLabToLch.js';
-import convertLchToLab from '../lch/convertLchToLab.js';
-import convertOklabToRgb from '../oklab/convertOklabToRgb.js';
-import convertRgbToOklab from '../oklab/convertRgbToOklab.js';
+import lch from '../lch/definition';
+import convertLabToLch from '../lch/convertLabToLch';
+import convertLchToLab from '../lch/convertLchToLab';
+import convertOklabToRgb from '../oklab/convertOklabToRgb';
+import convertRgbToOklab from '../oklab/convertRgbToOklab';
 import type { Oklch } from './types';
 import type { Oklab } from '../oklab/types';
 import type { Rgb } from '../rgb/types';

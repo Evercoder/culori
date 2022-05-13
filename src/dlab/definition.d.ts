@@ -1,5 +1,5 @@
-import { interpolatorLinear } from '../interpolate/linear.js';
-import { fixupAlpha } from '../fixup/alpha.js';
+import { interpolatorLinear } from '../interpolate/linear';
+import { fixupAlpha } from '../fixup/alpha';
 import { Dlab } from './types';
 import { Lab65 } from '../lab65/types';
 import { Rgb } from '../rgb/types';

@@ -1,11 +1,11 @@
-import convertDlchToLab65 from './convertDlchToLab65.js';
-import convertLab65ToDlch from './convertLab65ToDlch.js';
+import convertDlchToLab65 from './convertDlchToLab65';
+import convertLab65ToDlch from './convertLab65ToDlch';
 
-import { fixupHueShorter } from '../fixup/hue.js';
-import { fixupAlpha } from '../fixup/alpha.js';
-import { interpolatorLinear } from '../interpolate/linear.js';
-import { differenceHueChroma } from '../difference.js';
-import { averageAngle } from '../average.js';
+import { fixupHueShorter } from '../fixup/hue';
+import { fixupAlpha } from '../fixup/alpha';
+import { interpolatorLinear } from '../interpolate/linear';
+import { differenceHueChroma } from '../difference';
+import { averageAngle } from '../average';
 import { Dlab } from '../dlab/types';
 import { Dlch } from './types';
 import { Rgb } from '../rgb/types';

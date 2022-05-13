@@ -1,4 +1,4 @@
-import lch from '../lch/definition.js';
+import lch from '../lch/definition';
 import { Lch } from '../lch/types';
 import { Lab65 } from '../lab65/types';
 import { Rgb } from '../rgb/types';
