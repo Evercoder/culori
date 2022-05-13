@@ -1,4 +1,33 @@
-// TODO: add types for color definitions
+import modeA98 from './a98/definition';
+import modeCubehelix from './cubehelix/definition';
+import modeDlab from './dlab/definition';
+import modeDlch from './dlch/definition';
+import modeHsi from './hsi/definition';
+import modeHsl from './hsl/definition';
+import modeHsv from './hsv/definition';
+import modeHwb from './hwb/definition';
+import modeJab from './jab/definition';
+import modeJch from './jch/definition';
+import modeLab from './lab/definition';
+import modeLab65 from './lab65/definition';
+import modeLch from './lch/definition';
+import modeLch65 from './lch65/definition';
+import modeLchuv from './lchuv/definition';
+import modeLrgb from './lrgb/definition';
+import modeLuv from './luv/definition';
+import modeOkhsl from './okhsl/modeOkhsl';
+import modeOkhsv from './okhsv/modeOkhsv';
+import modeOklab from './oklab/definition';
+import modeOklch from './oklch/definition';
+import modeP3 from './p3/definition';
+import modeProphoto from './prophoto/definition';
+import modeRec2020 from './rec2020/definition';
+import modeRgb from './rgb/definition';
+import modeXyz50 from './xyz50/definition';
+import modeXyz65 from './xyz65/definition';
+import modeYiq from './yiq/definition';
+import { useMode } from './modes';
+import { ConvertFn } from './converter';
 
 export { default as converter } from './converter';
 
@@ -176,6 +205,66 @@ export { default as convertXyz50ToProphoto } from './prophoto/convertXyz50ToProp
 export { default as convertXyz50ToRgb } from './xyz50/convertXyz50ToRgb';
 export { default as convertXyz50ToXyz65 } from './xyz65/convertXyz50ToXyz65';
 export { default as convertYiqToRgb } from './yiq/convertYiqToRgb';
+
+export {
+	modeA98,
+	modeCubehelix,
+	modeDlab,
+	modeDlch,
+	modeHsi,
+	modeHsl,
+	modeHsv,
+	modeHwb,
+	modeJab,
+	modeJch,
+	modeLab,
+	modeLab65,
+	modeLch,
+	modeLch65,
+	modeLchuv,
+	modeLrgb,
+	modeLuv,
+	modeOkhsl,
+	modeOkhsv,
+	modeOklab,
+	modeOklch,
+	modeP3,
+	modeProphoto,
+	modeRec2020,
+	modeRgb,
+	modeXyz50,
+	modeXyz65,
+	modeYiq
+};
+
+export const a98: ConvertFn<'a98'>;
+export const cubehelix: ConvertFn<'cubehelix'>;
+export const dlab: ConvertFn<'dlab'>;
+export const dlch: ConvertFn<'dlch'>;
+export const hsi: ConvertFn<'hsi'>;
+export const hsl: ConvertFn<'hsl'>;
+export const hsv: ConvertFn<'hsv'>;
+export const hwb: ConvertFn<'hwb'>;
+export const jab: ConvertFn<'jab'>;
+export const jch: ConvertFn<'jch'>;
+export const lab: ConvertFn<'lab'>;
+export const lab65: ConvertFn<'lab65'>;
+export const lch: ConvertFn<'lch'>;
+export const lch65: ConvertFn<'lch65'>;
+export const lchuv: ConvertFn<'lchuv'>;
+export const lrgb: ConvertFn<'lrgb'>;
+export const luv: ConvertFn<'luv'>;
+export const okhsl: ConvertFn<'okhsl'>;
+export const okhsv: ConvertFn<'okhsv'>;
+export const oklab: ConvertFn<'oklab'>;
+export const oklch: ConvertFn<'oklch'>;
+export const p3: ConvertFn<'p3'>;
+export const prophoto: ConvertFn<'prophoto'>;
+export const rec2020: ConvertFn<'rec2020'>;
+export const rgb: ConvertFn<'rgb'>;
+export const xyz50: ConvertFn<'xyz50'>;
+export const xyz65: ConvertFn<'xyz65'>;
+export const yiq: ConvertFn<'yiq'>;
 
 /* Types */
 

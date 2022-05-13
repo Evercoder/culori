@@ -1,6 +1,6 @@
 import { Color, FindColorByMode, Mode } from './common';
 
-type ConvertFn<M extends Mode> = (
+export type ConvertFn<M extends Mode> = (
 	color: Color | string
 ) => FindColorByMode<M> | undefined;
 
