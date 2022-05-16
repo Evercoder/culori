@@ -1,5 +1,16 @@
 import tape from 'tape';
 import { cubehelix, formatCss } from '../src/index.js';
+import convertRgbToCubehelix from '../src/cubehelix/convertRgbToCubehelix.js';
+
+tape('cubehelix', function (test) {
+	test.deepEqual(cubehelix('black'), {
+		mode: 'cubehelix',
+		l: 0,
+		s: undefined
+	});
+
+	test.end();
+});
 
 tape('color(--cubehelix)', t => {
 	t.deepEqual(cubehelix('color(--cubehelix 30 0.5 1 / 0.25)'), {
@@ -25,4 +36,21 @@ tape('formatCss', t => {
 		'color(--cubehelix 0 0.5 0.5 / 0.25)'
 	);
 	t.end();
+});
+
+tape('convertRgbToCubehelix', function (test) {
+	test.deepEqual(
+		convertRgbToCubehelix({
+			r: 1,
+			b: 1,
+			g: 1
+		}),
+		{
+			mode: 'cubehelix',
+			l: 1,
+			s: undefined
+		}
+	);
+
+	test.end();
 });

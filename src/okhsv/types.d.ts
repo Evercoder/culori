@@ -1,6 +1,6 @@
 export interface Okhsv {
 	mode: 'okhsv';
-	h: number;
+	h?: number;
 	s: number;
 	v: number;
 	alpha?: number;

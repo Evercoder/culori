@@ -2,6 +2,6 @@ export interface Lch {
 	mode: 'lch';
 	l: number;
 	c: number;
-	h: number;
+	h?: number;
 	alpha?: number;
 }
