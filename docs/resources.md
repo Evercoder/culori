@@ -15,6 +15,7 @@ These projects add more functionality to Culori, but they're separate as to keep
 ## Products using Culori
 
 -   [Moqups](https://moqups.com) — all our color-manipulation functions are handled by Culori.
+-   [Schemist](https://github.com/felixgirault/schemist) — color schemes builder backed by Culori.
 
 Does your product/project use Culori? Create a PR and add yourself to this list.
 
