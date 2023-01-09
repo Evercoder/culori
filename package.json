@@ -44,7 +44,7 @@
 		"src"
 	],
 	"devDependencies": {
-		"@11ty/eleventy": "^0.12.1",
+		"@11ty/eleventy": "^1.0.2",
 		"@11ty/eleventy-plugin-syntaxhighlight": "^3.1.2",
 		"esbuild": "^0.13.3",
 		"eslint": "^7.32.0",
