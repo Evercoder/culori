@@ -827,7 +827,7 @@ samples(10).map(t => t * t);
 
 <a id="lerp" href="#lerp">#</a> **lerp**(_a_, _b_, _t_) → _value_
 
-<span aria-label='Source:'>☞</span> [src/samples.js]({{codebase}}/src/samples.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/lerp.js]({{codebase}}/src/interpolate/lerp.js)
 
 Interpolates between the values `a` and `b` at the point `t ∈ [0, 1]`.
 
