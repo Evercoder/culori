@@ -340,6 +340,10 @@ Serialized as `color(--jzczhz j c h)`, with the `none` keyword for any missing c
 
 Serialized as `color(--yiq y i q)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+The conversion matrices between the sRGB and YIQ color spaces are taken from:
+
+> Yuriy Kotsarenko, Fernando Ramos, [_Measuring perceived color difference using YIQ NTSC transmission color space in mobile applications_](http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf), Programación Matemática y Software (2010), Vol. 2, No 2.
+
 ### CIE XYZ
 
 The [CIE XYZ color space](https://en.wikipedia.org/wiki/CIE_1931_color_space), also known as the CIE 1931 color space.

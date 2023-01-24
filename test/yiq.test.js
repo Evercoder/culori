@@ -1,22 +1,29 @@
 import tape from 'tape';
 import { yiq, formatRgb, formatCss } from '../src/index.js';
 
-tape('rgb to yiq and back', function (test) {
-	test.deepEqual(
+tape('rgb -> yiq', t => {
+	t.deepEqual(yiq('purple'), {
+		mode: 'yiq',
+		y: 0.20749931419607845,
+		i: 0.13762565019607842,
+		q: 0.26233329443137254
+	});
+	t.end();
+});
+
+tape('rgb -> yiq -> rgb', t => {
+	t.deepEqual(
 		formatRgb(yiq('rgb(255, 255, 255)')),
 		'rgb(255, 255, 255)',
 		'white'
 	);
 
-	test.deepEqual(formatRgb(yiq('rgb(0, 0, 0)')), 'rgb(0, 0, 0)', 'black');
+	t.deepEqual(formatRgb(yiq('rgb(0, 0, 0)')), 'rgb(0, 0, 0)', 'black');
+	t.deepEqual(formatRgb(yiq('rgb(100, 0, 0)')), 'rgb(100, 0, 0)', 'red');
+	t.deepEqual(formatRgb(yiq('rgb(0, 120, 0)')), 'rgb(0, 120, 0)', 'blue');
+	t.deepEqual(formatRgb(yiq('rgb(0, 0, 89)')), 'rgb(0, 0, 89)', 'green');
 
-	test.deepEqual(formatRgb(yiq('rgb(100, 0, 0)')), 'rgb(100, 0, 0)', 'red');
-
-	test.deepEqual(formatRgb(yiq('rgb(0, 120, 0)')), 'rgb(0, 120, 0)', 'blue');
-
-	test.deepEqual(formatRgb(yiq('rgb(0, 0, 89)')), 'rgb(0, 0, 89)', 'green');
-
-	test.end();
+	t.end();
 });
 
 tape('color(--yiq)', t => {
