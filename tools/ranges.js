@@ -1,4 +1,4 @@
-let culori = require('../src/index.js');
+import { converter, getMode } from '../src/index.js';
 
 /*
 	Find the channel value ranges (minimum & maximum)
@@ -6,8 +6,8 @@ let culori = require('../src/index.js');
 	RGB colors to that space.
  */
 let ranges = (mode, step = 0.01) => {
-	let conv = culori.converter(mode);
-	let chs = culori.getMode(mode).channels;
+	let conv = converter(mode);
+	let chs = getMode(mode).channels;
 	let res = chs.reduce(
 		(acc, ch) => ((acc[ch] = [Infinity, -Infinity]), acc),
 		{}
