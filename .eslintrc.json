@@ -15,6 +15,7 @@
 		"import/no-anonymous-default-export": 1,
 		"import/no-unused-modules": 1,
 		"no-const-assign": 1,
+		"no-loss-of-precision": 0,
 		"no-mixed-spaces-and-tabs": 0,
 		"no-this-before-super": 1,
 		"no-undef": 2,
