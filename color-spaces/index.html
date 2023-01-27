@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v2.0.3 (<a
+				>v2.0.4 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,11 +48,11 @@
 				</li>
 				
 				<li class="">
-					<a href="/colophon/">Colophon</a>
+					<a href="/resources/">Resources</a>
 				</li>
 				
 				<li class="">
-					<a href="/resources/">Resources</a>
+					<a href="/colophon/">Colophon</a>
 				</li>
 				<li>
 					<a href="https://github.com/Evercoder/culori"
@@ -703,6 +703,10 @@
 </tbody>
 </table>
 <p>Serialized as <code>color(--yiq y i q)</code>, with the <code>none</code> keyword for any missing color channel. An explicit <code>alpha &lt; 1</code> is included as <code> / alpha</code>.</p>
+<p>The conversion matrices between the sRGB and YIQ color spaces are taken from:</p>
+<blockquote>
+<p>Yuriy Kotsarenko, Fernando Ramos, <a href="http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf"><em>Measuring perceived color difference using YIQ NTSC transmission color space in mobile applications</em></a>, Programación Matemática y Software (2010), Vol. 2, No 2.</p>
+</blockquote>
 <h3>CIE XYZ</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/CIE_1931_color_space">CIE XYZ color space</a>, also known as the CIE 1931 color space.</p>
 <h4><code>xyz50</code></h4>
@@ -817,7 +821,7 @@
 
 		<script
 			type="text/javascript"
-			src="https://unpkg.com/culori@2.0.3"
+			src="https://unpkg.com/culori@2.0.4"
 		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });

@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v2.0.3 (<a
+				>v2.0.4 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,11 +48,11 @@
 				</li>
 				
 				<li class="">
-					<a href="/colophon/">Colophon</a>
+					<a href="/resources/">Resources</a>
 				</li>
 				
 				<li class="">
-					<a href="/resources/">Resources</a>
+					<a href="/colophon/">Colophon</a>
 				</li>
 				<li>
 					<a href="https://github.com/Evercoder/culori"
@@ -450,7 +450,7 @@
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> samples <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> easing <span class="token keyword">from</span> <span class="token string">'bezier-easing'</span><span class="token punctuation">;</span><br><br><span class="token comment">// Bezier easing:</span><br><span class="token keyword">let</span> bezier <span class="token operator">=</span> <span class="token function">easing</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>bezier<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// easeInQuad:</span><br><span class="token function">samples</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">t</span> <span class="token operator">=></span> t <span class="token operator">*</span> t<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h3>Lerp</h3>
 <p><a id="lerp" href="#lerp">#</a> <strong>lerp</strong>(<em>a</em>, <em>b</em>, <em>t</em>) → <em>value</em></p>
-<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/samples.js">src/samples.js</a></p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/interpolate/lerp.js">src/interpolate/lerp.js</a></p>
 <p>Interpolates between the values <code>a</code> and <code>b</code> at the point <code>t ∈ [0, 1]</code>.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> lerp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><span class="token function">lerp</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ 7.5</span></code></pre>
 <h3>Mappings</h3>
@@ -1162,7 +1162,7 @@
 
 		<script
 			type="text/javascript"
-			src="https://unpkg.com/culori@2.0.3"
+			src="https://unpkg.com/culori@2.0.4"
 		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });

@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v2.0.3 (<a
+				>v2.0.4 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,11 +48,11 @@
 				</li>
 				
 				<li class="">
-					<a href="/colophon/">Colophon</a>
+					<a href="/resources/">Resources</a>
 				</li>
 				
 				<li class="">
-					<a href="/resources/">Resources</a>
+					<a href="/colophon/">Colophon</a>
 				</li>
 				<li>
 					<a href="https://github.com/Evercoder/culori"
@@ -86,7 +86,7 @@
 <p>When using a bundler such as <a href="https://esbuild.github.io/">esbuild</a>, a minified build fits on the back of a napkin.</p>
 <details>
 <summary>Show esbuild output for code above</summary>
-<pre class="language-bash"><code class="language-bash">esbuild --bundle --minify hex-to-hsl-string.js</code></pre>
+<pre class="language-bash"><code class="language-bash">esbuild <span class="token parameter variable">--bundle</span> <span class="token parameter variable">--minify</span> hex-to-hsl-string.js</code></pre>
 <p><code style='word-break: break-all;'>(()=&gt;{var b=(e,o)=&gt;{if(typeof e==&quot;number&quot;){if(o===3)return{mode:&quot;rgb&quot;,r:(e&gt;&gt;8&amp;15|e&gt;&gt;4&amp;240)/255,g:(e&gt;&gt;4&amp;15|e&amp;240)/255,b:(e&amp;15|e&lt;&lt;4&amp;240)/255};if(o===4)return{mode:&quot;rgb&quot;,r:(e&gt;&gt;12&amp;15|e&gt;&gt;8&amp;240)/255,g:(e&gt;&gt;8&amp;15|e&gt;&gt;4&amp;240)/255,b:(e&gt;&gt;4&amp;15|e&amp;240)/255,alpha:(e&amp;15|e&lt;&lt;4&amp;240)/255};if(o===6)return{mode:&quot;rgb&quot;,r:(e&gt;&gt;16&amp;255)/255,g:(e&gt;&gt;8&amp;255)/255,b:(e&amp;255)/255};if(o===8)return{mode:&quot;rgb&quot;,r:(e&gt;&gt;24&amp;255)/255,g:(e&gt;&gt;16&amp;255)/255,b:(e&gt;&gt;8&amp;255)/255,alpha:(e&amp;255)/255}}},u=b;var c=/^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i,x=e=&gt;{let o;return(o=e.match(c))?u(parseInt(o[1],16),o[1].length):void 0},l=x;function f({r:e,g:o,b:t,alpha:s}){let r=Math.max(e,o,t),a=Math.min(e,o,t),i={mode:&quot;hsl&quot;,s:r===a?0:(r-a)/(1-Math.abs(r+a-1)),l:.5*(r+a)};return r-a!=0&amp;&amp;(i.h=(r===e?(o-t)/(r-a)+(o&lt;t)*6:r===o?(t-e)/(r-a)+2:(e-o)/(r-a)+4)<em>60),s!==void 0&amp;&amp;(i.alpha=s),i}function p(e=4){return o=&gt;typeof o==&quot;number&quot;?Math.round(o</em>(e=Math.pow(10,e)))/e:o}var n=p(2),d=e=&gt;Math.max(0,Math.min(1,e));var m=e=&gt;{if(e===void 0)return;let o=n(e.h||0),t=n(d(e.s)*100),s=n(d(e.l)*100);return e.alpha===void 0||e.alpha===1?<code>hsl(${o}, ${t}%, ${s}%)</code>:<code>hsla(${o}, ${t}%, ${s}%, ${n(d(e.alpha))})</code>};console.log(m(f(l(&quot;#ffcc00&quot;))));})();
 </code></p>
 </details>
@@ -119,7 +119,7 @@
 
 		<script
 			type="text/javascript"
-			src="https://unpkg.com/culori@2.0.3"
+			src="https://unpkg.com/culori@2.0.4"
 		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
