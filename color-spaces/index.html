@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v2.0.4 (<a
+				>v2.1.0 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,11 +48,11 @@
 				</li>
 				
 				<li class="">
-					<a href="/resources/">Resources</a>
+					<a href="/colophon/">Colophon</a>
 				</li>
 				
 				<li class="">
-					<a href="/colophon/">Colophon</a>
+					<a href="/resources/">Resources</a>
 				</li>
 				<li>
 					<a href="https://github.com/Evercoder/culori"
@@ -674,7 +674,7 @@
 </tbody>
 </table>
 <p>Serialized as <code>color(--jzczhz j c h)</code>, with the <code>none</code> keyword for any missing color channel. An explicit <code>alpha &lt; 1</code> is included as <code> / alpha</code>.</p>
-<h3>YIQ</h3>
+<h3>YIQ (<code>yiq</code>)</h3>
 <p><a href="https://en.wikipedia.org/wiki/YIQ">YIQ</a> is the color space used by the NTSC color TV system. It contains the following channels:</p>
 <table>
 <thead>
@@ -686,17 +686,17 @@
 </thead>
 <tbody>
 <tr>
-<td>Y</td>
+<td><code>y</code></td>
 <td><code>[0, 1]</code></td>
 <td>Luma</td>
 </tr>
 <tr>
-<td>I</td>
+<td><code>i</code></td>
 <td><code>[-0.595, 0.595]</code>≈</td>
 <td>In-phase (orange-blue axis)</td>
 </tr>
 <tr>
-<td>Q</td>
+<td><code>q</code></td>
 <td><code>[-0.522, 0.522]</code>≈</td>
 <td>Quadrature (green-purple axis)</td>
 </tr>
@@ -721,17 +721,17 @@
 </thead>
 <tbody>
 <tr>
-<td>X</td>
+<td><code>x</code></td>
 <td><code>[0, 0.964]</code>≈</td>
 <td>?</td>
 </tr>
 <tr>
-<td>Y</td>
+<td><code>y</code></td>
 <td><code>[0, 0.999]</code>≈</td>
 <td>?</td>
 </tr>
 <tr>
-<td>Z</td>
+<td><code>z</code></td>
 <td><code>[0, 0.825]</code>≈</td>
 <td>?</td>
 </tr>
@@ -750,23 +750,53 @@
 </thead>
 <tbody>
 <tr>
-<td>X</td>
+<td><code>x</code></td>
 <td><code>[0, 0.950]</code>≈</td>
 <td>?</td>
 </tr>
 <tr>
-<td>Y</td>
+<td><code>y</code></td>
 <td><code>[0, 1]</code>≈</td>
 <td>?</td>
 </tr>
 <tr>
-<td>Z</td>
+<td><code>z</code></td>
 <td><code>[0, 1.088]</code>≈</td>
 <td>?</td>
 </tr>
 </tbody>
 </table>
 <p>Serialized as <code>color(xyz-d65 x y z)</code>, with the <code>none</code> keyword for any missing color channel. An explicit <code>alpha &lt; 1</code> is included as <code> / alpha</code>.</p>
+<h3>XYB</h3>
+<p>The XYB color model is part of <a href="https://ds.jpeg.org/whitepapers/jpeg-xl-whitepaper.pdf">the JPEG XL Image Coding System</a>, as an <q>LMS-based colour model inspired by the human visual system, facilitating perceptually uniform quantization. It uses a gamma of 3 for computationally efficient decoding</q>.</p>
+<h4><code>xyb</code></h4>
+<p>The default XYB color space, defined in relationship to sRGB.</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td><code>[-0.015, 0.028]</code>≈</td>
+<td>?</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td><code>[0, 0.845]</code>≈</td>
+<td>?</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><code>[0, 0.845]</code> ≈</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
 <h3>Cubehelix</h3>
 <p><a href="https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/">The Cubehelix color scheme</a> was described by Dave Green in this paper:</p>
 <blockquote>
@@ -821,7 +851,7 @@
 
 		<script
 			type="text/javascript"
-			src="https://unpkg.com/culori@2.0.4"
+			src="https://unpkg.com/culori@2.1.0"
 		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });

@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v2.0.4 (<a
+				>v2.1.0 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,11 +48,11 @@
 				</li>
 				
 				<li class="">
-					<a href="/resources/">Resources</a>
+					<a href="/colophon/">Colophon</a>
 				</li>
 				
 				<li class="">
-					<a href="/colophon/">Colophon</a>
+					<a href="/resources/">Resources</a>
 				</li>
 				<li>
 					<a href="https://github.com/Evercoder/culori"
@@ -98,7 +98,7 @@
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token string">'culori/css'</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token function">interpolate</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'lch'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h3><code>culori/all</code></h3>
 <p>Bootstrap all the color spaces available in Culori.</p>
-<p>It provides the following named exports: <code>a98</code>, <code>cubehelix</code>, <code>dlab</code>, <code>dlch</code>, <code>hsi</code>, <code>hsl</code>, <code>hsv</code>, <code>hwb</code>, <code>jab</code>, <code>jch</code>, <code>lab</code>, <code>lab65</code>, <code>lch</code>, <code>lch65</code>, <code>lchuv</code>, <code>lrgb</code>, <code>luv</code>, <code>okhsl</code>, <code>okhsv</code>, <code>oklab</code>, <code>oklch</code>, <code>p3</code>, <code>prophoto</code>, <code>rec2020</code>, <code>rgb</code>, <code>xyz50</code>, <code>xyz65</code>, and <code>yiq</code>.</p>
+<p>It provides the following named exports: <code>a98</code>, <code>cubehelix</code>, <code>dlab</code>, <code>dlch</code>, <code>hsi</code>, <code>hsl</code>, <code>hsv</code>, <code>hwb</code>, <code>jab</code>, <code>jch</code>, <code>lab</code>, <code>lab65</code>, <code>lch</code>, <code>lch65</code>, <code>lchuv</code>, <code>lrgb</code>, <code>luv</code>, <code>okhsl</code>, <code>okhsv</code>, <code>oklab</code>, <code>oklch</code>, <code>p3</code>, <code>prophoto</code>, <code>rec2020</code>, <code>rgb</code>, <code>xyb</code>, <code>xyz50</code>, <code>xyz65</code>, and <code>yiq</code>.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token string">'culori/all'</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token function">interpolate</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'oklab'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
 			</article>
@@ -119,7 +119,7 @@
 
 		<script
 			type="text/javascript"
-			src="https://unpkg.com/culori@2.0.4"
+			src="https://unpkg.com/culori@2.1.0"
 		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
