@@ -103,6 +103,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
 <li><a href='#wcagLuminance'>wcagLuminance</a></li>
+<li><a href='#color-spaces'>xyb</a></li>
 <li><a href='#color-spaces'>xyz50</a></li>
 <li><a href='#color-spaces'>xyz65</a></li>
 <li><a href='#color-spaces'>yiq</a></li>
@@ -1458,6 +1459,7 @@ Mode | Color space | Definition object
 `prophoto` | ProPhoto RGB color space | `modeProphoto`
 `rec2020` | Rec. 2020 RGB color space | `modeRec2020`
 `rgb` | sRGB color space | `modeRgb`
+`xyb` | XYB color space | `modeXyb`
 `xyz50` | XYZ with D50 white-point | `modeXyz50`
 `xyz65` | XYZ with D65 white-point | `modeXyz65`
 `yiq` | YIQ color space | `modeYiq`
@@ -1727,13 +1729,20 @@ __convertRgbToHsl__(_color_) → _color_ | `rgb` → `hsl`
 __convertRgbToHsv__(_color_) → _color_ | `rgb` → `hsv`
 __convertRgbToHwb__(_color_) → _color_ | `rgb` → `hwb`
 __convertRgbToJab__(_color_) → _color_ | `rgb` → `jab`
-__convertRgbToLab__(_color_) → _color_ | `rgb` → `lab`
 __convertRgbToLab65__(_color_) → _color_ | `rgb` → `lab65`
+__convertRgbToLab__(_color_) → _color_ | `rgb` → `lab`
 __convertRgbToLrgb__(_color_) → _color_ | `rgb` → `lrgb`
 __convertRgbToOklab__(_color_) → _color_ | `rgb` → `oklab`
+__convertRgbToXyb__(_color_) → _color_ | `rgb` → `xyb`
 __convertRgbToXyz50__(_color_) → _color_ | `rgb` → `xyz50`
 __convertRgbToXyz65__(_color_) → _color_ | `rgb` → `xyz65`
 __convertRgbToYiq__(_color_) → _color_ | `rgb` → `yiq`
+__convertXybToRgb__(_color_) → _color_ | `xyb` → `rgb`
+__convertXyz50ToLab__(_color_) → _color_ | `xyz50` → `lab`
+__convertXyz50ToLuv__(_color_) → _color_ | `xyz50` → `luv`
+__convertXyz50ToProphoto__(_color_) → _color_ | `xyz50` → `prophoto`
+__convertXyz50ToRgb__(_color_) → _color_ | `xyz50` → `rgb`
+__convertXyz50ToXyz65__(_color_) → _color_ | `xyz50` → `xyz65`
 __convertXyz65ToA98__(_color_) → _color_ | `xyz65` → `a98`
 __convertXyz65ToJab__(_color_) → _color_ | `xyz65` → `jab`
 __convertXyz65ToLab65__(_color_) → _color_ | `xyz65` → `lab65`
@@ -1741,11 +1750,6 @@ __convertXyz65ToP3__(_color_) → _color_ | `xyz65` → `p3`
 __convertXyz65ToRec2020__(_color_) → _color_ | `xyz65` → `rec2020`
 __convertXyz65ToRgb__(_color_) → _color_ | `xyz65` → `rgb`
 __convertXyz65ToXyz50__(_color_) → _color_ | `xyz65` → `xyz50`
-__convertXyz50ToLab__(_color_) → _color_ | `xyz50` → `lab`
-__convertXyz50ToLuv__(_color_) → _color_ | `xyz50` → `luv`
-__convertXyz50ToProphoto__(_color_) → _color_ | `xyz50` → `prophoto`
-__convertXyz50ToRgb__(_color_) → _color_ | `xyz50` → `rgb`
-__convertXyz50ToXyz65__(_color_) → _color_ | `xyz50` → `xyz65`
 __convertYiqToRgb__(_color_) → _color_ | `yiq` → `rgb`
 
 

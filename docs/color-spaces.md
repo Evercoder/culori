@@ -328,15 +328,15 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.
 
 Serialized as `color(--jzczhz j c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
-### YIQ
+### YIQ (`yiq`)
 
 [YIQ](https://en.wikipedia.org/wiki/YIQ) is the color space used by the NTSC color TV system. It contains the following channels:
 
 | Channel | Range              | Description                    |
 | ------- | ------------------ | ------------------------------ |
-| Y       | `[0, 1]`           | Luma                           |
-| I       | `[-0.595, 0.595]`≈ | In-phase (orange-blue axis)    |
-| Q       | `[-0.522, 0.522]`≈ | Quadrature (green-purple axis) |
+| `y`       | `[0, 1]`           | Luma                           |
+| `i`       | `[-0.595, 0.595]`≈ | In-phase (orange-blue axis)    |
+| `q`       | `[-0.522, 0.522]`≈ | Quadrature (green-purple axis) |
 
 Serialized as `color(--yiq y i q)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
@@ -354,9 +354,9 @@ The CIE XYZ color space in respect to the D50 standard illuminant.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| X       | `[0, 0.964]`≈ | ?           |
-| Y       | `[0, 0.999]`≈ | ?           |
-| Z       | `[0, 0.825]`≈ | ?           |
+| `x`       | `[0, 0.964]`≈ | ?           |
+| `y`       | `[0, 0.999]`≈ | ?           |
+| `z`       | `[0, 0.825]`≈ | ?           |
 
 Serialized as `color(xyz-d50 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
@@ -366,11 +366,25 @@ The CIE XYZ color space in respect to the D65 standard illuminant.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| X       | `[0, 0.950]`≈ | ?           |
-| Y       | `[0, 1]`≈     | ?           |
-| Z       | `[0, 1.088]`≈ | ?           |
+| `x`       | `[0, 0.950]`≈ | ?           |
+| `y`       | `[0, 1]`≈     | ?           |
+| `z`       | `[0, 1.088]`≈ | ?           |
 
 Serialized as `color(xyz-d65 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+### XYB 
+
+The XYB color model is part of [the JPEG XL Image Coding System](https://ds.jpeg.org/whitepapers/jpeg-xl-whitepaper.pdf), as an <q>LMS-based colour model inspired by the human visual system, facilitating perceptually uniform quantization. It uses a gamma of 3 for computationally efficient decoding</q>. 
+
+#### `xyb`
+
+The default XYB color space, defined in relationship to sRGB.
+
+| Channel | Range         | Description |
+| ------- | ------------- | ----------- |
+| `x`       | `[-0.015, 0.028]`≈ | ?           |
+| `y`       | `[0, 0.845]`≈     | ?           |
+| `b`       | `[0, 0.845]` ≈ | ?           |
 
 ### Cubehelix
 
