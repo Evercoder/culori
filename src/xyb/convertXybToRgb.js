@@ -6,7 +6,8 @@ const transfer = v => Math.pow(v + bias_cbrt, 3);
 const convertXybToRgb = ({ x, y, b, alpha }) => {
 	const l = transfer(x + y) - bias;
 	const m = transfer(y - x) - bias;
-	const s = transfer(b) - bias;
+	/* Account for chroma from luma: add Y back to B */
+	const s = transfer(b + y) - bias;
 
 	const res = convertLrgbToRgb({
 		r:

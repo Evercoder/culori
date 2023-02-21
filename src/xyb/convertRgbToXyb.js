@@ -17,7 +17,8 @@ const convertRgbToXyb = color => {
 		mode: 'xyb',
 		x: (l - m) / 2,
 		y: (l + m) / 2,
-		b: s
+		/* Apply default chroma from luma (subtract Y from B) */
+		b: s - (l + m) / 2
 	};
 	if (alpha !== undefined) res.alpha = alpha;
 	return res;
