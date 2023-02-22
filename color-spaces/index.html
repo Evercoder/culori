@@ -770,7 +770,8 @@
 <h3>XYB</h3>
 <p>The XYB color model is part of <a href="https://ds.jpeg.org/whitepapers/jpeg-xl-whitepaper.pdf">the JPEG XL Image Coding System</a>, as an <q>LMS-based colour model inspired by the human visual system, facilitating perceptually uniform quantization. It uses a gamma of 3 for computationally efficient decoding</q>.</p>
 <h4><code>xyb</code></h4>
-<p>The default XYB color space, defined in relationship to sRGB, with the default Chroma from Luma adjustment applied.</p>
+<p>The default XYB color space, defined in relationship to sRGB.</p>
+<p>It has the default <em>Chroma from Luma</em> adjustment applied (effectively Y is subtracted from B) so that colors with <code>{ x: 0, b: 0 }</code> coordinates are achromatic.</p>
 <table>
 <thead>
 <tr>
@@ -783,17 +784,17 @@
 <tr>
 <td><code>x</code></td>
 <td><code>[-0.0154, 0.0281]</code>≈</td>
-<td>?</td>
+<td>Cyan-red component</td>
 </tr>
 <tr>
 <td><code>y</code></td>
 <td><code>[0, 0.8453]</code>≈</td>
-<td>?</td>
+<td>Luma</td>
 </tr>
 <tr>
 <td><code>b</code></td>
 <td><code>[ -0.2778, 0.3880 ]</code> ≈</td>
-<td>?</td>
+<td>Blue-yellow component</td>
 </tr>
 </tbody>
 </table>
