@@ -7,51 +7,57 @@ const IdentStartCodePoint = /[^\x00-\x7F]|[a-zA-Z_]/;
 const IdentCodePoint = /[^\x00-\x7F]|[-\w]/;
 
 export const Tokens = {
-	Comma: 'comma',
-	Delim: 'delim',
-	Dimension: 'dimension',
 	Function: 'function',
 	Ident: 'ident',
 	Number: 'number',
-	Whitespace: ' ',
 	Percentage: 'percentage',
 	ParenClose: ')',
 	None: 'none',
-	Solidus: '/',
-	Hue: 'hue'
+	Hue: 'hue',
+	Alpha: 'alpha'
 };
-
-/* 
-	Consume an escape sequence.
-	TODO: handle newlines and hex digits
-*/
-function esc(chars) {
-	let v = '';
-	if (!chars.length) {
-		throw new Error(
-			'Unexpected end of input, unterminated escape sequence'
-		);
-	} else {
-		// Consume escaped character
-		v += chars.shift();
-	}
-	return v;
-}
 
 /*
 	4.3.10. Check if three code points would start a number
 	https://drafts.csswg.org/css-syntax/#starts-with-a-number
  */
 function is_num(chars) {
-	let ch = chars[0];
-	let ch1 = chars[1];
+	let ch = chars[chars._i];
+	let ch1 = chars[chars._i + 1];
 	if (ch === '-' || ch === '+') {
-		return /\d/.test(ch1) || (ch1 === '.' && /\d/.test(chars[2]));
+		return (
+			/\d/.test(ch1) || (ch1 === '.' && /\d/.test(chars[chars._i + 2]))
+		);
 	}
 	if (ch === '.') {
 		return /\d/.test(ch1);
 	}
 	return /\d/.test(ch);
+}
+
+/*
+	Check if the stream starts with an identifier.
+ */
+
+function is_ident(chars) {
+	if (chars._i >= chars.length) {
+		return false;
+	}
+	let ch = chars[chars._i];
+	if (ch.match(IdentStartCodePoint)) {
+		return true;
+	}
+	if (ch === '-') {
+		if (chars.length - chars._i < 2) {
+			return false;
+		}
+		let ch1 = chars[chars._i + 1];
+		if (ch1.match(IdentStartCodePoint) || ch1 === '-') {
+			return true;
+		}
+		return false;
+	}
+	return false;
 }
 
 /*
@@ -68,88 +74,55 @@ const huenits = {
 
 function num(chars) {
 	let value = '';
-	if (/[+-]/.test(chars[0])) {
-		value += chars.shift();
+	if (/[+-]/.test(chars[chars._i])) {
+		value += chars[chars._i++];
 	}
 	value += digits(chars);
-	if (chars[0] === '.' && /\d/.test(chars[1])) {
-		value += chars.shift() + digits(chars);
+	if (chars[chars._i] === '.' && /\d/.test(chars[chars._i + 1])) {
+		value += chars[chars._i++] + digits(chars);
 	}
-	if (/e/i.test(chars[0])) {
-		if (/[+-]/.test(chars[1]) && /\d/.test(chars[2])) {
-			value += chars.shift() + chars.shift() + digits(chars);
-		} else if (/\d/.test(chars[1])) {
-			value += chars.shift() + digits(chars);
+	if (/e/i.test(chars[chars._i])) {
+		if (
+			/[+-]/.test(chars[chars._i + 1]) &&
+			/\d/.test(chars[chars._i + 2])
+		) {
+			value += chars[chars._i++] + chars[chars._i++] + digits(chars);
+		} else if (/\d/.test(chars[chars._i + 1])) {
+			value += chars[chars._i++] + digits(chars);
 		}
 	}
 	if (is_ident(chars)) {
 		let id = ident(chars);
-		// if (id === 'deg' || id === 'rad' || id === 'turn' || id === 'grad') {
 		if (/deg|rad|turn|grad/.test(id)) {
-			return [Tokens.Hue, value * huenits[id]];
+			return { type: Tokens.Hue, value: value * huenits[id] };
 		}
-		return [Tokens.Dimension, +value, id];
+		return undefined;
 	}
-	if (chars[0] === '%') {
-		chars.shift();
-		return [Tokens.Percentage, +value];
+	if (chars[chars._i] === '%') {
+		chars._i++;
+		return { type: Tokens.Percentage, value: +value };
 	}
-	return +value;
+	return { type: Tokens.Number, value: +value };
 }
 
 /*
-	Consume digits
+	Consume digits.
  */
 function digits(chars) {
 	let v = '';
-	while (/\d/.test(chars[0])) {
-		v += chars.shift();
+	while (/\d/.test(chars[chars._i])) {
+		v += chars[chars._i++];
 	}
 	return v;
-}
-
-/*
-	Check if the stream starts with an identifier.
- */
-
-function is_ident(chars) {
-	if (!chars.length) {
-		return false;
-	}
-	let ch = chars[0];
-	if (ch.match(IdentStartCodePoint)) {
-		return true;
-	}
-	if (ch === '-') {
-		if (chars.length < 2) {
-			return false;
-		}
-		let ch1 = chars[1];
-		if (ch1.match(IdentStartCodePoint) || ch1 === '-') {
-			return true;
-		}
-		if (ch1 === '\\') {
-			return !!esc(chars);
-		}
-		return false;
-	}
-	if (ch === '\\') {
-		return !!esc(chars);
-	}
-	return false;
 }
 
 /*
 	Consume an identifier.
  */
 function ident(chars) {
-	let v = '',
-		ch;
-	while (
-		chars.length &&
-		(chars[0].match(IdentCodePoint) || chars[0] === '\\')
-	) {
-		v += (ch = chars.shift()) === '\\' ? esc(chars) : ch;
+	let v = '';
+	while (chars._i < chars.length && chars[chars._i].match(IdentCodePoint)) {
+		v += chars[chars._i++];
 	}
 	return v;
 }
@@ -159,125 +132,142 @@ function ident(chars) {
  */
 function identlike(chars) {
 	let v = ident(chars);
-	// TODO: handle URLs?
-	if (chars[0] === '(') {
-		chars.shift();
-		return [Tokens.Function, v];
+	if (chars[chars._i] === '(') {
+		chars._i++;
+		return { type: Tokens.Function, value: v };
 	}
 	if (v === 'none') {
-		return Tokens.None;
+		return { type: Tokens.None, value: undefined };
 	}
-	return [Tokens.Ident, v];
+	return { type: Tokens.Ident, value: v };
 }
 
 export function tokenize(str = '') {
 	let chars = str.trim().split('');
+	chars._i = 0;
 	let tokens = [];
 	let ch;
 
-	while (chars.length) {
-		ch = chars.shift();
+	while (chars._i < chars.length) {
+		ch = chars[chars._i++];
 
 		/*
 			Consume whitespace without emitting it
 		 */
-		if (ch.match(/[\n\t ]/)) {
-			while (chars.length && chars[0].match(/[\n\t ]/)) {
-				chars.shift();
-			}
-			continue;
-		}
-
-		if (ch === ')') {
-			tokens.push(Tokens.ParenClose);
-			continue;
-		}
-
-		if (ch === '+') {
-			if (is_num(chars)) {
-				chars.unshift(ch);
-				tokens.push(num(chars));
-			} else {
-				tokens.push([Tokens.Delim, ch]);
+		if (ch === '\n' || ch === '\t' || ch === ' ') {
+			while (
+				chars._i < chars.length &&
+				(chars[chars._i] === '\n' ||
+					chars[chars._i] === '\t' ||
+					chars[chars._i] === ' ')
+			) {
+				chars._i++;
 			}
 			continue;
 		}
 
 		if (ch === ',') {
-			tokens.push(Tokens.Comma);
+			return undefined;
+		}
+
+		if (ch === ')') {
+			tokens.push({ type: Tokens.ParenClose });
 			continue;
+		}
+
+		if (ch === '+') {
+			if (is_num(chars)) {
+				chars._i--;
+				tokens.push(num(chars));
+				continue;
+			}
+			return undefined;
 		}
 
 		if (ch === '-') {
 			if (is_num(chars)) {
-				chars.unshift(ch);
+				chars._i--;
 				tokens.push(num(chars));
+				continue;
 			} else if (is_ident(chars)) {
-				chars.unshift(ch);
-				tokens.push([Tokens.Ident, ident(chars)]);
-			} else {
-				tokens.push([Tokens.Delim, ch]);
+				chars._i--;
+				tokens.push({ type: Tokens.Ident, value: ident(chars) });
+				continue;
 			}
-			continue;
+			return undefined;
 		}
 
 		if (ch === '.') {
 			if (is_num(chars)) {
-				chars.unshift(ch);
+				chars._i--;
 				tokens.push(num(chars));
-			} else {
-				tokens.push([Tokens.Delim, ch]);
+				continue;
 			}
-			continue;
+			return undefined;
 		}
 
 		if (ch === '/') {
-			tokens.push(Tokens.Solidus);
-			continue;
-		}
-
-		if (ch === '\\') {
-			if (chars.length && chars[0] !== '\n') {
-				chars.unshift(ch);
-				tokens.push(identlike(chars));
-				continue;
+			while (
+				chars._i < chars.length &&
+				(chars[chars._i] === '\n' ||
+					chars[chars._i] === '\t' ||
+					chars[chars._i] === ' ')
+			) {
+				chars._i++;
 			}
-			throw new Error('Invalid escape');
+			let alpha;
+			if (is_num(chars)) {
+				alpha = num(chars);
+				if (alpha.type !== Tokens.Hue) {
+					tokens.push({ type: Tokens.Alpha, value: alpha });
+					continue;
+				}
+			}
+			if (is_ident(chars)) {
+				if (ident(chars) === 'none') {
+					tokens.push({
+						type: Tokens.Alpha,
+						value: { type: Tokens.None, value: undefined }
+					});
+					continue;
+				}
+			}
+			return undefined;
 		}
 
 		if (ch.match(/\d/)) {
-			chars.unshift(ch);
+			chars._i--;
 			tokens.push(num(chars));
 			continue;
 		}
 
 		if (ch.match(IdentStartCodePoint)) {
-			chars.unshift(ch);
+			chars._i--;
 			tokens.push(identlike(chars));
 			continue;
 		}
 
 		/*
-			Treat everything not already handled
-			as a delimiter.
+			Treat everything not already handled as an error.
 		 */
-		tokens.push([Tokens.Delim, ch]);
+		return undefined;
 	}
 
 	return tokens;
 }
 
 export function parseColorSyntax(tokens) {
-	let token = tokens.shift();
-	if (!token || token[0] !== Tokens.Function || token[1] !== 'color') {
+	tokens._i = 0;
+	let token = tokens[tokens._i++];
+	if (!token || token.type !== Tokens.Function || token.value !== 'color') {
 		return undefined;
 	}
-	token = tokens.shift();
+	token = tokens[tokens._i++];
 
-	if (token[0] !== Tokens.Ident) {
+	if (token.type !== Tokens.Ident) {
 		return undefined;
 	}
-	const mode = colorProfiles[token[1]];
+	const mode = colorProfiles[token.value];
 	if (!mode) {
 		return undefined;
 	}
@@ -286,84 +276,74 @@ export function parseColorSyntax(tokens) {
 	if (!modeDef) {
 		return undefined;
 	}
-	for (let i = 0, ch; i < modeDef.channels.length; i++) {
-		ch = modeDef.channels[i];
-		token = tokens.shift();
-		if (ch === 'alpha') {
-			if (token === Tokens.ParenClose) {
-				continue;
-			}
-			if (token !== Tokens.Solidus) {
-				return undefined;
-			}
-			token = tokens.shift();
-		}
-		if (typeof token === 'number') {
-			res[ch] = token;
-			continue;
-		}
-		if (token === 'none') {
-			continue;
-		}
-		if (token[0] === Tokens.Percentage) {
-			res[ch] = token[1] / 100;
-			continue;
-		}
+	const coords = consumeCoords(tokens, false);
+	if (!coords) {
 		return undefined;
+	}
+	for (let ii = 0, c; ii < modeDef.channels.length; ii++) {
+		c = coords[ii];
+		if (c.type !== Tokens.None) {
+			res[modeDef.channels[ii]] =
+				c.type === Tokens.Number ? c.value : c.value / 100;
+		}
 	}
 
 	return res;
 }
 
-function consumeCoords(tokens, i, includeHue) {
+function consumeCoords(tokens, includeHue) {
 	const coords = [];
 	let token;
-	while (i < tokens.length) {
-		token = tokens[i++];
-		if (token === 'none') {
-			coords.push(undefined);
-			continue;
-		}
+	while (tokens._i < tokens.length) {
+		token = tokens[tokens._i++];
 		if (
-			token === Tokens.Solidus ||
-			typeof token === 'number' ||
-			token[0] === Tokens.Percentage ||
-			token[0] === Tokens.Hue
+			token.type === Tokens.None ||
+			token.type === Tokens.Number ||
+			token.type === Tokens.Alpha ||
+			token.type === Tokens.Percentage ||
+			token.type === Tokens.Hue
 		) {
 			coords.push(token);
 			continue;
 		}
-		if (token === Tokens.ParenClose) {
-			if (i < tokens.length) {
+		if (token.type === Tokens.ParenClose) {
+			if (tokens._i < tokens.length) {
 				return undefined;
 			}
 			continue;
 		}
 		return undefined;
 	}
-	if (coords.length === 5) {
-		if (coords[3] !== Tokens.Solidus) {
-			return undefined;
-		}
-		coords.splice(3, 1);
-	}
-	if (
-		coords.length < 3 ||
-		coords.length > 4 ||
-		coords.some(c => c === Tokens.Solidus)
-	) {
+
+	if (coords.length < 3 || coords.length > 4) {
 		return undefined;
 	}
-	return coords;
+
+	if (coords.length === 4) {
+		if (coords[3].type !== Tokens.Alpha) {
+			return undefined;
+		}
+		coords[3] = coords[3].value;
+	}
+	if (coords.length === 3) {
+		coords.push({ type: Tokens.None, value: undefined });
+	}
+
+	return coords.every(c => c.type !== Tokens.Alpha) ? coords : undefined;
 }
 
 export function parseModernSyntax(tokens, includeHue) {
-	let i = 0;
-	let token = tokens[i++];
-	if (!token || token[0] !== Tokens.Function) {
+	tokens._i = 0;
+	let token = tokens[tokens._i++];
+	if (!token || token.type !== Tokens.Function) {
 		return undefined;
 	}
-	return consumeCoords(tokens, i, includeHue);
+	let coords = consumeCoords(tokens, includeHue);
+	if (!coords) {
+		return undefined;
+	}
+	coords.unshift(token.value);
+	return coords;
 }
 
 const parse = color => {
@@ -371,7 +351,7 @@ const parse = color => {
 		return undefined;
 	}
 	const tokens = tokenize(color);
-	const parsed = parseModernSyntax(tokens, true);
+	const parsed = tokens ? parseModernSyntax(tokens, true) : undefined;
 	let result = undefined;
 	let i = 0;
 	let len = parsers.length;
@@ -380,7 +360,7 @@ const parse = color => {
 			return result;
 		}
 	}
-	return parseColorSyntax(tokens);
+	return tokens ? parseColorSyntax(tokens) : undefined;
 };
 
 export default parse;

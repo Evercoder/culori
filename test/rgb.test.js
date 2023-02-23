@@ -54,13 +54,17 @@ tape('rgb(Object)', function (test) {
 });
 
 tape('color(srgb)', t => {
-	t.deepEqual(rgb('color(srgb 1 0 0 / 0.25)'), {
-		r: 1,
-		g: 0,
-		b: 0,
-		alpha: 0.25,
-		mode: 'rgb'
-	});
+	t.deepEqual(
+		rgb('color(srgb 1 0 0 / 0.25)'),
+		{
+			r: 1,
+			g: 0,
+			b: 0,
+			alpha: 0.25,
+			mode: 'rgb'
+		},
+		'color(srgb 1 0 0 / 0.25)'
+	);
 	t.deepEqual(rgb('color(srgb 0% 50% 0.5 / 25%)'), {
 		r: 0,
 		g: 0.5,
@@ -72,6 +76,10 @@ tape('color(srgb)', t => {
 });
 
 tape('formatCss', t => {
-	t.equal(formatCss(rgb('color(srgb 1 0 0.5/1)')), 'color(srgb 1 0 0.5)');
+	t.equal(
+		formatCss(rgb('color(srgb 1 0 0.5/1)')),
+		'color(srgb 1 0 0.5)',
+		'color(srgb 1 0 0.5/1)'
+	);
 	t.end();
 });

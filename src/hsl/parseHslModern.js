@@ -1,38 +1,41 @@
 import { Tokens } from '../parse.js';
 
 function parseHslModern(color, parsed) {
-	if (!color.match(/^hsla?\(/)) {
-		return undefined;
-	}
 	if (!parsed) {
 		return undefined;
 	}
+	if (parsed[0] !== 'hsl' && parsed[0] !== 'hsla') {
+		return undefined;
+	}
 	const res = { mode: 'hsl' };
-	if (parsed[0] !== undefined) {
-		if (parsed[0][0] === Tokens.Percentage) {
+	const [_, h, s, l, alpha] = parsed;
+
+	if (h.type !== Tokens.None) {
+		if (h.type === Tokens.Percentage) {
 			return undefined;
 		}
-		res.h = typeof parsed[0] === 'number' ? parsed[0] : parsed[0][1];
+		res.h = h.value;
 	}
-	if (parsed[1] !== undefined) {
-		if (parsed[1][0] === Tokens.Hue) {
+
+	if (s.type !== Tokens.None) {
+		if (s.type === Tokens.Hue) {
 			return undefined;
 		}
-		res.s = typeof parsed[1] === 'number' ? parsed[1] : parsed[1][1] / 100;
+		res.s = s.type === Tokens.Number ? s.value : s.value / 100;
 	}
-	if (parsed[2] !== undefined) {
-		if (parsed[2][0] === Tokens.Hue) {
+
+	if (l.type !== Tokens.None) {
+		if (l.type === Tokens.Hue) {
 			return undefined;
 		}
-		res.l = typeof parsed[1] === 'number' ? parsed[2] : parsed[2][1] / 100;
+		res.l = l.type === Tokens.Number ? l.value : l.value / 100;
 	}
-	if (parsed[3] !== undefined) {
-		if (parsed[3][0] === Tokens.Hue) {
-			return undefined;
-		}
+
+	if (alpha.type !== Tokens.None) {
 		res.alpha =
-			typeof parsed[3] === 'number' ? parsed[3] : parsed[3][1] / 100;
+			alpha.type === Tokens.Number ? alpha.value : alpha.value / 100;
 	}
+
 	return res;
 }
 

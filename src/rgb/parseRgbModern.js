@@ -1,46 +1,33 @@
 import { Tokens } from '../parse.js';
 
 function parseRgbModern(color, parsed) {
-	if (!color.match(/^rgba?\(/)) {
-		return undefined;
-	}
 	if (!parsed) {
 		return undefined;
 	}
+	if (parsed[0] !== 'rgb' && parsed[0] !== 'rgba') {
+		return undefined;
+	}
 	const res = { mode: 'rgb' };
-	if (parsed[0] !== undefined) {
-		if (parsed[0][0] === Tokens.Hue) {
-			return undefined;
-		}
-		res.r =
-			typeof parsed[0] === 'number'
-				? parsed[0] / 255
-				: parsed[0][1] / 100;
+	const [_, r, g, b, alpha] = parsed;
+	if (
+		r.type === Tokens.Hue ||
+		g.type === Tokens.Hue ||
+		b.type === Tokens.Hue
+	) {
+		return undefined;
 	}
-	if (parsed[1] !== undefined) {
-		if (parsed[1][0] === Tokens.Hue) {
-			return undefined;
-		}
-		res.g =
-			typeof parsed[1] === 'number'
-				? parsed[1] / 255
-				: parsed[1][1] / 100;
+	if (r.type !== Tokens.None) {
+		res.r = r.type === Tokens.Number ? r.value / 255 : r.value / 100;
 	}
-	if (parsed[2] !== undefined) {
-		if (parsed[2][0] === Tokens.Hue) {
-			return undefined;
-		}
-		res.b =
-			typeof parsed[2] === 'number'
-				? parsed[2] / 255
-				: parsed[2][1] / 100;
+	if (g.type !== Tokens.None) {
+		res.g = g.type === Tokens.Number ? g.value / 255 : g.value / 100;
 	}
-	if (parsed[3] !== undefined) {
-		if (parsed[3][0] === Tokens.Hue) {
-			return undefined;
-		}
+	if (b.type !== Tokens.None) {
+		res.b = b.type === Tokens.Number ? b.value / 255 : b.value / 100;
+	}
+	if (alpha.type !== Tokens.None) {
 		res.alpha =
-			typeof parsed[3] === 'number' ? parsed[3] : parsed[3][1] / 100;
+			alpha.type === Tokens.Number ? alpha.value : alpha.value / 100;
 	}
 
 	return res;
