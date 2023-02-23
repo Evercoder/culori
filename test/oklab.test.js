@@ -48,6 +48,13 @@ tape('oklab()', t => {
 		alpha: 0.25,
 		mode: 'oklab'
 	});
+	t.deepEqual(oklab('oklab(25% -20% 125% / 15%)'), {
+		mode: 'oklab',
+		l: 0.25,
+		a: -0.08,
+		b: 0.5,
+		alpha: 0.15
+	});
 	t.end();
 });
 

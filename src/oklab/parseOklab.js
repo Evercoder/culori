@@ -10,13 +10,13 @@ function parseOklab(color, parsed) {
 		return undefined;
 	}
 	if (l.type !== Tok.None) {
-		res.l = l.value;
+		res.l = l.type === Tok.Number ? l.value : l.value / 100;
 	}
 	if (a.type !== Tok.None) {
-		res.a = a.type === Tok.Number ? a.value : a.value / 0.4;
+		res.a = a.type === Tok.Number ? a.value : (a.value * 0.4) / 100;
 	}
 	if (b.type !== Tok.None) {
-		res.b = b.type === Tok.Number ? b.value : b.value / 0.4;
+		res.b = b.type === Tok.Number ? b.value : (b.value * 0.4) / 100;
 	}
 	if (alpha.type !== Tok.None) {
 		res.alpha = alpha.type === Tok.Number ? alpha.value : alpha.value / 100;

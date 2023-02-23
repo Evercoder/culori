@@ -34,6 +34,13 @@ tape('oklch()', t => {
 		alpha: 0.25,
 		mode: 'oklch'
 	});
+	t.deepEqual(oklch('oklch(40% 50% .5turn / 15%)'), {
+		mode: 'oklch',
+		l: 0.4,
+		c: 0.2,
+		h: 180,
+		alpha: 0.15
+	});
 	t.end();
 });
 

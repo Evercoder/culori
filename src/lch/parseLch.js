@@ -13,7 +13,10 @@ function parseLch(color, parsed) {
 		res.l = l.value;
 	}
 	if (c.type !== Tok.None) {
-		res.c = Math.max(0, c.type === Tok.Number ? c.value : c.value / 150);
+		res.c = Math.max(
+			0,
+			c.type === Tok.Number ? c.value : (c.value * 150) / 100
+		);
 	}
 	if (h.type !== Tok.None) {
 		if (h.type === Tok.Percentage) {

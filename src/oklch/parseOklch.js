@@ -10,10 +10,13 @@ function parseOklch(color, parsed) {
 		if (l.type === Tok.Hue) {
 			return undefined;
 		}
-		res.l = l.value;
+		res.l = c.type === Tok.Number ? l.value : l.value / 100;
 	}
 	if (c.type !== Tok.None) {
-		res.c = Math.max(0, c.type === Tok.Number ? c.value : c.value / 0.4);
+		res.c = Math.max(
+			0,
+			c.type === Tok.Number ? c.value : (c.value * 0.4) / 100
+		);
 	}
 	if (h.type !== Tok.None) {
 		if (h.type === Tok.Percentage) {

@@ -13,10 +13,10 @@ function parseLab(color, parsed) {
 		res.l = l.value;
 	}
 	if (a.type !== Tok.None) {
-		res.a = a.type === Tok.Number ? a.value : a.value / 125;
+		res.a = a.type === Tok.Number ? a.value : (a.value * 125) / 100;
 	}
 	if (b.type !== Tok.None) {
-		res.b = b.type === Tok.Number ? b.value : b.value / 125;
+		res.b = b.type === Tok.Number ? b.value : (b.value * 125) / 100;
 	}
 	if (alpha.type !== Tok.None) {
 		res.alpha = alpha.type === Tok.Number ? alpha.value : alpha.value / 100;

@@ -23,6 +23,20 @@ tape('lch', t => {
 		},
 		'red'
 	);
+	t.deepEqual(lch('lch(20% 30% .5turn / 10%)'), {
+		mode: 'lch',
+		l: 20,
+		c: 45,
+		h: 180,
+		alpha: 0.1
+	});
+	t.deepEqual(lch('lch(20% -30% .5turn / 10%)'), {
+		mode: 'lch',
+		l: 20,
+		c: 0,
+		h: 180,
+		alpha: 0.1
+	});
 	t.end();
 });
 
