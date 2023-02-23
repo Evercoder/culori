@@ -27,20 +27,21 @@ JavaScript libraries:
 -   [d3-color](https://github.com/d3/d3-color) by [Mike Bostock](https://bost.ocks.org/mike/)
 -   [chroma.js](https://github.com/gka/chroma.js) by [Gregor Aisch](https://driven-by-data.net/)
 -   [colorjs.io](https://github.com/LeaVerou/color.js) by [Lea Verou](http://lea.verou.me/) and [Chris Lilley](https://svgees.us/)
--   [TinyColor](https://github.com/bgrins/TinyColor) by [Brian Grinstead](http://briangrinstead.com)
--   [color](https://github.com/Qix-/color) by Heather Arthur
--   [color.js](https://github.com/brehaut/color-js) by [Andrew Brehaut](https://brehaut.net/) et al
--   [chromatist](https://github.com/jrus/chromatist) by [Jacob Rus](http://www.hcs.harvard.edu/~jrus/)
--   [graypegg/chromatism](https://github.com/graypegg/chromatism)
 
 In other languages:
 
 -   [Colour](https://www.colour-science.org/) for Python
 -   [the `colorspace` package](http://colorspace.r-forge.r-project.org/) for R
 -   [the `Colors` package](https://github.com/JuliaGraphics/Colors.jl) for Julia
+- [ColorAide](https://github.com/facelessuser/coloraide) for Python by Isaac Muse
 -   [colorio](https://github.com/nschloe/colorio) for Python by Nico Schlömer
 
 ## Further reading
+
+### Specifications
+
+- [CSS Color Level 4](https://drafts.csswg.org/css-color/)
+- [CSS Color Level 5](https://drafts.csswg.org/css-color-5/)
 
 ### Websites
 

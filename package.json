@@ -15,7 +15,7 @@
 		"./package.json": "./package.json"
 	},
 	"repository": "git@github.com:Evercoder/culori.git",
-	"author": "Dan Burzo <danburzo@gmail.com>",
+	"author": "Dan Burzo <dan@danburzo.ro>",
 	"description": "A general-purpose color library for JavaScript",
 	"keywords": [
 		"blend",
@@ -57,7 +57,7 @@
 	},
 	"scripts": {
 		"prepare": "git config core.hooksPath .git-hooks",
-		"test": "tape 'test/*.js' | tap-spec",
+		"test": "tape 'test/**/*.test.js' | tap-spec",
 		"build": "node build.js",
 		"benchmark": "node benchmark/index.js",
 		"prepublishOnly": "npm run lint && npm run build && npm run test",

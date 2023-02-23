@@ -1,4 +1,5 @@
 import { build } from 'esbuild';
+import { writeFile } from 'node:fs/promises';
 
 // Bundled CJS
 build({
@@ -25,7 +26,10 @@ build({
 	logLevel: 'info',
 	bundle: true,
 	format: 'esm',
+	metafile: true,
 	outfile: 'bundled/culori.mjs'
+}).then(result => {
+	writeFile('bundled/meta.json', JSON.stringify(result.metafile, null, 2));
 });
 
 // Bundled ESM, minified

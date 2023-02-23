@@ -515,7 +515,7 @@ Smootherstep is a variant of the [Smoothstep][smoothstep] easing function.
 
 <span aria-label='Source:'>☞</span> [src/easing/inOutSine.js]({{codebase}}/src/easing/inOutSine.js)
 
-Sinusoidal in-out easing. Can be used to create, for example, a cosine interpolation [as described by Paul Bourke](paulbourke.net/miscellaneous/interpolation/):
+Sinusoidal in-out easing. Can be used to create, for example, a cosine interpolation [as described by Paul Bourke](http://paulbourke.net/miscellaneous/interpolation/):
 
 ```js
 import { interpolate, easingInOutSine } from 'culori';
