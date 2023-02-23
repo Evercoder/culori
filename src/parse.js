@@ -6,7 +6,7 @@ const IdentStartCodePoint = /[^\x00-\x7F]|[a-zA-Z_]/;
 /* eslint-disable-next-line no-control-regex */
 const IdentCodePoint = /[^\x00-\x7F]|[-\w]/;
 
-export const Tokens = {
+export const Tok = {
 	Function: 'function',
 	Ident: 'ident',
 	Number: 'number',
@@ -94,15 +94,15 @@ function num(chars) {
 	if (is_ident(chars)) {
 		let id = ident(chars);
 		if (/deg|rad|turn|grad/.test(id)) {
-			return { type: Tokens.Hue, value: value * huenits[id] };
+			return { type: Tok.Hue, value: value * huenits[id] };
 		}
 		return undefined;
 	}
 	if (chars[chars._i] === '%') {
 		chars._i++;
-		return { type: Tokens.Percentage, value: +value };
+		return { type: Tok.Percentage, value: +value };
 	}
-	return { type: Tokens.Number, value: +value };
+	return { type: Tok.Number, value: +value };
 }
 
 /*
@@ -134,12 +134,12 @@ function identlike(chars) {
 	let v = ident(chars);
 	if (chars[chars._i] === '(') {
 		chars._i++;
-		return { type: Tokens.Function, value: v };
+		return { type: Tok.Function, value: v };
 	}
 	if (v === 'none') {
-		return { type: Tokens.None, value: undefined };
+		return { type: Tok.None, value: undefined };
 	}
-	return { type: Tokens.Ident, value: v };
+	return { type: Tok.Ident, value: v };
 }
 
 export function tokenize(str = '') {
@@ -171,7 +171,7 @@ export function tokenize(str = '') {
 		}
 
 		if (ch === ')') {
-			tokens.push({ type: Tokens.ParenClose });
+			tokens.push({ type: Tok.ParenClose });
 			continue;
 		}
 
@@ -191,7 +191,7 @@ export function tokenize(str = '') {
 				continue;
 			} else if (is_ident(chars)) {
 				chars._i--;
-				tokens.push({ type: Tokens.Ident, value: ident(chars) });
+				tokens.push({ type: Tok.Ident, value: ident(chars) });
 				continue;
 			}
 			return undefined;
@@ -218,16 +218,16 @@ export function tokenize(str = '') {
 			let alpha;
 			if (is_num(chars)) {
 				alpha = num(chars);
-				if (alpha.type !== Tokens.Hue) {
-					tokens.push({ type: Tokens.Alpha, value: alpha });
+				if (alpha.type !== Tok.Hue) {
+					tokens.push({ type: Tok.Alpha, value: alpha });
 					continue;
 				}
 			}
 			if (is_ident(chars)) {
 				if (ident(chars) === 'none') {
 					tokens.push({
-						type: Tokens.Alpha,
-						value: { type: Tokens.None, value: undefined }
+						type: Tok.Alpha,
+						value: { type: Tok.None, value: undefined }
 					});
 					continue;
 				}
@@ -259,12 +259,11 @@ export function tokenize(str = '') {
 export function parseColorSyntax(tokens) {
 	tokens._i = 0;
 	let token = tokens[tokens._i++];
-	if (!token || token.type !== Tokens.Function || token.value !== 'color') {
+	if (!token || token.type !== Tok.Function || token.value !== 'color') {
 		return undefined;
 	}
 	token = tokens[tokens._i++];
-
-	if (token.type !== Tokens.Ident) {
+	if (token.type !== Tok.Ident) {
 		return undefined;
 	}
 	const mode = colorProfiles[token.value];
@@ -272,22 +271,17 @@ export function parseColorSyntax(tokens) {
 		return undefined;
 	}
 	const res = { mode };
-	const modeDef = getMode(mode);
-	if (!modeDef) {
-		return undefined;
-	}
 	const coords = consumeCoords(tokens, false);
 	if (!coords) {
 		return undefined;
 	}
-	for (let ii = 0, c; ii < modeDef.channels.length; ii++) {
+	const channels = getMode(mode).channels;
+	for (let ii = 0, c; ii < channels.length; ii++) {
 		c = coords[ii];
-		if (c.type !== Tokens.None) {
-			res[modeDef.channels[ii]] =
-				c.type === Tokens.Number ? c.value : c.value / 100;
+		if (c.type !== Tok.None) {
+			res[channels[ii]] = c.type === Tok.Number ? c.value : c.value / 100;
 		}
 	}
-
 	return res;
 }
 
@@ -297,16 +291,16 @@ function consumeCoords(tokens, includeHue) {
 	while (tokens._i < tokens.length) {
 		token = tokens[tokens._i++];
 		if (
-			token.type === Tokens.None ||
-			token.type === Tokens.Number ||
-			token.type === Tokens.Alpha ||
-			token.type === Tokens.Percentage ||
-			token.type === Tokens.Hue
+			token.type === Tok.None ||
+			token.type === Tok.Number ||
+			token.type === Tok.Alpha ||
+			token.type === Tok.Percentage ||
+			token.type === Tok.Hue
 		) {
 			coords.push(token);
 			continue;
 		}
-		if (token.type === Tokens.ParenClose) {
+		if (token.type === Tok.ParenClose) {
 			if (tokens._i < tokens.length) {
 				return undefined;
 			}
@@ -320,22 +314,22 @@ function consumeCoords(tokens, includeHue) {
 	}
 
 	if (coords.length === 4) {
-		if (coords[3].type !== Tokens.Alpha) {
+		if (coords[3].type !== Tok.Alpha) {
 			return undefined;
 		}
 		coords[3] = coords[3].value;
 	}
 	if (coords.length === 3) {
-		coords.push({ type: Tokens.None, value: undefined });
+		coords.push({ type: Tok.None, value: undefined });
 	}
 
-	return coords.every(c => c.type !== Tokens.Alpha) ? coords : undefined;
+	return coords.every(c => c.type !== Tok.Alpha) ? coords : undefined;
 }
 
 export function parseModernSyntax(tokens, includeHue) {
 	tokens._i = 0;
 	let token = tokens[tokens._i++];
-	if (!token || token.type !== Tokens.Function) {
+	if (!token || token.type !== Tok.Function) {
 		return undefined;
 	}
 	let coords = consumeCoords(tokens, includeHue);

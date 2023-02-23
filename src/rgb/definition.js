@@ -1,7 +1,7 @@
 import parseNamed from './parseNamed.js';
 import parseHex from './parseHex.js';
+import parseRgbLegacy from './parseRgbLegacy.js';
 import parseRgb from './parseRgb.js';
-import parseRgbModern from './parseRgbModern.js';
 import parseTransparent from './parseTransparent.js';
 import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
@@ -14,15 +14,14 @@ const definition = {
 	mode: 'rgb',
 	channels: ['r', 'g', 'b', 'alpha'],
 	parse: [
-		parseHex,
-		parseRgbModern,
 		parseRgb,
+		parseHex,
+		parseRgbLegacy,
 		parseNamed,
 		parseTransparent,
 		'srgb'
 	],
 	serialize: 'srgb',
-
 	interpolate: {
 		r: interpolatorLinear,
 		g: interpolatorLinear,

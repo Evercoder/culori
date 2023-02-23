@@ -40,10 +40,21 @@ tape('color(--oklab)', t => {
 	t.end();
 });
 
+tape('oklab()', t => {
+	t.deepEqual(oklab('oklab(30 0.5 1 / 0.25)'), {
+		l: 30,
+		a: 0.5,
+		b: 1,
+		alpha: 0.25,
+		mode: 'oklab'
+	});
+	t.end();
+});
+
 tape('formatCss', t => {
 	t.equal(
 		formatCss('color(--oklab 30 0.5 1 / 0.25)'),
-		'color(--oklab 30 0.5 1 / 0.25)'
+		'oklab(30 0.5 1 / 0.25)'
 	);
 	t.end();
 });

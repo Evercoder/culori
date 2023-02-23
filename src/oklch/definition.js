@@ -3,6 +3,7 @@ import convertLabToLch from '../lch/convertLabToLch.js';
 import convertLchToLab from '../lch/convertLchToLab.js';
 import convertOklabToRgb from '../oklab/convertOklabToRgb.js';
 import convertRgbToOklab from '../oklab/convertRgbToOklab.js';
+import parseOklch from './parseOklch.js';
 
 const definition = {
 	...lch,
@@ -18,8 +19,11 @@ const definition = {
 		oklab: c => convertLabToLch(c, 'oklch')
 	},
 
-	parse: ['--oklch'],
-	serialize: '--oklch',
+	parse: [parseOklch, '--oklch'],
+	serialize: c =>
+		`oklch(${c.l !== undefined ? c.l : 'none'} ${
+			c.c !== undefined ? c.c : 'none'
+		} ${c.h || 0}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
 
 	ranges: {
 		l: [0, 0.999],
