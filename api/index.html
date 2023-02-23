@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v2.1.1 (<a
+				>v3.0.0 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -840,7 +840,7 @@
 <h4><code>fromMode</code> (<em>object</em>)</h4>
 <p>The opposite of <code>toMode</code>. A set of function to convert from various color spaces to the color space we're defining. At least <code>rgb</code> needs to be included.</p>
 <h4><code>ranges</code> (<em>object</em>, optional)</h4>
-<p>The ranges for values in specific channels; if left unspecified, defaults to <code>[0, 1]</code>.</p>
+<p>The reference ranges for values in specific channels; if left unspecified, defaults to <code>[0, 1]</code>.</p>
 <h4><code>parse</code> (<em>array</em>, optional)</h4>
 <p>Any parsers for the color space that can transform strings into colors. These can be either functions, or strings — the latter is used as the color space's identifier to parse the <code>color(&lt;ident&gt;)</code> CSS syntax.</p>
 <h4><code>serialize</code> (<em>function</em> or <em>string</em>, optional)</h4>
@@ -860,13 +860,17 @@
 <p>This makes sure <a href="#differenceEuclidean"><code>differenceEuclidean()</code></a> works as expected, but there may be more hidden assumptions in the codebase.</p>
 <p>Here's a sample definition for the HSL color space:</p>
 <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span><br>  <span class="token literal-property property">mode</span><span class="token operator">:</span> <span class="token string">'hsl'</span><span class="token punctuation">,</span><br>  <span class="token literal-property property">fromMode</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token literal-property property">rgb</span><span class="token operator">:</span> convertRgbToHsl<br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token literal-property property">toMode</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token literal-property property">rgb</span><span class="token operator">:</span> convertHslToRgb<br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token literal-property property">channels</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'h'</span><span class="token punctuation">,</span> <span class="token string">'s'</span><span class="token punctuation">,</span> <span class="token string">'l'</span><span class="token punctuation">,</span> <span class="token string">'alpha'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><br>  <span class="token literal-property property">ranges</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token literal-property property">h</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">360</span><span class="token punctuation">]</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token literal-property property">parse</span><span class="token operator">:</span> <span class="token punctuation">[</span>parseHsl<span class="token punctuation">]</span><span class="token punctuation">,</span><br>  <span class="token literal-property property">serialize</span><span class="token operator">:</span> serializeHsl<span class="token punctuation">,</span><br>  <span class="token literal-property property">interpolate</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token literal-property property">h</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>      <span class="token literal-property property">use</span><span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>      <span class="token literal-property property">fixup</span><span class="token operator">:</span> fixupHueShorter<br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token literal-property property">s</span><span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>    <span class="token literal-property property">l</span><span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>    <span class="token literal-property property">alpha</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>      <span class="token literal-property property">use</span><span class="token operator">:</span> interpolatorLinear<span class="token punctuation">,</span><br>      <span class="token literal-property property">fixup</span><span class="token operator">:</span> fixupAlpha<br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token literal-property property">difference</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token literal-property property">h</span><span class="token operator">:</span> differenceHueSaturation<br>  <span class="token punctuation">}</span><span class="token punctuation">,</span><br>  <span class="token literal-property property">average</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token literal-property property">h</span><span class="token operator">:</span> averageAngle<br>  <span class="token punctuation">}</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p><a id="useParser" href="#useParser">#</a> <strong>useParser</strong>(<em>parser</em>)</p>
+<p><a id="useParser" href="#useParser">#</a> <strong>useParser</strong>(<em>parser</em>, <em>mode</em>)</p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/modes.js">src/modes.js</a></p>
-<p>Register a new parser function.</p>
-<p>The function will receive a color string as its only argument, and should return a color object.</p>
+<p>Register a new parser. The parser can be:</p>
+<ul>
+<li>a function, in which case the <em>mode</em> argument is not necessary.</li>
+<li>a string representing the identifier to match in the <code>color()</code> syntax, in which case the <em>mode</em> argument is required.</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> useParser <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token comment">// Register custom parser</span><br><span class="token function">useParser</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>  <span class="token keyword">let</span> color <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span><br>  <span class="token comment">// parse the string</span><br>  <span class="token keyword">return</span> color<span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// Register `color(--oklab)` syntax</span><br><span class="token function">useParser</span><span class="token punctuation">(</span><span class="token string">'--oklab'</span><span class="token punctuation">,</span> <span class="token string">'oklab'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p><a id="removeParser" href="#removeParser">#</a> <strong>removeParser</strong>(<em>parser</em>)</p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/modes.js">src/modes.js</a></p>
-<p>Remove a previously registered parser function.</p>
+<p>Remove a previously registered parser function or string, including parsers registered by default.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> parse<span class="token punctuation">,</span> parseNamed<span class="token punctuation">,</span> removeParser <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }</span><br><br><span class="token function">removeParser</span><span class="token punctuation">(</span>parseNamed<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ undefined</span></code></pre>
 <h2 id='low-level-api'>
   <a href='#low-level-api'>#</a>
@@ -880,7 +884,9 @@
 <p>Parses hex strings of 3, 4, 6, or 8 characters, with or without the <code>#</code> prefix, and returns <code>rgb</code> color objects.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> parseHex <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token function">parseHex</span><span class="token punctuation">(</span><span class="token string">'#abc'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">parseHex</span><span class="token punctuation">(</span><span class="token string">'#abcd'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">parseHex</span><span class="token punctuation">(</span><span class="token string">'#abcdef'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">parseHex</span><span class="token punctuation">(</span><span class="token string">'#abcdef12'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p><a id="parseHsl" href="#parseHsl">#</a> <strong>parseHsl</strong>(<em>string</em>) → <em>color</em></p>
-<p>Parses <code>hsl(…)</code> / <code>hsla(…)</code> strings and returns <code>hsl</code> color objects.</p>
+<p>Parses <code>hsl(…)</code> strings in the modern format and returns <code>hsl</code> color objects.</p>
+<p><a id="parseHslLegacy" href="#parseHslLegacy">#</a> <strong>parseHslLegacy</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses <code>hsl(…)</code> / <code>hsla(…)</code> strings in the legacy (comma-separated) format and returns <code>hsl</code> color objects.</p>
 <p><a id="parseHwb" href="#parseHwb">#</a> <strong>parseHwb</strong>(<em>string</em>) → <em>color</em></p>
 <p>Parses <code>hwb(…)</code> strings and returns <code>hwb</code> color objects.</p>
 <p><a id="parseLab" href="#parseLab">#</a> <strong>parseLab</strong>(<em>string</em>) → <em>color</em></p>
@@ -889,8 +895,14 @@
 <p>Parses <code>lch(…)</code> strings and returns <code>lch</code> color objects.</p>
 <p><a id="parseNamed" href="#parseNamed">#</a> <strong>parseNamed</strong>(<em>string</em>) → <em>color</em></p>
 <p>Parses named CSS colors (eg. <code>tomato</code>) and returns <code>rgb</code> color objects.</p>
+<p><a id="parseOklab" href="#parseOklab">#</a> <strong>parseOklab</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses <code>oklab(…)</code> strings and returns <code>oklab</code> color objects.</p>
+<p><a id="parseOklch" href="#parseOklch">#</a> <strong>parseOklch</strong>(<em>string</em>) → <em>color</em></p>
+<p>Parses <code>oklch(…)</code> strings and returns <code>oklch</code> color objects.</p>
 <p><a id="parseRgb" href="#parseRgb">#</a> <strong>parseRgb</strong>(<em>color</em>) → <em>color</em></p>
-<p>Parses <code>rgb(…)</code> / <code>rgba(…)</code> strings and returns <code>rgb</code> color objects.</p>
+<p>Parses <code>rgb(…)</code> strings in the modern syntax and returns <code>rgb</code> color objects.</p>
+<p><a id="parseRgbLegacy" href="#parseRgbLegacy">#</a> <strong>parseRgbLegacy</strong>(<em>color</em>) → <em>color</em></p>
+<p>Parses <code>rgb(…)</code> / <code>rgba(…)</code> strings in the legacy (comma-separated) syntax and returns <code>rgb</code> color objects.</p>
 <p><a id="parseTransparent" href="#parseTransparent">#</a><strong>parseTransparent</strong>(<em>string</em>) → <em>color</em></p>
 <p>Parses the <code>transparent</code> string and returns a transparent black <code>rgb</code> color object.</p>
 <h3>Serialization functions</h3>
@@ -1176,7 +1188,7 @@
 
 		<script
 			type="text/javascript"
-			src="https://unpkg.com/culori@2.1.1"
+			src="https://unpkg.com/culori@3.0.0"
 		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });

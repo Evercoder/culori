@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v2.1.1 (<a
+				>v3.0.0 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -67,7 +67,27 @@
 		<div class="container">
 			<article>
 				<h1>Migration guide</h1>
-				<h2>Migrating from version 1.x to 2.0</h2>
+				<h2>Migrating from version 2.x to 3.0</h2>
+<h3>Custom identifiers removed from the <code>color()</code> syntax</h3>
+<p>For better alignment with the CSS Color Level 4 specification, support for the following formats has changed:</p>
+<ul>
+<li><code>color(--oklab)</code> removed in favor of <code>oklab()</code></li>
+<li><code>color(--oklch)</code> removed in favor of <code>oklch()</code></li>
+<li><code>color(--srgb-linear)</code> removed in favor of <code>color(srgb-linear)</code></li>
+<li><code>color(--xyz-d50)</code> removed in favor of <code>color(xyz-d50)</code></li>
+<li><code>color(--xyz-d65)</code> removed in favor of <code>color(xyz)</code> and <code>color(xyz-d65)</code></li>
+</ul>
+<p>The custom identifiers removed in this release can be re-registered with <a href="/api/#useParser"><code>useParser()</code></a>, using string arguments:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> useParser <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token function">useParser</span><span class="token punctuation">(</span><span class="token string">'--oklab'</span><span class="token punctuation">,</span> <span class="token string">'oklab'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">useParser</span><span class="token punctuation">(</span><span class="token string">'--oklch'</span><span class="token punctuation">,</span> <span class="token string">'oklch'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">useParser</span><span class="token punctuation">(</span><span class="token string">'--srgb-linear'</span><span class="token punctuation">,</span> <span class="token string">'lrgb'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">useParser</span><span class="token punctuation">(</span><span class="token string">'--xyz-d50'</span><span class="token punctuation">,</span> <span class="token string">'xyz50'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">useParser</span><span class="token punctuation">(</span><span class="token string">'--xyz-d65'</span><span class="token punctuation">,</span> <span class="token string">'xyz65'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3>Parsing modern vs. legacy syntaxes for <code>rgb()</code> and <code>hsl()</code></h3>
+<p>The parsing of the <a href="https://w3c.github.io/csswg-drafts/css-color-4/#color-syntax-modern">modern syntax</a> (space-separated) and the <a href="https://w3c.github.io/csswg-drafts/css-color-4/#color-syntax-legacy">legacy syntax</a> (comma-separated) for the <code>rgb</code> and <code>hsl</code> color spaces has been split to separate functions:</p>
+<ul>
+<li><code>parseRgb()</code> now parses just the modern <code>rgb()</code> / <code>rgba()</code> syntax</li>
+<li><code>parseHsl()</code> now parses just the modern <code>hsl()</code> / <code>hsla()</code> syntax</li>
+<li><code>parseRgbLegacy()</code> has been added to the API to parse the legacy <code>rgb()</code> / <code>rgba()</code> syntax</li>
+<li><code>parseHslLegacy()</code> has been added to the API to parse the legacy <code>hsl()</code> / <code>hsla()</code> syntax</li>
+</ul>
+<h2>Migrating from version 1.x to 2.0</h2>
 <ul>
 <li>all color components in all CSS color syntaxes now accept the <code>none</code> keyword. (<a href="https://github.com/w3c/csswg-drafts/issues/6107">w3c/csswg-drafts#6107</a>)</li>
 </ul>
@@ -156,7 +176,7 @@
 
 		<script
 			type="text/javascript"
-			src="https://unpkg.com/culori@2.1.1"
+			src="https://unpkg.com/culori@3.0.0"
 		></script>
 		<script type="text/javascript">
 			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
