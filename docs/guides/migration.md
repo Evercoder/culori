@@ -4,7 +4,9 @@ title: 'Migration guide'
 
 ## Migrating from version 2.x to 3.0
 
-For better alignment with the CSS Color Level 4 specification, support for the following syntaxes has changed:
+### Custom identifiers removed from the `color()` syntax
+
+For better alignment with the CSS Color Level 4 specification, support for the following formats has changed:
 
 * `color(--oklab)` removed in favor of `oklab()`
 * `color(--oklch)` removed in favor of `oklch()`
@@ -23,6 +25,15 @@ useParser('--srgb-linear', 'lrgb');
 useParser('--xyz-d50', 'xyz50');
 useParser('--xyz-d65', 'xyz65');
 ```
+
+### Parsing modern vs. legacy syntaxes for `rgb()` and `hsl()`
+
+The parsing of the [modern syntax](https://w3c.github.io/csswg-drafts/css-color-4/#color-syntax-modern) (space-separated) and the [legacy syntax](https://w3c.github.io/csswg-drafts/css-color-4/#color-syntax-legacy) (comma-separated) for the `rgb` and `hsl` color spaces has been split to separate functions:
+
+* `parseRgb()` now parses just the modern `rgb()` / `rgba()` syntax
+* `parseHsl()` now parses just the modern `hsl()` / `hsla()` syntax
+* `parseRgbLegacy()` has been added to the API to parse the legacy `rgb()` / `rgba()` syntax
+* `parseHslLegacy()` has been added to the API to parse the legacy `hsl()` / `hsla()` syntax
 
 ## Migrating from version 1.x to 2.0
 
