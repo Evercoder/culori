@@ -199,7 +199,7 @@ tape('hsl', function (test) {
 
 	test.deepEqual(
 		parse('hsl(0 1 0.5)'),
-		undefined,
+		{ h: 0, s: 1, l: 0.5, mode: 'hsl' },
 		'hsl current (no percentage)'
 	);
 
@@ -211,7 +211,7 @@ tape('hsl', function (test) {
 
 	test.deepEqual(
 		parse('hsl(0 1 0.5 / 0.5)'),
-		undefined,
+		{ h: 0, s: 1, l: 0.5, mode: 'hsl', alpha: 0.5 },
 		'hsla current (no percentage)'
 	);
 

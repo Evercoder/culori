@@ -1,28 +1,16 @@
 import hueToDeg from '../util/hue.js';
-import {
-	hue,
-	per,
-	num_per,
-	hue_none,
-	per_none,
-	num_per_none,
-	c,
-	s
-} from '../util/regex.js';
+import { hue, per, num_per, c } from '../util/regex.js';
 
 /*
-	hsl() regular expressions.
+	hsl() regular expressions for legacy format
 	Reference: https://drafts.csswg.org/css-color/#the-hsl-notation
  */
 const hsl_old = new RegExp(
 	`^hsla?\\(\\s*${hue}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
 );
-const hsl_new = new RegExp(
-	`^hsla?\\(\\s*${hue_none}${s}${per_none}${s}${per_none}\\s*(?:\\/\\s*${num_per_none}\\s*)?\\)$`
-);
 
 const parseHsl = color => {
-	let match = color.match(hsl_old) || color.match(hsl_new);
+	let match = color.match(hsl_old);
 	if (!match) return;
 	let res = { mode: 'hsl' };
 

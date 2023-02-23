@@ -378,13 +378,15 @@ The XYB color model is part of [the JPEG XL Image Coding System](https://ds.jpeg
 
 #### `xyb`
 
-The default XYB color space, defined in relationship to sRGB, with the default Chroma from Luma adjustment applied.
+The default XYB color space, defined in relationship to sRGB. 
+
+It has the default _Chroma from Luma_ adjustment applied (effectively Y is subtracted from B) so that colors with `{ x: 0, b: 0 }` coordinates are achromatic.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| `x`       | `[-0.0154, 0.0281]`≈ | ?           |
-| `y`       | `[0, 0.8453]`≈     | ?           |
-| `b`       | `[ -0.2778, 0.3880 ]` ≈ | ?           |
+| `x`       | `[-0.0154, 0.0281]`≈ | Cyan-red component           |
+| `y`       | `[0, 0.8453]`≈     | Luma           |
+| `b`       | `[ -0.2778, 0.3880 ]` ≈ | Blue-yellow component           |
 
 ### Cubehelix
 

@@ -1,6 +1,7 @@
 import chroma from 'chroma-js';
 import { color } from 'd3-color';
 import tinycolor from 'tinycolor2';
+import { ColorSpace, sRGB, parse } from 'colorjs.io/fn';
 import { rgb } from '../../src/index.js';
 import benchmark from '../util/benchmark.js';
 
@@ -46,6 +47,27 @@ benchmark('culori: culori("rgb(r,g,b)")', () => {
 		for (var g = 0; g <= 255; g += increment) {
 			for (var b = 0; b <= 255; b += increment) {
 				rgb(`rgb(${r},${g},${b})`);
+			}
+		}
+	}
+});
+
+benchmark('culori: culori("rgb(r g b)")', () => {
+	for (var r = 0; r <= 255; r += increment) {
+		for (var g = 0; g <= 255; g += increment) {
+			for (var b = 0; b <= 255; b += increment) {
+				rgb(`rgb(${r} ${g} ${b})`);
+			}
+		}
+	}
+});
+
+ColorSpace.register(sRGB);
+benchmark('colorjs.io: parse("rgb(r g b)")', () => {
+	for (var r = 0; r <= 255; r += increment) {
+		for (var g = 0; g <= 255; g += increment) {
+			for (var b = 0; b <= 255; b += increment) {
+				parse(`rgb(${r} ${g} ${b})`);
 			}
 		}
 	}
