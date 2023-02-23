@@ -17,17 +17,17 @@ export const Tok = {
 	Alpha: 'alpha'
 };
 
+let _i = 0;
+
 /*
 	4.3.10. Check if three code points would start a number
 	https://drafts.csswg.org/css-syntax/#starts-with-a-number
  */
 function is_num(chars) {
-	let ch = chars[chars._i];
-	let ch1 = chars[chars._i + 1];
+	let ch = chars[_i];
+	let ch1 = chars[_i + 1];
 	if (ch === '-' || ch === '+') {
-		return (
-			/\d/.test(ch1) || (ch1 === '.' && /\d/.test(chars[chars._i + 2]))
-		);
+		return /\d/.test(ch1) || (ch1 === '.' && /\d/.test(chars[_i + 2]));
 	}
 	if (ch === '.') {
 		return /\d/.test(ch1);
@@ -40,19 +40,19 @@ function is_num(chars) {
  */
 
 function is_ident(chars) {
-	if (chars._i >= chars.length) {
+	if (_i >= chars.length) {
 		return false;
 	}
-	let ch = chars[chars._i];
-	if (ch.match(IdentStartCodePoint)) {
+	let ch = chars[_i];
+	if (IdentStartCodePoint.test(ch)) {
 		return true;
 	}
 	if (ch === '-') {
-		if (chars.length - chars._i < 2) {
+		if (chars.length - _i < 2) {
 			return false;
 		}
-		let ch1 = chars[chars._i + 1];
-		if (ch1.match(IdentStartCodePoint) || ch1 === '-') {
+		let ch1 = chars[_i + 1];
+		if (ch1 === '-' || IdentStartCodePoint.test(ch1)) {
 			return true;
 		}
 		return false;
@@ -74,32 +74,32 @@ const huenits = {
 
 function num(chars) {
 	let value = '';
-	if (/[+-]/.test(chars[chars._i])) {
-		value += chars[chars._i++];
+	if (chars[_i] === '-' || chars[_i] === '+') {
+		value += chars[_i++];
 	}
 	value += digits(chars);
-	if (chars[chars._i] === '.' && /\d/.test(chars[chars._i + 1])) {
-		value += chars[chars._i++] + digits(chars);
+	if (chars[_i] === '.' && /\d/.test(chars[_i + 1])) {
+		value += chars[_i++] + digits(chars);
 	}
-	if (/e/i.test(chars[chars._i])) {
+	if (chars[_i] === 'e' || chars[_i] === 'E') {
 		if (
-			/[+-]/.test(chars[chars._i + 1]) &&
-			/\d/.test(chars[chars._i + 2])
+			(chars[_i + 1] === '-' || chars[_i + 1] === '+') &&
+			/\d/.test(chars[_i + 2])
 		) {
-			value += chars[chars._i++] + chars[chars._i++] + digits(chars);
-		} else if (/\d/.test(chars[chars._i + 1])) {
-			value += chars[chars._i++] + digits(chars);
+			value += chars[_i++] + chars[_i++] + digits(chars);
+		} else if (/\d/.test(chars[_i + 1])) {
+			value += chars[_i++] + digits(chars);
 		}
 	}
 	if (is_ident(chars)) {
 		let id = ident(chars);
-		if (/deg|rad|turn|grad/.test(id)) {
+		if (id === 'deg' || id === 'rad' || id === 'turn' || id === 'grad') {
 			return { type: Tok.Hue, value: value * huenits[id] };
 		}
 		return undefined;
 	}
-	if (chars[chars._i] === '%') {
-		chars._i++;
+	if (chars[_i] === '%') {
+		_i++;
 		return { type: Tok.Percentage, value: +value };
 	}
 	return { type: Tok.Number, value: +value };
@@ -110,8 +110,8 @@ function num(chars) {
  */
 function digits(chars) {
 	let v = '';
-	while (/\d/.test(chars[chars._i])) {
-		v += chars[chars._i++];
+	while (/\d/.test(chars[_i])) {
+		v += chars[_i++];
 	}
 	return v;
 }
@@ -121,8 +121,8 @@ function digits(chars) {
  */
 function ident(chars) {
 	let v = '';
-	while (chars._i < chars.length && chars[chars._i].match(IdentCodePoint)) {
-		v += chars[chars._i++];
+	while (_i < chars.length && IdentCodePoint.test(chars[_i])) {
+		v += chars[_i++];
 	}
 	return v;
 }
@@ -132,8 +132,8 @@ function ident(chars) {
  */
 function identlike(chars) {
 	let v = ident(chars);
-	if (chars[chars._i] === '(') {
-		chars._i++;
+	if (chars[_i] === '(') {
+		_i++;
 		return { type: Tok.Function, value: v };
 	}
 	if (v === 'none') {
@@ -143,25 +143,25 @@ function identlike(chars) {
 }
 
 export function tokenize(str = '') {
-	let chars = str.trim().split('');
-	chars._i = 0;
+	let chars = str.trim();
 	let tokens = [];
 	let ch;
 
-	while (chars._i < chars.length) {
-		ch = chars[chars._i++];
+	/* reset counter */
+	_i = 0;
+
+	while (_i < chars.length) {
+		ch = chars[_i++];
 
 		/*
 			Consume whitespace without emitting it
 		 */
 		if (ch === '\n' || ch === '\t' || ch === ' ') {
 			while (
-				chars._i < chars.length &&
-				(chars[chars._i] === '\n' ||
-					chars[chars._i] === '\t' ||
-					chars[chars._i] === ' ')
+				_i < chars.length &&
+				(chars[_i] === '\n' || chars[_i] === '\t' || chars[_i] === ' ')
 			) {
-				chars._i++;
+				_i++;
 			}
 			continue;
 		}
@@ -177,7 +177,7 @@ export function tokenize(str = '') {
 
 		if (ch === '+') {
 			if (is_num(chars)) {
-				chars._i--;
+				_i--;
 				tokens.push(num(chars));
 				continue;
 			}
@@ -186,11 +186,11 @@ export function tokenize(str = '') {
 
 		if (ch === '-') {
 			if (is_num(chars)) {
-				chars._i--;
+				_i--;
 				tokens.push(num(chars));
 				continue;
 			} else if (is_ident(chars)) {
-				chars._i--;
+				_i--;
 				tokens.push({ type: Tok.Ident, value: ident(chars) });
 				continue;
 			}
@@ -199,7 +199,7 @@ export function tokenize(str = '') {
 
 		if (ch === '.') {
 			if (is_num(chars)) {
-				chars._i--;
+				_i--;
 				tokens.push(num(chars));
 				continue;
 			}
@@ -208,12 +208,10 @@ export function tokenize(str = '') {
 
 		if (ch === '/') {
 			while (
-				chars._i < chars.length &&
-				(chars[chars._i] === '\n' ||
-					chars[chars._i] === '\t' ||
-					chars[chars._i] === ' ')
+				_i < chars.length &&
+				(chars[_i] === '\n' || chars[_i] === '\t' || chars[_i] === ' ')
 			) {
-				chars._i++;
+				_i++;
 			}
 			let alpha;
 			if (is_num(chars)) {
@@ -235,14 +233,14 @@ export function tokenize(str = '') {
 			return undefined;
 		}
 
-		if (ch.match(/\d/)) {
-			chars._i--;
+		if (/\d/.test(ch)) {
+			_i--;
 			tokens.push(num(chars));
 			continue;
 		}
 
-		if (ch.match(IdentStartCodePoint)) {
-			chars._i--;
+		if (IdentStartCodePoint.test(ch)) {
+			_i--;
 			tokens.push(identlike(chars));
 			continue;
 		}
