@@ -29,7 +29,7 @@ const definition = {
 
 	parse: [parseLab],
 	serialize: c =>
-		`lab(${c.l !== undefined ? c.l + '%' : 'none'} ${
+		`lab(${c.l !== undefined ? c.l : 'none'} ${
 			c.a !== undefined ? c.a : 'none'
 		} ${c.b !== undefined ? c.b : 'none'}${
 			c.alpha < 1 ? ` / ${c.alpha}` : ''
