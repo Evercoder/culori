@@ -1516,7 +1516,7 @@ The opposite of `toMode`. A set of function to convert from various color spaces
 
 #### `ranges` (_object_, optional)
 
-The ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
+The reference ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
 
 #### `parse` (_array_, optional)
 

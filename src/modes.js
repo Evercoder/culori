@@ -5,7 +5,6 @@ const modes = {};
 
 const parsers = [];
 const colorProfiles = {};
-const modernColorFunctions = {};
 
 const identity = v => v;
 
@@ -57,12 +56,7 @@ const useMode = definition => {
 		if (typeof parser === 'function') {
 			useParser(parser);
 		} else if (typeof parser === 'string') {
-			const m = parser.match(/^(.+)\(\)$/);
-			if (m) {
-				modernColorFunctions[m[1]] = definition.mode;
-			} else {
-				colorProfiles[parser] = definition.mode;
-			}
+			colorProfiles[parser] = definition.mode;
 		}
 	});
 
@@ -92,6 +86,5 @@ export {
 	removeParser,
 	converters,
 	parsers,
-	colorProfiles,
-	modernColorFunctions
+	colorProfiles
 };

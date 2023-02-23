@@ -138,11 +138,11 @@ The [CIELAB color space](https://en.wikipedia.org/wiki/CIELAB_color_space), also
 
 The CIELAB color space using the [D50 standard illuminant](https://en.wikipedia.org/wiki/Standard_illuminant) as the reference white, following the [CSS Color Module Level 4 specification](https://drafts.csswg.org/css-color/#lab-colors).
 
-| Channel | Range                 | Description           |
+| Channel | CSS Reference Range                 | Description           |
 | ------- | --------------------- | --------------------- |
 | `l`     | `[0, 100]`            | Lightness             |
-| `a`     | `[-79.287, 93.55]`≈   | Green–red component   |
-| `b`     | `[-112.029, 93.388]`≈ | Blue–yellow component |
+| `a`     | `[-100, 100]`   | Green–red component   |
+| `b`     | `[-100, 100]` | Blue–yellow component |
 
 Serialized as `lab(l% a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
@@ -150,10 +150,10 @@ Serialized as `lab(l% a b)`, with the `none` keyword for any missing color chann
 
 The CIELCh color space using the D50 standard illuminant.
 
-| Channel | Range           | Description |
+| Channel | CSS Reference Range           | Description |
 | ------- | --------------- | ----------- |
 | `l`     | `[0, 100]`      | Lightness   |
-| `c`     | `[0, 131.207]`≈ | Chroma      |
+| `c`     | `[0, 150]` | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
 Serialized as `lch(l% c h)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
@@ -252,13 +252,13 @@ See also: [Okhsl and Okhsv, two new color spaces for color picking](https://bott
 
 The Oklab color space in Cartesian form.
 
-| Channel | Range              | Description           |
+| Channel | CSS Reference Range              | Description           |
 | ------- | ------------------ | --------------------- |
-| `l`     | `[0, 0.999]`≈      | Lightness             |
-| `a`     | `[-0.233, 0.276]`≈ | Green–red component   |
-| `b`     | `[-0.311, 0.198]`≈ | Blue–yellow component |
+| `l`     | `[0, 1]`     | Lightness             |
+| `a`     | `[-0.4, 0.4]` | Green–red component   |
+| `b`     | `[-0.4, 0.4]` | Blue–yellow component |
 
-Serialized as `color(--oklab l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `oklab(l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `oklch`
 
@@ -266,11 +266,11 @@ The Oklab color space in cylindrical form.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| `l`     | `[0, 0.999]`≈ | Lightness   |
-| `c`     | `[0, 0.322]`≈ | Chroma      |
+| `l`     | `[0, 1]` | Lightness   |
+| `c`     | `[0, 0.4]` | Chroma      |
 | `h`     | `[0, 360)`    | Hue         |
 
-Serialized as `color(--oklch l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `oklch(l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### `okhsl`
 
