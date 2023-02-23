@@ -60,8 +60,8 @@ tape('color(--srgb-linear)', t => {
 
 tape('formatCss', t => {
 	t.equal(
-		formatCss('color(--srgb-linear 0% 50% 0.5 / 25%)'),
-		'color(--srgb-linear 0 0.5 0.5 / 0.25)'
+		formatCss('color(srgb-linear 0% 50% 0.5 / 25%)'),
+		'color(srgb-linear 0 0.5 0.5 / 0.25)'
 	);
 	t.end();
 });

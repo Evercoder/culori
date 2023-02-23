@@ -43,7 +43,7 @@ Serialized as `color(srgb r g b)`, with the `none` keyword for any missing color
 
 The linear-light form of the sRGB color space.
 
-Serialized as `color(--srgb-linear r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `color(srgb-linear r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `a98`
 
@@ -144,7 +144,7 @@ The CIELAB color space using the [D50 standard illuminant](https://en.wikipedia.
 | `a`     | `[-100, 100]`   | Green–red component   |
 | `b`     | `[-100, 100]` | Blue–yellow component |
 
-Serialized as `lab(l% a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `lab(l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `lch`
 
@@ -156,7 +156,7 @@ The CIELCh color space using the D50 standard illuminant.
 | `c`     | `[0, 150]` | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
-Serialized as `lch(l% c h)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `lch(l c h)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `lab65`
 

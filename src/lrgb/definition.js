@@ -14,8 +14,8 @@ const definition = {
 		rgb: convertRgbToLrgb
 	},
 
-	parse: ['--srgb-linear'],
-	serialize: '--srgb-linear'
+	parse: ['srgb-linear'],
+	serialize: 'srgb-linear'
 };
 
 export default definition;
