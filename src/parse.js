@@ -295,7 +295,7 @@ function consumeCoords(tokens, includeHue) {
 			token.type === Tok.Number ||
 			token.type === Tok.Alpha ||
 			token.type === Tok.Percentage ||
-			token.type === Tok.Hue
+			(includeHue && token.type === Tok.Hue)
 		) {
 			coords.push(token);
 			continue;
