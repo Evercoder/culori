@@ -1599,12 +1599,9 @@ import { useParser } from 'culori';
 
 // Register custom parser
 useParser(function(str) => {
-  return {
-    mode: 'rgb',
-    r: 0,
-    g: 0,
-    b: 0
-  };
+  let color = {};
+  // parse the string
+  return color;
 });
 
 // Register `color(--oklab)` syntax
@@ -1615,7 +1612,7 @@ useParser('--oklab', 'oklab');
 
 <span aria-label='Source:'>☞</span> [src/modes.js]({{codebase}}/src/modes.js)
 
-Remove a previously registered parser function.
+Remove a previously registered parser function or string, including parsers registered by default.
 
 ```js
 import { parse, parseNamed, removeParser } from 'culori';

@@ -4,7 +4,25 @@ title: 'Migration guide'
 
 ## Migrating from version 2.x to 3.0
 
-### 
+For better alignment with the CSS Color Level 4 specification, support for the following syntaxes has changed:
+
+* `color(--oklab)` removed in favor of `oklab()`
+* `color(--oklch)` removed in favor of `oklch()`
+* `color(--srgb-linear)` removed in favor of `color(srgb-linear)`
+* `color(--xyz-d50)` removed in favor of `color(xyz-d50)`
+* `color(--xyz-d65)` removed in favor of `color(xyz)` and `color(xyz-d65)`
+
+The custom identifiers removed in this release can be re-registered with [`useParser()`](/api/#useParser), using string arguments:
+
+```js
+import { useParser } from 'culori';
+
+useParser('--oklab', 'oklab');
+useParser('--oklch', 'oklch');
+useParser('--srgb-linear', 'lrgb');
+useParser('--xyz-d50', 'xyz50');
+useParser('--xyz-d65', 'xyz65');
+```
 
 ## Migrating from version 1.x to 2.0
 
