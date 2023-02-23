@@ -1,5 +1,6 @@
 import convertHslToRgb from './convertHslToRgb.js';
 import convertRgbToHsl from './convertRgbToHsl.js';
+import parseHslLegacy from './parseHslLegacy.js';
 import parseHsl from './parseHsl.js';
 import { fixupHueShorter } from '../fixup/hue.js';
 import { fixupAlpha } from '../fixup/alpha.js';
@@ -24,7 +25,7 @@ const definition = {
 		h: [0, 360]
 	},
 
-	parse: [parseHsl],
+	parse: [parseHsl, parseHslLegacy],
 	serialize: c =>
 		`hsl(${c.h || 0} ${c.s !== undefined ? c.s * 100 + '%' : 'none'} ${
 			c.l !== undefined ? c.l * 100 + '%' : 'none'

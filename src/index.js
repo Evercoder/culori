@@ -151,6 +151,10 @@ export { default as parseNamed } from './rgb/parseNamed.js';
 export { default as parseTransparent } from './rgb/parseTransparent.js';
 export { default as parseHex } from './rgb/parseHex.js';
 export { default as parseRgb } from './rgb/parseRgb.js';
+export { default as parseHslLegacy } from './hsl/parseHslLegacy.js';
+export { default as parseRgbLegacy } from './rgb/parseRgbLegacy.js';
+export { default as parseOklab } from './oklab/parseOklab.js';
+export { default as parseOklch } from './oklch/parseOklch.js';
 
 export { default as convertA98ToXyz65 } from './a98/convertA98ToXyz65.js';
 export { default as convertCubehelixToRgb } from './cubehelix/convertCubehelixToRgb.js';

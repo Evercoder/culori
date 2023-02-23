@@ -26,6 +26,14 @@ tape('lab', t => {
 		},
 		'red'
 	);
+
+	t.deepEqual(lab('lab(50% -10% 200% / 10%)'), {
+		mode: 'lab',
+		l: 50,
+		a: -12.5,
+		b: 250,
+		alpha: 0.1
+	});
 	t.end();
 });
 
