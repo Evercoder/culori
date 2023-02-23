@@ -83,3 +83,27 @@ tape('formatCss', t => {
 	);
 	t.end();
 });
+
+/*
+	See: https://emnudge.dev/blog/perfect-rgb-regex/
+*/
+tape('exotic species', t => {
+	t.equal(
+		formatCss(rgb('rgb(1-2-3)')),
+		'color(srgb 0.00392156862745098 -0.00784313725490196 -0.011764705882352941)'
+	);
+	t.equal(
+		formatCss(rgb('rgb(1-.2.3)')),
+		'color(srgb 0.00392156862745098 -0.0007843137254901962 0.001176470588235294)'
+	);
+	t.equal(
+		formatCss(rgb('rgb(1 .2.3)')),
+		'color(srgb 0.00392156862745098 0.0007843137254901962 0.001176470588235294)'
+	);
+	t.equal(
+		formatCss(rgb('rgb(.1.2.3)')),
+		'color(srgb 0.0003921568627450981 0.0007843137254901962 0.001176470588235294)'
+	);
+	t.equal(formatCss(rgb('rgb(1.2.3)')), undefined);
+	t.end();
+});
