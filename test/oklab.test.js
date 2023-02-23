@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { oklab, formatCss } from '../src/index.js';
+import { oklab, formatCss, useParser, removeParser } from '../src/index.js';
 
 tape('rgb → oklab', t => {
 	t.deepEqual(
@@ -29,14 +29,20 @@ tape('rgb → oklab', t => {
 	t.end();
 });
 
-tape('color(--oklab)', t => {
-	t.deepEqual(oklab('color(--oklab 30 0.5 1 / 0.25)'), {
+tape('color(--oklab) with custom ident registration', t => {
+	const c = 'color(--oklab 30 0.5 1 / 0.25)';
+	const cc = {
 		l: 30,
 		a: 0.5,
 		b: 1,
 		alpha: 0.25,
 		mode: 'oklab'
-	});
+	};
+	t.equal(oklab(c), undefined);
+	useParser('--oklab', 'oklab');
+	t.deepEqual(oklab(c), cc);
+	removeParser('--oklab');
+	t.equal(oklab(c), undefined);
 	t.end();
 });
 
@@ -59,9 +65,6 @@ tape('oklab()', t => {
 });
 
 tape('formatCss', t => {
-	t.equal(
-		formatCss('color(--oklab 30 0.5 1 / 0.25)'),
-		'oklab(30 0.5 1 / 0.25)'
-	);
+	t.equal(formatCss('oklab(30% 0.5 1 / 0.25)'), 'oklab(0.3 0.5 1 / 0.25)');
 	t.end();
 });

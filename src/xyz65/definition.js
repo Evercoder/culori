@@ -33,7 +33,7 @@ const definition = {
 
 	channels: ['x', 'y', 'z', 'alpha'],
 
-	parse: ['xyz', 'xyz-d65', '--xyz-d65'],
+	parse: ['xyz', 'xyz-d65'],
 	serialize: 'xyz-d65',
 
 	interpolate: {

@@ -2,6 +2,10 @@
 title: 'Migration guide'
 ---
 
+## Migrating from version 2.x to 3.0
+
+### 
+
 ## Migrating from version 1.x to 2.0
 
 * all color components in all CSS color syntaxes now accept the `none` keyword. ([w3c/csswg-drafts#6107](https://github.com/w3c/csswg-drafts/issues/6107))

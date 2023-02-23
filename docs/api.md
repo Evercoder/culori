@@ -1585,13 +1585,31 @@ Here's a sample definition for the HSL color space:
 };
 ```
 
-<a id="useParser" href="#useParser">#</a> **useParser**(_parser_)
+<a id="useParser" href="#useParser">#</a> **useParser**(_parser_, _mode_)
 
 <span aria-label='Source:'>☞</span> [src/modes.js]({{codebase}}/src/modes.js)
 
-Register a new parser function.
+Register a new parser. The parser can be:
 
-The function will receive a color string as its only argument, and should return a color object.
+* a function, in which case the _mode_ argument is not necessary.
+* a string representing the identifier to match in the `color()` syntax, in which case the _mode_ argument is required.
+
+```js
+import { useParser } from 'culori';
+
+// Register custom parser
+useParser(function(str) => {
+  return {
+    mode: 'rgb',
+    r: 0,
+    g: 0,
+    b: 0
+  };
+});
+
+// Register `color(--oklab)` syntax
+useParser('--oklab', 'oklab');
+```
 
 <a id="removeParser" href="#removeParser">#</a> **removeParser**(_parser_)
 

@@ -79,20 +79,7 @@ tape('color(xyz-d65)', t => {
 });
 
 tape('color(--xyz-d65)', t => {
-	t.deepEqual(xyz65('color(--xyz-d65 1 0 0 / 0.25)'), {
-		x: 1,
-		y: 0,
-		z: 0,
-		alpha: 0.25,
-		mode: 'xyz65'
-	});
-	t.deepEqual(xyz65('color(--xyz-d65 0% 50% 0.5 / 25%)'), {
-		x: 0,
-		y: 0.5,
-		z: 0.5,
-		alpha: 0.25,
-		mode: 'xyz65'
-	});
+	t.deepEqual(xyz65('color(--xyz-d65 1 0 0 / 0.25)'), undefined);
 	t.end();
 });
 

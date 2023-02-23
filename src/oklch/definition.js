@@ -19,7 +19,7 @@ const definition = {
 		oklab: c => convertLabToLch(c, 'oklch')
 	},
 
-	parse: [parseOklch, '--oklch'],
+	parse: [parseOklch],
 	serialize: c =>
 		`oklch(${c.l !== undefined ? c.l : 'none'} ${
 			c.c !== undefined ? c.c : 'none'

@@ -31,7 +31,7 @@ const definition = {
 		b: [-0.4, 0.4]
 	},
 
-	parse: [parseOklab, '--oklab'],
+	parse: [parseOklab],
 	serialize: c =>
 		`oklab(${c.l !== undefined ? c.l : 'none'} ${
 			c.a !== undefined ? c.a : 'none'
