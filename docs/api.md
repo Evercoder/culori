@@ -1635,7 +1635,11 @@ parseHex('#abcdef12');
 
 <a id="parseHsl" href="#parseHsl">#</a> __parseHsl__(_string_) → _color_
 
-Parses `hsl(…)` / `hsla(…)` strings and returns `hsl` color objects.
+Parses `hsl(…)` strings in the modern format and returns `hsl` color objects.
+
+<a id="parseHslLegacy" href="#parseHslLegacy">#</a> __parseHslLegacy__(_string_) → _color_
+
+Parses `hsl(…)` / `hsla(…)` strings in the legacy (comma-separated) format and returns `hsl` color objects.
 
 <a id="parseHwb" href="#parseHwb">#</a> __parseHwb__(_string_) → _color_
 
@@ -1653,9 +1657,21 @@ Parses `lch(…)` strings and returns `lch` color objects.
 
 Parses named CSS colors (eg. `tomato`) and returns `rgb` color objects.
 
+<a id="parseOklab" href="#parseOklab">#</a> __parseOklab__(_string_) → _color_
+
+Parses `oklab(…)` strings and returns `oklab` color objects.
+
+<a id="parseOklch" href="#parseOklch">#</a> __parseOklch__(_string_) → _color_
+
+Parses `oklch(…)` strings and returns `oklch` color objects.
+
 <a id="parseRgb" href="#parseRgb">#</a> __parseRgb__(_color_) → _color_
 
-Parses `rgb(…)` / `rgba(…)` strings and returns `rgb` color objects.
+Parses `rgb(…)` strings in the modern syntax and returns `rgb` color objects.
+
+<a id="parseRgbLegacy" href="#parseRgbLegacy">#</a> __parseRgbLegacy__(_color_) → _color_
+
+Parses `rgb(…)` / `rgba(…)` strings in the legacy (comma-separated) syntax and returns `rgb` color objects.
 
 <a id="parseTransparent" href="#parseTransparent">#</a>__parseTransparent__(_string_) → _color_
 
