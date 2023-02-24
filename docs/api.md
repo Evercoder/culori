@@ -100,6 +100,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#color-spaces'>rgb</a></li>
 <li><a href='#round'>round</a></li>
 <li><a href='#samples'>samples</a></li>
+<li><a href='#unlerp'>unlerp</a></li>
 <li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
 <li><a href='#wcagLuminance'>wcagLuminance</a></li>
@@ -837,6 +838,12 @@ import { lerp } from 'culori';
 lerp(5, 10, 0.5);
 // ⇒ 7.5
 ```
+
+<a id="unlerp" href="#unlerp">#</a> **unlerp**(_a_, _b_, _v_) → _value_
+
+<span aria-label='Source:'>☞</span> [src/interpolate/lerp.js]({{codebase}}/src/interpolate/lerp.js)
+
+Returns the point `t` at which the value `v` is located between the values `a` and `b`. The inverse of `lerp`.
 
 ### Mappings
 
