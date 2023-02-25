@@ -3,11 +3,15 @@ title: 'Guides'
 menu-order: 4
 ---
 
-## [Migration guide](./migration)
+## Working with Culori 
+
+### [Optimize bundle size with tree-shaking](./tree-shaking/)
+
+Once you're done prototyping and you're ready to ship an optimized bundle, switch your imports over to the fully tree-shakeable version.
+
+### [Migration guide](./migration/)
 
 This guide documents the breaking changes in each new major release of the library and how to address them in your code.
-
-## [Optimize bundle size with tree-shaking](./tree-shaking)
 
 ## Elsewhere
 

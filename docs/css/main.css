@@ -1,8 +1,4 @@
-body {
-	font-family: var(--ff-main);
-	line-height: 1.5;
-	margin: 0;
-
+html {
 	--red: #d84f4c;
 	--indigo: #57467d;
 	--offwhite: #f8f5f4;
@@ -14,12 +10,25 @@ body {
 		sans-serif, Apple Color Emoji, Segoe UI Emoji;
 	--ff-code: 'Consolas', monospace;
 
+	font-size: 115%;
+}
+
+@media (max-width: 30em) {
+	html {
+		font-size: 90%;
+	}
+}
+
+body {
+	font-family: var(--ff-main);
+	line-height: 1.5;
+	margin: 0;
 	text-size-adjust: none;
 	-webkit-text-size-adjust: none;
 }
 
 .container {
-	max-width: 60rem;
+	max-width: 50rem;
 	margin: 0 auto;
 	padding: 0 1rem;
 }
@@ -119,6 +128,15 @@ nav ul > * {
 
 nav a {
 	border-bottom: 0.2em solid transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: 1.1;
 }
 
 h1 {

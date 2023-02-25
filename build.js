@@ -42,6 +42,16 @@ build({
 	outfile: 'bundled/culori.min.mjs'
 });
 
+// Bundled ESM, minified, for the website
+build({
+	entryPoints: ['./src/index.js'],
+	logLevel: 'info',
+	bundle: true,
+	minify: true,
+	format: 'esm',
+	outfile: 'docs/static/culori.min.mjs'
+});
+
 // Bundled IIFE
 build({
 	entryPoints: ['./src/index.js'],

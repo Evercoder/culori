@@ -1,5 +1,6 @@
 ---
-title: Home
+title: Color functions for JavaScript
+homepage: true
 layout: layouts/default
 menu-order: 0
 ---
@@ -13,9 +14,7 @@ menu-order: 0
 [hwb-colors]: https://drafts.csswg.org/css-color/#the-hwb-notation
 [lab-colors]: https://drafts.csswg.org/css-color/#lab-colors
 
-Culori is a color library for JavaScript that supports most color spaces and formats defined in the [CSS Colors Level 4][css4-colors] specification ([named colors][css4-named-colors], [hex colors][hex-colors] with 3 to 8 digits, [RGB][rgb-colors], [HSL][hsl-colors], [HWB][hwb-colors], [Lab and LCh][lab-colors]), plus [additional color spaces](./color-spaces).
-
-It handles [color differences](https://en.wikipedia.org/wiki/Color_difference), interpolation, gradients, blend modes [and more](./api).
+Culori is a JavaScript color library that supports the conversion and manipulation of all formats defined in the [CSS Colors Level 4][css4-colors] specification, plus [additional color spaces](./color-spaces). It handles [color differences](https://en.wikipedia.org/wiki/Color_difference), interpolation, gradients, blend modes [and much more](/api/).
 
 ```bash
 npm install culori

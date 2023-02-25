@@ -2,7 +2,7 @@
 title: 'Migration guide'
 ---
 
-## Migrating from version 2.x to 3.0
+## From v2 to v3
 
 ### Custom identifiers removed from the `color()` syntax
 
@@ -35,7 +35,7 @@ The parsing of the [modern syntax](https://w3c.github.io/csswg-drafts/css-color-
 * `parseRgbLegacy()` has been added to the API to parse the legacy `rgb()` / `rgba()` syntax
 * `parseHslLegacy()` has been added to the API to parse the legacy `hsl()` / `hsla()` syntax
 
-## Migrating from version 1.x to 2.0
+## From v1 to v2
 
 * all color components in all CSS color syntaxes now accept the `none` keyword. ([w3c/csswg-drafts#6107](https://github.com/w3c/csswg-drafts/issues/6107))
 
@@ -124,7 +124,7 @@ lch(75 50 15deg)
 In version 2.0, we drop this quirk and bring Culori in line with the specification.
 
 
-## Migrating from version 0.x to 1.0
+## From v0.x to v1
 
 ### Using the library
 

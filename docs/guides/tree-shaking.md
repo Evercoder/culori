@@ -2,9 +2,9 @@
 title: 'Optimize bundle size with tree-shaking'
 ---
 
-The default `culori` import comes with the full set of color spaces and functions to let you prototype quickly and with fewer errors. 
+The default `culori` import comes with the full set of color spaces and functions to let you prototype quickly and with fewer errors. However, the way color spaces are initialized prevents the library from being tree-shaken, so when you use a bundler (such as [esbuild](https://esbuild.github.io/), [Vite](https://vitejs.dev/), or [Parcel](https://parceljs.org/)), the entire Culori library is bundled regardless of what you're actually using.
 
-However, the way color spaces are initialized prevents the library from being tree-shaken, so when you use a bundler such as Webpack or Parcel, the entire Culori library is bundled regardless of what you're actually using.
+This guides walks you through switching your imports to the tree-shakeable version once you're done prototyping and you're ready to ship an optimized bundle.
 
 ## Using `culori/fn`
 
@@ -46,6 +46,8 @@ import {
 	modeHwb,
 	modeLab,
 	modeLch,
+	modeOklab,
+	modeOklch,
 	modeP3,
 	modeProphoto,
 	modeRec2020,
@@ -59,6 +61,8 @@ const hsl = useMode(modeHsl);
 const hwb = useMode(modeHwb);
 const lab = useMode(modeLab);
 const lch = useMode(modeLch);
+const oklab = useMode(modeOklab);
+const oklch = useMode(modeOklch);
 const p3 = useMode(modeP3);
 const prophoto = useMode(modeProphoto);
 const rec2020 = useMode(modeRec2020);
@@ -66,6 +70,8 @@ const rgb = useMode(modeRgb);
 const xyz50 = useMode(modeXyz50);
 const xyz65 = useMode(modeXyz65);
 ```
+
+You don't need to do all of this manually. You can import the [CSS bundle](#culori-css) instead.
 
 ### Using Culori without registering color spaces
 
@@ -102,11 +108,11 @@ esbuild --bundle --minify hex-to-hsl-string.js
 
 For convenience, a couple of bootstrap packages are available.
 
-### `culori/css` 
+<h3 id='culori-css'><code>culori/css</code></h3>
 
 Bootstrap all the color spaces available in CSS, plus a handful of  related ones we get for free, since they are used under the hood. 
 
-It provides the following named exports: `a98`, `hsl`, `hsv`, `hwb`, `lab`, `lab65`, `lch`, `lch65`, `lrgb`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz50`, and `xyz65`.
+It provides the following named exports: `a98`, `hsl`, `hsv`, `hwb`, `lab`, `lab65`, `lch`, `lch65`, `lrgb`, `oklab`, `oklch`, `p3`, `prophoto`, `rec2020`, `rgb`, `xyz50`, and `xyz65`.
 
 ```js
 import 'culori/css';
@@ -125,5 +131,5 @@ It provides the following named exports: `a98`, `cubehelix`, `dlab`, `dlch`, `hs
 import 'culori/all';
 import { interpolate } from 'culori/fn';
 
-interpolate(['red', 'green'], 'oklab');
+interpolate(['red', 'green'], 'xyb');
 ```

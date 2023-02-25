@@ -6,13 +6,13 @@ menu-order: 1
 
 ## Install Culori from npm
 
-Add Culori as a dependency to your project:
+Culori is distributed [on npm](https://npmjs.com/package/culori) in a variety of formats. Install it with:
 
 ```bash
 npm install culori
 ```
 
-Then start using it:
+Then start importing functions from [the API](/api/):
 
 ```js
 import { rgb } from 'culori';
@@ -20,6 +20,8 @@ import { rgb } from 'culori';
 rgb('tomato');
 // ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }
 ```
+
+For code that runs in browsers, you may want to streamline the bundle to only include the parts of Culori you're using. See [Optimize bundle size with tree-shaking](/guides/tree-shaking/) for guidance on switching your imports to use `'culori/fn'` instead of `'culori'` once you're done prototyping.
 
 ## Fetch Culori from a CDN
 
@@ -53,11 +55,7 @@ Use it as an ES module:
 
 ### In your browser's console
 
-The library is added to every page of this website, so you can try the API in your browser's console as you read through the examples. 
-
-### Runkit
-
-You can also use Culori in the Runkit npm playground ([npm.runkit.com/culori](https://npm.runkit.com/culori)) to test the API without installing anything.
+The library is available on this website as the global variable `culori`, so can try the API in your browser's console as you read through the examples. 
 
 ### Observable
 
