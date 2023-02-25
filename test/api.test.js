@@ -228,6 +228,8 @@ const API_CSS = [
 	'lch',
 	'lch65',
 	'lrgb',
+	'oklab',
+	'oklch',
 	'p3',
 	'prophoto',
 	'rec2020',
