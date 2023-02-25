@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v3.0.0 (<a
+				>v3.0.1 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -68,10 +68,11 @@
 			<article>
 				<h1>Getting Started</h1>
 				<h2>Install Culori from npm</h2>
-<p>Add Culori as a dependency to your project:</p>
+<p>Culori is distributed <a href="https://npmjs.com/package/culori">on npm</a> in a variety of formats. Install it with:</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> culori</code></pre>
-<p>Then start using it:</p>
+<p>Then start importing functions from <a href="/api/">the API</a>:</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }</span></code></pre>
+<p>For code that runs in browsers, you may want to streamline the bundle to only include the parts of Culori you're using. See <a href="/guides/tree-shaking/">Optimize bundle size with tree-shaking</a> for guidance on switching your imports to use <code>'culori/fn'</code> instead of <code>'culori'</code> once you're done prototyping.</p>
 <h2>Fetch Culori from a CDN</h2>
 <p>You can use Culori from your favorite Content Delivery Network to create quick prototypes in HTML. Here are a few popular choices:</p>
 <table>
@@ -102,25 +103,23 @@
 <pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/culori<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>culori<span class="token punctuation">.</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'salmon'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 <h2>Use Culori online</h2>
 <h3>In your browser's console</h3>
-<p>The library is added to every page of this website, so you can try the API in your browser's console as you read through the examples.</p>
-<h3>Runkit</h3>
-<p>You can also use Culori in the Runkit npm playground (<a href="https://npm.runkit.com/culori">npm.runkit.com/culori</a>) to test the API without installing anything.</p>
+<p>The library is available on this website as the global variable <code>culori</code>, so can try the API in your browser's console as you read through the examples.</p>
 <h3>Observable</h3>
 <p>If you prefer to see the results visually, <a href="https://beta.observablehq.com">Observable</a> is a great place to tinker with the library.</p>
 <p>Add this cell and you're good to go:</p>
-<pre class="language-js"><code class="language-js">culori <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'culori@3.0.0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-js"><code class="language-js">culori <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'culori@3.0.1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>It's often useful to pin the library to a specific version, to make sure your old notebooks don't break if the API changes in a new major version of the library.</p>
 <h2>Use Culori in Deno</h2>
 <p>The library is published to <a href="https://deno.land/x/culori">deno.land/x/culori</a> for usage in <a href="https://deno.land/">Deno</a>:</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'https://deno.land/x/culori@3.0.0/index.js'</span><span class="token punctuation">;</span><br><br><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'https://deno.land/x/culori@3.0.1/index.js'</span><span class="token punctuation">;</span><br><br><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
 			</article>
 		</div>
 		<footer>
 	<div class="container">
 		<p>
-			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
-			page be improved?
+			Culori is a <a href="https://moqups.com">Moqups</a> production. Can
+			this page be improved?
 			<a
 				href="https://github.com/Evercoder/culori/blob/main/./docs/getting-started.md"
 				>Edit it on GitHub</a
@@ -130,20 +129,23 @@
 </footer>
 
 
-		<script
-			type="text/javascript"
-			src="https://unpkg.com/culori@3.0.0"
-		></script>
-		<script type="text/javascript">
-			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
+		<script type="module">
+			import * as culori from '/culori.min.mjs';
+
+			/* Expose as global variable */
+			window.culori = culori;
+
+			const { p3, random, formatCss, formatHex } = culori;
+
+			const r = () => random('lch', { l: [30, 80], c: [60, 90] });
 			let r1 = r();
 			let r2 = r();
-			if (CSS.supports('color: color(display-p3)')) {
-				r1 = culori.formatCss(culori.p3(r1));
-				r2 = culori.formatCss(culori.p3(r2));
+			if (CSS.supports('color: color(display-p3 0 0 0)')) {
+				r1 = formatCss(p3(r1));
+				r2 = formatCss(p3(r2));
 			} else {
-				r1 = culori.formatHex(r1);
-				r2 = culori.formatHex(r2);
+				r1 = formatHex(r1);
+				r2 = formatHex(r2);
 			}
 			document.body.style.setProperty('--random-1', r1);
 			document.body.style.setProperty('--random-2', r2);

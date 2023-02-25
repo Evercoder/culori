@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v3.0.0 (<a
+				>v3.0.1 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -67,8 +67,8 @@
 		<div class="container">
 			<article>
 				<h1>Optimize bundle size with tree-shaking</h1>
-				<p>The default <code>culori</code> import comes with the full set of color spaces and functions to let you prototype quickly and with fewer errors.</p>
-<p>However, the way color spaces are initialized prevents the library from being tree-shaken, so when you use a bundler such as Webpack or Parcel, the entire Culori library is bundled regardless of what you're actually using.</p>
+				<p>The default <code>culori</code> import comes with the full set of color spaces and functions to let you prototype quickly and with fewer errors. However, the way color spaces are initialized prevents the library from being tree-shaken, so when you use a bundler (such as <a href="https://esbuild.github.io/">esbuild</a>, <a href="https://vitejs.dev/">Vite</a>, or <a href="https://parceljs.org/">Parcel</a>), the entire Culori library is bundled regardless of what you're actually using.</p>
+<p>This guides walks you through switching your imports to the tree-shakeable version once you're done prototyping and you're ready to ship an optimized bundle.</p>
 <h2>Using <code>culori/fn</code></h2>
 <p>To optimize the bundle size, you can opt into the tree-shakeable version by importing from <code>culori/fn</code> instead of <code>culori</code>:</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> …<span class="token punctuation">,</span> …<span class="token punctuation">,</span> … <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span></code></pre>
@@ -78,7 +78,8 @@
 <p>Since none of the color spaces are pre-registered the shortcuts to <code>converter(mode)</code>, such as <code>culori.rgb</code> or <code>culori.hsl</code>, are also missing. They are, however, helpfully returned by <code>useMode()</code>:</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> useMode<span class="token punctuation">,</span> modeRgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token keyword">const</span> rgb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRgb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }</span></code></pre>
 <p>To recreate a subset of Culori that only deals with valid CSS colors, you would use this:</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span><br>	useMode<span class="token punctuation">,</span><br>	modeA98<span class="token punctuation">,</span><br>	modeHsl<span class="token punctuation">,</span><br>	modeHwb<span class="token punctuation">,</span><br>	modeLab<span class="token punctuation">,</span><br>	modeLch<span class="token punctuation">,</span><br>	modeP3<span class="token punctuation">,</span><br>	modeProphoto<span class="token punctuation">,</span><br>	modeRec2020<span class="token punctuation">,</span><br>	modeRgb<span class="token punctuation">,</span><br>	modeXyz50<span class="token punctuation">,</span><br>	modeXyz65<br><span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token keyword">const</span> a98 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeA98<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> hsl <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeHsl<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> hwb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeHwb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> lab <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeLab<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> lch <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeLch<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> p3 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeP3<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> prophoto <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeProphoto<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> rec2020 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRec2020<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> rgb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRgb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> xyz50 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeXyz50<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> xyz65 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeXyz65<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span><br>	useMode<span class="token punctuation">,</span><br>	modeA98<span class="token punctuation">,</span><br>	modeHsl<span class="token punctuation">,</span><br>	modeHwb<span class="token punctuation">,</span><br>	modeLab<span class="token punctuation">,</span><br>	modeLch<span class="token punctuation">,</span><br>	modeOklab<span class="token punctuation">,</span><br>	modeOklch<span class="token punctuation">,</span><br>	modeP3<span class="token punctuation">,</span><br>	modeProphoto<span class="token punctuation">,</span><br>	modeRec2020<span class="token punctuation">,</span><br>	modeRgb<span class="token punctuation">,</span><br>	modeXyz50<span class="token punctuation">,</span><br>	modeXyz65<br><span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token keyword">const</span> a98 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeA98<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> hsl <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeHsl<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> hwb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeHwb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> lab <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeLab<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> lch <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeLch<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> oklab <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeOklab<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> oklch <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeOklch<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> p3 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeP3<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> prophoto <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeProphoto<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> rec2020 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRec2020<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> rgb <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeRgb<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> xyz50 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeXyz50<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> xyz65 <span class="token operator">=</span> <span class="token function">useMode</span><span class="token punctuation">(</span>modeXyz65<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>You don't need to do all of this manually. You can import the <a href="#culori-css">CSS bundle</a> instead.</p>
 <h3>Using Culori without registering color spaces</h3>
 <p>You can import and use the <a href="/api#low-level-api">low-level parsing and conversion functions</a> without registering any color space beforehand:</p>
 <p><strong>hex-to-hsl-string.js</strong></p>
@@ -92,22 +93,22 @@
 </details>
 <h2>Bootstrap packages</h2>
 <p>For convenience, a couple of bootstrap packages are available.</p>
-<h3><code>culori/css</code></h3>
+<h3 id='culori-css'><code>culori/css</code></h3>
 <p>Bootstrap all the color spaces available in CSS, plus a handful of  related ones we get for free, since they are used under the hood.</p>
-<p>It provides the following named exports: <code>a98</code>, <code>hsl</code>, <code>hsv</code>, <code>hwb</code>, <code>lab</code>, <code>lab65</code>, <code>lch</code>, <code>lch65</code>, <code>lrgb</code>, <code>p3</code>, <code>prophoto</code>, <code>rec2020</code>, <code>rgb</code>, <code>xyz50</code>, and <code>xyz65</code>.</p>
+<p>It provides the following named exports: <code>a98</code>, <code>hsl</code>, <code>hsv</code>, <code>hwb</code>, <code>lab</code>, <code>lab65</code>, <code>lch</code>, <code>lch65</code>, <code>lrgb</code>, <code>oklab</code>, <code>oklch</code>, <code>p3</code>, <code>prophoto</code>, <code>rec2020</code>, <code>rgb</code>, <code>xyz50</code>, and <code>xyz65</code>.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token string">'culori/css'</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token function">interpolate</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'lch'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h3><code>culori/all</code></h3>
 <p>Bootstrap all the color spaces available in Culori.</p>
 <p>It provides the following named exports: <code>a98</code>, <code>cubehelix</code>, <code>dlab</code>, <code>dlch</code>, <code>hsi</code>, <code>hsl</code>, <code>hsv</code>, <code>hwb</code>, <code>jab</code>, <code>jch</code>, <code>lab</code>, <code>lab65</code>, <code>lch</code>, <code>lch65</code>, <code>lchuv</code>, <code>lrgb</code>, <code>luv</code>, <code>okhsl</code>, <code>okhsv</code>, <code>oklab</code>, <code>oklch</code>, <code>p3</code>, <code>prophoto</code>, <code>rec2020</code>, <code>rgb</code>, <code>xyb</code>, <code>xyz50</code>, <code>xyz65</code>, and <code>yiq</code>.</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token string">'culori/all'</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token function">interpolate</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'oklab'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token string">'culori/all'</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> interpolate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori/fn'</span><span class="token punctuation">;</span><br><br><span class="token function">interpolate</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'xyb'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
 			</article>
 		</div>
 		<footer>
 	<div class="container">
 		<p>
-			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
-			page be improved?
+			Culori is a <a href="https://moqups.com">Moqups</a> production. Can
+			this page be improved?
 			<a
 				href="https://github.com/Evercoder/culori/blob/main/./docs/guides/tree-shaking.md"
 				>Edit it on GitHub</a
@@ -117,20 +118,23 @@
 </footer>
 
 
-		<script
-			type="text/javascript"
-			src="https://unpkg.com/culori@3.0.0"
-		></script>
-		<script type="text/javascript">
-			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
+		<script type="module">
+			import * as culori from '/culori.min.mjs';
+
+			/* Expose as global variable */
+			window.culori = culori;
+
+			const { p3, random, formatCss, formatHex } = culori;
+
+			const r = () => random('lch', { l: [30, 80], c: [60, 90] });
 			let r1 = r();
 			let r2 = r();
-			if (CSS.supports('color: color(display-p3)')) {
-				r1 = culori.formatCss(culori.p3(r1));
-				r2 = culori.formatCss(culori.p3(r2));
+			if (CSS.supports('color: color(display-p3 0 0 0)')) {
+				r1 = formatCss(p3(r1));
+				r2 = formatCss(p3(r2));
 			} else {
-				r1 = culori.formatHex(r1);
-				r2 = culori.formatHex(r2);
+				r1 = formatHex(r1);
+				r2 = formatHex(r2);
 			}
 			document.body.style.setProperty('--random-1', r1);
 			document.body.style.setProperty('--random-2', r2);

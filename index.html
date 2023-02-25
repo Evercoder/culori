@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>
-			 Home &middot; culori 
+			 Color functions for JavaScript &middot; culori 
 		</title>
 
 		<link rel="icon" type="image/png" href='/favicon.png' />
@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v3.0.0 (<a
+				>v3.0.1 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -66,9 +66,8 @@
 
 		<div class="container">
 			<article>
-				<h1>Home</h1>
-				<p>Culori is a color library for JavaScript that supports most color spaces and formats defined in the <a href="https://drafts.csswg.org/css-color/">CSS Colors Level 4</a> specification (<a href="https://drafts.csswg.org/css-color/#named-colors">named colors</a>, <a href="https://drafts.csswg.org/css-color/#hex-notation">hex colors</a> with 3 to 8 digits, <a href="https://drafts.csswg.org/css-color/#rgb-functions">RGB</a>, <a href="https://drafts.csswg.org/css-color/#the-hsl-notation">HSL</a>, <a href="https://drafts.csswg.org/css-color/#the-hwb-notation">HWB</a>, <a href="https://drafts.csswg.org/css-color/#lab-colors">Lab and LCh</a>), plus <a href="./color-spaces">additional color spaces</a>.</p>
-<p>It handles <a href="https://en.wikipedia.org/wiki/Color_difference">color differences</a>, interpolation, gradients, blend modes <a href="./api">and more</a>.</p>
+				<h1>Color functions for JavaScript</h1>
+				<p>Culori is a JavaScript color library that supports the conversion and manipulation of all formats defined in the <a href="https://drafts.csswg.org/css-color/">CSS Colors Level 4</a> specification, plus <a href="./color-spaces">additional color spaces</a>. It handles <a href="https://en.wikipedia.org/wiki/Color_difference">color differences</a>, interpolation, gradients, blend modes <a href="/api/">and much more</a>.</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> culori</code></pre>
 <p><a class='btn-link' href='./getting-started'>Get started</a></p>
 <h2>What sets Culori apart?</h2>
@@ -82,8 +81,8 @@
 		<footer>
 	<div class="container">
 		<p>
-			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
-			page be improved?
+			Culori is a <a href="https://moqups.com">Moqups</a> production. Can
+			this page be improved?
 			<a
 				href="https://github.com/Evercoder/culori/blob/main/./docs/index.md"
 				>Edit it on GitHub</a
@@ -93,20 +92,23 @@
 </footer>
 
 
-		<script
-			type="text/javascript"
-			src="https://unpkg.com/culori@3.0.0"
-		></script>
-		<script type="text/javascript">
-			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
+		<script type="module">
+			import * as culori from '/culori.min.mjs';
+
+			/* Expose as global variable */
+			window.culori = culori;
+
+			const { p3, random, formatCss, formatHex } = culori;
+
+			const r = () => random('lch', { l: [30, 80], c: [60, 90] });
 			let r1 = r();
 			let r2 = r();
-			if (CSS.supports('color: color(display-p3)')) {
-				r1 = culori.formatCss(culori.p3(r1));
-				r2 = culori.formatCss(culori.p3(r2));
+			if (CSS.supports('color: color(display-p3 0 0 0)')) {
+				r1 = formatCss(p3(r1));
+				r2 = formatCss(p3(r2));
 			} else {
-				r1 = culori.formatHex(r1);
-				r2 = culori.formatHex(r2);
+				r1 = formatHex(r1);
+				r2 = formatHex(r2);
 			}
 			document.body.style.setProperty('--random-1', r1);
 			document.body.style.setProperty('--random-2', r2);

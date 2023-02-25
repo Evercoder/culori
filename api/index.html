@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v3.0.0 (<a
+				>v3.0.1 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -162,6 +162,7 @@
 <li><a href='#color-spaces'>rgb</a></li>
 <li><a href='#round'>round</a></li>
 <li><a href='#samples'>samples</a></li>
+<li><a href='#unlerp'>unlerp</a></li>
 <li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
 <li><a href='#wcagLuminance'>wcagLuminance</a></li>
@@ -454,6 +455,9 @@
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/interpolate/lerp.js">src/interpolate/lerp.js</a></p>
 <p>Interpolates between the values <code>a</code> and <code>b</code> at the point <code>t ∈ [0, 1]</code>.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> lerp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><span class="token function">lerp</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ 7.5</span></code></pre>
+<p><a id="unlerp" href="#unlerp">#</a> <strong>unlerp</strong>(<em>a</em>, <em>b</em>, <em>v</em>) → <em>value</em></p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/interpolate/lerp.js">src/interpolate/lerp.js</a></p>
+<p>Returns the point <code>t</code> at which the value <code>v</code> is located between the values <code>a</code> and <code>b</code>. The inverse of <code>lerp</code>.</p>
 <h3>Mappings</h3>
 <p><a id="mapper" href="#mapper">#</a> <strong>mapper</strong>(<em>fn</em>, <em>mode = &quot;rgb&quot;</em>) → <em>function (color | string)</em></p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/map.js">src/map.js</a></p>
@@ -1175,8 +1179,8 @@
 		<footer>
 	<div class="container">
 		<p>
-			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
-			page be improved?
+			Culori is a <a href="https://moqups.com">Moqups</a> production. Can
+			this page be improved?
 			<a
 				href="https://github.com/Evercoder/culori/blob/main/./docs/api.md"
 				>Edit it on GitHub</a
@@ -1186,20 +1190,23 @@
 </footer>
 
 
-		<script
-			type="text/javascript"
-			src="https://unpkg.com/culori@3.0.0"
-		></script>
-		<script type="text/javascript">
-			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
+		<script type="module">
+			import * as culori from '/culori.min.mjs';
+
+			/* Expose as global variable */
+			window.culori = culori;
+
+			const { p3, random, formatCss, formatHex } = culori;
+
+			const r = () => random('lch', { l: [30, 80], c: [60, 90] });
 			let r1 = r();
 			let r2 = r();
-			if (CSS.supports('color: color(display-p3)')) {
-				r1 = culori.formatCss(culori.p3(r1));
-				r2 = culori.formatCss(culori.p3(r2));
+			if (CSS.supports('color: color(display-p3 0 0 0)')) {
+				r1 = formatCss(p3(r1));
+				r2 = formatCss(p3(r2));
 			} else {
-				r1 = culori.formatHex(r1);
-				r2 = culori.formatHex(r2);
+				r1 = formatHex(r1);
+				r2 = formatHex(r2);
 			}
 			document.body.style.setProperty('--random-1', r1);
 			document.body.style.setProperty('--random-2', r2);

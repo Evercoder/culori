@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v3.0.0 (<a
+				>v3.0.1 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -67,18 +67,18 @@
 		<div class="container">
 			<article>
 				<h1>Colophon</h1>
-				<p>Developed by <a href="http://danburzo.ro">Dan Burzo</a> with the help of many collaborators, and released under the MIT license. The library is indebted to Mike Bostock's <a href="https://github.com/d3">D3.js</a> and Gregor Aisch's <a href="https://github.com/gka/chroma.js">chroma.js</a>. D3, in particular, has been a treasure-trove of ideas and academic references.</p>
-<p>Culori is the Romanian word for ‘colors’. The logo is typeset in <a href="https://pstypelab.com/hatchfont">Hatch</a> by Mark Caneso.</p>
-<p>The code is formatted with <a href="https://prettier.io">Prettier</a>, upkeeped with <a href="https://eslint.org/">ESLint</a>, tested with <a href="https://github.com/substack/tape">tape</a>, and bundled with <a href="https://esbuild.github.io/">esbuild</a>.</p>
-<p>This website is statically generated using <a href="https://11ty.dev">Eleventy</a> and published to GitHub Pages.</p>
+				<p>Culori is developed by <a href="http://danburzo.ro">Dan Burzo</a> with the help of many collaborators, and released under the MIT license.</p>
+<p>The library has been inspired by Mike Bostock's <a href="https://github.com/d3">D3.js</a> and Gregor Aisch's <a href="https://github.com/gka/chroma.js">chroma.js</a>: they have popularized color science in the browser and provided a blueprint for a color manipulation API. I have learned a tremendous amount by reading through the documentation the source code while developing Culori. D3, in particular, has been a treasure trove of ideas and pointers to academic references.</p>
+<p>I pronounce the name of the library as <a href="http://ipa-reader.xyz/?text=ku%CB%90lori">[kuːlori]</a>. Culori is the Romanian word for ‘colors’. The logo is typeset in <a href="https://pstypelab.com/hatchfont">Hatch</a> by Mark Caneso.</p>
+<p>The code is formatted with <a href="https://prettier.io">Prettier</a>, upkept with <a href="https://eslint.org/">ESLint</a>, tested with <a href="https://github.com/ljharb/tape">tape</a>, and bundled with <a href="https://esbuild.github.io/">esbuild</a>. This website is statically generated using <a href="https://11ty.dev">Eleventy</a> and published to GitHub Pages.</p>
 
 			</article>
 		</div>
 		<footer>
 	<div class="container">
 		<p>
-			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
-			page be improved?
+			Culori is a <a href="https://moqups.com">Moqups</a> production. Can
+			this page be improved?
 			<a
 				href="https://github.com/Evercoder/culori/blob/main/./docs/colophon.md"
 				>Edit it on GitHub</a
@@ -88,20 +88,23 @@
 </footer>
 
 
-		<script
-			type="text/javascript"
-			src="https://unpkg.com/culori@3.0.0"
-		></script>
-		<script type="text/javascript">
-			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
+		<script type="module">
+			import * as culori from '/culori.min.mjs';
+
+			/* Expose as global variable */
+			window.culori = culori;
+
+			const { p3, random, formatCss, formatHex } = culori;
+
+			const r = () => random('lch', { l: [30, 80], c: [60, 90] });
 			let r1 = r();
 			let r2 = r();
-			if (CSS.supports('color: color(display-p3)')) {
-				r1 = culori.formatCss(culori.p3(r1));
-				r2 = culori.formatCss(culori.p3(r2));
+			if (CSS.supports('color: color(display-p3 0 0 0)')) {
+				r1 = formatCss(p3(r1));
+				r2 = formatCss(p3(r2));
 			} else {
-				r1 = culori.formatHex(r1);
-				r2 = culori.formatHex(r2);
+				r1 = formatHex(r1);
+				r2 = formatHex(r2);
 			}
 			document.body.style.setProperty('--random-1', r1);
 			document.body.style.setProperty('--random-2', r2);

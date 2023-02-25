@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v3.0.0 (<a
+				>v3.0.1 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -67,9 +67,11 @@
 		<div class="container">
 			<article>
 				<h1>Guides</h1>
-				<h2><a href="./migration">Migration guide</a></h2>
+				<h2>Working with Culori</h2>
+<h3><a href="./tree-shaking/">Optimize bundle size with tree-shaking</a></h3>
+<p>Once you're done prototyping and you're ready to ship an optimized bundle, switch your imports over to the fully tree-shakeable version.</p>
+<h3><a href="./migration/">Migration guide</a></h3>
 <p>This guide documents the breaking changes in each new major release of the library and how to address them in your code.</p>
-<h2><a href="./tree-shaking">Optimize bundle size with tree-shaking</a></h2>
 <h2>Elsewhere</h2>
 <p><a href="https://tympanus.net/codrops/2021/12/07/coloring-with-code-a-programmatic-approach-to-design/">Coloring With Code — A Programmatic Approach To Design</a>, a tutorial by George Francis.</p>
 
@@ -78,8 +80,8 @@
 		<footer>
 	<div class="container">
 		<p>
-			A <a href="https://labs.moqups.com">Moqups Labs</a> thing. Can this
-			page be improved?
+			Culori is a <a href="https://moqups.com">Moqups</a> production. Can
+			this page be improved?
 			<a
 				href="https://github.com/Evercoder/culori/blob/main/./docs/guides/index.md"
 				>Edit it on GitHub</a
@@ -89,20 +91,23 @@
 </footer>
 
 
-		<script
-			type="text/javascript"
-			src="https://unpkg.com/culori@3.0.0"
-		></script>
-		<script type="text/javascript">
-			const r = () => culori.random('lch', { l: [30, 80], c: [60, 90] });
+		<script type="module">
+			import * as culori from '/culori.min.mjs';
+
+			/* Expose as global variable */
+			window.culori = culori;
+
+			const { p3, random, formatCss, formatHex } = culori;
+
+			const r = () => random('lch', { l: [30, 80], c: [60, 90] });
 			let r1 = r();
 			let r2 = r();
-			if (CSS.supports('color: color(display-p3)')) {
-				r1 = culori.formatCss(culori.p3(r1));
-				r2 = culori.formatCss(culori.p3(r2));
+			if (CSS.supports('color: color(display-p3 0 0 0)')) {
+				r1 = formatCss(p3(r1));
+				r2 = formatCss(p3(r2));
 			} else {
-				r1 = culori.formatHex(r1);
-				r2 = culori.formatHex(r2);
+				r1 = formatHex(r1);
+				r2 = formatHex(r2);
 			}
 			document.body.style.setProperty('--random-1', r1);
 			document.body.style.setProperty('--random-2', r2);
