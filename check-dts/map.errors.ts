@@ -7,7 +7,7 @@ const doubler = mapper(v => {
 	return v * 2;
 });
 
-// THROWS Type 'Rgb' is missing the following properties from type 'Hsl': h, s, l
+// THROWS Type 'Rgb' is missing the following properties from type 'Hsl': s, l
 const case_3_expect_error: Hsl = doubler({
 	mode: 'hsl',
 	h: 0,
