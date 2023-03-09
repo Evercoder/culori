@@ -1,8 +1,4 @@
 import lch from '../lch/definition';
-import convertLabToLch from '../lch/convertLabToLch';
-import convertLchToLab from '../lch/convertLchToLab';
-import convertOklabToRgb from '../oklab/convertOklabToRgb';
-import convertRgbToOklab from '../oklab/convertRgbToOklab';
 import { Oklch } from './types';
 import { Oklab } from '../oklab/types';
 import { Rgb } from '../rgb/types';
