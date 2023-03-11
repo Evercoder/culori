@@ -32,6 +32,8 @@ tape('gamma transfer function', t => {
 
 tape('when mode is null and color is rgb string', t => {
 	let increaser = mapper(v => v + 0.1, null);
+
+	// might be incorrect
 	t.throws(() => {
 		increaser('#cc0033');
 	}, "Cannot read properties of undefined (reading 'channels')");
@@ -41,12 +43,16 @@ tape('when mode is null and color is rgb string', t => {
 tape('when mode is null and color is rgb', t => {
 	let increaser = mapper(v => v + 0.1, null);
 	const res = increaser({ mode: 'rgb', r: 0.8, g: 0, b: 0.2 });
+
+	// might be incorrect
 	t.equal(res.mode, null);
 	t.end();
 });
 
 tape('when mode is null and preserve_mode is true', t => {
 	let increaser = mapper(v => v + 1, null, true);
+
+	// might be incorrect
 	t.throws(
 		() => {
 			const res = increaser({ mode: 'rgb', r: 0.8, g: 0, b: 0.2 });
