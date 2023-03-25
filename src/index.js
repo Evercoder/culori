@@ -99,7 +99,6 @@ export { default as samples } from './samples.js';
 export {
 	displayable,
 	inGamut,
-	toGamut,
 	clampRgb,
 	clampChroma,
 	clampGamut

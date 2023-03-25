@@ -123,5 +123,14 @@ tape('clampGamut()', t => {
 		'p3 color to rec2020'
 	);
 
+	const crimson = 'color(display-p3 0.8 0.1 0.3)';
+	const toRgb = clampGamut('rgb');
+
+	t.equal(
+		formatCss(toRgb(crimson)),
+		'color(display-p3 0.8015640173988641 0.16985582666875737 0.30217671004779834)',
+		'api docs example'
+	);
+
 	t.end();
 });

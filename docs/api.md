@@ -62,6 +62,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#color-spaces'>hsl</a></li>
 <li><a href='#color-spaces'>hsv</a></li>
 <li><a href='#color-spaces'>hwb</a></li>
+<li><a href='#inGamut'>inGamut</a></li>
 <li><a href='#interpolate'>interpolate</a></li>
 <li><a href='#interpolateWith'>interpolateWith</a></li>
 <li><a href='#interpolateWithPremultipliedAlpha'>interpolateWithPremultipliedAlpha</a></li>
@@ -100,6 +101,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#color-spaces'>rgb</a></li>
 <li><a href='#round'>round</a></li>
 <li><a href='#samples'>samples</a></li>
+<li><a href='#toGamut'>toGamut</a></li>
 <li><a href='#unlerp'>unlerp</a></li>
 <li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
@@ -277,15 +279,35 @@ formatCss({ mode: 'lrgb', r: 0.5, s: 0.25, b: 1, alpha: 0.25 });
 // ⇒ 'color(--srgb-linear 0.5 0.25 1 / 0.25)'
 ```
 
-## Clamping
+## Gamut mapping
 
 Some color spaces (Lab and LCh in particular) allow you to express colors that can't be displayed on-screen. The methods below allow you to identify when that's the case and to produce displayable versions of the colors.
 
+<a id="inGamut" href="#inGamut">#</a> **inGamut**(_mode = "rgb"_) → _function (color | string)_
+
+<span aria-label='Source:'>☞</span> [src/clamp.js]({{codebase}}/src/clamp.js)
+
+Given a color space, returns a function with which to check whether a particular color is within the gamut of that color space. 
+
+This is meant to be used with RGB-based color spaces and their derivates (`hsl`, `hsv`, etc.). If the color space has no gamut limits, the function will always return `true`, regardless of the color passed to it. To find out which color spaces have gamut limits, see the [Color Spaces](/color-spaces/) page.
+
+```js
+import { inGamut } from 'culori';
+
+const inRgb = inGamut('rgb');
+
+inRgb('red');
+// ⇒ true
+
+inRgb('color(srgb 1.1 0 0)');
+// ⇒ false
+```
+
 <a id="displayable" href="#displayable">#</a> **displayable**(_color_ or _string_) → _boolean_
 
-<span aria-label='Source:'>☞</span> [src/displayable.js]({{codebase}}/src/displayable.js)
+<span aria-label='Source:'>☞</span> [src/clamp.js]({{codebase}}/src/clamp.js)
 
-Checks whether a particular color fits inside the sRGB gamut, by verifying that the `r`, `g`, and `b` channels are all in the interval `[0, 1]`.
+Checks whether a particular color fits inside the sRGB gamut. Equivalent to `inGamut('rgb')`.
 
 ```js
 import { displayable } from 'culori';
@@ -293,7 +315,7 @@ import { displayable } from 'culori';
 displayable('red');
 // ⇒ true
 
-displayable('rgb(300 255 255)');
+displayable('color(srgb 1.1 0 0)');
 // ⇒ false
 ```
 
@@ -314,6 +336,26 @@ import { clampRgb } from 'culori';
 clampRgb('lab(50% 100 100)');
 // ⇒ { mode: "lab", l: 54.29…, a: 80.81…, b: 69.88… }
 ```
+
+<a id="clampGamut" href="#clampGamut">#</a> **clampGamut**(_mode = 'rgb'_) → _function(color | string)_
+
+This function extends the functionality of `clampRgb` to other color spaces. Given a color space, it returns a function with which to obtain colors within the gamut of that color space. 
+
+If the color space has no gamut limits, colors are returned unchanged. To find out which color spaces have gamut limits, see the [Color Spaces](/color-spaces/) page.
+
+The in-gamut color is always returned in the color space of the original color.
+
+```js
+import { formatCss, clampGamut } from 'culori';
+
+const crimson = 'color(display-p3 0.8 0.1 0.3)';
+const toRgb = clampGamut('rgb');
+
+formatCss(toRgb(crimson));
+// ⇒ 'color(display-p3 0.801… 0.169… 0.302…)'
+```
+
+<span aria-label='Source:'>☞</span> [src/clamp.js]({{codebase}}/src/clamp.js)
 
 <a id="clampChroma" href="#clampChroma">#</a> **clampChroma**(_color_ or _string_, _mode = 'lch'_) → _color_
 
