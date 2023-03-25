@@ -12,7 +12,7 @@ import { fixupAlpha } from '../fixup/alpha.js';
 
 const definition = {
 	mode: 'xyz50',
-	parse: ['xyz-d50', '--xyz-d50'],
+	parse: ['xyz-d50'],
 	serialize: 'xyz-d50',
 
 	toMode: {

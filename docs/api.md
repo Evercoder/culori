@@ -100,9 +100,11 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#color-spaces'>rgb</a></li>
 <li><a href='#round'>round</a></li>
 <li><a href='#samples'>samples</a></li>
+<li><a href='#unlerp'>unlerp</a></li>
 <li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
 <li><a href='#wcagLuminance'>wcagLuminance</a></li>
+<li><a href='#color-spaces'>xyb</a></li>
 <li><a href='#color-spaces'>xyz50</a></li>
 <li><a href='#color-spaces'>xyz65</a></li>
 <li><a href='#color-spaces'>yiq</a></li>
@@ -514,7 +516,7 @@ Smootherstep is a variant of the [Smoothstep][smoothstep] easing function.
 
 <span aria-label='Source:'>☞</span> [src/easing/inOutSine.js]({{codebase}}/src/easing/inOutSine.js)
 
-Sinusoidal in-out easing. Can be used to create, for example, a cosine interpolation [as described by Paul Bourke](paulbourke.net/miscellaneous/interpolation/):
+Sinusoidal in-out easing. Can be used to create, for example, a cosine interpolation [as described by Paul Bourke](http://paulbourke.net/miscellaneous/interpolation/):
 
 ```js
 import { interpolate, easingInOutSine } from 'culori';
@@ -827,7 +829,7 @@ samples(10).map(t => t * t);
 
 <a id="lerp" href="#lerp">#</a> **lerp**(_a_, _b_, _t_) → _value_
 
-<span aria-label='Source:'>☞</span> [src/samples.js]({{codebase}}/src/samples.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/lerp.js]({{codebase}}/src/interpolate/lerp.js)
 
 Interpolates between the values `a` and `b` at the point `t ∈ [0, 1]`.
 
@@ -837,6 +839,12 @@ lerp(5, 10, 0.5);
 // ⇒ 7.5
 ```
 
+<a id="unlerp" href="#unlerp">#</a> **unlerp**(_a_, _b_, _v_) → _value_
+
+<span aria-label='Source:'>☞</span> [src/interpolate/lerp.js]({{codebase}}/src/interpolate/lerp.js)
+
+Returns the point `t` at which the value `v` is located between the values `a` and `b`. The inverse of `lerp`.
+
 ### Mappings
 
 <a id="mapper" href="#mapper">#</a> **mapper**(_fn_, _mode = "rgb"_) → _function (color | string)_
@@ -845,9 +853,9 @@ lerp(5, 10, 0.5);
 
 Creates a mapping that applies _fn_ on each channel of the color in the _mode_ color space.
 
-The resulting function accepts a single argument (a color object or a string), which it converts to the _mode_ color space if not already there.
+The resulting function accepts a single argument (a color object or a string), which it converts to the _mode_ color space if necessary.
 
-The _mode_ parameter can be set to `null`, in which case the mapper will iterate through all the channels in the color's original color space.
+The _mode_ parameter can be set to `null`, in which case the mapper will iterate through the channels in the color's original color space.
 
 The _fn_ callback has the following signature:
 
@@ -876,9 +884,9 @@ multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 });
 // ⇒ { mode: 'rgb', r: 0.5, g: 0.3, b: 0.2, a: 0.5 }
 ```
 
-All channels are included in the mapping, so you might want to exclude the `alpha` channel from your function, like we do above.
+All channels, including `alpha`, are included in the mapping. You may want to handle the `alpha` channel differently in the callback function, like in the example above.
 
-Returning `undefined` or `NaN` from the function will omit that channel from the resulting color.
+Returning `undefined` or `NaN` from the callback function will omit that channel from the resulting color object.
 
 #### Built-in mappings
 
@@ -1458,6 +1466,7 @@ Mode | Color space | Definition object
 `prophoto` | ProPhoto RGB color space | `modeProphoto`
 `rec2020` | Rec. 2020 RGB color space | `modeRec2020`
 `rgb` | sRGB color space | `modeRgb`
+`xyb` | XYB color space | `modeXyb`
 `xyz50` | XYZ with D50 white-point | `modeXyz50`
 `xyz65` | XYZ with D65 white-point | `modeXyz65`
 `yiq` | YIQ color space | `modeYiq`
@@ -1514,7 +1523,7 @@ The opposite of `toMode`. A set of function to convert from various color spaces
 
 #### `ranges` (_object_, optional)
 
-The ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
+The reference ranges for values in specific channels; if left unspecified, defaults to `[0, 1]`.
 
 #### `parse` (_array_, optional)
 
@@ -1583,19 +1592,34 @@ Here's a sample definition for the HSL color space:
 };
 ```
 
-<a id="useParser" href="#useParser">#</a> **useParser**(_parser_)
+<a id="useParser" href="#useParser">#</a> **useParser**(_parser_, _mode_)
 
 <span aria-label='Source:'>☞</span> [src/modes.js]({{codebase}}/src/modes.js)
 
-Register a new parser function.
+Register a new parser. The parser can be:
 
-The function will receive a color string as its only argument, and should return a color object.
+* a function, in which case the _mode_ argument is not necessary.
+* a string representing the identifier to match in the `color()` syntax, in which case the _mode_ argument is required.
+
+```js
+import { useParser } from 'culori';
+
+// Register custom parser
+useParser(function(str) => {
+  let color = {};
+  // parse the string
+  return color;
+});
+
+// Register `color(--oklab)` syntax
+useParser('--oklab', 'oklab');
+```
 
 <a id="removeParser" href="#removeParser">#</a> **removeParser**(_parser_)
 
 <span aria-label='Source:'>☞</span> [src/modes.js]({{codebase}}/src/modes.js)
 
-Remove a previously registered parser function.
+Remove a previously registered parser function or string, including parsers registered by default.
 
 ```js
 import { parse, parseNamed, removeParser } from 'culori';
@@ -1633,7 +1657,11 @@ parseHex('#abcdef12');
 
 <a id="parseHsl" href="#parseHsl">#</a> __parseHsl__(_string_) → _color_
 
-Parses `hsl(…)` / `hsla(…)` strings and returns `hsl` color objects.
+Parses `hsl(…)` strings in the modern format and returns `hsl` color objects.
+
+<a id="parseHslLegacy" href="#parseHslLegacy">#</a> __parseHslLegacy__(_string_) → _color_
+
+Parses `hsl(…)` / `hsla(…)` strings in the legacy (comma-separated) format and returns `hsl` color objects.
 
 <a id="parseHwb" href="#parseHwb">#</a> __parseHwb__(_string_) → _color_
 
@@ -1651,9 +1679,21 @@ Parses `lch(…)` strings and returns `lch` color objects.
 
 Parses named CSS colors (eg. `tomato`) and returns `rgb` color objects.
 
+<a id="parseOklab" href="#parseOklab">#</a> __parseOklab__(_string_) → _color_
+
+Parses `oklab(…)` strings and returns `oklab` color objects.
+
+<a id="parseOklch" href="#parseOklch">#</a> __parseOklch__(_string_) → _color_
+
+Parses `oklch(…)` strings and returns `oklch` color objects.
+
 <a id="parseRgb" href="#parseRgb">#</a> __parseRgb__(_color_) → _color_
 
-Parses `rgb(…)` / `rgba(…)` strings and returns `rgb` color objects.
+Parses `rgb(…)` strings in the modern syntax and returns `rgb` color objects.
+
+<a id="parseRgbLegacy" href="#parseRgbLegacy">#</a> __parseRgbLegacy__(_color_) → _color_
+
+Parses `rgb(…)` / `rgba(…)` strings in the legacy (comma-separated) syntax and returns `rgb` color objects.
 
 <a id="parseTransparent" href="#parseTransparent">#</a>__parseTransparent__(_string_) → _color_
 
@@ -1727,13 +1767,20 @@ __convertRgbToHsl__(_color_) → _color_ | `rgb` → `hsl`
 __convertRgbToHsv__(_color_) → _color_ | `rgb` → `hsv`
 __convertRgbToHwb__(_color_) → _color_ | `rgb` → `hwb`
 __convertRgbToJab__(_color_) → _color_ | `rgb` → `jab`
-__convertRgbToLab__(_color_) → _color_ | `rgb` → `lab`
 __convertRgbToLab65__(_color_) → _color_ | `rgb` → `lab65`
+__convertRgbToLab__(_color_) → _color_ | `rgb` → `lab`
 __convertRgbToLrgb__(_color_) → _color_ | `rgb` → `lrgb`
 __convertRgbToOklab__(_color_) → _color_ | `rgb` → `oklab`
+__convertRgbToXyb__(_color_) → _color_ | `rgb` → `xyb`
 __convertRgbToXyz50__(_color_) → _color_ | `rgb` → `xyz50`
 __convertRgbToXyz65__(_color_) → _color_ | `rgb` → `xyz65`
 __convertRgbToYiq__(_color_) → _color_ | `rgb` → `yiq`
+__convertXybToRgb__(_color_) → _color_ | `xyb` → `rgb`
+__convertXyz50ToLab__(_color_) → _color_ | `xyz50` → `lab`
+__convertXyz50ToLuv__(_color_) → _color_ | `xyz50` → `luv`
+__convertXyz50ToProphoto__(_color_) → _color_ | `xyz50` → `prophoto`
+__convertXyz50ToRgb__(_color_) → _color_ | `xyz50` → `rgb`
+__convertXyz50ToXyz65__(_color_) → _color_ | `xyz50` → `xyz65`
 __convertXyz65ToA98__(_color_) → _color_ | `xyz65` → `a98`
 __convertXyz65ToJab__(_color_) → _color_ | `xyz65` → `jab`
 __convertXyz65ToLab65__(_color_) → _color_ | `xyz65` → `lab65`
@@ -1741,11 +1788,6 @@ __convertXyz65ToP3__(_color_) → _color_ | `xyz65` → `p3`
 __convertXyz65ToRec2020__(_color_) → _color_ | `xyz65` → `rec2020`
 __convertXyz65ToRgb__(_color_) → _color_ | `xyz65` → `rgb`
 __convertXyz65ToXyz50__(_color_) → _color_ | `xyz65` → `xyz50`
-__convertXyz50ToLab__(_color_) → _color_ | `xyz50` → `lab`
-__convertXyz50ToLuv__(_color_) → _color_ | `xyz50` → `luv`
-__convertXyz50ToProphoto__(_color_) → _color_ | `xyz50` → `prophoto`
-__convertXyz50ToRgb__(_color_) → _color_ | `xyz50` → `rgb`
-__convertXyz50ToXyz65__(_color_) → _color_ | `xyz50` → `xyz65`
 __convertYiqToRgb__(_color_) → _color_ | `yiq` → `rgb`
 
 

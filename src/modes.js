@@ -53,11 +53,7 @@ const useMode = definition => {
 
 	modes[definition.mode] = definition;
 	(definition.parse || []).forEach(parser => {
-		if (typeof parser === 'function') {
-			useParser(parser);
-		} else if (typeof parser === 'string') {
-			colorProfiles[parser] = definition.mode;
-		}
+		useParser(parser, definition.mode);
 	});
 
 	return converter(definition.mode);
@@ -65,17 +61,27 @@ const useMode = definition => {
 
 const getMode = mode => modes[mode];
 
-const useParser = parser => {
-	const idx = parsers.indexOf(parser);
-	if (idx < 0) {
-		parsers.push(parser);
+const useParser = (parser, mode) => {
+	if (typeof parser === 'string') {
+		if (!mode) {
+			throw new Error(`'mode' required when 'parser' is a string`);
+		}
+		colorProfiles[parser] = mode;
+	} else if (typeof parser === 'function') {
+		if (parsers.indexOf(parser) < 0) {
+			parsers.push(parser);
+		}
 	}
 };
 
 const removeParser = parser => {
-	const idx = parsers.indexOf(parser);
-	if (idx > 0) {
-		parsers.splice(idx, 1);
+	if (typeof parser === 'string') {
+		delete colorProfiles[parser];
+	} else if (typeof parser === 'function') {
+		const idx = parsers.indexOf(parser);
+		if (idx > 0) {
+			parsers.splice(idx, 1);
+		}
 	}
 };
 

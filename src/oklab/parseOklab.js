@@ -1,22 +1,22 @@
 import { Tok } from '../parse.js';
 
-function parseLab(color, parsed) {
-	if (!parsed || parsed[0] !== 'lab') {
+function parseOklab(color, parsed) {
+	if (!parsed || parsed[0] !== 'oklab') {
 		return undefined;
 	}
-	const res = { mode: 'lab' };
+	const res = { mode: 'oklab' };
 	const [, l, a, b, alpha] = parsed;
 	if (l.type === Tok.Hue || a.type === Tok.Hue || b.type === Tok.Hue) {
 		return undefined;
 	}
 	if (l.type !== Tok.None) {
-		res.l = l.value;
+		res.l = l.type === Tok.Number ? l.value : l.value / 100;
 	}
 	if (a.type !== Tok.None) {
-		res.a = a.type === Tok.Number ? a.value : (a.value * 125) / 100;
+		res.a = a.type === Tok.Number ? a.value : (a.value * 0.4) / 100;
 	}
 	if (b.type !== Tok.None) {
-		res.b = b.type === Tok.Number ? b.value : (b.value * 125) / 100;
+		res.b = b.type === Tok.Number ? b.value : (b.value * 0.4) / 100;
 	}
 	if (alpha.type !== Tok.None) {
 		res.alpha = alpha.type === Tok.Number ? alpha.value : alpha.value / 100;
@@ -25,4 +25,4 @@ function parseLab(color, parsed) {
 	return res;
 }
 
-export default parseLab;
+export default parseOklab;

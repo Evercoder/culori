@@ -40,15 +40,15 @@ tape('round-trip', t => {
 	t.end();
 });
 
-tape('color(--srgb-linear)', t => {
-	t.deepEqual(lrgb('color(--srgb-linear 1 0 0 / 0.25)'), {
+tape('color(srgb-linear)', t => {
+	t.deepEqual(lrgb('color(srgb-linear 1 0 0 / 0.25)'), {
 		r: 1,
 		g: 0,
 		b: 0,
 		alpha: 0.25,
 		mode: 'lrgb'
 	});
-	t.deepEqual(lrgb('color(--srgb-linear 0% 50% 0.5 / 25%)'), {
+	t.deepEqual(lrgb('color(srgb-linear 0% 50% 0.5 / 25%)'), {
 		r: 0,
 		g: 0.5,
 		b: 0.5,
@@ -60,8 +60,8 @@ tape('color(--srgb-linear)', t => {
 
 tape('formatCss', t => {
 	t.equal(
-		formatCss('color(--srgb-linear 0% 50% 0.5 / 25%)'),
-		'color(--srgb-linear 0 0.5 0.5 / 0.25)'
+		formatCss('color(srgb-linear 0% 50% 0.5 / 25%)'),
+		'color(srgb-linear 0 0.5 0.5 / 0.25)'
 	);
 	t.end();
 });

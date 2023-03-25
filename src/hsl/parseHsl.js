@@ -1,51 +1,38 @@
-import hueToDeg from '../util/hue.js';
-import {
-	hue,
-	per,
-	num_per,
-	hue_none,
-	per_none,
-	num_per_none,
-	c,
-	s
-} from '../util/regex.js';
+import { Tok } from '../parse.js';
 
-/*
-	hsl() regular expressions.
-	Reference: https://drafts.csswg.org/css-color/#the-hsl-notation
- */
-const hsl_old = new RegExp(
-	`^hsla?\\(\\s*${hue}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
-);
-const hsl_new = new RegExp(
-	`^hsla?\\(\\s*${hue_none}${s}${per_none}${s}${per_none}\\s*(?:\\/\\s*${num_per_none}\\s*)?\\)$`
-);
+function parseHsl(color, parsed) {
+	if (!parsed || (parsed[0] !== 'hsl' && parsed[0] !== 'hsla')) {
+		return undefined;
+	}
+	const res = { mode: 'hsl' };
+	const [, h, s, l, alpha] = parsed;
 
-const parseHsl = color => {
-	let match = color.match(hsl_old) || color.match(hsl_new);
-	if (!match) return;
-	let res = { mode: 'hsl' };
-
-	if (match[3] !== undefined) {
-		res.h = +match[3];
-	} else if (match[1] !== undefined && match[2] !== undefined) {
-		res.h = hueToDeg(match[1], match[2]);
+	if (h.type !== Tok.None) {
+		if (h.type === Tok.Percentage) {
+			return undefined;
+		}
+		res.h = h.value;
 	}
 
-	if (match[4] !== undefined) {
-		res.s = Math.min(Math.max(0, match[4] / 100), 1);
+	if (s.type !== Tok.None) {
+		if (s.type === Tok.Hue) {
+			return undefined;
+		}
+		res.s = s.type === Tok.Number ? s.value : s.value / 100;
 	}
 
-	if (match[5] !== undefined) {
-		res.l = Math.min(Math.max(0, match[5] / 100), 1);
+	if (l.type !== Tok.None) {
+		if (l.type === Tok.Hue) {
+			return undefined;
+		}
+		res.l = l.type === Tok.Number ? l.value : l.value / 100;
 	}
 
-	if (match[6] !== undefined) {
-		res.alpha = match[6] / 100;
-	} else if (match[7] !== undefined) {
-		res.alpha = +match[7];
+	if (alpha.type !== Tok.None) {
+		res.alpha = alpha.type === Tok.Number ? alpha.value : alpha.value / 100;
 	}
+
 	return res;
-};
+}
 
 export default parseHsl;

@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 import { color } from 'd3-color';
-import d3i from 'd3-interpolate';
+import { quantize, interpolateRgb } from 'd3-interpolate';
 import tinycolor from 'tinycolor2';
 import { samples, interpolate, formatHex } from '../../src/index.js';
 import benchmark from '../util/benchmark.js';
@@ -51,14 +51,14 @@ benchmark('chroma: #fff -> #000 in RGB (cached)', () => {
 
 benchmark('d3-color: #fff -> #000 in RGB', () => {
 	for (var i = 0; i < iterations; i++) {
-		d3i.quantize(d3i.interpolateRgb('#fff', '#000'), count);
+		quantize(interpolateRgb('#fff', '#000'), count);
 	}
 });
 
-let interp = d3i.interpolateRgb('#fff', '#000');
+let interp = interpolateRgb('#fff', '#000');
 benchmark('d3-color: #fff -> #000 in RGB (cached)', () => {
 	for (var i = 0; i < iterations; i++) {
-		d3i.quantize(interp, count);
+		quantize(interp, count);
 	}
 });
 

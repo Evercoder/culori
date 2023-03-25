@@ -26,12 +26,20 @@ tape('lab', t => {
 		},
 		'red'
 	);
+
+	t.deepEqual(lab('lab(50% -10% 200% / 10%)'), {
+		mode: 'lab',
+		l: 50,
+		a: -12.5,
+		b: 250,
+		alpha: 0.1
+	});
 	t.end();
 });
 
 tape('formatCss', t => {
-	t.equal(formatCss('lab(40% 10 30 / 50%)'), 'lab(40% 10 30 / 0.5)');
-	t.equal(formatCss('lab(40% 10 30 / 100%)'), 'lab(40% 10 30)');
-	t.equal(formatCss('lab(40% 10 30)'), 'lab(40% 10 30)');
+	t.equal(formatCss('lab(40% 10 30 / 50%)'), 'lab(40 10 30 / 0.5)');
+	t.equal(formatCss('lab(40% 10 30 / 100%)'), 'lab(40 10 30)');
+	t.equal(formatCss('lab(40% 10 30)'), 'lab(40 10 30)');
 	t.end();
 });

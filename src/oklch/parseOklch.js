@@ -1,21 +1,21 @@
 import { Tok } from '../parse.js';
 
-function parseLch(color, parsed) {
-	if (!parsed || parsed[0] !== 'lch') {
+function parseOklch(color, parsed) {
+	if (!parsed || parsed[0] !== 'oklch') {
 		return undefined;
 	}
-	const res = { mode: 'lch' };
+	const res = { mode: 'oklch' };
 	const [, l, c, h, alpha] = parsed;
 	if (l.type !== Tok.None) {
 		if (l.type === Tok.Hue) {
 			return undefined;
 		}
-		res.l = l.value;
+		res.l = l.type === Tok.Number ? l.value : l.value / 100;
 	}
 	if (c.type !== Tok.None) {
 		res.c = Math.max(
 			0,
-			c.type === Tok.Number ? c.value : (c.value * 150) / 100
+			c.type === Tok.Number ? c.value : (c.value * 0.4) / 100
 		);
 	}
 	if (h.type !== Tok.None) {
@@ -31,4 +31,4 @@ function parseLch(color, parsed) {
 	return res;
 }
 
-export default parseLch;
+export default parseOklch;

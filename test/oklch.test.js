@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { oklch, formatCss } from '../src/index.js';
+import { oklch, formatCss, useParser, removeParser } from '../src/index.js';
 
 tape('oklch', t => {
 	t.deepEqual(
@@ -26,21 +26,42 @@ tape('oklch', t => {
 	t.end();
 });
 
-tape('color(--oklch)', t => {
-	t.deepEqual(oklch('color(--oklch 30 0.5 1 / 0.25)'), {
+tape('oklch()', t => {
+	t.deepEqual(oklch('oklch(30 0.5 1 / 0.25)'), {
 		l: 30,
 		c: 0.5,
 		h: 1,
 		alpha: 0.25,
 		mode: 'oklch'
 	});
+	t.deepEqual(oklch('oklch(40% 50% .5turn / 15%)'), {
+		mode: 'oklch',
+		l: 0.4,
+		c: 0.2,
+		h: 180,
+		alpha: 0.15
+	});
+	t.end();
+});
+
+tape('color(--oklch) with custom ident', t => {
+	const color_str = 'color(--oklch 30 0.5 1 / 0.25)';
+	const color = {
+		l: 30,
+		c: 0.5,
+		h: 1,
+		alpha: 0.25,
+		mode: 'oklch'
+	};
+	t.equal(oklch(color_str), undefined);
+	useParser('--oklch', 'oklch');
+	t.deepEqual(oklch(color_str), color);
+	removeParser('--oklch');
+	t.equal(oklch(color_str), undefined);
 	t.end();
 });
 
 tape('formatCss', t => {
-	t.equal(
-		formatCss('color(--oklch 30 0.5 1 / 0.25)'),
-		'color(--oklch 30 0.5 1 / 0.25)'
-	);
+	t.equal(formatCss('oklch(30% 0.5 1 / 0.25)'), 'oklch(0.3 0.5 1 / 0.25)');
 	t.end();
 });

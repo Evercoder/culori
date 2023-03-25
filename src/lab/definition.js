@@ -23,13 +23,13 @@ const definition = {
 
 	ranges: {
 		l: [0, 100],
-		a: [-79.287, 93.55],
-		b: [-112.029, 93.388]
+		a: [-100, 100],
+		b: [-100, 100]
 	},
 
 	parse: [parseLab],
 	serialize: c =>
-		`lab(${c.l !== undefined ? c.l + '%' : 'none'} ${
+		`lab(${c.l !== undefined ? c.l : 'none'} ${
 			c.a !== undefined ? c.a : 'none'
 		} ${c.b !== undefined ? c.b : 'none'}${
 			c.alpha < 1 ? ` / ${c.alpha}` : ''

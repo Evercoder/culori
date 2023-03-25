@@ -24,6 +24,7 @@ export { default as modeP3 } from './p3/definition.js';
 export { default as modeProphoto } from './prophoto/definition.js';
 export { default as modeRec2020 } from './rec2020/definition.js';
 export { default as modeRgb } from './rgb/definition.js';
+export { default as modeXyb } from './xyb/definition.js';
 export { default as modeXyz50 } from './xyz50/definition.js';
 export { default as modeXyz65 } from './xyz65/definition.js';
 export { default as modeYiq } from './yiq/definition.js';
@@ -92,7 +93,7 @@ export {
 	interpolatorSplineMonotoneClosed
 } from './interpolate/splineMonotone.js';
 
-export { default as lerp } from './interpolate/lerp.js';
+export { lerp, unlerp } from './interpolate/lerp.js';
 export { default as samples } from './samples.js';
 export {
 	displayable,
@@ -155,6 +156,10 @@ export { default as parseNamed } from './rgb/parseNamed.js';
 export { default as parseTransparent } from './rgb/parseTransparent.js';
 export { default as parseHex } from './rgb/parseHex.js';
 export { default as parseRgb } from './rgb/parseRgb.js';
+export { default as parseHslLegacy } from './hsl/parseHslLegacy.js';
+export { default as parseRgbLegacy } from './rgb/parseRgbLegacy.js';
+export { default as parseOklab } from './oklab/parseOklab.js';
+export { default as parseOklch } from './oklch/parseOklch.js';
 
 export { default as convertA98ToXyz65 } from './a98/convertA98ToXyz65.js';
 export { default as convertCubehelixToRgb } from './cubehelix/convertCubehelixToRgb.js';
@@ -201,6 +206,8 @@ export { default as convertRgbToOklab } from './oklab/convertRgbToOklab.js';
 export { default as convertRgbToXyz50 } from './xyz50/convertRgbToXyz50.js';
 export { default as convertRgbToXyz65 } from './xyz65/convertRgbToXyz65.js';
 export { default as convertRgbToYiq } from './yiq/convertRgbToYiq.js';
+export { default as convertRgbToXyb } from './xyb/convertRgbToXyb.js';
+export { default as convertXybToRgb } from './xyb/convertXybToRgb.js';
 export { default as convertXyz65ToA98 } from './a98/convertXyz65ToA98.js';
 export { default as convertXyz65ToJab } from './jab/convertXyz65ToJab.js';
 export { default as convertXyz65ToLab65 } from './lab65/convertXyz65ToLab65.js';

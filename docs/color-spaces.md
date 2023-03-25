@@ -43,7 +43,7 @@ Serialized as `color(srgb r g b)`, with the `none` keyword for any missing color
 
 The linear-light form of the sRGB color space.
 
-Serialized as `color(--srgb-linear r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `color(srgb-linear r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `a98`
 
@@ -138,25 +138,25 @@ The [CIELAB color space](https://en.wikipedia.org/wiki/CIELAB_color_space), also
 
 The CIELAB color space using the [D50 standard illuminant](https://en.wikipedia.org/wiki/Standard_illuminant) as the reference white, following the [CSS Color Module Level 4 specification](https://drafts.csswg.org/css-color/#lab-colors).
 
-| Channel | Range                 | Description           |
+| Channel | CSS Reference Range                 | Description           |
 | ------- | --------------------- | --------------------- |
 | `l`     | `[0, 100]`            | Lightness             |
-| `a`     | `[-79.287, 93.55]`≈   | Green–red component   |
-| `b`     | `[-112.029, 93.388]`≈ | Blue–yellow component |
+| `a`     | `[-100, 100]`   | Green–red component   |
+| `b`     | `[-100, 100]` | Blue–yellow component |
 
-Serialized as `lab(l% a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `lab(l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `lch`
 
 The CIELCh color space using the D50 standard illuminant.
 
-| Channel | Range           | Description |
+| Channel | CSS Reference Range           | Description |
 | ------- | --------------- | ----------- |
 | `l`     | `[0, 100]`      | Lightness   |
-| `c`     | `[0, 131.207]`≈ | Chroma      |
+| `c`     | `[0, 150]` | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
-Serialized as `lch(l% c h)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `lch(l c h)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `lab65`
 
@@ -252,13 +252,13 @@ See also: [Okhsl and Okhsv, two new color spaces for color picking](https://bott
 
 The Oklab color space in Cartesian form.
 
-| Channel | Range              | Description           |
+| Channel | CSS Reference Range              | Description           |
 | ------- | ------------------ | --------------------- |
-| `l`     | `[0, 0.999]`≈      | Lightness             |
-| `a`     | `[-0.233, 0.276]`≈ | Green–red component   |
-| `b`     | `[-0.311, 0.198]`≈ | Blue–yellow component |
+| `l`     | `[0, 1]`     | Lightness             |
+| `a`     | `[-0.4, 0.4]` | Green–red component   |
+| `b`     | `[-0.4, 0.4]` | Blue–yellow component |
 
-Serialized as `color(--oklab l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `oklab(l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 #### `oklch`
 
@@ -266,11 +266,11 @@ The Oklab color space in cylindrical form.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| `l`     | `[0, 0.999]`≈ | Lightness   |
-| `c`     | `[0, 0.322]`≈ | Chroma      |
+| `l`     | `[0, 1]` | Lightness   |
+| `c`     | `[0, 0.4]` | Chroma      |
 | `h`     | `[0, 360)`    | Hue         |
 
-Serialized as `color(--oklch l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+Serialized as `oklch(l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 ### `okhsl`
 
@@ -328,17 +328,21 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.
 
 Serialized as `color(--jzczhz j c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
-### YIQ
+### YIQ (`yiq`)
 
 [YIQ](https://en.wikipedia.org/wiki/YIQ) is the color space used by the NTSC color TV system. It contains the following channels:
 
 | Channel | Range              | Description                    |
 | ------- | ------------------ | ------------------------------ |
-| Y       | `[0, 1]`           | Luma                           |
-| I       | `[-0.595, 0.595]`≈ | In-phase (orange-blue axis)    |
-| Q       | `[-0.522, 0.522]`≈ | Quadrature (green-purple axis) |
+| `y`       | `[0, 1]`           | Luma                           |
+| `i`       | `[-0.595, 0.595]`≈ | In-phase (orange-blue axis)    |
+| `q`       | `[-0.522, 0.522]`≈ | Quadrature (green-purple axis) |
 
 Serialized as `color(--yiq y i q)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+The conversion matrices between the sRGB and YIQ color spaces are taken from:
+
+> Yuriy Kotsarenko, Fernando Ramos, [_Measuring perceived color difference using YIQ NTSC transmission color space in mobile applications_](http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf), Programación Matemática y Software (2010), Vol. 2, No 2.
 
 ### CIE XYZ
 
@@ -350,9 +354,9 @@ The CIE XYZ color space in respect to the D50 standard illuminant.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| X       | `[0, 0.964]`≈ | ?           |
-| Y       | `[0, 0.999]`≈ | ?           |
-| Z       | `[0, 0.825]`≈ | ?           |
+| `x`       | `[0, 0.964]`≈ | ?           |
+| `y`       | `[0, 0.999]`≈ | ?           |
+| `z`       | `[0, 0.825]`≈ | ?           |
 
 Serialized as `color(xyz-d50 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
@@ -362,11 +366,27 @@ The CIE XYZ color space in respect to the D65 standard illuminant.
 
 | Channel | Range         | Description |
 | ------- | ------------- | ----------- |
-| X       | `[0, 0.950]`≈ | ?           |
-| Y       | `[0, 1]`≈     | ?           |
-| Z       | `[0, 1.088]`≈ | ?           |
+| `x`       | `[0, 0.950]`≈ | ?           |
+| `y`       | `[0, 1]`≈     | ?           |
+| `z`       | `[0, 1.088]`≈ | ?           |
 
 Serialized as `color(xyz-d65 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+### XYB 
+
+The XYB color model is part of [the JPEG XL Image Coding System](https://ds.jpeg.org/whitepapers/jpeg-xl-whitepaper.pdf), as an <q>LMS-based colour model inspired by the human visual system, facilitating perceptually uniform quantization. It uses a gamma of 3 for computationally efficient decoding</q>. 
+
+#### `xyb`
+
+The default XYB color space, defined in relationship to sRGB. 
+
+It has the default _Chroma from Luma_ adjustment applied (effectively Y is subtracted from B) so that colors with `{ x: 0, b: 0 }` coordinates are achromatic.
+
+| Channel | Range         | Description |
+| ------- | ------------- | ----------- |
+| `x`       | `[-0.0154, 0.0281]`≈ | Cyan-red component           |
+| `y`       | `[0, 0.8453]`≈     | Luma           |
+| `b`       | `[ -0.2778, 0.3880 ]` ≈ | Blue-yellow component           |
 
 ### Cubehelix
 

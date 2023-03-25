@@ -2,7 +2,40 @@
 title: 'Migration guide'
 ---
 
-## Migrating from version 1.x to 2.0
+## From v2 to v3
+
+### Custom identifiers removed from the `color()` syntax
+
+For better alignment with the CSS Color Level 4 specification, support for the following formats has changed:
+
+* `color(--oklab)` removed in favor of `oklab()`
+* `color(--oklch)` removed in favor of `oklch()`
+* `color(--srgb-linear)` removed in favor of `color(srgb-linear)`
+* `color(--xyz-d50)` removed in favor of `color(xyz-d50)`
+* `color(--xyz-d65)` removed in favor of `color(xyz)` and `color(xyz-d65)`
+
+The custom identifiers removed in this release can be re-registered with [`useParser()`](/api/#useParser), using string arguments:
+
+```js
+import { useParser } from 'culori';
+
+useParser('--oklab', 'oklab');
+useParser('--oklch', 'oklch');
+useParser('--srgb-linear', 'lrgb');
+useParser('--xyz-d50', 'xyz50');
+useParser('--xyz-d65', 'xyz65');
+```
+
+### Parsing modern vs. legacy syntaxes for `rgb()` and `hsl()`
+
+The parsing of the [modern syntax](https://w3c.github.io/csswg-drafts/css-color-4/#color-syntax-modern) (space-separated) and the [legacy syntax](https://w3c.github.io/csswg-drafts/css-color-4/#color-syntax-legacy) (comma-separated) for the `rgb` and `hsl` color spaces has been split to separate functions:
+
+* `parseRgb()` now parses just the modern `rgb()` / `rgba()` syntax
+* `parseHsl()` now parses just the modern `hsl()` / `hsla()` syntax
+* `parseRgbLegacy()` has been added to the API to parse the legacy `rgb()` / `rgba()` syntax
+* `parseHslLegacy()` has been added to the API to parse the legacy `hsl()` / `hsla()` syntax
+
+## From v1 to v2
 
 * all color components in all CSS color syntaxes now accept the `none` keyword. ([w3c/csswg-drafts#6107](https://github.com/w3c/csswg-drafts/issues/6107))
 
@@ -91,7 +124,7 @@ lch(75 50 15deg)
 In version 2.0, we drop this quirk and bring Culori in line with the specification.
 
 
-## Migrating from version 0.x to 1.0
+## From v0.x to v1
 
 ### Using the library
 
