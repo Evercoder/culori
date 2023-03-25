@@ -853,9 +853,9 @@ Returns the point `t` at which the value `v` is located between the values `a` a
 
 Creates a mapping that applies _fn_ on each channel of the color in the _mode_ color space.
 
-The resulting function accepts a single argument (a color object or a string), which it converts to the _mode_ color space if not already there.
+The resulting function accepts a single argument (a color object or a string), which it converts to the _mode_ color space if necessary.
 
-The _mode_ parameter can be set to `null`, in which case the mapper will iterate through all the channels in the color's original color space.
+The _mode_ parameter can be set to `null`, in which case the mapper will iterate through the channels in the color's original color space.
 
 The _fn_ callback has the following signature:
 
@@ -884,9 +884,9 @@ multiplyAlpha({ r: 1, g: 0.6, b: 0.4, a: 0.5 });
 // ⇒ { mode: 'rgb', r: 0.5, g: 0.3, b: 0.2, a: 0.5 }
 ```
 
-All channels are included in the mapping, so you might want to exclude the `alpha` channel from your function, like we do above.
+All channels, including `alpha`, are included in the mapping. You may want to handle the `alpha` channel differently in the callback function, like in the example above.
 
-Returning `undefined` or `NaN` from the function will omit that channel from the resulting color.
+Returning `undefined` or `NaN` from the callback function will omit that channel from the resulting color object.
 
 #### Built-in mappings
 

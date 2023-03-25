@@ -10,7 +10,7 @@ const mapper = (fn, mode = 'rgb', preserve_mode = false) => {
 		if (!conv_color) {
 			return undefined;
 		}
-		let res = (channels || getMode(color.mode).channels).reduce(
+		let res = (channels || getMode(conv_color.mode).channels).reduce(
 			(res, ch) => {
 				let v = fn(conv_color[ch], ch, conv_color, mode);
 				if (v !== undefined && !isNaN(v)) {
@@ -18,7 +18,7 @@ const mapper = (fn, mode = 'rgb', preserve_mode = false) => {
 				}
 				return res;
 			},
-			{ mode }
+			{ mode: conv_color.mode }
 		);
 		if (!preserve_mode) {
 			return res;

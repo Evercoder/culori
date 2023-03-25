@@ -30,95 +30,61 @@ tape('gamma transfer function', t => {
 	t.end();
 });
 
-tape('when mode is null and color is rgb string', t => {
+tape('mode = null', t => {
 	let increaser = mapper(v => v + 0.1, null);
-
-	// might be incorrect
-	t.throws(() => {
-		increaser('#cc0033');
-	}, "Cannot read properties of undefined (reading 'channels')");
-	t.end();
-});
-
-tape('when mode is null and color is rgb', t => {
-	let increaser = mapper(v => v + 0.1, null);
-	const res = increaser({ mode: 'rgb', r: 0.8, g: 0, b: 0.2 });
-
-	// might be incorrect
-	t.equal(res.mode, null);
-	t.end();
-});
-
-tape('when mode is null and preserve_mode is true', t => {
-	let increaser = mapper(v => v + 1, null, true);
-
-	// might be incorrect
-	t.throws(
-		() => {
-			const res = increaser({ mode: 'rgb', r: 0.8, g: 0, b: 0.2 });
-			console.log(res);
-		},
-		{ message: "Cannot read properties of undefined (reading 'rgb')" }
+	t.equal(formatHex(increaser('#cc0033')), '#e61a4d', 'color is rgb string');
+	t.equal(
+		increaser({ mode: 'rgb', r: 0.8, g: 0, b: 0.2 }).mode,
+		'rgb',
+		'color is rgb'
 	);
 	t.end();
 });
 
-tape('when mode is undefined and preserve_mode is true', t => {
-	let decreaseMapper = mapper(v => v - 0.1, undefined, true);
-	const res = decreaseMapper('#cc0033');
-	t.equal(res.mode, 'rgb');
+tape('preserve_mode', t => {
+	const rgbColor = { mode: 'rgb', r: 0.8, g: 0, b: 0.2 };
+	const fn = v => v + 0.1;
+	t.equal(
+		formatHex(mapper(fn, null, true)(rgbColor)),
+		'#e61a4d',
+		'mode = null, preserve_mode = true'
+	);
+	t.equal(
+		mapper(fn, undefined, true)('#cc0033').mode,
+		'rgb',
+		'mode = undefined, preserve_mode = true'
+	);
+	t.equal(
+		mapper(fn, 'hsl', true)('#cc0033').mode,
+		'rgb',
+		'mode = hsl, preserve_mode = true'
+	);
+	t.equal(
+		mapper(fn, 'hsl', false)('#cc0033').mode,
+		'hsl',
+		'mode = hsl, preserve_mode = false'
+	);
+	t.equal(
+		mapper(fn, 'oklch', false)('#cc0033').mode,
+		'oklch',
+		'mode = oklch, preserve_mode = false'
+	);
+	const oklchColor = {
+		mode: 'oklch',
+		alpha: 0.25,
+		l: 30,
+		c: 0.5,
+		h: 1
+	};
+	t.equal(
+		mapper(fn, 'hsl', false)(oklchColor).mode,
+		'hsl',
+		'oklch color, mode = hsl, preserve_mode = false'
+	);
+	t.equal(
+		mapper(fn, 'hsl', true)(oklchColor).mode,
+		'oklch',
+		'oklch color, mode = hsl, preserve_mode = true'
+	);
 	t.end();
 });
-
-tape('when mode is hsl and preserve_mode is true', t => {
-	let increaser = mapper(v => v + 0.1, 'hsl', true);
-	const res = increaser('#cc0033');
-	t.equal(res.mode, 'rgb');
-	t.end();
-});
-
-tape('when mode is hsl and preserve_mode is false', t => {
-	let increaser = mapper(v => v + 0.1, 'hsl', false);
-	const res = increaser('#cc0033');
-	t.equal(res.mode, 'hsl');
-	t.end();
-});
-
-tape('when mode is oklch and preserve_mode is false', t => {
-	let increaser = mapper(v => v + 0.1, 'oklch', false);
-	const res = increaser('#cc0033');
-	t.equal(res.mode, 'oklch');
-	t.end();
-});
-
-tape(
-	`when input color is oklch('color(--oklch 30 0.5 1 / 0.25)') and when mode is hsl and preserve_mode is false`,
-	t => {
-		let increaser = mapper(v => v + 0.1, 'hsl', false);
-		const res = increaser({
-			mode: 'oklch',
-			alpha: 0.25,
-			l: 30,
-			c: 0.5,
-			h: 1
-		});
-		t.equal(res.mode, 'hsl');
-		t.end();
-	}
-);
-
-tape(
-	`when input color is oklch('color(--oklch 30 0.5 1 / 0.25)') and when mode is hsl and preserve_mode is true`,
-	t => {
-		let increaser = mapper(v => v + 0.1, 'hsl', true);
-		const res = increaser({
-			mode: 'oklch',
-			alpha: 0.25,
-			l: 30,
-			c: 0.5,
-			h: 1
-		});
-		t.equal(res.mode, 'oklch');
-		t.end();
-	}
-);
