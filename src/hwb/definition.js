@@ -24,6 +24,8 @@ const definition = {
 		h: [0, 360]
 	},
 
+	gamut: 'rgb',
+
 	parse: [parseHwb],
 	serialize: c =>
 		`hwb(${c.h || 0} ${c.w * 100}% ${c.b * 100}%${

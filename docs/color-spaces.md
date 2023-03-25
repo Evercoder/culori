@@ -39,11 +39,15 @@ The [sRGB color space](https://en.wikipedia.org/wiki/SRGB), which most people re
 
 Serialized as `color(srgb r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Has gamut limits.
+
 #### `lrgb`
 
 The linear-light form of the sRGB color space.
 
 Serialized as `color(srgb-linear r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Has gamut limits.
 
 #### `a98`
 
@@ -51,12 +55,15 @@ The A98 RGB color space, compatible with the [Adobe RGB (1998) color space](http
 
 Serialized as `color(a98-rgb r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Has gamut limits.
+
 #### `p3`
 
 The [Display P3 color space](https://en.wikipedia.org/wiki/DCI-P3#Display_P3).
 
 Serialized as `color(display-p3 r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Has gamut limits.
 
 #### `prophoto`
 
@@ -64,11 +71,15 @@ The [ProPhoto RGB color space](https://en.wikipedia.org/wiki/ProPhoto_RGB_color_
 
 Serialized as `color(prophoto-rgb r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Has gamut limits.
+
 #### `rec2020`
 
 The [Rec. 2020 color space](https://en.wikipedia.org/wiki/Rec._2020).
 
 Serialized as `color(rec2020 r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Has gamut limits.
 
 ### The HSL/HSV/HSI family
 
@@ -90,6 +101,8 @@ The HSL color space.
 
 Serialized as `hsl(h s% l%)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Has gamut limits.
+
 #### `hsv`
 
 The HSV color space.
@@ -102,6 +115,8 @@ The HSV color space.
 
 Serialized as `color(--hsv h s v)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Has gamut limits.
+
 #### `hsi`
 
 The HSI color space.
@@ -113,6 +128,8 @@ The HSI color space.
 | `i`     | `[0, 1]`   | Intensity         |
 
 Serialized as `color(--hsi h s i)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Has gamut limits.
 
 ### HWB
 
@@ -127,6 +144,8 @@ Serialized as `color(--hsi h s i)`, with the `none` keyword for any missing colo
 Serialized as `hwb(h w% b%)`.
 
 Serialized as `hwb(h w% b%)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Has gamut limits.
 
 > Smith, Alvy Ray (1996) — ["HWB — A More Intuitive Hue-Based Color Model"](http://alvyray.com/Papers/CG/HWB_JGTv208.pdf), Journal of Graphics, GPU and Game tools.
 
@@ -146,6 +165,8 @@ The CIELAB color space using the [D50 standard illuminant](https://en.wikipedia.
 
 Serialized as `lab(l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 #### `lch`
 
 The CIELCh color space using the D50 standard illuminant.
@@ -157,6 +178,8 @@ The CIELCh color space using the D50 standard illuminant.
 | `h`     | `[0, 360)`      | Hue         |
 
 Serialized as `lch(l c h)`. A missing hue is serialized as `0`, with the `none` keyword for any other missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Does not have gamut limits.
 
 #### `lab65`
 
@@ -170,6 +193,8 @@ CIELAB relative to the D65 standard illuminant.
 
 Serialized as `color(--lab-d65 l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 #### `lch65`
 
 CIELCh relative to the D65 standard illuminant.
@@ -181,6 +206,8 @@ CIELCh relative to the D65 standard illuminant.
 | `h`     | `[0, 360)`      | Hue         |
 
 Serialized as `color(--lch-d65 l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Does not have gamut limits.
 
 ### CIELUV
 
@@ -202,6 +229,8 @@ let deltaE_uv = culori.colorDifferenceEuclidean('luv');
 
 Serialized as `color(--luv l u v)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 #### `lchuv`
 
 | Channel | Range           | Description |
@@ -211,6 +240,8 @@ Serialized as `color(--luv l u v)`, with the `none` keyword for any missing colo
 | `h`     | `[0, 360)`      | Hue         |
 
 Serialized as `color(--lchuv l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Does not have gamut limits.
 
 ### DIN99 Lab / LCh
 
@@ -230,6 +261,8 @@ The DIN99o color space in Cartesian form.
 
 Serialized as `color(--din99o-lab l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 #### `dlch`
 
 The DIN99o color space in cylindrical form.
@@ -241,6 +274,8 @@ The DIN99o color space in cylindrical form.
 | `h`     | `[0, 360)`     | Hue         |
 
 Serialized as `color(--din99o-lch l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Does not have gamut limits.
 
 ### Oklab, Oklch, Okhsl, Okhsv
 
@@ -260,6 +295,8 @@ The Oklab color space in Cartesian form.
 
 Serialized as `oklab(l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 #### `oklch`
 
 The Oklab color space in cylindrical form.
@@ -272,6 +309,8 @@ The Oklab color space in cylindrical form.
 
 Serialized as `oklch(l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 ### `okhsl`
 
 | Channel | Range      | Description       |
@@ -282,6 +321,8 @@ Serialized as `oklch(l c h)`, with the `none` keyword for any missing color chan
 
 Serialized as `color(--okhsl h s l)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 ### `okhsv`
 
 | Channel | Range      | Description       |
@@ -291,6 +332,8 @@ Serialized as `color(--okhsl h s l)`, with the `none` keyword for any missing co
 | `v`     | `[0, 1]`   | Value         |
 
 Serialized as `color(--okhsv h s v)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Does not have gamut limits.
 
 #### Further reading
 
@@ -316,6 +359,8 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in Cartesian form.
 
 Serialized as `color(--jzazbz j a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 #### `jch`
 
 The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.
@@ -328,6 +373,8 @@ The J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space in cylindrical form.
 
 Serialized as `color(--jzczhz j c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 ### YIQ (`yiq`)
 
 [YIQ](https://en.wikipedia.org/wiki/YIQ) is the color space used by the NTSC color TV system. It contains the following channels:
@@ -339,6 +386,8 @@ Serialized as `color(--jzczhz j c h)`, with the `none` keyword for any missing c
 | `q`       | `[-0.522, 0.522]`≈ | Quadrature (green-purple axis) |
 
 Serialized as `color(--yiq y i q)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Does not have gamut limits.
 
 The conversion matrices between the sRGB and YIQ color spaces are taken from:
 
@@ -360,6 +409,8 @@ The CIE XYZ color space in respect to the D50 standard illuminant.
 
 Serialized as `color(xyz-d50 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.
+
 #### `xyz65`
 
 The CIE XYZ color space in respect to the D65 standard illuminant.
@@ -371,6 +422,8 @@ The CIE XYZ color space in respect to the D65 standard illuminant.
 | `z`       | `[0, 1.088]`≈ | ?           |
 
 Serialized as `color(xyz-d65 x y z)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Does not have gamut limits.
 
 ### XYB 
 
@@ -387,6 +440,8 @@ It has the default _Chroma from Luma_ adjustment applied (effectively Y is subtr
 | `x`       | `[-0.0154, 0.0281]`≈ | Cyan-red component           |
 | `y`       | `[0, 0.8453]`≈     | Luma           |
 | `b`       | `[ -0.2778, 0.3880 ]` ≈ | Blue-yellow component           |
+
+Does not have gamut limits.
 
 ### Cubehelix
 
@@ -408,3 +463,4 @@ The channels in the `cubehelix` color space maintain the conventions from D3, na
 
 Serialized as `color(--cubehelix h s l)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
+Does not have gamut limits.

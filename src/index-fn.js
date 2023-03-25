@@ -95,8 +95,13 @@ export {
 
 export { lerp, unlerp } from './interpolate/lerp.js';
 export { default as samples } from './samples.js';
-export { default as displayable } from './displayable.js';
-export { clampRgb, clampChroma } from './clamp.js';
+export {
+	displayable,
+	inGamut,
+	clampRgb,
+	clampChroma,
+	clampGamut
+} from './clamp.js';
 export { default as nearest } from './nearest.js';
 export { useMode, getMode, useParser, removeParser } from './modes.js';
 export { default as parse } from './parse.js';
