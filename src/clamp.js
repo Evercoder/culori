@@ -12,11 +12,7 @@ const fixup_rgb = color => {
 	return c;
 };
 
-/*
-	Returns whether the color is in the sRGB gamut.
- */
-export function displayable(color) {
-	const c = rgb(color);
+const inrange_rgb = c => {
 	return (
 		c !== undefined &&
 		c.r >= 0 &&
@@ -26,6 +22,13 @@ export function displayable(color) {
 		c.b >= 0 &&
 		c.b <= 1
 	);
+};
+
+/*
+	Returns whether the color is in the sRGB gamut.
+ */
+export function displayable(color) {
+	return inrange_rgb(rgb(color));
 }
 
 /*
@@ -34,19 +37,12 @@ export function displayable(color) {
 	in that color space's gamut.
  */
 export function inGamut(mode = 'rgb') {
-	const conv = converter(mode);
-	const { channels, ranges } = getMode(mode);
-	return color => {
-		const c = conv(color);
-		return (
-			c !== undefined &&
-			channels.every(
-				ch =>
-					ch === 'alpha' ||
-					(c[ch] >= ranges[ch][0] && c[ch] <= ranges[ch][1])
-			)
-		);
-	};
+	const { gamut } = getMode(mode);
+	if (!gamut) {
+		return color => true;
+	}
+	const conv = converter(typeof gamut === 'string' ? gamut : mode);
+	return color => inrange_rgb(conv(color));
 }
 
 /*

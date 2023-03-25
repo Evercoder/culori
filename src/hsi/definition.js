@@ -26,6 +26,8 @@ const definition = {
 		h: [0, 360]
 	},
 
+	gamut: 'rgb',
+
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },
 		s: interpolatorLinear,

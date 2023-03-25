@@ -25,6 +25,8 @@ const definition = {
 		h: [0, 360]
 	},
 
+	gamut: 'rgb',
+
 	parse: [parseHsl, parseHslLegacy],
 	serialize: c =>
 		`hsl(${c.h || 0} ${c.s !== undefined ? c.s * 100 + '%' : 'none'} ${

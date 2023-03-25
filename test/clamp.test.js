@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { clampChroma, displayable } from '../src/index.js';
+import { clampChroma, displayable, inGamut } from '../src/index.js';
 
 tape('RGB', function (test) {
 	test.equal(displayable({ mode: 'rgb', r: 0, g: 0, b: 0 }), true);
@@ -63,16 +63,37 @@ tape('Issue #129', function (test) {
 	test.end();
 });
 
-// tape('toGamut()', t => {
-// 	let clamp = toGamut('p3', 'lch');
-// 	t.deepEqual(
-// 		clamp('lch(0.1% 95 328)'),
-// 		{
-// 			mode: 'p3',
-// 			r: 0,
-// 			g: 0,
-// 			b: 0
-// 		}
-// 	);
-// 	t.end();
-// });
+tape('inGamut()', t => {
+	t.equal(
+		inGamut('rec2020')('color(rec2020 1 1 0)'),
+		true,
+		'rec2020 in rec2020 gamut'
+	);
+	t.equal(
+		inGamut('p3')('color(rec2020 1 1 0)'),
+		false,
+		'rec2020 in p3 gamut'
+	);
+	t.equal(
+		inGamut('rgb')('color(rec2020 1 1 0)'),
+		false,
+		'rec2020 in rgb gamut'
+	);
+
+	t.equal(
+		inGamut('rec2020')('color(display-p3 1 1 0)'),
+		true,
+		'p3 in rec2020 gamut'
+	);
+	t.equal(inGamut('p3')('color(display-p3 1 1 0)'), true, 'p3 in p3 gamut');
+	t.equal(
+		inGamut('rgb')('color(display-p3 1 1 0)'),
+		false,
+		'p3 in rgb gamut'
+	);
+
+	t.equal(inGamut('hsl')('color(srgb 1 1 0)'), true, 'in hsl gamut');
+	t.equal(inGamut('hsl')('color(srgb 1 1.1 0)'), false, 'out of hsl gamut');
+
+	t.end();
+});
