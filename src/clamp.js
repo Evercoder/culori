@@ -4,8 +4,7 @@ import { getMode } from './modes.js';
 import { differenceEuclidean } from './difference.js';
 
 const rgb = converter('rgb');
-const fixup_rgb = color => {
-	const c = rgb(color);
+const fixup_rgb = c => {
 	c.r = Math.max(0, Math.min(c.r, 1));
 	c.g = Math.max(0, Math.min(c.g, 1));
 	c.b = Math.max(0, Math.min(c.b, 1));
@@ -61,7 +60,7 @@ export function clampRgb(color) {
 	// keep track of color's original mode
 	let conv = converter(color.mode);
 
-	return conv(fixup_rgb(color));
+	return conv(fixup_rgb(rgb(color)));
 }
 
 /*
@@ -76,29 +75,27 @@ export function clampRgb(color) {
 	produces an in-gamut color.
  */
 export function clampGamut(mode = 'rgb') {
-	const gamutConverter = converter(mode);
-	const { channels, ranges } = getMode(mode);
+	const { gamut } = getMode(mode);
+	if (!gamut) {
+		return color => prepare(color);
+	}
+	const destMode = typeof gamut === 'string' ? gamut : mode;
+	const destConv = converter(destMode);
+	const inDestGamut = inGamut(destMode);
 	return color => {
-		const c = gamutConverter(color);
-		if (c === undefined) {
+		const original = prepare(color);
+		if (!original) {
 			return undefined;
 		}
-		return channels.reduce(
-			(res, ch) => {
-				if (c[ch] !== undefined) {
-					if (ch === 'alpha') {
-						res.alpha = c.alpha;
-					} else {
-						res[ch] = Math.max(
-							Math.min(c[ch], ranges[ch][1]),
-							ranges[ch][0]
-						);
-					}
-				}
-				return res;
-			},
-			{ mode }
-		);
+		const converted = destConv(original);
+		if (inDestGamut(converted)) {
+			return original;
+		}
+		const clamped = fixup_rgb(converted);
+		if (original.mode === clamped.mode) {
+			return clamped;
+		}
+		return converter(original.mode)(clamped);
 	};
 }
 
@@ -131,7 +128,7 @@ export function clampChroma(color, mode = 'lch') {
 	// if not even chroma = 0 is displayable
 	// fall back to RGB clamping
 	if (!displayable(clamped)) {
-		return conv(fixup_rgb(clamped));
+		return conv(fixup_rgb(rgb(clamped)));
 	}
 
 	// By this time we know chroma = 0 is displayable and our current chroma is not.

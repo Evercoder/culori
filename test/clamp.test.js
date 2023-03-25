@@ -1,5 +1,11 @@
 import tape from 'tape';
-import { clampChroma, displayable, inGamut } from '../src/index.js';
+import {
+	clampChroma,
+	displayable,
+	inGamut,
+	clampGamut,
+	formatCss
+} from '../src/index.js';
 
 tape('RGB', function (test) {
 	test.equal(displayable({ mode: 'rgb', r: 0, g: 0, b: 0 }), true);
@@ -94,6 +100,28 @@ tape('inGamut()', t => {
 
 	t.equal(inGamut('hsl')('color(srgb 1 1 0)'), true, 'in hsl gamut');
 	t.equal(inGamut('hsl')('color(srgb 1 1.1 0)'), false, 'out of hsl gamut');
+
+	t.end();
+});
+
+tape('clampGamut()', t => {
+	const p3Color = 'color(display-p3 1 1 0)';
+
+	t.equal(
+		formatCss(clampGamut('rgb')(p3Color)),
+		'color(display-p3 0.9999999999999999 0.9999999999999997 0.3308973181805899)',
+		'p3 color to rgb'
+	);
+	t.equal(
+		formatCss(clampGamut('p3')(p3Color)),
+		'color(display-p3 1 1 0)',
+		'p3 color to p3'
+	);
+	t.equal(
+		formatCss(clampGamut('rec2020')(p3Color)),
+		'color(display-p3 1 1 0)',
+		'p3 color to rec2020'
+	);
 
 	t.end();
 });
