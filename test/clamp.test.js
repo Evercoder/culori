@@ -4,7 +4,9 @@ import {
 	displayable,
 	inGamut,
 	clampGamut,
-	formatCss
+	formatCss,
+	differenceEuclidean,
+	toGamut
 } from '../src/index.js';
 
 tape('RGB', function (test) {
@@ -132,5 +134,29 @@ tape('clampGamut()', t => {
 		'api docs example'
 	);
 
+	t.end();
+});
+
+tape('toGamut()', t => {
+	t.equal(
+		formatCss(toGamut('rgb')({ mode: 'oklch', l: 1.5, c: 0.2, h: 180 })),
+		'color(srgb 1 1 1)',
+		'white'
+	);
+	t.equal(
+		formatCss(toGamut('rgb')({ mode: 'oklch', l: -1.5, c: 0.2, h: 180 })),
+		'color(srgb 0 0 0)',
+		'black'
+	);
+	t.equal(
+		formatCss(toGamut('rgb')('color(--lch-d65 100 0 180)')),
+		'color(srgb 0.9999999999999968 1.0000000000000016 0.9999999999999986)',
+		'chroma = 0'
+	);
+	t.equal(
+		formatCss(toGamut('p3')('lch(80% 150 60)')),
+		'color(display-p3 0.9999999999999994 0.6969234154991887 0.5084794582132421)',
+		'api docs example'
+	);
 	t.end();
 });

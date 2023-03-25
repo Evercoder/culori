@@ -100,7 +100,8 @@ export {
 	inGamut,
 	clampRgb,
 	clampChroma,
-	clampGamut
+	clampGamut,
+	toGamut
 } from './clamp.js';
 export { default as nearest } from './nearest.js';
 export { useMode, getMode, useParser, removeParser } from './modes.js';

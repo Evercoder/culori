@@ -376,7 +376,7 @@ By default, the color is converted to `lch` to perform the clamping, but any col
 import { clampChroma } from 'culori';
 
 clampChroma({ mode: 'oklch', l: 0.5, c: 0.16, h: 180 }, 'oklch');
-// => { mode: 'oklch', l: 0.5, c: 0.09, h: 180 }
+// ⇒ { mode: 'oklch', l: 0.5, c: 0.09, h: 180 }
 ```
 
 In general, chroma clamping is more accurate and computationally simpler when performed in the color's original space, where possible. Here's some sample code that uses the color's own `mode` for color spaces containing a Chroma dimension, and `lch` otherwise:
@@ -390,6 +390,31 @@ clampChroma(color, color.c !== undefined ? color.mode : 'lch');
 If the chroma-finding algorithm fails to find a displayable color (which can happen when not even the achromatic version, with `Chroma = 0`, is displayable), the method falls back to the `clampRgb` method, as a last resort.
 
 The function uses [the bisection method](https://en.wikipedia.org/wiki/Bisection_method) to speed up the search for the largest Chroma value. However, due to discontinuities in the CIELCh color space, the function is not guaranteed to return the optimal result. [See this discussion](https://github.com/d3/d3-color/issues/33) for details.
+
+<a id="toGamut" href="#toGamut">#</a> **toGamut**(_dest = 'rgb'_, _mode = 'oklch'_, _delta = differenceEuclidean('oklch')_, _jnd = 0.02_) → _function (color | string)_
+
+<span aria-label='Source:'>☞</span> [src/clamp.js]({{codebase}}/src/clamp.js)
+
+Obtain a color that's in the `dest` gamut, by first converting it to the `mode` color space and then finding the largest chroma that's in gamut, similar to `clampChroma()`.
+
+The color returned is in the `dest` color space.
+
+```js
+import { p3, toGamut } from 'culori';
+
+const color = 'lch(80% 150 60)';
+
+p3(color);
+// ⇒ { mode: "p3", r: 1.229…, g: 0.547…, b: -0.073… }
+
+const toP3 = toGamut('p3');
+toP3(color);
+// ⇒ { mode: "p3", r: 0.999…, g: 0.696…, b: 0.508… }
+```
+
+To address the shortcomings of `clampChroma`, which can sometimes produce colors more desaturated than necessary, the test used in the binary search is replaced with "is color is roughly in gamut", by comparing the candidate to the clipped version (obtained with `clampGamut`). The test passes if the colors are not to dissimilar, judged by the `delta` color difference function and an associated `jnd` just-noticeable difference value.
+
+The default arguments for this function correspond to [the gamut mapping algorithm](https://drafts.csswg.org/css-color/#css-gamut-mapping) defined in the CSS Color Module Level 4 spec, but the algorithm itself is slightly different.
 
 ## Interpolation
 

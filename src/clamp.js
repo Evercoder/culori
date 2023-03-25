@@ -5,10 +5,16 @@ import { differenceEuclidean } from './difference.js';
 
 const rgb = converter('rgb');
 const fixup_rgb = c => {
-	c.r = Math.max(0, Math.min(c.r, 1));
-	c.g = Math.max(0, Math.min(c.g, 1));
-	c.b = Math.max(0, Math.min(c.b, 1));
-	return c;
+	const res = {
+		mode: c.mode,
+		r: Math.max(0, Math.min(c.r, 1)),
+		g: Math.max(0, Math.min(c.g, 1)),
+		b: Math.max(0, Math.min(c.b, 1))
+	};
+	if (c.alpha !== undefined) {
+		res.alpha = c.alpha;
+	}
+	return res;
 };
 
 const inrange_rgb = c => {
@@ -152,4 +158,90 @@ export function clampChroma(color, mode = 'lch') {
 	return conv(
 		displayable(clamped) ? clamped : { ...clamped, c: _last_good_c }
 	);
+}
+
+/*
+	Obtain a color that's in the `dest` gamut,
+	by first converting it to the `mode` color space
+	and then finding the largest chroma that's in gamut,
+	similar to `clampChroma`. 
+
+	The color returned is in the `dest` color space.
+
+	To address the shortcomings of `clampChroma`, which can
+	sometimes produce colors more desaturated than necessary,
+	the test used in the binary search is replaced with
+	"is color is roughly in gamut", by comparing the candidate 
+	to the clipped version (obtained with `clampGamut`).
+	The test passes if the colors are not to dissimilar, 
+	judged by the `delta` color difference function 
+	and an associated `jnd` just-noticeable difference value.
+
+	The default arguments for this function correspond to the
+	gamut mapping algorithm defined in CSS Color Level 4:
+	https://drafts.csswg.org/css-color/#css-gamut-mapping
+ */
+export function toGamut(
+	dest = 'rgb',
+	mode = 'oklch',
+	delta = differenceEuclidean('oklch'),
+	jnd = 0.02
+) {
+	const destConv = converter(dest);
+
+	if (!getMode(dest).gamut) {
+		return color => destConv(color);
+	}
+
+	const inDestinationGamut = inGamut(dest);
+	const clipToGamut = clampGamut(dest);
+
+	const ucs = converter(mode);
+	const { ranges } = getMode(mode);
+
+	const gamutDef = getMode(dest);
+	const White = destConv('white');
+	const Black = destConv('black');
+
+	return color => {
+		color = prepare(color);
+		if (color === undefined) {
+			return undefined;
+		}
+		const candidate = { ...ucs(color) };
+		if (candidate.l >= ranges.l[1]) {
+			const res = { ...White };
+			if (color.alpha !== undefined) {
+				res.alpha = color.alpha;
+			}
+			return res;
+		}
+		if (candidate.l <= ranges.l[0]) {
+			const res = { ...Black };
+			if (color.alpha !== undefined) {
+				res.alpha = color.alpha;
+			}
+			return res;
+		}
+		if (inDestinationGamut(candidate)) {
+			return destConv(candidate);
+		}
+		let start = 0;
+		let end = candidate.c;
+		let ε = (ranges.c[1] - ranges.c[0]) / 4000; // 0.0001 for oklch()
+		let clipped = clipToGamut(candidate);
+		while (end - start > ε) {
+			candidate.c = (start + end) * 0.5;
+			clipped = clipToGamut(candidate);
+			if (
+				inDestinationGamut(candidate) ||
+				(jnd > 0 && delta(candidate, clipped) <= jnd)
+			) {
+				start = candidate.c;
+			} else {
+				end = candidate.c;
+			}
+		}
+		return destConv(inDestinationGamut(candidate) ? candidate : clipped);
+	};
 }

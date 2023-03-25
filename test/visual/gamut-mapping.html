@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Gamut mapping algorithms</title>
+
+		<style>
+			body {
+				padding: 0;
+				margin: 0;
+			}
+
+			.side-by-side {
+				display: flex;
+				flex-wrap: nowrap;
+				justify-content: center;
+				border: 1rem solid #fff;
+				background: #f0f0f0;
+				padding: 0.5rem;
+				gap: 1rem;
+				height: 400px;
+				resize: vertical;
+				overflow: hidden;
+			}
+
+			.spectrum {
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				aspect-ratio: 1 / 1.1;
+				justify-content: space-between;
+			}
+		</style>
+
+		<script type="module">
+			import {
+				clampChroma,
+				clampGamut,
+				differenceEuclidean,
+				dlch,
+				getMode,
+				inGamut,
+				lch,
+				lch65,
+				oklch,
+				rgb,
+				toGamut
+			} from '../../src/index.js';
+			import {
+				toGamutCSSColor4,
+				toGamutCSSColor4Smooth,
+				toGamutFuzzy,
+				toGamutCLReduce,
+				toGamutNewton
+			} from './gamut-mapping-algorithms.js';
+
+			import {
+				formDataMap,
+				draw,
+				scaleLinear,
+				scalePow
+			} from './utils.js';
+
+			const inRgb = inGamut('rgb');
+			const toRgb = clampGamut('rgb');
+
+			/* DOM Elements */
+			const controlsForm = document.querySelector('#controls');
+			const outputs = [...document.querySelectorAll('output[for]')];
+
+			const canvasLeft = document.querySelector('#canvas-left canvas');
+			const canvasRight = document.querySelector('#canvas-right canvas');
+
+			const CANVAS_SIZE = 200;
+			[canvasLeft, canvasRight].forEach(c => {
+				c.width = CANVAS_SIZE;
+				c.height = CANVAS_SIZE;
+			});
+
+			const METHODS = {
+				clip: () => c => toRgb(c),
+				css4: toGamutCSSColor4,
+				'css4-smooth': toGamutCSSColor4Smooth,
+				fuzzy: toGamutFuzzy,
+				'chroma-reduce': function (gamut, space) {
+					return c => clampChroma(c, space);
+				},
+				'cl-reduce': toGamutCLReduce,
+				culori: toGamut,
+				newton: toGamutNewton
+			};
+
+			const CONVERTERS = {
+				lch,
+				oklch,
+				lch65,
+				dlch
+			};
+
+			const scaleJND = scalePow([0, 100], [0, 100], 4);
+			const widen = (range, inc) => {
+				return [range[0] * (1 + inc), range[1] * (1 + inc)];
+			};
+
+			function redraw(controls) {
+				let ranges = getMode(controls.drawspace).ranges;
+
+				const scaleL = scaleLinear(
+					[CANVAS_SIZE, 0],
+					widen(ranges.l, 0)
+				);
+				const scaleC = scaleLinear(
+					[0, CANVAS_SIZE],
+					widen(ranges.c, 0)
+				);
+
+				function roughlySame(color, ref) {
+					return (
+						differenceEuclidean(controls.space)(color, ref) <=
+						controls.jnd
+					);
+				}
+
+				function color(i, j) {
+					const res = {
+						mode: controls.drawspace,
+						l: scaleL(j),
+						c: scaleC(i),
+						h: controls.hue
+					};
+					if (!controls.showgamut || controls.showgamut === 'none') {
+						return res;
+					}
+
+					const nextColorToRight = {
+						mode: controls.drawspace,
+						l: scaleL(j),
+						c: scaleC(i + 1),
+						h: controls.hue
+					};
+
+					let isGamutLimit = false;
+
+					if (controls.showgamut === 'strict') {
+						isGamutLimit = inRgb(res) && !inRgb(nextColorToRight);
+					} else if (controls.showgamut === 'loose') {
+						isGamutLimit =
+							(inRgb(res) || roughlySame(res, toRgb(res))) &&
+							!(
+								inRgb(nextColorToRight) ||
+								roughlySame(
+									nextColorToRight,
+									toRgb(nextColorToRight)
+								)
+							);
+					}
+					if (isGamutLimit) {
+						return 'white';
+					}
+					return res;
+				}
+
+				const gamutMapLeft = controls.method_left(
+					'rgb',
+					controls.space,
+					differenceEuclidean(controls.space),
+					controls.jnd
+				);
+
+				const gamutMapRight = controls.method_right(
+					'rgb',
+					controls.space,
+					differenceEuclidean(controls.space),
+					controls.jnd
+				);
+
+				let perfNow = performance.now();
+
+				draw(canvasLeft, (i, j) => {
+					const res = rgb(gamutMapLeft(color(i, j)));
+					if (!res) {
+						console.log(color(i, j), 'gamutMapLeft');
+					}
+					return res;
+				});
+
+				console.log('left: ', performance.now() - perfNow);
+
+				const epsilon = 1e-3;
+				function diff(colorA, colorB) {
+					colorA = rgb(colorA);
+					colorB = rgb(colorB);
+					if (Math.abs(colorA.r - colorB.r) > epsilon) {
+						return true;
+					}
+					if (Math.abs(colorA.g - colorB.g) > epsilon) {
+						return true;
+					}
+					if (Math.abs(colorA.b - colorB.b) > epsilon) {
+						return true;
+					}
+					return false;
+				}
+
+				perfNow = performance.now();
+				draw(canvasRight, (i, j) => {
+					const res = gamutMapRight(color(i, j));
+					if (!res) {
+						console.log(color(i, j), 'gamutMapRight');
+					}
+					if (!controls.showdiff || controls.showdiff === 'none') {
+						return rgb(res);
+					}
+					const ref = gamutMapLeft(color(i, j));
+					if (controls.showdiff === 'strict') {
+						return rgb(diff(res, ref) ? 'magenta' : res);
+					}
+					if (controls.showdiff === 'loose') {
+						return rgb(roughlySame(res, ref) ? res : 'magenta');
+					}
+					return rgb(res);
+				});
+				console.log('right: ', performance.now() - perfNow);
+			}
+
+			controlsForm.addEventListener('input', e => {
+				const controls = formDataMap(e.currentTarget, {
+					jnd: v => scaleJND(v),
+					method_left: v => METHODS[v],
+					method_right: v => METHODS[v]
+				});
+				outputs.forEach(el => (el.value = controls[el.htmlFor]));
+				redraw(controls);
+			});
+			controlsForm.dispatchEvent(new Event('input'));
+		</script>
+	</head>
+	<body>
+		<h1>Gamut mapping algorithms</h1>
+
+		<form id="controls">
+			<fieldset>
+				<legend>Show difference</legend>
+				<label
+					><input type="radio" name="showdiff" value="none" checked />
+					None</label
+				>
+				<label
+					><input type="radio" name="showdiff" value="strict" />
+					Strict</label
+				>
+				<label
+					><input type="radio" name="showdiff" value="loose" />
+					Loose</label
+				>
+			</fieldset>
+
+			<div class="side-by-side">
+				<figure class="spectrum" id="canvas-left">
+					<canvas></canvas>
+					<figcaption>
+						<label
+							>Method:
+							<select name="method_left">
+								<option value="clip" selected>clip</option>
+								<option value="chroma-reduce">
+									chroma-reduce
+								</option>
+								<option value="css4">css-color-4</option>
+								<option value="css4-smooth">
+									css-color-4-smooth
+								</option>
+								<option value="fuzzy">fuzzy</option>
+								<option value="culori">culori.toGamut()</option>
+								<option value="cl-reduce">cl-reduce</option>
+								<option value="newton">
+									newton (@ccameron)
+								</option>
+							</select>
+						</label>
+					</figcaption>
+				</figure>
+				<figure class="spectrum" id="canvas-right">
+					<canvas></canvas>
+					<figcaption>
+						<label
+							>Method:
+							<select name="method_right">
+								<option value="clip" selected>clip</option>
+								<option value="chroma-reduce">
+									chroma-reduce
+								</option>
+								<option value="css4">css-color-4</option>
+								<option value="css4-smooth">
+									css-color-4-smooth
+								</option>
+								<option value="fuzzy">fuzzy</option>
+								<option value="culori">culori.toGamut()</option>
+								<option value="cl-reduce">cl-reduce</option>
+								<option value="newton">
+									newton (@ccameron)
+								</option>
+							</select>
+						</label>
+					</figcaption>
+				</figure>
+			</div>
+			<p>
+				<label>
+					Hue:
+					<input
+						id="hue"
+						name="hue"
+						type="range"
+						min="0"
+						max="360"
+						step="0.5"
+					/>
+				</label>
+				<output for="hue"></output>
+
+				<label>
+					JND:
+					<input
+						id="jnd"
+						type="range"
+						min="0"
+						max="100"
+						step="1"
+						name="jnd"
+					/>
+				</label>
+				<output for="jnd"></output>
+			</p>
+			<p>
+				Illustrate space:
+				<label
+					><input type="radio" name="drawspace" value="lch" checked />
+					LCH (D50)</label
+				>
+				<label
+					><input type="radio" name="drawspace" value="lch65" /> LCH
+					(D65)</label
+				>
+				<label
+					><input type="radio" name="drawspace" value="oklch" />
+					OKLCH</label
+				>
+				<label
+					><input type="radio" name="drawspace" value="dlch" /> DIN99o
+					LCH</label
+				>
+			</p>
+			<p>
+				Mapping space:
+				<label
+					><input type="radio" name="space" value="lch" checked /> LCH
+					(D50)</label
+				>
+				<label
+					><input type="radio" name="space" value="lch65" /> LCH
+					(D65)</label
+				>
+				<label
+					><input type="radio" name="space" value="oklch" />
+					OKLCH</label
+				>
+				<label
+					><input type="radio" name="space" value="dlch" /> DIN99o
+					LCH</label
+				>
+			</p>
+
+			<fieldset>
+				<legend>Show gamut</legend>
+				<label
+					><input
+						type="radio"
+						name="showgamut"
+						value="none"
+						checked
+					/>
+					None</label
+				>
+				<label
+					><input type="radio" name="showgamut" value="strict" />
+					Strict</label
+				>
+				<label
+					><input type="radio" name="showgamut" value="loose" />
+					Loose</label
+				>
+			</fieldset>
+		</form>
+	</body>
+</html>

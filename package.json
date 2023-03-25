@@ -58,6 +58,7 @@
 	"scripts": {
 		"prepare": "git config core.hooksPath .git-hooks",
 		"test": "tape 'test/**/*.test.js' | tap-spec",
+		"start": "npx esbuild --servedir=.",
 		"build": "node build.js",
 		"benchmark": "node benchmark/index.js",
 		"prepublishOnly": "npm run lint && npm run build && npm run test",
