@@ -9,7 +9,6 @@ import {
 	differenceEuclidean,
 	getMode,
 	inGamut,
-	toGamut,
 	oklab
 } from '../../src/index.js';
 
@@ -41,7 +40,6 @@ export function toGamutCSSColor4(
 			return undefined;
 		}
 		const candidate = { ...ucs(color) };
-		const initial = { ...candidate };
 		if (candidate.l >= ranges.l[1]) {
 			const res = { ...White };
 			if (color.alpha !== undefined) {
@@ -107,7 +105,6 @@ export function toGamutCSSColor4Smooth(
 			return undefined;
 		}
 		const candidate = { ...ucs(color) };
-		const initial = { ...candidate };
 		if (candidate.l >= ranges.l[1]) {
 			const res = { ...White };
 			if (color.alpha !== undefined) {
@@ -185,7 +182,6 @@ export function toGamutFuzzy(
 			return undefined;
 		}
 		const candidate = { ...ucs(color) };
-		const initial = { ...candidate };
 		if (candidate.l >= ranges.l[1]) {
 			const res = { ...White };
 			if (color.alpha !== undefined) {
@@ -235,7 +231,6 @@ export function toGamutCLReduce(
 	delta = differenceEuclidean('oklch')
 ) {
 	const inDestinationGamut = inGamut(dest);
-	const clipToGamut = clampGamut(dest);
 	const destConv = converter(dest);
 
 	const ucs = converter(mode);
@@ -254,7 +249,6 @@ export function toGamutCLReduce(
 			return undefined;
 		}
 		const candidate = { ...ucs(color) };
-		const initial = { ...candidate };
 		if (candidate.l >= ranges.l[1]) {
 			const res = { ...White };
 			if (color.alpha !== undefined) {
@@ -300,7 +294,7 @@ export function toGamutCLReduce(
 export function toGamutNewton() {
 	return color => {
 		const color_oklab = oklab(color);
-		const [res_oklab, res_rgb] = GamutMapNewton([
+		const [, res_rgb] = GamutMapNewton([
 			color_oklab.l,
 			color_oklab.a,
 			color_oklab.b

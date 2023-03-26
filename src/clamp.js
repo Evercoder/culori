@@ -199,7 +199,6 @@ export function toGamut(
 	const ucs = converter(mode);
 	const { ranges } = getMode(mode);
 
-	const gamutDef = getMode(dest);
 	const White = destConv('white');
 	const Black = destConv('black');
 

@@ -5,7 +5,6 @@ import {
 	inGamut,
 	clampGamut,
 	formatCss,
-	differenceEuclidean,
 	toGamut
 } from '../src/index.js';
 

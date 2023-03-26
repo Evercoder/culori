@@ -54,7 +54,7 @@ export function draw(canvas, fn) {
 	const w = canvas.width;
 	const h = canvas.height;
 	const imageData = ctx.createImageData(w, h);
-	for (let idx = 0, i, j, color; idx < imageData.data.length; ) {
+	for (let idx = 0, color; idx < imageData.data.length; ) {
 		color = fn((idx / 4) % w, Math.floor(idx / 4 / w));
 		if (!color) {
 			throw new Error('no color');
