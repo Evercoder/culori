@@ -55,5 +55,6 @@ In other languages:
 
 ### Books
 
--   [Fairchild, Mark D.](http://markfairchild.org/) — _Color Appearance Models_, 3rd Edition, Wiley-IS&T, Chichester, UK (2013); ISBN 978-1-119-96703-3
--   [Poynton, Charles](http://poynton.ca/) — _Digital Video and HD Algorithms and Interfaces_, Second edition (Burlington, Mass.: Morgan Kaufmann/Elsevier, 2012)
+-   [Fairchild, Mark D.](http://markfairchild.org/) — [_Color Appearance Models_](https://www.wiley.com/en-us/Color+Appearance+Models%2C+3rd+Edition-p-9781119967033), 3rd Edition, Wiley, 2013.
+- Morovič, Ján — [_Color Gamut Mapping_](https://www.wiley.com/en-ie/Color+Gamut+Mapping-p-9780470030325), Wiley, 2008.
+-   [Poynton, Charles](http://poynton.ca/) — [_Digital Video and HD Algorithms and Interfaces_](https://www.elsevier.com/books/digital-video-and-hd/poynton/978-0-12-391926-7), 2nd Edition, Morgan Kaufmann, 2012.

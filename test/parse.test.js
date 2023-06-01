@@ -300,3 +300,8 @@ tape('undefined', function (test) {
 	test.equal(parse(undefined), undefined);
 	test.end();
 });
+
+tape('Issue #204', function (test) {
+	test.equal(parse('oklch(70% 0..1 156)'), undefined);
+	test.end();
+});

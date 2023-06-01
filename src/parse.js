@@ -176,8 +176,8 @@ export function tokenize(str = '') {
 		}
 
 		if (ch === '+') {
+			_i--;
 			if (is_num(chars)) {
-				_i--;
 				tokens.push(num(chars));
 				continue;
 			}
@@ -185,12 +185,12 @@ export function tokenize(str = '') {
 		}
 
 		if (ch === '-') {
+			_i--;
 			if (is_num(chars)) {
-				_i--;
 				tokens.push(num(chars));
 				continue;
-			} else if (is_ident(chars)) {
-				_i--;
+			}
+			if (is_ident(chars)) {
 				tokens.push({ type: Tok.Ident, value: ident(chars) });
 				continue;
 			}
@@ -198,8 +198,8 @@ export function tokenize(str = '') {
 		}
 
 		if (ch === '.') {
+			_i--;
 			if (is_num(chars)) {
-				_i--;
 				tokens.push(num(chars));
 				continue;
 			}
