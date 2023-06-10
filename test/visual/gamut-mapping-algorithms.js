@@ -62,8 +62,8 @@ export function toGamutCSSColor4(
 		let end = candidate.c;
 		let clipped;
 		/* Corresponds to about 10 steps */
-		let ε = (ranges.c[1] - ranges.c[0]) / 1000;
-		while (end - start > ε) {
+		let epsilon = (ranges.c[1] - ranges.c[0]) / 1000;
+		while (end - start > epsilon) {
 			candidate.c = (start + end) * 0.5;
 			if (inDestinationGamut(candidate)) {
 				start = candidate.c;
@@ -125,7 +125,7 @@ export function toGamutCSSColor4Smooth(
 
 		let start = 0;
 		let end = candidate.c;
-		let ε = (ranges.c[1] - ranges.c[0]) / 1000;
+		let epsilon = (ranges.c[1] - ranges.c[0]) / 1000;
 		let lower_bound_in_gamut = true;
 		let clipped = clipToGamut(candidate);
 		let e = delta(clipped, candidate);
@@ -133,7 +133,7 @@ export function toGamutCSSColor4Smooth(
 			return clipped;
 		}
 
-		while (end - start > ε) {
+		while (end - start > epsilon) {
 			candidate.c = (start + end) * 0.5;
 			if (lower_bound_in_gamut && inDestinationGamut(candidate)) {
 				start = candidate.c;
@@ -141,7 +141,7 @@ export function toGamutCSSColor4Smooth(
 				clipped = clipToGamut(candidate);
 				e = delta(candidate, clipped);
 				if (e <= jnd) {
-					if (jnd - e < ε) {
+					if (jnd - e < epsilon) {
 						return clipped;
 					} else {
 						lower_bound_in_gamut = false;
@@ -208,8 +208,8 @@ export function toGamutFuzzy(
 		let end = candidate.c;
 
 		/* Corresponds to about 10 steps */
-		let ε = (ranges.c[1] - ranges.c[0]) / 1000;
-		while (end - start > ε) {
+		let epsilon = (ranges.c[1] - ranges.c[0]) / 1000;
+		while (end - start > epsilon) {
 			candidate.c = (start + end) * 0.5;
 			clipped = clipToGamut(candidate);
 			if (
@@ -274,9 +274,9 @@ export function toGamutCLReduce(
 			candidate.l * (1 - alpha);
 		let endC = candidate.c;
 		let endL = candidate.l;
-		let εC = (ranges.c[1] - ranges.c[0]) / 1000;
-		let εL = (ranges.l[1] - ranges.l[0]) / 1000;
-		while (endC - startC > εC || endL - startL > εL) {
+		let epsilonC = (ranges.c[1] - ranges.c[0]) / 1000;
+		let epsilonL = (ranges.l[1] - ranges.l[0]) / 1000;
+		while (endC - startC > epsilonC || endL - startL > epsilonL) {
 			candidate.c = (startC + endC) * 0.5;
 			candidate.l = (startL + endL) * 0.5;
 			if (inDestinationGamut(candidate)) {

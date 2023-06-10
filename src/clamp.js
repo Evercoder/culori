@@ -227,9 +227,9 @@ export function toGamut(
 		}
 		let start = 0;
 		let end = candidate.c;
-		let ε = (ranges.c[1] - ranges.c[0]) / 4000; // 0.0001 for oklch()
+		let epsilon = (ranges.c[1] - ranges.c[0]) / 4000; // 0.0001 for oklch()
 		let clipped = clipToGamut(candidate);
-		while (end - start > ε) {
+		while (end - start > epsilon) {
 			candidate.c = (start + end) * 0.5;
 			clipped = clipToGamut(candidate);
 			if (
