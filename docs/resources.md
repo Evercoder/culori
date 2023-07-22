@@ -17,6 +17,7 @@ These projects add more functionality to Culori, but they're separate as to keep
 -   [Moqups](https://moqups.com) — all our color-manipulation functions are handled by Culori.
 -   [Schemist](https://github.com/felixgirault/schemist) — color schemes builder backed by Culori.
 -   [Color Name API](https://github.com/meodai/color-name-api) — a REST API for color names that makes use Culori's [differenceCiede2000](https://culorijs.org/api/#differenceCiede2000) to return a fitting name for every color.
+-   [Atmos](https://atmos.style) - a toolbox based on (OK)LCH color space for creating professional color palettes. Utilizing Culori for color manipulation allowed us to concentrate on our product's essence rather than getting bogged down in implementation details.
 
 Does your product/project use Culori? Create a PR and add yourself to this list.
 
