@@ -93,7 +93,7 @@ export {
 	interpolatorSplineMonotoneClosed
 } from './interpolate/splineMonotone.js';
 
-export { lerp, unlerp } from './interpolate/lerp.js';
+export { lerp, unlerp, blerp, trilerp } from './interpolate/lerp.js';
 export { default as samples } from './samples.js';
 export {
 	displayable,

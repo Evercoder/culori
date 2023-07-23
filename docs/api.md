@@ -13,6 +13,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#averageAngle'>averageAngle</a></li>
 <li><a href='#averageNumber'>averageNumber</a></li>
 <li><a href='#blend'>blend</a></li>
+<li><a href='#blerp'>blerp</a></li>
 <li><a href='#clampChroma'>clampChroma</a></li>
 <li><a href='#clampRgb'>clampRgb</a></li>
 <li><a href='#colorsNamed'>colorsNamed</a></li>
@@ -102,6 +103,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#round'>round</a></li>
 <li><a href='#samples'>samples</a></li>
 <li><a href='#toGamut'>toGamut</a></li>
+<li><a href='#trilerp'>trilerp</a></li>
 <li><a href='#unlerp'>unlerp</a></li>
 <li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
@@ -911,6 +913,18 @@ lerp(5, 10, 0.5);
 <span aria-label='Source:'>☞</span> [src/interpolate/lerp.js]({{codebase}}/src/interpolate/lerp.js)
 
 Returns the point `t` at which the value `v` is located between the values `a` and `b`. The inverse of `lerp`.
+
+<a id="blerp" href="#blerp">#</a> **blerp**(_a00_, _a01_, _a10_, _a11_, _tx_, _ty_) → _value_
+
+<span aria-label='Source:'>☞</span> [src/interpolate/lerp.js]({{codebase}}/src/interpolate/lerp.js)
+
+Perform the [bilinear interpolation](https://en.wikipedia.org/wiki/Bilinear_interpolation) of the four values `a00`, `a01`, `a10`, and `a11` at the point `(tx, ty)`, with `tx, ty ∈ [0, 1]`. This is the extension of `lerp` to two dimensions.
+
+<a id="trilerp" href="#trilerp">#</a> **trilerp**(_a000_, _a010_, _a100_, _a110_, _a001_, _a011_, _a101_, _a111_, _tx_, _ty_, _tz_) → _value_
+
+<span aria-label='Source:'>☞</span> [src/interpolate/lerp.js]({{codebase}}/src/interpolate/lerp.js)
+
+Perform the [trilinear interpolation](https://en.wikipedia.org/wiki/Trilinear_interpolation) of the eight values `a000`, `a010`, `a100`, `a110`, `a001`, `a011`, `a101`, and `a111` at the point `(tx, ty, tz)`, with `tx, ty, tz ∈ [0, 1]`. This is the extension of `lerp` to three dimensions.
 
 ### Mappings
 
