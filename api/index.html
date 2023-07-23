@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v3.1.3 (<a
+				>v3.2.0 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -75,6 +75,7 @@
 <li><a href='#averageAngle'>averageAngle</a></li>
 <li><a href='#averageNumber'>averageNumber</a></li>
 <li><a href='#blend'>blend</a></li>
+<li><a href='#blerp'>blerp</a></li>
 <li><a href='#clampChroma'>clampChroma</a></li>
 <li><a href='#clampRgb'>clampRgb</a></li>
 <li><a href='#colorsNamed'>colorsNamed</a></li>
@@ -164,6 +165,7 @@
 <li><a href='#round'>round</a></li>
 <li><a href='#samples'>samples</a></li>
 <li><a href='#toGamut'>toGamut</a></li>
+<li><a href='#trilerp'>trilerp</a></li>
 <li><a href='#unlerp'>unlerp</a></li>
 <li><a href='#useMode'>useMode</a></li>
 <li><a href='#wcagContrast'>wcagContrast</a></li>
@@ -682,6 +684,12 @@
 <p><a id="unlerp" href="#unlerp">#</a> <strong>unlerp</strong>(<em>a</em>, <em>b</em>, <em>v</em>) → <em>value</em></p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/interpolate/lerp.js">src/interpolate/lerp.js</a></p>
 <p>Returns the point <code>t</code> at which the value <code>v</code> is located between the values <code>a</code> and <code>b</code>. The inverse of <code>lerp</code>.</p>
+<p><a id="blerp" href="#blerp">#</a> <strong>blerp</strong>(<em>a00</em>, <em>a01</em>, <em>a10</em>, <em>a11</em>, <em>tx</em>, <em>ty</em>) → <em>value</em></p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/interpolate/lerp.js">src/interpolate/lerp.js</a></p>
+<p>Perform the <a href="https://en.wikipedia.org/wiki/Bilinear_interpolation">bilinear interpolation</a> of the four values <code>a00</code>, <code>a01</code>, <code>a10</code>, and <code>a11</code> at the point <code>(tx, ty)</code>, with <code>tx, ty ∈ [0, 1]</code>. This is the extension of <code>lerp</code> to two dimensions.</p>
+<p><a id="trilerp" href="#trilerp">#</a> <strong>trilerp</strong>(<em>a000</em>, <em>a010</em>, <em>a100</em>, <em>a110</em>, <em>a001</em>, <em>a011</em>, <em>a101</em>, <em>a111</em>, <em>tx</em>, <em>ty</em>, <em>tz</em>) → <em>value</em></p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/interpolate/lerp.js">src/interpolate/lerp.js</a></p>
+<p>Perform the <a href="https://en.wikipedia.org/wiki/Trilinear_interpolation">trilinear interpolation</a> of the eight values <code>a000</code>, <code>a010</code>, <code>a100</code>, <code>a110</code>, <code>a001</code>, <code>a011</code>, <code>a101</code>, and <code>a111</code> at the point <code>(tx, ty, tz)</code>, with <code>tx, ty, tz ∈ [0, 1]</code>. This is the extension of <code>lerp</code> to three dimensions.</p>
 <h3>Mappings</h3>
 <p><a id="mapper" href="#mapper">#</a> <strong>mapper</strong>(<em>fn</em>, <em>mode = &quot;rgb&quot;</em>) → <em>function (color | string)</em></p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/map.js">src/map.js</a></p>
