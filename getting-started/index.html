@@ -23,7 +23,7 @@
 				/>
 			</a>
 			<span
-				>v3.1.1 (<a
+				>v3.1.3 (<a
 					href="https://github.com/evercoder/culori/releases"
 					>changelog</a
 				>)</span
@@ -48,11 +48,11 @@
 				</li>
 				
 				<li class="">
-					<a href="/resources/">Resources</a>
+					<a href="/colophon/">Colophon</a>
 				</li>
 				
 				<li class="">
-					<a href="/colophon/">Colophon</a>
+					<a href="/resources/">Resources</a>
 				</li>
 				<li>
 					<a href="https://github.com/Evercoder/culori"
@@ -71,7 +71,10 @@
 <p>Culori is distributed <a href="https://npmjs.com/package/culori">on npm</a> in a variety of formats. Install it with:</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> culori</code></pre>
 <p>Then start importing functions from <a href="/api/">the API</a>:</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span><br><br><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token comment">// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }</span></code></pre>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span>
+
+<span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ⇒ Object { mode: "rgb", r: 1, g: 0.38823529411764707, b: 0.2784313725490196 }</span></code></pre>
 <p>For code that runs in browsers, you may want to streamline the bundle to only include the parts of Culori you're using. See <a href="/guides/tree-shaking/">Optimize bundle size with tree-shaking</a> for guidance on switching your imports to use <code>'culori/fn'</code> instead of <code>'culori'</code> once you're done prototyping.</p>
 <h2>Fetch Culori from a CDN</h2>
 <p>You can use Culori from your favorite Content Delivery Network to create quick prototypes in HTML. Here are a few popular choices:</p>
@@ -98,20 +101,28 @@
 </tbody>
 </table>
 <p>Use it as an ES module:</p>
-<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>module<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>	<span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'https://cdn.skypack.dev/culori'</span><span class="token punctuation">;</span><br>	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'salmon'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>module<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+	<span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'https://cdn.skypack.dev/culori'</span><span class="token punctuation">;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'salmon'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 <p>...or using a traditional <code>&lt;script&gt;</code> tag. The library will be made available under the <code>culori</code> global variable:</p>
-<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/culori<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>culori<span class="token punctuation">.</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'salmon'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/culori<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>culori<span class="token punctuation">.</span><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'salmon'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 <h2>Use Culori online</h2>
 <h3>In your browser's console</h3>
 <p>The library is available on this website as the global variable <code>culori</code>, so can try the API in your browser's console as you read through the examples.</p>
 <h3>Observable</h3>
 <p>If you prefer to see the results visually, <a href="https://beta.observablehq.com">Observable</a> is a great place to tinker with the library.</p>
 <p>Add this cell and you're good to go:</p>
-<pre class="language-js"><code class="language-js">culori <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'culori@3.1.1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-js"><code class="language-js">culori <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'culori@3.1.3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>It's often useful to pin the library to a specific version, to make sure your old notebooks don't break if the API changes in a new major version of the library.</p>
 <h2>Use Culori in Deno</h2>
 <p>The library is published to <a href="https://deno.land/x/culori">deno.land/x/culori</a> for usage in <a href="https://deno.land/">Deno</a>:</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'https://deno.land/x/culori@3.1.1/index.js'</span><span class="token punctuation">;</span><br><br><span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'https://deno.land/x/culori@3.1.3/index.js'</span><span class="token punctuation">;</span>
+
+<span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
 			</article>
 		</div>
