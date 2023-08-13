@@ -69,7 +69,7 @@ body {
 	padding-top: 0.5em;
 }
 
-nav .active a {
+ul.nav .active a {
 	font-weight: bold;
 	border-color: var(--link-color);
 }
@@ -114,19 +114,16 @@ table code {
 	padding: 0;
 }
 
-nav ul {
+ul.nav {
 	display: flex;
 	flex-wrap: wrap;
 	list-style: none;
 	padding: 0;
+	margin: 2rem 0;
+	gap: 1.25em;
 }
 
-nav ul > * {
-	margin-right: 1.25em;
-	margin-bottom: 1em;
-}
-
-nav a {
+ul.nav a {
 	border-bottom: 0.2em solid transparent;
 }
 

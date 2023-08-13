@@ -1,6 +1,5 @@
 ---
 title: 'Guides'
-menu-order: 4
 ---
 
 ## Working with Culori 

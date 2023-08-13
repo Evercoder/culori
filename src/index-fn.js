@@ -138,7 +138,10 @@ export {
 
 // Easings
 export { default as easingMidpoint } from './easing/midpoint.js';
-export { default as easingSmoothstep } from './easing/smoothstep.js';
+export {
+	easingSmoothstep,
+	easingSmoothstepInverse
+} from './easing/smoothstep.js';
 export { default as easingSmootherstep } from './easing/smootherstep.js';
 export { default as easingInOutSine } from './easing/inOutSine.js';
 export { default as easingGamma } from './easing/gamma.js';

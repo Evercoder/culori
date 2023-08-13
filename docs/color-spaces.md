@@ -1,7 +1,6 @@
 ---
-layout: layouts/default
+layout: default.njk
 title: Color Spaces
-menu-order: 3
 ---
 
 This is an overview of the color spaces built into culori, listing their channels and expected ranges.

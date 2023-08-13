@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>
+			{% if title %} {{ title }} &middot; culori {% else %} culori {%
+			endif %}
+		</title>
+
+		<link rel="icon" type="image/png" href='{{"/favicon.png" | url }}' />
+		<link rel="stylesheet" href='{{"/css/main.css" | url }}' />
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<div class="logo">
+					<a href='{{"/" | url }}'>
+						<img
+							width="132"
+							height="30"
+							src='{{ "/img/culori.svg" | url }}'
+							alt="culori"
+						/>
+					</a>
+					<span
+						>v{{ pkg.version }} (<a
+							href="https://github.com/evercoder/culori/releases"
+							>changelog</a
+						>)</span
+					>
+				</div>
+				<nav>
+					<ul class='nav'>
+						<li {% if page.url == '/getting-started/' %}class="active"{% endif %}>
+							<a href="/getting-started/">Getting Started</a>
+						</li>
+						<li {% if page.url == '/api/' %}class="active"{% endif %}>
+							<a href="/api/">API Reference</a>
+						</li>
+						<li {% if page.url == '/color-spaces/' %}class="active"{% endif %}>
+							<a href="/color-spaces/">Color Spaces</a>
+						</li>
+						<li {% if page.url == '/guides/' %}class="active"{% endif %}>
+							<a href="/guides/">Guides</a>
+						</li>
+						<li>
+							<a href="https://github.com/Evercoder/culori"
+								>GitHub <span aria-hidden="true">↗</span></a
+							>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<div class="container">
+			<article>
+				<h1>{{ title }}</h1>
+				{{ content | safe }}
+			</article>
+		</div>
+		<footer>
+			<div class="container">
+
+				<p>
+					Culori is built by <a href="https://moqups.com">Moqups</a> &middot; <a href="/colophon/">Colophon</a> &middot; <a href="/resources/">Resources</a> 
+				<p>
+
+				<p>
+					Can this page be improved?
+					<a
+						href="https://github.com/Evercoder/culori/blob/main/{{ page.inputPath }}"
+						>Edit it on GitHub</a
+					>
+				</p>
+			</div>
+		</footer>
+
+
+		<script type="module">
+			import * as culori from '/culori.min.mjs';
+
+			/* Expose as global variable */
+			window.culori = culori;
+
+			const { p3, random, formatCss, formatHex } = culori;
+
+			const r = () => random('lch', { l: [30, 80], c: [60, 90] });
+			let r1 = r();
+			let r2 = r();
+			if (CSS.supports('color: color(display-p3 0 0 0)')) {
+				r1 = formatCss(p3(r1));
+				r2 = formatCss(p3(r2));
+			} else {
+				r1 = formatHex(r1);
+				r2 = formatHex(r2);
+			}
+			document.body.style.setProperty('--random-1', r1);
+			document.body.style.setProperty('--random-2', r2);
+		</script>
+	</body>
+</html>

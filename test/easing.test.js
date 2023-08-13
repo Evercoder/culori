@@ -1,8 +1,12 @@
 import tape from 'tape';
 
 import midpoint from '../src/easing/midpoint.js';
-import smoothstep from '../src/easing/smoothstep.js';
+import {
+	easingSmoothstep,
+	easingSmoothstepInverse
+} from '../src/easing/smoothstep.js';
 import smootherstep from '../src/easing/smootherstep.js';
+import samples from '../src/samples.js';
 
 tape('easingMidpoint', t => {
 	let noop = midpoint(0.5);
@@ -21,9 +25,19 @@ tape('easingMidpoint', t => {
 });
 
 tape('easingSmoothstep', t => {
-	t.equal(smoothstep(0), 0);
-	t.equal(smoothstep(1), 1);
-	t.equal(smoothstep(0.5), 0.5);
+	t.equal(easingSmoothstep(0), 0);
+	t.equal(easingSmoothstep(1), 1);
+	t.equal(easingSmoothstep(0.5), 0.5);
+	t.end();
+});
+
+tape('easingSmoothstepInverse', t => {
+	samples(5).forEach(x => {
+		t.ok(
+			Math.abs(easingSmoothstepInverse(easingSmoothstep(x)) - x) < 1e-15,
+			`roundtrip: ${x}`
+		);
+	});
 	t.end();
 });
 

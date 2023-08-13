@@ -1,7 +1,6 @@
 ---
-layout: layouts/default
-title: "Getting Started"
-menu-order: 1
+layout: default.njk
+title: "Getting Started with Culori"
 ---
 
 ## Install Culori from npm

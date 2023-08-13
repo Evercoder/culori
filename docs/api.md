@@ -1,7 +1,6 @@
 ---
-layout: layouts/default
+layout: default.njk
 title: API Reference
-menu-order: 2
 codebase: 'https://github.com/evercoder/culori/blob/main'
 ---
 
@@ -38,6 +37,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#easingMidpoint'>easingMidpoint</a></li>
 <li><a href='#easingSmootherstep'>easingSmootherstep</a></li>
 <li><a href='#easingSmoothstep'>easingSmoothstep</a></li>
+<li><a href='#easingSmoothstepInverse'>easingSmoothstepInverse</a></li>
 <li><a href='#filterBrightness'>filterBrightness</a></li>
 <li><a href='#filterContrast'>filterContrast</a></li>
 <li><a href='#filterDeficiencyDeuter'>filterDeficiencyDeuter</a></li>
@@ -574,6 +574,12 @@ interpolate(['red', 0.25, 'blue']);
 <span aria-label='Source:'>☞</span> [src/easing/smoothstep.js]({{codebase}}/src/easing/smoothstep.js)
 
 The [Smoothstep][smoothstep] easing function.
+
+<a id="easingSmoothstepInverse" href="#easingSmoothstepInverse">#</a> **easingSmoothstep**
+
+<span aria-label='Source:'>☞</span> [src/easing/smoothstep.js]({{codebase}}/src/easing/smoothstep.js)
+
+The inverse of the [Smoothstep][smoothstep] easing function.
 
 <a id="easingSmootherstep" href="#easingSmootherstep">#</a> **easingSmootherstep**
 

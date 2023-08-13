@@ -1,7 +1,6 @@
 ---
-layout: layouts/default
+layout: default.njk
 title: Colophon
-menu-order: 6
 ---
 
 Culori is developed by [Dan Burzo](http://danburzo.ro) with the help of many collaborators, and released under the MIT license. 

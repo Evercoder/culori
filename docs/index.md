@@ -1,8 +1,7 @@
 ---
 title: Color functions for JavaScript
 homepage: true
-layout: layouts/default
-menu-order: 0
+layout: default.njk
 ---
 
 [css4-colors]: https://drafts.csswg.org/css-color/

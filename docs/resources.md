@@ -1,7 +1,6 @@
 ---
-layout: layouts/default
+layout: default.njk
 title: Resources
-menu-order: 5
 ---
 
 ## Culori extras
