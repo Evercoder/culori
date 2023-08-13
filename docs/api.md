@@ -552,7 +552,7 @@ interpolate(['red', 0.25, 'green']);
 
 As opposed to how current browsers implement the CSS spec ([see discussion](https://github.com/w3c/csswg-drafts/issues/3931)), interpolation hints _do not_ affect color stop positions in Culori.
 
-### Built-in easing functions
+<h3 id='built-in-easing-functions'>Built-in easing functions</h3>
 
 <a id="easingMidpoint" href="#easingMidpoint">#</a> **easingMidpoint**(_H = 0.5_)
 
