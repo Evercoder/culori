@@ -1,6 +1,6 @@
 const fn = c => {
 	const abs = Math.abs(c);
-	if (abs < 0.04045) {
+	if (abs <= 0.04045) {
 		return c / 12.92;
 	}
 	return (Math.sign(c) || 1) * Math.pow((abs + 0.055) / 1.055, 2.4);

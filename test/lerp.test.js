@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lerp, unlerp, blerp, trilerp } from '../src/index.js';
+import { lerp, unlerp, trilerp } from '../src/index.js';
 
 tape('lerp()', t => {
 	t.equal(lerp(10, 2, 0.5), 6);
