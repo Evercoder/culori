@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>
-			 Getting Started &middot; culori 
+			 Getting Started with Culori &middot; culori 
 		</title>
 
 		<link rel="icon" type="image/png" href='/favicon.png' />
@@ -12,61 +12,50 @@
 	</head>
 	<body>
 		<header>
-	<div class="container">
-		<div class="logo">
-			<a href='/'>
-				<img
-					width="132"
-					height="30"
-					src='/img/culori.svg'
-					alt="culori"
-				/>
-			</a>
-			<span
-				>v3.2.0 (<a
-					href="https://github.com/evercoder/culori/releases"
-					>changelog</a
-				>)</span
-			>
-		</div>
-		<nav>
-			<ul>
-				<li class="active ">
-					<a href="/getting-started/">Getting Started</a>
-				</li>
-				
-				<li class="">
-					<a href="/api/">API Reference</a>
-				</li>
-				
-				<li class="">
-					<a href="/color-spaces/">Color Spaces</a>
-				</li>
-				
-				<li class="">
-					<a href="/guides/">Guides</a>
-				</li>
-				
-				<li class="">
-					<a href="/colophon/">Colophon</a>
-				</li>
-				
-				<li class="">
-					<a href="/resources/">Resources</a>
-				</li>
-				<li>
-					<a href="https://github.com/Evercoder/culori"
-						>GitHub <span aria-hidden="true">↗</span></a
+			<div class="container">
+				<div class="logo">
+					<a href='/'>
+						<img
+							width="132"
+							height="30"
+							src='/img/culori.svg'
+							alt="culori"
+						/>
+					</a>
+					<span
+						>v3.3.0 (<a
+							href="https://github.com/evercoder/culori/releases"
+							>changelog</a
+						>)</span
 					>
-				</li>
-			</ul>
-		</nav>
-	</div>
-</header>
+				</div>
+				<nav>
+					<ul class='nav'>
+						<li class="active">
+							<a href="/getting-started/">Getting Started</a>
+						</li>
+						<li >
+							<a href="/api/">API Reference</a>
+						</li>
+						<li >
+							<a href="/color-spaces/">Color Spaces</a>
+						</li>
+						<li >
+							<a href="/guides/">Guides</a>
+						</li>
+						<li>
+							<a href="https://github.com/Evercoder/culori"
+								>GitHub <span aria-hidden="true">↗</span></a
+							>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
 
 		<div class="container">
 			<article>
-				<h1>Getting Started</h1>
+				<h1>Getting Started with Culori</h1>
 				<h2>Install Culori from npm</h2>
 <p>Culori is distributed <a href="https://npmjs.com/package/culori">on npm</a> in a variety of formats. Install it with:</p>
 <pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> culori</code></pre>
@@ -116,28 +105,32 @@
 <h3>Observable</h3>
 <p>If you prefer to see the results visually, <a href="https://beta.observablehq.com">Observable</a> is a great place to tinker with the library.</p>
 <p>Add this cell and you're good to go:</p>
-<pre class="language-js"><code class="language-js">culori <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'culori@3.2.0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-js"><code class="language-js">culori <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'culori@3.3.0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>It's often useful to pin the library to a specific version, to make sure your old notebooks don't break if the API changes in a new major version of the library.</p>
 <h2>Use Culori in Deno</h2>
 <p>The library is published to <a href="https://deno.land/x/culori">deno.land/x/culori</a> for usage in <a href="https://deno.land/">Deno</a>:</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'https://deno.land/x/culori@3.2.0/index.js'</span><span class="token punctuation">;</span>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> rgb <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'https://deno.land/x/culori@3.3.0/index.js'</span><span class="token punctuation">;</span>
 
 <span class="token function">rgb</span><span class="token punctuation">(</span><span class="token string">'tomato'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
 			</article>
 		</div>
 		<footer>
-	<div class="container">
-		<p>
-			Culori is a <a href="https://moqups.com">Moqups</a> production. Can
-			this page be improved?
-			<a
-				href="https://github.com/Evercoder/culori/blob/main/./docs/getting-started.md"
-				>Edit it on GitHub</a
-			>.
-		</p>
-	</div>
-</footer>
+			<div class="container">
+
+				<p>
+					Culori is built by <a href="https://moqups.com">Moqups</a> &middot; <a href="/colophon/">Colophon</a> &middot; <a href="/resources/">Resources</a> 
+				<p>
+
+				<p>
+					Can this page be improved?
+					<a
+						href="https://github.com/Evercoder/culori/blob/main/./docs/getting-started.md"
+						>Edit it on GitHub</a
+					>
+				</p>
+			</div>
+		</footer>
 
 
 		<script type="module">

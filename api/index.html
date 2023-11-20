@@ -12,57 +12,46 @@
 	</head>
 	<body>
 		<header>
-	<div class="container">
-		<div class="logo">
-			<a href='/'>
-				<img
-					width="132"
-					height="30"
-					src='/img/culori.svg'
-					alt="culori"
-				/>
-			</a>
-			<span
-				>v3.2.0 (<a
-					href="https://github.com/evercoder/culori/releases"
-					>changelog</a
-				>)</span
-			>
-		</div>
-		<nav>
-			<ul>
-				<li class="">
-					<a href="/getting-started/">Getting Started</a>
-				</li>
-				
-				<li class="active ">
-					<a href="/api/">API Reference</a>
-				</li>
-				
-				<li class="">
-					<a href="/color-spaces/">Color Spaces</a>
-				</li>
-				
-				<li class="">
-					<a href="/guides/">Guides</a>
-				</li>
-				
-				<li class="">
-					<a href="/colophon/">Colophon</a>
-				</li>
-				
-				<li class="">
-					<a href="/resources/">Resources</a>
-				</li>
-				<li>
-					<a href="https://github.com/Evercoder/culori"
-						>GitHub <span aria-hidden="true">↗</span></a
+			<div class="container">
+				<div class="logo">
+					<a href='/'>
+						<img
+							width="132"
+							height="30"
+							src='/img/culori.svg'
+							alt="culori"
+						/>
+					</a>
+					<span
+						>v3.3.0 (<a
+							href="https://github.com/evercoder/culori/releases"
+							>changelog</a
+						>)</span
 					>
-				</li>
-			</ul>
-		</nav>
-	</div>
-</header>
+				</div>
+				<nav>
+					<ul class='nav'>
+						<li >
+							<a href="/getting-started/">Getting Started</a>
+						</li>
+						<li class="active">
+							<a href="/api/">API Reference</a>
+						</li>
+						<li >
+							<a href="/color-spaces/">Color Spaces</a>
+						</li>
+						<li >
+							<a href="/guides/">Guides</a>
+						</li>
+						<li>
+							<a href="https://github.com/Evercoder/culori"
+								>GitHub <span aria-hidden="true">↗</span></a
+							>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
 
 		<div class="container">
 			<article>
@@ -100,6 +89,7 @@
 <li><a href='#easingMidpoint'>easingMidpoint</a></li>
 <li><a href='#easingSmootherstep'>easingSmootherstep</a></li>
 <li><a href='#easingSmoothstep'>easingSmoothstep</a></li>
+<li><a href='#easingSmoothstepInverse'>easingSmoothstepInverse</a></li>
 <li><a href='#filterBrightness'>filterBrightness</a></li>
 <li><a href='#filterContrast'>filterContrast</a></li>
 <li><a href='#filterDeficiencyDeuter'>filterDeficiencyDeuter</a></li>
@@ -332,7 +322,7 @@
 <span class="token function">formatCss</span><span class="token punctuation">(</span><span class="token function">toRgb</span><span class="token punctuation">(</span>crimson<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// ⇒ 'color(display-p3 0.801… 0.169… 0.302…)'</span></code></pre>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/clamp.js">src/clamp.js</a></p>
-<p><a id="clampChroma" href="#clampChroma">#</a> <strong>clampChroma</strong>(<em>color</em> or <em>string</em>, <em>mode = 'lch'</em>) → <em>color</em></p>
+<p><a id="clampChroma" href="#clampChroma">#</a> <strong>clampChroma</strong>(<em>color</em> or <em>string</em>, <em>mode = 'lch'</em>, <em>rgbGamut = 'rgb'</em>) → <em>color</em></p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/clamp.js">src/clamp.js</a></p>
 <p>Obtains a displayable version of the color by converting it to a temporary color space containing a Chroma channel, then looking for the closest Chroma value that's displayable for the given Lightness and Hue. Compared to <code>clampRgb</code>, the function has the advantage of preserving the hue of the original color. The displayable color returned by this function will be converted back to the original color space.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> clampChroma <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span>
@@ -340,6 +330,7 @@
 <span class="token function">clampChroma</span><span class="token punctuation">(</span><span class="token string">'lab(50% 100 100)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// ⇒ { mode: 'lab', l:50.00…, a: 63.11…, b: 63.11… }</span></code></pre>
 <p>By default, the color is converted to <code>lch</code> to perform the clamping, but any color space that contains a Chroma dimension can be used by sending an explicit <code>mode</code> argument.</p>
+<p>Likewise, the destination RGB gamut can be overriden with the corresponding parameter.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> clampChroma <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span>
 
 <span class="token function">clampChroma</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">mode</span><span class="token operator">:</span> <span class="token string">'oklch'</span><span class="token punctuation">,</span> <span class="token literal-property property">l</span><span class="token operator">:</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token literal-property property">c</span><span class="token operator">:</span> <span class="token number">0.16</span><span class="token punctuation">,</span> <span class="token literal-property property">h</span><span class="token operator">:</span> <span class="token number">180</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'oklch'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -364,8 +355,11 @@
 <span class="token keyword">const</span> toP3 <span class="token operator">=</span> <span class="token function">toGamut</span><span class="token punctuation">(</span><span class="token string">'p3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">toP3</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// ⇒ { mode: "p3", r: 0.999…, g: 0.696…, b: 0.508… }</span></code></pre>
-<p>To address the shortcomings of <code>clampChroma</code>, which can sometimes produce colors more desaturated than necessary, the test used in the binary search is replaced with &quot;is color is roughly in gamut&quot;, by comparing the candidate to the clipped version (obtained with <code>clampGamut</code>). The test passes if the colors are not to dissimilar, judged by the <code>delta</code> color difference function and an associated <code>jnd</code> just-noticeable difference value.</p>
+<p>To address the shortcomings of <code>clampChroma</code>, which can sometimes produce colors more desaturated than necessary, the test used in the binary search is replaced with “is color is roughly in gamut”, by comparing the candidate to the clipped version (obtained with <code>clampGamut</code>). The test passes if the colors are not to dissimilar, judged by the <code>delta</code> color difference function and an associated <code>jnd</code> just-noticeable difference value.</p>
 <p>The default arguments for this function correspond to <a href="https://drafts.csswg.org/css-color/#css-gamut-mapping">the gamut mapping algorithm</a> defined in the CSS Color Module Level 4 spec, but the algorithm itself is slightly different.</p>
+<p>The “roughly in gamut” aspect of the algorithm can be disabled by passing <code>null</code> for the <code>delta</code> color difference function:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> toGamut <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> clampToP3 <span class="token operator">=</span> <span class="token function">toGamut</span><span class="token punctuation">(</span><span class="token string">'p3'</span><span class="token punctuation">,</span> <span class="token string">'oklch'</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h2>Interpolation</h2>
 <p>In any color space, colors occupy positions given by their values for each channel. Interpolating colors means tracing a line through the coordinates of these colors, and figuring out what colors reside on the line at various positions.</p>
 <img src='/img/red-blue.png' height='20' alt='red and blue, linearly interpolated'/>
@@ -452,7 +446,7 @@
 <span class="token comment">// interpolation hint:</span>
 <span class="token function">interpolate</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token number">0.25</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>As opposed to how current browsers implement the CSS spec (<a href="https://github.com/w3c/csswg-drafts/issues/3931">see discussion</a>), interpolation hints <em>do not</em> affect color stop positions in Culori.</p>
-<h3>Built-in easing functions</h3>
+<h3 id='built-in-easing-functions'>Built-in easing functions</h3>
 <p><a id="easingMidpoint" href="#easingMidpoint">#</a> <strong>easingMidpoint</strong>(<em>H = 0.5</em>)</p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/easing/midpoint.js">src/easing/midpoint.js</a></p>
 <p><a href="https://github.com/w3c/csswg-drafts/issues/3935">Proposed here</a>, the <code>midpoint</code> easing function lets you shift the midpoint of a gradient like in tools such as Adobe Photoshop. You can use it with <a href="#interpolate"><code>interpolate()</code></a> as an alternative to interpolation hints:</p>
@@ -465,6 +459,9 @@
 <p><a id="easingSmoothstep" href="#easingSmoothstep">#</a> <strong>easingSmoothstep</strong></p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/easing/smoothstep.js">src/easing/smoothstep.js</a></p>
 <p>The <a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep</a> easing function.</p>
+<p><a id="easingSmoothstepInverse" href="#easingSmoothstepInverse">#</a> <strong>easingSmoothstep</strong></p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/easing/smoothstep.js">src/easing/smoothstep.js</a></p>
+<p>The inverse of the <a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep</a> easing function.</p>
 <p><a id="easingSmootherstep" href="#easingSmootherstep">#</a> <strong>easingSmootherstep</strong></p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/easing/smootherstep.js">src/easing/smootherstep.js</a></p>
 <p>Smootherstep is a variant of the <a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep</a> easing function.</p>
@@ -1612,17 +1609,21 @@ culori
 			</article>
 		</div>
 		<footer>
-	<div class="container">
-		<p>
-			Culori is a <a href="https://moqups.com">Moqups</a> production. Can
-			this page be improved?
-			<a
-				href="https://github.com/Evercoder/culori/blob/main/./docs/api.md"
-				>Edit it on GitHub</a
-			>.
-		</p>
-	</div>
-</footer>
+			<div class="container">
+
+				<p>
+					Culori is built by <a href="https://moqups.com">Moqups</a> &middot; <a href="/colophon/">Colophon</a> &middot; <a href="/resources/">Resources</a> 
+				<p>
+
+				<p>
+					Can this page be improved?
+					<a
+						href="https://github.com/Evercoder/culori/blob/main/./docs/api.md"
+						>Edit it on GitHub</a
+					>
+				</p>
+			</div>
+		</footer>
 
 
 		<script type="module">
