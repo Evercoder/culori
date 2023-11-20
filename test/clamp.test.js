@@ -5,7 +5,8 @@ import {
 	inGamut,
 	clampGamut,
 	formatCss,
-	toGamut
+	toGamut,
+	lch
 } from '../src/index.js';
 
 tape('RGB', function (test) {
@@ -66,6 +67,12 @@ tape('Issue #129', function (test) {
 	test.deepEqual(
 		clampChroma({ mode: 'oklch', l: 0.5, c: 0.16, h: 180 }, 'oklch'),
 		{ mode: 'oklch', l: 0.5, c: 0.090703125, h: 180 }
+	);
+
+	test.equal(
+		formatCss(clampChroma('lch(80% 150 60)', 'lch', 'p3')),
+		'lch(80 60.040283203125 60)',
+		'with p3 gamut'
 	);
 	test.end();
 });
@@ -157,5 +164,15 @@ tape('toGamut()', t => {
 		'color(display-p3 0.9999999999999994 0.6969234154991887 0.5084794582132421)',
 		'api docs example'
 	);
+
+	const likeClampChroma = toGamut('rgb', 'lch', null);
+
+	t.deepEqual(lch(likeClampChroma('lch(50% 120 5)')), {
+		mode: 'lch',
+		l: 50.00519612994975,
+		c: 77.47625128342412,
+		h: 5.006331789592595
+	});
+
 	t.end();
 });

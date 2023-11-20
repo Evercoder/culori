@@ -359,7 +359,7 @@ formatCss(toRgb(crimson));
 
 <span aria-label='Source:'>☞</span> [src/clamp.js]({{codebase}}/src/clamp.js)
 
-<a id="clampChroma" href="#clampChroma">#</a> **clampChroma**(_color_ or _string_, _mode = 'lch'_) → _color_
+<a id="clampChroma" href="#clampChroma">#</a> **clampChroma**(_color_ or _string_, _mode = 'lch'_, _rgbGamut = 'rgb'_) → _color_
 
 <span aria-label='Source:'>☞</span> [src/clamp.js]({{codebase}}/src/clamp.js)
 
@@ -373,6 +373,8 @@ clampChroma('lab(50% 100 100)');
 ```
 
 By default, the color is converted to `lch` to perform the clamping, but any color space that contains a Chroma dimension can be used by sending an explicit `mode` argument.
+
+Likewise, the destination RGB gamut can be overriden with the corresponding parameter.
 
 ```js
 import { clampChroma } from 'culori';
@@ -414,9 +416,16 @@ toP3(color);
 // ⇒ { mode: "p3", r: 0.999…, g: 0.696…, b: 0.508… }
 ```
 
-To address the shortcomings of `clampChroma`, which can sometimes produce colors more desaturated than necessary, the test used in the binary search is replaced with "is color is roughly in gamut", by comparing the candidate to the clipped version (obtained with `clampGamut`). The test passes if the colors are not to dissimilar, judged by the `delta` color difference function and an associated `jnd` just-noticeable difference value.
+To address the shortcomings of `clampChroma`, which can sometimes produce colors more desaturated than necessary, the test used in the binary search is replaced with “is color is roughly in gamut”, by comparing the candidate to the clipped version (obtained with `clampGamut`). The test passes if the colors are not to dissimilar, judged by the `delta` color difference function and an associated `jnd` just-noticeable difference value.
 
 The default arguments for this function correspond to [the gamut mapping algorithm](https://drafts.csswg.org/css-color/#css-gamut-mapping) defined in the CSS Color Module Level 4 spec, but the algorithm itself is slightly different.
+
+The “roughly in gamut” aspect of the algorithm can be disabled by passing `null` for the `delta` color difference function:
+
+```js
+import { toGamut } from 'culori';
+const clampToP3 = toGamut('p3', 'oklch', null);
+```
 
 ## Interpolation
 

@@ -17,6 +17,8 @@ const fixup_rgb = c => {
 	return res;
 };
 
+const to_displayable_srgb = c => fixup_rgb(rgb(c));
+
 const inrange_rgb = c => {
 	return (
 		c !== undefined &&
@@ -66,7 +68,7 @@ export function clampRgb(color) {
 	// keep track of color's original mode
 	let conv = converter(color.mode);
 
-	return conv(fixup_rgb(rgb(color)));
+	return conv(to_displayable_srgb(color));
 }
 
 /*
@@ -106,21 +108,25 @@ export function clampGamut(mode = 'rgb') {
 }
 
 /*
-	Obtain a color that's in the sRGB gamut
-	by first converting it to `mode` and then
-	finding the the greatest chroma value
-	that fits the gamut.
+	Obtain a color that’s in a RGB gamut (by default sRGB)
+	by first converting it to `mode` and then finding 
+	the greatest chroma value that fits the gamut.
 
 	By default, the CIELCh color space is used,
 	but any color that has a chroma component will do.
 
 	The result is returned in the color's original color space.
  */
-export function clampChroma(color, mode = 'lch') {
+export function clampChroma(color, mode = 'lch', rgbGamut = 'rgb') {
 	color = prepare(color);
 
+	let inDestinationGamut =
+		rgbGamut === 'rgb' ? displayable : inGamut(rgbGamut);
+	let clipToGamut =
+		rgbGamut === 'rgb' ? to_displayable_srgb : clampGamut(rgbGamut);
+
 	// if the color is undefined or displayable, return it directly
-	if (color === undefined || displayable(color)) return color;
+	if (color === undefined || inDestinationGamut(color)) return color;
 
 	// keep track of color's original mode
 	let conv = converter(color.mode);
@@ -133,8 +139,8 @@ export function clampChroma(color, mode = 'lch') {
 
 	// if not even chroma = 0 is displayable
 	// fall back to RGB clamping
-	if (!displayable(clamped)) {
-		return conv(fixup_rgb(rgb(clamped)));
+	if (!inDestinationGamut(clamped)) {
+		return conv(clipToGamut(clamped));
 	}
 
 	// By this time we know chroma = 0 is displayable and our current chroma is not.
@@ -147,7 +153,7 @@ export function clampChroma(color, mode = 'lch') {
 
 	while (end - start > resolution) {
 		clamped.c = start + (end - start) * 0.5;
-		if (displayable(clamped)) {
+		if (inDestinationGamut(clamped)) {
 			_last_good_c = clamped.c;
 			start = clamped.c;
 		} else {
@@ -156,7 +162,7 @@ export function clampChroma(color, mode = 'lch') {
 	}
 
 	return conv(
-		displayable(clamped) ? clamped : { ...clamped, c: _last_good_c }
+		inDestinationGamut(clamped) ? clamped : { ...clamped, c: _last_good_c }
 	);
 }
 
@@ -173,13 +179,16 @@ export function clampChroma(color, mode = 'lch') {
 	the test used in the binary search is replaced with
 	"is color is roughly in gamut", by comparing the candidate 
 	to the clipped version (obtained with `clampGamut`).
-	The test passes if the colors are not to dissimilar, 
+	The test passes if the colors are not too dissimilar, 
 	judged by the `delta` color difference function 
 	and an associated `jnd` just-noticeable difference value.
 
 	The default arguments for this function correspond to the
 	gamut mapping algorithm defined in CSS Color Level 4:
 	https://drafts.csswg.org/css-color/#css-gamut-mapping
+
+	To disable the “roughly in gamut” part, pass either
+	`null` for the `delta` parameter, or zero for `jnd`.
  */
 export function toGamut(
 	dest = 'rgb',
@@ -234,7 +243,7 @@ export function toGamut(
 			clipped = clipToGamut(candidate);
 			if (
 				inDestinationGamut(candidate) ||
-				(jnd > 0 && delta(candidate, clipped) <= jnd)
+				(delta && jnd > 0 && delta(candidate, clipped) <= jnd)
 			) {
 				start = candidate.c;
 			} else {
