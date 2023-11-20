@@ -28,7 +28,9 @@ const definition = {
 		b: interpolatorLinear,
 		alpha: { use: interpolatorLinear, fixup: fixupAlpha }
 	},
-	gamut: true
+	gamut: true,
+	white: { r: 1, g: 1, b: 1 },
+	black: { r: 0, g: 0, b: 0 }
 };
 
 export default definition;
