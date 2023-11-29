@@ -14,7 +14,8 @@ const averageAngle = val => {
 		},
 		{ sin: 0, cos: 0 }
 	);
-	return (Math.atan2(sum.sin, sum.cos) * 180) / Math.PI;
+	let angle = (Math.atan2(sum.sin, sum.cos) * 180) / Math.PI;
+	return angle < 0 ? 360 + angle : angle;
 };
 
 const averageNumber = val => {
