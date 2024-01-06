@@ -18,14 +18,14 @@ function ParseHwb(color, parsed) {
 		if (w.type === Tok.Hue) {
 			return undefined;
 		}
-		res.w = w.type === Tok.Number ? w.value : w.value / 100;
+		res.w = w.value / 100;
 	}
 
 	if (b.type !== Tok.None) {
 		if (b.type === Tok.Hue) {
 			return undefined;
 		}
-		res.b = b.type === Tok.Number ? b.value : b.value / 100;
+		res.b = b.value / 100;
 	}
 
 	if (alpha.type !== Tok.None) {

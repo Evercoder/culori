@@ -198,7 +198,7 @@ tape('hsl', function (test) {
 	);
 
 	test.deepEqual(
-		parse('hsl(0 1 0.5)'),
+		parse('hsl(0 100 50)'),
 		{ h: 0, s: 1, l: 0.5, mode: 'hsl' },
 		'hsl current (no percentage)'
 	);
@@ -210,7 +210,7 @@ tape('hsl', function (test) {
 	);
 
 	test.deepEqual(
-		parse('hsl(0 1 0.5 / 0.5)'),
+		parse('hsl(0 100 50 / 0.5)'),
 		{ h: 0, s: 1, l: 0.5, mode: 'hsl', alpha: 0.5 },
 		'hsla current (no percentage)'
 	);
@@ -241,6 +241,18 @@ tape('hwb', function (test) {
 		parse('hwb(200 10% 30% / 50%)'),
 		{ h: 200, w: 0.1, b: 0.3, alpha: 0.5, mode: 'hwb' },
 		'hwba'
+	);
+
+	test.deepEqual(
+		parse('hwb(60deg 25 100 / 0.5)'),
+		{
+			h: 60,
+			w: 0.25,
+			b: 1,
+			alpha: 0.5,
+			mode: 'hwb'
+		},
+		'<number>'
 	);
 
 	test.end();

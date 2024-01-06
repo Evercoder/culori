@@ -18,14 +18,14 @@ function parseHsl(color, parsed) {
 		if (s.type === Tok.Hue) {
 			return undefined;
 		}
-		res.s = s.type === Tok.Number ? s.value : s.value / 100;
+		res.s = s.value / 100;
 	}
 
 	if (l.type !== Tok.None) {
 		if (l.type === Tok.Hue) {
 			return undefined;
 		}
-		res.l = l.type === Tok.Number ? l.value : l.value / 100;
+		res.l = l.value / 100;
 	}
 
 	if (alpha.type !== Tok.None) {
