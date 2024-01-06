@@ -10,7 +10,10 @@ function parseOklch(color, parsed) {
 		if (l.type === Tok.Hue) {
 			return undefined;
 		}
-		res.l = l.type === Tok.Number ? l.value : l.value / 100;
+		res.l = Math.min(
+			Math.max(0, l.type === Tok.Number ? l.value : l.value / 100),
+			1
+		);
 	}
 	if (c.type !== Tok.None) {
 		res.c = Math.max(

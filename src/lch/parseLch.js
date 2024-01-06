@@ -10,7 +10,7 @@ function parseLch(color, parsed) {
 		if (l.type === Tok.Hue) {
 			return undefined;
 		}
-		res.l = l.value;
+		res.l = Math.min(Math.max(0, l.value), 100);
 	}
 	if (c.type !== Tok.None) {
 		res.c = Math.max(

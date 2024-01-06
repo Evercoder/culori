@@ -10,7 +10,7 @@ function parseLab(color, parsed) {
 		return undefined;
 	}
 	if (l.type !== Tok.None) {
-		res.l = l.value;
+		res.l = Math.min(Math.max(0, l.value), 100);
 	}
 	if (a.type !== Tok.None) {
 		res.a = a.type === Tok.Number ? a.value : (a.value * 125) / 100;

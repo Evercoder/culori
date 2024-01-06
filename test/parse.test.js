@@ -283,6 +283,18 @@ tape('lab()', function (test) {
 		'lab with percentage'
 	);
 
+	test.deepEqual(
+		parse('lab(130 -45 +1000)'),
+		{ l: 100, a: -45, b: 1000, mode: 'lab' },
+		'clamp L to 100'
+	);
+
+	test.deepEqual(
+		parse('lab(-1 -45 +1000)'),
+		{ l: 0, a: -45, b: 1000, mode: 'lab' },
+		'clamp L to 0'
+	);
+
 	test.end();
 });
 
@@ -303,6 +315,18 @@ tape('lch()', function (test) {
 		parse('lch(50% 3 240)'),
 		{ l: 50, c: 3, h: 240, mode: 'lch' },
 		'lch with percentage'
+	);
+
+	test.deepEqual(
+		parse('lch(130 -45 480deg)'),
+		{ l: 100, c: 0, h: 480, mode: 'lch' },
+		'clamp L to 100, C to 0'
+	);
+
+	test.deepEqual(
+		parse('lch(-1 -45 -480deg)'),
+		{ l: 0, c: 0, h: -480, mode: 'lch' },
+		'clamp L to 0, C to 0'
 	);
 
 	test.end();

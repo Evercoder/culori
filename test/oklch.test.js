@@ -27,8 +27,8 @@ tape('oklch', t => {
 });
 
 tape('oklch()', t => {
-	t.deepEqual(oklch('oklch(30 0.5 1 / 0.25)'), {
-		l: 30,
+	t.deepEqual(oklch('oklch(0.3 0.5 1 / 0.25)'), {
+		l: 0.3,
 		c: 0.5,
 		h: 1,
 		alpha: 0.25,
@@ -41,6 +41,28 @@ tape('oklch()', t => {
 		h: 180,
 		alpha: 0.15
 	});
+	t.deepEqual(
+		oklch('oklch(-1 0.5 0.5turn / 0.42)'),
+		{
+			mode: 'oklch',
+			l: 0,
+			c: 0.5,
+			h: 180,
+			alpha: 0.42
+		},
+		'clamp L to 0'
+	);
+	t.deepEqual(
+		oklch('oklch(2 0.5 40deg / 0.42)'),
+		{
+			mode: 'oklch',
+			l: 1,
+			c: 0.5,
+			h: 40,
+			alpha: 0.42
+		},
+		'clamp L to 1'
+	);
 	t.end();
 });
 

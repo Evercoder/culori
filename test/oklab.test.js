@@ -47,8 +47,8 @@ tape('color(--oklab) with custom ident registration', t => {
 });
 
 tape('oklab()', t => {
-	t.deepEqual(oklab('oklab(30 0.5 1 / 0.25)'), {
-		l: 30,
+	t.deepEqual(oklab('oklab(0.4 0.5 1 / 0.25)'), {
+		l: 0.4,
 		a: 0.5,
 		b: 1,
 		alpha: 0.25,
@@ -61,6 +61,16 @@ tape('oklab()', t => {
 		b: 0.5,
 		alpha: 0.15
 	});
+	t.deepEqual(
+		oklab('oklab(-0.5 1 0)'),
+		{ l: 0, a: 1, b: 0, mode: 'oklab' },
+		'clamp L to 0'
+	);
+	t.deepEqual(
+		oklab('oklab(2 1 0)'),
+		{ l: 1, a: 1, b: 0, mode: 'oklab' },
+		'clamp L to 1'
+	);
 	t.end();
 });
 

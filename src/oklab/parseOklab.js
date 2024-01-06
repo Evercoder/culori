@@ -10,7 +10,10 @@ function parseOklab(color, parsed) {
 		return undefined;
 	}
 	if (l.type !== Tok.None) {
-		res.l = l.type === Tok.Number ? l.value : l.value / 100;
+		res.l = Math.min(
+			Math.max(0, l.type === Tok.Number ? l.value : l.value / 100),
+			1
+		);
 	}
 	if (a.type !== Tok.None) {
 		res.a = a.type === Tok.Number ? a.value : (a.value * 0.4) / 100;
