@@ -18,36 +18,32 @@ These projects add more functionality to Culori, but they're separate as to keep
 -   [Color Name API](https://github.com/meodai/color-name-api) — a REST API for color names that makes use Culori's [differenceCiede2000](https://culorijs.org/api/#differenceCiede2000) to return a fitting name for every color.
 -   [Atmos](https://atmos.style) - a toolbox based on (OK)LCH color space for creating professional color palettes. Utilizing Culori for color manipulation allowed us to concentrate on our product's essence rather than getting bogged down in implementation details.
 
-Does your product/project use Culori? Create a PR and add yourself to this list.
+_Does your product/project use Culori? Create a PR and add yourself to this list._
 
 ## Similar projects
 
-JavaScript libraries:
-
--   [d3-color](https://github.com/d3/d3-color) by [Mike Bostock](https://bost.ocks.org/mike/)
--   [chroma.js](https://github.com/gka/chroma.js) by [Gregor Aisch](https://driven-by-data.net/)
--   [colorjs.io](https://github.com/LeaVerou/color.js) by [Lea Verou](http://lea.verou.me/) and [Chris Lilley](https://svgees.us/)
-
-In other languages:
-
--   [Colour](https://www.colour-science.org/) for Python
--   [the `colorspace` package](http://colorspace.r-forge.r-project.org/) for R
--   [the `Colors` package](https://github.com/JuliaGraphics/Colors.jl) for Julia
-- [ColorAide](https://github.com/facelessuser/coloraide) for Python by Isaac Muse
--   [colorio](https://github.com/nschloe/colorio) for Python by Nico Schlömer
+-   [d3-color](https://github.com/d3/d3-color) by [Mike Bostock](https://bost.ocks.org/mike/) (JavaScript)
+-   [chroma.js](https://github.com/gka/chroma.js) by [Gregor Aisch](https://driven-by-data.net/) (JavaScript)
+-   [colorjs.io](https://github.com/LeaVerou/color.js) by [Lea Verou](http://lea.verou.me/) and [Chris Lilley](https://svgees.us/) (JavaScript)
+-   [Colour](https://www.colour-science.org/) (Python)
+- [ColorAide](https://github.com/facelessuser/coloraide) by Isaac Muse (Python)
+-   [colorio](https://github.com/nschloe/colorio) by Nico Schlömer (Python)
+-   [`colorspace` package](http://colorspace.r-forge.r-project.org/) (R)
+-   [`Colors` package](https://github.com/JuliaGraphics/Colors.jl) (Julia)
 
 ## Further reading
 
 ### Specifications
 
-- [CSS Color Level 4](https://drafts.csswg.org/css-color/)
-- [CSS Color Level 5](https://drafts.csswg.org/css-color-5/)
+- [CSS Color Module Level 4](https://drafts.csswg.org/css-color-4/)
+- [CSS Color Module Level 5](https://drafts.csswg.org/css-color-5/)
+- [CSS Color HDR Module Level 1](https://drafts.csswg.org/css-color-hdr/)
 
 ### Websites
 
--   David Briggs's [The Dimensions of Color](http://www.huevaluechroma.com/)
--   Bruce Lindbloom's [Useful Color Math](http://www.brucelindbloom.com/index.html?Math.html)
--   Rune Madsen's [Programming Design Systems](https://programmingdesignsystems.com/)
+-   David Briggs’s [The Dimensions of Color](http://www.huevaluechroma.com/)
+-   Bruce Lindbloom’s [Useful Color Math](http://www.brucelindbloom.com/index.html?Math.html)
+-   Rune Madsen’s [Programming Design Systems](https://programmingdesignsystems.com/)
 
 ### Articles
 
