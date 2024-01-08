@@ -9,8 +9,9 @@
 	"exports": {
 		".": {
 			"require": "./bundled/culori.cjs",
-			"import": "./bundled/culori.min.mjs"
+			"import": "./src/index.js"
 		},
+		"./require": "./bundled/culori.cjs",
 		"./css": "./src/bootstrap/css.js",
 		"./all": "./src/bootstrap/all.js",
 		"./fn": "./src/index-fn.js",
