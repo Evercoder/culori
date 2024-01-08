@@ -7,8 +7,10 @@
 	"browser": "./bundled/culori.min.js",
 	"jsdelivr": "./bundled/culori.umd.js",
 	"exports": {
-		"./require": "./bundled/culori.cjs",
-		".": "./src/index.js",
+		".": {
+			"require": "./bundled/culori.cjs",
+			"import": "./bundled/culori.min.mjs"
+		},
 		"./css": "./src/bootstrap/css.js",
 		"./all": "./src/bootstrap/all.js",
 		"./fn": "./src/index-fn.js",
