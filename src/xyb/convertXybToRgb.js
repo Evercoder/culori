@@ -4,6 +4,9 @@ import { bias, bias_cbrt } from './constants.js';
 const transfer = v => Math.pow(v + bias_cbrt, 3);
 
 const convertXybToRgb = ({ x, y, b, alpha }) => {
+	if (x === undefined) x = 0;
+	if (y === undefined) y = 0;
+	if (b === undefined) b = 0;
 	const l = transfer(x + y) - bias;
 	const m = transfer(y - x) - bias;
 	/* Account for chroma from luma: add Y back to B */

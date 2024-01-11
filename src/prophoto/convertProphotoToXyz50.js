@@ -6,7 +6,7 @@
 		* http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
 */
 
-const linearize = v => {
+const linearize = (v = 0) => {
 	let abs = Math.abs(v);
 	if (abs >= 16 / 512) {
 		return Math.sign(v) * Math.pow(abs, 1.8);

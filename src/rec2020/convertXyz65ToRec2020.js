@@ -18,6 +18,9 @@ const gamma = v => {
 };
 
 const convertXyz65ToRec2020 = ({ x, y, z, alpha }) => {
+	if (x === undefined) x = 0;
+	if (y === undefined) y = 0;
+	if (z === undefined) z = 0;
 	let res = {
 		mode: 'rec2020',
 		r: gamma(

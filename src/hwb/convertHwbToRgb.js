@@ -11,6 +11,8 @@
 import convertHsvToRgb from '../hsv/convertHsvToRgb.js';
 
 export default function convertHwbToRgb({ h, w, b, alpha }) {
+	if (w === undefined) w = 0;
+	if (b === undefined) b = 0;
 	// normalize w + b to 1
 	if (w + b > 1) {
 		let s = w + b;

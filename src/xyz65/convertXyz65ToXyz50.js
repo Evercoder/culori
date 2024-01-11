@@ -9,6 +9,9 @@
 
 const convertXyz65ToXyz50 = xyz65 => {
 	let { x, y, z, alpha } = xyz65;
+	if (x === undefined) x = 0;
+	if (y === undefined) y = 0;
+	if (z === undefined) z = 0;
 	let res = {
 		mode: 'xyz50',
 		x:

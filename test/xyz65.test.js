@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { xyz65, formatCss } from '../src/index.js';
+import { xyz65, rgb, formatCss } from '../src/index.js';
 
 tape('xyz65', t => {
 	/*
@@ -88,5 +88,16 @@ tape('formatCss', t => {
 		formatCss('color(xyz 0% 50% 0.5 / 25%)'),
 		'color(xyz-d65 0 0.5 0.5 / 0.25)'
 	);
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(xyz-d65 none 0.5 none)'), 'xyz65 to rgb is ok');
+	t.deepEqual(
+		rgb('color(xyz-d65 none 0.5 none)'),
+		rgb('color(xyz-d65 0 0.5 0')
+	);
+	t.ok(xyz65('rgb(none 100 20)'), 'rgb to xyz65 is ok');
+	t.deepEqual(xyz65('rgb(none 100 20)'), xyz65('rgb(0 100 20)'));
 	t.end();
 });

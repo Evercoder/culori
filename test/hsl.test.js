@@ -148,3 +148,11 @@ tape('formatCss', t => {
 	t.equal(formatCss(hsl('#ffffff00')), 'hsl(none 0% 100% / 0)');
 	t.end();
 });
+
+tape('missing components', t => {
+	t.ok(rgb('hsl(none 50% none)'));
+	t.deepEqual(rgb('hsl(none 50% none)'), rgb('hsl(0deg 50% 0%)'));
+	t.ok(hsl('rgb(none 100 20)'));
+	t.deepEqual(hsl('rgb(none 100 20)'), hsl('rgb(0 100 20)'));
+	t.end();
+});

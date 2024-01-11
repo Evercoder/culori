@@ -10,7 +10,7 @@
 const α = 1.09929682680944;
 const β = 0.018053968510807;
 
-const linearize = v => {
+const linearize = (v = 0) => {
 	let abs = Math.abs(v);
 	if (abs < β * 4.5) {
 		return v / 4.5;

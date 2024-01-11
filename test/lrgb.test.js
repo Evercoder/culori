@@ -65,3 +65,14 @@ tape('formatCss', t => {
 	);
 	t.end();
 });
+
+tape('missing components', t => {
+	t.ok(rgb('color(srgb-linear none 0.5 none)'), 'lrgb to rgb is ok');
+	t.deepEqual(
+		rgb('color(srgb-linear none 0.5 none)'),
+		rgb('color(srgb-linear 0 0.5 0')
+	);
+	t.ok(lrgb('rgb(none 100 20)'), 'rgb to lrgb is ok');
+	t.deepEqual(lrgb('rgb(none 100 20)'), lrgb('rgb(0 100 20)'));
+	t.end();
+});

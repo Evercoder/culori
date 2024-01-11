@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { dlab, formatCss } from '../src/index.js';
+import { dlab, rgb, formatCss } from '../src/index.js';
 
 tape('dlab', t => {
 	t.deepEqual(dlab('white'), { mode: 'dlab', l: 100, a: 0, b: 0 }, 'white');
@@ -48,5 +48,16 @@ tape('formatCss', t => {
 		formatCss('color(--din99o-lab 0 50% 0.5 / 25%)'),
 		'color(--din99o-lab 0 0.5 0.5 / 0.25)'
 	);
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(--din99o-lab none 0.5 none)'), 'dlab to rgb is ok');
+	t.deepEqual(
+		rgb('color(--din99o-lab none 0.5 none)'),
+		rgb('color(--din99o-lab 0 0.5 0)')
+	);
+	t.ok(dlab('rgb(none 100 20)'), 'rgb to dlab is ok');
+	t.deepEqual(dlab('rgb(none 100 20)'), dlab('rgb(0 100 20)'));
 	t.end();
 });

@@ -16,6 +16,9 @@ const jabPqDecode = v => {
 const rel = v => v / 203;
 
 const convertJabToXyz65 = ({ j, a, b, alpha }) => {
+	if (j === undefined) j = 0;
+	if (a === undefined) a = 0;
+	if (b === undefined) b = 0;
 	let i = (j + d0) / (0.44 + 0.56 * (j + d0));
 
 	let l = jabPqDecode(i + 0.13860504 * a + 0.058047316 * b);

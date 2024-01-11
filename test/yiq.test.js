@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { yiq, formatRgb, formatCss } from '../src/index.js';
+import { yiq, rgb, formatRgb, formatCss } from '../src/index.js';
 
 tape('rgb -> yiq', t => {
 	t.deepEqual(yiq('purple'), {
@@ -49,5 +49,13 @@ tape('formatCss', t => {
 		formatCss('color(--yiq 0% 50% 0.5 / 25%)'),
 		'color(--yiq 0 0.5 0.5 / 0.25)'
 	);
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(--yiq none 0.5 none)'), 'yiq to rgb is ok');
+	t.deepEqual(rgb('color(--yiq none 0.5 none)'), rgb('color(--yiq 0 0.5 0'));
+	t.ok(yiq('rgb(none 100 20)'), 'rgb to yiq is ok');
+	t.deepEqual(yiq('rgb(none 100 20)'), yiq('rgb(0 100 20)'));
 	t.end();
 });

@@ -118,3 +118,11 @@ tape('formatCss', t => {
 	);
 	t.end();
 });
+
+tape('missing components', t => {
+	t.ok(rgb('color(--hsi none 0.5 none)'), 'hsi to rgb is ok');
+	t.deepEqual(rgb('color(--hsi none 0.5 none)'), rgb('color(--hsi 0 0.5 0'));
+	t.ok(hsi('rgb(none 100 20)'), 'rgb to hsi is ok');
+	t.deepEqual(hsi('rgb(none 100 20)'), hsi('rgb(0 100 20)'));
+	t.end();
+});

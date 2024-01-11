@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lab65, formatCss } from '../src/index.js';
+import { lab65, rgb, formatCss } from '../src/index.js';
 
 tape('lab65', t => {
 	t.deepEqual(lab65('white'), { mode: 'lab65', l: 100, a: 0, b: 0 }, 'white');
@@ -41,5 +41,16 @@ tape('formatCss', t => {
 		formatCss('color(--lab-d65 30 0.5 1 / 0.25)'),
 		'color(--lab-d65 30 0.5 1 / 0.25)'
 	);
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(--lab-d65 none 0.5 none)'), 'lab65 to rgb is ok');
+	t.deepEqual(
+		rgb('color(--lab-d65 none 0.5 none)'),
+		rgb('color(--lab-d65 0 0.5 0)')
+	);
+	t.ok(lab65('rgb(none 100 20)'), 'rgb to lab65 is ok');
+	t.deepEqual(lab65('rgb(none 100 20)'), lab65('rgb(0 100 20)'));
 	t.end();
 });

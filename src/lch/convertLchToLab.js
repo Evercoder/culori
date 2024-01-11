@@ -4,6 +4,7 @@
 		* https://drafts.csswg.org/css-color/#color-conversion-code
 */
 const convertLchToLab = ({ l, c, h, alpha }, mode = 'lab') => {
+	if (h === undefined) h = 0;
 	let res = {
 		mode,
 		l,

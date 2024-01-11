@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { a98, formatCss } from '../src/index.js';
+import { a98, rgb, formatCss } from '../src/index.js';
 
 tape('a98', t => {
 	t.deepEqual(
@@ -44,5 +44,16 @@ tape('formatCss', t => {
 		formatCss('color(a98-rgb 0% 50% 0.5 / 25%)'),
 		'color(a98-rgb 0 0.5 0.5 / 0.25)'
 	);
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(a98-rgb none 0.5 none)'), 'a98 to rgb is ok');
+	t.deepEqual(
+		rgb('color(a98-rgb none 0.5 none)'),
+		rgb('color(a98-rgb 0 0.5 0')
+	);
+	t.ok(a98('rgb(none 100 20)'), 'rgb to a98 is ok');
+	t.deepEqual(a98('rgb(none 100 20)'), a98('rgb(0 100 20)'));
 	t.end();
 });

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { luv } from '../src/index.js';
+import { luv, rgb } from '../src/index.js';
 
 tape('luv', t => {
 	t.deepEqual(
@@ -45,5 +45,13 @@ tape('color(--luv)', t => {
 		alpha: 0.25,
 		mode: 'luv'
 	});
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(--luv none 0.5 none)'), 'luv to rgb is ok');
+	t.deepEqual(rgb('color(--luv none 0.5 none)'), rgb('color(--luv 0 0.5 0)'));
+	t.ok(luv('rgb(none 100 20)'), 'rgb to luv is ok');
+	t.deepEqual(luv('rgb(none 100 20)'), luv('rgb(0 100 20)'));
 	t.end();
 });

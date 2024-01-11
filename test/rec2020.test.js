@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { rec2020, formatCss } from '../src/index.js';
+import { rec2020, rgb, formatCss } from '../src/index.js';
 
 tape('rec2020', t => {
 	t.deepEqual(
@@ -48,5 +48,16 @@ tape('formatCss', t => {
 		formatCss('color(rec2020 0% 50% 0.5 / 25%)'),
 		'color(rec2020 0 0.5 0.5 / 0.25)'
 	);
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(rec2020 none 0.5 none)'), 'rec2020 to rgb is ok');
+	t.deepEqual(
+		rgb('color(rec2020 none 0.5 none)'),
+		rgb('color(rec2020 0 0.5 0')
+	);
+	t.ok(rec2020('rgb(none 100 20)'), 'rgb to rec2020 is ok');
+	t.deepEqual(rec2020('rgb(none 100 20)'), rec2020('rgb(0 100 20)'));
 	t.end();
 });

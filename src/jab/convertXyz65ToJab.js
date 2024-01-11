@@ -12,7 +12,7 @@ const jabPqEncode = v => {
 };
 
 // Convert to Absolute XYZ
-const abs = v => Math.max(v * 203, 0);
+const abs = (v = 0) => Math.max(v * 203, 0);
 
 const convertXyz65ToJab = ({ x, y, z, alpha }) => {
 	x = abs(x);

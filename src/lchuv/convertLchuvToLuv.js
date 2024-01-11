@@ -1,4 +1,5 @@
 const convertLchuvToLuv = ({ l, c, h, alpha }) => {
+	if (h === undefined) h = 0;
 	let res = {
 		mode: 'luv',
 		l: l,

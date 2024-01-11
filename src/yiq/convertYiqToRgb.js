@@ -1,4 +1,7 @@
 const convertYiqToRgb = ({ y, i, q, alpha }) => {
+	if (y === undefined) y = 0;
+	if (i === undefined) i = 0;
+	if (q === undefined) q = 0;
 	const res = {
 		mode: 'rgb',
 		r: y + 0.95608445 * i + 0.6208885 * q,

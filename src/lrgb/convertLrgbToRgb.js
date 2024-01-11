@@ -1,4 +1,4 @@
-const fn = c => {
+const fn = (c = 0) => {
 	const abs = Math.abs(c);
 	if (abs > 0.0031308) {
 		return (Math.sign(c) || 1) * (1.055 * Math.pow(abs, 1 / 2.4) - 0.055);

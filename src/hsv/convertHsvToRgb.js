@@ -3,7 +3,9 @@ import normalizeHue from '../util/normalizeHue.js';
 // Based on: https://en.wikipedia.org/wiki/HSL_and_HSV#Converting_to_RGB
 
 export default function convertHsvToRgb({ h, s, v, alpha }) {
-	h = normalizeHue(h);
+	h = normalizeHue(h !== undefined ? h : 0);
+	if (s === undefined) s = 0;
+	if (v === undefined) v = 0;
 	let f = Math.abs(((h / 60) % 2) - 1);
 	let res;
 	switch (Math.floor(h / 60)) {

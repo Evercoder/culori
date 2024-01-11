@@ -1,5 +1,11 @@
 import tape from 'tape';
-import { oklab, formatCss, useParser, removeParser } from '../src/index.js';
+import {
+	oklab,
+	rgb,
+	formatCss,
+	useParser,
+	removeParser
+} from '../src/index.js';
 
 tape('rgb → oklab', t => {
 	t.deepEqual(
@@ -88,5 +94,13 @@ tape('oklab()', t => {
 
 tape('formatCss', t => {
 	t.equal(formatCss('oklab(30% 0.5 1 / 0.25)'), 'oklab(0.3 0.5 1 / 0.25)');
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('oklab(none 0.5 none)'), 'oklab to rgb is ok');
+	t.deepEqual(rgb('oklab(none 0.5 none)'), rgb('oklab(0% 0.5 0%)'));
+	t.ok(oklab('rgb(none 100 20)'), 'rgb to oklab is ok');
+	t.deepEqual(oklab('rgb(none 100 20)'), oklab('rgb(0 100 20)'));
 	t.end();
 });

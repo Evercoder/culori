@@ -27,17 +27,21 @@ import normalizeHue from '../util/normalizeHue.js';
 import { get_Cs, toe } from './helpers.js';
 
 export default function convertOklabToOkhsl(lab) {
-	const ret = { mode: 'okhsl', l: toe(lab.l) };
+	const l = lab.l !== undefined ? lab.l : 0;
+	const a = lab.a !== undefined ? lab.a : 0;
+	const b = lab.b !== undefined ? lab.b : 0;
+
+	const ret = { mode: 'okhsl', l: toe(l) };
 
 	if (lab.alpha !== undefined) {
 		ret.alpha = lab.alpha;
 	}
-	let c = Math.sqrt(lab.a * lab.a + lab.b * lab.b);
+	let c = Math.sqrt(a * a + b * b);
 	if (!c) {
 		ret.s = 0;
 		return ret;
 	}
-	let [C_0, C_mid, C_max] = get_Cs(lab.l, lab.a / c, lab.b / c);
+	let [C_0, C_mid, C_max] = get_Cs(l, a / c, b / c);
 	let s;
 	if (c < C_mid) {
 		let k_0 = 0;
@@ -54,7 +58,7 @@ export default function convertOklabToOkhsl(lab) {
 	}
 	if (s) {
 		ret.s = s;
-		ret.h = normalizeHue((Math.atan2(lab.b, lab.a) * 180) / Math.PI);
+		ret.h = normalizeHue((Math.atan2(b, a) * 180) / Math.PI);
 	}
 	return ret;
 }

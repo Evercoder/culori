@@ -26,30 +26,32 @@
 import { toe_inv, get_Cs } from './helpers.js';
 
 export default function convertOkhslToOklab(hsl) {
-	let l = toe_inv(hsl.l);
+	let h = hsl.h !== undefined ? hsl.h : 0;
+	let s = hsl.s !== undefined ? hsl.s : 0;
+	let l = hsl.l !== undefined ? hsl.l : 0;
 
-	const ret = { mode: 'oklab', l };
+	const ret = { mode: 'oklab', l: toe_inv(l) };
 
 	if (hsl.alpha !== undefined) {
 		ret.alpha = hsl.alpha;
 	}
 
-	if (!hsl.s || hsl.l === 1) {
+	if (!s || l === 1) {
 		ret.a = ret.b = 0;
 		return ret;
 	}
 
-	let a_ = Math.cos((hsl.h / 180) * Math.PI);
-	let b_ = Math.sin((hsl.h / 180) * Math.PI);
-	let [C_0, C_mid, C_max] = get_Cs(l, a_, b_);
+	let a_ = Math.cos((h / 180) * Math.PI);
+	let b_ = Math.sin((h / 180) * Math.PI);
+	let [C_0, C_mid, C_max] = get_Cs(ret.l, a_, b_);
 	let t, k_0, k_1, k_2;
-	if (hsl.s < 0.8) {
-		t = 1.25 * hsl.s;
+	if (s < 0.8) {
+		t = 1.25 * s;
 		k_0 = 0;
 		k_1 = 0.8 * C_0;
 		k_2 = 1 - k_1 / C_mid;
 	} else {
-		t = 5 * (hsl.s - 0.8);
+		t = 5 * (s - 0.8);
 		k_0 = C_mid;
 		k_1 = (0.2 * C_mid * C_mid * 1.25 * 1.25) / C_0;
 		k_2 = 1 - k_1 / (C_max - C_mid);
