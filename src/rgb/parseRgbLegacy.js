@@ -40,9 +40,9 @@ const parseRgbLegacy = color => {
 	}
 
 	if (match[4] !== undefined) {
-		res.alpha = match[4] / 100;
+		res.alpha = Math.max(0, Math.min(1, match[4] / 100));
 	} else if (match[5] !== undefined) {
-		res.alpha = +match[5];
+		res.alpha = Math.max(0, Math.min(1, +match[5]));
 	}
 
 	return res;

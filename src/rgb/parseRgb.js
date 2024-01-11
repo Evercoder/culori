@@ -19,7 +19,13 @@ function parseRgb(color, parsed) {
 		res.b = b.type === Tok.Number ? b.value / 255 : b.value / 100;
 	}
 	if (alpha.type !== Tok.None) {
-		res.alpha = alpha.type === Tok.Number ? alpha.value : alpha.value / 100;
+		res.alpha = Math.min(
+			1,
+			Math.max(
+				0,
+				alpha.type === Tok.Number ? alpha.value : alpha.value / 100
+			)
+		);
 	}
 
 	return res;

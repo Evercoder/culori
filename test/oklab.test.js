@@ -71,6 +71,18 @@ tape('oklab()', t => {
 		{ l: 1, a: 1, b: 0, mode: 'oklab' },
 		'clamp L to 1'
 	);
+
+	t.deepEqual(
+		oklab('oklab(0.4 -1 1 / -0.5)'),
+		{ mode: 'oklab', l: 0.4, a: -1, b: 1, alpha: 0 },
+		'clamp alpha < 0'
+	);
+
+	t.deepEqual(
+		oklab('oklab(0.4 -1 1 / 1.5)'),
+		{ mode: 'oklab', l: 0.4, a: -1, b: 1, alpha: 1 },
+		'clamp alpha > 1'
+	);
 	t.end();
 });
 

@@ -145,6 +145,30 @@ tape('rgb', function (test) {
 		'rgba current (percentage)'
 	);
 
+	test.deepEqual(
+		parse('rgba(255, 0, 0, 150%)'),
+		{ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 1 },
+		'rgb legacy, clamp alpha > 1'
+	);
+
+	test.deepEqual(
+		parse('rgba(255, 0, 0, -50%)'),
+		{ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0 },
+		'rgb legacy, clamp alpha < 0'
+	);
+
+	test.deepEqual(
+		parse('rgb(255 0 0 / 150%)'),
+		{ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 1 },
+		'rgb modern, clamp alpha > 1'
+	);
+
+	test.deepEqual(
+		parse('rgb(255 0 0 / -50%)'),
+		{ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0 },
+		'rgb modern, clamp alpha < 0'
+	);
+
 	test.end();
 });
 
@@ -221,6 +245,30 @@ tape('hsl', function (test) {
 		'hsla current (percentage)'
 	);
 
+	test.deepEqual(
+		parse('hsla(240, 100%, 50%, -50%)'),
+		{ mode: 'hsl', h: 240, s: 1, l: 0.5, alpha: 0 },
+		'hsl legacy, clamp alpha < 0'
+	);
+
+	test.deepEqual(
+		parse('hsla(240, 100%, 50%, 150%)'),
+		{ mode: 'hsl', h: 240, s: 1, l: 0.5, alpha: 1 },
+		'hsl legacy, clamp alpha > 1'
+	);
+
+	test.deepEqual(
+		parse('hsl(240 100% 50% / -50%)'),
+		{ mode: 'hsl', h: 240, s: 1, l: 0.5, alpha: 0 },
+		'hsl modern, clamp alpha < 0'
+	);
+
+	test.deepEqual(
+		parse('hsla(240 100% 50% / 150%)'),
+		{ mode: 'hsl', h: 240, s: 1, l: 0.5, alpha: 1 },
+		'hsl modern, clamp alpha > 1'
+	);
+
 	test.end();
 });
 
@@ -253,6 +301,18 @@ tape('hwb', function (test) {
 			mode: 'hwb'
 		},
 		'<number>'
+	);
+
+	test.deepEqual(
+		parse('hwb(50deg 25 100 / -0.5)'),
+		{ mode: 'hwb', h: 50, w: 0.25, b: 1, alpha: 0 },
+		'clamp alpha < 0'
+	);
+
+	test.deepEqual(
+		parse('hwb(50deg 25 100 / 150%)'),
+		{ mode: 'hwb', h: 50, w: 0.25, b: 1, alpha: 1 },
+		'clamp alpha > 1'
 	);
 
 	test.end();
@@ -295,6 +355,18 @@ tape('lab()', function (test) {
 		'clamp L to 0'
 	);
 
+	test.deepEqual(
+		parse('lab(40 -10 10 / -0.5)'),
+		{ mode: 'lab', l: 40, a: -10, b: 10, alpha: 0 },
+		'clamp alpha < 0'
+	);
+
+	test.deepEqual(
+		parse('lab(40 -10 10 / 1.5)'),
+		{ mode: 'lab', l: 40, a: -10, b: 10, alpha: 1 },
+		'clamp alpha > 1'
+	);
+
 	test.end();
 });
 
@@ -327,6 +399,18 @@ tape('lch()', function (test) {
 		parse('lch(-1 -45 -480deg)'),
 		{ l: 0, c: 0, h: -480, mode: 'lch' },
 		'clamp L to 0, C to 0'
+	);
+
+	test.deepEqual(
+		parse('lch(40 5 10 / -0.5)'),
+		{ mode: 'lch', l: 40, c: 5, h: 10, alpha: 0 },
+		'clamp alpha < 0'
+	);
+
+	test.deepEqual(
+		parse('lch(40 5 10 / 1.5)'),
+		{ mode: 'lch', l: 40, c: 5, h: 10, alpha: 1 },
+		'clamp alpha > 1'
 	);
 
 	test.end();

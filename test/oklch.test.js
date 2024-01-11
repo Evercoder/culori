@@ -63,6 +63,17 @@ tape('oklch()', t => {
 		},
 		'clamp L to 1'
 	);
+	t.deepEqual(
+		oklch('oklch(0.4 0.5 10 / -0.5)'),
+		{ mode: 'oklch', l: 0.4, c: 0.5, h: 10, alpha: 0 },
+		'clamp alpha < 0'
+	);
+
+	t.deepEqual(
+		oklch('oklch(0.4 0.5 10 / 1.5)'),
+		{ mode: 'oklch', l: 0.4, c: 0.5, h: 10, alpha: 1 },
+		'clamp alpha > 1'
+	);
 	t.end();
 });
 
@@ -85,5 +96,9 @@ tape('color(--oklch) with custom ident', t => {
 
 tape('formatCss', t => {
 	t.equal(formatCss('oklch(30% 0.5 1 / 0.25)'), 'oklch(0.3 0.5 1 / 0.25)');
+	t.equal(
+		formatCss(oklch('#ffffff00')),
+		'oklch(0.999999993473546 0 none / 0)'
+	);
 	t.end();
 });

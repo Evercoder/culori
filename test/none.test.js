@@ -1,5 +1,12 @@
 import tape from 'tape';
-import { parse, formatRgb, formatHsl, formatCss } from '../src/index.js';
+import {
+	parse,
+	formatHex,
+	formatHex8,
+	formatRgb,
+	formatHsl,
+	formatCss
+} from '../src/index.js';
 
 tape('parse "none" keyword', t => {
 	t.deepEqual(
@@ -50,23 +57,24 @@ tape('parse "none" keyword', t => {
 
 tape('serialize "none" keyword', t => {
 	t.equal(
-		formatRgb('rgb(none 255 127.5)'),
-		'rgb(none, 255, 128)',
+		formatRgb('rgb(none none none / none)'),
+		'rgb(0, 0, 0)',
 		'formatRgb'
 	);
+	t.equal(formatHex('rgb(none none none / none)'), '#000000', 'formatHex');
 	t.equal(
-		formatHsl('hsl(none none none)'),
-		'hsl(0, none, none)',
-		'formatHsl'
+		formatHex8('rgb(none none none / none)'),
+		'#000000ff',
+		'formatHex8'
 	);
 	t.equal(
-		formatHsl('hsl(none none none)'),
-		'hsl(0, none, none)',
+		formatHsl('hsl(none none none / none)'),
+		'hsl(0, 0%, 0%)',
 		'formatHsl'
 	);
 	t.equal(
 		formatCss('hsl(none none none)'),
-		'hsl(0 none none)',
+		'hsl(none none none)',
 		'formatCss(hsl)'
 	);
 	t.equal(
@@ -76,8 +84,19 @@ tape('serialize "none" keyword', t => {
 	);
 	t.equal(
 		formatCss('lch(none none none / none)'),
-		'lch(none none 0)',
+		'lch(none none none)',
 		'formatCss(lch)'
+	);
+
+	t.equal(
+		formatCss('oklab(none none none / none)'),
+		'oklab(none none none)',
+		'formatCss(oklab)'
+	);
+	t.equal(
+		formatCss('oklch(none none none / none)'),
+		'oklch(none none none)',
+		'formatCss(oklch)'
 	);
 	t.end();
 });

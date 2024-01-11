@@ -28,7 +28,9 @@ const definition = {
 
 	parse: [parseHwb],
 	serialize: c =>
-		`hwb(${c.h || 0} ${c.w * 100}% ${c.b * 100}%${
+		`hwb(${c.h !== undefined ? c.h : 'none'} ${
+			c.w !== undefined ? c.w * 100 + '%' : 'none'
+		} ${c.b !== undefined ? c.b * 100 + '%' : 'none'}${
 			c.alpha < 1 ? ` / ${c.alpha}` : ''
 		})`,
 

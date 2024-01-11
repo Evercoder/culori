@@ -44,6 +44,6 @@ tape('formatCss', t => {
 	t.equal(formatCss('lch(40% 10 30 / 50%)'), 'lch(40 10 30 / 0.5)');
 	t.equal(formatCss('lch(40% 10 30 / 100%)'), 'lch(40 10 30)');
 	t.equal(formatCss('lch(40% 10 30)'), 'lch(40 10 30)');
-	t.equal(formatCss(lch('#ffffff00')), 'lch(100.00000139649632 0 0 / 0)');
+	t.equal(formatCss(lch('#ffffff00')), 'lch(100.00000139649632 0 none / 0)');
 	t.end();
 });

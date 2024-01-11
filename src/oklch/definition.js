@@ -23,7 +23,9 @@ const definition = {
 	serialize: c =>
 		`oklch(${c.l !== undefined ? c.l : 'none'} ${
 			c.c !== undefined ? c.c : 'none'
-		} ${c.h || 0}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
+		} ${c.h !== undefined ? c.h : 'none'}${
+			c.alpha < 1 ? ` / ${c.alpha}` : ''
+		})`,
 
 	ranges: {
 		l: [0, 1],

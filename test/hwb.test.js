@@ -33,6 +33,6 @@ tape('formatCss', t => {
 	t.equal(formatCss('hwb(200 150% 50% / .5)'), 'hwb(200 150% 50% / 0.5)');
 	t.equal(formatCss('hwb(200 150% 50% / 100%)'), 'hwb(200 150% 50%)');
 	t.equal(formatCss('hwb(200 150% 50%)'), 'hwb(200 150% 50%)');
-	t.equal(formatCss(hwb('#ffffff00')), 'hwb(0 100% 0% / 0)');
+	t.equal(formatCss(hwb('#ffffff00')), 'hwb(none 100% 0% / 0)');
 	t.end();
 });

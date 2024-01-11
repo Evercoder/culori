@@ -29,9 +29,9 @@ const parseHslLegacy = color => {
 	}
 
 	if (match[6] !== undefined) {
-		res.alpha = match[6] / 100;
+		res.alpha = Math.max(0, Math.min(1, match[6] / 100));
 	} else if (match[7] !== undefined) {
-		res.alpha = +match[7];
+		res.alpha = Math.max(0, Math.min(1, +match[7]));
 	}
 	return res;
 };
