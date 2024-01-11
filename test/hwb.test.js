@@ -44,3 +44,12 @@ tape('missing components', t => {
 	t.deepEqual(hwb('rgb(none 100 20)'), hwb('rgb(0 100 20)'));
 	t.end();
 });
+
+tape('powerless components', t => {
+	t.deepEqual(hwb(rgb('hwb(60deg 75% 50%)')), {
+		mode: 'hwb',
+		w: 0.6,
+		b: 0.4
+	});
+	t.end();
+});
