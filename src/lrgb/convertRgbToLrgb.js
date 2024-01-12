@@ -1,4 +1,4 @@
-const fn = c => {
+const fn = (c = 0) => {
 	const abs = Math.abs(c);
 	if (abs <= 0.04045) {
 		return c / 12.92;

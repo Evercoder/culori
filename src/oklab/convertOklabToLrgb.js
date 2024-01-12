@@ -1,4 +1,7 @@
 const convertOklabToLrgb = ({ l, a, b, alpha }) => {
+	if (l === undefined) l = 0;
+	if (a === undefined) a = 0;
+	if (b === undefined) b = 0;
 	let L = Math.pow(
 		l * 0.99999999845051981432 +
 			0.39633779217376785678 * a +

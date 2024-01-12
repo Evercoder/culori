@@ -1,6 +1,8 @@
 import normalizeHue from '../util/normalizeHue.js';
 
 const convertLuvToLchuv = ({ l, u, v, alpha }) => {
+	if (u === undefined) u = 0;
+	if (v === undefined) v = 0;
 	let c = Math.sqrt(u * u + v * v);
 	let res = {
 		mode: 'lchuv',

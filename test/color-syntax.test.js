@@ -36,3 +36,17 @@ tape('hue components', t => {
 	});
 	t.end();
 });
+
+tape('clamp alpha', t => {
+	t.deepEqual(
+		parse('color(srgb 1.5 -0.4 0.2 / -0.5)'),
+		{ mode: 'rgb', r: 1.5, g: -0.4, b: 0.2, alpha: 0 },
+		'clamp alpha < 0'
+	);
+	t.deepEqual(
+		parse('color(srgb 1.5 -0.4 0.2 / 1.5)'),
+		{ mode: 'rgb', r: 1.5, g: -0.4, b: 0.2, alpha: 1 },
+		'clamp alpha > 1'
+	);
+	t.end();
+});

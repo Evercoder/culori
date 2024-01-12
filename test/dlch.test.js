@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { dlch, formatCss } from '../src/index.js';
+import { dlch, rgb, formatCss } from '../src/index.js';
 
 tape('dlch', t => {
 	t.deepEqual(dlch('white'), { mode: 'dlch', l: 100, c: 0 }, 'white');
@@ -45,5 +45,16 @@ tape('formatCss', t => {
 		formatCss('color(--din99o-lch 0 50% 0.5 / 25%)'),
 		'color(--din99o-lch 0 0.5 0.5 / 0.25)'
 	);
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(--din99o-lch none 0.5 none)'), 'dlch to rgb is ok');
+	t.deepEqual(
+		rgb('color(--din99o-lch none 0.5 none)'),
+		rgb('color(--din99o-lch 0% 0.5 0)')
+	);
+	t.ok(dlch('rgb(none 100 20)'), 'rgb to dlch is ok');
+	t.deepEqual(dlch('rgb(none 100 20)'), dlch('rgb(0 100 20)'));
 	t.end();
 });

@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lchuv, formatCss } from '../src/index.js';
+import { lchuv, rgb, formatCss } from '../src/index.js';
 
 tape('lchuv', t => {
 	t.deepEqual(
@@ -53,5 +53,16 @@ tape('formatCss', t => {
 		formatCss('color(--lchuv 30 0.5 1 / 0.25)'),
 		'color(--lchuv 30 0.5 1 / 0.25)'
 	);
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(--lchuv none 0.5 none)'), 'lchuv to rgb is ok');
+	t.deepEqual(
+		rgb('color(--lchuv none 0.5 none)'),
+		rgb('color(--lchuv 0 0.5 0)')
+	);
+	t.ok(lchuv('rgb(none 100 20)'), 'rgb to lchuv is ok');
+	t.deepEqual(lchuv('rgb(none 100 20)'), lchuv('rgb(0 100 20)'));
 	t.end();
 });

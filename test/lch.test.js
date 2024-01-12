@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lch, formatCss } from '../src/index.js';
+import { lch, rgb, formatCss } from '../src/index.js';
 
 tape('lch', t => {
 	t.deepEqual(
@@ -44,6 +44,14 @@ tape('formatCss', t => {
 	t.equal(formatCss('lch(40% 10 30 / 50%)'), 'lch(40 10 30 / 0.5)');
 	t.equal(formatCss('lch(40% 10 30 / 100%)'), 'lch(40 10 30)');
 	t.equal(formatCss('lch(40% 10 30)'), 'lch(40 10 30)');
-	t.equal(formatCss(lch('#ffffff00')), 'lch(100.00000139649632 0 0 / 0)');
+	t.equal(formatCss(lch('#ffffff00')), 'lch(100.00000139649632 0 none / 0)');
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('lch(none 0.5 none)'), 'lch to rgb is ok');
+	t.deepEqual(rgb('lch(none 0.5 none)'), rgb('lch(0% 0.5 0)'));
+	t.ok(lch('rgb(none 100 20)'), 'rgb to lch is ok');
+	t.deepEqual(lch('rgb(none 100 20)'), lch('rgb(0 100 20)'));
 	t.end();
 });

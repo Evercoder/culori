@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { lab, formatCss } from '../src/index.js';
+import { lab, rgb, formatCss } from '../src/index.js';
 
 tape('lab', t => {
 	t.deepEqual(
@@ -41,5 +41,13 @@ tape('formatCss', t => {
 	t.equal(formatCss('lab(40% 10 30 / 50%)'), 'lab(40 10 30 / 0.5)');
 	t.equal(formatCss('lab(40% 10 30 / 100%)'), 'lab(40 10 30)');
 	t.equal(formatCss('lab(40% 10 30)'), 'lab(40 10 30)');
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('lab(none 0.5 none)'), 'lab to rgb is ok');
+	t.deepEqual(rgb('lab(none 0.5 none)'), rgb('lab(0% 0.5 0%)'));
+	t.ok(lab('rgb(none 100 20)'), 'rgb to lab is ok');
+	t.deepEqual(lab('rgb(none 100 20)'), lab('rgb(0 100 20)'));
 	t.end();
 });

@@ -7,7 +7,7 @@
 		* https://www.adobe.com/digitalimag/pdfs/AdobeRGB1998.pdf
 */
 
-const linearize = v => Math.pow(Math.abs(v), 563 / 256) * Math.sign(v);
+const linearize = (v = 0) => Math.pow(Math.abs(v), 563 / 256) * Math.sign(v);
 
 const convertA98ToXyz65 = a98 => {
 	let r = linearize(a98.r);

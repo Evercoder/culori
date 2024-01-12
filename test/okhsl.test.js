@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { okhsl, formatHex, formatCss } from '../src/index.js';
+import { okhsl, rgb, formatHex, formatCss } from '../src/index.js';
 
 tape('rgb → okhsl', t => {
 	t.equal(
@@ -58,5 +58,16 @@ tape('rgb → okhsl → rgb', t => {
 	t.equal(formatHex(okhsl('white')), '#ffffff', 'white');
 	t.equal(formatHex(okhsl('black')), '#000000', 'black');
 	t.equal(formatHex(okhsl('#3333')), '#333333', '#333');
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(--okhsl none 0.5 none)'));
+	t.deepEqual(
+		rgb('color(--okhsl none 0.5 none)'),
+		rgb('color(--okhsl 0 0.5 0)')
+	);
+	t.ok(okhsl('rgb(none 100 20)'));
+	t.deepEqual(okhsl('rgb(none 100 20)'), okhsl('rgb(0 100 20)'));
 	t.end();
 });

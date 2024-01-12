@@ -9,6 +9,9 @@
 import convertLrgbToRgb from '../lrgb/convertLrgbToRgb.js';
 
 const convertXyz50ToRgb = ({ x, y, z, alpha }) => {
+	if (x === undefined) x = 0;
+	if (y === undefined) y = 0;
+	if (z === undefined) z = 0;
 	let res = convertLrgbToRgb({
 		r:
 			x * 3.1341359569958707 -

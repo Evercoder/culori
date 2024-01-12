@@ -8,6 +8,14 @@ export const un = u_fn(D50.X, D50.Y, D50.Z);
 export const vn = v_fn(D50.X, D50.Y, D50.Z);
 
 const convertLuvToXyz50 = ({ l, u, v, alpha }) => {
+	if (l === undefined) l = 0;
+	if (l === 0) {
+		return { mode: 'xyz50', x: 0, y: 0, z: 0 };
+	}
+
+	if (u === undefined) u = 0;
+	if (v === undefined) v = 0;
+
 	let up = u / (13 * l) + un;
 	let vp = v / (13 * l) + vn;
 	let y = D50.Y * (l <= 8 ? l / k : Math.pow((l + 16) / 116, 3));

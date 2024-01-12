@@ -28,7 +28,13 @@ function parseOklch(color, parsed) {
 		res.h = h.value;
 	}
 	if (alpha.type !== Tok.None) {
-		res.alpha = alpha.type === Tok.Number ? alpha.value : alpha.value / 100;
+		res.alpha = Math.min(
+			1,
+			Math.max(
+				0,
+				alpha.type === Tok.Number ? alpha.value : alpha.value / 100
+			)
+		);
 	}
 
 	return res;

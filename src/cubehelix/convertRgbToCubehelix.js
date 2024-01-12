@@ -18,6 +18,9 @@ let BE = M[1] * M[4];
 let BCAD = M[1] * M[2] - M[0] * M[3];
 
 const convertRgbToCubehelix = ({ r, g, b, alpha }) => {
+	if (r === undefined) r = 0;
+	if (g === undefined) g = 0;
+	if (b === undefined) b = 0;
 	let l = (BCAD * b + r * DE - g * BE) / (BCAD + DE - BE);
 	let x = b - l;
 	let y = (M[4] * (g - l) - M[2] * x) / M[3];

@@ -15,6 +15,9 @@ const gamma = v => {
 };
 
 const convertXyz50ToProphoto = ({ x, y, z, alpha }) => {
+	if (x === undefined) x = 0;
+	if (y === undefined) y = 0;
+	if (z === undefined) z = 0;
 	let res = {
 		mode: 'prophoto',
 		r: gamma(

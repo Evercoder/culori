@@ -1,5 +1,5 @@
 import tape from 'tape';
-import { prophoto, formatCss } from '../src/index.js';
+import { prophoto, rgb, formatCss } from '../src/index.js';
 
 tape('prophoto', t => {
 	t.deepEqual(
@@ -53,5 +53,16 @@ tape('formatCss', t => {
 		formatCss('color(prophoto-rgb 0% 50% 0.5 / 25%)'),
 		'color(prophoto-rgb 0 0.5 0.5 / 0.25)'
 	);
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(rgb('color(prophoto-rgb none 0.5 none)'), 'prophoto to rgb is ok');
+	t.deepEqual(
+		rgb('color(prophoto-rgb none 0.5 none)'),
+		rgb('color(prophoto-rgb 0 0.5 0')
+	);
+	t.ok(prophoto('rgb(none 100 20)'), 'rgb to prophoto is ok');
+	t.deepEqual(prophoto('rgb(none 100 20)'), prophoto('rgb(0 100 20)'));
 	t.end();
 });

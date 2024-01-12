@@ -9,6 +9,9 @@
 const gamma = v => Math.pow(Math.abs(v), 256 / 563) * Math.sign(v);
 
 const convertXyz65ToA98 = ({ x, y, z, alpha }) => {
+	if (x === undefined) x = 0;
+	if (y === undefined) y = 0;
+	if (z === undefined) z = 0;
 	let res = {
 		mode: 'a98',
 		r: gamma(

@@ -28,12 +28,15 @@ import convertOklabToLrgb from '../oklab/convertOklabToLrgb.js';
 import { get_ST_max, toe_inv, toe } from '../okhsl/helpers.js';
 
 export default function convertOklabToOkhsv(lab) {
-	let c = Math.sqrt(lab.a * lab.a + lab.b * lab.b);
+	let l = lab.l !== undefined ? lab.l : 0;
+	let a = lab.a !== undefined ? lab.a : 0;
+	let b = lab.b !== undefined ? lab.b : 0;
 
-	let l = lab.l;
+	let c = Math.sqrt(a * a + b * b);
+
 	// TODO: c = 0
-	let a_ = c ? lab.a / c : 1;
-	let b_ = c ? lab.b / c : 1;
+	let a_ = c ? a / c : 1;
+	let b_ = c ? b / c : 1;
 
 	let [S_max, T] = get_ST_max(a_, b_);
 	let S_0 = 0.5;
@@ -61,7 +64,7 @@ export default function convertOklabToOkhsv(lab) {
 		v: l ? l / L_v : 0
 	};
 	if (ret.s) {
-		ret.h = normalizeHue((Math.atan2(lab.b, lab.a) * 180) / Math.PI);
+		ret.h = normalizeHue((Math.atan2(b, a) * 180) / Math.PI);
 	}
 	if (lab.alpha !== undefined) {
 		ret.alpha = lab.alpha;

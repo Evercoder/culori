@@ -29,8 +29,9 @@ export default function convertOkhsvToOklab(hsv) {
 		ret.alpha = hsv.alpha;
 	}
 
-	// Hue may be missing for achromatic colors
-	const h = hsv.h || 0;
+	const h = hsv.h !== undefined ? hsv.h : 0;
+	const s = hsv.s !== undefined ? hsv.s : 0;
+	const v = hsv.v !== undefined ? hsv.v : 0;
 
 	const a_ = Math.cos((h / 180) * Math.PI);
 	const b_ = Math.sin((h / 180) * Math.PI);
@@ -38,8 +39,8 @@ export default function convertOkhsvToOklab(hsv) {
 	const [S_max, T] = get_ST_max(a_, b_);
 	const S_0 = 0.5;
 	const k = 1 - S_0 / S_max;
-	const L_v = 1 - (hsv.s * S_0) / (S_0 + T - T * k * hsv.s);
-	const C_v = (hsv.s * T * S_0) / (S_0 + T - T * k * hsv.s);
+	const L_v = 1 - (s * S_0) / (S_0 + T - T * k * s);
+	const C_v = (s * T * S_0) / (S_0 + T - T * k * s);
 
 	const L_vt = toe_inv(L_v);
 	const C_vt = (C_v * L_vt) / L_v;
@@ -52,7 +53,7 @@ export default function convertOkhsvToOklab(hsv) {
 		1 / Math.max(rgb_scale.r, rgb_scale.g, rgb_scale.b, 0)
 	);
 
-	const L_new = toe_inv(hsv.v * L_v);
+	const L_new = toe_inv(v * L_v);
 	const C = (C_v * L_new) / L_v;
 
 	ret.l = L_new * scale_L;

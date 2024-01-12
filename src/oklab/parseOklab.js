@@ -22,7 +22,13 @@ function parseOklab(color, parsed) {
 		res.b = b.type === Tok.Number ? b.value : (b.value * 0.4) / 100;
 	}
 	if (alpha.type !== Tok.None) {
-		res.alpha = alpha.type === Tok.Number ? alpha.value : alpha.value / 100;
+		res.alpha = Math.min(
+			1,
+			Math.max(
+				0,
+				alpha.type === Tok.Number ? alpha.value : alpha.value / 100
+			)
+		);
 	}
 
 	return res;

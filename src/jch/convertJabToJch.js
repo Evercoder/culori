@@ -1,6 +1,8 @@
 import normalizeHue from '../util/normalizeHue.js';
 
 const convertJabToJch = ({ j, a, b, alpha }) => {
+	if (a === undefined) a = 0;
+	if (b === undefined) b = 0;
 	let c = Math.sqrt(a * a + b * b);
 	let res = {
 		mode: 'jch',

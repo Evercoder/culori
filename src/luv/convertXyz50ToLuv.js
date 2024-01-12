@@ -10,6 +10,9 @@ export const vn = v_fn(D50.X, D50.Y, D50.Z);
 const l_fn = value => (value <= e ? k * value : 116 * Math.cbrt(value) - 16);
 
 const convertXyz50ToLuv = ({ x, y, z, alpha }) => {
+	if (x === undefined) x = 0;
+	if (y === undefined) y = 0;
+	if (z === undefined) z = 0;
 	let l = l_fn(y / D50.Y);
 	let u = u_fn(x, y, z);
 	let v = v_fn(x, y, z);

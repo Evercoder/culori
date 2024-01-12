@@ -274,10 +274,14 @@ export function parseColorSyntax(tokens) {
 		return undefined;
 	}
 	const channels = getMode(mode).channels;
-	for (let ii = 0, c; ii < channels.length; ii++) {
+	for (let ii = 0, c, ch; ii < channels.length; ii++) {
 		c = coords[ii];
+		ch = channels[ii];
 		if (c.type !== Tok.None) {
-			res[channels[ii]] = c.type === Tok.Number ? c.value : c.value / 100;
+			res[ch] = c.type === Tok.Number ? c.value : c.value / 100;
+			if (ch === 'alpha') {
+				res[ch] = Math.max(0, Math.min(1, res[ch]));
+			}
 		}
 	}
 	return res;

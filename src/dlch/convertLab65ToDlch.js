@@ -7,6 +7,9 @@ import normalizeHue from '../util/normalizeHue.js';
  */
 
 const convertLab65ToDlch = ({ l, a, b, alpha }) => {
+	if (l === undefined) l = 0;
+	if (a === undefined) a = 0;
+	if (b === undefined) b = 0;
 	let e = a * cosθ + b * sinθ;
 	let f = 0.83 * (b * cosθ - a * sinθ);
 	let G = Math.sqrt(e * e + f * f);

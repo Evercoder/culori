@@ -1,4 +1,7 @@
 const convertLrgbToOklab = ({ r, g, b, alpha }) => {
+	if (r === undefined) r = 0;
+	if (g === undefined) g = 0;
+	if (b === undefined) b = 0;
 	let L = Math.cbrt(
 		0.41222147079999993 * r + 0.5363325363 * g + 0.0514459929 * b
 	);

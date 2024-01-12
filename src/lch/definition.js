@@ -34,7 +34,9 @@ const definition = {
 	serialize: c =>
 		`lch(${c.l !== undefined ? c.l : 'none'} ${
 			c.c !== undefined ? c.c : 'none'
-		} ${c.h || 0}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
+		} ${c.h !== undefined ? c.h : 'none'}${
+			c.alpha < 1 ? ` / ${c.alpha}` : ''
+		})`,
 
 	interpolate: {
 		h: { use: interpolatorLinear, fixup: fixupHueShorter },

@@ -123,3 +123,11 @@ tape('formatCss', t => {
 	);
 	t.end();
 });
+
+tape('missing components', t => {
+	t.ok(rgb('color(--hsv none 0.5 none)'), 'hsv to rgb is ok');
+	t.deepEqual(rgb('color(--hsv none 0.5 none)'), rgb('color(--hsv 0 0.5 0'));
+	t.ok(hsv('rgb(none 100 20)'), 'rgb to hsv is ok');
+	t.deepEqual(hsv('rgb(none 100 20)'), hsv('rgb(0 100 20)'));
+	t.end();
+});

@@ -5,8 +5,11 @@ import { getMode } from './modes.js';
 
 let twoDecimals = round(2);
 
-const clamp = value => Math.max(0, Math.min(1, value));
+const clamp = value => Math.max(0, Math.min(1, value || 0));
 const fixup = value => Math.round(clamp(value) * 255);
+
+const rgb = converter('rgb');
+const hsl = converter('hsl');
 
 export const serializeHex = color => {
 	if (color === undefined) {
@@ -34,9 +37,9 @@ export const serializeRgb = color => {
 		return undefined;
 	}
 
-	let r = color.r !== undefined ? fixup(color.r) : 'none';
-	let g = color.g !== undefined ? fixup(color.g) : 'none';
-	let b = color.b !== undefined ? fixup(color.b) : 'none';
+	let r = fixup(color.r);
+	let g = fixup(color.g);
+	let b = fixup(color.b);
 
 	if (color.alpha === undefined || color.alpha === 1) {
 		// opaque color
@@ -53,14 +56,8 @@ export const serializeHsl = color => {
 	}
 
 	const h = twoDecimals(color.h || 0);
-	const s =
-		color.s !== undefined
-			? twoDecimals(clamp(color.s) * 100) + '%'
-			: 'none';
-	const l =
-		color.l !== undefined
-			? twoDecimals(clamp(color.l) * 100) + '%'
-			: 'none';
+	const s = twoDecimals(clamp(color.s) * 100) + '%';
+	const l = twoDecimals(clamp(color.l) * 100) + '%';
 
 	if (color.alpha === undefined || color.alpha === 1) {
 		// opaque color
@@ -97,7 +94,7 @@ export const formatCss = c => {
 	return undefined;
 };
 
-export const formatHex = c => serializeHex(converter('rgb')(c));
-export const formatHex8 = c => serializeHex8(converter('rgb')(c));
-export const formatRgb = c => serializeRgb(converter('rgb')(c));
-export const formatHsl = c => serializeHsl(converter('hsl')(c));
+export const formatHex = c => serializeHex(rgb(c));
+export const formatHex8 = c => serializeHex8(rgb(c));
+export const formatRgb = c => serializeRgb(rgb(c));
+export const formatHsl = c => serializeHsl(hsl(c));
