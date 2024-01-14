@@ -1547,6 +1547,7 @@ Mode | Color space | Definition object
 `hsl` | HSL color space | `modeHsl`
 `hsv` | HSV color space | `modeHsv`
 `hwb` | HWB color space | `modeHwb`
+`itp` | IC<sub>t</sub>C<sub>p</sub> color space | `modeItp`
 `jab` | J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> color space | `modeJab`
 `jch` | J<sub>z</sub>a<sub>z</sub>b<sub>z</sub> in cylindrical form | `modeJch`
 `lab` | CIELAB color space (D50 Illuminant) | `modeLab`

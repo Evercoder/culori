@@ -5,7 +5,7 @@ import { converter, getMode } from '../src/index.js';
 	for a particular color space, by converting lots of
 	RGB colors to that space.
  */
-let ranges = (mode, step = 0.01) => {
+let ranges = (mode, step = 1 / 128) => {
 	let conv = converter(mode);
 	let chs = getMode(mode).channels;
 	let res = chs.reduce(
@@ -32,4 +32,4 @@ let ranges = (mode, step = 0.01) => {
 	return res;
 };
 
-console.log(ranges(process.argv[2], 0.0025));
+console.log(ranges(process.argv[2], 1 / 512));

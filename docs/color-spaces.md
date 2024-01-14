@@ -438,7 +438,21 @@ It has the default _Chroma from Luma_ adjustment applied (effectively Y is subtr
 | ------- | ------------- | ----------- |
 | `x`       | `[-0.0154, 0.0281]`≈ | Cyan-red component           |
 | `y`       | `[0, 0.8453]`≈     | Luma           |
-| `b`       | `[ -0.2778, 0.3880 ]` ≈ | Blue-yellow component           |
+| `b`       | `[ -0.2778, 0.3880 ]`≈ | Blue-yellow component           |
+
+Does not have gamut limits.
+
+#### `itp`
+
+IC<sub>t</sub>C<sub>p</sub> (or ITP) color space, as defined in ITU-R Recommendation BT.2100.
+
+| Channel | Range             | Description           |
+|---------|-------------------|-----------------------|
+| `i`     | `[0, 0.581]`≈     | Intensity             |
+| `t`    | `[-0.282, 0.278]`≈ | Blue-yellow component |
+| `p`    | `[-0.162, 0.279]`≈ | Green–red component   |
+
+Serialized as `color(--ictcp i t p)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
 Does not have gamut limits.
 

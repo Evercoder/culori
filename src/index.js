@@ -7,6 +7,7 @@ import modeHsi from './hsi/definition.js';
 import modeHsl from './hsl/definition.js';
 import modeHsv from './hsv/definition.js';
 import modeHwb from './hwb/definition.js';
+import modeItp from './itp/definition.js';
 import modeJab from './jab/definition.js';
 import modeJch from './jch/definition.js';
 import modeLab from './lab/definition.js';
@@ -172,6 +173,7 @@ export { default as convertHsiToRgb } from './hsi/convertHsiToRgb.js';
 export { default as convertHslToRgb } from './hsl/convertHslToRgb.js';
 export { default as convertHsvToRgb } from './hsv/convertHsvToRgb.js';
 export { default as convertHwbToRgb } from './hwb/convertHwbToRgb.js';
+export { default as convertItpToXyz65 } from './itp/convertItpToXyz65.js';
 export { default as convertJabToJch } from './jch/convertJabToJch.js';
 export { default as convertJabToRgb } from './jab/convertJabToRgb.js';
 export { default as convertJabToXyz65 } from './jab/convertJabToXyz65.js';
@@ -218,6 +220,7 @@ export { default as convertXyz50ToProphoto } from './prophoto/convertXyz50ToProp
 export { default as convertXyz50ToRgb } from './xyz50/convertXyz50ToRgb.js';
 export { default as convertXyz50ToXyz65 } from './xyz65/convertXyz50ToXyz65.js';
 export { default as convertXyz65ToA98 } from './a98/convertXyz65ToA98.js';
+export { default as convertXyz65ToItp } from './itp/convertXyz65ToItp.js';
 export { default as convertXyz65ToJab } from './jab/convertXyz65ToJab.js';
 export { default as convertXyz65ToLab65 } from './lab65/convertXyz65ToLab65.js';
 export { default as convertXyz65ToP3 } from './p3/convertXyz65ToP3.js';
@@ -235,6 +238,7 @@ export {
 	modeHsl,
 	modeHsv,
 	modeHwb,
+	modeItp,
 	modeJab,
 	modeJch,
 	modeLab,
@@ -266,6 +270,7 @@ export const hsi = useMode(modeHsi);
 export const hsl = useMode(modeHsl);
 export const hsv = useMode(modeHsv);
 export const hwb = useMode(modeHwb);
+export const itp = useMode(modeItp);
 export const jab = useMode(modeJab);
 export const jch = useMode(modeJch);
 export const lab = useMode(modeLab);
