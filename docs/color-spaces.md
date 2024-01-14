@@ -442,15 +442,17 @@ It has the default _Chroma from Luma_ adjustment applied (effectively Y is subtr
 
 Does not have gamut limits.
 
-#### `itp`
+### <abbr>IC<sub>t</sub>C<sub>p</sub></abbr>
 
-IC<sub>t</sub>C<sub>p</sub> (or ITP) color space, as defined in ITU-R Recommendation BT.2100.
+<abbr>IC<sub>t</sub>C<sub>p</sub></abbr> (or <abbr>ITP</abbr>) color space developed by [Dolby Laboratories](https://professional.dolby.com/siteassets/pdfs/ictcp_dolbywhitepaper_v071.pdf), as defined in [<abbr>ITU-R</abbr> Recommendation BT.2100](https://www.itu.int/rec/R-REC-BT.2100). It is included in the <abbr>CSS</abbr> [<abbr>HDR</abbr> Color Module Level 1](https://drafts.csswg.org/css-color-hdr/#ICtCp) specification.
+
+#### `itp`
 
 | Channel | Range             | Description           |
 |---------|-------------------|-----------------------|
 | `i`     | `[0, 0.581]`≈     | Intensity             |
-| `t`    | `[-0.282, 0.278]`≈ | Blue-yellow component |
-| `p`    | `[-0.162, 0.279]`≈ | Green–red component   |
+| `t`    | `[-0.282, 0.278]`≈ | Blue-yellow component (“tritanopia”) |
+| `p`    | `[-0.162, 0.279]`≈ | Green–red component (“protanopia”)  |
 
 Serialized as `color(--ictcp i t p)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
