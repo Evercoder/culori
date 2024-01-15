@@ -7,6 +7,7 @@ import {
 	differenceCmc,
 	differenceHyab,
 	differenceKotsarenkoRamos,
+	differenceItp,
 	rgb,
 	lab65,
 	round,
@@ -185,5 +186,10 @@ tape('difference in LCh space', t => {
 
 tape('differenceHyab', t => {
 	t.equal(differenceHyab()('red', 'green'), 139.92805737622862);
+	t.end();
+});
+
+tape('differenceItp', t => {
+	t.equal(differenceItp()('red', 'green'), 238.28868759957626);
 	t.end();
 });

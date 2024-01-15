@@ -292,6 +292,14 @@ const differenceHyab = () => {
 const differenceKotsarenkoRamos = () =>
 	differenceEuclidean('yiq', [0.5053, 0.299, 0.1957]);
 
+/*
+	ΔE_ITP, as defined in Rec. ITU-R BT.2124:
+
+	https://www.itu.int/rec/R-REC-BT.2124/en
+*/
+const differenceItp = () =>
+	differenceEuclidean('itp', [518400, 129600, 518400]);
+
 export {
 	differenceHueChroma,
 	differenceHueSaturation,
@@ -302,5 +310,6 @@ export {
 	differenceCiede2000,
 	differenceCmc,
 	differenceHyab,
-	differenceKotsarenkoRamos
+	differenceKotsarenkoRamos,
+	differenceItp
 };

@@ -458,6 +458,8 @@ Serialized as `color(--ictcp i t p)`, with the `none` keyword for any missing co
 
 Does not have gamut limits.
 
+The `itp` color space is the basis of the [ΔE<sub>ITP</sub> color difference](/api/#differenceItp) metric defined in _Objective metric for the assessment of the potential visibility of colour differences in television_ ([Rec. ITU-R BT.2124](https://www.itu.int/rec/R-REC-BT.2124/en)).
+
 ### Cubehelix
 
 [The Cubehelix color scheme](https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/) was described by Dave Green in this paper:

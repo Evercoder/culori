@@ -29,6 +29,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#differenceHueSaturation'>differenceHueSaturation</a></li>
 <li><a href='#differenceHyab'>differenceHyab</a></li>
 <li><a href='#differenceKotsarenkoRamos'>differenceKotsarenkoRamos</a></li>
+<li><a href='#differenceItp'>differenceItp</a></li>
 <li><a href='#displayable'>displayable</a></li>
 <li><a href='#color-spaces'>dlab</a></li>
 <li><a href='#color-spaces'>dlch</a></li>
@@ -1097,7 +1098,7 @@ These methods are concerned to finding the [distance between two colors](https:/
 
 Returns a [Euclidean distance](https://en.wikipedia.org/wiki/Color_difference#Euclidean) function in a certain color space.
 
-You can optionally assign different weights to the channels in the color space. See, for example, the [Kotsarenko/Ramos distance](#differenceKotsarenkoRamos).
+You can optionally assign different weights to the channels in the color space. See, for example, the [Kotsarenko/Ramos distance](#differenceKotsarenkoRamos) or [ΔE<sub>ITP</sub>](#differenceItp).
 
 The default weights `[1, 1, 1, 0]` mean that the _alpha_, which is the fourth channel in all the color spaces Culori defines, is not taken into account. Send `[1, 1, 1, 1]` as the weights to include it in the computation.
 
@@ -1174,6 +1175,12 @@ Computes the [DIN99o][din99ode] ΔE\*<sub>99o</sub> color difference between the
 <span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
 Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the colors _a_ and _b_. This is a weighted Euclidean distance in the `yiq` color space.
+
+<a id="differenceItp" href="#differenceItp">#</a> **differenceItp**()
+
+<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
+
+Computes the [ΔE<sub>ITP</sub>][eitp-difference] color difference metric between the colors _a_ and _b_. This is a weighted Euclidean distance in the `itp` color space, scaled by a factor of 720 so that a the just-noticeable difference (<abbr>JND</abbr>) corresponds to a value of 1.
 
 ### Nearest color(s)
 
@@ -1898,3 +1905,4 @@ __convertYiqToRgb__(_color_) → _color_ | `yiq` → `rgb`
 [kotsarekno-ramos]: http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf
 [din99ode]: https://de.wikipedia.org/wiki/DIN99-Farbraum#Farbabstandsformel
 [midpoint]: https://github.com/w3c/csswg-drafts/issues/3935
+[eitp-difference]: https://www.itu.int/rec/R-REC-BT.2124/en

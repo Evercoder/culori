@@ -118,7 +118,8 @@ export {
 	differenceHueSaturation,
 	differenceHueChroma,
 	differenceHueNaive,
-	differenceKotsarenkoRamos
+	differenceKotsarenkoRamos,
+	differenceItp
 } from './difference.js';
 
 export {
