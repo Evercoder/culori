@@ -7,9 +7,9 @@ const rgb = converter('rgb');
 const fixup_rgb = c => {
 	const res = {
 		mode: c.mode,
-		r: Math.max(0, Math.min(c.r, 1)),
-		g: Math.max(0, Math.min(c.g, 1)),
-		b: Math.max(0, Math.min(c.b, 1))
+		r: Math.max(0, Math.min(c.r !== undefined ? c.r : 0, 1)),
+		g: Math.max(0, Math.min(c.g !== undefined ? c.g : 0, 1)),
+		b: Math.max(0, Math.min(c.b !== undefined ? c.b : 0, 1))
 	};
 	if (c.alpha !== undefined) {
 		res.alpha = c.alpha;
@@ -22,12 +22,9 @@ const to_displayable_srgb = c => fixup_rgb(rgb(c));
 const inrange_rgb = c => {
 	return (
 		c !== undefined &&
-		c.r >= 0 &&
-		c.r <= 1 &&
-		c.g >= 0 &&
-		c.g <= 1 &&
-		c.b >= 0 &&
-		c.b <= 1
+		(c.r === undefined || (c.r >= 0 && c.r <= 1)) &&
+		(c.g === undefined || (c.g >= 0 && c.g <= 1)) &&
+		(c.b === undefined || (c.b >= 0 && c.b <= 1))
 	);
 };
 
@@ -146,10 +143,10 @@ export function clampChroma(color, mode = 'lch', rgbGamut = 'rgb') {
 	// By this time we know chroma = 0 is displayable and our current chroma is not.
 	// Find the displayable chroma through the bisection method.
 	let start = 0;
-	let end = color.c;
+	let end = color.c !== undefined ? color.c : 0;
 	let range = getMode(mode).ranges.c;
 	let resolution = (range[1] - range[0]) / Math.pow(2, 13);
-	let _last_good_c;
+	let _last_good_c = clamped.c;
 
 	while (end - start > resolution) {
 		clamped.c = start + (end - start) * 0.5;
@@ -215,6 +212,11 @@ export function toGamut(
 			return undefined;
 		}
 		const candidate = { ...ucs(color) };
+
+		// account for missing components
+		if (candidate.l === undefined) candidate.l = 0;
+		if (candidate.c === undefined) candidate.c = 0;
+
 		if (candidate.l >= ranges.l[1]) {
 			const res = { ...destMode.white, mode: dest };
 			if (color.alpha !== undefined) {

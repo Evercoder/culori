@@ -3,6 +3,7 @@ import {
 	clampChroma,
 	displayable,
 	inGamut,
+	clampRgb,
 	clampGamut,
 	formatCss,
 	toGamut,
@@ -48,6 +49,21 @@ tape('clampChroma (lch)', function (test) {
 		h: 5
 	});
 	test.equal(displayable(clampChroma('lch(50% 120 5)')), true);
+	test.deepEqual(
+		clampChroma({
+			mode: 'lch',
+			l: 0,
+			c: 100,
+			h: 30
+		}),
+		{
+			mode: 'lch',
+			l: 0,
+			c: 0,
+			h: 30
+		},
+		'for l = 0, only c = 0 is in gamut'
+	);
 	test.end();
 });
 
@@ -173,6 +189,80 @@ tape('toGamut()', t => {
 		c: 77.47625128342412,
 		h: 5.006331789592595
 	});
+
+	t.end();
+});
+
+tape('missing components', t => {
+	t.ok(displayable('rgb(none none none)'), 'displayable');
+
+	t.ok(inGamut('p3')('color(display-p3 none none none)'), 'inGamut');
+
+	t.deepEqual(
+		clampRgb('rgb(none 300 none)'),
+		{
+			mode: 'rgb',
+			r: 0,
+			g: 1,
+			b: 0
+		},
+		'clampRgb'
+	);
+
+	t.deepEqual(
+		clampGamut('p3')('color(display-p3 none 3 none)'),
+		{
+			mode: 'p3',
+			r: 0,
+			g: 1,
+			b: 0
+		},
+		'clampGamut'
+	);
+
+	t.deepEqual(
+		clampChroma({
+			mode: 'lch',
+			l: 120
+		}),
+		{
+			mode: 'lch',
+			l: 100.00000139649632,
+			c: 0
+		},
+		'clampChroma, lch color (no conversion)'
+	);
+
+	t.deepEqual(
+		clampChroma('color(srgb 1.1 none none)'),
+		{
+			mode: 'rgb',
+			r: 0.9999762593315072,
+			g: 0.3000275449561938,
+			b: 0.17168509121325368
+		},
+		'clampChroma, rgb color'
+	);
+
+	t.deepEqual(
+		toGamut()({
+			mode: 'lch',
+			l: 120
+		}),
+		{ r: 1, g: 1, b: 1, mode: 'rgb' },
+		'toGamut(), oklch color (no conversion)'
+	);
+
+	t.deepEqual(
+		toGamut()('color(srgb 1.1 none none)'),
+		{
+			mode: 'rgb',
+			r: 0.9999999999999994,
+			g: 0.24780803212382269,
+			b: 0.18935507566673854
+		},
+		'toGamut(), rgb color'
+	);
 
 	t.end();
 });
