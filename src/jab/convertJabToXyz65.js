@@ -2,8 +2,6 @@ import { M1 as n, C1, C2, C3 } from '../hdr/transfer.js';
 const p = 134.03437499999998; // = 1.7 * 2523 / Math.pow(2, 5);
 const d0 = 1.6295499532821566e-11;
 
-const npow = (v, exp) => Math.sign(v) * Math.pow(Math.abs(v), exp);
-
 /* 
 	The encoding function is derived from Perceptual Quantizer.
 */
