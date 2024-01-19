@@ -23,7 +23,7 @@
 						/>
 					</a>
 					<span
-						>v3.3.0 (<a
+						>v4.0.0 (<a
 							href="https://github.com/evercoder/culori/releases"
 							>changelog</a
 						>)</span
@@ -809,12 +809,44 @@
 </tr>
 <tr>
 <td><code>b</code></td>
-<td><code>[ -0.2778, 0.3880 ]</code> ≈</td>
+<td><code>[ -0.2778, 0.3880 ]</code>≈</td>
 <td>Blue-yellow component</td>
 </tr>
 </tbody>
 </table>
 <p>Does not have gamut limits.</p>
+<h3><abbr>IC<sub>t</sub>C<sub>p</sub></abbr></h3>
+<p><abbr>IC<sub>t</sub>C<sub>p</sub></abbr> (or <abbr>ITP</abbr>) color space developed by <a href="https://professional.dolby.com/siteassets/pdfs/ictcp_dolbywhitepaper_v071.pdf">Dolby Laboratories</a>, as defined in <a href="https://www.itu.int/rec/R-REC-BT.2100"><abbr>ITU-R</abbr> Recommendation BT.2100</a>. It is included in the <abbr>CSS</abbr> <a href="https://drafts.csswg.org/css-color-hdr/#ICtCp"><abbr>HDR</abbr> Color Module Level 1</a> specification.</p>
+<h4><code>itp</code></h4>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Range</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>i</code></td>
+<td><code>[0, 0.581]</code>≈</td>
+<td>Intensity</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td><code>[-0.282, 0.278]</code>≈</td>
+<td>Blue-yellow component (“tritanopia”)</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td><code>[-0.162, 0.279]</code>≈</td>
+<td>Green–red component (“protanopia”)</td>
+</tr>
+</tbody>
+</table>
+<p>Serialized as <code>color(--ictcp i t p)</code>, with the <code>none</code> keyword for any missing color channel. An explicit <code>alpha &lt; 1</code> is included as <code> / alpha</code>.</p>
+<p>Does not have gamut limits.</p>
+<p>The <code>itp</code> color space is the basis of the <a href="/api/#differenceItp">ΔE<sub>ITP</sub> color difference</a> metric defined in <em>Objective metric for the assessment of the potential visibility of colour differences in television</em> (<a href="https://www.itu.int/rec/R-REC-BT.2124/en">Rec. ITU-R BT.2124</a>).</p>
 <h3>Cubehelix</h3>
 <p><a href="https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/">The Cubehelix color scheme</a> was described by Dave Green in this paper:</p>
 <blockquote>

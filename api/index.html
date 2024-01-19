@@ -23,7 +23,7 @@
 						/>
 					</a>
 					<span
-						>v3.3.0 (<a
+						>v4.0.0 (<a
 							href="https://github.com/evercoder/culori/releases"
 							>changelog</a
 						>)</span
@@ -81,6 +81,7 @@
 <li><a href='#differenceHueSaturation'>differenceHueSaturation</a></li>
 <li><a href='#differenceHyab'>differenceHyab</a></li>
 <li><a href='#differenceKotsarenkoRamos'>differenceKotsarenkoRamos</a></li>
+<li><a href='#differenceItp'>differenceItp</a></li>
 <li><a href='#displayable'>displayable</a></li>
 <li><a href='#color-spaces'>dlab</a></li>
 <li><a href='#color-spaces'>dlch</a></li>
@@ -787,7 +788,7 @@
 <p><a id="differenceEuclidean" href="#differenceEuclidean">#</a> <strong>differenceEuclidean</strong>(<em>mode = 'rgb'</em>, <em>weights = [1, 1, 1, 0]</em>)</p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/difference.js">src/difference.js</a></p>
 <p>Returns a <a href="https://en.wikipedia.org/wiki/Color_difference#Euclidean">Euclidean distance</a> function in a certain color space.</p>
-<p>You can optionally assign different weights to the channels in the color space. See, for example, the <a href="#differenceKotsarenkoRamos">Kotsarenko/Ramos distance</a>.</p>
+<p>You can optionally assign different weights to the channels in the color space. See, for example, the <a href="#differenceKotsarenkoRamos">Kotsarenko/Ramos distance</a> or <a href="#differenceItp">ΔE<sub>ITP</sub></a>.</p>
 <p>The default weights <code>[1, 1, 1, 0]</code> mean that the <em>alpha</em>, which is the fourth channel in all the color spaces Culori defines, is not taken into account. Send <code>[1, 1, 1, 1]</code> as the weights to include it in the computation.</p>
 <p>In cylindrical spaces, the hue is factored into the Euclidean distance in a variety of ways. The functions below are used internally:</p>
 <p><a id="differenceHueChroma" href="#differenceHueChroma">#</a> <strong>differenceHueChroma</strong>(<em>colorA</em>, <em>colorB</em>)</p>
@@ -828,6 +829,9 @@
 <p><a id="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> <strong>differenceKotsarenkoRamos</strong>()</p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/difference.js">src/difference.js</a></p>
 <p>Computes the <a href="http://www.progmat.uaem.mx:8080/artVol2Num2/Articulo3Vol2Num2.pdf">Kotsarenko/Ramos</a> color difference between the colors <em>a</em> and <em>b</em>. This is a weighted Euclidean distance in the <code>yiq</code> color space.</p>
+<p><a id="differenceItp" href="#differenceItp">#</a> <strong>differenceItp</strong>()</p>
+<p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/difference.js">src/difference.js</a></p>
+<p>Computes the <a href="https://www.itu.int/rec/R-REC-BT.2124/en">ΔE<sub>ITP</sub></a> color difference metric between the colors <em>a</em> and <em>b</em>. This is a weighted Euclidean distance in the <code>itp</code> color space, scaled by a factor of 720 so that a the just-noticeable difference (<abbr>JND</abbr>) corresponds to a value of 1.</p>
 <h3>Nearest color(s)</h3>
 <p><a id="nearest" href="#nearest">#</a> <strong>nearest</strong>(<em>colors</em>, <em>metric = differenceEuclidean()</em>, <em>accessor = identity</em>) → <em>function(color, n = 1, τ = Infinity)</em></p>
 <p><span aria-label='Source:'>☞</span> <a href="https://github.com/evercoder/culori/blob/main/src/nearest.js">src/nearest.js</a></p>
@@ -1094,6 +1098,11 @@ culori
 <td><code>hwb</code></td>
 <td>HWB color space</td>
 <td><code>modeHwb</code></td>
+</tr>
+<tr>
+<td><code>itp</code></td>
+<td>IC<sub>t</sub>C<sub>p</sub> color space</td>
+<td><code>modeItp</code></td>
 </tr>
 <tr>
 <td><code>jab</code></td>
