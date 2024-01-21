@@ -77,6 +77,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#interpolatorSplineMonotoneClosed'>interpolatorSplineMonotoneClosed</a></li>
 <li><a href='#interpolatorSplineNatural'>interpolatorSplineNatural</a></li>
 <li><a href='#interpolatorSplineNaturalClosed'>interpolatorSplineNaturalClosed</a></li>
+<li><a href='#color-spaces'>itp</a></li>
 <li><a href='#color-spaces'>jab</a></li>
 <li><a href='#color-spaces'>jch</a></li>
 <li><a href='#color-spaces'>lab65</a></li>
