@@ -2,7 +2,8 @@ import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
 import convertItpToXyz65 from './convertItpToXyz65.js';
 import convertXyz65ToItp from './convertXyz65ToItp.js';
-import { convertRgbToXyz65, convertXyz65ToRgb } from '../index.js';
+import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65.js';
+import convertXyz65ToRgb from '../xyz65/convertXyz65ToRgb.js';
 
 /*
   ICtCp (or ITP) color space, as defined in ITU-R Recommendation BT.2100.

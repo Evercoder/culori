@@ -35,9 +35,9 @@ _Does your product/project use Culori? Create a PR and add yourself to this list
 
 ### Specifications
 
-- [CSS Color Module Level 4](https://drafts.csswg.org/css-color-4/) [[changelog](https://github.com/w3c/csswg-drafts/commits/main/css-color-4)]
-- [CSS Color Module Level 5](https://drafts.csswg.org/css-color-5/) [[changelog](https://github.com/w3c/csswg-drafts/commits/main/css-color-5)]
-- [CSS Color HDR Module Level 1](https://drafts.csswg.org/css-color-hdr/) [[changelog](https://github.com/w3c/csswg-drafts/commits/main/css-color-hdr)]
+- [CSS Color Module Level 4](https://drafts.csswg.org/css-color-4/) [[changelog](https://github.com/w3c/csswg-drafts/commits/main/css-color-4), [issues](https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-color-4)]
+- [CSS Color Module Level 5](https://drafts.csswg.org/css-color-5/) [[changelog](https://github.com/w3c/csswg-drafts/commits/main/css-color-5), [issues](https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-color-5)]
+- [CSS Color HDR Module Level 1](https://drafts.csswg.org/css-color-hdr/) [[changelog](https://github.com/w3c/csswg-drafts/commits/main/css-color-hdr), [issues](https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-color-hdr)]
 
 ### Websites
 
