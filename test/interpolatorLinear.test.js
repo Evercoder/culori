@@ -1,9 +1,10 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { samples, interpolatorLinear } from '../src/index.js';
 
-tape('interpolatorLinear', t => {
+test('interpolatorLinear', t => {
 	let data = [3, 2.8, 2.5, 1, 0.95, 0.8, 0.5, 0.1, 0.05];
-	t.deepEqual(
+	assert.deepEqual(
 		samples(10).map(interpolatorLinear(data)),
 		[
 			3, 2.822222222222222, 2.5666666666666664, 1.5000000000000002,
@@ -11,14 +12,12 @@ tape('interpolatorLinear', t => {
 			0.4111111111111111, 0.09444444444444447, 0.05
 		]
 	);
-	t.end();
 });
 
-tape('outside [0, 1] range', t => {
+test('outside [0, 1] range', t => {
 	let it = interpolatorLinear([3, 10, 1]);
-	t.equal(it(-0.5), -4);
-	t.equal(it(-1), -11);
-	t.equal(it(1.5), -8);
-	t.equal(it(2), -17);
-	t.end();
+	assert.equal(it(-0.5), -4);
+	assert.equal(it(-1), -11);
+	assert.equal(it(1.5), -8);
+	assert.equal(it(2), -17);
 });

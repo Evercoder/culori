@@ -1,12 +1,13 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { xyz65, rgb, formatCss } from '../src/index.js';
 
-tape('xyz65', t => {
+test('xyz65', t => {
 	/*
 		These should theoretically be equal to the Xn, Yn, and Zn values
 		from xyz65/constants.js, but there's a small rounding error for `y`.
 	 */
-	t.deepEqual(
+	assert.deepEqual(
 		xyz65('white'),
 		{
 			mode: 'xyz65',
@@ -17,8 +18,8 @@ tape('xyz65', t => {
 		'white'
 	);
 
-	t.deepEqual(xyz65('black'), { mode: 'xyz65', x: 0, y: 0, z: 0 });
-	t.deepEqual(
+	assert.deepEqual(xyz65('black'), { mode: 'xyz65', x: 0, y: 0, z: 0 });
+	assert.deepEqual(
 		xyz65('red'),
 		{
 			mode: 'xyz65',
@@ -28,7 +29,7 @@ tape('xyz65', t => {
 		},
 		'red'
 	);
-	t.deepEqual(
+	assert.deepEqual(
 		xyz65('#00cc0080'),
 		{
 			mode: 'xyz65',
@@ -39,65 +40,59 @@ tape('xyz65', t => {
 		},
 		'#00cc0080'
 	);
-	t.end();
 });
 
-tape('color(xyz)', t => {
-	t.deepEqual(xyz65('color(xyz 1 0 0 / 0.25)'), {
+test('color(xyz)', t => {
+	assert.deepEqual(xyz65('color(xyz 1 0 0 / 0.25)'), {
 		x: 1,
 		y: 0,
 		z: 0,
 		alpha: 0.25,
 		mode: 'xyz65'
 	});
-	t.deepEqual(xyz65('color(xyz 0% 50% 0.5 / 25%)'), {
+	assert.deepEqual(xyz65('color(xyz 0% 50% 0.5 / 25%)'), {
 		x: 0,
 		y: 0.5,
 		z: 0.5,
 		alpha: 0.25,
 		mode: 'xyz65'
 	});
-	t.end();
 });
 
-tape('color(xyz-d65)', t => {
-	t.deepEqual(xyz65('color(xyz-d65 1 0 0 / 0.25)'), {
+test('color(xyz-d65)', t => {
+	assert.deepEqual(xyz65('color(xyz-d65 1 0 0 / 0.25)'), {
 		x: 1,
 		y: 0,
 		z: 0,
 		alpha: 0.25,
 		mode: 'xyz65'
 	});
-	t.deepEqual(xyz65('color(xyz-d65 0% 50% 0.5 / 25%)'), {
+	assert.deepEqual(xyz65('color(xyz-d65 0% 50% 0.5 / 25%)'), {
 		x: 0,
 		y: 0.5,
 		z: 0.5,
 		alpha: 0.25,
 		mode: 'xyz65'
 	});
-	t.end();
 });
 
-tape('color(--xyz-d65)', t => {
-	t.deepEqual(xyz65('color(--xyz-d65 1 0 0 / 0.25)'), undefined);
-	t.end();
+test('color(--xyz-d65)', t => {
+	assert.deepEqual(xyz65('color(--xyz-d65 1 0 0 / 0.25)'), undefined);
 });
 
-tape('formatCss', t => {
-	t.equal(
+test('formatCss', t => {
+	assert.equal(
 		formatCss('color(xyz 0% 50% 0.5 / 25%)'),
 		'color(xyz-d65 0 0.5 0.5 / 0.25)'
 	);
-	t.end();
 });
 
-tape('missing components', t => {
-	t.ok(rgb('color(xyz-d65 none 0.5 none)'), 'xyz65 to rgb is ok');
-	t.deepEqual(
+test('missing components', t => {
+	assert.ok(rgb('color(xyz-d65 none 0.5 none)'), 'xyz65 to rgb is ok');
+	assert.deepEqual(
 		rgb('color(xyz-d65 none 0.5 none)'),
 		rgb('color(xyz-d65 0 0.5 0')
 	);
-	t.ok(xyz65('rgb(none 100 20)'), 'rgb to xyz65 is ok');
-	t.deepEqual(xyz65('rgb(none 100 20)'), xyz65('rgb(0 100 20)'));
-	t.end();
+	assert.ok(xyz65('rgb(none 100 20)'), 'rgb to xyz65 is ok');
+	assert.deepEqual(xyz65('rgb(none 100 20)'), xyz65('rgb(0 100 20)'));
 });

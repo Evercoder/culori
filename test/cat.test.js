@@ -1,4 +1,5 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { xyz65, xyz50, rgb } from '../src/index.js';
 
 let colors = ['red', 'green', 'blue', 'white', 'black', 'magenta', 'tomato'];
@@ -22,16 +23,14 @@ let sameRGB = (a, b) => {
 	);
 };
 
-tape('rgb -> xyz50 = rgb -> xyz65 -> xyz50', t => {
+test('rgb -> xyz50 = rgb -> xyz65 -> xyz50', t => {
 	colors.forEach(c => {
-		t.ok(sameXYZ(xyz50(rgb(c)), xyz50(xyz65(rgb(c)))), c);
+		assert.ok(sameXYZ(xyz50(rgb(c)), xyz50(xyz65(rgb(c)))), c);
 	});
-	t.end();
 });
 
-tape('rgb -> xyz50 -> rgb = rgb -> xyz50 -> xyz65 -> rgb', t => {
+test('rgb -> xyz50 -> rgb = rgb -> xyz50 -> xyz65 -> rgb', t => {
 	colors.forEach(c => {
-		t.ok(sameRGB(rgb(xyz50(rgb(c))), rgb(xyz65(xyz50(rgb(c))))), c);
+		assert.ok(sameRGB(rgb(xyz50(rgb(c))), rgb(xyz65(xyz50(rgb(c))))), c);
 	});
-	t.end();
 });

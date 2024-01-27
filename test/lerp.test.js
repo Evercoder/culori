@@ -1,14 +1,13 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { lerp, unlerp, trilerp } from '../src/index.js';
 
-tape('lerp()', t => {
-	t.equal(lerp(10, 2, 0.5), 6);
-	t.end();
+test('lerp()', t => {
+	assert.equal(lerp(10, 2, 0.5), 6);
 });
 
-tape('unlerp()', t => {
-	t.equal(unlerp(5, 10, 2.5), -0.5);
-	t.end();
+test('unlerp()', t => {
+	assert.equal(unlerp(5, 10, 2.5), -0.5);
 });
 
 const RYB_CUBE = [
@@ -22,7 +21,7 @@ const RYB_CUBE = [
 	{ mode: 'rgb', r: 0.2, g: 0.094, b: 0 } // black
 ];
 
-tape('trilerp()', t => {
+test('trilerp()', t => {
 	const RYB_COLOR = [1, 0.5, 0.25];
 	const EXPECTED_LINEAR = {
 		mode: 'rgb',
@@ -49,8 +48,6 @@ tape('trilerp()', t => {
 		};
 	}
 
-	t.deepEqual(ryb2rgb(RYB_COLOR, false), EXPECTED_LINEAR, 'ryb: linear');
-	t.deepEqual(ryb2rgb(RYB_COLOR), EXPECTED_BIASED, 'ryb: biased');
-
-	t.end();
+	assert.deepEqual(ryb2rgb(RYB_COLOR, false), EXPECTED_LINEAR, 'ryb: linear');
+	assert.deepEqual(ryb2rgb(RYB_COLOR), EXPECTED_BIASED, 'ryb: biased');
 });

@@ -1,8 +1,9 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { formatCss, formatHex, itp } from '../src/index.js';
 
-tape('itp', t => {
-	t.deepEqual(
+test('itp', t => {
+	assert.deepEqual(
 		itp('white'),
 		{
 			mode: 'itp',
@@ -12,7 +13,7 @@ tape('itp', t => {
 		},
 		'white'
 	);
-	t.deepEqual(
+	assert.deepEqual(
 		itp('black'),
 		{
 			mode: 'itp',
@@ -22,7 +23,7 @@ tape('itp', t => {
 		},
 		'black'
 	);
-	t.deepEqual(
+	assert.deepEqual(
 		itp('red'),
 		{
 			mode: 'itp',
@@ -32,37 +33,34 @@ tape('itp', t => {
 		},
 		'red'
 	);
-	t.end();
 });
 
-tape('color(--ictcp)', t => {
-	t.deepEqual(itp('color(--ictcp 1 0 0 / 0.25)'), {
+test('color(--ictcp)', t => {
+	assert.deepEqual(itp('color(--ictcp 1 0 0 / 0.25)'), {
 		mode: 'itp',
 		i: 1,
 		t: 0,
 		p: 0,
 		alpha: 0.25
 	});
-	t.deepEqual(itp('color(--ictcp 0% 50% 0.5 / 25%)'), {
+	assert.deepEqual(itp('color(--ictcp 0% 50% 0.5 / 25%)'), {
 		mode: 'itp',
 		i: 0,
 		t: 0.5,
 		p: 0.5,
 		alpha: 0.25
 	});
-	t.end();
 });
 
-tape('formatCss', t => {
-	t.equal(
+test('formatCss', t => {
+	assert.equal(
 		formatCss('color(--ictcp 0% 50% 0.5 / 25%)'),
 		'color(--ictcp 0 0.5 0.5 / 0.25)'
 	);
-	t.end();
 });
 
-tape('formatCss', t => {
-	t.equal(
+test('formatCss', t => {
+	assert.equal(
 		formatHex({
 			mode: 'itp',
 			i: 0.4278802843622844,
@@ -72,5 +70,4 @@ tape('formatCss', t => {
 		'#ff0000',
 		'red'
 	);
-	t.end();
 });

@@ -1,4 +1,5 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import {
 	formatHex,
 	formatHex8,
@@ -7,29 +8,25 @@ import {
 	rgb
 } from '../src/index.js';
 
-tape('formatHex', function (test) {
-	test.equal(formatHex('tomato'), '#ff6347');
-	test.end();
+test('formatHex', t => {
+	assert.equal(formatHex('tomato'), '#ff6347');
 });
 
-tape('formatHex8', t => {
-	t.equal(
+test('formatHex8', t => {
+	assert.equal(
 		formatHex8({ mode: 'rgb', r: 1, g: 1, b: 1, alpha: 0 }),
 		'#ffffff00'
 	);
-	t.end();
 });
 
-tape('formatRgb', function (test) {
-	test.equal(formatRgb(rgb('#f0f0f0f0')), 'rgba(240, 240, 240, 0.94)');
-	test.equal(formatRgb('#f0f0f0f0'), 'rgba(240, 240, 240, 0.94)');
-
-	test.end();
+test('formatRgb', t => {
+	assert.equal(formatRgb(rgb('#f0f0f0f0')), 'rgba(240, 240, 240, 0.94)');
+	assert.equal(formatRgb('#f0f0f0f0'), 'rgba(240, 240, 240, 0.94)');
 });
 
-tape('formatHsl', function (test) {
-	test.equal(formatHsl('red'), 'hsl(0, 100%, 50%)');
-	test.equal(
+test('formatHsl', t => {
+	assert.equal(formatHsl('red'), 'hsl(0, 100%, 50%)');
+	assert.equal(
 		formatHsl({
 			mode: 'hsl',
 			h: 30.21,
@@ -39,9 +36,8 @@ tape('formatHsl', function (test) {
 		}),
 		'hsla(30.21, 23.61%, 48.32%, 0)'
 	);
-	test.equal(
+	assert.equal(
 		formatHsl({ mode: 'hsl', h: 405, s: 1.2, l: -1 }),
 		'hsl(405, 100%, 0%)'
 	);
-	test.end();
 });

@@ -1,4 +1,5 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import {
 	differenceEuclidean,
 	differenceCie76,
@@ -14,10 +15,10 @@ import {
 	hsl
 } from '../src/index.js';
 
-tape('euclidean distance in RGB', function (test) {
+test('euclidean distance in RGB', t => {
 	let delta = differenceEuclidean();
 
-	test.equal(
+	assert.equal(
 		delta(
 			rgb({ r: 1, g: 0, b: 0, alpha: 0.5 }),
 			rgb({ r: 0, g: 1, b: 0, alpha: 0.75 })
@@ -25,57 +26,49 @@ tape('euclidean distance in RGB', function (test) {
 		1.4142135623730951
 	);
 
-	test.equal(delta('red', 'red'), 0);
-
-	test.end();
+	assert.equal(delta('red', 'red'), 0);
 });
 
-tape('euclidean distance in HSL', function (test) {
+test('euclidean distance in HSL', t => {
 	let delta = differenceEuclidean('hsl');
 
-	test.equal(
+	assert.equal(
 		delta(hsl({ h: 0, s: 1, l: 1 }), hsl({ h: 180, s: 1, l: 1 })),
 		2
 	);
 
-	test.equal(
+	assert.equal(
 		delta(hsl({ h: 0, s: 1, l: 1 }), hsl({ h: 360, s: 1, l: 1 })),
 		2.4492935982947064e-16
 	);
 
-	test.equal(
+	assert.equal(
 		delta(hsl({ h: 60, s: 1, l: 1 }), hsl({ h: -540, s: 1, l: 1 })),
 		1.732050807568877
 	);
-
-	test.end();
 });
 
-tape('cie76 difference', function (test) {
-	test.equal(
+test('cie76 difference', t => {
+	assert.equal(
 		differenceCie76()(
 			lab65({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab65({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
 		1.4142135623730951
 	);
-
-	test.end();
 });
 
-tape('cie94 difference', function (test) {
-	test.equal(
+test('cie94 difference', t => {
+	assert.equal(
 		differenceCie94()(
 			lab65({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab65({ l: 0, a: 1, b: 0, alpha: 0.75 })
 		),
 		1.4142135623730951
 	);
-
-	test.end();
 });
 
-tape('ciede2000 difference', function (test) {
+test('ciede2000 difference', t => {
 	let approx = round(4);
 
 	// Test data from: http://www2.ece.rochester.edu/~gsharma/ciede2000/
@@ -118,7 +111,7 @@ tape('ciede2000 difference', function (test) {
 
 	for (var i = 0; i < testdata.length; i++) {
 		let line = testdata[i];
-		test.equal(
+		assert.equal(
 			approx(
 				differenceCiede2000()(
 					lab65({ l: +line[0], a: +line[1], b: +line[2] }),
@@ -129,7 +122,7 @@ tape('ciede2000 difference', function (test) {
 		);
 
 		// also test for symmetry
-		test.equal(
+		assert.equal(
 			approx(
 				differenceCiede2000()(
 					lab65({ l: +line[3], a: +line[4], b: +line[5] }),
@@ -139,12 +132,10 @@ tape('ciede2000 difference', function (test) {
 			+line[6]
 		);
 	}
-
-	test.end();
 });
 
-tape('differenceCmc', function (test) {
-	test.equal(
+test('differenceCmc', t => {
+	assert.equal(
 		differenceCmc()(
 			lab65({ l: 1, a: 0, b: 0, alpha: 0.5 }),
 			lab65({ l: 0, a: 1, b: 0, alpha: 0.75 })
@@ -152,44 +143,37 @@ tape('differenceCmc', function (test) {
 		2.507265255284643
 	);
 
-	test.equal(
+	assert.equal(
 		differenceCmc()('rgb(55, 60, 48)', 'rgb(55, 65, 53)'),
 		3.590406912120119
 	);
 
-	test.equal(
+	assert.equal(
 		differenceCmc(2, 1)('rgb(55, 60, 48)', 'rgb(55, 65, 53)'),
 		2.82061249589761
 	);
 
-	test.equal(
+	assert.equal(
 		differenceCmc()('lab(50% 40 20)', 'lab(60% 20 100)'),
 		53.10947821085943
 	);
-
-	test.end();
 });
 
-tape('differenceKotsarenkoRamos', function (test) {
-	test.equal(
+test('differenceKotsarenkoRamos', t => {
+	assert.equal(
 		differenceKotsarenkoRamos()('white', 'black'),
 		0.7108445752103619
 	);
-
-	test.end();
 });
 
-tape('difference in LCh space', t => {
-	t.equal(differenceEuclidean('lch')('red', 'green'), 130.3598834181675);
-	t.end();
+test('difference in LCh space', t => {
+	assert.equal(differenceEuclidean('lch')('red', 'green'), 130.3598834181675);
 });
 
-tape('differenceHyab', t => {
-	t.equal(differenceHyab()('red', 'green'), 139.92805737622862);
-	t.end();
+test('differenceHyab', t => {
+	assert.equal(differenceHyab()('red', 'green'), 139.92805737622862);
 });
 
-tape('differenceItp', t => {
-	t.equal(differenceItp()('red', 'green'), 238.28868759957626);
-	t.end();
+test('differenceItp', t => {
+	assert.equal(differenceItp()('red', 'green'), 238.28868759957626);
 });

@@ -54,13 +54,11 @@
 		"eslint-plugin-import": "^2.29.1",
 		"gh-pages": "^6.1.1",
 		"prettier": "^3.2.4",
-		"pretty-quick": "^4.0.0",
-		"tap-arc": "^1.2.2",
-		"tape": "^5.7.3"
+		"pretty-quick": "^4.0.0"
 	},
 	"scripts": {
 		"prepare": "git config core.hooksPath .git-hooks",
-		"test": "tape 'test/**/*.test.js' | tap-arc",
+		"test": "node --test 'test/**/*.test.js'",
 		"start": "npx esbuild --servedir=.",
 		"build": "node build.js",
 		"benchmark": "node benchmark/index.js",
