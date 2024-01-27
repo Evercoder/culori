@@ -16,4 +16,8 @@ The full documentation is published on [culorijs.org](https://culorijs.org). Som
 
 ## Contributing
 
-Contributions of any kind (feedback, ideas, bug fixes) are welcome. Please open a GitHub issue before starting work on anything that's not straightforward.
+Contributions of all kinds (feedback, ideas, bug fixes, documentation) are welcome. 
+
+Please open a GitHub issue/discussion before putting in any work that’s not straightforward.
+
+More in [CONTRIBUTING.md](./CONTRIBUTING.md).
