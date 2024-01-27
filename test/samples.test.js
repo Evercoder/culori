@@ -1,8 +1,9 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { interpolate, samples, formatHex } from '../src/index.js';
 
-tape('11 swatches between black and white in RGB', function (test) {
-	test.deepEqual(
+test('11 swatches between black and white in RGB', t => {
+	assert.deepEqual(
 		samples(11)
 			.map(interpolate(['#fff', '#000']))
 			.map(formatHex),
@@ -20,12 +21,10 @@ tape('11 swatches between black and white in RGB', function (test) {
 			'#000000'
 		]
 	);
-
-	test.end();
 });
 
-tape('11 swatches between black and white in Lab', function (test) {
-	test.deepEqual(
+test('11 swatches between black and white in Lab', t => {
+	assert.deepEqual(
 		samples(11)
 			.map(interpolate(['#fff', '#000'], 'lab'))
 			.map(formatHex),
@@ -43,12 +42,10 @@ tape('11 swatches between black and white in Lab', function (test) {
 			'#000000'
 		]
 	);
-
-	test.end();
 });
 
-tape('11 swatches between black and white in Lch', function (test) {
-	test.deepEqual(
+test('11 swatches between black and white in Lch', t => {
+	assert.deepEqual(
 		samples(11)
 			.map(interpolate(['#fff', '#000'], 'lch'))
 			.map(formatHex),
@@ -66,12 +63,10 @@ tape('11 swatches between black and white in Lch', function (test) {
 			'#000000'
 		]
 	);
-
-	test.end();
 });
 
-tape('11 swatches between black and white in DIN99o', function (test) {
-	test.deepEqual(
+test('11 swatches between black and white in DIN99o', t => {
+	assert.deepEqual(
 		samples(11)
 			.map(interpolate(['#fff', '#000'], 'dlab'))
 			.map(formatHex),
@@ -90,15 +85,13 @@ tape('11 swatches between black and white in DIN99o', function (test) {
 		]
 	);
 
-	// test.deepEqual(
+	// assert.deepEqual(
 	// 	samples(11).map(interpolate(['red', 'white'], 'dlch')).map(formatHex),
 	// 	[]
 	// )
-
-	test.end();
 });
 
-// tape('default cubehelix scale', function(test) {
+// test('default cubehelix scale', function(test) {
 
 // 	let start = cubehelix({
 // 		h: 300,
@@ -112,10 +105,10 @@ tape('11 swatches between black and white in DIN99o', function (test) {
 // 		l: 1
 // 	})
 
-// 	test.deepEqual(
+// 	assert.deepEqual(
 // 		samples(10).map(interpolate([start, end], 'cubehelix')).map(formatHex),
 // 		['#000000', '#1a1935', '#15474e', '#2b6f39', '#767b33', '#c17a6f', '#d490c6', '#c3c0f2', '#ceebef', '#ffffff']
 // 	)
 
-// 	test.end();
+// 	;
 // });

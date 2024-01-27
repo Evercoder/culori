@@ -1,14 +1,15 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { rgb, lrgb, formatCss } from '../src/index.js';
 
-tape('round-trip', t => {
+test('round-trip', t => {
 	let in_gamut = {
 		mode: 'rgb',
 		r: 0.1,
 		g: 0.25,
 		b: 0.7
 	};
-	t.deepEqual(
+	assert.deepEqual(
 		lrgb(in_gamut),
 		{
 			mode: 'lrgb',
@@ -18,7 +19,7 @@ tape('round-trip', t => {
 		},
 		'in gamut'
 	);
-	t.deepEqual(rgb(lrgb(in_gamut)), in_gamut, 'in gamut');
+	assert.deepEqual(rgb(lrgb(in_gamut)), in_gamut, 'in gamut');
 
 	let out_of_gamut = {
 		mode: 'rgb',
@@ -26,7 +27,7 @@ tape('round-trip', t => {
 		g: 0.25,
 		b: 2.7
 	};
-	t.deepEqual(
+	assert.deepEqual(
 		lrgb(out_of_gamut),
 		{
 			mode: 'lrgb',
@@ -36,43 +37,39 @@ tape('round-trip', t => {
 		},
 		'out of gamut'
 	);
-	t.deepEqual(rgb(lrgb(out_of_gamut)), out_of_gamut, 'out of gamut');
-	t.end();
+	assert.deepEqual(rgb(lrgb(out_of_gamut)), out_of_gamut, 'out of gamut');
 });
 
-tape('color(srgb-linear)', t => {
-	t.deepEqual(lrgb('color(srgb-linear 1 0 0 / 0.25)'), {
+test('color(srgb-linear)', t => {
+	assert.deepEqual(lrgb('color(srgb-linear 1 0 0 / 0.25)'), {
 		r: 1,
 		g: 0,
 		b: 0,
 		alpha: 0.25,
 		mode: 'lrgb'
 	});
-	t.deepEqual(lrgb('color(srgb-linear 0% 50% 0.5 / 25%)'), {
+	assert.deepEqual(lrgb('color(srgb-linear 0% 50% 0.5 / 25%)'), {
 		r: 0,
 		g: 0.5,
 		b: 0.5,
 		alpha: 0.25,
 		mode: 'lrgb'
 	});
-	t.end();
 });
 
-tape('formatCss', t => {
-	t.equal(
+test('formatCss', t => {
+	assert.equal(
 		formatCss('color(srgb-linear 0% 50% 0.5 / 25%)'),
 		'color(srgb-linear 0 0.5 0.5 / 0.25)'
 	);
-	t.end();
 });
 
-tape('missing components', t => {
-	t.ok(rgb('color(srgb-linear none 0.5 none)'), 'lrgb to rgb is ok');
-	t.deepEqual(
+test('missing components', t => {
+	assert.ok(rgb('color(srgb-linear none 0.5 none)'), 'lrgb to rgb is ok');
+	assert.deepEqual(
 		rgb('color(srgb-linear none 0.5 none)'),
 		rgb('color(srgb-linear 0 0.5 0')
 	);
-	t.ok(lrgb('rgb(none 100 20)'), 'rgb to lrgb is ok');
-	t.deepEqual(lrgb('rgb(none 100 20)'), lrgb('rgb(0 100 20)'));
-	t.end();
+	assert.ok(lrgb('rgb(none 100 20)'), 'rgb to lrgb is ok');
+	assert.deepEqual(lrgb('rgb(none 100 20)'), lrgb('rgb(0 100 20)'));
 });

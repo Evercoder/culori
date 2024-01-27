@@ -1,4 +1,5 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import {
 	parse,
 	formatHex,
@@ -8,95 +9,108 @@ import {
 	formatCss
 } from '../src/index.js';
 
-tape('parse "none" keyword', t => {
-	t.deepEqual(
+test('parse "none" keyword', t => {
+	assert.deepEqual(
 		parse('rgb(none, 255, 127.5)'),
 		undefined,
 		'rgb() <number> (legacy)'
 	);
-	t.deepEqual(
+	assert.deepEqual(
 		parse('rgb(none 255 127.5 / none)'),
 		{ mode: 'rgb', g: 1, b: 0.5 },
 		'rgb() <number>'
 	);
-	t.deepEqual(
+	assert.deepEqual(
 		parse('rgb(none, 100%, 50%)'),
 		undefined,
 		'rgb() <percentage> (legacy)'
 	);
-	t.deepEqual(
+	assert.deepEqual(
 		parse('rgba(none 100% 50% / none)'),
 		{ mode: 'rgb', g: 1, b: 0.5 },
 		'rgb() <percentage>'
 	);
-	t.deepEqual(parse('hsl(none, 50%, 100%)'), undefined, 'hsl() (legacy)');
-	t.deepEqual(parse('hsla(none 50% none)'), { mode: 'hsl', s: 0.5 }, 'hsl()');
+	assert.deepEqual(
+		parse('hsl(none, 50%, 100%)'),
+		undefined,
+		'hsl() (legacy)'
+	);
+	assert.deepEqual(
+		parse('hsla(none 50% none)'),
+		{ mode: 'hsl', s: 0.5 },
+		'hsl()'
+	);
 
-	t.deepEqual(
+	assert.deepEqual(
 		parse('hwb(none none 50% / none)'),
 		{ mode: 'hwb', b: 0.5 },
 		'hwb()'
 	);
 
-	t.deepEqual(parse('lab(none 12 none)'), { mode: 'lab', a: 12 }, 'lab()');
+	assert.deepEqual(
+		parse('lab(none 12 none)'),
+		{ mode: 'lab', a: 12 },
+		'lab()'
+	);
 
-	t.deepEqual(
+	assert.deepEqual(
 		parse('lch(5% none 1turn)'),
 		{ mode: 'lch', l: 5, h: 360 },
 		'lch()'
 	);
 
-	t.deepEqual(
+	assert.deepEqual(
 		parse('color(display-p3 none none none / 0.1)'),
 		{ mode: 'p3', alpha: 0.1 },
 		'color()'
 	);
-
-	t.end();
 });
 
-tape('serialize "none" keyword', t => {
-	t.equal(
+test('serialize "none" keyword', t => {
+	assert.equal(
 		formatRgb('rgb(none none none / none)'),
 		'rgb(0, 0, 0)',
 		'formatRgb'
 	);
-	t.equal(formatHex('rgb(none none none / none)'), '#000000', 'formatHex');
-	t.equal(
+	assert.equal(
+		formatHex('rgb(none none none / none)'),
+		'#000000',
+		'formatHex'
+	);
+	assert.equal(
 		formatHex8('rgb(none none none / none)'),
 		'#000000ff',
 		'formatHex8'
 	);
-	t.equal(
+	assert.equal(
 		formatHsl('hsl(none none none / none)'),
 		'hsl(0, 0%, 0%)',
 		'formatHsl'
 	);
-	t.equal(
+	assert.equal(
 		formatCss('hsl(none none none)'),
 		'hsl(none none none)',
 		'formatCss(hsl)'
 	);
-	t.equal(
+	assert.equal(
 		formatCss('lab(none none none / none)'),
 		'lab(none none none)',
 		'formatCss(lab)'
 	);
-	t.equal(
+	assert.equal(
 		formatCss('lch(none none none / none)'),
 		'lch(none none none)',
 		'formatCss(lch)'
 	);
 
-	t.equal(
+	assert.equal(
 		formatCss('oklab(none none none / none)'),
 		'oklab(none none none)',
 		'formatCss(oklab)'
 	);
-	t.equal(
+	assert.equal(
 		formatCss('oklch(none none none / none)'),
 		'oklch(none none none)',
 		'formatCss(oklch)'
 	);
-	t.end();
 });

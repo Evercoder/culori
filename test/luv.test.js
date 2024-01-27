@@ -1,8 +1,9 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { luv, rgb } from '../src/index.js';
 
-tape('luv', t => {
-	t.deepEqual(
+test('luv', t => {
+	assert.deepEqual(
 		luv('white'),
 		{
 			mode: 'luv',
@@ -12,8 +13,8 @@ tape('luv', t => {
 		},
 		'white'
 	);
-	t.deepEqual(luv('black'), { mode: 'luv', l: 0, u: 0, v: 0 }, 'black');
-	t.deepEqual(
+	assert.deepEqual(luv('black'), { mode: 'luv', l: 0, u: 0, v: 0 }, 'black');
+	assert.deepEqual(
 		luv('red'),
 		{
 			mode: 'luv',
@@ -23,7 +24,7 @@ tape('luv', t => {
 		},
 		'red'
 	);
-	t.deepEqual(
+	assert.deepEqual(
 		luv('#00cc0080'),
 		{
 			mode: 'luv',
@@ -34,24 +35,24 @@ tape('luv', t => {
 		},
 		'#00cc0080'
 	);
-	t.end();
 });
 
-tape('color(--luv)', t => {
-	t.deepEqual(luv('color(--luv 30 0.5 1 / 0.25)'), {
+test('color(--luv)', t => {
+	assert.deepEqual(luv('color(--luv 30 0.5 1 / 0.25)'), {
 		l: 30,
 		u: 0.5,
 		v: 1,
 		alpha: 0.25,
 		mode: 'luv'
 	});
-	t.end();
 });
 
-tape('missing components', t => {
-	t.ok(rgb('color(--luv none 0.5 none)'), 'luv to rgb is ok');
-	t.deepEqual(rgb('color(--luv none 0.5 none)'), rgb('color(--luv 0 0.5 0)'));
-	t.ok(luv('rgb(none 100 20)'), 'rgb to luv is ok');
-	t.deepEqual(luv('rgb(none 100 20)'), luv('rgb(0 100 20)'));
-	t.end();
+test('missing components', t => {
+	assert.ok(rgb('color(--luv none 0.5 none)'), 'luv to rgb is ok');
+	assert.deepEqual(
+		rgb('color(--luv none 0.5 none)'),
+		rgb('color(--luv 0 0.5 0)')
+	);
+	assert.ok(luv('rgb(none 100 20)'), 'rgb to luv is ok');
+	assert.deepEqual(luv('rgb(none 100 20)'), luv('rgb(0 100 20)'));
 });

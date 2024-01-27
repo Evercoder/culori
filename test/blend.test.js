@@ -1,8 +1,9 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { blend } from '../src/index.js';
 
-tape('blendNormal', function (test) {
-	test.deepEqual(blend(['white', 'rgba(0, 0, 0, 0.5)']), {
+test('blendNormal', t => {
+	assert.deepEqual(blend(['white', 'rgba(0, 0, 0, 0.5)']), {
 		mode: 'rgb',
 		r: 0.5,
 		g: 0.5,
@@ -10,7 +11,7 @@ tape('blendNormal', function (test) {
 		alpha: 1
 	});
 
-	test.deepEqual(
+	assert.deepEqual(
 		blend([
 			{ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 },
 			{ mode: 'rgb', r: 0, g: 0, b: 1, alpha: 0.5 }
@@ -25,16 +26,14 @@ tape('blendNormal', function (test) {
 	);
 
 	// blend with transparent source
-	test.deepEqual(
+	assert.deepEqual(
 		blend([{ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 }, 'transparent']),
 		{ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 }
 	);
 
 	// blend with transparent backdrop
-	test.deepEqual(
+	assert.deepEqual(
 		blend(['transparent', { mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 }]),
 		{ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 }
 	);
-
-	test.end();
 });

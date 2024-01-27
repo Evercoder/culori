@@ -1,8 +1,9 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { lchuv, rgb, formatCss } from '../src/index.js';
 
-tape('lchuv', t => {
-	t.deepEqual(
+test('lchuv', t => {
+	assert.deepEqual(
 		lchuv('white'),
 		{
 			mode: 'lchuv',
@@ -12,8 +13,8 @@ tape('lchuv', t => {
 		},
 		'white'
 	);
-	t.deepEqual(lchuv('black'), { mode: 'lchuv', l: 0, c: 0 }, 'black');
-	t.deepEqual(
+	assert.deepEqual(lchuv('black'), { mode: 'lchuv', l: 0, c: 0 }, 'black');
+	assert.deepEqual(
 		lchuv('red'),
 		{
 			mode: 'lchuv',
@@ -23,7 +24,7 @@ tape('lchuv', t => {
 		},
 		'red'
 	);
-	t.deepEqual(
+	assert.deepEqual(
 		lchuv('#00cc0080'),
 		{
 			mode: 'lchuv',
@@ -34,35 +35,31 @@ tape('lchuv', t => {
 		},
 		'#00cc0080'
 	);
-	t.end();
 });
 
-tape('color(--lchuv)', t => {
-	t.deepEqual(lchuv('color(--lchuv 30 0.5 1 / 0.25)'), {
+test('color(--lchuv)', t => {
+	assert.deepEqual(lchuv('color(--lchuv 30 0.5 1 / 0.25)'), {
 		l: 30,
 		c: 0.5,
 		h: 1,
 		alpha: 0.25,
 		mode: 'lchuv'
 	});
-	t.end();
 });
 
-tape('formatCss', t => {
-	t.equal(
+test('formatCss', t => {
+	assert.equal(
 		formatCss('color(--lchuv 30 0.5 1 / 0.25)'),
 		'color(--lchuv 30 0.5 1 / 0.25)'
 	);
-	t.end();
 });
 
-tape('missing components', t => {
-	t.ok(rgb('color(--lchuv none 0.5 none)'), 'lchuv to rgb is ok');
-	t.deepEqual(
+test('missing components', t => {
+	assert.ok(rgb('color(--lchuv none 0.5 none)'), 'lchuv to rgb is ok');
+	assert.deepEqual(
 		rgb('color(--lchuv none 0.5 none)'),
 		rgb('color(--lchuv 0 0.5 0)')
 	);
-	t.ok(lchuv('rgb(none 100 20)'), 'rgb to lchuv is ok');
-	t.deepEqual(lchuv('rgb(none 100 20)'), lchuv('rgb(0 100 20)'));
-	t.end();
+	assert.ok(lchuv('rgb(none 100 20)'), 'rgb to lchuv is ok');
+	assert.deepEqual(lchuv('rgb(none 100 20)'), lchuv('rgb(0 100 20)'));
 });

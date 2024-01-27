@@ -1,8 +1,9 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { xyz50, rgb, formatCss } from '../src/index.js';
 
-tape('xyz50', t => {
-	t.deepEqual(
+test('xyz50', t => {
+	assert.deepEqual(
 		xyz50('white'),
 		{
 			mode: 'xyz50',
@@ -12,8 +13,8 @@ tape('xyz50', t => {
 		},
 		'white'
 	);
-	t.deepEqual(xyz50('black'), { mode: 'xyz50', x: 0, y: 0, z: 0 });
-	t.deepEqual(
+	assert.deepEqual(xyz50('black'), { mode: 'xyz50', x: 0, y: 0, z: 0 });
+	assert.deepEqual(
 		xyz50('red'),
 		{
 			mode: 'xyz50',
@@ -23,7 +24,7 @@ tape('xyz50', t => {
 		},
 		'red'
 	);
-	t.deepEqual(
+	assert.deepEqual(
 		xyz50('#00cc0080'),
 		{
 			mode: 'xyz50',
@@ -34,47 +35,42 @@ tape('xyz50', t => {
 		},
 		'#00cc0080'
 	);
-	t.end();
 });
 
-tape('color(xyz-d50)', t => {
-	t.deepEqual(xyz50('color(xyz-d50 1 0 0 / 0.25)'), {
+test('color(xyz-d50)', t => {
+	assert.deepEqual(xyz50('color(xyz-d50 1 0 0 / 0.25)'), {
 		x: 1,
 		y: 0,
 		z: 0,
 		alpha: 0.25,
 		mode: 'xyz50'
 	});
-	t.deepEqual(xyz50('color(xyz-d50 0% 50% 0.5 / 25%)'), {
+	assert.deepEqual(xyz50('color(xyz-d50 0% 50% 0.5 / 25%)'), {
 		x: 0,
 		y: 0.5,
 		z: 0.5,
 		alpha: 0.25,
 		mode: 'xyz50'
 	});
-	t.end();
 });
 
-tape('color(--xyz-d50)', t => {
-	t.deepEqual(xyz50('color(--xyz-d50 1 0 0 / 0.25)'), undefined);
-	t.end();
+test('color(--xyz-d50)', t => {
+	assert.deepEqual(xyz50('color(--xyz-d50 1 0 0 / 0.25)'), undefined);
 });
 
-tape('formatCss', t => {
-	t.equal(
+test('formatCss', t => {
+	assert.equal(
 		formatCss('color(xyz-d50 0% 50% 0.5 / 25%)'),
 		'color(xyz-d50 0 0.5 0.5 / 0.25)'
 	);
-	t.end();
 });
 
-tape('missing components', t => {
-	t.ok(rgb('color(xyz-d50 none 0.5 none)'), 'xyz50 to rgb is ok');
-	t.deepEqual(
+test('missing components', t => {
+	assert.ok(rgb('color(xyz-d50 none 0.5 none)'), 'xyz50 to rgb is ok');
+	assert.deepEqual(
 		rgb('color(xyz-d50 none 0.5 none)'),
 		rgb('color(xyz-d50 0 0.5 0')
 	);
-	t.ok(xyz50('rgb(none 100 20)'), 'rgb to xyz50 is ok');
-	t.deepEqual(xyz50('rgb(none 100 20)'), xyz50('rgb(0 100 20)'));
-	t.end();
+	assert.ok(xyz50('rgb(none 100 20)'), 'rgb to xyz50 is ok');
+	assert.deepEqual(xyz50('rgb(none 100 20)'), xyz50('rgb(0 100 20)'));
 });

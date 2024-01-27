@@ -60,7 +60,7 @@
 	},
 	"scripts": {
 		"prepare": "git config core.hooksPath .git-hooks",
-		"test": "tape 'test/**/*.test.js' | tap-arc",
+		"test": "node --test 'test/**/*.test.js'",
 		"start": "npx esbuild --servedir=.",
 		"build": "node build.js",
 		"benchmark": "node benchmark/index.js",

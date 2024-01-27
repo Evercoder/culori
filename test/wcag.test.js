@@ -1,16 +1,15 @@
-import { luminance, contrast } from '../src/wcag.js';
-import tape from 'tape';
+import { wcagLuminance, wcagContrast } from '../src/index.js';
+import test from 'node:test';
+import assert from 'node:assert';
 
-tape('luminance', t => {
-	t.equal(luminance('white'), 1);
-	t.equal(luminance('black'), 0);
-	t.equal(luminance('#999'), 0.31854677812509186);
-	t.end();
+test('wcagLuminance', t => {
+	assert.equal(wcagLuminance('white'), 1);
+	assert.equal(wcagLuminance('black'), 0);
+	assert.equal(wcagLuminance('#999'), 0.31854677812509186);
 });
 
-tape('contrast', t => {
-	t.equal(contrast('black', 'white'), 21);
-	t.equal(contrast('white', 'black'), 21);
-	t.equal(contrast('red', 'red'), 1);
-	t.end();
+test('wcagContrast', t => {
+	assert.equal(wcagContrast('black', 'white'), 21);
+	assert.equal(wcagContrast('white', 'black'), 21);
+	assert.equal(wcagContrast('red', 'red'), 1);
 });

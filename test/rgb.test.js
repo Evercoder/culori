@@ -1,60 +1,57 @@
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 import { rgb, formatHex, formatCss } from '../src/index.js';
 
-tape('rgb(Specifier)', function (test) {
-	test.deepEqual(formatHex(rgb('#ffffff')), '#ffffff');
+test('rgb(Specifier)', t => {
+	assert.deepEqual(formatHex(rgb('#ffffff')), '#ffffff');
 
-	test.deepEqual(
+	assert.deepEqual(
 		rgb('tomato'),
 		{ r: 1, g: 0.38823529411764707, b: 0.2784313725490196, mode: 'rgb' },
 		'named color'
 	);
 
-	test.deepEqual(
+	assert.deepEqual(
 		rgb('rgb(255, 0, 0)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
 		'rgb()'
 	);
 
-	test.deepEqual(
+	assert.deepEqual(
 		rgb('rgba(255, 0, 0)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
 		'rgba()'
 	);
 
-	test.deepEqual(
+	assert.deepEqual(
 		rgb('rgb(100%, 0%, 0%)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
 		'rgb()'
 	);
 
-	test.deepEqual(
+	assert.deepEqual(
 		rgb('rgba(100%, 0%, 0%)'),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
 		'rgba()'
 	);
-
-	test.end();
 });
 
-tape('rgb(Object)', function (test) {
-	test.deepEqual(
+test('rgb(Object)', t => {
+	assert.deepEqual(
 		rgb({ r: 1, g: 0, b: 0 }),
 		{ r: 1, g: 0, b: 0, mode: 'rgb' },
 		'red'
 	);
 
-	test.deepEqual(
+	assert.deepEqual(
 		rgb({ r: 0.1, g: 0.2, b: 0.3, alpha: 0.4 }),
 		{ r: 0.1, g: 0.2, b: 0.3, alpha: 0.4, mode: 'rgb' },
 		'floating point'
 	);
-
-	test.end();
 });
 
-tape('color(srgb)', t => {
-	t.deepEqual(
+test('color(srgb)', t => {
+	assert.deepEqual(
 		rgb('color(srgb 1 0 0 / 0.25)'),
 		{
 			r: 1,
@@ -65,45 +62,42 @@ tape('color(srgb)', t => {
 		},
 		'color(srgb 1 0 0 / 0.25)'
 	);
-	t.deepEqual(rgb('color(srgb 0% 50% 0.5 / 25%)'), {
+	assert.deepEqual(rgb('color(srgb 0% 50% 0.5 / 25%)'), {
 		r: 0,
 		g: 0.5,
 		b: 0.5,
 		alpha: 0.25,
 		mode: 'rgb'
 	});
-	t.end();
 });
 
-tape('formatCss', t => {
-	t.equal(
+test('formatCss', t => {
+	assert.equal(
 		formatCss(rgb('color(srgb 1 0 0.5/1)')),
 		'color(srgb 1 0 0.5)',
 		'color(srgb 1 0 0.5/1)'
 	);
-	t.end();
 });
 
 /*
 	See: https://emnudge.dev/blog/perfect-rgb-regex/
 */
-tape('exotic species', t => {
-	t.equal(
+test('exotic species', t => {
+	assert.equal(
 		formatCss(rgb('rgb(1-2-3)')),
 		'color(srgb 0.00392156862745098 -0.00784313725490196 -0.011764705882352941)'
 	);
-	t.equal(
+	assert.equal(
 		formatCss(rgb('rgb(1-.2.3)')),
 		'color(srgb 0.00392156862745098 -0.0007843137254901962 0.001176470588235294)'
 	);
-	t.equal(
+	assert.equal(
 		formatCss(rgb('rgb(1 .2.3)')),
 		'color(srgb 0.00392156862745098 0.0007843137254901962 0.001176470588235294)'
 	);
-	t.equal(
+	assert.equal(
 		formatCss(rgb('rgb(.1.2.3)')),
 		'color(srgb 0.0003921568627450981 0.0007843137254901962 0.001176470588235294)'
 	);
-	t.equal(formatCss(rgb('rgb(1.2.3)')), undefined);
-	t.end();
+	assert.equal(formatCss(rgb('rgb(1.2.3)')), undefined);
 });

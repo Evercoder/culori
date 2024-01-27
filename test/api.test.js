@@ -1,7 +1,8 @@
 /*
 	Keep an eye on the API surface of the various bundles
  */
-import tape from 'tape';
+import test from 'node:test';
+import assert from 'node:assert';
 
 import * as full from '../src/index.js';
 import * as css from '../src/bootstrap/css.js';
@@ -474,22 +475,18 @@ const API_FN = [
 	'wcagLuminance'
 ];
 
-tape('culori', t => {
-	t.deepEqual(Object.keys(full).sort(), API_FULL.sort());
-	t.end();
+test('culori', t => {
+	assert.deepEqual(Object.keys(full).sort(), API_FULL.sort());
 });
 
-tape('culori/css', t => {
-	t.deepEqual(Object.keys(css).sort(), API_CSS.sort());
-	t.end();
+test('culori/css', t => {
+	assert.deepEqual(Object.keys(css).sort(), API_CSS.sort());
 });
 
-tape('culori/all', t => {
-	t.deepEqual(Object.keys(all).sort(), API_ALL.sort());
-	t.end();
+test('culori/all', t => {
+	assert.deepEqual(Object.keys(all).sort(), API_ALL.sort());
 });
 
-tape('culori/fn', t => {
-	t.deepEqual(Object.keys(fn).sort(), API_FN.sort());
-	t.end();
+test('culori/fn', t => {
+	assert.deepEqual(Object.keys(fn).sort(), API_FN.sort());
 });
