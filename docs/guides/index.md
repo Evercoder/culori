@@ -15,3 +15,4 @@ This guide documents the breaking changes in each new major release of the libra
 ## Elsewhere
 
 [Coloring With Code — A Programmatic Approach To Design](https://tympanus.net/codrops/2021/12/07/coloring-with-code-a-programmatic-approach-to-design/), a tutorial by George Francis.
+[huetiful-js - Open source Typescript library for manipulating color and generating custom color scales based Culori](https://github.com/prjctimg/huetiful)
