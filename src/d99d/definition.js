@@ -6,6 +6,7 @@ import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65.js';
 import convertXyz65ToD99d from './convertXyz65ToD99d.js';
 import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
+import { differenceEuclidean } from '../difference.js';
 
 const definition = {
 	mode: 'd99d',
@@ -20,11 +21,12 @@ const definition = {
 
 	channels: ['l', 'a', 'b', 'alpha'],
 
-	// TODO: check ranges
 	ranges: {
 		l: [0, 100],
-		a: [-40.09, 45.501],
-		b: [-40.469, 44.344]
+		a: [-55, 55],
+		b: [-55, 55],
+		c: [0, 55],
+		h: [0, 360]
 	},
 
 	interpolate: {
@@ -35,6 +37,10 @@ const definition = {
 			use: interpolatorLinear,
 			fixup: fixupAlpha
 		}
+	},
+
+	difference: {
+		h: differenceEuclidean
 	}
 };
 
