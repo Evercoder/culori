@@ -1,4 +1,4 @@
-import { kE, θ } from './constants.js';
+import { kE } from './constants.js';
 import convertXyz65ToLab65 from '../lab65/convertXyz65ToLab65.js';
 import normalizeHue from '../util/normalizeHue.js';
 
