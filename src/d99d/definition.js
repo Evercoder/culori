@@ -16,6 +16,7 @@ const definition = {
 
 	fromMode: {
 		xyz65: convertXyz65ToD99d,
+		// @ts-ignore
 		rgb: c => convertXyz65ToD99d(convertRgbToXyz65(c))
 	},
 

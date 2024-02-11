@@ -6,7 +6,6 @@ import convertRgbToXyz65 from '../xyz65/convertRgbToXyz65.js';
 import convertXyz65ToD99c from './convertXyz65ToD99c.js';
 import { interpolatorLinear } from '../interpolate/linear.js';
 import { fixupAlpha } from '../fixup/alpha.js';
-import { fixupHueShorter } from '../fixup/hue.js';
 import { differenceEuclidean } from '../difference.js';
 
 const definition = {
@@ -17,6 +16,7 @@ const definition = {
 
 	fromMode: {
 		xyz65: convertXyz65ToD99c,
+		// @ts-ignore
 		rgb: c => convertXyz65ToD99c(convertRgbToXyz65(c))
 	},
 
