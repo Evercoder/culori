@@ -277,6 +277,51 @@ Serialized as `color(--din99o-lch l c h)`, with the `none` keyword for any missi
 
 Does not have gamut limits.
 
+### DIN99c and DIN99d
+
+DIN99c and DIN99d are "spinoffs" of DIN99b which itself is derived from DIN99. For color distance calculation they are said to perform better than DIN99o, especially in the blue areas, and are comparable in quality to the complex CIE2000 formula.
+
+The sole purpose of these color spaces is highly performant distance calculation, so only conversion _to_ DIN99c/d is implemented.
+The models also contains chroma and hue channels as supporting information.
+
+The color distance (deltaE) function factories are:
+```js
+culori.differenceEuclidean('d99c')
+culori.differenceEuclidean('d99d')
+```
+If needed outside of culori, distance calculation is:<br>
+```text
+&Delta;E = SQRT( &Delta;L<sup>2</sup> + &Delta;a<sup>2</sup> + &Delta;b<sup>2</sup> )
+```
+
+#### `din99c`
+
+DIN99c color space in cartesian and cylindrical form.
+
+| Channel | Range                | Description |
+| ------- | -------------------- | ----------- |
+| `l`     | `[0, 100]`           | Lightness   |
+| `a`     | `[-55, 55]`≈         |
+| `b`     | `[-55, 55]`≈         |
+| `c`     | `[0, 55]`≈           | Chroma      |
+| `h`     | `[0, 360)`           | Hue         |
+
+Does not have gamut limits.
+
+#### `din99d`
+
+DIN99d color space in cartesian and cylindrical form.
+
+| Channel | Range                | Description |
+| ------- | -------------------- | ----------- |
+| `l`     | `[0, 100]`           | Lightness   |
+| `a`     | `[-55, 55]`≈         |
+| `b`     | `[-55, 55]`≈         |
+| `c`     | `[0, 55]`≈           | Chroma      |
+| `h`     | `[0, 360)`           | Hue         |
+
+Does not have gamut limits.
+
 ### Oklab, Oklch, Okhsl, Okhsv
 
 The [Oklab color space](https://bottosson.github.io/posts/oklab/), in Cartesian (Lab) and cylindrical (LCh) forms. It uses the D65 standard illuminant. 
