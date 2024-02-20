@@ -22,7 +22,6 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#differenceCie94'>differenceCie94</a></li>
 <li><a href='#differenceCiede2000'>differenceCiede2000</a></li>
 <li><a href='#differenceCmc'>differenceCmc</a></li>
-<li><a href='#differenceDin99o'>differenceDin99o</a></li>
 <li><a href='#differenceEuclidean'>differenceEuclidean</a></li>
 <li><a href='#differenceHueChroma'>differenceHueChroma</a></li>
 <li><a href='#differenceHueNaive'>differenceHueNaive</a></li>
@@ -1164,12 +1163,6 @@ Computes the HyAB color difference between the colors _a_ and _b_, as proposed i
 The HyAB formula combines the Euclidean and [city block](https://en.wikipedia.org/wiki/Taxicab_geometry) distance and has been experimentally shown to work better for large color differences than CIEDE2000, while still holding up well for smaller color differences, making it a _"good candidate formula for image processing and computer vision applications"_.
 
 ### Other difference formulas
-
-<a id="differenceDin99o" href="#differenceDin99o">#</a> **differenceDin99o**()
-
-<span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
-
-Computes the [DIN99o][din99ode] ΔE\*<sub>99o</sub> color difference between the colors _a_ and _b_. The computation is done in the `dlab` color space.
 
 <a id="differenceKotsarenkoRamos" href="#differenceKotsarenkoRamos">#</a> **differenceKotsarenkoRamos**()
 
