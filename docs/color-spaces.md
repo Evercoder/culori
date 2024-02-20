@@ -244,7 +244,7 @@ Does not have gamut limits.
 
 ### DIN99 Lab / LCh
 
-The [DIN99](https://de.wikipedia.org/wiki/DIN99-Farbraum) color space "squishes" the CIELAB D65 color space to obtain an [effective color difference](#culoriDifferenceDin99o) metric that can be expressed as a simple Euclidean distance. The latest iteration of the the standard, DIN99o, is available in Cartesian (`dlab`) and plar (`dlch`) form.
+The [DIN99](https://de.wikipedia.org/wiki/DIN99-Farbraum) color space "squishes" the CIELAB D65 color space to obtain an [effective color difference](#culoriDifferenceDin99o) metric that can be expressed as a simple Euclidean distance. The latest iteration of the the standard, DIN99o, is available in Cartesian (`dlab`) and polar (`dlch`) form.
 
 > [_Industrial Color Physics_](https://search.worldcat.org/title/Industrial-color-physics/oclc/663097553), Georg A. Klein, Springer (2010)
 > [DIN 6176](https://www.beuth.de/en/standard/din-6176/292836682), _Colorimetric determination of colour differences of object colours according to the DIN99o formula_
