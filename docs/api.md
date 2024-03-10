@@ -551,7 +551,7 @@ Culori comes with [just a few](#built-in-easing-functions) easing functions, but
 
 ### Interpolation hints
 
-Any number in he _colors_ array will be interpreted as an [interpolation hint](https://drafts.csswg.org/css-images-4/#color-stop-syntax):
+Any number in the _colors_ array will be interpreted as an [interpolation hint](https://drafts.csswg.org/css-images-4/#color-stop-syntax):
 
 ```js
 import { interpolate } from 'culori';
