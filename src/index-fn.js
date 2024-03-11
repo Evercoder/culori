@@ -2,6 +2,8 @@
 export { default as modeA98 } from './a98/definition.js';
 export { default as modeCubehelix } from './cubehelix/definition.js';
 export { default as modeDlab } from './dlab/definition.js';
+export { default as moded99c } from './d99c/definition.js';
+export { default as modeD99d } from './d99d/definition.js';
 export { default as modeDlch } from './dlch/definition.js';
 export { default as modeHsi } from './hsi/definition.js';
 export { default as modeHsl } from './hsl/definition.js';
@@ -215,6 +217,8 @@ export { default as convertRgbToYiq } from './yiq/convertRgbToYiq.js';
 export { default as convertRgbToXyb } from './xyb/convertRgbToXyb.js';
 export { default as convertXybToRgb } from './xyb/convertXybToRgb.js';
 export { default as convertXyz65ToA98 } from './a98/convertXyz65ToA98.js';
+export { default as convertXyz65ToD99c } from './d99c/convertXyz65ToD99c';
+export { default as convertXyz65ToD99d } from './d99d/convertXyz65ToD99d';
 export { default as convertXyz65ToItp } from './itp/convertXyz65ToItp.js';
 export { default as convertXyz65ToJab } from './jab/convertXyz65ToJab.js';
 export { default as convertXyz65ToLab65 } from './lab65/convertXyz65ToLab65.js';

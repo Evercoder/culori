@@ -2,6 +2,8 @@
 import modeA98 from './a98/definition.js';
 import modeCubehelix from './cubehelix/definition.js';
 import modeDlab from './dlab/definition.js';
+import moded99c from './d99c/definition.js';
+import modeD99d from './d99d/definition.js';
 import modeDlch from './dlch/definition.js';
 import modeHsi from './hsi/definition.js';
 import modeHsl from './hsl/definition.js';
@@ -221,6 +223,8 @@ export { default as convertXyz50ToProphoto } from './prophoto/convertXyz50ToProp
 export { default as convertXyz50ToRgb } from './xyz50/convertXyz50ToRgb.js';
 export { default as convertXyz50ToXyz65 } from './xyz65/convertXyz50ToXyz65.js';
 export { default as convertXyz65ToA98 } from './a98/convertXyz65ToA98.js';
+export { default as convertXyz65ToD99c } from './d99c/convertXyz65ToD99c';
+export { default as convertXyz65ToD99d } from './d99d/convertXyz65ToD99d';
 export { default as convertXyz65ToItp } from './itp/convertXyz65ToItp.js';
 export { default as convertXyz65ToJab } from './jab/convertXyz65ToJab.js';
 export { default as convertXyz65ToLab65 } from './lab65/convertXyz65ToLab65.js';
@@ -234,6 +238,8 @@ export {
 	modeA98,
 	modeCubehelix,
 	modeDlab,
+	moded99c,
+	modeD99d,
 	modeDlch,
 	modeHsi,
 	modeHsl,
@@ -266,6 +272,8 @@ export {
 export const a98 = useMode(modeA98);
 export const cubehelix = useMode(modeCubehelix);
 export const dlab = useMode(modeDlab);
+export const d99c = useMode(moded99c);
+export const d99d = useMode(modeD99d);
 export const dlch = useMode(modeDlch);
 export const hsi = useMode(modeHsi);
 export const hsl = useMode(modeHsl);
