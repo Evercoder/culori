@@ -34,9 +34,6 @@ body {
 }
 
 .logo {
-	font-size: 2.4em;
-	line-height: 1;
-	font-weight: bold;
 	display: flex;
 	align-items: stretch;
 	justify-content: space-between;
@@ -49,24 +46,20 @@ body {
 	margin: 1em 0;
 }
 
-.logo span {
-	font-size: 0.5em;
-}
-
-.logo > * {
+.logo a {
 	background: #fff;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 1.25em;
+	padding-block: 0.25rem;
 }
 
-.logo > :not(:last-child) {
-	padding-right: 0.5em;
+.logo a:first-child {
+	padding-right: 1rem;
 }
 
-.logo > :not(:first-child) {
-	padding-left: 0.75em;
-}
-
-.logo > :last-child {
-	padding-top: 0.5em;
+.logo a:last-child {
+	padding-left: 1rem;
 }
 
 ul.nav .active a {

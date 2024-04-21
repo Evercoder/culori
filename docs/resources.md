@@ -49,9 +49,12 @@ _Does your product/project use Culori? Create a PR and add yourself to this list
 ### Articles
 
 -   [Color: From Hexcodes to Eyeballs](http://jamie-wong.com/post/color/) by Jamie Wong
+-   [Okay, color spaces](https://ericportis.com/posts/2024/okay-color-spaces/) by Eric Portis
+-   [How to generate color palettes for design systems](https://matthewstrom.com/writing/generating-color-palettes/) by Matthew Ström
 
 ### Books
 
 -   [Fairchild, Mark D.](http://markfairchild.org/) — [_Color Appearance Models_](https://www.wiley.com/en-us/Color+Appearance+Models%2C+3rd+Edition-p-9781119967033), 3rd Edition, Wiley, 2013.
+- Green, Phil (ed.) — [_Fundamentals and Applications of Colour Engineering_](https://onlinelibrary.wiley.com/doi/book/10.1002/9781119827214), Wiley, 2023.
 - Morovič, Ján — [_Color Gamut Mapping_](https://www.wiley.com/en-ie/Color+Gamut+Mapping-p-9780470030325), Wiley, 2008.
 -   [Poynton, Charles](http://poynton.ca/) — [_Digital Video and HD Algorithms and Interfaces_](https://www.elsevier.com/books/digital-video-and-hd/poynton/978-0-12-391926-7), 2nd Edition, Morgan Kaufmann, 2012.

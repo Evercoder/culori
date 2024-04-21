@@ -3,12 +3,10 @@ layout: default.njk
 title: Color Spaces
 ---
 
-This is an overview of the color spaces built into culori, listing their channels and expected ranges.
+This is an overview of the color spaces built into Culori, listing their channels and expected ranges.
 
 <details>
 <summary>A note on terminology</summary>
-
-## A note on terminology
 
 A [color model](https://en.wikipedia.org/wiki/Color_model) is a way to describe colors along certain dimensions. RGB, for example, is a color model: color is expressed as a combination of red, green and blue.
 
