@@ -22,23 +22,18 @@
 							alt="culori"
 						/>
 					</a>
-					<span
-						>v4.0.1 (<a
-							href="https://github.com/evercoder/culori/releases"
-							>changelog</a
-						>)</span
-					>
+					<a href="https://github.com/evercoder/culori/releases">v4.0.1</a>
 				</div>
 				<nav>
 					<ul class='nav'>
 						<li >
-							<a href="/getting-started/">Getting Started</a>
+							<a href="/getting-started/">Get started</a>
 						</li>
 						<li >
-							<a href="/api/">API Reference</a>
+							<a href="/api/">API reference</a>
 						</li>
 						<li class="active">
-							<a href="/color-spaces/">Color Spaces</a>
+							<a href="/color-spaces/">Color spaces</a>
 						</li>
 						<li >
 							<a href="/guides/">Guides</a>
@@ -56,10 +51,9 @@
 		<div class="container">
 			<article>
 				<h1>Color Spaces</h1>
-				<p>This is an overview of the color spaces built into culori, listing their channels and expected ranges.</p>
+				<p>This is an overview of the color spaces built into Culori, listing their channels and expected ranges.</p>
 <details>
 <summary>A note on terminology</summary>
-<h2>A note on terminology</h2>
 <p>A <a href="https://en.wikipedia.org/wiki/Color_model">color model</a> is a way to describe colors along certain dimensions. RGB, for example, is a color model: color is expressed as a combination of red, green and blue.</p>
 <p>A color model, along with a precise description of how colors in the model are to be interpreted, makes a color <em>space</em>. sRGB, Display P3 and ProPhoto RGB are all color spaces that employ the RGB model: they describe colors as combination of red, green, and blue primaries; however, they have different notions of how these red, green, and blue primary colors look.</p>
 <p>In some color spaces, such as CIELAB or CIELCh, some channels don't have fixed ranges. For these channels, approximate ranges are obtained by converting all sRGB colors defined by <code>r, g, b ∈ ℕ ⋂ [0, 255]</code> to that specific color space. Whenever that's the case, the range is marked with the approximation symbol <code>≈</code>.</p>
