@@ -27,6 +27,7 @@ _Does your product/project use Culori? Create a PR and add yourself to this list
 -   [d3-color](https://github.com/d3/d3-color) by [Mike Bostock](https://bost.ocks.org/mike/) (JavaScript)
 -   [chroma.js](https://github.com/gka/chroma.js) by [Gregor Aisch](https://driven-by-data.net/) (JavaScript)
 -   [colorjs.io](https://github.com/LeaVerou/color.js) by [Lea Verou](http://lea.verou.me/) and [Chris Lilley](https://svgees.us/) (JavaScript)
+-   [@texel/color](https://github.com/texel-org/color/) by [Matt DesLauriers](https://www.mattdesl.com/) (JavaScript)
 -   [Colour](https://www.colour-science.org/) (Python)
 - [ColorAide](https://github.com/facelessuser/coloraide) by Isaac Muse (Python)
 -   [colorio](https://github.com/nschloe/colorio) by Nico Schlömer (Python)
