@@ -33,6 +33,7 @@ _Does your product/project use Culori? Create a PR and add yourself to this list
 -   [colorio](https://github.com/nschloe/colorio) by Nico Schlömer (Python)
 -   [`colorspace` package](http://colorspace.r-forge.r-project.org/) (R)
 -   [`Colors` package](https://github.com/JuliaGraphics/Colors.jl) (Julia)
+- [`linebender/color`](https://github.com/linebender/color) by Raph Levien & collaborators (Rust)
 
 ## Further reading
 
