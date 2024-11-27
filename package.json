@@ -47,13 +47,13 @@
 		"src"
 	],
 	"devDependencies": {
-		"@11ty/eleventy": "^2.0.1",
+		"@11ty/eleventy": "^3.0.0",
 		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
-		"esbuild": "^0.19.11",
-		"eslint": "^8.56.0",
-		"eslint-plugin-import": "^2.29.1",
-		"gh-pages": "^6.1.1",
-		"prettier": "^3.2.4",
+		"esbuild": "^0.24.0",
+		"eslint": "^8.57.1",
+		"eslint-plugin-import": "^2.31.0",
+		"gh-pages": "^6.2.0",
+		"prettier": "^3.4.1",
 		"pretty-quick": "^4.0.0"
 	},
 	"scripts": {
