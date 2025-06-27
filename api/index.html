@@ -22,7 +22,7 @@
 							alt="culori"
 						/>
 					</a>
-					<a href="https://github.com/evercoder/culori/releases">v4.0.1</a>
+					<a href="https://github.com/evercoder/culori/releases">v4.0.2</a>
 				</div>
 				<nav>
 					<ul class='nav'>
@@ -356,6 +356,7 @@
 <p>The “roughly in gamut” aspect of the algorithm can be disabled by passing <code>null</code> for the <code>delta</code> color difference function:</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> toGamut <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'culori'</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> clampToP3 <span class="token operator">=</span> <span class="token function">toGamut</span><span class="token punctuation">(</span><span class="token string">'p3'</span><span class="token punctuation">,</span> <span class="token string">'oklch'</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The algorithm expects an LCH-like color space, containing lightness and chroma components, for the <code>mode</code> argument.</p>
 <h2>Interpolation</h2>
 <p>In any color space, colors occupy positions given by their values for each channel. Interpolating colors means tracing a line through the coordinates of these colors, and figuring out what colors reside on the line at various positions.</p>
 <img src='/img/red-blue.png' height='20' alt='red and blue, linearly interpolated'/>
