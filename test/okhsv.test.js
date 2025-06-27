@@ -5,18 +5,18 @@ import { okhsv, rgb, formatHex, formatCss } from '../src/index.js';
 test('rgb → okhsv', t => {
 	assert.equal(
 		formatCss(okhsv('red')),
-		'color(--okhsv 29.2338851923426 0.9995219692256307 0.9999999999999997)',
+		'color(--okhsv 29.233880279627854 0.9995219665357181 0.9999999999999998)',
 		'red'
 	);
 	assert.equal(
 		formatCss(okhsv('white')),
-		'color(--okhsv none 0 1.00000009386827)',
+		'color(--okhsv none 0 1.0000000000000004)',
 		'white'
 	);
 	assert.equal(formatCss(okhsv('black')), 'color(--okhsv none 0 0)', 'black');
 	assert.equal(
 		formatCss(okhsv('#3333')),
-		'color(--okhsv none 0 0.220995101721347 / 0.2)',
+		'color(--okhsv none 0 0.22099507377330885 / 0.2)',
 		'#333'
 	);
 });

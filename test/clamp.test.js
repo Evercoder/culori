@@ -172,12 +172,12 @@ test('toGamut()', t => {
 	);
 	assert.equal(
 		formatCss(toGamut('rgb')('color(--lch-d65 100 0 180)')),
-		'color(srgb 0.9999999999999968 1.0000000000000016 0.9999999999999986)',
+		'color(srgb 1 1 1)',
 		'chroma = 0'
 	);
 	assert.equal(
 		formatCss(toGamut('p3')('lch(80% 150 60)')),
-		'color(display-p3 0.9999999999999994 0.6969234154991887 0.5084794582132421)',
+		'color(display-p3 0.9999999999999999 0.6969234114981073 0.5084794107705369)',
 		'api docs example'
 	);
 
@@ -257,9 +257,9 @@ test('missing components', t => {
 		toGamut()('color(srgb 1.1 none none)'),
 		{
 			mode: 'rgb',
-			r: 0.9999999999999994,
-			g: 0.24780803212382269,
-			b: 0.18935507566673854
+			r: 0.9999999999999997,
+			g: 0.2478080277701502,
+			b: 0.18935505411180673
 		},
 		'toGamut(), rgb color'
 	);

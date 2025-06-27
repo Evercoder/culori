@@ -1,16 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { oklch, formatCss, useParser, removeParser } from '../src/index.js';
+import {
+	rgb,
+	oklch,
+	formatCss,
+	useParser,
+	removeParser,
+	displayable
+} from '../src/index.js';
 
 test('oklch', t => {
 	assert.deepEqual(
 		oklch('white'),
-		{ mode: 'oklch', l: 0.999999993473546, c: 0 },
+		{ mode: 'oklch', l: 1.0000000000000002, c: 0 },
 		'white'
 	);
 	assert.deepEqual(
 		oklch('#111'),
-		{ mode: 'oklch', l: 0.1776377719172259, c: 0 },
+		{ mode: 'oklch', l: 0.17763777307657064, c: 0 },
 		'#111'
 	);
 	assert.deepEqual(oklch('black'), { mode: 'oklch', l: 0, c: 0 }, 'black');
@@ -18,9 +25,9 @@ test('oklch', t => {
 		oklch('red'),
 		{
 			mode: 'oklch',
-			l: 0.6279553606145515,
-			c: 0.25768330773615683,
-			h: 29.2338851923426
+			l: 0.6279553639214311,
+			c: 0.2576833038053608,
+			h: 29.233880279627854
 		},
 		'red'
 	);
@@ -99,6 +106,16 @@ test('formatCss', t => {
 	);
 	assert.equal(
 		formatCss(oklch('#ffffff00')),
-		'oklch(0.999999993473546 0 none / 0)'
+		'oklch(1.0000000000000002 0 none / 0)'
 	);
+});
+
+test('Issue #255', t => {
+	assert.deepEqual(rgb(oklch('tomato')), {
+		mode: 'rgb',
+		r: 0.9999999999999997,
+		g: 0.38823529411764784,
+		b: 0.2784313725490196
+	});
+	assert.ok(displayable(oklch('tomato')));
 });

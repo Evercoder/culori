@@ -11,14 +11,14 @@ import {
 test('rgb → oklab', t => {
 	assert.deepEqual(
 		oklab('white'),
-		{ mode: 'oklab', l: 0.999999993473546, a: 0, b: 0 },
+		{ mode: 'oklab', l: 1.0000000000000002, a: 0, b: 0 },
 		'white'
 	);
 
 	// Tests that achromatic RGB colors get a = b = 0 in OKLab
 	assert.deepEqual(
 		oklab('#111'),
-		{ mode: 'oklab', l: 0.1776377719172259, a: 0, b: 0 },
+		{ mode: 'oklab', l: 0.17763777307657064, a: 0, b: 0 },
 		'#111'
 	);
 
@@ -31,9 +31,9 @@ test('rgb → oklab', t => {
 		oklab('red'),
 		{
 			mode: 'oklab',
-			l: 0.6279553606145515,
-			a: 0.22486306106597417,
-			b: 0.12584629853073503
+			l: 0.6279553639214311,
+			a: 0.22486306842627443,
+			b: 0.12584627733058495
 		},
 		'red'
 	);
