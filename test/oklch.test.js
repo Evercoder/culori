@@ -6,7 +6,8 @@ import {
 	formatCss,
 	useParser,
 	removeParser,
-	displayable
+	displayable,
+	inGamut
 } from '../src/index.js';
 
 test('oklch', t => {
@@ -118,4 +119,9 @@ test('Issue #255', t => {
 		b: 0.2784313725490196
 	});
 	assert.ok(displayable(oklch('tomato')));
+});
+
+test('Issue #249', t => {
+	assert.ok(displayable('oklch(100% 0 0)'));
+	assert.ok(inGamut('rgb')('oklch(100% 0 0)'));
 });
