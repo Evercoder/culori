@@ -189,6 +189,8 @@ test('toGamut()', t => {
 		c: 77.47625128342412,
 		h: 5.006331789592595
 	});
+
+	assert.throws(() => toGamut('rgb', 'lab'));
 });
 
 test('missing components', t => {

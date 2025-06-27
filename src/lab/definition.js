@@ -23,8 +23,8 @@ const definition = {
 
 	ranges: {
 		l: [0, 100],
-		a: [-100, 100],
-		b: [-100, 100]
+		a: [-125, 125],
+		b: [-125, 125]
 	},
 
 	parse: [parseLab],

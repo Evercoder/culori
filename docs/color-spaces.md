@@ -157,8 +157,8 @@ The CIELAB color space using the [D50 standard illuminant](https://en.wikipedia.
 | Channel | CSS Reference Range                 | Description           |
 | ------- | --------------------- | --------------------- |
 | `l`     | `[0, 100]`            | Lightness             |
-| `a`     | `[-100, 100]`   | Green–red component   |
-| `b`     | `[-100, 100]` | Blue–yellow component |
+| `a`     | `[-125, 125]`   | Green–red component   |
+| `b`     | `[-125, 125]` | Blue–yellow component |
 
 Serialized as `lab(l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
@@ -185,8 +185,8 @@ CIELAB relative to the D65 standard illuminant.
 | Channel | Range                | Description           |
 | ------- | -------------------- | --------------------- |
 | `l`     | `[0, 100]`           | Lightness             |
-| `a`     | `[-86.183, 98.234]`≈ | Green–red component   |
-| `b`     | `[-107.86, 94.478]`≈ | Blue–yellow component |
+| `a`     | `[-125, 125]` | Green–red component   |
+| `b`     | `[-125, 125]` | Blue–yellow component |
 
 Serialized as `color(--lab-d65 l a b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
 
@@ -199,7 +199,7 @@ CIELCh relative to the D65 standard illuminant.
 | Channel | Range           | Description |
 | ------- | --------------- | ----------- |
 | `l`     | `[0, 100]`      | Lightness   |
-| `c`     | `[0, 133.807]`≈ | Chroma      |
+| `c`     | `[0, 150]` | Chroma      |
 | `h`     | `[0, 360)`      | Hue         |
 
 Serialized as `color(--lch-d65 l c h)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.

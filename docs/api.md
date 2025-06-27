@@ -428,6 +428,8 @@ import { toGamut } from 'culori';
 const clampToP3 = toGamut('p3', 'oklch', null);
 ```
 
+The algorithm expects an LCH-like color space, containing lightness and chroma components, for the `mode` argument.
+
 ## Interpolation
 
 In any color space, colors occupy positions given by their values for each channel. Interpolating colors means tracing a line through the coordinates of these colors, and figuring out what colors reside on the line at various positions.

@@ -206,6 +206,10 @@ export function toGamut(
 	const ucs = converter(mode);
 	const { ranges } = getMode(mode);
 
+	if (!ranges.l || !ranges.c) {
+		throw new Error('LCH-like space expected');
+	}
+
 	return color => {
 		color = prepare(color);
 		if (color === undefined) {
