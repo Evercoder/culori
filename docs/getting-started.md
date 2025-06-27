@@ -73,7 +73,7 @@ It's often useful to pin the library to a specific version, to make sure your ol
 The library is published to [deno.land/x/culori](https://deno.land/x/culori) for usage in [Deno](https://deno.land/):
 
 ```js
-import { rgb } from 'https://deno.land/x/culori@{{pkg.version}}/index.js';
+import { rgb } from 'https://deno.land/x/culori@v{{pkg.version}}/index.js';
 
 rgb('tomato');
 ```
