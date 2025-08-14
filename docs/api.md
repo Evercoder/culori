@@ -525,7 +525,7 @@ const easeIn = t => t * t;
 interpolate(
 	['red', 'green', 'blue'],
 	'rgb',
-	interpolatorPiecewise((a, b, t) => lerp(a, b)(easeIn(t)))
+	interpolatorPiecewise((a, b, t) => lerp(a, b, easeIn(t)))
 );
 ```
 
@@ -534,7 +534,7 @@ This formula can be helpful if you wanted to apply a different easing function p
 ```js
 import { interpolate, interpolatorPiecewise, lerp } from 'culori';
 function piecewiseEasing(easingFn) {
-	return interpolatorPiecewise((a, b, t) => lerp(a, b)(easingFn(t)));
+	return interpolatorPiecewise((a, b, t) => lerp(a, b, easingFn(t)));
 }
 
 interpolate(['red', 'green', 'blue'], 'rgb', {
