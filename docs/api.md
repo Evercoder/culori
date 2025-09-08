@@ -14,6 +14,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#blend'>blend</a></li>
 <li><a href='#blerp'>blerp</a></li>
 <li><a href='#clampChroma'>clampChroma</a></li>
+<li><a href='#clampGamut'>clampGamut</a></li>
 <li><a href='#clampRgb'>clampRgb</a></li>
 <li><a href='#colorsNamed'>colorsNamed</a></li>
 <li><a href='#converter'>converter</a></li>
@@ -154,7 +155,7 @@ parse('#ff0000');
 
 /* A HSL color */
 parse('hsl(60 50% 10% / 100%)');
-// ⇒ { h: 60, s: 0.5, b: 0.1, alpha: 1, mode: 'hsl' }
+// ⇒ { h: 60, s: 0.5, l: 0.1, alpha: 1, mode: 'hsl' }
 
 /* A Lab color */
 parse('lab(100% -50 50)');
@@ -244,7 +245,7 @@ formatHsl('lab(50 0 0 / 25%)');
 
 <span aria-label='Source:'>☞</span> [src/formatter.js]({{codebase}}/src/formatter.js)
 
-Returns a CSS string for the given color, based on the CSS Color Level 4 specification. A few color spaces, such as `hsl` or `lab`, have their own functional representation in CSS. We use that whenever possible; the `hsl` color space is represented as `hsl(h% s l / alpha)`. Predefined color spaces are represented using the `color()` notation with the appropriate identifier for the color space, e.g. `color(display-p3 r g b / alpha)`. All other colors paces use the `color()` notation with a dashed identifier. For example, `jab` is represented as `color(--jzazbz j a b / alpha)`.
+Returns a CSS string for the given color, based on the CSS Color Level 4 specification. A few color spaces, such as `hsl` or `lab`, have their own functional representation in CSS. We use that whenever possible; the `hsl` color space is represented as `hsl(h% s l / alpha)`. Predefined color spaces are represented using the `color()` notation with the appropriate identifier for the color space, e.g. `color(display-p3 r g b / alpha)`. All other colors spaces use the `color()` notation with a dashed identifier. For example, `jab` is represented as `color(--jzazbz j a b / alpha)`.
 
 You can find the exact string produced for each color space under the _Serialized as_ entry on the [Color Spaces](/color-spaces) page.
 
@@ -272,13 +273,13 @@ formatCss({ mode: 'p3', r: 0.5, s: 0.25, b: 1, alpha: 1 });
 /*
 	sRGB colors.
  */
-formatCss({ mode: 'rgb', r: 0.5, s: 0.25, b: 1, alpha: 0.25 });
+formatCss({ mode: 'rgb', r: 0.5, g: 0.25, b: 1, alpha: 0.25 });
 // ⇒ 'color(srgb 0.5 0.25 1 / 0.25)'
 
 /*
 	A custom color space.
  */
-formatCss({ mode: 'lrgb', r: 0.5, s: 0.25, b: 1, alpha: 0.25 });
+formatCss({ mode: 'lrgb', r: 0.5, g: 0.25, b: 1, alpha: 0.25 });
 // ⇒ 'color(--srgb-linear 0.5 0.25 1 / 0.25)'
 ```
 
@@ -587,7 +588,7 @@ interpolate(['red', 0.25, 'blue']);
 
 The [Smoothstep][smoothstep] easing function.
 
-<a id="easingSmoothstepInverse" href="#easingSmoothstepInverse">#</a> **easingSmoothstep**
+<a id="easingSmoothstepInverse" href="#easingSmoothstepInverse">#</a> **easingSmoothstepInverse**
 
 <span aria-label='Source:'>☞</span> [src/easing/smoothstep.js]({{codebase}}/src/easing/smoothstep.js)
 
@@ -1068,12 +1069,12 @@ let interpolateWithAlphaChromaPremult = interpolateWith(
 	(...args) => mapAlphaDivide(mapChromaDivide(...args))
 );
 
-interpolateWithAlphaPremult(['red', 'transparent', 'blue'])(0.25);
+interpolateWithAlphaChromaPremult(['red', 'transparent', 'blue'])(0.25);
 ```
 
 <a id="interpolateWithPremultipliedAlpha" href="#interpolateWithPremultipliedAlpha">#</a> **interpolateWithPremultipliedAlpha**(_colors_, _mode = "rgb"_, _overrides_)
 
-<span aria-label='Source:'>☞</span> [src/interpolate.js]({{codebase}}/src/interpolate.js)
+<span aria-label='Source:'>☞</span> [src/interpolate/interpolate.js]({{codebase}}/src/interpolate/interpolate.js)
 
 Takes the same arguments as [`interpolate()`](#interpolate), but applies [alpha premultiplication](https://drafts.csswg.org/css-images-4/#premultiplied).
 
@@ -1176,7 +1177,7 @@ Computes the [Kotsarenko/Ramos][kotsarekno-ramos] color difference between the c
 
 <span aria-label='Source:'>☞</span> [src/difference.js]({{codebase}}/src/difference.js)
 
-Computes the [ΔE<sub>ITP</sub>][eitp-difference] color difference metric between the colors _a_ and _b_. This is a weighted Euclidean distance in the `itp` color space, scaled by a factor of 720 so that a the just-noticeable difference (<abbr>JND</abbr>) corresponds to a value of 1.
+Computes the [ΔE<sub>ITP</sub>][eitp-difference] color difference metric between the colors _a_ and _b_. This is a weighted Euclidean distance in the `itp` color space. The weights are chosen such that a difference of 1 corresponds to one Just Noticeable Difference (<abbr>JND</abbr>).
 
 ### Nearest color(s)
 
@@ -1469,7 +1470,7 @@ Simulate deuteranomaly and deuteranopia. The `severity` parameter is in the inte
 
 <span aria-label='Source:'>☞</span> [src/deficiency.js]({{codebase}}/src/deficiency.js)
 
-Simuate tritanomaly and tritanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to tritanopia.
+Simulate tritanomaly and tritanopia. The `severity` parameter is in the interval `[0, 1]`, where `0` corresponds to normal vision and `1` (the default value) corresponds to tritanopia.
 
 Examples:
 
@@ -1562,6 +1563,8 @@ Mode | Color space | Definition object
 `luv` | CIELUV color space (D50 Illuminant) | `modeLuv`
 `oklab` | Oklab color space | `modeOklab`
 `oklch` | Oklab color space, cylindrical form | `modeOklch`
+`okhsl` | Okhsl color space | `modeOkhsl`
+`okhsv` | Okhsv color space | `modeOkhsv`
 `p3` | Display P3 color space | `modeP3`
 `prophoto` | ProPhoto RGB color space | `modeProphoto`
 `rec2020` | Rec. 2020 RGB color space | `modeRec2020`
@@ -1787,11 +1790,11 @@ Parses `oklab(…)` strings and returns `oklab` color objects.
 
 Parses `oklch(…)` strings and returns `oklch` color objects.
 
-<a id="parseRgb" href="#parseRgb">#</a> __parseRgb__(_color_) → _color_
+<a id="parseRgb" href="#parseRgb">#</a> __parseRgb__(_string_) → _color_
 
 Parses `rgb(…)` strings in the modern syntax and returns `rgb` color objects.
 
-<a id="parseRgbLegacy" href="#parseRgbLegacy">#</a> __parseRgbLegacy__(_color_) → _color_
+<a id="parseRgbLegacy" href="#parseRgbLegacy">#</a> __parseRgbLegacy__(_string_) → _color_
 
 Parses `rgb(…)` / `rgba(…)` strings in the legacy (comma-separated) syntax and returns `rgb` color objects.
 
