@@ -29,6 +29,34 @@ const inrange_rgb = c => {
 };
 
 /*
+	Tolerance for the gamut-boundary check used by `clampChroma`.
+
+	Converting a color to RGB and back (for example through Oklch)
+	introduces floating-point rounding errors on the order of 1e-14,
+	which can push an already-displayable color's channels slightly
+	outside the [0, 1] interval. Without a tolerance, fully-saturated
+	sRGB colors such as `rgb(0 0 1)` are seen as out of gamut, and
+	`clampChroma` reduces their chroma even though they were displayable
+	to begin with (see issue #253).
+
+	The epsilon is large enough to absorb that round-trip error, yet far
+	smaller than any perceptible color difference.
+ */
+const GAMUT_EPSILON = 1e-7;
+
+const inrange_rgb_tolerant = c => {
+	return (
+		c !== undefined &&
+		(c.r === undefined ||
+			(c.r >= -GAMUT_EPSILON && c.r <= 1 + GAMUT_EPSILON)) &&
+		(c.g === undefined ||
+			(c.g >= -GAMUT_EPSILON && c.g <= 1 + GAMUT_EPSILON)) &&
+		(c.b === undefined ||
+			(c.b >= -GAMUT_EPSILON && c.b <= 1 + GAMUT_EPSILON))
+	);
+};
+
+/*
 	Returns whether the color is in the sRGB gamut.
  */
 export function displayable(color) {
@@ -117,8 +145,18 @@ export function clampGamut(mode = 'rgb') {
 export function clampChroma(color, mode = 'lch', rgbGamut = 'rgb') {
 	color = prepare(color);
 
-	let inDestinationGamut =
-		rgbGamut === 'rgb' ? displayable : inGamut(rgbGamut);
+	// Use a gamut check that tolerates the floating-point rounding error
+	// introduced by the conversion to RGB, so that colors which are already
+	// displayable aren't needlessly desaturated (see issue #253).
+	let gamutConv =
+		rgbGamut === 'rgb'
+			? rgb
+			: converter(
+					typeof getMode(rgbGamut).gamut === 'string'
+						? getMode(rgbGamut).gamut
+						: rgbGamut
+				);
+	let inDestinationGamut = c => inrange_rgb_tolerant(gamutConv(c));
 	let clipToGamut =
 		rgbGamut === 'rgb' ? to_displayable_srgb : clampGamut(rgbGamut);
 
