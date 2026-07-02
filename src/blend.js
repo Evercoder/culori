@@ -15,8 +15,10 @@ const BLENDS = {
 	normal: (b, s) => s,
 	multiply: (b, s) => b * s,
 	screen: (b, s) => b + s - b * s,
-	'hard-light': (b, s) => (s < 0.5 ? b * 2 * s : 2 * s * (1 - b) - 1),
-	overlay: (b, s) => (b < 0.5 ? s * 2 * b : 2 * b * (1 - s) - 1),
+	'hard-light': (b, s) =>
+		s < 0.5 ? b * 2 * s : b + (2 * s - 1) - b * (2 * s - 1),
+	overlay: (b, s) =>
+		b < 0.5 ? s * 2 * b : s + (2 * b - 1) - s * (2 * b - 1),
 	darken: (b, s) => Math.min(b, s),
 	lighten: (b, s) => Math.max(b, s),
 	'color-dodge': (b, s) =>
@@ -27,7 +29,7 @@ const BLENDS = {
 		s < 0.5
 			? b - (1 - 2 * s) * b * (1 - b)
 			: b +
-			  (2 * s - 1) *
+				(2 * s - 1) *
 					((b < 0.25 ? ((16 * b - 12) * b + 4) * b : Math.sqrt(b)) -
 						b),
 	difference: (b, s) => Math.abs(b - s),
