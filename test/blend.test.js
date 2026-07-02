@@ -37,3 +37,31 @@ test('blendNormal', t => {
 		{ mode: 'rgb', r: 1, g: 0, b: 0, alpha: 0.5 }
 	);
 });
+
+test('blendHardLight', t => {
+	// hard-light of 0.5 over 0.5 stays 0.5 (must not collapse to 0)
+	assert.deepEqual(
+		blend(
+			[
+				{ mode: 'rgb', r: 0.5, g: 0.5, b: 0.5 },
+				{ mode: 'rgb', r: 0.5, g: 0.5, b: 0.5 }
+			],
+			'hard-light'
+		),
+		{ mode: 'rgb', r: 0.5, g: 0.5, b: 0.5, alpha: 1 }
+	);
+});
+
+test('blendOverlay', t => {
+	// overlay of 0.75 over 0.75 is 0.875 (must not collapse to 0)
+	assert.deepEqual(
+		blend(
+			[
+				{ mode: 'rgb', r: 0.75, g: 0.75, b: 0.75 },
+				{ mode: 'rgb', r: 0.75, g: 0.75, b: 0.75 }
+			],
+			'overlay'
+		),
+		{ mode: 'rgb', r: 0.875, g: 0.875, b: 0.875, alpha: 1 }
+	);
+});
