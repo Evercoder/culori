@@ -118,13 +118,18 @@ function digits(chars) {
 
 /*
 	Consume an identifier.
+
+	Every identifier in the CSS color grammar — function names (`rgb`, `oklch`,
+	`color`, …), keywords (`none`), color-space names (`srgb`, `display-p3`, …)
+	and hue angle units (`deg`, `turn`, …) — is an ASCII case-insensitive
+	keyword, so we normalize identifiers to lowercase as we consume them.
  */
 function ident(chars) {
 	let v = '';
 	while (_i < chars.length && IdentCodePoint.test(chars[_i])) {
 		v += chars[_i++];
 	}
-	return v;
+	return v.toLowerCase();
 }
 
 /*
@@ -264,10 +269,13 @@ export function parseColorSyntax(tokens) {
 	if (token.type !== Tok.Ident) {
 		return undefined;
 	}
-	const mode = colorProfiles[token.value];
-	if (!mode) {
+	// Use an own-property check so that identifiers inherited from
+	// `Object.prototype` (`constructor`, `__proto__`, …) don't resolve to
+	// truthy non-profile values and crash further down.
+	if (!Object.prototype.hasOwnProperty.call(colorProfiles, token.value)) {
 		return undefined;
 	}
+	const mode = colorProfiles[token.value];
 	const res = { mode };
 	const coords = consumeCoords(tokens, false);
 	if (!coords) {

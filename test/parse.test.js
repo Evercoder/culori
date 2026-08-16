@@ -408,3 +408,66 @@ test('undefined', t => {
 test('Issue #204', t => {
 	assert.equal(parse('oklch(70% 0..1 156)'), undefined);
 });
+
+test('case-insensitive function names and keywords', t => {
+	// Function names are ASCII case-insensitive in CSS.
+	assert.deepEqual(parse('RGB(255 0 0)'), parse('rgb(255 0 0)'), 'RGB()');
+	assert.deepEqual(
+		parse('RGBA(255, 0, 0, 0.5)'),
+		parse('rgba(255, 0, 0, 0.5)'),
+		'RGBA() legacy'
+	);
+	assert.deepEqual(
+		parse('HSL(120 50% 50%)'),
+		parse('hsl(120 50% 50%)'),
+		'HSL()'
+	);
+	assert.deepEqual(
+		parse('HSLA(120, 50%, 50%, 0.5)'),
+		parse('hsla(120, 50%, 50%, 0.5)'),
+		'HSLA() legacy'
+	);
+	assert.deepEqual(parse('HWB(120 0% 0%)'), parse('hwb(120 0% 0%)'), 'HWB()');
+	assert.deepEqual(parse('LAB(50 0 0)'), parse('lab(50 0 0)'), 'LAB()');
+	assert.deepEqual(parse('LCH(50 40 30)'), parse('lch(50 40 30)'), 'LCH()');
+	assert.deepEqual(
+		parse('OkLCH(0.5 0.1 30)'),
+		parse('oklch(0.5 0.1 30)'),
+		'OkLCH() (mixed case)'
+	);
+
+	// Color-space identifiers inside color() are case-insensitive too.
+	assert.deepEqual(
+		parse('COLOR(DISPLAY-P3 1 0 0)'),
+		parse('color(display-p3 1 0 0)'),
+		'color() with uppercase profile'
+	);
+
+	// Hue angle units are case-insensitive, in both modern and legacy syntax.
+	assert.deepEqual(
+		parse('hsl(120DEG 50% 50%)'),
+		parse('hsl(120deg 50% 50%)'),
+		'uppercase hue unit (modern)'
+	);
+	assert.deepEqual(
+		parse('hsl(0.5TURN, 50%, 50%)'),
+		parse('hsl(0.5turn, 50%, 50%)'),
+		'uppercase hue unit (legacy)'
+	);
+
+	// The `transparent` keyword is case-insensitive.
+	assert.deepEqual(
+		parse('TRANSPARENT'),
+		{ mode: 'rgb', r: 0, g: 0, b: 0, alpha: 0 },
+		'TRANSPARENT'
+	);
+});
+
+test('color() with a non-profile identifier returns undefined', t => {
+	// Identifiers inherited from Object.prototype must not resolve to a
+	// truthy value in the color-space lookup (and must not throw).
+	assert.equal(parse('color(__proto__ 1 0 0)'), undefined, '__proto__');
+	assert.equal(parse('color(constructor 1 0 0)'), undefined, 'constructor');
+	assert.equal(parse('color(CONSTRUCTOR 1 0 0)'), undefined, 'CONSTRUCTOR');
+	assert.equal(parse('color(toString 1 0 0)'), undefined, 'toString');
+});

@@ -5,11 +5,13 @@ import { num, per, num_per, c } from '../util/regex.js';
 	Reference: https://drafts.csswg.org/css-color/#rgb-functions
  */
 const rgb_num_old = new RegExp(
-	`^rgba?\\(\\s*${num}${c}${num}${c}${num}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
+	`^rgba?\\(\\s*${num}${c}${num}${c}${num}\\s*(?:,\\s*${num_per}\\s*)?\\)$`,
+	'i'
 );
 
 const rgb_per_old = new RegExp(
-	`^rgba?\\(\\s*${per}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
+	`^rgba?\\(\\s*${per}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`,
+	'i'
 );
 
 const parseRgbLegacy = color => {
