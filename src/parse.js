@@ -118,18 +118,13 @@ function digits(chars) {
 
 /*
 	Consume an identifier.
-
-	Every identifier in the CSS color grammar — function names (`rgb`, `oklch`,
-	`color`, …), keywords (`none`), color-space names (`srgb`, `display-p3`, …)
-	and hue angle units (`deg`, `turn`, …) — is an ASCII case-insensitive
-	keyword, so we normalize identifiers to lowercase as we consume them.
  */
 function ident(chars) {
 	let v = '';
 	while (_i < chars.length && IdentCodePoint.test(chars[_i])) {
 		v += chars[_i++];
 	}
-	return v.toLowerCase();
+	return v;
 }
 
 /*
@@ -148,7 +143,7 @@ function identlike(chars) {
 }
 
 export function tokenize(str = '') {
-	let chars = str.trim();
+	let chars = str.trim().toLowerCase();
 	let tokens = [];
 	let ch;
 

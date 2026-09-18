@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { parse } from '../src/index.js';
+import { parse, parseTransparent } from '../src/index.js';
 
 test('named colors', t => {
 	assert.deepEqual(
@@ -470,4 +470,35 @@ test('color() with a non-profile identifier returns undefined', t => {
 	assert.equal(parse('color(constructor 1 0 0)'), undefined, 'constructor');
 	assert.equal(parse('color(CONSTRUCTOR 1 0 0)'), undefined, 'CONSTRUCTOR');
 	assert.equal(parse('color(toString 1 0 0)'), undefined, 'toString');
+});
+
+test('parseTransparent accepts absent colors', t => {
+	assert.equal(parseTransparent(), undefined);
+	assert.equal(parseTransparent(null), undefined);
+	assert.equal(parseTransparent(''), undefined);
+	assert.equal(parseTransparent('red'), undefined);
+	assert.deepEqual(parseTransparent('TrAnSpArEnT'), {
+		mode: 'rgb',
+		r: 0,
+		g: 0,
+		b: 0,
+		alpha: 0
+	});
+});
+
+test('case-insensitive keywords and exponential notation', t => {
+	assert.deepEqual(parse('  RGB(1E2 NoNe 0 / NoNe)  '), {
+		mode: 'rgb',
+		r: 100 / 255,
+		b: 0
+	});
+});
+
+test('case-insensitive hue units in modern and legacy syntax', t => {
+	for (const unit of ['DEG', 'RAD', 'GRAD', 'TURN']) {
+		for (const separator of [' ', ', ']) {
+			const color = `HSL(0.5${unit}${separator}50%${separator}50%)`;
+			assert.deepEqual(parse(color), parse(color.toLowerCase()), color);
+		}
+	}
 });

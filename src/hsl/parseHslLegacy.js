@@ -18,7 +18,7 @@ const parseHslLegacy = color => {
 	if (match[3] !== undefined) {
 		res.h = +match[3];
 	} else if (match[1] !== undefined && match[2] !== undefined) {
-		res.h = hueToDeg(match[1], match[2].toLowerCase());
+		res.h = hueToDeg(match[1], match[2]);
 	}
 
 	if (match[4] !== undefined) {
