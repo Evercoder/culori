@@ -18,7 +18,7 @@ function parseHsl(color, parsed) {
 		if (s.type === Tok.Hue) {
 			return undefined;
 		}
-		res.s = s.value / 100;
+		res.s = Math.max(0, s.value / 100);
 	}
 
 	if (l.type !== Tok.None) {

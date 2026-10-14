@@ -265,6 +265,19 @@ test('hsl', t => {
 	);
 });
 
+test('hsl() clamps negative saturation', t => {
+	assert.deepEqual(
+		parse('hsl(0 -100% 50%)'),
+		{ mode: 'hsl', h: 0, s: 0, l: 0.5 },
+		'negative percentage saturation'
+	);
+	assert.deepEqual(
+		parse('hsl(0 -100 50)'),
+		{ mode: 'hsl', h: 0, s: 0, l: 0.5 },
+		'negative numeric saturation'
+	);
+});
+
 test('hwb', t => {
 	assert.deepEqual(
 		parse('hwb(100 0% 0%)'),
