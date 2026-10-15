@@ -421,3 +421,17 @@ test('undefined', t => {
 test('Issue #204', t => {
 	assert.equal(parse('oklch(70% 0..1 156)'), undefined);
 });
+
+test('invalid dimension does not throw', t => {
+	const tests = [
+		'rgb(1px 2 3)',
+		'hsl(90DEG 100% 50%)',
+		'oklab(1x 2 3)',
+		'lch(50% 40 90DEG)',
+		'color(srgb 1 2px 3)',
+		'rgb(1 2 3 / 1px)'
+	];
+	tests.forEach(t => {
+		assert.equal(parse(t), undefined, t);
+	});
+});

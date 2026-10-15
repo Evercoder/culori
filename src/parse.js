@@ -216,7 +216,7 @@ export function tokenize(str = '') {
 			let alpha;
 			if (is_num(chars)) {
 				alpha = num(chars);
-				if (alpha.type !== Tok.Hue) {
+				if (alpha !== undefined && alpha.type !== Tok.Hue) {
 					tokens.push({ type: Tok.Alpha, value: alpha });
 					continue;
 				}
@@ -251,7 +251,7 @@ export function tokenize(str = '') {
 		return undefined;
 	}
 
-	return tokens;
+	return tokens.includes(undefined) ? undefined : tokens;
 }
 
 export function parseColorSyntax(tokens) {
