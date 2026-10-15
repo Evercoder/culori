@@ -14,9 +14,13 @@ test('0 severity', t => {
 });
 
 test('0.55 severity', t => {
-	assert.equal(formatHex(filterDeficiencyProt(0.55)('blue')), '#0012ff');
+	assert.equal(formatHex(filterDeficiencyProt(0.55)('blue')), '#0011ff');
 	assert.equal(formatHex(filterDeficiencyDeuter(0.55)('blue')), '#000afa');
-	assert.equal(formatHex(filterDeficiencyTrit(0.55)('blue')), '#000fae');
+	assert.equal(formatHex(filterDeficiencyTrit(0.55)('blue')), '#000eb6');
+});
+
+test('severity interpolates between matrices', t => {
+	assert.equal(formatHex(filterDeficiencyProt(0.05)('#ff8800')), '#f98900');
 });
 
 test('1 severity', t => {
