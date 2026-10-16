@@ -17,6 +17,9 @@
 		"./fn": "./src/index-fn.js",
 		"./package.json": "./package.json"
 	},
+	"bin": {
+		"culori": "./src/cli.js"
+	},
 	"repository": "git@github.com:Evercoder/culori.git",
 	"author": "Dan Burzo <dan@danburzo.ro>",
 	"description": "A general-purpose color library for JavaScript",
