@@ -6,7 +6,8 @@ import { hue, per, num_per, c } from '../util/regex.js';
 	Reference: https://drafts.csswg.org/css-color/#the-hsl-notation
  */
 const hsl_old = new RegExp(
-	`^hsla?\\(\\s*${hue}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`
+	`^hsla?\\(\\s*${hue}${c}${per}${c}${per}\\s*(?:,\\s*${num_per}\\s*)?\\)$`,
+	'i'
 );
 
 const parseHslLegacy = color => {
