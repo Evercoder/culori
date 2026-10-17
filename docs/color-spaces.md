@@ -62,6 +62,14 @@ Serialized as `color(display-p3 r g b)`, with the `none` keyword for any missing
 
 Has gamut limits.
 
+#### `lp3`
+
+The linear-light form of the Display P3 color space.
+
+Serialized as `color(display-p3-linear r g b)`, with the `none` keyword for any missing color channel. An explicit `alpha < 1` is included as ` / alpha`.
+
+Has gamut limits.
+
 #### `prophoto`
 
 The [ProPhoto RGB color space](https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space).
