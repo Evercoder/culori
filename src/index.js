@@ -15,6 +15,7 @@ import modeLab65 from './lab65/definition.js';
 import modeLch from './lch/definition.js';
 import modeLch65 from './lch65/definition.js';
 import modeLchuv from './lchuv/definition.js';
+import modeLp3 from './lp3/definition.js';
 import modeLrgb from './lrgb/definition.js';
 import modeLuv from './luv/definition.js';
 import modeOkhsl from './okhsl/modeOkhsl.js';
@@ -187,6 +188,7 @@ export { default as convertLabToRgb } from './lab/convertLabToRgb.js';
 export { default as convertLabToXyz50 } from './lab/convertLabToXyz50.js';
 export { default as convertLchToLab } from './lch/convertLchToLab.js';
 export { default as convertLchuvToLuv } from './lchuv/convertLchuvToLuv.js';
+export { default as convertLp3ToXyz65 } from './lp3/convertLp3ToXyz65.js';
 export { default as convertLrgbToOklab } from './oklab/convertLrgbToOklab.js';
 export { default as convertLrgbToRgb } from './lrgb/convertLrgbToRgb.js';
 export { default as convertLuvToLchuv } from './lchuv/convertLuvToLchuv.js';
@@ -224,6 +226,7 @@ export { default as convertXyz65ToA98 } from './a98/convertXyz65ToA98.js';
 export { default as convertXyz65ToItp } from './itp/convertXyz65ToItp.js';
 export { default as convertXyz65ToJab } from './jab/convertXyz65ToJab.js';
 export { default as convertXyz65ToLab65 } from './lab65/convertXyz65ToLab65.js';
+export { default as convertXyz65ToLp3 } from './lp3/convertXyz65ToLp3.js';
 export { default as convertXyz65ToP3 } from './p3/convertXyz65ToP3.js';
 export { default as convertXyz65ToRec2020 } from './rec2020/convertXyz65ToRec2020.js';
 export { default as convertXyz65ToRgb } from './xyz65/convertXyz65ToRgb.js';
@@ -247,6 +250,7 @@ export {
 	modeLch,
 	modeLch65,
 	modeLchuv,
+	modeLp3,
 	modeLrgb,
 	modeLuv,
 	modeOkhsl,
@@ -279,6 +283,7 @@ export const lab65 = useMode(modeLab65);
 export const lch = useMode(modeLch);
 export const lch65 = useMode(modeLch65);
 export const lchuv = useMode(modeLchuv);
+export const lp3 = useMode(modeLp3);
 export const lrgb = useMode(modeLrgb);
 export const luv = useMode(modeLuv);
 export const okhsl = useMode(modeOkhsl);
