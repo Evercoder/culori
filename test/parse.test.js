@@ -421,3 +421,21 @@ test('undefined', t => {
 test('Issue #204', t => {
 	assert.equal(parse('oklch(70% 0..1 156)'), undefined);
 });
+
+test('leading and trailing whitespace is ignored', t => {
+	const red = { mode: 'rgb', r: 1, g: 0, b: 0 };
+	assert.deepEqual(parse('  red '), red, 'named color');
+	assert.deepEqual(parse(' #f00 '), red, 'hex color');
+	assert.deepEqual(parse('rgb(255, 0, 0) '), red, 'legacy rgb()');
+	assert.deepEqual(parse('\trgb(255 0 0)\n'), red, 'modern rgb()');
+	assert.deepEqual(
+		parse(' transparent '),
+		{ mode: 'rgb', r: 0, g: 0, b: 0, alpha: 0 },
+		'transparent'
+	);
+	assert.deepEqual(
+		parse(' hsl(120, 100%, 50%) '),
+		{ mode: 'hsl', h: 120, s: 1, l: 0.5 },
+		'legacy hsl()'
+	);
+});

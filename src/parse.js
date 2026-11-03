@@ -346,6 +346,8 @@ const parse = color => {
 	if (typeof color !== 'string') {
 		return undefined;
 	}
+	// ignore leading and trailing whitespace, like the tokenizer does
+	color = color.trim();
 	const tokens = tokenize(color);
 	const parsed = tokens ? parseModernSyntax(tokens, true) : undefined;
 	let result = undefined;
