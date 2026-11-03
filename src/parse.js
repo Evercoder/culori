@@ -124,7 +124,8 @@ function ident(chars) {
 	while (_i < chars.length && IdentCodePoint.test(chars[_i])) {
 		v += chars[_i++];
 	}
-	return v;
+	// CSS identifiers are ASCII case-insensitive
+	return v.toLowerCase();
 }
 
 /*

@@ -421,3 +421,41 @@ test('undefined', t => {
 test('Issue #204', t => {
 	assert.equal(parse('oklch(70% 0..1 156)'), undefined);
 });
+
+test('CSS identifiers are case-insensitive', t => {
+	assert.deepEqual(
+		parse('RGB(255, 0, 0)'),
+		{ mode: 'rgb', r: 1, g: 0, b: 0 },
+		'RGB() legacy syntax'
+	);
+	assert.deepEqual(
+		parse('Rgb(255 0 0 / NONE)'),
+		{ mode: 'rgb', r: 1, g: 0, b: 0 },
+		'Rgb() modern syntax with NONE'
+	);
+	assert.deepEqual(
+		parse('HSLA(0.5TURN, 100%, 50%, 1)'),
+		{ mode: 'hsl', h: 180, s: 1, l: 0.5, alpha: 1 },
+		'HSLA() legacy syntax with uppercase unit'
+	);
+	assert.deepEqual(
+		parse('hsl(120DEG 100% 50%)'),
+		{ mode: 'hsl', h: 120, s: 1, l: 0.5 },
+		'uppercase hue unit'
+	);
+	assert.deepEqual(
+		parse('OKLCH(60% 0.1 50)'),
+		{ mode: 'oklch', l: 0.6, c: 0.1, h: 50 },
+		'OKLCH()'
+	);
+	assert.deepEqual(
+		parse('COLOR(Display-P3 1 0 0)'),
+		{ mode: 'p3', r: 1, g: 0, b: 0 },
+		'COLOR() with mixed-case color space'
+	);
+	assert.deepEqual(
+		parse('TRANSPARENT'),
+		{ mode: 'rgb', r: 0, g: 0, b: 0, alpha: 0 },
+		'TRANSPARENT'
+	);
+});
