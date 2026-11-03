@@ -142,6 +142,19 @@ function identlike(chars) {
 	return { type: Tok.Ident, value: v };
 }
 
+/*
+	Consume a numeric token and push it to the token list.
+	Returns false when the token is invalid (e.g. an unsupported unit).
+ */
+function pushNum(tokens, chars) {
+	const token = num(chars);
+	if (!token) {
+		return false;
+	}
+	tokens.push(token);
+	return true;
+}
+
 export function tokenize(str = '') {
 	let chars = str.trim();
 	let tokens = [];
@@ -178,7 +191,9 @@ export function tokenize(str = '') {
 		if (ch === '+') {
 			_i--;
 			if (is_num(chars)) {
-				tokens.push(num(chars));
+				if (!pushNum(tokens, chars)) {
+					return undefined;
+				}
 				continue;
 			}
 			return undefined;
@@ -187,7 +202,9 @@ export function tokenize(str = '') {
 		if (ch === '-') {
 			_i--;
 			if (is_num(chars)) {
-				tokens.push(num(chars));
+				if (!pushNum(tokens, chars)) {
+					return undefined;
+				}
 				continue;
 			}
 			if (is_ident(chars)) {
@@ -200,7 +217,9 @@ export function tokenize(str = '') {
 		if (ch === '.') {
 			_i--;
 			if (is_num(chars)) {
-				tokens.push(num(chars));
+				if (!pushNum(tokens, chars)) {
+					return undefined;
+				}
 				continue;
 			}
 			return undefined;
@@ -216,7 +235,7 @@ export function tokenize(str = '') {
 			let alpha;
 			if (is_num(chars)) {
 				alpha = num(chars);
-				if (alpha.type !== Tok.Hue) {
+				if (alpha && alpha.type !== Tok.Hue) {
 					tokens.push({ type: Tok.Alpha, value: alpha });
 					continue;
 				}
@@ -235,7 +254,9 @@ export function tokenize(str = '') {
 
 		if (/\d/.test(ch)) {
 			_i--;
-			tokens.push(num(chars));
+			if (!pushNum(tokens, chars)) {
+				return undefined;
+			}
 			continue;
 		}
 
@@ -261,7 +282,7 @@ export function parseColorSyntax(tokens) {
 		return undefined;
 	}
 	token = tokens[tokens._i++];
-	if (token.type !== Tok.Ident) {
+	if (!token || token.type !== Tok.Ident) {
 		return undefined;
 	}
 	const mode = colorProfiles[token.value];

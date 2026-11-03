@@ -421,3 +421,22 @@ test('undefined', t => {
 test('Issue #204', t => {
 	assert.equal(parse('oklch(70% 0..1 156)'), undefined);
 });
+
+test('unsupported units return undefined instead of throwing', t => {
+	assert.equal(parse('rgb(10px 0 0)'), undefined, 'rgb(10px 0 0)');
+	assert.equal(parse('rgb(-5px 0 0)'), undefined, 'rgb(-5px 0 0)');
+	assert.equal(parse('rgb(.5px 0 0)'), undefined, 'rgb(.5px 0 0)');
+	assert.equal(parse('rgb(0 0 0 / 5px)'), undefined, 'rgb(0 0 0 / 5px)');
+	assert.equal(
+		parse('hsl(120foo 100% 50%)'),
+		undefined,
+		'hsl(120foo 100% 50%)'
+	);
+	assert.equal(
+		parse('color(srgb 1px 0 0)'),
+		undefined,
+		'color(srgb 1px 0 0)'
+	);
+	assert.equal(parse('color('), undefined, 'color(');
+	assert.equal(parse('color()'), undefined, 'color()');
+});
