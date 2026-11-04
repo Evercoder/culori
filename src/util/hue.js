@@ -1,5 +1,5 @@
 const hueToDeg = (val, unit) => {
-	switch (unit) {
+	switch (unit?.toLowerCase()) {
 		case 'deg':
 			return +val;
 		case 'rad':

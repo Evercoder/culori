@@ -143,7 +143,7 @@ function identlike(chars) {
 }
 
 export function tokenize(str = '') {
-	let chars = str.trim();
+	let chars = str.trim().toLowerCase();
 	let tokens = [];
 	let ch;
 
@@ -264,10 +264,13 @@ export function parseColorSyntax(tokens) {
 	if (token.type !== Tok.Ident) {
 		return undefined;
 	}
-	const mode = colorProfiles[token.value];
-	if (!mode) {
+	// Use an own-property check so that identifiers inherited from
+	// `Object.prototype` (`constructor`, `__proto__`, …) don't resolve to
+	// truthy non-profile values and crash further down.
+	if (!Object.prototype.hasOwnProperty.call(colorProfiles, token.value)) {
 		return undefined;
 	}
+	const mode = colorProfiles[token.value];
 	const res = { mode };
 	const coords = consumeCoords(tokens, false);
 	if (!coords) {
