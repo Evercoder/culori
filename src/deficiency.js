@@ -155,9 +155,9 @@ const TRIT = [
 ];
 
 const deficiency = (lut, t) => {
-	let tt = Math.max(0, Math.min(1, t));
-	let i = Math.round(tt / 0.1);
-	let w = Math.round(tt % 0.1);
+	let tt = Math.max(0, Math.min(1, t)) * (lut.length - 1);
+	let i = Math.floor(tt);
+	let w = tt - i;
 	let arr = lut[i];
 	if (w > 0 && i < lut.length - 1) {
 		let arr_2 = lut[i + 1];
