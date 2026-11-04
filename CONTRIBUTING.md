@@ -1,5 +1,9 @@
 # Contributing
 
+## AI policy
+
+Culori started as a handwritten project and, for aesthetic reasons, I would like it to remain an entirely handwritten project. As such, all contributions must be human-authored.
+
 ## Development
 
 Tests are defined using the `node:test` and `node:assert` modules. Running the tests require Node 21 or newer:
