@@ -7,8 +7,10 @@ import {
 	clampRgb,
 	clampGamut,
 	formatCss,
+	formatHex,
 	toGamut,
-	lch
+	lch,
+	oklch
 } from '../src/index.js';
 
 test('RGB', t => {
@@ -87,6 +89,34 @@ test('Issue #129', t => {
 		'lch(80 60.040283203125 60)',
 		'with p3 gamut'
 	);
+});
+
+test('Issue #253', t => {
+	// A color that is already displayable should not have its chroma
+	// reduced because of the floating-point error introduced by the
+	// round-trip conversion to RGB. Pure sRGB primaries are the worst
+	// offenders, since they sit exactly on the gamut boundary.
+	const blue = oklch({ mode: 'rgb', r: 0, g: 0, b: 1 });
+	assert.deepEqual(
+		clampChroma(blue, 'oklch'),
+		blue,
+		'pure blue keeps its chroma'
+	);
+
+	// Every sRGB primary/corner must survive an oklch round-trip + clamp.
+	const corners = [
+		{ mode: 'rgb', r: 1, g: 0, b: 0 },
+		{ mode: 'rgb', r: 0, g: 1, b: 0 },
+		{ mode: 'rgb', r: 0, g: 0, b: 1 },
+		{ mode: 'rgb', r: 1, g: 1, b: 0 },
+		{ mode: 'rgb', r: 0, g: 1, b: 1 },
+		{ mode: 'rgb', r: 1, g: 0, b: 1 },
+		{ mode: 'rgb', r: 1, g: 1, b: 1 }
+	];
+	corners.forEach(c => {
+		const clamped = clampChroma(oklch(c), 'oklch');
+		assert.equal(clamped.c, oklch(c).c, `${formatHex(c)} keeps its chroma`);
+	});
 });
 
 test('inGamut()', t => {
