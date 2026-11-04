@@ -86,6 +86,7 @@ codebase: 'https://github.com/evercoder/culori/blob/main'
 <li><a href='#color-spaces'>lch</a></li>
 <li><a href='#color-spaces'>lchuv</a></li>
 <li><a href='#lerp'>lerp</a></li>
+<li><a href='#color-spaces'>lp3</a></li>
 <li><a href='#color-spaces'>lrgb</a></li>
 <li><a href='#color-spaces'>luv</a></li>
 <li><a href='#mapAlphaDivide'>mapAlphaDivide</a></li>
@@ -1559,6 +1560,7 @@ Mode | Color space | Definition object
 `lch` | CIELCh color space (D50 Illuminant) | `modeLch`
 `lch65` | CIELCh color space (D65 Illuminant) | `modeLch65`
 `lchuv` | CIELCHuv color space (D50 Illuminant) | `modeLchuv`
+`lp3` | Linear-light Display P3 color space | `modeLp3`
 `lrgb` | Linear-light sRGB color space | `modeLrgb`
 `luv` | CIELUV color space (D50 Illuminant) | `modeLuv`
 `oklab` | Oklab color space | `modeOklab`
@@ -1851,6 +1853,7 @@ __convertLabToRgb__(_color_) → _color_ | `lab` → `rgb`
 __convertLabToXyz50__(_color_) → _color_ | `lab` → `xyz50`
 __convertLchToLab__(_color_) → _color_ | `lch` → `lab`
 __convertLchuvToLuv__(_color_) → _color_ | `lchuv` → `luv`
+__convertLp3ToXyz65__(_color_) → _color_ | `lp3` → `xyz65`
 __convertLrgbToOklab__(_color_) → _color_ | `lrgb` → `oklab`
 __convertLrgbToRgb__(_color_) → _color_ | `lrgb` → `rgb`
 __convertLuvToLchuv__(_color_) → _color_ | `luv` → `lchuv`
@@ -1887,6 +1890,7 @@ __convertXyz50ToXyz65__(_color_) → _color_ | `xyz50` → `xyz65`
 __convertXyz65ToA98__(_color_) → _color_ | `xyz65` → `a98`
 __convertXyz65ToJab__(_color_) → _color_ | `xyz65` → `jab`
 __convertXyz65ToLab65__(_color_) → _color_ | `xyz65` → `lab65`
+__convertXyz65ToLp3__(_color_) → _color_ | `xyz65` → `lp3`
 __convertXyz65ToP3__(_color_) → _color_ | `xyz65` → `p3`
 __convertXyz65ToRec2020__(_color_) → _color_ | `xyz65` → `rec2020`
 __convertXyz65ToRgb__(_color_) → _color_ | `xyz65` → `rgb`
