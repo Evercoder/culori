@@ -346,13 +346,14 @@ const parse = color => {
 	if (typeof color !== 'string') {
 		return undefined;
 	}
-	const tokens = tokenize(color);
+	const str = color.trim();
+	const tokens = tokenize(str);
 	const parsed = tokens ? parseModernSyntax(tokens, true) : undefined;
 	let result = undefined;
 	let i = 0;
 	let len = parsers.length;
 	while (i < len) {
-		if ((result = parsers[i++](color, parsed)) !== undefined) {
+		if ((result = parsers[i++](str, parsed)) !== undefined) {
 			return result;
 		}
 	}

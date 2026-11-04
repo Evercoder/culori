@@ -140,7 +140,7 @@ The object needs to have a `mode` property that identifies the color space, and 
 
 <span aria-label='Source:'>☞</span> [src/parse.js]({{codebase}}/src/parse.js)
 
-Parses a string and returns the corresponding _color_. The color will be in the matching color space, e.g. RGB for hex strings, HSL for `hsl(…, …, …)` strings, et cetera. If no built-in parsers can match the string, the function will return `undefined`.
+Parses a string and returns the corresponding _color_. The color will be in the matching color space, e.g. RGB for hex strings, HSL for `hsl(…, …, …)` strings, et cetera. If no built-in parsers can match the string, the function will return `undefined`. Leading and trailing whitespace is removed with `String.prototype.trim()` before parsing.
 
 ```js
 import { parse } from 'culori';
@@ -1701,7 +1701,7 @@ Here's a sample definition for the HSL color space:
 
 Register a new parser. The parser can be:
 
-* a function, in which case the _mode_ argument is not necessary.
+* a function, in which case the _mode_ argument is not necessary. The function receives the string with leading and trailing whitespace removed.
 * a string representing the identifier to match in the `color()` syntax, in which case the _mode_ argument is required.
 
 ```js

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { parse } from '../src/index.js';
+import { parse, useParser, removeParser } from '../src/index.js';
 
 test('named colors', t => {
 	assert.deepEqual(
@@ -330,6 +330,44 @@ test('transparent', t => {
 		alpha: 0,
 		mode: 'rgb'
 	});
+});
+
+test('surrounding whitespace', t => {
+	[
+		'#336699',
+		'tomato',
+		'transparent',
+		'rgb(51, 102, 153)',
+		'rgba(51, 102, 153, 0.5)',
+		'hsl(210, 50%, 40%)',
+		'hsla(210, 50%, 40%, 0.5)',
+		'rgb(51 102 153)',
+		'color(srgb 0.2 0.4 0.6)'
+	].forEach(color => {
+		const expected = parse(color);
+		assert.notEqual(expected, undefined, color);
+		[` ${color}`, `${color} `, `\n\t${color}\n`].forEach(padded => {
+			assert.deepEqual(parse(padded), expected, JSON.stringify(padded));
+		});
+	});
+});
+
+test('custom parsers receive the trimmed string', t => {
+	const parseTestColor = str =>
+		str === '--test-color'
+			? { mode: 'rgb', r: 0.2, g: 0.4, b: 0.6 }
+			: undefined;
+	useParser(parseTestColor);
+	try {
+		assert.deepEqual(parse(' \t--test-color\n'), {
+			mode: 'rgb',
+			r: 0.2,
+			g: 0.4,
+			b: 0.6
+		});
+	} finally {
+		removeParser(parseTestColor);
+	}
 });
 
 test('lab()', t => {
