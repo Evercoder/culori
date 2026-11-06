@@ -12,7 +12,7 @@ const nearest = (colors, metric = differenceEuclidean(), accessor = d => d) => {
 	let arr = colors.map((c, idx) => ({ color: accessor(c), i: idx }));
 	return (color, n = 1, τ = Infinity) => {
 		if (isFinite(n)) {
-			n = Math.max(1, Math.min(n, arr.length - 1));
+			n = Math.max(1, Math.min(n, arr.length));
 		}
 
 		arr.forEach(c => {

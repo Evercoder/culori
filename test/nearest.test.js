@@ -40,3 +40,13 @@ test('nearest() with accessor', t => {
 	let nearestColors = nearest(names, undefined, name => palette[name]);
 	assert.deepEqual(nearestColors('red', 1), ['Bright Red']);
 });
+
+test('nearest() returns up to all colors', t => {
+	let palette = ['red', 'green', 'blue', 'yellow', 'purple'];
+	let nearestColors = nearest(palette);
+	assert.equal(
+		nearestColors('orange', palette.length).length,
+		palette.length,
+		'n equal to the number of colors returns all of them'
+	);
+});
